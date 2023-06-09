@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{6de885d1-4c1e-4114-af9c-baf1681c353f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Draw">
+      <UniqueIdentifier>{e923cdc9-b3b9-4fcb-8c92-9806b93d5e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA">
+      <UniqueIdentifier>{f99e054a-73cc-4991-a34e-ce6aa6ca869b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup">
+      <UniqueIdentifier>{a84d3364-40f5-47fb-b7d5-6f5f66b4229e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Adapter\Adapter.cpp">
+      <Filter>CLEYERA</Filter>
+    </ClCompile>
+    <ClCompile Include="Adapter\Setup\DirectXSetup.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
+    <ClCompile Include="Adapter\Setup\WinSetup.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
+    <ClCompile Include="Adapter\Draw\Model.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Adapter\Draw\Rect.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Adapter\Struct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Adapter\Vector4.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Adapter\Adapter.h">
+      <Filter>CLEYERA</Filter>
+    </ClInclude>
+    <ClInclude Include="Adapter\Setup\DirectXSetup.h">
+      <Filter>Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="Adapter\Setup\WinSetup.h">
+      <Filter>Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="Adapter\Draw\Model.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Adapter\Draw\Rect.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\Object3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\Object3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
