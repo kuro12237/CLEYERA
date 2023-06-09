@@ -30,7 +30,7 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Adapter\Adapter.cpp">
+    <ClCompile Include="Adapter\Cleyera.cpp">
       <Filter>CLEYERA</Filter>
     </ClCompile>
     <ClCompile Include="Adapter\Setup\DirectXSetup.cpp">
@@ -53,7 +53,7 @@
     <ClInclude Include="Adapter\Vector4.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Adapter\Adapter.h">
+    <ClInclude Include="Adapter\Cleyera.h">
       <Filter>CLEYERA</Filter>
     </ClInclude>
     <ClInclude Include="Adapter\Setup\DirectXSetup.h">
@@ -76,5 +76,8 @@
     <FxCompile Include="Shader\Object3d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
 </Project>

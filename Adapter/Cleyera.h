@@ -4,11 +4,11 @@
 #include"Draw/Model.h"
 #include"Draw/Rect.h"
 #include"Struct.h"
-class Adapter
+class Cleyera
 {
 public:
-	Adapter();
-	~Adapter();
+	Cleyera();
+	~Cleyera();
 
 	/// <summary>
 	/// Adapterの初期化

@@ -1,4 +1,4 @@
-#include"Adapter/Adapter.h"
+#include"Adapter/Cleyera.h"
 #define Triangle_Property_MAX 15
 
 
@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 
 
-	Adapter* adapter_ = new Adapter;
+	Cleyera* Cleyera_ = new Cleyera;
 
 	//Size
 	const int32_t kClientWidth = 1280;
@@ -144,7 +144,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	}
 
-	adapter_->Initialize(kClientWidth, kClientHeight);
+	Cleyera_->Initialize(kClientWidth, kClientHeight);
 
 
 
@@ -152,22 +152,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
 
-		adapter_->TriangleVertexCreate(TriangleProperty_[i].vertexData);
+		Cleyera_->TriangleVertexCreate(TriangleProperty_[i].vertexData);
 	}
 
 
 	RectProperty rect;
 	{
-		 //rect.leftTop={ -0.5f,-0.5f,0.0f,1.0f };
-		 //rect.rightTop={  0.5f,-0.5f,0.0f,1.0f };
-		 //rect.leftDown= { -0.5f, 0.5f, 0.0f, 1.0f };
-		 //{  0.5f,0.5f,0.0f,1.0f };
-
+		
 		rect.leftTop= { -0.5f,0.5f,0.0f,1.0f };
 		rect.rightTop = { 0.5f,0.5f,0.0f,1.0f };
 		rect.leftDown = { -0.5f,-0.5f,0.0f,1.0f };
 		rect.rightDown = { 0.5f,-0.5f,0.0f,1.0f };
-		adapter_->RectVartexCreate(rect.vartexData);
+		Cleyera_->RectVartexCreate(rect.vartexData);
 	}
 
 	MSG msg{};
@@ -176,7 +172,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
-			adapter_->WinMSG(msg);
+			Cleyera_->WinMSG(msg);
 
 
 		}
@@ -184,7 +180,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 
 		}
-		adapter_->BeginFlame(kClientWidth,kClientHeight);
+		Cleyera_->BeginFlame(kClientWidth,kClientHeight);
 		
 	
 		for (int i = 0; i < Triangle_Property_MAX	; i++)
@@ -194,9 +190,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			
 
 		}
-		adapter_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, rect.vartexData);
+		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, rect.vartexData);
 
-		adapter_->EndFlame();
+		Cleyera_->EndFlame();
 
 		
 	}
@@ -204,12 +200,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//’¸“_‚Ì‰ð•ú
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
-		adapter_->TriangleRelease(TriangleProperty_[i].vertexData);
+		Cleyera_->TriangleRelease(TriangleProperty_[i].vertexData);
 	}
-	adapter_->RectRelese(rect.vartexData);
+	Cleyera_->RectRelese(rect.vartexData);
 
-	adapter_->Deleate();
-	adapter_->~Adapter();
+	Cleyera_->Deleate();
+	Cleyera_->~Cleyera();
 
 	return 0;
 }

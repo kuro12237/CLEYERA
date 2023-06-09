@@ -1,7 +1,7 @@
-#include"Adapter.h"
+#include"Cleyera.h"
 
 
-void Adapter::Initialize(const int32_t Width, const int32_t Height)
+void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 {
 	//windows
 	WinSetup_->Initialize(Width,Height);
@@ -44,19 +44,19 @@ void Adapter::Initialize(const int32_t Width, const int32_t Height)
 	Rect_->DirectXSetCommands(DXSetup_->GetCommands());
 }
 
-void Adapter::WinMSG(MSG &msg)
+void Cleyera::WinMSG(MSG &msg)
 {
 
 	WinSetup_->WinMSG(msg);
 
 }
 
-void Adapter::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
+void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
 }
 
-void Adapter::EndFlame()
+void Cleyera::EndFlame()
 {
 	DXSetup_->EndFlame();
 }
@@ -65,7 +65,7 @@ void Adapter::EndFlame()
 /// 三角形の頂点の作成
 /// </summary>
 /// <param name="vertex"></param>
-void Adapter::TriangleVertexCreate(VertexProperty&vertex)
+void Cleyera::TriangleVertexCreate(VertexProperty&vertex)
 {
 	Model_->CreateVertex(vertex);
 }
@@ -74,7 +74,7 @@ void Adapter::TriangleVertexCreate(VertexProperty&vertex)
 /// 四角形の頂点作成
 /// </summary>
 /// <param name="vertex"></param>
-void Adapter::RectVartexCreate(RectVertexProrertys& vertex)
+void Cleyera::RectVartexCreate(RectVertexProrertys& vertex)
 {
 	Rect_->CreateVertex(vertex);
 }
@@ -86,7 +86,7 @@ void Adapter::RectVartexCreate(RectVertexProrertys& vertex)
 /// <param name="left"></param>
 /// <param name="right"></param>
 /// <param name="vertex"></param>
-void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
+void Cleyera::TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
 {
 	Model_->Draw( top, left,  right, vertex);
 }
@@ -100,7 +100,7 @@ void Adapter::TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty verte
 /// <param name="左下"></param>
 /// <param name="右下"></param>
 /// <param name="vertex"></param>
-void Adapter::RectDraw(Vec4 leftTop, Vec4 rightTop, Vec4 leftDown, Vec4 rightDown, RectVertexProrertys vertex)
+void Cleyera::RectDraw(Vec4 leftTop, Vec4 rightTop, Vec4 leftDown, Vec4 rightDown, RectVertexProrertys vertex)
 {
 	Rect_->Draw(leftTop, rightTop, leftDown, rightDown, vertex);
 }
@@ -109,13 +109,13 @@ void Adapter::RectDraw(Vec4 leftTop, Vec4 rightTop, Vec4 leftDown, Vec4 rightDow
 /// 三角形の頂点の解放処理
 /// </summary>
 /// <param name="vartex"></param>
-void Adapter::TriangleRelease(VertexProperty vartex)
+void Cleyera::TriangleRelease(VertexProperty vartex)
 {
 	Model_->VartexRelease(vartex);
 
 }
 
-void Adapter::RectRelese(RectVertexProrertys vartex)
+void Cleyera::RectRelese(RectVertexProrertys vartex)
 {
 	Model_->VartexRelease(vartex.left);
 	Model_->VartexRelease(vartex.right);
@@ -123,7 +123,7 @@ void Adapter::RectRelese(RectVertexProrertys vartex)
 }
 
 
-void Adapter::Deleate()
+void Cleyera::Deleate()
 {
 
 	DXSetup_->Deleate();
@@ -131,12 +131,12 @@ void Adapter::Deleate()
 	DXSetup_->ChackRelease();
 }
 
-Adapter::Adapter()
+Cleyera::Cleyera()
 {
 	
 }
 
-Adapter::~Adapter()
+Cleyera::~Cleyera()
 {
 	DXSetup_->~DirectXSetup();
 	WinSetup_->~WindowsSetup();
