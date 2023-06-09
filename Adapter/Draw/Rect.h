@@ -17,5 +17,5 @@ private:
 
 };
 
-//cleyera//ƒNƒŒƒCƒ‰
+//cleyera//ã‚¯ãƒ¬ã‚¤ãƒ©
 //CLEYERA ENGINE

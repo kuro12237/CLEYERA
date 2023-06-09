@@ -186,7 +186,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < Triangle_Property_MAX	; i++)
 		{
 
-			//adapter_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,TriangleProperty_[i].vertexData);
+			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,TriangleProperty_[i].vertexData);
 			
 
 		}
@@ -197,7 +197,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		
 	}
 
-	//’¸“_‚Ì‰ğ•ú
+	//é ‚ç‚¹ã®è§£æ”¾
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
 		Cleyera_->TriangleRelease(TriangleProperty_[i].vertexData);
