@@ -36,47 +36,29 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Adapter\Cleyera.cpp">
-      <Filter>CLEYERA</Filter>
-    </ClCompile>
-    <ClCompile Include="Adapter\Setup\DirectXSetup.cpp">
-      <Filter>Setup</Filter>
-    </ClCompile>
-    <ClCompile Include="Adapter\Setup\WinSetup.cpp">
-      <Filter>Setup</Filter>
-    </ClCompile>
-    <ClCompile Include="Adapter\Draw\Model.cpp">
-      <Filter>Draw</Filter>
-    </ClCompile>
-    <ClCompile Include="Adapter\Draw\Rect.cpp">
-      <Filter>Draw</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp">
       <Filter>Matrix</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\Setup\DirectXSetup.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Setup\WinSetup.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Cleyera.cpp">
+      <Filter>CLEYERA</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Draw\Model.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Draw\Rect.cpp">
+      <Filter>Draw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Adapter\Struct.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Adapter\Cleyera.h">
-      <Filter>CLEYERA</Filter>
-    </ClInclude>
-    <ClInclude Include="Adapter\Setup\DirectXSetup.h">
-      <Filter>Setup</Filter>
-    </ClInclude>
-    <ClInclude Include="Adapter\Setup\WinSetup.h">
-      <Filter>Setup</Filter>
-    </ClInclude>
-    <ClInclude Include="Adapter\Draw\Model.h">
-      <Filter>Draw</Filter>
-    </ClInclude>
-    <ClInclude Include="Adapter\Draw\Rect.h">
-      <Filter>Draw</Filter>
-    </ClInclude>
-    <ClInclude Include="Adapter\Vector4.h">
-      <Filter>Vector</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h">
       <Filter>Matrix</Filter>
     </ClInclude>
@@ -93,6 +75,30 @@
       <Filter>Vector</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Vector\Vector3.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Setup\DirectXSetup.h">
+      <Filter>Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Setup\WinSetup.h">
+      <Filter>Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Cleyera.h">
+      <Filter>CLEYERA</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\CleyeraStruct.h">
+      <Filter>CLEYERA</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Draw\Model.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Draw\Rect.h">
+      <Filter>Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Vector\Vector4.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Vector\VectorTransform.h">
       <Filter>Vector</Filter>
     </ClInclude>
   </ItemGroup>
