@@ -25,7 +25,7 @@ public:
 
 	void CreateVertex(VertexProperty &vertex);
 
-	void Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty &vertex);
+	void Draw(Vector4 top, Vector4 left, Vector4 right, VertexProperty &vertex);
 
 	void VartexRelease(VertexProperty vartex);
 

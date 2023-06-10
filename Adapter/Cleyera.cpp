@@ -86,7 +86,7 @@ void Cleyera::RectVartexCreate(RectVertexProrertys& vertex)
 /// <param name="left"></param>
 /// <param name="right"></param>
 /// <param name="vertex"></param>
-void Cleyera::TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex)
+void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, VertexProperty vertex)
 {
 	Model_->Draw( top, left,  right, vertex);
 }
@@ -100,7 +100,7 @@ void Cleyera::TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty verte
 /// <param name="左下"></param>
 /// <param name="右下"></param>
 /// <param name="vertex"></param>
-void Cleyera::RectDraw(Vec4 leftTop, Vec4 rightTop, Vec4 leftDown, Vec4 rightDown, RectVertexProrertys vertex)
+void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, RectVertexProrertys vertex)
 {
 	Rect_->Draw(leftTop, rightTop, leftDown, rightDown, vertex);
 }

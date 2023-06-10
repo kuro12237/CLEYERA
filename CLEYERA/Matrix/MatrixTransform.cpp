@@ -49,9 +49,9 @@ Matrix2x2 MatrixTransform::Multiply(Matrix2x2 matrix1, Matrix2x2 matrix2)
 	return result;
 }
 
-Vec2 MatrixTransform::Multiply(Vec2 vector, Matrix2x2 matrix)
+Vector2 MatrixTransform::Multiply(Vector2 vector, Matrix2x2 matrix)
 {
-	Vec2 result;
+	Vector2 result;
 	result.x = vector.x * matrix.m[0][0] + vector.y * matrix.m[1][0];
 	result.y = vector.x * matrix.m[0][1] + vector.y * matrix.m[1][1];
 
@@ -152,9 +152,9 @@ Matrix3x3 MatrixTransform::Multiply(const Matrix3x3& m1, const Matrix3x3& m2)
 	return result;
 }
 
-Vec3 MatrixTransform::Multiply(const Vec3 v, const Matrix3x3 matrix)
+Vector3 MatrixTransform::Multiply(const Vector3 v, const Matrix3x3 matrix)
 {
-	Vec3 result;
+	Vector3 result;
 
 	result.x = v.x * matrix.m[0][0] + 
 		v.y * matrix.m[1][0] + v.z * matrix.m[2][0];
@@ -171,7 +171,7 @@ Vec3 MatrixTransform::Multiply(const Vec3 v, const Matrix3x3 matrix)
 
 #pragma region 移動・回転・大きさ
 
-Matrix3x3 MatrixTransform::MakeTranslate3x3Matrix(Vec2 translate)
+Matrix3x3 MatrixTransform::MakeTranslate3x3Matrix(Vector2 translate)
 {
 	Matrix3x3 result;
 
@@ -208,7 +208,7 @@ Matrix3x3 MatrixTransform::MakeRotate3x3Matrix(float theta)
 	return result;
 }
 
-Matrix3x3 MatrixTransform::MakeScaleMatrix(const Vec2 scale)
+Matrix3x3 MatrixTransform::MakeScaleMatrix(const Vector2 scale)
 {
 	Matrix3x3 result;
 	result.m[0][0] = scale.x;
@@ -233,7 +233,7 @@ Matrix3x3 MatrixTransform::MakeScaleMatrix(const Vec2 scale)
 
 #pragma region 行列変換
 
-Matrix3x3 MatrixTransform::MakeAffineMatrix(const Vec2 translate, float radian, const Vec2 scale)
+Matrix3x3 MatrixTransform::MakeAffineMatrix(const Vector2 translate, float radian, const Vector2 scale)
 {
 	Matrix3x3 result;
 
@@ -252,9 +252,9 @@ Matrix3x3 MatrixTransform::MakeAffineMatrix(const Vec2 translate, float radian, 
 	return result;
 }
 
-Vec2 MatrixTransform::Transform(Vec2 v, Matrix3x3 matrix)
+Vector2 MatrixTransform::Transform(Vector2 v, Matrix3x3 matrix)
 {
-	Vec2 result;
+	Vector2 result;
 	result.x = v.x * matrix.m[0][0] + v.y * matrix.m[1][0] + 1.0f * matrix.m[2][0];
 	result.y = v.x * matrix.m[0][1] + v.y * matrix.m[1][1] + 1.0f * matrix.m[2][1];
 	float w = v.x * matrix.m[0][2] + v.y * matrix.m[1][2] + 1.0f * matrix.m[2][2];
@@ -452,7 +452,7 @@ Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 #pragma endregion 
 
 #pragma region スケール・移動・回転
-Matrix4x4 MatrixTransform::MakeScaleMatrix(const Vec3 scale)
+Matrix4x4 MatrixTransform::MakeScaleMatrix(const Vector3 scale)
 {
 	Matrix4x4 result;
 	result.m[0][0] = scale.x;
@@ -478,7 +478,7 @@ Matrix4x4 MatrixTransform::MakeScaleMatrix(const Vec3 scale)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::MakeTranslateMatrix(Vec3 translate)
+Matrix4x4 MatrixTransform::MakeTranslateMatrix(Vector3 translate)
 {
 	Matrix4x4 result;
 	result.m[0][0] = 1.0f;
@@ -602,7 +602,7 @@ Matrix4x4 MatrixTransform::MakeRotateXYZMatrix(float radianX, float radianY, flo
 #pragma endregion 
 
 #pragma region 行列の変換
-Matrix4x4 MatrixTransform::MakeAffineMatrix(const Vec3& scale, const Vec3& rotate, const Vec3& translate)
+Matrix4x4 MatrixTransform::MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate)
 {
 	Matrix4x4 result;
 
@@ -833,9 +833,9 @@ Matrix4x4 MatrixTransform::Identity()
 	return result;
 }
 
-Vec3 MatrixTransform::Transform(const Vec3& v, const Matrix4x4 matrix)
+Vector3 MatrixTransform::Transform(const Vector3& v, const Matrix4x4 matrix)
 {
-	Vec3 result;
+	Vector3 result;
 
 	result.x = (v.x * matrix.m[0][0]) + (v.y * matrix.m[1][0])
 		+ (v.z * matrix.m[2][0]) + (1.0f * matrix.m[3][0]);

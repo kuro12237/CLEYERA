@@ -51,7 +51,7 @@ public:
 	/// <param name="left"></param>
 	/// <param name="right"></param>
 	/// <param name="三角形の頂点"></param>
-	void TriangleDraw(Vec4 top, Vec4 left, Vec4 right, VertexProperty vertex);
+	void TriangleDraw(Vector4 top, Vector4 left, Vector4 right, VertexProperty vertex);
 
 	/// <summary>
 	/// 四角形の表示/// </summary>
@@ -60,7 +60,7 @@ public:
 	/// <param name="左下"></param>
 	/// <param name="右下"></param>
 	/// <param name="vertex"></param>
-	void RectDraw(Vec4 lefttop, Vec4 righttop, Vec4 leftdown, Vec4 rightDown, RectVertexProrertys vertex);
+	void RectDraw(Vector4 lefttop, Vector4 righttop, Vector4 leftdown, Vector4 rightDown, RectVertexProrertys vertex);
 	
 	/// <summary>
 	/// 三角形の頂点の解放処理

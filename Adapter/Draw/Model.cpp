@@ -34,7 +34,7 @@ void Model::CreateVertex(VertexProperty &vertex)
 
 	//バッファリソース。テクスチャの場合はまた別の設定をする
 	vertexResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	vertexResourceDesc.Width = sizeof(Vec4) * 3; //リソースのサイズ。今回はvector4を3頂点分
+	vertexResourceDesc.Width = sizeof(Vector4) * 3; //リソースのサイズ。今回はvector4を3頂点分
 
 	//バッファの場合はこれらは1にする決まり
 	vertexResourceDesc.Height = 1;
@@ -51,10 +51,10 @@ void Model::CreateVertex(VertexProperty &vertex)
 	vertex.BufferView.BufferLocation = vertex.Resource->GetGPUVirtualAddress();
 
 	//使用するリソースのサイズは頂点3つ分のサイズ
-	vertex.BufferView.SizeInBytes = sizeof(Vec4) * 3;
+	vertex.BufferView.SizeInBytes = sizeof(Vector4) * 3;
 
 	//1頂点あたりのサイズ
-	vertex.BufferView.StrideInBytes = sizeof(Vec4);
+	vertex.BufferView.StrideInBytes = sizeof(Vector4);
 
 
 }
@@ -63,10 +63,10 @@ void Model::CreateVertex(VertexProperty &vertex)
 
 
 
-void Model::Draw(Vec4 top, Vec4 left, Vec4 right, VertexProperty &vertex)
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right, VertexProperty &vertex)
 {
 
-	Vec4* vertexData = nullptr;
+	Vector4* vertexData = nullptr;
 
 
 	//書き込むためのアドレスを取得

@@ -1,6 +1,6 @@
 #pragma once
 
-struct Vec2
+struct Vector2
 {
 	float x, y;
 };

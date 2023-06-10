@@ -144,6 +144,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Adapter\Draw\Rect.cpp" />
     <ClCompile Include="Adapter\Setup\DirectXSetup.cpp" />
     <ClCompile Include="Adapter\Setup\WinSetup.cpp" />
+    <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Adapter\Setup\WinSetup.h" />
     <ClInclude Include="Adapter\Struct.h" />
     <ClInclude Include="Adapter\Vector4.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
+    <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
+    <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector2.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\Object3d.PS.hlsl">

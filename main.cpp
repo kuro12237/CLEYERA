@@ -6,18 +6,18 @@
 
 struct  TriangleProperty
 {
-	Vec4 top;
-	Vec4 left;
-	Vec4 right;
+	Vector4 top;
+	Vector4 left;
+	Vector4 right;
 	VertexProperty vertexData;
 };
 
 struct  RectProperty
 {
-	Vec4 leftTop;
-	Vec4 rightTop;
-	Vec4 leftDown;
-	Vec4 rightDown;
+	Vector4 leftTop;
+	Vector4 rightTop;
+	Vector4 leftDown;
+	Vector4 rightDown;
 	RectVertexProrertys vartexData;
 };
 

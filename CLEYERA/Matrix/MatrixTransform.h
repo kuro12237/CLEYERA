@@ -58,7 +58,7 @@ public:
 	/// <param name="vector"></param>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Vec2 Multiply(Vec2 vector, Matrix2x2 matrix);
+	Vector2 Multiply(Vector2 vector, Matrix2x2 matrix);
 
 #pragma endregion
 
@@ -131,7 +131,7 @@ public:
 	/// <param name="v"></param>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Vec3 Multiply(const Vec3 v, const Matrix3x3 matrix);
+	Vector3 Multiply(const Vector3 v, const Matrix3x3 matrix);
 
 #pragma endregion 
  
@@ -144,7 +144,7 @@ public:
 	/// </summary>
 	/// <param name="translate"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeTranslate3x3Matrix(Vec2 translate);
+	Matrix3x3 MakeTranslate3x3Matrix(Vector2 translate);
 
 	/// <summary>
 	/// 3x3行列回転
@@ -158,7 +158,7 @@ public:
 	/// </summary>
 	/// <param name="scale"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeScaleMatrix(const Vec2 scale);
+	Matrix3x3 MakeScaleMatrix(const Vector2 scale);
 
 
 
@@ -173,7 +173,7 @@ public:
 	/// <param name="radian"></param>
 	/// <param name="scale"></param>
 	/// <returns></returns>
-	Matrix3x3 MakeAffineMatrix(const Vec2 translate, float radian, const Vec2 scale);
+	Matrix3x3 MakeAffineMatrix(const Vector2 translate, float radian, const Vector2 scale);
 
 
 	/// <summary>
@@ -182,7 +182,7 @@ public:
 	/// <param name="v"></param>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Vec2 Transform(Vec2 v, Matrix3x3 matrix);
+	Vector2 Transform(Vector2 v, Matrix3x3 matrix);
 
 	/// <summary>
 	/// 3x3の逆行列
@@ -261,14 +261,14 @@ public:
 	/// </summary>
 	/// <param name="scale"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeScaleMatrix(const Vec3 scale);
+	Matrix4x4 MakeScaleMatrix(const Vector3 scale);
 
 	/// <summary>
 	/// 4x4平行移動行列
 	/// </summary>
 	/// <param name="translate"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeTranslateMatrix(Vec3 translate);
+	Matrix4x4 MakeTranslateMatrix(Vector3 translate);
 
 #pragma region 回転
 	/// <summary>
@@ -314,7 +314,7 @@ public:
 	/// <param name="rotate"></param>
 	/// <param name="translate"></param>
 	/// <returns></returns>
-	Matrix4x4 MakeAffineMatrix(const Vec3& scale, const Vec3& rotate, const Vec3& translate);
+	Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
 
 
 	/// <summary>
@@ -343,7 +343,7 @@ public:
 	/// <param name="v"></param>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
-	Vec3 Transform(const Vec3& v, const Matrix4x4 matrix);
+	Vector3 Transform(const Vector3& v, const Matrix4x4 matrix);
 
 	/// <summary>
 	/// 4x4正射影行列
