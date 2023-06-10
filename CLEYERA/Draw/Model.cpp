@@ -2,6 +2,8 @@
 
 Model::Model()
 {
+	matrixTransform_ = new MatrixTransform();
+	vectorTransform_ = new VectorTransform();
 
 }
 

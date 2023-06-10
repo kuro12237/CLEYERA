@@ -13,6 +13,9 @@
 
 #include "../Setup/DirectXSetup.h"
 
+#include "../Matrix/MatrixTransform.h"
+#include"../Vector/VectorTransform.h"
+
 class  Model
 {
 public:
@@ -34,10 +37,12 @@ public:
 
 private:
 
+
+	MatrixTransform* matrixTransform_ = nullptr;
+	VectorTransform* vectorTransform_ = nullptr;
+
 	ID3D12Device* device = nullptr;
-
 	Commands commands;
-
 	HRESULT hr;
 
 };
