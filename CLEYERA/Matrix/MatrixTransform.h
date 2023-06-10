@@ -52,14 +52,7 @@ public:
 	/// <returns></returns>
 	Matrix2x2 Multiply(Matrix2x2 matrix1, Matrix2x2 matrix2);
 
-	/// <summary>
-	/// 二次元ベクトルと2x2行列の掛け算
-	/// </summary>
-	/// <param name="vector"></param>
-	/// <param name="matrix"></param>
-	/// <returns></returns>
-	Vector2 Multiply(Vector2 vector, Matrix2x2 matrix);
-
+	
 #pragma endregion
 
 
@@ -125,13 +118,6 @@ public:
 	/// <returns></returns>
 	Matrix3x3 Multiply(const Matrix3x3& m1, const Matrix3x3& m2);
 
-	/// <summary>
-	/// 三次元ベクトルと3x3行列の掛け算
-	/// </summary>
-	/// <param name="v"></param>
-	/// <param name="matrix"></param>
-	/// <returns></returns>
-	Vector3 Multiply(const Vector3 v, const Matrix3x3 matrix);
 
 #pragma endregion 
  
@@ -337,13 +323,6 @@ public:
 	/// <returns></returns>
 	Matrix4x4 Identity();
 
-	/// <summary>
-	/// 3次元ベクトルを4x4行列で変換
-	/// </summary>
-	/// <param name="v"></param>
-	/// <param name="matrix"></param>
-	/// <returns></returns>
-	Vector3 Transform(const Vector3& v, const Matrix4x4 matrix);
 
 	/// <summary>
 	/// 4x4正射影行列

@@ -49,15 +49,6 @@ Matrix2x2 MatrixTransform::Multiply(Matrix2x2 matrix1, Matrix2x2 matrix2)
 	return result;
 }
 
-Vector2 MatrixTransform::Multiply(Vector2 vector, Matrix2x2 matrix)
-{
-	Vector2 result;
-	result.x = vector.x * matrix.m[0][0] + vector.y * matrix.m[1][0];
-	result.y = vector.x * matrix.m[0][1] + vector.y * matrix.m[1][1];
-
-	return result;
-}
-
 #pragma endregion
 
 #pragma region 回転
@@ -152,20 +143,7 @@ Matrix3x3 MatrixTransform::Multiply(const Matrix3x3& m1, const Matrix3x3& m2)
 	return result;
 }
 
-Vector3 MatrixTransform::Multiply(const Vector3 v, const Matrix3x3 matrix)
-{
-	Vector3 result;
 
-	result.x = v.x * matrix.m[0][0] + 
-		v.y * matrix.m[1][0] + v.z * matrix.m[2][0];
-	result.y = v.x * matrix.m[0][1] +
-		v.y * matrix.m[1][1] + v.z * matrix.m[2][1];
-	result.z = v.x * matrix.m[0][2] +
-		v.y * matrix.m[1][2] + v.z * matrix.m[2][2];
-
-	return result;
-
-}
 
 #pragma endregion 
 
@@ -214,17 +192,17 @@ Matrix3x3 MatrixTransform::MakeScaleMatrix(const Vector2 scale)
 	result.m[0][0] = scale.x;
 	result.m[0][1] = 0.0f;
 	result.m[0][2] = 0.0f;
-	result.m[0][3] = 0.0f;
+	
 
 	result.m[1][0] = 0.0f;
 	result.m[1][1] = scale.y;
 	result.m[1][2] = 0.0f;
-	result.m[1][3] = 0.0f;
+	
 
 	result.m[2][0] = 0.0f;
 	result.m[2][1] = 0.0f;
 	result.m[2][2] = 0.0f;
-	result.m[2][3] = 1.0f;
+	
 
 	return result;
 }
@@ -831,32 +809,6 @@ Matrix4x4 MatrixTransform::Identity()
 
 
 	return result;
-}
-
-Vector3 MatrixTransform::Transform(const Vector3& v, const Matrix4x4 matrix)
-{
-	Vector3 result;
-
-	result.x = (v.x * matrix.m[0][0]) + (v.y * matrix.m[1][0])
-		+ (v.z * matrix.m[2][0]) + (1.0f * matrix.m[3][0]);
-
-	result.y = (v.x * matrix.m[0][1]) + (v.y * matrix.m[1][1])
-		+ (v.z * matrix.m[2][1]) + (1.0f * matrix.m[3][1]);
-
-	result.z = (v.x * matrix.m[0][2]) + (v.y * matrix.m[1][2])
-		+ (v.z * matrix.m[2][2]) + (1.0f * matrix.m[3][2]);
-
-	float w = (v.x * matrix.m[0][3]) + (v.y * matrix.m[1][3]) + (v.z * matrix.m[2][3]) + (1.0f * matrix.m[3][3]);
-
-
-	assert(w != 0.0f);
-	result.x /= w;
-	result.y /= w;
-	result.z /= w;
-
-	return result;
-
-
 }
 
 Matrix4x4 MatrixTransform::MakeOrthographicMatrix(float left, float top, float right, float bottom, float neaCrlip, float farClip)
