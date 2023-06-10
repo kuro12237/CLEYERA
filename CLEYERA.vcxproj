@@ -139,28 +139,28 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Adapter\Cleyera.cpp" />
-    <ClCompile Include="Adapter\Draw\Model.cpp" />
-    <ClCompile Include="Adapter\Draw\Rect.cpp" />
-    <ClCompile Include="Adapter\Setup\DirectXSetup.cpp" />
-    <ClCompile Include="Adapter\Setup\WinSetup.cpp" />
+    <ClCompile Include="CLEYERA\Cleyera.cpp" />
+    <ClCompile Include="CLEYERA\Draw\Model.cpp" />
+    <ClCompile Include="CLEYERA\Draw\Rect.cpp" />
     <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
+    <ClCompile Include="CLEYERA\Setup\DirectXSetup.cpp" />
+    <ClCompile Include="CLEYERA\Setup\WinSetup.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Adapter\Cleyera.h" />
-    <ClInclude Include="Adapter\Draw\Model.h" />
-    <ClInclude Include="Adapter\Draw\Rect.h" />
-    <ClInclude Include="Adapter\Setup\DirectXSetup.h" />
-    <ClInclude Include="Adapter\Setup\WinSetup.h" />
-    <ClInclude Include="Adapter\Struct.h" />
-    <ClInclude Include="Adapter\Vector4.h" />
+    <ClInclude Include="CLEYERA\Cleyera.h" />
+    <ClInclude Include="CLEYERA\CleyeraStruct.h" />
+    <ClInclude Include="CLEYERA\Draw\Model.h" />
+    <ClInclude Include="CLEYERA\Draw\Rect.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
+    <ClInclude Include="CLEYERA\Setup\DirectXSetup.h" />
+    <ClInclude Include="CLEYERA\Setup\WinSetup.h" />
     <ClInclude Include="CLEYERA\Vector\Vector2.h" />
     <ClInclude Include="CLEYERA\Vector\Vector3.h" />
+    <ClInclude Include="CLEYERA\Vector\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\Object3d.PS.hlsl">

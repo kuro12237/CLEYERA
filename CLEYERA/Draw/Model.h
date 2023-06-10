@@ -28,7 +28,7 @@ public:
 
 	void CreateVertex(BufferResource &vertex);
 
-	void Draw(Vec4 top, Vec4 left, Vec4 right, BufferResource &vertex);
+	void Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &vertex);
 
 	void VartexRelease(BufferResource vartex);
 

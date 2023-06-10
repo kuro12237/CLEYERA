@@ -62,7 +62,7 @@ BufferResource Model::CreateBufferResource(ID3D12Device*device , size_t sizeInby
 void Model::CreateVertex(BufferResource &vertex)
 {
 
-	vertex = CreateBufferResource(device, sizeof(Vec4) * 3);
+	vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
 
 }
 
@@ -70,10 +70,10 @@ void Model::CreateVertex(BufferResource &vertex)
 
 
 
-void Model::Draw(Vec4 top, Vec4 left, Vec4 right, BufferResource &vertex)
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &vertex)
 {
 
-	Vec4* vertexData = nullptr;
+	Vector4* vertexData = nullptr;
 
 
 	//書き込むためのアドレスを取得

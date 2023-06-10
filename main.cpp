@@ -1,4 +1,4 @@
-#include"Adapter/Cleyera.h"
+#include"CLEYERA/Cleyera.h"
 #define Triangle_Property_MAX 15
 
 
@@ -9,7 +9,7 @@ struct  TriangleProperty
 	Vector4 top;
 	Vector4 left;
 	Vector4 right;
-	VertexProperty vertexData;
+	BufferResource vertexData;
 };
 
 struct  RectProperty
@@ -18,7 +18,7 @@ struct  RectProperty
 	Vector4 rightTop;
 	Vector4 leftDown;
 	Vector4 rightDown;
-	RectVertexProrertys vartexData;
+	RectBufferResource vartexData;
 };
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)

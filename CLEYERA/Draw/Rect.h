@@ -11,7 +11,7 @@ public:
 
 	void BufferCreate(RectBufferResource &vartex);
 
-	void Draw(Vec4 leftTop, Vec4 rightTop, Vec4 leftDown, Vec4 rightDown,RectBufferResource vertex);
+	void Draw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown,RectBufferResource vertex);
 
 private:
 
