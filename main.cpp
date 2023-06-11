@@ -2,7 +2,7 @@
 #define Triangle_Property_MAX 15
 
 
-//vertexDataをResourceDataに差し替える
+
 
 struct  TriangleProperty
 {
