@@ -27,7 +27,9 @@ public:
 	void DirectXSetCommands(Commands commands_);
 
 
-	static BufferResource CreateBufferResource(ID3D12Device* device, size_t sizeInbyte);
+	static ID3D12Resource* CreateBufferResource(ID3D12Device* device, size_t sizeInbyte);
+	static D3D12_VERTEX_BUFFER_VIEW CreateBufferVier(size_t sizeInbyte ,ID3D12Resource* Resource);
+
 
 	void CreateVertex(BufferResource &vertex);
 

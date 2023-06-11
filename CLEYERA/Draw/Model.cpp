@@ -23,9 +23,9 @@ void Model::DirectXSetCommands(Commands commands_)
 
 
 
-BufferResource Model::CreateBufferResource(ID3D12Device*device , size_t sizeInbyte)
+ID3D12Resource* Model::CreateBufferResource(ID3D12Device*device , size_t sizeInbyte)
 {
-	BufferResource ResultResource;
+	ID3D12Resource* RssultResource;
 	//頂点リソース用のヒープの設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 
@@ -49,23 +49,31 @@ BufferResource Model::CreateBufferResource(ID3D12Device*device , size_t sizeInby
 	vertexResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 	HRESULT hr;
 	hr=device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&ResultResource.Resource));
+		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&RssultResource));
 	assert(SUCCEEDED(hr));
-	ResultResource.BufferView.BufferLocation = ResultResource.Resource->GetGPUVirtualAddress();
+
+	return RssultResource;
+}
+
+D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferVier(size_t sizeInbyte,ID3D12Resource* Resource)
+{
+	D3D12_VERTEX_BUFFER_VIEW resultBufferView;
+
+	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
 
 	//使用するリソースのサイズは頂点3つ分のサイズ
-	ResultResource.BufferView.SizeInBytes = sizeInbyte;
+	resultBufferView.SizeInBytes = sizeInbyte;
 
 	//1頂点あたりのサイズ
-	ResultResource.BufferView.StrideInBytes = sizeInbyte/3;
-	return ResultResource;
+	resultBufferView.StrideInBytes = sizeInbyte / 3;
+	return resultBufferView;
 }
 
 void Model::CreateVertex(BufferResource &vertex)
 {
 
-	vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
-
+	vertex.Resource = CreateBufferResource(device, sizeof(Vector4) * 3);
+	vertex.BufferView = CreateBufferVier(sizeof(Vector4) * 3,vertex.Resource);
 }
 
 
