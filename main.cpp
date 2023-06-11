@@ -182,7 +182,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		Cleyera_->BeginFlame(kClientWidth,kClientHeight);
 		
-	
+	 
+
 		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
