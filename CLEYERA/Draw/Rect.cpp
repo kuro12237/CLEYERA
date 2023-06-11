@@ -15,11 +15,11 @@ void Rect::BufferCreate(RectBufferResource &vartex)
 	
 }
 
-void Rect::Draw(Vector4 lefttop,Vector4 righttop,Vector4 leftdown,Vector4 rightDown, RectBufferResource vertex)
+void Rect::Draw(Vector4 lefttop,Vector4 righttop,Vector4 leftdown,Vector4 rightDown, unsigned int ColorCode, RectBufferResource vertex)
 {
 
-	Model::Draw(lefttop, leftdown, righttop, vertex.left);
-	Model::Draw(righttop, leftdown, rightDown, vertex.right);
+	Model::Draw(lefttop, leftdown, righttop,ColorCode, vertex.left);
+	Model::Draw(righttop, leftdown, rightDown,ColorCode, vertex.right);
 
 }
 

@@ -83,7 +83,7 @@ void Model::CreateVertex(BufferResource &Resource)
 
 
 
-void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &Resource)
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, BufferResource &Resource)
 {
 
 	Vector4* vertexData = nullptr;
@@ -101,7 +101,9 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &Resou
 	//右上
 	vertexData[2] = { right };
 
-	*MaterialData = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+	Vector4 colorData = ColorAdapter(ColorCode);
+
+	*MaterialData = colorData;
 	
 	commands.List->IASetVertexBuffers(0, 1, &Resource.BufferView);
 
@@ -122,6 +124,26 @@ void Model::VartexRelease(BufferResource Resource)
 
 	Resource.Vertex->Release();
 	Resource.Material->Release();
+}
+
+Vector4 Model::ColorAdapter(unsigned int color)
+{
+	
+     
+	Vector4 ResultColor = {
+     
+	   ((color >> 24) & 0xFF) / 255.0f, // 赤
+     
+	   ((color >> 16) & 0xFF) / 255.0f, // 緑
+     
+	   ((color >>8) & 0xFF) / 255.0f,  // 青
+     
+	   ((color) & 0xFF) / 255.0f //透明度
+     
+    };
+     
+     return ResultColor;
+	
 }
 
 

@@ -16,6 +16,15 @@
 
 
 
+enum Color
+{
+	RED =  0xFF0000FF,
+	GREEN= 0x00FF00FF,
+	BLUE = 0x0000FFFF,
+	WHITE= 0xFFFFFFFF,
+	BLACK= 0x000000FF
+};
+
 
 struct  BufferResource
 {

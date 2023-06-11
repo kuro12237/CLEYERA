@@ -9,7 +9,7 @@ struct  TriangleProperty
 	Vector4 top;
 	Vector4 left;
 	Vector4 right;
-	BufferResource vertexData;
+	BufferResource ResourceData;
 };
 
 struct  RectProperty
@@ -18,7 +18,7 @@ struct  RectProperty
 	Vector4 rightTop;
 	Vector4 leftDown;
 	Vector4 rightDown;
-	RectBufferResource vartexData;
+	RectBufferResource ResourceData;
 };
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -152,7 +152,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
 
-		Cleyera_->TriangleVertexCreate(TriangleProperty_[i].vertexData);
+		Cleyera_->TriangleVertexCreate(TriangleProperty_[i].ResourceData);
 	}
 
 
@@ -163,7 +163,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		rect.rightTop = { 0.5f,0.5f,0.0f,1.0f };
 		rect.leftDown = { -0.5f,-0.5f,0.0f,1.0f };
 		rect.rightDown = { 0.5f,-0.5f,0.0f,1.0f };
-		Cleyera_->RectVartexCreate(rect.vartexData);
+		Cleyera_->RectVartexCreate(rect.ResourceData);
 	}
 
 	MSG msg{};
@@ -186,23 +186,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
-			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,TriangleProperty_[i].vertexData);
+			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,RED,TriangleProperty_[i].ResourceData);
 			
 
 		}
-		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, rect.vartexData);
+		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown,BLUE, rect.ResourceData);
 
 		Cleyera_->EndFlame();
 
-		
 	}
 
 	//頂点の解放
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
-		Cleyera_->TriangleRelease(TriangleProperty_[i].vertexData);
+		Cleyera_->TriangleRelease(TriangleProperty_[i].ResourceData);
 	}
-	Cleyera_->RectRelese(rect.vartexData);
+	Cleyera_->RectRelese(rect.ResourceData);
+
 
 	Cleyera_->Deleate();
 	Cleyera_->~Cleyera();

@@ -86,9 +86,9 @@ void Cleyera::RectVartexCreate(RectBufferResource& vertex)
 /// <param name="left"></param>
 /// <param name="right"></param>
 /// <param name="vertex"></param>
-void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, BufferResource vertex)
+void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, BufferResource vertex)
 {
-	Model_->Draw( top, left,  right, vertex);
+	Model_->Draw( top, left,  right,ColorCode,vertex);
 }
 
 
@@ -100,26 +100,26 @@ void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, BufferResou
 /// <param name="左下"></param>
 /// <param name="右下"></param>
 /// <param name="vertex"></param>
-void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, RectBufferResource vertex)
+void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, RectBufferResource vertex)
 {
-	Rect_->Draw(leftTop, rightTop, leftDown, rightDown, vertex);
+	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode, vertex);
 }
 
 /// <summary>
 /// 三角形の頂点の解放処理
 /// </summary>
 /// <param name="vartex"></param>
-void Cleyera::TriangleRelease(BufferResource vartex)
+void Cleyera::TriangleRelease(BufferResource Resource)
 {
-	Model_->VartexRelease(vartex);
+	Model_->VartexRelease(Resource);
 
 
 }
 
-void Cleyera::RectRelese(RectBufferResource vartex)
+void Cleyera::RectRelese(RectBufferResource Resource)
 {
-	Model_->VartexRelease(vartex.left);
-	Model_->VartexRelease(vartex.right);
+	Model_->VartexRelease(Resource.left);
+	Model_->VartexRelease(Resource.right);
 
 }
 
