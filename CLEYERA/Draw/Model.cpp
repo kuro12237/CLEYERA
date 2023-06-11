@@ -23,9 +23,9 @@ void Model::DirectXSetCommands(Commands commands_)
 
 
 
-BufferResource Model::CreateBufferResource(ID3D12Device*device , size_t sizeInbyte)
+ID3D12Resource* Model::CreateBufferResource(ID3D12Device*device , size_t sizeInbyte)
 {
-	BufferResource ResultResource;
+	ID3D12Resource* RssultResource;
 	//頂点リソース用のヒープの設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 
@@ -49,38 +49,49 @@ BufferResource Model::CreateBufferResource(ID3D12Device*device , size_t sizeInby
 	vertexResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 	HRESULT hr;
 	hr=device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&ResultResource.Resource));
+		&vertexResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&RssultResource));
 	assert(SUCCEEDED(hr));
-	ResultResource.BufferView.BufferLocation = ResultResource.Resource->GetGPUVirtualAddress();
+
+	return RssultResource;
+}
+
+D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferVier(size_t sizeInbyte,ID3D12Resource* Resource)
+{
+	D3D12_VERTEX_BUFFER_VIEW resultBufferView;
+
+	resultBufferView.BufferLocation = Resource->GetGPUVirtualAddress();
 
 	//使用するリソースのサイズは頂点3つ分のサイズ
-	ResultResource.BufferView.SizeInBytes = sizeInbyte;
+	resultBufferView.SizeInBytes = sizeInbyte;
 
 	//1頂点あたりのサイズ
-	ResultResource.BufferView.StrideInBytes = sizeInbyte/3;
-	return ResultResource;
+	resultBufferView.StrideInBytes = sizeInbyte / 3;
+	return resultBufferView;
 }
 
-void Model::CreateVertex(BufferResource &vertex)
+
+
+void Model::CreateVertex(BufferResource &Resource)
 {
 
-	vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
-
+	Resource.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
+	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
+	Resource.BufferView = CreateBufferVier(sizeof(Vector4) * 3,Resource.Vertex);
 }
 
 
 
 
 
-void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &vertex)
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, BufferResource &Resource)
 {
 
 	Vector4* vertexData = nullptr;
-
+	Vector4* MaterialData = nullptr;
 
 	//書き込むためのアドレスを取得
-	vertex.Resource->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-
+	Resource.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 	//左下
 	vertexData[0] = { left };
 
@@ -90,23 +101,49 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &verte
 	//右上
 	vertexData[2] = { right };
 
+	Vector4 colorData = ColorAdapter(ColorCode);
+
+	*MaterialData = colorData;
 	
-	commands.List->IASetVertexBuffers(0, 1, &vertex.BufferView);
+	commands.List->IASetVertexBuffers(0, 1, &Resource.BufferView);
 
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+	
+	//マテリアルCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(0, Resource.Material->GetGPUVirtualAddress());
+	
 	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(3, 1, 0, 0);
 
 
 }
 
-void Model::VartexRelease(BufferResource vartex)
+void Model::VartexRelease(BufferResource Resource)
 {
 
-	vartex.Resource->Release();
+	Resource.Vertex->Release();
+	Resource.Material->Release();
+}
 
+Vector4 Model::ColorAdapter(unsigned int color)
+{
+	
+     
+	Vector4 ResultColor = {
+     
+	   ((color >> 24) & 0xFF) / 255.0f, // 赤
+     
+	   ((color >> 16) & 0xFF) / 255.0f, // 緑
+     
+	   ((color >>8) & 0xFF) / 255.0f,  // 青
+     
+	   ((color) & 0xFF) / 255.0f //透明度
+     
+    };
+     
+     return ResultColor;
+	
 }
 
 
