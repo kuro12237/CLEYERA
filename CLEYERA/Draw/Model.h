@@ -35,7 +35,7 @@ public:
 
 	void Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &vertex);
 
-	void VartexRelease(BufferResource vartex);
+	void VartexRelease(BufferResource Resource);
 
 private:
 

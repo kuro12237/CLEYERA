@@ -69,26 +69,29 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferVier(size_t sizeInbyte,ID3D12Resourc
 	return resultBufferView;
 }
 
-void Model::CreateVertex(BufferResource &vertex)
+
+
+void Model::CreateVertex(BufferResource &Resource)
 {
 
-	vertex.Resource = CreateBufferResource(device, sizeof(Vector4) * 3);
-	vertex.BufferView = CreateBufferVier(sizeof(Vector4) * 3,vertex.Resource);
+	Resource.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
+	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
+	Resource.BufferView = CreateBufferVier(sizeof(Vector4) * 3,Resource.Vertex);
 }
 
 
 
 
 
-void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &vertex)
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &Resource)
 {
 
 	Vector4* vertexData = nullptr;
-
+	Vector4* MaterialData = nullptr;
 
 	//書き込むためのアドレスを取得
-	vertex.Resource->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-
+	Resource.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 	//左下
 	vertexData[0] = { left };
 
@@ -98,23 +101,27 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, BufferResource &verte
 	//右上
 	vertexData[2] = { right };
 
+	*MaterialData = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 	
-	commands.List->IASetVertexBuffers(0, 1, &vertex.BufferView);
+	commands.List->IASetVertexBuffers(0, 1, &Resource.BufferView);
 
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+	
+	//マテリアルCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(0, Resource.Material->GetGPUVirtualAddress());
+	
 	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(3, 1, 0, 0);
 
 
 }
 
-void Model::VartexRelease(BufferResource vartex)
+void Model::VartexRelease(BufferResource Resource)
 {
 
-	vartex.Resource->Release();
-
+	Resource.Vertex->Release();
+	Resource.Material->Release();
 }
 
 

@@ -20,7 +20,8 @@
 struct  BufferResource
 {
 	D3D12_VERTEX_BUFFER_VIEW BufferView;
-	ID3D12Resource* Resource;
+	ID3D12Resource* Vertex;
+	ID3D12Resource* Material;
 };
 
 struct RectBufferResource

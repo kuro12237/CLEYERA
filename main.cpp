@@ -183,7 +183,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Cleyera_->BeginFlame(kClientWidth,kClientHeight);
 		
 	
-		for (int i = 0; i < Triangle_Property_MAX	; i++)
+		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
 			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,TriangleProperty_[i].vertexData);

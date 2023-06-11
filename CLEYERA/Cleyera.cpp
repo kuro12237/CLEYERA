@@ -113,6 +113,7 @@ void Cleyera::TriangleRelease(BufferResource vartex)
 {
 	Model_->VartexRelease(vartex);
 
+
 }
 
 void Cleyera::RectRelese(RectBufferResource vartex)
