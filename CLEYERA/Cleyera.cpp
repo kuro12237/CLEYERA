@@ -65,7 +65,7 @@ void Cleyera::EndFlame()
 /// 三角形の頂点の作成
 /// </summary>
 /// <param name="vertex"></param>
-void Cleyera::TriangleVertexCreate(BufferResource&vertex)
+void Cleyera::TriangleResourceCreate(BufferResource&vertex)
 {
 	Model_->CreateVertex(vertex);
 }
@@ -74,7 +74,7 @@ void Cleyera::TriangleVertexCreate(BufferResource&vertex)
 /// 四角形の頂点作成
 /// </summary>
 /// <param name="vertex"></param>
-void Cleyera::RectVartexCreate(RectBufferResource& vertex)
+void Cleyera::RectResourceCreate(RectBufferResource& vertex)
 {
 	Rect_->BufferCreate(vertex);
 }

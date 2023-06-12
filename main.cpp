@@ -152,22 +152,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
 
-		Cleyera_->TriangleVertexCreate(TriangleProperty_[i].ResourceData);
+		Cleyera_->TriangleResourceCreate(TriangleProperty_[i].ResourceData);
 	}
 
 
 	RectProperty rect;
 	{
-		
-		rect.leftTop= { -0.5f,0.5f,0.0f,1.0f };
+
+		rect.leftTop = { -0.5f,0.5f,0.0f,1.0f };
 		rect.rightTop = { 0.5f,0.5f,0.0f,1.0f };
 		rect.leftDown = { -0.5f,-0.5f,0.0f,1.0f };
 		rect.rightDown = { 0.5f,-0.5f,0.0f,1.0f };
-		Cleyera_->RectVartexCreate(rect.ResourceData);
+		Cleyera_->RectResourceCreate(rect.ResourceData);
 	}
 
 	MSG msg{};
-	
+
+
+
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -176,22 +178,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
 		}
-		else
-		{
 
-		}
-		Cleyera_->BeginFlame(kClientWidth,kClientHeight);
-		
-	 
+		Cleyera_->BeginFlame(kClientWidth, kClientHeight);
+
+
 
 		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
-			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,RED,TriangleProperty_[i].ResourceData);
-			
+			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right, RED, TriangleProperty_[i].ResourceData);
+
 
 		}
-		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown,BLUE, rect.ResourceData);
+		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, 0x6400FFFF, rect.ResourceData);
 
 		Cleyera_->EndFlame();
 

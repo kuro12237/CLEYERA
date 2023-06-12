@@ -39,10 +39,10 @@ public:
 	/// 三角形の頂点の生成
 	/// </summary>
 	/// <param name="vertex"></param>
-	void TriangleVertexCreate(BufferResource &vertex);
+	void TriangleResourceCreate(BufferResource &vertex);
 		
 
-	void RectVartexCreate(RectBufferResource &vertex);
+	void RectResourceCreate(RectBufferResource &vertex);
 
 	/// <summary>
 	/// 三角形の表示
