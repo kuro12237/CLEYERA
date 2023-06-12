@@ -128,8 +128,6 @@ void Model::VartexRelease(BufferResource Resource)
 
 Vector4 Model::ColorAdapter(unsigned int color)
 {
-	
-     
 	Vector4 ResultColor = {
      
 	   ((color >> 24) & 0xFF) / 255.0f, // 赤

@@ -37,7 +37,7 @@ void WindowsSetup::Initialize(const int32_t  kClientWidth, const int32_t  kClien
 	wc_.lpfnWndProc = WindowProc;
 
 	//ウインドウクラス名
-	wc_.lpszClassName = L"directXClass";
+	wc_.lpszClassName = L"CLEYERA";
 	//インスタンス
 	wc_.hInstance = GetModuleHandle(nullptr);
 	//カーソル
@@ -56,7 +56,7 @@ void WindowsSetup::Initialize(const int32_t  kClientWidth, const int32_t  kClien
 	//ウインドウの生成
 	hwnd = CreateWindow(
 		wc_.lpszClassName,
-		L"DirectX",
+		L"CLEYERA",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
