@@ -184,9 +184,22 @@ Vector4 VectorTransform::Multiply(Vector4 v, Matrix4x4 matrix)
 	result.x /= w;
 	result.y /= w;
 	result.z /= w;
-
+	
 	return result;
 
+}
+
+Vector4 VectorTransform::Identity4x4()
+{
+	Vector4 result;
+
+	result.x = 1.0f;
+	result.y = 1.0f;
+	result.z = 1.0f;
+	result.w = 1.0f;
+
+
+	return result;
 }
 
 

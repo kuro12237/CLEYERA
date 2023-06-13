@@ -33,7 +33,7 @@ public:
 
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
-	HWND SetHwnd()
+	HWND GetHwnd()
 	{
 		return hwnd;
 	}

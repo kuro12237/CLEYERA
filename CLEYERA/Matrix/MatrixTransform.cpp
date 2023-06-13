@@ -600,6 +600,8 @@ Matrix4x4 MatrixTransform::MakeAffineMatrix(const Vector3& scale, const Vector3&
 	return result;
 }
 
+
+
 Matrix4x4 MatrixTransform::Transpose(const Matrix4x4 m)
 {
 	Matrix4x4 result;

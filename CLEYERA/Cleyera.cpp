@@ -21,7 +21,7 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 	//CommandList
 	DXSetup_->CreateCommands();
 	//swapChain
-	DXSetup_->CreateSwapChain(Width,Height,WinSetup_->SetHwnd());
+	DXSetup_->CreateSwapChain(Width,Height,WinSetup_->GetHwnd());
 	//rtvDescritor
 	DXSetup_->CreatertvDescritorHeap();
 	//swapChainを引っ張る
@@ -42,6 +42,11 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 
 	Rect_->DirectXSetDevice(DXSetup_->GetDevice());
 	Rect_->DirectXSetCommands(DXSetup_->GetCommands());
+	//カメラの初期化
+
+	CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
+	SceSetup_->SceneInitialize(camera, Width, Height);
+	
 }
 
 void Cleyera::WinMSG(MSG &msg)
@@ -86,9 +91,12 @@ void Cleyera::RectResourceCreate(RectBufferResource& vertex)
 /// <param name="left"></param>
 /// <param name="right"></param>
 /// <param name="vertex"></param>
-void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, BufferResource vertex)
+void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource)
 {
-	Model_->Draw( top, left,  right,ColorCode,vertex);
+	
+	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+
+	Model_->Draw( top, left,  right,ColorCode,Scene,bufferResource);
 }
 
 
@@ -100,9 +108,11 @@ void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned in
 /// <param name="左下"></param>
 /// <param name="右下"></param>
 /// <param name="vertex"></param>
-void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, RectBufferResource vertex)
+void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource vertex)
 {
-	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode, vertex);
+
+	//Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+	//Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,vertex);
 }
 
 /// <summary>
@@ -131,6 +141,8 @@ void Cleyera::Deleate()
 	WinSetup_->Deleate();
 	DXSetup_->ChackRelease();
 }
+
+
 
 Cleyera::Cleyera()
 {

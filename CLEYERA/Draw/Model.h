@@ -16,6 +16,7 @@
 #include "../Matrix/MatrixTransform.h"
 #include"../Vector/VectorTransform.h"
 
+
 class  Model
 {
 public:
@@ -33,7 +34,7 @@ public:
 
 	void CreateVertex(BufferResource &vertex);
 
-	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, BufferResource &Resource);
+	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource &Resource);
 
 	void VartexRelease(BufferResource Resource);
 
@@ -54,6 +55,7 @@ private:
 	Commands commands;
 	HRESULT hr;
 
+	Transform cameraTransform = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} };
 };
 
 

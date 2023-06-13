@@ -365,6 +365,7 @@ public:
 	/// <returns></returns>
 	Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip);
 	
+	Matrix4x4 toDeviceSpace(Matrix4x4 worldViewProjectionMatrix, int32_t kWindowWidth, int32_t kWindowHeight);
 #pragma endregion 
 
 #pragma endregion

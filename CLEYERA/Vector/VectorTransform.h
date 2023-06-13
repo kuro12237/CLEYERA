@@ -61,6 +61,7 @@ public:
 	/// <returns></returns>
 	Vector2 Multiply(Vector2 vector, Matrix2x2 matrix);
 
+
 #pragma endregion
 
 #pragma endregion
@@ -150,13 +151,18 @@ public:
 
 
 	/// <summary>
-	/// 四次元ベクトルと2x2行列の掛け算
+	/// 四次元ベクトルと4x4行列の掛け算
 	/// </summary>
 	/// <param name="vector"></param>
 	/// <param name="matrix"></param>
 	/// <returns></returns>
 	Vector4 Multiply(Vector4 v, Matrix4x4 matrix);
 
+	/// <summary>
+	/// 四次元ベクトルに4x4単位行列書き込む
+	/// </summary>
+	/// <returns></returns>
+	Vector4 Identity4x4();
 
 	/// <summary>
 	/// 向き

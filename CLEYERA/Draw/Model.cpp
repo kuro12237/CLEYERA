@@ -76,6 +76,7 @@ void Model::CreateVertex(BufferResource &Resource)
 
 	Resource.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
 	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
+	Resource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
 	Resource.BufferView = CreateBufferVier(sizeof(Vector4) * 3,Resource.Vertex);
 }
 
@@ -83,15 +84,19 @@ void Model::CreateVertex(BufferResource &Resource)
 
 
 
-void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, BufferResource &Resource)
+
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode,Matrix4x4 matrixTransform,BufferResource &Resource)
 {
 
 	Vector4* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
-
+	Matrix4x4* wvpData = nullptr;
 	//書き込むためのアドレスを取得
 	Resource.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
+	Resource.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
+    
+	//座標
 	//左下
 	vertexData[0] = { left };
 
@@ -101,10 +106,17 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	//右上
 	vertexData[2] = { right };
 
+	//マテリアル
 	Vector4 colorData = ColorAdapter(ColorCode);
 
 	*MaterialData = colorData;
-	
+	//
+	//Scene返還
+	//行列の変換
+
+	*wvpData = matrixTransform;
+	//*wvpData = worldViewProjectionMatrix;
+
 	commands.List->IASetVertexBuffers(0, 1, &Resource.BufferView);
 
 	//形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
@@ -113,6 +125,9 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	//マテリアルCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(0, Resource.Material->GetGPUVirtualAddress());
 	
+	//wvp用のCBufferの場所を設定
+	commands.List->SetGraphicsRootConstantBufferView(1, Resource.wvpResource->GetGPUVirtualAddress());
+
 	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(3, 1, 0, 0);
 
@@ -124,6 +139,7 @@ void Model::VartexRelease(BufferResource Resource)
 
 	Resource.Vertex->Release();
 	Resource.Material->Release();
+	Resource.wvpResource->Release();
 }
 
 Vector4 Model::ColorAdapter(unsigned int color)

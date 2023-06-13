@@ -57,6 +57,9 @@
     <ClCompile Include="CLEYERA\Draw\Rect.cpp">
       <Filter>Draw</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\Setup\SceneSetup.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h">
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Vector\VectorTransform.h">
       <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Setup\SceneSetup.h">
+      <Filter>Setup</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
