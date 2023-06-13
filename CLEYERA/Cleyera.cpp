@@ -44,8 +44,8 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 	Rect_->DirectXSetCommands(DXSetup_->GetCommands());
 	//カメラの初期化
 
-	CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
-	SceSetup_->SceneInitialize(camera, Width, Height);
+	//CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
+	//SceSetup_->SceneInitialize(camera, Width, Height);
 	
 }
 
@@ -94,9 +94,9 @@ void Cleyera::RectResourceCreate(RectBufferResource& vertex)
 void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource)
 {
 	
-	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+	//Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
 
-	Model_->Draw( top, left,  right,ColorCode,Scene,bufferResource);
+	Model_->Draw( top, left,  right,ColorCode,matrixTransform,bufferResource);
 }
 
 

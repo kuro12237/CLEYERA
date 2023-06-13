@@ -114,7 +114,15 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	//Scene返還
 	//行列の変換
 
-	*wvpData = matrixTransform;
+	Transform camera={ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} };
+
+	Matrix4x4 projectionMatrix = matrixTransform_->MakePerspectiveFovMatrix(0.45, 1280.0f / 720.0f, 0.1f, 100.0f);
+	Matrix4x4 cameraMatrix = matrixTransform_->MakeAffineMatrix(camera.scale, camera.rotate, camera.translate);
+	Matrix4x4 viewMatrix = matrixTransform_->Inverse(cameraMatrix);
+
+	Matrix4x4 worldViewProjectionMatrix = matrixTransform_->Multiply(matrixTransform, matrixTransform_->Multiply(viewMatrix, projectionMatrix));
+
+	*wvpData = worldViewProjectionMatrix;
 	//*wvpData = worldViewProjectionMatrix;
 
 	commands.List->IASetVertexBuffers(0, 1, &Resource.BufferView);

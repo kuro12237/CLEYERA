@@ -202,7 +202,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			
 		}
-		//rotate += 0.03;
+		rotate += 0.03;
 		Transform CameraPosition = { {0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 		timer++;
 		if (timer>=120)
