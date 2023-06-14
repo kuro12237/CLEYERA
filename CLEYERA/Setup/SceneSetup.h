@@ -32,9 +32,9 @@ private:
 
 	MatrixTransform* matrixTransform = nullptr;
 	VectorTransform* vectorTransform_ = nullptr;
-	CameraTransform cameraTransform;
-    
-	Matrix4x4 cameraMatrix;
 
+	CameraTransform cameraTransform;
+	Matrix4x4 cameraMatrix;
+	Matrix4x4 projectionMatrix;
 };
 

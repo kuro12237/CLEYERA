@@ -142,6 +142,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\Draw\Model.cpp" />
     <ClCompile Include="CLEYERA\Draw\Rect.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
     <ClCompile Include="CLEYERA\Setup\DirectXSetup.cpp" />
     <ClCompile Include="CLEYERA\Setup\SceneSetup.cpp" />
@@ -154,6 +161,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="CLEYERA\CleyeraStruct.h" />
     <ClInclude Include="CLEYERA\Draw\Model.h" />
     <ClInclude Include="CLEYERA\Draw\Rect.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imconfig.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_dx12.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_internal.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_rectpack.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_textedit.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
@@ -178,6 +193,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CLEYERA\externals\imgui\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

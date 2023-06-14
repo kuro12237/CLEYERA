@@ -42,11 +42,28 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 
 	Rect_->DirectXSetDevice(DXSetup_->GetDevice());
 	Rect_->DirectXSetCommands(DXSetup_->GetCommands());
-	//カメラの初期化
-
-	//CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
-	//SceSetup_->SceneInitialize(camera, Width, Height);
 	
+	//カメラの初期化
+	 
+	CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
+	SceSetup_->SceneInitialize(camera, Width, Height);
+	
+	//ImGui
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
+    ImGui_ImplWin32_Init(WinSetup_->GetHwnd());
+	ImGui_ImplDX12_Init(
+		DXSetup_->GetDevice(),
+		DXSetup_->GeSwapChainDesc().BufferCount,
+		DXSetup_->GetRTV().rtvDesc.Format,
+		DXSetup_->GetSrvDescripterHeap(),
+		DXSetup_->GetSrvDescripterHeap()->GetCPUDescriptorHandleForHeapStart(),
+		DXSetup_->GetSrvDescripterHeap()->GetGPUDescriptorHandleForHeapStart()
+
+	);
+
+
 }
 
 void Cleyera::WinMSG(MSG &msg)
@@ -56,32 +73,50 @@ void Cleyera::WinMSG(MSG &msg)
 
 }
 
+
+
+
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
+
+	ImGui_ImplDX12_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+
+	
+	
 	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
+	DXSetup_->ScissorViewCommand(kClientWidth, kClientHeight);
+
 }
 
 void Cleyera::EndFlame()
 {
+	ImGui::ShowDemoWindow();
+	ImGui::Render();
+	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), DXSetup_->GetCommands().List);
+
+
 	DXSetup_->EndFlame();
 }
 
 /// <summary>
-/// 三角形の頂点の作成
+/// 三角形のバッファの作成
 /// </summary>
 /// <param name="vertex"></param>
-void Cleyera::TriangleResourceCreate(BufferResource&vertex)
+void Cleyera::TriangleResourceCreate(BufferResource&bufferResource)
 {
-	Model_->CreateVertex(vertex);
+	Model_->CreateVertex(bufferResource);
 }
 
 /// <summary>
-/// 四角形の頂点作成
+/// 四角形のバッファ作成
 /// </summary>
 /// <param name="vertex"></param>
-void Cleyera::RectResourceCreate(RectBufferResource& vertex)
+void Cleyera::RectResourceCreate(RectBufferResource& bufferResource)
 {
-	Rect_->BufferCreate(vertex);
+	Rect_->BufferCreate(bufferResource);
 }
 
 /// <summary>
@@ -94,9 +129,9 @@ void Cleyera::RectResourceCreate(RectBufferResource& vertex)
 void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource)
 {
 	
-	//Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
 
-	Model_->Draw( top, left,  right,ColorCode,matrixTransform,bufferResource);
+	Model_->Draw( top, left,  right,ColorCode,Scene,bufferResource);
 }
 
 
@@ -108,11 +143,19 @@ void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned in
 /// <param name="左下"></param>
 /// <param name="右下"></param>
 /// <param name="vertex"></param>
-void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource vertex)
+void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource bufferResouce)
 {
 
-	//Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
-	//Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,vertex);
+	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+
+	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,bufferResouce);
+}
+
+void Cleyera::CameraUpdate(Transform cameraTransform)
+{
+
+	SceSetup_->TransformUpdate(cameraTransform);
+
 }
 
 /// <summary>
@@ -136,9 +179,13 @@ void Cleyera::RectRelese(RectBufferResource Resource)
 
 void Cleyera::Deleate()
 {
-
+	
+	
 	DXSetup_->Deleate();
+
+
 	WinSetup_->Deleate();
+	
 	DXSetup_->ChackRelease();
 }
 
@@ -153,4 +200,5 @@ Cleyera::~Cleyera()
 {
 	DXSetup_->~DirectXSetup();
 	WinSetup_->~WindowsSetup();
+	
 }
