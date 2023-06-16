@@ -1,6 +1,14 @@
 #include"Cleyera.h"
 
+//cleyera//クレイラ
+//CLEYERA ENGINE
 
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="Width"></param>
+/// <param name="Height"></param>
 void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 {
 	//windows
@@ -48,21 +56,8 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 	CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
 	SceSetup_->SceneInitialize(camera, Width, Height);
 	
-	//ImGui
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGui::StyleColorsDark();
-    ImGui_ImplWin32_Init(WinSetup_->GetHwnd());
-	ImGui_ImplDX12_Init(
-		DXSetup_->GetDevice(),
-		DXSetup_->GeSwapChainDesc().BufferCount,
-		DXSetup_->GetRTV().rtvDesc.Format,
-		DXSetup_->GetSrvDescripterHeap(),
-		DXSetup_->GetSrvDescripterHeap()->GetCPUDescriptorHandleForHeapStart(),
-		DXSetup_->GetSrvDescripterHeap()->GetGPUDescriptorHandleForHeapStart()
-
-	);
-
+	
+	ImGuiManager_->Initialize(WinSetup_,DXSetup_);
 
 }
 
@@ -79,23 +74,23 @@ void Cleyera::WinMSG(MSG &msg)
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 
-	ImGui_ImplDX12_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-
-
-	
+	//ImGui_ImplDX12_NewFrame();
+	//ImGui_ImplWin32_NewFrame();
+	//ImGui::NewFrame();
 	
 	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
 	DXSetup_->ScissorViewCommand(kClientWidth, kClientHeight);
+	ImGuiManager_->BeginFlame(DXSetup_);
 
+
+	//ImGuiManager_->BeginFlame();
 }
 
 void Cleyera::EndFlame()
 {
-	ImGui::ShowDemoWindow();
-	ImGui::Render();
-	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), DXSetup_->GetCommands().List);
+	//ImGui::ShowDemoWindow();
+	//ImGui::Render();
+	ImGuiManager_->EndFlame(DXSetup_);
 
 
 	DXSetup_->EndFlame();
@@ -179,13 +174,10 @@ void Cleyera::RectRelese(RectBufferResource Resource)
 
 void Cleyera::Deleate()
 {
-	
-	
+	ImGuiManager_->Release();
+
 	DXSetup_->Deleate();
-
-
 	WinSetup_->Deleate();
-	
 	DXSetup_->ChackRelease();
 }
 
@@ -193,12 +185,30 @@ void Cleyera::Deleate()
 
 Cleyera::Cleyera()
 {
-	
-}
+	WinSetup_ = new WindowsSetup();
+	DXSetup_=new DirectXSetup();
+	SceSetup_=new ScenceSetup();
 
+	Model_ = new Model();
+	Rect_ = new Rect();
+	ImGuiManager_ = new ImGuiManager();
+
+	vectorTransform_ = new VectorTransform();
+	matrixTransform_ = new MatrixTransform();
+
+}
 Cleyera::~Cleyera()
 {
-	DXSetup_->~DirectXSetup();
-	WinSetup_->~WindowsSetup();
+	delete WinSetup_;
+	delete DXSetup_;
+	delete SceSetup_;
+
+	delete ImGuiManager_;
+
+	delete Model_;
+	delete Rect_;
 	
+	delete vectorTransform_;
+	delete matrixTransform_;
+
 }

@@ -9,6 +9,9 @@ Model::Model()
 
 Model::~Model()
 {
+	delete matrixTransform_;
+	delete vectorTransform_;
+
 }
 
 void Model::DirectXSetDevice(ID3D12Device* device_)
@@ -55,7 +58,7 @@ ID3D12Resource* Model::CreateBufferResource(ID3D12Device*device , size_t sizeInb
 	return RssultResource;
 }
 
-D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferVier(size_t sizeInbyte,ID3D12Resource* Resource)
+D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferView(size_t sizeInbyte,ID3D12Resource* Resource)
 {
 	D3D12_VERTEX_BUFFER_VIEW resultBufferView;
 
@@ -77,7 +80,7 @@ void Model::CreateVertex(BufferResource &Resource)
 	Resource.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
 	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
 	Resource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
-	Resource.BufferView = CreateBufferVier(sizeof(Vector4) * 3,Resource.Vertex);
+	Resource.BufferView = CreateBufferView(sizeof(Vector4) * 3,Resource.Vertex);
 }
 
 

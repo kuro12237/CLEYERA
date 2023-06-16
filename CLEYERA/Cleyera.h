@@ -5,10 +5,13 @@
 #include"Draw/Model.h"
 #include"Draw/Rect.h"
 #include"CleyeraStruct.h"
-
+#include"ImGuiManager/ImGuiManager.h"
 
 #include<string>
 #include<format>
+/// <summary>
+/// CLEYERA ENGINE
+/// </summary>
 class Cleyera
 {
 public:
@@ -103,17 +106,17 @@ public:
 private:
 
 
-	WindowsSetup* WinSetup_ = new WindowsSetup();
-	DirectXSetup* DXSetup_ = new DirectXSetup();
-	ScenceSetup* SceSetup_ = new ScenceSetup();
-	Model* Model_ = new Model();
-	Rect* Rect_ = new Rect();
-
+	WindowsSetup* WinSetup_ =nullptr;
+	DirectXSetup* DXSetup_ = nullptr;
+	ScenceSetup* SceSetup_ = nullptr;
+	Model* Model_ = nullptr;
+	Rect* Rect_ = nullptr;
+	ImGuiManager* ImGuiManager_=nullptr;
 
 
 	//
-	VectorTransform* vectorTransform_ = new VectorTransform();
-	MatrixTransform* matrixTransform_ = new MatrixTransform();
+	VectorTransform* vectorTransform_ =nullptr;
+	MatrixTransform* matrixTransform_ =nullptr;
 
 
 	

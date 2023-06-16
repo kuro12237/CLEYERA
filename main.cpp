@@ -159,15 +159,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 	TriangleProperty_[0] =
 	{
-
-
 	{ -0.5f,0.5f,0.0f,1.0f },
 
 	{ -0.5f,-0.5f,0.0f,1.0f},
 	{ 0.5f,-0.5f,0.0f,1.0f }
 	};
 
-	for (int i = 0; i < Triangle_Property_MAX; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		TriangleProperty_[i].matrixTransform = matrixTransform_->Identity();
 		Cleyera_->TriangleResourceCreate(TriangleProperty_[i].ResourceData);
@@ -221,7 +219,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		timer++;
 		if (timer>=120)
 		{
-			CameraPosition.translate.z -= 0.1f;
+			CameraPosition.translate.z -= 1.0f;
 			timer = 0;
 		}
 	
@@ -239,28 +237,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/// 更新処理終了
 		/// 
 
-		//TriangleProperty_[0].matrixTransform = matrixTransform_->MakeRotateZMatrix(rotate);
-		//TriangleProperty_[0].matrixTransform = matrixTransform_->MakeRotateYMatrix(rotate);
-		//rect.matrixTransform = matrixTransform_->MakeRotateYMatrix(rotate);
-		//rect.matrixTransform = matrixTransform_->MakeTranslateMatrix(translate);
-		
 		
 		///
 		///描画処理
 		/// 
-		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, 0x6400FFFF, rect.matrixTransform, rect.ResourceData);
+		//Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, 0x6400FFFF, rect.matrixTransform, rect.ResourceData);
 
 		
-		for (int i = 0; i < 1; i++)
+		for (int i = 0; i < 2; i++)
 		{
 
 			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right, RED,
 				TriangleProperty_[i].matrixTransform,
 				TriangleProperty_[i].ResourceData);
-
-
 		}
-		
+
+
+		ImGui::ShowDemoWindow();
+
 		///
 		///描画処理終了
 		/// 
@@ -269,7 +263,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 
 	//頂点の解放
-	for (int i = 0; i < Triangle_Property_MAX; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		Cleyera_->TriangleRelease(TriangleProperty_[i].ResourceData);
 	}
