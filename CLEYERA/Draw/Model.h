@@ -16,6 +16,7 @@
 #include "../Matrix/MatrixTransform.h"
 #include"../Vector/VectorTransform.h"
 
+
 class  Model
 {
 public:
@@ -28,12 +29,12 @@ public:
 
 
 	static ID3D12Resource* CreateBufferResource(ID3D12Device* device, size_t sizeInbyte);
-	static D3D12_VERTEX_BUFFER_VIEW CreateBufferVier(size_t sizeInbyte ,ID3D12Resource* Resource);
+	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte ,ID3D12Resource* Resource);
 
 
 	void CreateVertex(BufferResource &vertex);
 
-	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, BufferResource &Resource);
+	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource &Resource);
 
 	void VartexRelease(BufferResource Resource);
 
@@ -52,7 +53,7 @@ private:
 
 	ID3D12Device* device = nullptr;
 	Commands commands;
-	HRESULT hr;
+
 
 };
 

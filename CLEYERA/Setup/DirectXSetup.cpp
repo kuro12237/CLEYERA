@@ -9,47 +9,8 @@
 
 
 
-std::wstring ConvertString(const std::string& str)
-{
-	if (str.empty())
-	{
-		return std::wstring();
-	}
-
-	auto sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), NULL, 0);
-	if (sizeNeeded == 0)
-	{
-		return std::wstring();
-	}
-	std::wstring result(sizeNeeded, 0);
-	MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(&str[0]), static_cast<int>(str.size()), &result[0], sizeNeeded);
-	return result;
-}
-
-std::string ConvertString(const std::wstring& str)
-{
-	if (str.empty())
-	{
-		return std::string();
-	}
-
-	auto sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), NULL, 0, NULL, NULL);
-	if (sizeNeeded == 0)
-	{
-		return std::string();
-	}
-	std::string result(sizeNeeded, 0);
-	WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), result.data(), sizeNeeded, NULL, NULL);
-	return result;
-}
-
-//Log
-void Log(const std::string& message)
-{
-	OutputDebugStringA(message.c_str());
 
 
-}
 
 
 
@@ -152,6 +113,20 @@ IDxcBlob* DirectXSetup::CompilerShader(
 
 	//実行用のバイナリを返却
 	return shaderBlob;
+
+}
+
+ID3D12DescriptorHeap* DirectXSetup::CreateDescriptorHeap(ID3D12Device* device, D3D12_DESCRIPTOR_HEAP_TYPE heapType,UINT numDescriptors, bool shaderVisible)
+{
+	ID3D12DescriptorHeap* descriptHeap = nullptr;
+	D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc{};
+	descriptorHeapDesc.Type = heapType;
+	descriptorHeapDesc.NumDescriptors = numDescriptors;
+	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+
+	HRESULT hr = device->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
+	assert(SUCCEEDED(hr));
+	return descriptHeap;
 
 }
 
@@ -325,7 +300,7 @@ void DirectXSetup::CreateCommands()
 void DirectXSetup::CreateSwapChain(const int32_t Width,const int32_t Height, HWND hwnd_)
 {
     swapChain.swapChain = nullptr;
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
+	
 	//スワップチェーンの設定
 	swapChainDesc.Width = Width;
 	swapChainDesc.Height = Height;
@@ -346,13 +321,9 @@ void DirectXSetup::CreateSwapChain(const int32_t Width,const int32_t Height, HWN
 
 void DirectXSetup::CreatertvDescritorHeap()
 {
-	rtv.DescritorHeap= nullptr;
+	rtv.DescritorHeap = CreateDescriptorHeap(device, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, false);
+	srvDescriptorHeap = CreateDescriptorHeap(device, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, true);
 
-	rtv.rtvDescritorHeapDesc.Type= D3D12_DESCRIPTOR_HEAP_TYPE_RTV; 
-	rtv.rtvDescritorHeapDesc.NumDescriptors = 2; // ダブルバッファ用に2つ、多くても構わない
-	
-	hr = device->CreateDescriptorHeap(&rtv.rtvDescritorHeapDesc, IID_PPV_ARGS(&rtv.DescritorHeap));
-	assert(SUCCEEDED(hr));
 }
 
 void DirectXSetup::CreateSwapChainResorce()
@@ -436,10 +407,16 @@ void DirectXSetup::CreatePSO()
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material設定
-	D3D12_ROOT_PARAMETER rootParameters[1] = {};
+	D3D12_ROOT_PARAMETER rootParameters[2] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
+	//VertexのTransform
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[1].Descriptor.ShaderRegister = 0;
+	
+	
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
@@ -559,11 +536,17 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 	//float clearColor[] = { 1.0f,0.0f,0.0f,1.0f };
 	commands.List->ClearRenderTargetView(rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 	
+
+}
+
+void DirectXSetup::ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight)
+{
+
 	D3D12_VIEWPORT viewport{};
 
 	//クライアント領域のサイズを一緒にして画面全体に表示
-	viewport.Width = kClientWidth;
-	viewport.Height = kClientHeight;
+	viewport.Width = float(kClientWidth);
+	viewport.Height = float(kClientHeight);
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -584,6 +567,8 @@ void DirectXSetup::BeginFlame(const int32_t kClientWidth, const int32_t kClientH
 	commands.List->RSSetScissorRects(1, &scissorRect);
 	commands.List->SetGraphicsRootSignature(rootSignature);
 	commands.List->SetPipelineState(graphicsPipelineState);//
+
+
 }
 
 void DirectXSetup::EndFlame()
@@ -644,10 +629,12 @@ void DirectXSetup::Deleate()
 	fence->Release();
 
 	rtv.DescritorHeap->Release();
+	srvDescriptorHeap->Release();
 
 	swapChain.Resource[0]->Release();
 	swapChain.Resource[1]->Release();
 	swapChain.swapChain->Release();
+
 
 	commands.List->Release();
 	commands.Allocator->Release();

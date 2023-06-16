@@ -16,8 +16,9 @@
 
 #include "../Draw/Model.h"
 
+#include"../Log/Log.h"
 
-
+#include"../externals/DirectXTex/DirectXTex/DirectXTex.h"
 struct SwapChain
 {
 	IDXGISwapChain4* swapChain;
@@ -59,12 +60,29 @@ public:
 	DirectXSetup();
 	~DirectXSetup();
 
+	/// <summary>
+	/// シェーダーコンパイル
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="profile"></param>
+	/// <param name="dxcUtils"></param>
+	/// <param name="dxcCompiler"></param>
+	/// <param name="includeHandler"></param>
+	/// <returns></returns>
 	static IDxcBlob* CompilerShader(
 		const std::wstring& filePath,
 		const wchar_t* profile,
 		IDxcUtils* dxcUtils,
 		IDxcCompiler3* dxcCompiler,
 		IDxcIncludeHandler* includeHandler);
+
+
+
+	static ID3D12DescriptorHeap* CreateDescriptorHeap(
+		ID3D12Device* device, D3D12_DESCRIPTOR_HEAP_TYPE heapType,UINT numDescriptors, bool shaderVisible);
+
+
+
 
 	/// <summary>
 	/// DXGIファクトリーの生成
@@ -128,6 +146,7 @@ public:
 	/// </summary>
 	void BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight);
 
+	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
 	
 	/// <summary>
 	/// ループの最後の処理
@@ -154,6 +173,12 @@ public:
 
 	Commands GetCommands() { return commands; }
 
+	DXGI_SWAP_CHAIN_DESC1 GeSwapChainDesc() { return swapChainDesc; }
+       
+	RTV GetRTV() { return rtv; }
+
+	ID3D12DescriptorHeap* GetSrvDescripterHeap() { return srvDescriptorHeap; }
+
 private:
 
 
@@ -163,7 +188,10 @@ private:
 
 	Commands commands;
 	SwapChain swapChain;
+	
 	RTV rtv;
+	ID3D12DescriptorHeap* srvDescriptorHeap;
+
 
 	DXCProperty dxc;
 
@@ -191,7 +219,7 @@ private:
 
 	ID3D12Debug1 *debugController = nullptr;
 
-
+	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 
 };
 

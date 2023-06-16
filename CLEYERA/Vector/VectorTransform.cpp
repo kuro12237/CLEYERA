@@ -69,7 +69,7 @@ Vector3 VectorTransform::Add(Vector3 v1, Vector3 v2)
 
 	result.x = v1.x + v2.x;
 	result.y = v1.y + v2.y;
-	result.z = v1.x + v2.y;
+	result.z = v1.z + v2.z;
 	return result;
 }
 
@@ -79,7 +79,7 @@ Vector3 VectorTransform::Subtract(Vector3 v1, Vector3 v2)
 
 	result.x = v1.x - v2.x;
 	result.y = v1.y - v2.y;
-	result.z = v1.x - v2.y;
+	result.z = v1.z - v2.z;
 	return result;
 }
 
@@ -89,7 +89,7 @@ Vector3 VectorTransform::Multiply(Vector3 v1, Vector3 v2)
 
 	result.x = v1.x * v2.x;
 	result.y = v1.y * v2.y;
-	result.z = v1.x * v2.y;
+	result.z = v1.z * v2.z;
 	return result;
 }
 
@@ -99,7 +99,7 @@ Vector3 VectorTransform::Divide(Vector3 v1, Vector3 v2)
 
 	result.x = v1.x / v2.x;
 	result.y = v1.y / v2.y;
-	result.z = v1.x / v2.y;
+	result.z = v1.z/ v2.z;
 	return result;
 }
 
@@ -126,8 +126,8 @@ Vector4 VectorTransform::Add(Vector4 v1, Vector4 v2)
 
 	result.x = v1.x + v2.x;
 	result.y = v1.y + v2.y;
-	result.z = v1.x + v2.y;
-	result.w = v1.x + v2.y;
+	result.z = v1.z + v2.z;
+	result.w = v1.w + v2.w;
 	return result;
 }
 
@@ -137,8 +137,8 @@ Vector4 VectorTransform::Subtract(Vector4 v1, Vector4 v2)
 
 	result.x = v1.x - v2.x;
 	result.y = v1.y - v2.y;
-	result.z = v1.x - v2.y;
-	result.w = v1.x - v2.y;
+	result.z = v1.z - v2.z;
+	result.w = v1.w - v2.w;
 	return result;
 }
 
@@ -148,8 +148,9 @@ Vector4 VectorTransform::Multiply(Vector4 v1, Vector4 v2)
 
 	result.x = v1.x * v2.x;
 	result.y = v1.y * v2.y;
-	result.z = v1.x * v2.y;
-	result.w = v1.x * v2.y;
+	result.z = v1.z * v2.z;
+	result.w = v1.w * v2.w
+	;
 	return result;
 }
 
@@ -159,8 +160,8 @@ Vector4 VectorTransform::Divide(Vector4 v1, Vector4 v2)
 
 	result.x = v1.x / v2.x;
 	result.y = v1.y / v2.y;
-	result.z = v1.x / v2.y;
-	result.w = v1.x / v2.y;
+	result.z = v1.z / v2.z;
+	result.w = v1.w / v2.w;
 	return result;
 }
 
@@ -184,9 +185,22 @@ Vector4 VectorTransform::Multiply(Vector4 v, Matrix4x4 matrix)
 	result.x /= w;
 	result.y /= w;
 	result.z /= w;
-
+	
 	return result;
 
+}
+
+Vector4 VectorTransform::Identity4x4()
+{
+	Vector4 result;
+
+	result.x = 1.0f;
+	result.y = 1.0f;
+	result.z = 1.0f;
+	result.w = 1.0f;
+
+
+	return result;
 }
 
 

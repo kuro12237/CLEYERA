@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -142,9 +142,20 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\Draw\Model.cpp" />
     <ClCompile Include="CLEYERA\Draw\Rect.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp" />
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="CLEYERA\ImGuiManager\ImGuiManager.cpp" />
+    <ClCompile Include="CLEYERA\Log\Log.cpp" />
     <ClCompile Include="CLEYERA\Matrix\MatrixTransform.cpp" />
     <ClCompile Include="CLEYERA\Setup\DirectXSetup.cpp" />
+    <ClCompile Include="CLEYERA\Setup\SceneSetup.cpp" />
     <ClCompile Include="CLEYERA\Setup\WinSetup.cpp" />
+    <ClCompile Include="CLEYERA\TexManager\TexManager.cpp" />
     <ClCompile Include="CLEYERA\Vector\VectorTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -153,12 +164,24 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="CLEYERA\CleyeraStruct.h" />
     <ClInclude Include="CLEYERA\Draw\Model.h" />
     <ClInclude Include="CLEYERA\Draw\Rect.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imconfig.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_dx12.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_internal.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_rectpack.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_textedit.h" />
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="CLEYERA\ImGuiManager\ImGuiManager.h" />
+    <ClInclude Include="CLEYERA\Log\Log.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\Matrix\Matrix4x4.h" />
     <ClInclude Include="CLEYERA\Matrix\MatrixTransform.h" />
     <ClInclude Include="CLEYERA\Setup\DirectXSetup.h" />
+    <ClInclude Include="CLEYERA\Setup\SceneSetup.h" />
     <ClInclude Include="CLEYERA\Setup\WinSetup.h" />
+    <ClInclude Include="CLEYERA\TexManager\TexManager.h" />
     <ClInclude Include="CLEYERA\Vector\Vector2.h" />
     <ClInclude Include="CLEYERA\Vector\Vector3.h" />
     <ClInclude Include="CLEYERA\Vector\Vector4.h" />
@@ -176,6 +199,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CLEYERA\externals\imgui\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="CLEYERA\externals\DirectXTex\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

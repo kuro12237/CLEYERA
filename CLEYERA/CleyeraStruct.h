@@ -14,7 +14,14 @@
 
 #include<cassert>
 
+#include"Vector/Vector3.h"
 
+struct  Transform
+{
+	Vector3 scale;
+	Vector3 rotate;
+	Vector3 translate;
+};
 
 enum Color
 {
@@ -31,6 +38,7 @@ struct  BufferResource
 	D3D12_VERTEX_BUFFER_VIEW BufferView;
 	ID3D12Resource* Vertex;
 	ID3D12Resource* Material;
+	ID3D12Resource* wvpResource = nullptr;
 };
 
 struct RectBufferResource
@@ -49,3 +57,5 @@ struct Commands
 	//コマンドリスト
 	ID3D12GraphicsCommandList* List;
 };
+
+

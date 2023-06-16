@@ -31,6 +31,18 @@
     <Filter Include="Vector">
       <UniqueIdentifier>{5d06e2ae-d99c-43e2-be10-727002d73773}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Externals">
+      <UniqueIdentifier>{ea4508d7-2e26-456e-8452-5ee4f14d9734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup\ImGui">
+      <UniqueIdentifier>{f1600721-fb7f-4268-a9e8-f8f3efdb5c1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup\TexManager">
+      <UniqueIdentifier>{7749600f-73df-4ed8-b2cf-2dd3e7a2f9d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Log">
+      <UniqueIdentifier>{396e81b9-9daf-4f3e-9e94-3aa7a8d02c8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,6 +68,39 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Draw\Rect.cpp">
       <Filter>Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Setup\SceneSetup.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_demo.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_draw.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_dx12.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_impl_win32.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_tables.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\externals\imgui\imgui_widgets.cpp">
+      <Filter>Externals</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\ImGuiManager\ImGuiManager.cpp">
+      <Filter>Setup\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\TexManager\TexManager.cpp">
+      <Filter>Setup\TexManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Log\Log.cpp">
+      <Filter>CLEYERA\Log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +146,42 @@
     <ClInclude Include="CLEYERA\Vector\VectorTransform.h">
       <Filter>Vector</Filter>
     </ClInclude>
+    <ClInclude Include="CLEYERA\Setup\SceneSetup.h">
+      <Filter>Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imconfig.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_dx12.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_impl_win32.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imgui_internal.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_rectpack.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_textedit.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\externals\imgui\imstb_truetype.h">
+      <Filter>Externals</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\ImGuiManager\ImGuiManager.h">
+      <Filter>Setup\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\TexManager\TexManager.h">
+      <Filter>Setup\TexManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Log\Log.h">
+      <Filter>CLEYERA\Log</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\Object3d.PS.hlsl">
@@ -112,5 +193,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CLEYERA\externals\imgui\LICENSE.txt" />
   </ItemGroup>
 </Project>
