@@ -9,6 +9,7 @@
 
 #include<string>
 #include<format>
+
 /// <summary>
 /// CLEYERA ENGINE
 /// </summary>
@@ -97,8 +98,7 @@ public:
 	/// </summary>
 	void Deleate();
 
-	void ConvertNormalise();
-
+	
 
 
 

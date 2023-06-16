@@ -4,6 +4,37 @@
 //CLEYERA ENGINE
 
 
+Cleyera::Cleyera()
+{
+	WinSetup_ = new WindowsSetup();
+	DXSetup_ = new DirectXSetup();
+	SceSetup_ = new ScenceSetup();
+
+	Model_ = new Model();
+	Rect_ = new Rect();
+	ImGuiManager_ = new ImGuiManager();
+
+	vectorTransform_ = new VectorTransform();
+	matrixTransform_ = new MatrixTransform();
+
+}
+
+Cleyera::~Cleyera()
+{
+	delete WinSetup_;
+	delete DXSetup_;
+	delete SceSetup_;
+
+	delete ImGuiManager_;
+
+	delete Model_;
+	delete Rect_;
+
+	delete vectorTransform_;
+	delete matrixTransform_;
+
+}
+
 /// <summary>
 /// 
 /// </summary>
@@ -74,25 +105,17 @@ void Cleyera::WinMSG(MSG &msg)
 void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight)
 {
 
-	//ImGui_ImplDX12_NewFrame();
-	//ImGui_ImplWin32_NewFrame();
-	//ImGui::NewFrame();
-	
 	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
 	DXSetup_->ScissorViewCommand(kClientWidth, kClientHeight);
 	ImGuiManager_->BeginFlame(DXSetup_);
 
 
-	//ImGuiManager_->BeginFlame();
 }
 
 void Cleyera::EndFlame()
 {
-	//ImGui::ShowDemoWindow();
-	//ImGui::Render();
+	
 	ImGuiManager_->EndFlame(DXSetup_);
-
-
 	DXSetup_->EndFlame();
 }
 
@@ -146,6 +169,10 @@ void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vect
 	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,bufferResouce);
 }
 
+/// <summary>
+/// カメラ座標
+/// </summary>
+/// <param name="cameraTransform"></param>
 void Cleyera::CameraUpdate(Transform cameraTransform)
 {
 
@@ -183,32 +210,4 @@ void Cleyera::Deleate()
 
 
 
-Cleyera::Cleyera()
-{
-	WinSetup_ = new WindowsSetup();
-	DXSetup_=new DirectXSetup();
-	SceSetup_=new ScenceSetup();
 
-	Model_ = new Model();
-	Rect_ = new Rect();
-	ImGuiManager_ = new ImGuiManager();
-
-	vectorTransform_ = new VectorTransform();
-	matrixTransform_ = new MatrixTransform();
-
-}
-Cleyera::~Cleyera()
-{
-	delete WinSetup_;
-	delete DXSetup_;
-	delete SceSetup_;
-
-	delete ImGuiManager_;
-
-	delete Model_;
-	delete Rect_;
-	
-	delete vectorTransform_;
-	delete matrixTransform_;
-
-}
