@@ -219,7 +219,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		timer++;
 		if (timer>=120)
 		{
-			CameraPosition.translate.z -= 1.0f;
+			//CameraPosition.translate.z -= 1.0f;
 			timer = 0;
 		}
 	
@@ -241,7 +241,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		///
 		///描画処理
 		/// 
-		//Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, 0x6400FFFF, rect.matrixTransform, rect.ResourceData);
+		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, 0x6400FFFF, rect.matrixTransform, rect.ResourceData);
 
 		
 		for (int i = 0; i < 2; i++)

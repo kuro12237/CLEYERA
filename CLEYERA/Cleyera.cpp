@@ -119,31 +119,19 @@ void Cleyera::EndFlame()
 	DXSetup_->EndFlame();
 }
 
-/// <summary>
-/// 三角形のバッファの作成
-/// </summary>
-/// <param name="vertex"></param>
+
 void Cleyera::TriangleResourceCreate(BufferResource&bufferResource)
 {
 	Model_->CreateVertex(bufferResource);
 }
 
-/// <summary>
-/// 四角形のバッファ作成
-/// </summary>
-/// <param name="vertex"></param>
+
 void Cleyera::RectResourceCreate(RectBufferResource& bufferResource)
 {
 	Rect_->BufferCreate(bufferResource);
 }
 
-/// <summary>
-/// 三角形の描画
-/// </summary>
-/// <param name="top"></param>
-/// <param name="left"></param>
-/// <param name="right"></param>
-/// <param name="vertex"></param>
+
 void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource)
 {
 	
@@ -153,14 +141,7 @@ void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned in
 }
 
 
-/// <summary>
-/// 四角形の描画
-/// </summary>
-/// <param name="左上"></param>
-/// <param name="右上"></param>
-/// <param name="左下"></param>
-/// <param name="右下"></param>
-/// <param name="vertex"></param>
+
 void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource bufferResouce)
 {
 
@@ -169,10 +150,6 @@ void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vect
 	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,bufferResouce);
 }
 
-/// <summary>
-/// カメラ座標
-/// </summary>
-/// <param name="cameraTransform"></param>
 void Cleyera::CameraUpdate(Transform cameraTransform)
 {
 
@@ -180,10 +157,6 @@ void Cleyera::CameraUpdate(Transform cameraTransform)
 
 }
 
-/// <summary>
-/// 三角形の頂点の解放処理
-/// </summary>
-/// <param name="vartex"></param>
 void Cleyera::TriangleRelease(BufferResource Resource)
 {
 	Model_->VartexRelease(Resource);
