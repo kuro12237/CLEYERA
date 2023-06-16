@@ -37,6 +37,12 @@
     <Filter Include="Externals">
       <UniqueIdentifier>{ea4508d7-2e26-456e-8452-5ee4f14d9734}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Setup\ImGui">
+      <UniqueIdentifier>{f1600721-fb7f-4268-a9e8-f8f3efdb5c1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup\TexManager">
+      <UniqueIdentifier>{7749600f-73df-4ed8-b2cf-2dd3e7a2f9d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -88,7 +94,10 @@
       <Filter>Externals</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\ImGuiManager\ImGuiManager.cpp">
-      <Filter>CLEYERA\ImGui</Filter>
+      <Filter>Setup\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\TexManager\TexManager.cpp">
+      <Filter>Setup\TexManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +171,10 @@
       <Filter>Externals</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\ImGuiManager\ImGuiManager.h">
-      <Filter>CLEYERA\ImGui</Filter>
+      <Filter>Setup\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\TexManager\TexManager.h">
+      <Filter>Setup\TexManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

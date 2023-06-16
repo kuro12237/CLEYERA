@@ -25,10 +25,13 @@ struct  RectProperty
 	RectBufferResource ResourceData;
 };
 
+
+
+
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-
-
+	
+	
 	Cleyera* Cleyera_ = new Cleyera;
 
 	//Size
@@ -271,7 +274,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
 	Cleyera_->Deleate();
-	Cleyera_->~Cleyera();
+	delete Cleyera_;
 
 	return 0;
 }
