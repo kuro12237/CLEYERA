@@ -16,8 +16,9 @@
 
 #include "../Draw/Model.h"
 
+#include"../Log/Log.h"
 
-
+#include"../externals/DirectXTex/DirectXTex/DirectXTex.h"
 struct SwapChain
 {
 	IDXGISwapChain4* swapChain;

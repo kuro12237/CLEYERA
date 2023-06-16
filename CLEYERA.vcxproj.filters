@@ -43,6 +43,9 @@
     <Filter Include="Setup\TexManager">
       <UniqueIdentifier>{7749600f-73df-4ed8-b2cf-2dd3e7a2f9d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Log">
+      <UniqueIdentifier>{396e81b9-9daf-4f3e-9e94-3aa7a8d02c8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -98,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\TexManager\TexManager.cpp">
       <Filter>Setup\TexManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Log\Log.cpp">
+      <Filter>CLEYERA\Log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\TexManager\TexManager.h">
       <Filter>Setup\TexManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Log\Log.h">
+      <Filter>CLEYERA\Log</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
