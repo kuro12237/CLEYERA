@@ -30,6 +30,16 @@ public:
 
 	DirectX::ScratchImage Load(const std::string &filePath);
 
+	ID3D12Resource* CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata);
+
+	void uploadTexData(ID3D12Resource* tex, const DirectX::ScratchImage& mipImages);
+
+
+#pragma region  TexResourceの生成
+	static D3D12_RESOURCE_DESC  MetadataResourceSetting(const DirectX::TexMetadata& metadata);
+	static D3D12_HEAP_PROPERTIES heapProperties();
+#pragma endregion
+
 	void EndFlame();
 
 private:
