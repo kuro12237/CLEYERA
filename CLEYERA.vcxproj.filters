@@ -31,6 +31,9 @@
     <Filter Include="Vector">
       <UniqueIdentifier>{5d06e2ae-d99c-43e2-be10-727002d73773}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\ImGui">
+      <UniqueIdentifier>{fae76d80-d613-4c8f-84db-42bb93993a34}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Externals">
       <UniqueIdentifier>{ea4508d7-2e26-456e-8452-5ee4f14d9734}</UniqueIdentifier>
     </Filter>

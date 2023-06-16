@@ -23,8 +23,6 @@ public:
 	void EndFlame(DirectXSetup *DXSetup_);
 
 	void Release();
-
-	
 private:
 
 };
