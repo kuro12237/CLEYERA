@@ -6,9 +6,11 @@
 #include"Draw/Rect.h"
 #include"CleyeraStruct.h"
 #include"ImGuiManager/ImGuiManager.h"
+#include"TexManager/TexManager.h"
 
 #include<string>
 #include<format>
+
 
 /// <summary>
 /// CLEYERA ENGINE
@@ -94,12 +96,23 @@ public:
 
 
 	/// <summary>
+	/// texとBufferのリリース
+	/// </summary>
+	/// <param name="RESOURCE"></param>
+	/// <param name="Resource"></param>
+	void SpriteRelease(BufferResource RESOURCE, ID3D12Resource* Resource);
+	
+	/// <summary>
 	/// CleyeraEngineの解放
 	/// </summary>
 	void Deleate();
 
 	
-
+	/// <summary>
+	/// テクスチャのロード
+	/// </summary>
+	/// <param name="filePath"></param>
+	ID3D12Resource* LoadTex(const std::string &filePath);
 
 
 	
@@ -112,7 +125,7 @@ private:
 	Model* Model_ = nullptr;
 	Rect* Rect_ = nullptr;
 	ImGuiManager* ImGuiManager_=nullptr;
-
+	TexManager* TexManager_ = nullptr;
 
 	//
 	VectorTransform* vectorTransform_ =nullptr;

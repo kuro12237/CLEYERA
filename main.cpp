@@ -1,5 +1,5 @@
 #include"CLEYERA/Cleyera.h"
-#define Triangle_Property_MAX 15
+#define Triangle_Property_MAX 1
 
 #include"CLEYERA/Matrix/MatrixTransform.h"
 #include"CLEYERA/Vector/VectorTransform.h"
@@ -13,6 +13,7 @@ struct  TriangleProperty
 	Vector4 right;
 	Matrix4x4 matrixTransform;
 	BufferResource ResourceData;
+	ID3D12Resource* tex;
 };
 
 struct  RectProperty
@@ -56,6 +57,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{ 0.5f,0.5f,0.0f,1.0f },
 		{ -0.5f,-0.5f,0.0f,1.0f }
 		};
+		/*
 		TriangleProperty_[1] =
 		{
 
@@ -156,7 +158,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			{0.6f,-0.5f,0.0f,1.0f },
 			{1.0f,-0.5f,0.0f,1.0f }
 		};
-
+		*/
 	}
 
 	
@@ -168,7 +170,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	{ 0.5f,-0.5f,0.0f,1.0f }
 	};
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
 		TriangleProperty_[i].matrixTransform = matrixTransform_->Identity();
 		Cleyera_->TriangleResourceCreate(TriangleProperty_[i].ResourceData);
@@ -194,6 +196,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Vector3 translate = {0.03f,0.0f,0.0f};
 	float speed = 0.01;
 
+	TriangleProperty_[0].tex=Cleyera_->LoadTex("CLEYERA/DefaultResources/uvChecker.png");
 	
 	int timer = 0;
 	while (msg.message != WM_QUIT)
@@ -244,10 +247,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		///
 		///描画処理
 		/// 
-		Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, 0x6400FFFF, rect.matrixTransform, rect.ResourceData);
+		//Cleyera_->RectDraw(rect.leftTop, rect.rightTop, rect.leftDown, rect.rightDown, 0x6400FFFF, rect.matrixTransform, rect.ResourceData);
 
 		
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
 			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right, RED,
@@ -266,9 +269,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 
 	//頂点の解放
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
-		Cleyera_->TriangleRelease(TriangleProperty_[i].ResourceData);
+		Cleyera_->SpriteRelease(TriangleProperty_[i].ResourceData, TriangleProperty_[0].tex);
+		//Cleyera_->TriangleRelease(TriangleProperty_[i].ResourceData);
 	}
 	Cleyera_->RectRelese(rect.ResourceData);
 

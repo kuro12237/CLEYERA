@@ -39,6 +39,7 @@ struct  BufferResource
 	ID3D12Resource* Vertex;
 	ID3D12Resource* Material;
 	ID3D12Resource* wvpResource = nullptr;
+	
 };
 
 struct RectBufferResource

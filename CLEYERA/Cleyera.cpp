@@ -13,6 +13,7 @@ Cleyera::Cleyera()
 	Model_ = new Model();
 	Rect_ = new Rect();
 	ImGuiManager_ = new ImGuiManager();
+	TexManager_ = new TexManager();
 
 	vectorTransform_ = new VectorTransform();
 	matrixTransform_ = new MatrixTransform();
@@ -25,6 +26,7 @@ Cleyera::~Cleyera()
 	delete DXSetup_;
 	delete SceSetup_;
 
+	delete TexManager_;
 	delete ImGuiManager_;
 
 	delete Model_;
@@ -82,6 +84,9 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 	Rect_->DirectXSetDevice(DXSetup_->GetDevice());
 	Rect_->DirectXSetCommands(DXSetup_->GetCommands());
 	
+	//TEx
+	TexManager_->Initialize();
+
 	//カメラの初期化
 	 
 	CameraTransform camera = { {{1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} },0.0f};
@@ -107,6 +112,7 @@ void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight
 
 	DXSetup_->BeginFlame(kClientWidth,kClientHeight);
 	DXSetup_->ScissorViewCommand(kClientWidth, kClientHeight);
+	
 	ImGuiManager_->BeginFlame(DXSetup_);
 
 
@@ -114,7 +120,7 @@ void Cleyera::BeginFlame(const int32_t kClientWidth, const int32_t kClientHeight
 
 void Cleyera::EndFlame()
 {
-	
+	TexManager_->EndFlame();
 	ImGuiManager_->EndFlame(DXSetup_);
 	DXSetup_->EndFlame();
 }
@@ -171,14 +177,35 @@ void Cleyera::RectRelese(RectBufferResource Resource)
 
 }
 
+void Cleyera::SpriteRelease(BufferResource bufferResource, ID3D12Resource* tex)
+{
+	Model_->VartexRelease(bufferResource);
+	tex->Release();
+
+
+}
+
 
 void Cleyera::Deleate()
 {
 	ImGuiManager_->Release();
-
+	
 	DXSetup_->Deleate();
 	WinSetup_->Deleate();
 	DXSetup_->ChackRelease();
+}
+
+ID3D12Resource* Cleyera::LoadTex(const std::string& filePath)
+{
+	DirectX::ScratchImage mipImages = TexManager_->Load(filePath);
+	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+	TexManager_->SetDevice(DXSetup_->GetDevice());
+	
+	ID3D12Resource* texResource = TexManager_->CreateTexResource(metadata);
+	TexManager_->UploadTexData(texResource, mipImages);
+
+
+	return texResource;
 }
 
 

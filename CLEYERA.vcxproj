@@ -199,6 +199,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="Shader\Object3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CLEYERA\externals\imgui\LICENSE.txt" />
