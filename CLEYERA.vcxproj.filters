@@ -105,6 +105,9 @@
     <ClCompile Include="CLEYERA\Log\Log.cpp">
       <Filter>CLEYERA\Log</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\Setup\Input.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Matrix\Matrix2x2.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Log\Log.h">
       <Filter>CLEYERA\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Setup\Input.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
