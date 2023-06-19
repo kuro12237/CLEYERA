@@ -28,7 +28,6 @@ struct  RectProperty
 
 
 
-
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	
@@ -164,10 +163,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 	TriangleProperty_[0] =
 	{
-	{ -0.5f,0.5f,0.0f,1.0f },
+	
 
-	{ -0.5f,-0.5f,0.0f,1.0f},
-	{ 0.5f,-0.5f,0.0f,1.0f }
+			{0.0f,1.0f,0.0f,1.0f },
+			{-0.5f,0.0f,0.0f,1.0f },
+			{0.5f,0.0f,0.0f,1.0f }
+		
 	};
 
 	for (int i = 0; i < Triangle_Property_MAX; i++)

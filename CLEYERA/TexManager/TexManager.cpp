@@ -121,3 +121,8 @@ void TexManager::EndFlame()
 
 	CoUninitialize();
 }
+
+void TexManager::CrateShaderResourceView(ID3D12Resource* texResource, const DirectX::TexMetadata &metaData)
+{
+
+}

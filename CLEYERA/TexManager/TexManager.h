@@ -53,6 +53,11 @@ public:
 
 	void EndFlame();
 
+
+	void CrateShaderResourceView(ID3D12Resource* texResource, const DirectX::TexMetadata& metaData);
+
+
+
 private:
 
 	ID3D12Device* device;

@@ -166,7 +166,6 @@ public:
 	void ChackRelease();
 
 
-
 	//void SetDevice(ID3D12Device *device_);
 
 	ID3D12Device* GetDevice() { return device; }

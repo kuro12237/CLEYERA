@@ -129,6 +129,8 @@ void Cleyera::EndFlame()
 void Cleyera::TriangleResourceCreate(BufferResource&bufferResource)
 {
 	Model_->CreateVertex(bufferResource);
+
+
 }
 
 
@@ -203,9 +205,25 @@ ID3D12Resource* Cleyera::LoadTex(const std::string& filePath)
 	
 	ID3D12Resource* texResource = TexManager_->CreateTexResource(metadata);
 	TexManager_->UploadTexData(texResource, mipImages);
+	
+	
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = metadata.format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 
+	D3D12_CPU_DESCRIPTOR_HANDLE texSrvHandleCPU = DXSetup_->GetSrvDescripterHeap()->GetCPUDescriptorHandleForHeapStart();
+	D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU = DXSetup_->GetSrvDescripterHeap()->GetGPUDescriptorHandleForHeapStart();
 
+	texSrvHandleCPU.ptr += DXSetup_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	texSrvHandleGPU.ptr += DXSetup_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	DXSetup_->GetDevice()->CreateShaderResourceView(texResource, &srvDesc, texSrvHandleCPU);
+	
 	return texResource;
+
+	
 }
 
 

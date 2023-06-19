@@ -84,14 +84,20 @@ void Model::CreateVertex(BufferResource &Resource)
 }
 
 
+struct  VertexData
+{
+	Vector4 position;
+	Vector2 texcoord;
 
+};
 
 
 
 void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode,Matrix4x4 matrixTransform,BufferResource &Resource)
 {
 
-	Vector4* vertexData = nullptr;
+	VertexData* vertexData = nullptr;
+	//Vector4* vertexData = nullptr;
 	Vector4* MaterialData = nullptr;
 	Matrix4x4* wvpData = nullptr;
 	//書き込むためのアドレスを取得
@@ -99,15 +105,24 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	Resource.Material->Map(0, nullptr, reinterpret_cast<void**>(&MaterialData));
 	Resource.wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
     
+	//reinterpret_cast<void**>(&vertexData);
+
 	//座標
 	//左下
-	vertexData[0] = { left };
+	vertexData[0].position = left;
 
-	//上
-	vertexData[1] = { top };
+	//vertexData[0].texcoord = { 0.0f,1.0f };
+	////上
+	vertexData[1].position = top;
+	//vertexData[1].texcoord = { 0.5f,0.0f };
+	////右
+	vertexData[2].position=right;
+	//vertexData[2].texcoord = { 1.0f,1.0f };
+	// 
+	//vertexData[0] = left;
+	//vertexData[1] = top;
+	//vertexData[2] = right;
 
-	//右上
-	vertexData[2] = { right };
 
 	//マテリアル
 	Vector4 colorData = ColorAdapter(ColorCode);
