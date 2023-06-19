@@ -73,23 +73,24 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferView(size_t sizeInbyte,ID3D12Resourc
 }
 
 
-
-void Model::CreateVertex(BufferResource &Resource)
-{
-
-	Resource.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
-	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
-	Resource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
-	Resource.BufferView = CreateBufferView(sizeof(Vector4) * 3,Resource.Vertex);
-}
-
-
 struct  VertexData
 {
 	Vector4 position;
 	Vector2 texcoord;
 
 };
+
+
+
+void Model::CreateVertex(BufferResource &Resource)
+{
+	//メモ Vector4からVertexDataにサイズを換えるため↓も換える必要がある
+
+	Resource.Vertex = CreateBufferResource(device, sizeof(VertexData) * 3);
+	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
+	Resource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
+	Resource.BufferView = CreateBufferView(sizeof(VertexData) * 3,Resource.Vertex);
+}
 
 
 
@@ -110,19 +111,19 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	//座標
 	//左下
 	vertexData[0].position = left;
-
-	//vertexData[0].texcoord = { 0.0f,1.0f };
+	vertexData[0].texcoord = { 0.0f,1.0f };
 	////上
 	vertexData[1].position = top;
-	//vertexData[1].texcoord = { 0.5f,0.0f };
+	vertexData[1].texcoord = { 0.5f,0.0f };
 	////右
 	vertexData[2].position=right;
-	//vertexData[2].texcoord = { 1.0f,1.0f };
-	// 
-	//vertexData[0] = left;
-	//vertexData[1] = top;
-	//vertexData[2] = right;
+	vertexData[2].texcoord = { 1.0f,1.0f };
+	 
+	/*vertexData[0] = left;
+	vertexData[1] = top;
+	vertexData[2] = right;*/
 
+	int a= sizeof(vertexData[0]);
 
 	//マテリアル
 	Vector4 colorData = ColorAdapter(ColorCode);

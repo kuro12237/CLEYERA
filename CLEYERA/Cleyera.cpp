@@ -99,9 +99,7 @@ void Cleyera::Initialize(const int32_t Width, const int32_t Height)
 
 void Cleyera::WinMSG(MSG &msg)
 {
-
 	WinSetup_->WinMSG(msg);
-
 }
 
 
