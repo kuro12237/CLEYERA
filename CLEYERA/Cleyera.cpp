@@ -138,12 +138,12 @@ void Cleyera::RectResourceCreate(RectBufferResource& bufferResource)
 }
 
 
-void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource)
+void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource, texResourceProperty tex)
 {
 	
 	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
 
-	Model_->Draw( top, left,  right,ColorCode,Scene,bufferResource);
+	Model_->Draw( top, left,  right,ColorCode,Scene,bufferResource,tex);
 }
 
 
@@ -195,7 +195,7 @@ void Cleyera::Deleate()
 	DXSetup_->ChackRelease();
 }
 
-ID3D12Resource* Cleyera::LoadTex(const std::string& filePath)
+texResourceProperty Cleyera::LoadTex(const std::string& filePath)
 {
 	DirectX::ScratchImage mipImages = TexManager_->Load(filePath);
 	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
@@ -219,8 +219,14 @@ ID3D12Resource* Cleyera::LoadTex(const std::string& filePath)
 	texSrvHandleGPU.ptr += DXSetup_->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	DXSetup_->GetDevice()->CreateShaderResourceView(texResource, &srvDesc, texSrvHandleCPU);
 	
-	return texResource;
+	
 
+	texResourceProperty tex;
+
+	tex.Resource = texResource;
+	tex.SrvHandleGPU = texSrvHandleGPU;
+
+	return tex;
 	
 }
 

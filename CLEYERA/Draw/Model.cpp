@@ -94,7 +94,7 @@ void Model::CreateVertex(BufferResource &Resource)
 
 
 
-void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode,Matrix4x4 matrixTransform,BufferResource &Resource)
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode,Matrix4x4 matrixTransform,BufferResource &Resource,texResourceProperty tex)
 {
 
 	VertexData* vertexData = nullptr;
@@ -123,7 +123,6 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	vertexData[1] = top;
 	vertexData[2] = right;*/
 
-	int a= sizeof(vertexData[0]);
 
 	//マテリアル
 	Vector4 colorData = ColorAdapter(ColorCode);
@@ -145,6 +144,10 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	
 	//wvp用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(1, Resource.wvpResource->GetGPUVirtualAddress());
+
+	//
+	commands.List->SetGraphicsRootDescriptorTable(2, tex.SrvHandleGPU);
+
 
 	//描画(DrawCall/ドローコール)。
 	commands.List->DrawInstanced(3, 1, 0, 0);

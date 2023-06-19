@@ -13,7 +13,8 @@ struct  TriangleProperty
 	Vector4 right;
 	Matrix4x4 matrixTransform;
 	BufferResource ResourceData;
-	ID3D12Resource* tex;
+	texResourceProperty tex;
+
 };
 
 struct  RectProperty
@@ -254,9 +255,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
-			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right, RED,
+			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right, WHITE,
 				TriangleProperty_[i].matrixTransform,
-				TriangleProperty_[i].ResourceData);
+				TriangleProperty_[i].ResourceData,TriangleProperty_[i].tex);
 		}
 
 
@@ -272,7 +273,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//頂点の解放
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
-		Cleyera_->SpriteRelease(TriangleProperty_[i].ResourceData, TriangleProperty_[0].tex);
+		Cleyera_->SpriteRelease(TriangleProperty_[i].ResourceData, TriangleProperty_[0].tex.Resource);
 		//Cleyera_->TriangleRelease(TriangleProperty_[i].ResourceData);
 	}
 	Cleyera_->RectRelese(rect.ResourceData);

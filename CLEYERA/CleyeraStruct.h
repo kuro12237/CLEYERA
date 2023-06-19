@@ -33,6 +33,13 @@ enum Color
 };
 
 
+struct texResourceProperty
+{
+	D3D12_GPU_DESCRIPTOR_HANDLE SrvHandleGPU;
+	ID3D12Resource* Resource;
+
+};
+
 struct  BufferResource
 {
 	D3D12_VERTEX_BUFFER_VIEW BufferView;
