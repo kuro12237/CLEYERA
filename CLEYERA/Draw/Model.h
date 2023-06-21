@@ -36,7 +36,7 @@ public:
 
 	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource &Resource, texResourceProperty tex);
 
-	void VartexRelease(BufferResource Resource);
+	void BufferRelease(BufferResource Resource);
 
    /// <summary>
    /// 色16進数からVector4に変換する関数

@@ -137,6 +137,7 @@ public:
 	/// </summary>
 	void CreatePSO();
 
+
 	
 
 
@@ -148,6 +149,18 @@ public:
 
 	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
 	
+	/// <summary>
+	/// ビューポートの設定
+	/// </summary>
+	/// <param name="kClientWidth"></param>
+	/// <param name="kClientHeight"></param>
+	/// <returns></returns>
+	static D3D12_VIEWPORT viewportSetting(int32_t kClientWidth, int32_t kClientHeight);
+
+	static D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
+
+
+
 	/// <summary>
 	/// ループの最後の処理
 	/// </summary>

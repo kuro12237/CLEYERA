@@ -155,7 +155,7 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 
 }
 
-void Model::VartexRelease(BufferResource Resource)
+void Model::BufferRelease(BufferResource Resource)
 {
 
 	Resource.Vertex->Release();

@@ -403,6 +403,7 @@ void DirectXSetup::CreatePSO()
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
+	//descriptionRootSignature = CreateDescriptRootSignature();
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
@@ -415,8 +416,7 @@ void DirectXSetup::CreatePSO()
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].Descriptor.ShaderRegister = 0;
-	
-	
+
 
 	//DescriptorRanged
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
@@ -443,7 +443,7 @@ void DirectXSetup::CreatePSO()
 	staticSamplers[0].MaxLOD = D3D12_FLOAT32_MAX;
 	staticSamplers[0].ShaderRegister = 0;
 	staticSamplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	
+
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
 
@@ -452,8 +452,6 @@ void DirectXSetup::CreatePSO()
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
-
 
 	//シリアライズしてバイナリにする
 	
@@ -505,7 +503,7 @@ void DirectXSetup::CreatePSO()
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 
 	//裏面（時計回り）を表示しない
-	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
+	rasterizerDesc.CullMode = D3D12_CULL_MODE_NONE;
 	//三角形の中を塗りつぶす
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
@@ -586,23 +584,11 @@ void DirectXSetup::ScissorViewCommand(const int32_t kClientWidth, const int32_t 
 
 	D3D12_VIEWPORT viewport{};
 
-	//クライアント領域のサイズを一緒にして画面全体に表示
-	viewport.Width = float(kClientWidth);
-	viewport.Height = float(kClientHeight);
-	viewport.TopLeftX = 0;
-	viewport.TopLeftY = 0;
-	viewport.MinDepth = 0.0f;
-	viewport.MaxDepth = 1.0f;
-
+	viewport = viewportSetting(kClientWidth, kClientHeight);
 
 	//シザー矩形
 	D3D12_RECT scissorRect{};
-
-	//基本的にビューポートと同じ矩形が構成されるようにする
-	scissorRect.left = 0;
-	scissorRect.right = kClientWidth;
-	scissorRect.top = 0;
-	scissorRect.bottom = kClientHeight;
+	scissorRect = scissorRectSetting(kClientWidth, kClientHeight);
 
 	//コマンドを積む
 	commands.List->RSSetViewports(1, &viewport); //
@@ -612,6 +598,42 @@ void DirectXSetup::ScissorViewCommand(const int32_t kClientWidth, const int32_t 
 
 
 }
+
+#pragma region シザーとヴューポートの設定
+D3D12_VIEWPORT DirectXSetup::viewportSetting(int32_t kClientWidth,int32_t kClientHeight)
+{
+	D3D12_VIEWPORT viewport;
+	
+	//クライアント領域のサイズを一緒にして画面全体に表示
+	viewport.Width = float(kClientWidth);
+	viewport.Height = float(kClientHeight);
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+
+
+	return viewport;
+}
+
+D3D12_RECT DirectXSetup::scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight)
+{
+	//シザー矩形
+	D3D12_RECT scissorRect{};
+
+	//基本的にビューポートと同じ矩形が構成されるようにする
+	scissorRect.left = 0;
+	scissorRect.right = kClientWidth;
+	scissorRect.top = 0;
+	scissorRect.bottom = kClientHeight;
+
+
+	return scissorRect;
+
+}
+#pragma endregion
+
 
 void DirectXSetup::EndFlame()
 {

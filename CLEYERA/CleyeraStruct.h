@@ -23,14 +23,13 @@ struct  Transform
 	Vector3 translate;
 };
 
-enum Color
-{
-	RED =  0xFF0000FF,
-	GREEN= 0x00FF00FF,
-	BLUE = 0x0000FFFF,
-	WHITE= 0xFFFFFFFF,
-	BLACK= 0x000000FF
-};
+#define RED   0xFF0000FF
+#define GREEN 0x00FF00FF
+#define BLUE  0x0000FFFF
+#define WHITE 0xFFFFFFFF
+#define BLACK 0x000000FF
+
+
 
 
 struct texResourceProperty
@@ -39,6 +38,7 @@ struct texResourceProperty
 	ID3D12Resource* Resource;
 
 };
+
 
 struct  BufferResource
 {

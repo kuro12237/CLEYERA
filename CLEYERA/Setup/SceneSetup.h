@@ -4,6 +4,7 @@
 #include"../Matrix/MatrixTransform.h"
 #include"../Vector/VectorTransform.h"
 
+
 struct  CameraTransform
 {
 	Transform transform;

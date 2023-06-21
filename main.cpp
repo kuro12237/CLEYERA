@@ -1,5 +1,5 @@
 #include"CLEYERA/Cleyera.h"
-#define Triangle_Property_MAX 1
+#define Triangle_Property_MAX 2
 
 #include"CLEYERA/Matrix/MatrixTransform.h"
 #include"CLEYERA/Vector/VectorTransform.h"
@@ -57,7 +57,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{ 0.5f,0.5f,0.0f,1.0f },
 		{ -0.5f,-0.5f,0.0f,1.0f }
 		};
-		/*
+		
 		TriangleProperty_[1] =
 		{
 
@@ -65,6 +65,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			{-0.6f,0.5f,0.0f,1.0f },
 			{-0.2f,0.5f,0.0f,1.0f }
 		};
+		/*
 		TriangleProperty_[2] =
 		{
 
@@ -176,10 +177,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	{
 		TriangleProperty_[i].matrixTransform = matrixTransform_->Identity();
 		Cleyera_->TriangleResourceCreate(TriangleProperty_[i].ResourceData);
+		TriangleProperty_[i].tex = Cleyera_->LoadTex("CLEYERA/DefaultResources/uvChecker.png");
+
+
 	}
 
 
-	RectProperty rect;
+	/*RectProperty rect;
 	{
 
 		rect.leftTop = { -0.5f,0.5f,0.0f,1.0f };
@@ -188,7 +192,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		rect.rightDown = { 0.5f,-0.5f,0.0f,1.0f };
 		rect.matrixTransform = matrixTransform_->Identity();
 		Cleyera_->RectResourceCreate(rect.ResourceData);
-	}
+	
+	}*/
 
 	
 
@@ -198,7 +203,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Vector3 translate = {0.03f,0.0f,0.0f};
 	float speed = 0.01;
 
-	TriangleProperty_[0].tex=Cleyera_->LoadTex("CLEYERA/DefaultResources/uvChecker.png");
 	
 	int timer = 0;
 	while (msg.message != WM_QUIT)
@@ -233,6 +237,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 		Cleyera_->CameraUpdate(CameraPosition);
 
+		TriangleProperty_[0].matrixTransform = matrixTransform_->MakeRotateYMatrix(rotate);
+
 		if (translate.x<=-2.0f)
 		{
 			speed = 0.01;
@@ -259,7 +265,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				TriangleProperty_[i].matrixTransform,
 				TriangleProperty_[i].ResourceData,TriangleProperty_[i].tex);
 		}
-
+	
 
 		ImGui::ShowDemoWindow();
 
@@ -273,10 +279,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//頂点の解放
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
-		Cleyera_->SpriteRelease(TriangleProperty_[i].ResourceData, TriangleProperty_[0].tex.Resource);
+		Cleyera_->SpriteRelease(TriangleProperty_[i].ResourceData, 
+			TriangleProperty_[i].tex.Resource);
 		//Cleyera_->TriangleRelease(TriangleProperty_[i].ResourceData);
+
 	}
-	Cleyera_->RectRelese(rect.ResourceData);
 
 
 	Cleyera_->Deleate();

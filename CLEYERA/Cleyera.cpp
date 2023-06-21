@@ -165,21 +165,21 @@ void Cleyera::CameraUpdate(Transform cameraTransform)
 
 void Cleyera::TriangleRelease(BufferResource Resource)
 {
-	Model_->VartexRelease(Resource);
+	Model_->BufferRelease(Resource);
 
 
 }
 
 void Cleyera::RectRelese(RectBufferResource Resource)
 {
-	Model_->VartexRelease(Resource.left);
-	Model_->VartexRelease(Resource.right);
+	Model_->BufferRelease(Resource.left);
+	Model_->BufferRelease(Resource.right);
 
 }
 
 void Cleyera::SpriteRelease(BufferResource bufferResource, ID3D12Resource* tex)
 {
-	Model_->VartexRelease(bufferResource);
+	Model_->BufferRelease(bufferResource);
 	tex->Release();
 
 
@@ -227,6 +227,8 @@ texResourceProperty Cleyera::LoadTex(const std::string& filePath)
 	tex.SrvHandleGPU = texSrvHandleGPU;
 
 	return tex;
+	texResource->Release();
+	mipImages.Release();
 	
 }
 
