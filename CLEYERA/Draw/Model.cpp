@@ -68,7 +68,7 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferView(size_t sizeInbyte,ID3D12Resourc
 	resultBufferView.SizeInBytes = sizeInbyte;
 
 	//1頂点あたりのサイズ
-	resultBufferView.StrideInBytes = sizeInbyte / 3;
+	resultBufferView.StrideInBytes = sizeInbyte / 6;
 	return resultBufferView;
 }
 
@@ -86,15 +86,15 @@ void Model::CreateVertex(BufferResource &Resource)
 {
 	//メモ Vector4からVertexDataにサイズを換えるため↓も換える必要がある
 
-	Resource.Vertex = CreateBufferResource(device, sizeof(VertexData) * 3);
+	Resource.Vertex = CreateBufferResource(device, sizeof(VertexData) * 6);
 	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
 	Resource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
-	Resource.BufferView = CreateBufferView(sizeof(VertexData) * 3,Resource.Vertex);
+	Resource.BufferView = CreateBufferView(sizeof(VertexData) * 6,Resource.Vertex);
 }
 
 
 
-void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode,Matrix4x4 matrixTransform,BufferResource &Resource,texResourceProperty tex)
+void Model::Draw(Vector4 top, Vector4 left, Vector4 right,PeropertyPosition position, unsigned int ColorCode,Matrix4x4 matrixTransform,BufferResource &Resource,texResourceProperty tex)
 {
 
 	VertexData* vertexData = nullptr;
@@ -119,9 +119,14 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 	vertexData[2].position=right;
 	vertexData[2].texcoord = { 1.0f,1.0f };
 	 
-	/*vertexData[0] = left;
-	vertexData[1] = top;
-	vertexData[2] = right;*/
+	vertexData[3].position = position.left;
+	vertexData[3].texcoord = { 0.0f,1.0f };
+
+	vertexData[4].position = position.top;
+	vertexData[4].texcoord = { 0.5,0.0f };
+
+	vertexData[5].position = position.right;
+	vertexData[5].texcoord = { 1.0f,1.0f };
 
 
 	//マテリアル
@@ -150,7 +155,7 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 
 
 	//描画(DrawCall/ドローコール)。
-	commands.List->DrawInstanced(3, 1, 0, 0);
+	commands.List->DrawInstanced(6, 1, 0, 0);
 
 
 }

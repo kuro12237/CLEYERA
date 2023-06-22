@@ -34,7 +34,7 @@ public:
 
 	void CreateVertex(BufferResource &vertex);
 
-	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource &Resource, texResourceProperty tex);
+	void Draw(Vector4 top, Vector4 left, Vector4 right, PeropertyPosition position, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource &Resource, texResourceProperty tex);
 
 	void BufferRelease(BufferResource Resource);
 

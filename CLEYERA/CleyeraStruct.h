@@ -29,8 +29,12 @@ struct  Transform
 #define WHITE 0xFFFFFFFF
 #define BLACK 0x000000FF
 
-
-
+struct  PeropertyPosition
+{
+	Vector4 top;
+	Vector4 right;
+	Vector4 left;
+};
 
 struct texResourceProperty
 {

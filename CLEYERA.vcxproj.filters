@@ -189,7 +189,7 @@
       <Filter>CLEYERA\Log</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Setup\Input.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Setup</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -65,7 +65,7 @@ public:
 	/// <param name="left"></param>
 	/// <param name="right"></param>
 	/// <param name="三角形の頂点"></param>
-	void TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource vertex, texResourceProperty tex);
+	void TriangleDraw(Vector4 top, Vector4 left, Vector4 right, PeropertyPosition position, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource vertex, texResourceProperty tex);
 
 	/// <summary>
 	/// 四角形の表示/// </summary>

@@ -138,12 +138,12 @@ void Cleyera::RectResourceCreate(RectBufferResource& bufferResource)
 }
 
 
-void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource, texResourceProperty tex)
+void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, PeropertyPosition position, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource bufferResource, texResourceProperty tex)
 {
 	
 	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
 
-	Model_->Draw( top, left,  right,ColorCode,Scene,bufferResource,tex);
+	Model_->Draw( top, left,  right,position,ColorCode,Scene,bufferResource,tex);
 }
 
 
@@ -151,9 +151,9 @@ void Cleyera::TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned in
 void Cleyera::RectDraw(Vector4 leftTop, Vector4 rightTop, Vector4 leftDown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource bufferResouce)
 {
 
-	Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
+	//Matrix4x4 Scene = SceSetup_->worldViewProjectionMatrixFanc(matrixTransform);
 
-	Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,bufferResouce);
+	//Rect_->Draw(leftTop, rightTop, leftDown, rightDown,ColorCode,Scene,bufferResouce);
 }
 
 void Cleyera::CameraUpdate(Transform cameraTransform)

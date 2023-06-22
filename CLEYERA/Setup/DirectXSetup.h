@@ -138,7 +138,7 @@ public:
 	void CreatePSO();
 
 
-	
+	static ID3D12Resource* CreateDepthStencilTexResource(ID3D12Device* device, int32_t width, int32_t height);
 
 
 

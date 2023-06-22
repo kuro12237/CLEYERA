@@ -1,5 +1,5 @@
 #include"CLEYERA/Cleyera.h"
-#define Triangle_Property_MAX 2
+#define Triangle_Property_MAX 1
 
 #include"CLEYERA/Matrix/MatrixTransform.h"
 #include"CLEYERA/Vector/VectorTransform.h"
@@ -11,6 +11,9 @@ struct  TriangleProperty
 	Vector4 top;
 	Vector4 left;
 	Vector4 right;
+	PeropertyPosition poition;
+
+
 	Matrix4x4 matrixTransform;
 	BufferResource ResourceData;
 	texResourceProperty tex;
@@ -51,13 +54,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	{
 		TriangleProperty_[0] =
 		{
-
-
 		{ -0.5f,0.5f,0.0f,1.0f },
 		{ 0.5f,0.5f,0.0f,1.0f },
 		{ -0.5f,-0.5f,0.0f,1.0f }
-		};
 		
+		
+		};
+		/*
 		TriangleProperty_[1] =
 		{
 
@@ -172,6 +175,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			{0.5f,0.0f,0.0f,1.0f }
 		
 	};
+	TriangleProperty_[0].poition = { {0.0f,0.5f,0.0f,1.0f},{-0.5f,0.0f,0.5f,1.0f},{0.5f,0.0f,-0.5f,1.0f } };
 
 	for (int i = 0; i < Triangle_Property_MAX; i++)
 	{
@@ -261,7 +265,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < Triangle_Property_MAX; i++)
 		{
 
-			Cleyera_->TriangleDraw(TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right, WHITE,
+			Cleyera_->TriangleDraw(
+				TriangleProperty_[i].top, TriangleProperty_[i].left, TriangleProperty_[i].right,
+				TriangleProperty_[i].poition,
+				WHITE,
 				TriangleProperty_[i].matrixTransform,
 				TriangleProperty_[i].ResourceData,TriangleProperty_[i].tex);
 		}
