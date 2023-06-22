@@ -634,8 +634,7 @@ void DirectXSetup::ScissorViewCommand(const int32_t kClientWidth, const int32_t 
 	commands.List->SetGraphicsRootSignature(rootSignature);
 	commands.List->SetPipelineState(graphicsPipelineState);//
 
-	commands.List->SetPipelineState(graphicsPipelineState);//
-
+	
 }
 
 #pragma region シザーとヴューポートの設定
