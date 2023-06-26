@@ -63,7 +63,7 @@ public:
 	/// <param name="left"></param>
 	/// <param name="right"></param>
 	/// <param name="三角形の頂点"></param>
-	void TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource vertex);
+	void TriangleDraw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource resource);
 
 	/// <summary>
 	/// 四角形の表示/// </summary>
@@ -72,7 +72,7 @@ public:
 	/// <param name="左下"></param>
 	/// <param name="右下"></param>
 	/// <param name="vertex"></param>
-	void RectDraw(Vector4 lefttop, Vector4 righttop, Vector4 leftdown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource vertex);
+	void RectDraw(Vector4 lefttop, Vector4 righttop, Vector4 leftdown, Vector4 rightDown, unsigned int ColorCode, Matrix4x4 matrixTransform, RectBufferResource resource);
 	
 	/// <summary>
 	/// カメラ位置更新処理
@@ -81,16 +81,16 @@ public:
 	void CameraUpdate(Transform cameraTransform);
 
 	/// <summary>
-	/// 三角形の頂点の解放処理
+	/// 三角形のリソースの解放処理
 	/// </summary>
 	/// <param name="vartex"></param>
-	void TriangleRelease(BufferResource vartex);
+	void TriangleRelease(BufferResource bufferResource);
 
 	/// <summary>
-	/// 四角形の頂点解放処理
+	/// 四角形のリソース解放処理
 	/// </summary>
 	/// <param name="vartex"></param>
-	void RectRelese(RectBufferResource vartex);
+	void RectRelese(RectBufferResource bufferResource);
 
 
 	/// <summary>

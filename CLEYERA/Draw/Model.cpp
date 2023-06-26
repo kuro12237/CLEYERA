@@ -74,7 +74,7 @@ D3D12_VERTEX_BUFFER_VIEW Model::CreateBufferView(size_t sizeInbyte,ID3D12Resourc
 
 
 
-void Model::CreateVertex(BufferResource &Resource)
+void Model::CreateBuffer(BufferResource &Resource)
 {
 
 	Resource.Vertex = CreateBufferResource(device, sizeof(Vector4) * 3);
@@ -136,7 +136,7 @@ void Model::Draw(Vector4 top, Vector4 left, Vector4 right, unsigned int ColorCod
 
 }
 
-void Model::VartexRelease(BufferResource Resource)
+void Model::BufferRelease(BufferResource Resource)
 {
 
 	Resource.Vertex->Release();

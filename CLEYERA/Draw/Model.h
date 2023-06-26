@@ -32,11 +32,11 @@ public:
 	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte ,ID3D12Resource* Resource);
 
 
-	void CreateVertex(BufferResource &vertex);
+	void CreateBuffer(BufferResource &Resource);
 
 	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource &Resource);
 
-	void VartexRelease(BufferResource Resource);
+	void BufferRelease(BufferResource Resource);
 
    /// <summary>
    /// 色16進数からVector4に変換する関数

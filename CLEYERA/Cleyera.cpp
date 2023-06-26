@@ -122,7 +122,7 @@ void Cleyera::EndFlame()
 
 void Cleyera::TriangleResourceCreate(BufferResource&bufferResource)
 {
-	Model_->CreateVertex(bufferResource);
+	Model_->CreateBuffer(bufferResource);
 }
 
 
@@ -159,15 +159,15 @@ void Cleyera::CameraUpdate(Transform cameraTransform)
 
 void Cleyera::TriangleRelease(BufferResource Resource)
 {
-	Model_->VartexRelease(Resource);
+	Model_->BufferRelease(Resource);
 
 
 }
 
 void Cleyera::RectRelese(RectBufferResource Resource)
 {
-	Model_->VartexRelease(Resource.left);
-	Model_->VartexRelease(Resource.right);
+	Model_->BufferRelease(Resource.left);
+	Model_->BufferRelease(Resource.right);
 
 }
 

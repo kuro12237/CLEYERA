@@ -10,8 +10,8 @@ Rect::~Rect()
 
 void Rect::BufferCreate(RectBufferResource &vartex)
 {
-	Model::CreateVertex(vartex.left);
-	Model::CreateVertex(vartex.right);
+	Model::CreateBuffer(vartex.left);
+	Model::CreateBuffer(vartex.right);
 	
 }
 

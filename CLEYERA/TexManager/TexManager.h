@@ -26,10 +26,21 @@ public:
 	TexManager();
 	~TexManager();
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// テクスチャのロード
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <returns></returns>
 	DirectX::ScratchImage Load(const std::string &filePath);
 
+	/// <summary>
+	/// 
+	/// </summary>
 	void EndFlame();
 
 private:
