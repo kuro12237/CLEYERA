@@ -87,8 +87,13 @@ void Model::CreateResource(BufferResource &Resource)
 	//メモ Vector4からVertexDataにサイズを換えるため↓も換える必要がある
 
 	Resource.Vertex = CreateBufferResource(device, sizeof(VertexData) * 3);
+	
+	
+	
 	Resource.Material = CreateBufferResource(device, sizeof(Vector4));
 	Resource.wvpResource = CreateBufferResource(device, sizeof(Matrix4x4));
+
+
 	Resource.BufferView = CreateBufferView(sizeof(VertexData) * 3,Resource.Vertex);
 }
 
