@@ -82,7 +82,7 @@ struct  VertexData
 
 
 
-void Model::CreateVertex(BufferResource &Resource)
+void Model::CreateResource(BufferResource &Resource)
 {
 	//メモ Vector4からVertexDataにサイズを換えるため↓も換える必要がある
 

@@ -126,7 +126,7 @@ void Cleyera::EndFlame()
 
 void Cleyera::TriangleResourceCreate(BufferResource&bufferResource)
 {
-	Model_->CreateVertex(bufferResource);
+	Model_->CreateResource(bufferResource);
 
 
 }

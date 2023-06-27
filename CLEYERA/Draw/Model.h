@@ -32,7 +32,7 @@ public:
 	static D3D12_VERTEX_BUFFER_VIEW CreateBufferView(size_t sizeInbyte ,ID3D12Resource* Resource);
 
 
-	void CreateVertex(BufferResource &vertex);
+	void CreateResource(BufferResource &resource);
 
 	void Draw(Vector4 top, Vector4 left, Vector4 right,unsigned int ColorCode, Matrix4x4 matrixTransform, BufferResource &Resource, texResourceProperty tex);
 
