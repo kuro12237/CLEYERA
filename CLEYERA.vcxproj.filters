@@ -203,7 +203,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="Shader\Object3d.hlsli">
-      <Filter>Shader</Filter>
+      <Filter>Vector</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
