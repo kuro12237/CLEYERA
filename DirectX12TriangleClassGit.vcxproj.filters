@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CLEYERA">
+      <UniqueIdentifier>{9ab55b8a-64fe-4d67-8d71-e5b9dee912ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\base">
+      <UniqueIdentifier>{204edb48-7755-42a7-a61d-7d905828b260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\base\Win">
+      <UniqueIdentifier>{43c8fee7-2ab5-42b8-a709-4bed7f6e47b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\base\DX">
+      <UniqueIdentifier>{017f8792-fd1a-4636-a1e8-9cdf1151f7e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility">
+      <UniqueIdentifier>{06f07548-f2dd-4bf5-af1c-efff3fe1d603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\Pch">
+      <UniqueIdentifier>{65d73a79-29d0-48a6-a57a-a34b5eb0662c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\config">
+      <UniqueIdentifier>{8b599666-8065-4bcf-aaf9-c3c2837290c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\LogManager">
+      <UniqueIdentifier>{b67d1e82-2147-439b-85b5-dca6f7ac9655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics">
+      <UniqueIdentifier>{eddfe59e-92dc-4d1f-9c69-0b1ecce6088a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\GraphicsPipelineManager">
+      <UniqueIdentifier>{a485ec73-e80c-4af8-82bf-ff922e9a87eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\CompileShaders">
+      <UniqueIdentifier>{cc587c9c-3c0b-42de-af43-dd42597eb5a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{fb13fadd-3e00-414f-b0b7-9654c61d327d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model">
+      <UniqueIdentifier>{34952989-3102-48d1-a740-9c6ad56ab3ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\Plane">
+      <UniqueIdentifier>{a25d7723-6a3e-4057-a4b6-6baa02c6eef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Transform">
+      <UniqueIdentifier>{3a8bfbae-0acc-40fc-ba35-5e6fa5bb1c93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\CreateResource">
+      <UniqueIdentifier>{508999da-fe71-4022-a8ab-7e84d14adaf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\math">
+      <UniqueIdentifier>{df1d8822-d2f8-42f4-b43e-f0b3d1ed1520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\math\Matrix">
+      <UniqueIdentifier>{692e5c6d-0514-47b2-8bce-9c008250ca03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\DrawLine">
+      <UniqueIdentifier>{f85b1b84-693e-4840-a15b-a2820c64e40c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\TextureManager">
+      <UniqueIdentifier>{597ae9e2-f16c-45fb-9f5d-7940671c8212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\ImGuiManager">
+      <UniqueIdentifier>{1310bbed-7a84-468e-8f4f-9dac43a57489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\DebugTools">
+      <UniqueIdentifier>{0e048dfb-f3ee-43a9-9ed9-7e69565dfa83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\DebugTools\DebugGrid">
+      <UniqueIdentifier>{910d38c5-eed0-437d-b10d-55ce3a3c775d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\GameObject">
+      <UniqueIdentifier>{8e3763ee-ab75-4802-b3ed-6bf968714386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\Sphere">
+      <UniqueIdentifier>{0f0d6265-9cf3-40ad-acfb-38de0182afa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\ObjState">
+      <UniqueIdentifier>{7ad064f9-c521-4fd5-a423-17a94a8c7364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Sprite">
+      <UniqueIdentifier>{8ca2e2a2-0644-42de-8d42-6af1da68f612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Sprite\state">
+      <UniqueIdentifier>{ba0140f6-2613-4cf0-beae-b806b72b32e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project">
+      <UniqueIdentifier>{387c7c14-6a86-4f80-8065-ebfe3a2a4364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene">
+      <UniqueIdentifier>{0c802be9-ee57-4ecc-a25c-5d726d7ef52b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Input">
+      <UniqueIdentifier>{0594f166-5a6b-43b3-8c36-5010288e57ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Audio">
+      <UniqueIdentifier>{4ee1b44c-d002-488d-8839-c1fc665d795c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\DebugTools\DebugCamera">
+      <UniqueIdentifier>{37a1bfe0-2b42-4cbc-b26f-65f851b2677c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\FileLoader">
+      <UniqueIdentifier>{13b52452-38fe-4472-b33d-1e13f29e3436}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Particle">
+      <UniqueIdentifier>{efaa3838-3aa8-48b6-8460-43d30a48c24c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Particle\ParticleSprite">
+      <UniqueIdentifier>{7fe1395e-b8f2-41d0-85c8-6946004dd205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Particle\ParticlePlane">
+      <UniqueIdentifier>{c073a108-c039-4bd3-9fbf-37b30c3aeafc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\math\Quaternion">
+      <UniqueIdentifier>{d1cf5c41-681a-4ff6-92df-656d7304e1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\math\Vector">
+      <UniqueIdentifier>{3cb29394-5a40-4ddb-a173-7994b23f6ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Light">
+      <UniqueIdentifier>{fa6556f0-e893-424a-ac19-2af4803be191}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\MulitiPass">
+      <UniqueIdentifier>{a2ca512a-1a6d-4cb5-adcf-d78c00b802ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\CollisionManager">
+      <UniqueIdentifier>{fdcd6478-86f6-4622-a9fa-5a063fc9b748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\NormalMap">
+      <UniqueIdentifier>{ad675539-1a74-4b2e-a5df-45982bc8d1d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\Game">
+      <UniqueIdentifier>{6c226b21-6389-4d7f-9163-44a1ffdc95f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Lighting">
+      <UniqueIdentifier>{fee1b180-4afe-4841-be51-eaaa789a7b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Lighting\testShader">
+      <UniqueIdentifier>{7fb5b88b-e7ea-44db-b98f-9283481ec238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\Descripters">
+      <UniqueIdentifier>{97bd1649-5ec5-41e7-9771-154261bb6980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\PostEffect">
+      <UniqueIdentifier>{b34fba0f-9839-4f13-80cc-20f3ac55bd98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CLEYERA\Config\.editorconfig">
+      <Filter>CLEYERA\config</Filter>
+    </None>
+    <None Include="Resources\Shader\SpriteObject3d.hlsli">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\ParticleObject3d.hlsli">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SpriteObject2d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\SpriteObject2d.hlsli">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\LightingObject3d.hlsli">
+      <Filter>Shader\Lighting</Filter>
+    </None>
+    <None Include="Resources\Shader\PostEffect\PostEffectTest.hlsli">
+      <Filter>Shader\PostEffect</Filter>
+    </None>
+    <None Include="Resources\Shader\PostEffect\Shadow.hlsli">
+      <Filter>Shader\PostEffect</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CLEYERA\Cleyera.cpp">
+      <Filter>CLEYERA</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Base\Win\WinApp.cpp">
+      <Filter>CLEYERA\base\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp">
+      <Filter>CLEYERA\base\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp">
+      <Filter>CLEYERA\Utility\LogManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp">
+      <Filter>CLEYERA\Graphics\CompileShaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\Model.cpp">
+      <Filter>CLEYERA\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelPlaneState.cpp">
+      <Filter>CLEYERA\Model\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\MatrixTransform.cpp">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Transform\CameraData.cpp">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelLineState.cpp">
+      <Filter>CLEYERA\Model\DrawLine</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp">
+      <Filter>CLEYERA\Graphics\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.cpp">
+      <Filter>CLEYERA\Utility\ImGuiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp">
+      <Filter>CLEYERA\Model\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Sprite\Sprite.cpp">
+      <Filter>CLEYERA\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
+      <Filter>CLEYERA\Model\CreateResource</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp">
+      <Filter>CLEYERA\Sprite\state</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Input\Input.cpp">
+      <Filter>CLEYERA\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Project\GameManager\GameManager.cpp">
+      <Filter>Project</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp">
+      <Filter>CLEYERA\Utility\FileLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Particle\Particle.cpp">
+      <Filter>CLEYERA\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp">
+      <Filter>CLEYERA\Particle\ParticlePlane</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp">
+      <Filter>CLEYERA\Graphics\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\Quaternion\QuaternionTransform.cpp">
+      <Filter>CLEYERA\math\Quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\ModelManager.cpp">
+      <Filter>CLEYERA\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Light\Light.cpp">
+      <Filter>CLEYERA\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Light\LightingManager.cpp">
+      <Filter>CLEYERA\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\Game3dObject.cpp">
+      <Filter>CLEYERA\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\CollisionManager.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\NormalMap\NormalMap.cpp">
+      <Filter>CLEYERA\Graphics\NormalMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\GameScene.cpp">
+      <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
+      <Filter>CLEYERA\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Audio\AudioManager.cpp">
+      <Filter>CLEYERA\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\PostEffect\PostEffect.cpp">
+      <Filter>CLEYERA\MulitiPass</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.cpp">
+      <Filter>CLEYERA\Graphics\Descripters</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\DescripterManager\RTVDescripterManager.cpp">
+      <Filter>CLEYERA\Graphics\Descripters</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.cpp">
+      <Filter>CLEYERA\Graphics\Descripters</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Light\DirectionLIght.cpp">
+      <Filter>CLEYERA\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\TestScene.cpp" />
+    <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp" />
+    <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
+    <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
+      <Filter>CLEYERA\Utility\Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Cleyera.h">
+      <Filter>CLEYERA</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Base\Win\WinApp.h">
+      <Filter>CLEYERA\base\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h">
+      <Filter>CLEYERA\base\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h">
+      <Filter>CLEYERA\Utility\LogManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h">
+      <Filter>CLEYERA\Graphics\CompileShaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Model.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\IModelState.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h">
+      <Filter>CLEYERA\Model\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Transform\WorldTransform.h">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\MatrixTransform.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix2x2.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix3x3.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Matrix4x4.h">
+      <Filter>CLEYERA\math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Transform\CameraData.h">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelLineState.h">
+      <Filter>CLEYERA\Model\DrawLine</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\TextureManager\TextureManager.h">
+      <Filter>CLEYERA\Graphics\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.h">
+      <Filter>CLEYERA\Utility\ImGuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelSphereState.h">
+      <Filter>CLEYERA\Model\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelObjState.h">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Sprite\Sprite.h">
+      <Filter>CLEYERA\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\CreateResource\CreateResource.h">
+      <Filter>CLEYERA\Model\CreateResource</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h">
+      <Filter>CLEYERA\Sprite\state</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h">
+      <Filter>CLEYERA\Sprite\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameManager\GameManager.h">
+      <Filter>Project</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\IScene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Input\Input.h">
+      <Filter>CLEYERA\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\FileLoader\FileLoader.h">
+      <Filter>CLEYERA\Utility\FileLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Particle\Particle.h">
+      <Filter>CLEYERA\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Particle\state\IParticleState.h">
+      <Filter>CLEYERA\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Particle\SParticle.h">
+      <Filter>CLEYERA\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h">
+      <Filter>CLEYERA\Particle\ParticlePlane</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h">
+      <Filter>CLEYERA\Graphics\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Quaternion\QuaternionTransform.h">
+      <Filter>CLEYERA\math\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector2.h">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector3.h">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Vector4.h">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\ModelManager.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelObjData.h">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Light\Light.h">
+      <Filter>CLEYERA\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Light\LightingManager.h">
+      <Filter>CLEYERA\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\Quaternion\Quaternion.h">
+      <Filter>CLEYERA\math\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Game3dObject.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionManager.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionStructures\CollisionStructures.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\AABBCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\ColliderConfig.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\OBBCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SegmentCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SphereCollider.h">
+      <Filter>CLEYERA\Utility\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\math\VectorTransform.h">
+      <Filter>CLEYERA\math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\NormalMap\NormalMap.h">
+      <Filter>CLEYERA\Graphics\NormalMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\GameScene.h">
+      <Filter>Project\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Audio\AudioDataResource.h">
+      <Filter>CLEYERA\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Audio\AudioManager.h">
+      <Filter>CLEYERA\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\PostEffect\PostEffect.h">
+      <Filter>CLEYERA\MulitiPass</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\CreateResource\BufferResources.h">
+      <Filter>CLEYERA\Model\CreateResource</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h">
+      <Filter>CLEYERA\Graphics\Descripters</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\DescripterManager\RTVDescripterManager.h">
+      <Filter>CLEYERA\Graphics\Descripters</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.h">
+      <Filter>CLEYERA\Graphics\Descripters</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescripterData.h">
+      <Filter>CLEYERA\Graphics\Descripters</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Light\DirectionLIght.h">
+      <Filter>CLEYERA\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\TestScene.h">
+      <Filter>Project\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h" />
+    <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h" />
+    <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />
+    <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
+    <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModeCreatePipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\ShapeObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\ParticleObject3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\ParticleObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\SpriteObject2d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_Model3dObject.PS.hlsl">
+      <Filter>Shader\Lighting\testShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_Model3dObject.VS.hlsl">
+      <Filter>Shader\Lighting\testShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\LightingObject3d.CS.hlsl">
+      <Filter>Shader\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PBR_ModelObject3d.PS.hlsl">
+      <Filter>Shader\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PBR_ModelObject3d.VS.hlsl">
+      <Filter>Shader\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_ModelObject3d.PS.hlsl">
+      <Filter>Shader\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_ModelObject3d.VS.hlsl">
+      <Filter>Shader\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_Subsurface_Model3dObject.PS.hlsl">
+      <Filter>Shader\Lighting\testShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_Subsurface_Model3dObject.VS.hlsl">
+      <Filter>Shader\Lighting\testShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\PostEffectTest.VS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\PostEffectTest.PS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
