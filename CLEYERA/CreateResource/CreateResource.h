@@ -59,6 +59,11 @@ struct PostEffectParam
 
 };
 
+struct DefferredMaterial
+{
+	Vector4 color = { 1,1,1,1 };
+};
+
 struct PostEffectAdjustedColorParam
 {
 	/// <summary>
@@ -125,6 +130,8 @@ struct  Material
 	float scatterDistance=0.5f;
 };
 
+
+
 class CreateResources
 {
 public:
@@ -139,7 +146,6 @@ public:
 
 	static void CreateBufferResource(size_t sizeInbyte, ComPtr<ID3D12Resource>& Resource);
 
-	
 
 	/// <summary>
 	/// BufferView��쐬

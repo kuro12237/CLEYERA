@@ -4,7 +4,7 @@
 #include"ShaderManager.h"
 #include"StructGraphicsPipline.h"
 
-#include"ModelCreatePipline/ModeCreatePipline.h"
+#include"ModelCreatePipline/ModelCreatePipline.h"
 
 class GraphicsPipelineManager
 {
@@ -14,6 +14,11 @@ public:
 
 	static void Initialize();
     SPSO GetPso() { return pso; }
+
+#pragma region Set
+
+
+#pragma endregion
 
 private:
 
@@ -100,6 +105,9 @@ private:
 
 	static SPSOProperty CreatePostEffectTest(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 	static SPSOProperty CreateShadow(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
+
+	static void DefferrdShading(SPSO &pso);
+
 	SPSO pso = {};
 
 };

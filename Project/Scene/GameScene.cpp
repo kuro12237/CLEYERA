@@ -214,7 +214,8 @@ void GameScene::Update(GameManager* Scene)
 void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	gameObject_->Draw(worldTransform_, viewProjection_);
+	gameObject_->ColorDraw(worldTransform_, viewProjection_);
+	//gameObject_->Draw(worldTransform_, viewProjection_);
 	testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
 	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 

@@ -10,6 +10,8 @@ void GraphicsPipelineManager::Initialize()
 {
 	SPSO pso{};
 
+
+
 	CreatePSO(pso);
 	//2d
 	Create2dSpritePSOs(pso);
@@ -23,6 +25,7 @@ void GraphicsPipelineManager::Initialize()
 
 	CreatePostEffectPSOs(pso);
 
+	DefferrdShading(pso);
 	GraphicsPipelineManager::GetInstance()->pso = pso;
 }
 
@@ -2624,5 +2627,16 @@ SPSOProperty GraphicsPipelineManager::CreateShadow(ComPtr<ID3D12Device> device, 
 	assert(SUCCEEDED(hr));
 
 	return SpritePSO;
+}
+
+void GraphicsPipelineManager::DefferrdShading(SPSO& pso)
+{
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	SShaders shader = ShaderManager::Getinstance()->GetShader();
+	
+
+	pso.ColorModel3d = ModelCreatePipline::CreateColorModel(device,commands,shader.ColorModel);
+	LogManager::Log("Create colorModelPipline\n");
 }
 

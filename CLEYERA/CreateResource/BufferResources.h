@@ -1,6 +1,7 @@
 #pragma once
 #include"CreateResource.h"
 
+
 template<typename T>
 class BufferResource
 {
@@ -23,6 +24,8 @@ public:
 
 private:
 
+	void CreateBufferResource();
+
 	uint32_t bufferNum_ = 1;
 	T* param_ = {};
 	ComPtr<ID3D12Resource> buffer_ = nullptr;
@@ -32,7 +35,7 @@ template<typename T>
 inline void BufferResource<T>::CreateResource(uint32_t n)
 {
 	bufferNum_ = n;
-	buffer_ = CreateResources::CreateBufferResource(sizeof(T) * n);
+	CreateBufferResource();
 }
 
 template<typename T>
@@ -62,4 +65,27 @@ inline void BufferResource<T>::CommandCall(UINT number)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	commands.m_pList->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}
+
+template<typename T>
+inline void BufferResource<T>::CreateBufferResource()
+{
+	size_t sizeInbyte = sizeof(T) * bufferNum_;
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
+	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+	D3D12_RESOURCE_DESC ResourceDesc{};
+	ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	ResourceDesc.Width = sizeInbyte;
+	ResourceDesc.Height = 1;
+	ResourceDesc.DepthOrArraySize = 1;
+	ResourceDesc.MipLevels = 1;
+	ResourceDesc.SampleDesc.Count = 1;
+	ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	HRESULT hr = {};
+	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
+		&ResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&buffer_));
+	assert(SUCCEEDED(hr));
 }

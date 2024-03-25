@@ -24,6 +24,8 @@ public:
 
 	void ShadowDraw(const WorldTransform& worldTransform, const CameraData view);
 
+	void ColorDraw(const WorldTransform& worldTransform, const CameraData& view);
+
 #pragma region Set
 
 	void SetUvScale(Vector3 s) { uvScale_ = s; }
@@ -58,6 +60,11 @@ private:
 
 	unique_ptr<BufferResource<Material>>MaterialBuffer_ = nullptr;
 	Material material_ = {};
+
+	//defferd
+	unique_ptr<BufferResource<DefferredMaterial>>cMaterialBuffer_ = nullptr;
+	DefferredMaterial cMaterial_ = {};
+
 
 	Vector4 color_ = { 1,1,1,1 };
 	Vector3 uvScale_ = { 1,1,1 };

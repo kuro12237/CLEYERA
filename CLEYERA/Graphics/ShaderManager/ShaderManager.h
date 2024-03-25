@@ -26,6 +26,7 @@ struct SShaders
 	SShaderMode LightParticle;
 	SShaderMode PostEffectTest;
 	SShaderMode shadowMapVS;
+	SShaderMode ColorModel;
 };
 
 class ShaderManager
@@ -63,6 +64,8 @@ private:
 	static void ParticleShader();
 	static void PhongNormalModel();
 	static void PhongSubsurfaceModel();
+
+	static void ColorModel();
 
 	static void PostEffectTest();
 	static void ShadowMap();
