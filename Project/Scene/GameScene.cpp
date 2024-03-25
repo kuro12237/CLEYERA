@@ -15,7 +15,7 @@ void GameScene::Initialize()
 	worldTransform_.translate.y = 0.5f;
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
-	ModelManager::ModelLoadNormalMap();
+	//ModelManager::ModelLoadNormalMap();
 	//ModelManager::ModelUseSubsurface();
 	normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
 
