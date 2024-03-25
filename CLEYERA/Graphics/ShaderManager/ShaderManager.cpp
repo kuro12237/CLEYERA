@@ -101,6 +101,7 @@ void ShaderManager::ShaderComples()
 	PhongSubsurfaceModel();
 
 	ColorModel();
+	NormalModel();
 
 	PostEffectTest();
 	ShadowMap();
@@ -244,6 +245,22 @@ void ShaderManager::ColorModel()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.ColorModel = shaders;
+}
+
+void ShaderManager::NormalModel()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/NormalObject3d.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/NormalObject3d.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.NormalModel = shaders;
 }
 
 void ShaderManager::PostEffectTest()

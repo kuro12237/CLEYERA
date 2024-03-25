@@ -16,7 +16,7 @@ void GameScene::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	ModelManager::ModelLoadNormalMap();
-	ModelManager::ModelUseSubsurface();
+	//ModelManager::ModelUseSubsurface();
 	normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
 
 	ModelManager::ModelUseSubsurface();
@@ -214,7 +214,8 @@ void GameScene::Update(GameManager* Scene)
 void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	gameObject_->ColorDraw(worldTransform_, viewProjection_);
+	//gameObject_->ColorDraw(worldTransform_, viewProjection_);
+	gameObject_->NormalDraw(worldTransform_, viewProjection_);
 	//gameObject_->Draw(worldTransform_, viewProjection_);
 	testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
 	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);

@@ -29,3 +29,10 @@ struct ColorVertexShaderOutput
     float4 position : SV_POSITION;
     float2 texcoord : TEXCOORD0;
 };
+
+struct NormalVertexShaderOutput
+{
+    float4 position : SV_POSITION;
+    float2 texcoord : TEXCOORD;
+    float3 normal : Normal;
+};

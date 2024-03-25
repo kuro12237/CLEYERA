@@ -53,6 +53,8 @@ private:
 
 	bool isCreateObjectLoad_ = false;
 
+	uint32_t normalDfTex_ = 0;
+
 #pragma region 
 	//Singleton
 	TextureManager() = default;

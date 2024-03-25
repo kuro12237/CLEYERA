@@ -26,6 +26,8 @@ public:
 
 	void ColorDraw(const WorldTransform& worldTransform, const CameraData& view);
 
+	void NormalDraw(const WorldTransform& worldTransform, const CameraData& view);
+
 #pragma region Set
 
 	void SetUvScale(Vector3 s) { uvScale_ = s; }

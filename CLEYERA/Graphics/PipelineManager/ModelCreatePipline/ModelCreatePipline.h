@@ -17,6 +17,9 @@ public:
 
 	static SPSOProperty CreateColorModel(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
+	static SPSOProperty CreateNormalModel(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
+
+
 private:
 
 };

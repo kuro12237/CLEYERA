@@ -579,5 +579,7 @@
     </FxCompile>
     <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl" />
   </ItemGroup>
 </Project>

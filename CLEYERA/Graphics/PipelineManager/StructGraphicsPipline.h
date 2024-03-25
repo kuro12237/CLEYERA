@@ -32,6 +32,7 @@ struct SPSO
 	SPSOProperty PhongSubsurface_Model;
 	SBlendPSO LightingParticle3d;
 	SPSOProperty ColorModel3d;
+	SPSOProperty NormalModel3d;
 	SPSOProperty PostEffectTest;
 	SPSOProperty shadow;
 
