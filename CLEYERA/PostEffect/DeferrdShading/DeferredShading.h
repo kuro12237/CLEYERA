@@ -4,6 +4,7 @@
 #include"WorldTransform.h"
 #include"GraphicsPipelineManager.h"
 #include"Light/LightingManager.h"
+#include"Light/DirectionLIght.h"
 
 class DefferredShading
 {
@@ -21,6 +22,11 @@ public:
 
 	void PostNormalDraw();
 
+
+	void PreDepthDraw();
+
+	void PostDepthDraw();
+
 	void Draw(const CameraData& camera);
 
 private:
@@ -32,9 +38,12 @@ private:
 
 	void CreateTexBuffer();
 
+
+
 	unique_ptr<BufferResource<uint32_t>>colorTexBuffer_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>normalTexBuffer_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>depthBuffer_ = nullptr;
+	unique_ptr<BufferResource<uint32_t>>depthTexBuffer_ = nullptr;
 
 	unique_ptr<BufferResource<VertexData>>vertexBuffer_ = nullptr;
 	vector<VertexData>vertexData_;

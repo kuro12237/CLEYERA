@@ -46,7 +46,7 @@ void GameScene::Initialize()
 
 	TestSkyDomeWorldTreanform_.Initialize();
 	TestSkyDomeWorldTreanform_.scale = { 8.0f,8.0f,8.0f };
-	ModelManager::ModelLoadNormalMap();
+	//ModelManager::ModelLoadNormalMap();
 	modelHandle = ModelManager::LoadObjectFile("TestSkyDome");
 	testSkyDomeGameObject_= make_unique<Game3dObject>();
 	testSkyDomeGameObject_->Create();
@@ -60,6 +60,7 @@ void GameScene::Initialize()
 	defferedShading = make_unique<DefferredShading>();
 	defferedShading->Initialize();
 
+	DirectionalLight::Initialize();
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -173,6 +174,7 @@ void GameScene::Update(GameManager* Scene)
 
 	light_.UpdateMatrix();
 	LightingManager::AddList(light_);
+	
 
 	ImGui::Checkbox("TestRedLight", &UseTestRedLight_);
 	if (UseTestRedLight_)
@@ -239,7 +241,13 @@ void GameScene::PostProcessDraw()
     testGroundGameObject_->NormalDraw(testGroundWorldTransform_, viewProjection_);
 
 	defferedShading->PostNormalDraw();
+	defferedShading->PreDepthDraw();
+	gameObject_->ColorDraw(worldTransform_, viewProjection_);
+	//testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
+	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
+	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
 
+	defferedShading->PostDepthDraw();
 }
 
 void GameScene::Back2dSpriteDraw()

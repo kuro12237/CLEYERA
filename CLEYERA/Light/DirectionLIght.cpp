@@ -12,7 +12,8 @@ void DirectionalLight::Initialize()
 	DirectionalLight::GetInstance()->buffer_->CreateResource();
 	DirectionalLight::GetInstance()->light.intensity = 1.0f;
 	DirectionalLight::GetInstance()->light.pos = { -1,1,0 };
-	DirectionalLight::GetInstance()->light.matrix = MatrixTransform::Identity();
+	DirectionalLight::GetInstance()->light.useFlag = true;
+	//DirectionalLight::GetInstance()->light.matrix = MatrixTransform::Identity();
 	DirectionalLight::GetInstance()->worldMat_ = MatrixTransform::Identity();
 	DirectionalLight::GetInstance()->viewMat_ = MatrixTransform::Identity();
 }
@@ -40,7 +41,7 @@ void DirectionalLight::Update()
 		MatrixTransform::Multiply(MatrixTransform::Inverse(translateMatrix),
 			MatrixTransform::Inverse(MatrixTransform::Identity()));
 
-	DirectionalLight::GetInstance()->light.matrix = DirectionalLight::GetInstance()->viewMat_;
+	//DirectionalLight::GetInstance()->light.matrix = DirectionalLight::GetInstance()->viewMat_;
 	DirectionalLight::GetInstance()->buffer_->Setbuffer(DirectionalLight::GetInstance()->light);
 	DirectionalLight::GetInstance()->buffer_->UnMap();
 }

@@ -1489,6 +1489,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
+
 	//Sampler�̐ݒ�
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;

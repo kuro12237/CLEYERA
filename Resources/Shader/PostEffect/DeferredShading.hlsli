@@ -18,6 +18,13 @@ struct Material
     float4 color;
 };
 
+struct DirectionLightParam
+{
+    float32_t3 pos;
+    float32_t intensity;
+    bool useFlag;
+};
+
 struct PointLight
 {
     float32_t4 color;

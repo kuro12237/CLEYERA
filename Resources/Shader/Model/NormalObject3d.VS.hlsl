@@ -20,6 +20,7 @@ NormalVertexShaderOutput main(VertexShaderInput input)
     output.position =  output.position = mul(input.position, resultMatrix);
     output.normal = normalize(mul(input.normal, (float32_t3x3) resultMatrix));
     output.texcoord = input.texcoord;
+    output.worldMatrix = resultMatrix;
     return output;
 }
 

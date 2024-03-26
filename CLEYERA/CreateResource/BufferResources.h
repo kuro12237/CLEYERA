@@ -33,6 +33,8 @@ public:
 	 /// </summary>
 	 void CreateResource(DXGI_FORMAT format, const int32_t width, const int32_t height);
 
+	 void CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state, D3D12_CLEAR_VALUE depthClearValue);
+
 	 /// <summary>
 	 /// 画像bufferを更新
 	 /// </summary>
@@ -124,6 +126,25 @@ inline void BufferResource<T>::CreateResource(DXGI_FORMAT format,const int32_t w
 	);
 	assert(SUCCEEDED(hr));
 
+}
+
+template<typename T>
+inline void BufferResource<T>::CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state,D3D12_CLEAR_VALUE depthClearValue)
+{
+	//色
+	D3D12_CLEAR_VALUE color = depthClearValue;
+
+	//後で下を関数化
+	ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
+	HRESULT hr = device->CreateCommittedResource(
+		&heapPram,
+		D3D12_HEAP_FLAG_NONE,
+		&resourceDesc,
+		state,
+		&color,
+		IID_PPV_ARGS(&buffer_)
+	);
+	assert(SUCCEEDED(hr));
 }
 
 
@@ -278,36 +299,6 @@ inline void BufferResource<T>::RegisterRTV(DXGI_FORMAT format, const string& nam
 template<typename T>
 inline void BufferResource<T>::RegisterDSV(DXGI_FORMAT format, const string& name)
 {
-	D3D12_RESOURCE_DESC resourceDesc = {};
-	resourceDesc.Width = WinApp::GetkCilientWidth();
-	resourceDesc.Height = WinApp::GetkCilientHeight();
-	resourceDesc.MipLevels = 1;
-	resourceDesc.DepthOrArraySize = 1;
-
-	resourceDesc.Format = format;
-	resourceDesc.SampleDesc.Count = 1;
-	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-
-	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
-
-	D3D12_CLEAR_VALUE depthClearValue{};
-	depthClearValue.DepthStencil.Depth = 1.0f;
-	depthClearValue.Format = format;
-
-	HRESULT hr = {};
-	//作成
-	hr = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
-		&heapProperties,
-		D3D12_HEAP_FLAG_NONE,
-		&resourceDesc,
-		D3D12_RESOURCE_STATE_DEPTH_WRITE,
-		&depthClearValue,
-		IID_PPV_ARGS(&buffer_)
-	);
-	assert(SUCCEEDED(hr));
-
 	D3D12_DEPTH_STENCIL_VIEW_DESC desc{};
 	desc.Format = format;
 	desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;

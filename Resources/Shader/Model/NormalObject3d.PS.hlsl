@@ -12,6 +12,8 @@ PixelShaderOutput main(NormalVertexShaderOutput input)
     float4 transformedUV = float4(input.texcoord, 0.0f, 1.0f); //mul(float32_t4(input.texcoord, 0.0f, 1.0f), gMaterial.uv);
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
     float3 result = normalize(input.normal.rgb + textureColor.rgb);
-    output.color = float4(result.rgb , 1.0f);
+    float3 N = normalize(textureColor.rgb+ normalize(mul(input.normal.xyz, (float32_t3x3)input.worldMatrix)));
+
+    output.color = float4(N.x,N.y,N.z , 1.0f);
     return output;
 }

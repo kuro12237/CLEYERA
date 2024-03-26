@@ -35,4 +35,5 @@ struct NormalVertexShaderOutput
     float4 position : SV_POSITION;
     float2 texcoord : TEXCOORD;
     float3 normal : Normal;
+    float32_t4x4 worldMatrix : WORLDMATRIX0;
 };

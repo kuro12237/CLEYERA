@@ -22,6 +22,7 @@ void DefferredShading::Initialize()
 
 void DefferredShading::PreColorDraw()
 {
+	
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	// レンダーターゲットをセット
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = RTVDescriptorManager::GetHandle(colorTexBuffer_->GetRtvIndex());
@@ -42,10 +43,14 @@ void DefferredShading::PreColorDraw()
 
 	commands.m_pList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 	commands.m_pList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+	//PreDepthDraw();
+
 }
 
 void DefferredShading::PostColorDraw()
 {
+	//PostDepthDraw();
+
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier{};
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
@@ -55,6 +60,8 @@ void DefferredShading::PostColorDraw()
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(1, &barrier);
+
+
 }
 
 void DefferredShading::PreNormalDraw()
@@ -111,12 +118,13 @@ void DefferredShading::Draw( const CameraData& camera)
 	materialBuffer_->CommandCall(1);
 	DescriptorManager::rootParamerterCommand(2, colorTexBuffer_->GetSrvIndex());
 	DescriptorManager::rootParamerterCommand(3, normalTexBuffer_->GetSrvIndex());
-	camera.buffer_->CommandCall(4);
+	DescriptorManager::rootParamerterCommand(4, depthTexBuffer_->GetSrvIndex());
 	camera.buffer_->CommandCall(5);
+	camera.buffer_->CommandCall(6);
 
-	DescriptorManager::rootParamerterCommand(6, LightingManager::dsvHandle());
-	m_pList->SetGraphicsRootConstantBufferView(7, LightingManager::GetBuffer()->GetGPUVirtualAddress());
-
+	DescriptorManager::rootParamerterCommand(7, LightingManager::dsvHandle());
+	m_pList->SetGraphicsRootConstantBufferView(8, LightingManager::GetBuffer()->GetGPUVirtualAddress());
+	DirectionalLight::CommandCall(9);
 
 	m_pList->DrawInstanced(6, 1, 0, 0);
 }
@@ -145,8 +153,89 @@ void DefferredShading::CreateTexBuffer()
 	normalTexBuffer_->RegisterRTV(format, "DeferredShadingNormal");
 
 	depthBuffer_ = make_unique<BufferResource<uint32_t>>();
+	D3D12_RESOURCE_DESC resourceDesc = {};
+	resourceDesc.Width = WinApp::GetkCilientWidth();
+	resourceDesc.Height = WinApp::GetkCilientHeight();
+	resourceDesc.MipLevels = 1;
+	resourceDesc.DepthOrArraySize = 1;
+
+	resourceDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	resourceDesc.SampleDesc.Count = 1;
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+
+	D3D12_HEAP_PROPERTIES heapProperties{};
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+	D3D12_CLEAR_VALUE depthClearValue{};
+	depthClearValue.DepthStencil.Depth = 1.0f;
+	depthClearValue.Format = DXGI_FORMAT_D32_FLOAT;
+
+	depthBuffer_->CreateResource(resourceDesc,heapProperties, D3D12_RESOURCE_STATE_DEPTH_WRITE, depthClearValue);
 	depthBuffer_->RegisterDSV(DXGI_FORMAT_D32_FLOAT, "DeferredShadingDepth");
 
+	depthTexBuffer_ = make_unique<BufferResource<uint32_t>>();
+
+	//resourceDesc設定
+	D3D12_RESOURCE_DESC resourceTexDesc = {};
+	resourceTexDesc.Width = WinApp::GetkCilientWidth();
+	resourceTexDesc.Height = WinApp::GetkCilientHeight();
+	resourceTexDesc.MipLevels = 1;
+	resourceTexDesc.DepthOrArraySize = 1;
+	resourceTexDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	resourceTexDesc.SampleDesc.Count = 1;
+	resourceTexDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	resourceTexDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+	//Heap設定
+	D3D12_HEAP_PROPERTIES heapPram{};
+	heapPram.Type = D3D12_HEAP_TYPE_DEFAULT;
+	D3D12_CLEAR_VALUE color = {};
+	color.Format = DXGI_FORMAT_D32_FLOAT;
+	color.DepthStencil.Depth = 1.0f;
+	color.DepthStencil.Stencil = 0;
+	depthTexBuffer_->CreateResource(resourceTexDesc,heapPram,D3D12_RESOURCE_STATE_GENERIC_READ,color);
+	depthTexBuffer_->RegisterSRV(DXGI_FORMAT_R32_FLOAT, "DeferredShadingDepthTex");
+	depthTexBuffer_->RegisterDSV(DXGI_FORMAT_D32_FLOAT, "DeferredShadingDepthTex");
+
+}
+
+void DefferredShading::PreDepthDraw()
+{
+	////shadowMapTest用
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvShadowHandle = DSVDescriptorManager::GetHandle(depthTexBuffer_->GetDsvIndex());
+
+	D3D12_RESOURCE_BARRIER barrier;
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// 全てのサブリソースを選択
+	barrier.Transition.Subresource = 0xFFFFFFFF;
+	barrier.Transition.pResource = depthTexBuffer_->GetBuffer();
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_GENERIC_READ;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+	commands.m_pList->ResourceBarrier(1, &barrier);
+
+	commands.m_pList->OMSetRenderTargets(0, nullptr, false, &dsvShadowHandle);
+
+	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()));
+	CommandCallScissor();
+
+	commands.m_pList->ClearDepthStencilView(dsvShadowHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+}
+
+void DefferredShading::PostDepthDraw()
+{
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	D3D12_RESOURCE_BARRIER barrier;
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// 全てのサブリソースを選択
+	barrier.Transition.Subresource = 0xFFFFFFFF;
+	barrier.Transition.pResource = depthTexBuffer_->GetBuffer();
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
+	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(1, &barrier);
 }
 
 
