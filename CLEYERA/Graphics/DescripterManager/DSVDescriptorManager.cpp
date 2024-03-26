@@ -26,6 +26,12 @@ void DSVDescriptorManager::ImGuiUpdate()
     ImGui::Text("DSVindex::%d", DSVDescriptorManager::GetInstance()->index+1);
 }
 
+void DSVDescriptorManager::IndexIncrement(const string& name)
+{
+    DSVDescriptorManager::GetInstance()->index++;
+    DSVDescriptorManager::GetInstance()->datas_[name] = make_unique<DescripterData>(DSVDescriptorManager::GetInstance()->index, name);
+}
+
 void DSVDescriptorManager::AddPointer(ComPtr<ID3D12Resource> resource, D3D12_DEPTH_STENCIL_VIEW_DESC desc)
 {
     ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();

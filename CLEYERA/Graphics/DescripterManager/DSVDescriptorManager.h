@@ -12,7 +12,7 @@ public:
 	static void BeginFlame();
 	static void ImGuiUpdate();
 
-	static void IndexIncrement() { DSVDescriptorManager::GetInstance()->index++; };
+	static void IndexIncrement(const string &name);
 	static void AddPointer(ComPtr<ID3D12Resource>resource, D3D12_DEPTH_STENCIL_VIEW_DESC desc);
 
 	static bool CheckData(const string& name);

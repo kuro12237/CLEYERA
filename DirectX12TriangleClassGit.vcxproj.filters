@@ -172,6 +172,7 @@
       <Filter>Shader\PostEffect</Filter>
     </None>
     <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
+    <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -310,6 +311,8 @@
     <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
+    <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -518,6 +521,8 @@
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h" />
+    <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -581,5 +586,7 @@
     <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl" />
   </ItemGroup>
 </Project>

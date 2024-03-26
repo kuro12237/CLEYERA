@@ -31,6 +31,7 @@
     <None Include="Resources\Shader\LightingObject3d.hlsli" />
     <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
+    <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
     <None Include="Resources\Shader\PostEffect\PostEffectTest.hlsli" />
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli" />
     <None Include="Resources\Shader\SpriteObject2d.hlsli" />
@@ -56,6 +57,7 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
     <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp" />
@@ -75,6 +77,7 @@
     <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp" />
     <ClCompile Include="CLEYERA\Particle\Particle.cpp" />
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp" />
+    <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffect.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp" />
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp" />
@@ -110,6 +113,7 @@
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h" />
     <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h" />
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h" />
@@ -141,6 +145,7 @@
     <ClInclude Include="CLEYERA\Particle\SParticle.h" />
     <ClInclude Include="CLEYERA\Particle\state\IParticleState.h" />
     <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h" />
+    <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h" />
@@ -294,6 +299,28 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\PostEffectTest.PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>

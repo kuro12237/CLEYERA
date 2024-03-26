@@ -15,7 +15,7 @@ public:
 	static uint32_t CheckDatasIndex(const string& name);
 
 
-	static void IndexIncrement() { RTVDescriptorManager::GetInstance()->index_++; }
+	static void IndexIncrement(const string& name);
 	static void AddPointer(ComPtr<ID3D12Resource>resource,D3D12_RENDER_TARGET_VIEW_DESC desc);
 #pragma region get
 	static 	D3D12_CPU_DESCRIPTOR_HANDLE GetHandle(uint32_t index) { return RTVDescriptorManager::GetInstance()->handle_[index]; }

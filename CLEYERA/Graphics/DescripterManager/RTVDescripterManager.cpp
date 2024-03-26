@@ -48,6 +48,12 @@ uint32_t RTVDescriptorManager::CheckDatasIndex(const string& name)
 
 }
 
+void RTVDescriptorManager::IndexIncrement(const string &name)
+{
+	RTVDescriptorManager::GetInstance()->index_++;
+	RTVDescriptorManager::GetInstance()->datas_[name] =  std::make_unique<DescripterData>(RTVDescriptorManager::GetInstance()->index_, name);
+}
+
 void RTVDescriptorManager::AddPointer(ComPtr<ID3D12Resource> resource, D3D12_RENDER_TARGET_VIEW_DESC desc)
 {
 	RTVDescriptorManager::GetInstance()->handle_[RTVDescriptorManager::GetInstance()->index_] =

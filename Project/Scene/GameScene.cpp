@@ -56,6 +56,10 @@ void GameScene::Initialize()
 
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
+
+	defferedShading = make_unique<DefferredShading>();
+	defferedShading->Initialize();
+
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -221,6 +225,11 @@ void GameScene::PostProcessDraw()
 	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 
 	postEffect_->PostDraw();
+
+	defferedShading->PreColorDraw();
+
+	defferedShading->PostColorDraw();
+
 }
 
 void GameScene::Back2dSpriteDraw()
