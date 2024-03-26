@@ -588,5 +588,7 @@
     <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShadingNormal.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShadingNormal.PS.hlsl" />
   </ItemGroup>
 </Project>

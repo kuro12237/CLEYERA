@@ -57,6 +57,43 @@ void DefferredShading::PostColorDraw()
 	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(1, &barrier);
 }
 
+void DefferredShading::PreNormalDraw()
+{
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	// レンダーターゲットをセット
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = RTVDescriptorManager::GetHandle(normalTexBuffer_->GetRtvIndex());
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(depthBuffer_->GetDsvIndex());
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = normalTexBuffer_->GetBuffer();
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	commands.m_pList->ResourceBarrier(1, &barrier);
+	commands.m_pList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
+
+	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()));
+	CommandCallScissor();
+
+	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
+
+	commands.m_pList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	commands.m_pList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+}
+
+void DefferredShading::PostNormalDraw()
+{
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	//barrier.Transition.Subresource = 0xFFFFFFFF;
+	barrier.Transition.pResource = normalTexBuffer_->GetBuffer();
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(1, &barrier);
+}
+
 void DefferredShading::Draw( const CameraData& camera)
 {
 	ColorBufferUpdate();
@@ -73,8 +110,9 @@ void DefferredShading::Draw( const CameraData& camera)
 	wvp_->CommandCall(0);
 	materialBuffer_->CommandCall(1);
 	DescriptorManager::rootParamerterCommand(2, colorTexBuffer_->GetSrvIndex());
-	camera.buffer_->CommandCall(3);
+	DescriptorManager::rootParamerterCommand(3, normalTexBuffer_->GetSrvIndex());
 	camera.buffer_->CommandCall(4);
+	camera.buffer_->CommandCall(5);
 
 	m_pList->DrawInstanced(6, 1, 0, 0);
 }

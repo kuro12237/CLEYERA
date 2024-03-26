@@ -11,6 +11,8 @@ public:
 
 	static SPSOProperty DefferdShading(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
 
+	static SPSOProperty NormalDeferrdShading(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
+
 private:
 
 };

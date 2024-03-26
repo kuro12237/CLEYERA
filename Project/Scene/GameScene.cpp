@@ -229,8 +229,10 @@ void GameScene::PostProcessDraw()
 	defferedShading->PreColorDraw();
 	gameObject_->ColorDraw(worldTransform_, viewProjection_);
 	//testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
-
 	defferedShading->PostColorDraw();
+	defferedShading->PreNormalDraw();
+	gameObject_->NormalDraw(worldTransform_, viewProjection_);
+	defferedShading->PostNormalDraw();
 
 }
 
