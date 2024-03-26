@@ -219,7 +219,7 @@ void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 	//gameObject_->ColorDraw(worldTransform_, viewProjection_);
-	gameObject_->NormalDraw(worldTransform_, viewProjection_);
+	//gameObject_->NormalDraw(worldTransform_, viewProjection_);
 	//gameObject_->Draw(worldTransform_, viewProjection_);
 	testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
 	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
@@ -227,6 +227,8 @@ void GameScene::PostProcessDraw()
 	postEffect_->PostDraw();
 
 	defferedShading->PreColorDraw();
+	gameObject_->ColorDraw(worldTransform_, viewProjection_);
+	//testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 
 	defferedShading->PostColorDraw();
 
@@ -238,7 +240,8 @@ void GameScene::Back2dSpriteDraw()
 
 void GameScene::Object3dDraw()
 {
-	postEffect_->Draw(viewProjection_);
+	//postEffect_->Draw(viewProjection_);
+	defferedShading->Draw(viewProjection_);
 }
 
 void GameScene::Flont2dSpriteDraw()

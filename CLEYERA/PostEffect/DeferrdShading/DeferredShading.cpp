@@ -3,14 +3,18 @@
 void DefferredShading::Initialize()
 {
 	vertexBuffer_ = make_unique<BufferResource<VertexData>>();
-	vertexBuffer_->CreateResource(4);
+	vertexBuffer_->CreateResource(6);
+	vertexBuffer_->CreateVertexBufferView();
 
-	materialBuffer_ = make_unique<BufferResource<Material>>();
+	materialBuffer_ = make_unique<BufferResource<Vector4>>();
 	materialBuffer_->CreateResource();
 
 	indexBuffer_ = make_unique<BufferResource<uint32_t>>();
 	indexBuffer_->CreateResource(6);
 	indexBuffer_->CreateIndexBufferView();
+
+	wvp_ = make_unique<BufferResource<TransformationMatrix>>();
+	wvp_->CreateResource();
 
 	CreateTexBuffer();
 
@@ -46,22 +50,33 @@ void DefferredShading::PostColorDraw()
 	D3D12_RESOURCE_BARRIER barrier{};
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier.Transition.Subresource = 0xFFFFFFFF;
+	//barrier.Transition.Subresource = 0xFFFFFFFF;
 	barrier.Transition.pResource = colorTexBuffer_->GetBuffer();
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(1, &barrier);
 }
 
-void DefferredShading::Draw(const WorldTransform& worldTransform, const CameraData& camera)
+void DefferredShading::Draw( const CameraData& camera)
 {
-	worldTransform, camera;
+	ColorBufferUpdate();
 	ComPtr<ID3D12GraphicsCommandList> m_pList = DirectXCommon::GetInstance()->GetCommands().m_pList;
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().ColorPostProcess;
+
+    m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+	m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
 	vertexBuffer_->CommandVertexBufferViewCall();
+	vertexBuffer_->CommandPrimitiveTopologyCall();
 	indexBuffer_->CommandIndexBufferViewCall();
 
-    m_pList->DrawIndexedInstanced(6,1, 0, 0, 0);
+	wvp_->CommandCall(0);
+	materialBuffer_->CommandCall(1);
+	DescriptorManager::rootParamerterCommand(2, colorTexBuffer_->GetSrvIndex());
+	camera.buffer_->CommandCall(3);
+	camera.buffer_->CommandCall(4);
+
+	m_pList->DrawInstanced(6, 1, 0, 0);
 }
 
 
@@ -92,6 +107,51 @@ void DefferredShading::CreateTexBuffer()
 
 }
 
+
+void DefferredShading::ColorBufferUpdate()
+{
+	Vector2 pos_ = {};
+	Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()) };
+
+	vector<VertexData>vertexMap = {};
+	vertexMap.resize(6);
+	vertexMap[0].position = { pos_.x, pos_.y + size_.y,0.0f, 1.0f }; // 左下
+	vertexMap[0].texcoord = { 0.0f, 1.0f };
+	vertexMap[1].position = { pos_.x, pos_.y, 0.0f, 1.0f }; // 左上
+	vertexMap[1].texcoord = { 0.0f, 0.0f };
+	vertexMap[2].position = { pos_.x + size_.x, pos_.y + size_.y, 0.0f,1.0f }; // 右下
+	vertexMap[2].texcoord = { 1.0f,1.0f };
+	vertexMap[3].position = { pos_.x, pos_.y, 0.0f, 1.0f }; // 左上
+	vertexMap[3].texcoord = { 0.0f, 0.0f };
+	vertexMap[4].position = { pos_.x + size_.x, pos_.y, 0.0f, 1.0f }; // 右上
+	vertexMap[4].texcoord = { 1.0f, 0.0f };
+	vertexMap[5].position = { pos_.x + size_.x, pos_.y + size_.y, 0.0f,1.0f }; // 右下
+	vertexMap[5].texcoord = { 1.0f,1.0f };
+
+	indexData_.resize(6);
+	indexData_[0] = 0; indexData_[1] = 1; indexData_[2] = 2;
+	indexData_[3] = 1; indexData_[4] = 3; indexData_[5] = 2;
+
+	vertexBuffer_->Map();
+	vertexBuffer_->Setbuffer(vertexMap);
+
+	indexBuffer_->Map();
+	indexBuffer_->Setbuffer(indexData_);
+	indexBuffer_->UnMap();
+
+	TransformationMatrix wvpMap = {};
+	Matrix4x4 OrthographicMatrix = MatrixTransform::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
+	wvpMap.world = MatrixTransform::Identity();
+	wvpMap.WVP = OrthographicMatrix;
+
+	wvp_->Map();
+	wvp_->Setbuffer(wvpMap);
+	wvp_->UnMap();
+
+	materialData = { 1,1,1,1 };
+	materialBuffer_->Map();
+	materialBuffer_->Setbuffer(materialData);
+}
 
 void DefferredShading::CommandCallView(const float& width, const float& height)
 {

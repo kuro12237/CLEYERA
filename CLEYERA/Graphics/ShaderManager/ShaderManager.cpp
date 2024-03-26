@@ -102,6 +102,7 @@ void ShaderManager::ShaderComples()
 
 	ColorModel();
 	NormalModel();
+	ColorPostProcess();
 
 	PostEffectTest();
 	ShadowMap();
@@ -261,6 +262,22 @@ void ShaderManager::NormalModel()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.NormalModel = shaders;
+}
+
+void ShaderManager::ColorPostProcess()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/PostEffect/DeferredShading.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/PostEffect/DeferredShading.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.ColorPostProcess = shaders;
 }
 
 void ShaderManager::PostEffectTest()

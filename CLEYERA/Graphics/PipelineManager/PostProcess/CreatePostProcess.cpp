@@ -13,7 +13,7 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
-	D3D12_ROOT_PARAMETER rootParameters[10] = {};
+	D3D12_ROOT_PARAMETER rootParameters[5] = {};
 
 	//matrix
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
@@ -22,11 +22,11 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 	//material
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[1].Descriptor.ShaderRegister = 0;
+	rootParameters[1].Descriptor.ShaderRegister = 1;
 
 	//tex
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
-	descriptorRange[0].BaseShaderRegister = 1;
+	descriptorRange[0].BaseShaderRegister = 0;
 	descriptorRange[0].NumDescriptors = 1;
 	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;

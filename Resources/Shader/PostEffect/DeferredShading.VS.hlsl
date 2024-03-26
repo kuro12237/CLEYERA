@@ -15,7 +15,6 @@ VertexShaderOutput main(VertexShaderInput input)
     float32_t4x4 resultMatrix = gTransformationMatrix.WVP;
 
     float32_t4 pos = mul(input.position, resultMatrix);
-   // pos= float32_t4(ComputeShadow(pos.xyz), 1);
 
     output.position = pos;
     output.texcoord = input.texcoord;

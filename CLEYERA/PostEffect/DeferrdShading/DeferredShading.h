@@ -2,6 +2,7 @@
 #include"DirectXCommon.h"
 #include"CameraData.h"
 #include"WorldTransform.h"
+#include"GraphicsPipelineManager.h"
 
 class DefferredShading
 {
@@ -19,10 +20,11 @@ public:
 
 	void PostNormalDraw();
 
-	void Draw(const WorldTransform &worldTransform,const CameraData& camera);
+	void Draw(const CameraData& camera);
 
 private:
 
+	void ColorBufferUpdate();
 
 	void CommandCallView(const float& width, const float& height);
 	void CommandCallScissor();
@@ -37,7 +39,12 @@ private:
 	vector<VertexData>vertexData_;
 
 	unique_ptr<BufferResource<uint32_t>>indexBuffer_ = nullptr;
+	vector<uint32_t>indexData_{};
 
-	unique_ptr<BufferResource<Material>>materialBuffer_ = nullptr;
-	Material materialData = {};
+	unique_ptr<BufferResource<Vector4>>materialBuffer_ = nullptr;
+	Vector4 materialData = {};
+
+
+	unique_ptr<BufferResource<TransformationMatrix>>wvp_ = nullptr;
+	TransformationMatrix matrixData_{};
 };

@@ -28,6 +28,7 @@ struct SShaders
 	SShaderMode shadowMapVS;
 	SShaderMode ColorModel;
 	SShaderMode NormalModel;
+	SShaderMode ColorPostProcess;
 };
 
 class ShaderManager
@@ -68,7 +69,7 @@ private:
 
 	static void ColorModel();
 	static void NormalModel();
-
+	static void ColorPostProcess();
 
 	static void PostEffectTest();
 	static void ShadowMap();

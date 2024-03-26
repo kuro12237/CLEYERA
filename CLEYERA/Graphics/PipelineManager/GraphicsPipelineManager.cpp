@@ -2641,5 +2641,12 @@ void GraphicsPipelineManager::DefferrdShading(SPSO& pso)
 
 	pso.NormalModel3d = ModelCreatePipline::CreateNormalModel(device, commands, shader.NormalModel);
 	LogManager::Log("CreateNormalModelPipline");
+
+
+	pso.NormalModel3d = ModelCreatePipline::CreateNormalModel(device, commands, shader.NormalModel);
+	LogManager::Log("CreateNormalModelPipline");
+
+	pso.ColorPostProcess = CreatePostProcess::DefferdShading(device,commands,shader.ColorPostProcess);
+	LogManager::Log("ColorPostProcessPiplineComp");
 }
 
