@@ -1,10 +1,13 @@
 #pragma once
 #include"Pch.h"
 #include"CreateResource.h"
+#include"MatrixTransform.h"
 
 struct PointLight_param
 {
 	Vector4 color = {1.0f,1.0f,1.0f,1.0f};
+	Matrix4x4 matrix = MatrixTransform::Identity();
+
 	Vector3 position = {0.0f,0.0f,0.0f};
 	/// <summary>
 	/// 強さ
@@ -18,6 +21,9 @@ struct PointLight_param
 	/// 減衰率
 	/// </summary>
 	float decay = 0.1f;
-	
+
+	Vector3 worldPos_ = {};
+
+	void UpdateMatrix();
 
 };

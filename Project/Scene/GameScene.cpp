@@ -70,7 +70,7 @@ void GameScene::Update(GameManager* Scene)
 
 	if (ImGui::TreeNode("Light"))
 	{
-		ImGui::DragFloat3("translate", &light_.position.x,-0.1f,0.1f);
+		ImGui::DragFloat3("translate", &light_.worldPos_.x,-0.1f,0.1f);
 		ImGui::DragFloat("decay", &light_.decay, -0.1f, 0.1f);
 		ImGui::DragFloat("radious", &light_.radious, -0.1f, 0.1f);
 		ImGui::DragFloat("intencity", &light_.intencity, -0.1f, 0.1f);
@@ -171,6 +171,7 @@ void GameScene::Update(GameManager* Scene)
 	}
 #endif // _USE_IMGUI
 
+	light_.UpdateMatrix();
 	LightingManager::AddList(light_);
 
 	ImGui::Checkbox("TestRedLight", &UseTestRedLight_);
@@ -218,20 +219,25 @@ void GameScene::Update(GameManager* Scene)
 void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	//gameObject_->ColorDraw(worldTransform_, viewProjection_);
-	//gameObject_->NormalDraw(worldTransform_, viewProjection_);
-	//gameObject_->Draw(worldTransform_, viewProjection_);
-	testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
-	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
+	
+	//testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
+	//testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 
 	postEffect_->PostDraw();
 
 	defferedShading->PreColorDraw();
 	gameObject_->ColorDraw(worldTransform_, viewProjection_);
 	//testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
+	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
+	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
+
 	defferedShading->PostColorDraw();
+
 	defferedShading->PreNormalDraw();
 	gameObject_->NormalDraw(worldTransform_, viewProjection_);
+	testSkyDomeGameObject_->NormalDraw(TestSkyDomeWorldTreanform_, viewProjection_);
+    testGroundGameObject_->NormalDraw(testGroundWorldTransform_, viewProjection_);
+
 	defferedShading->PostNormalDraw();
 
 }

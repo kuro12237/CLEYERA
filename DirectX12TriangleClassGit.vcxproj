@@ -31,6 +31,7 @@
     <None Include="Resources\Shader\LightingObject3d.hlsli" />
     <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
+    <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli" />
     <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
     <None Include="Resources\Shader\PostEffect\PostEffectTest.hlsli" />
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli" />

@@ -173,6 +173,7 @@
     </None>
     <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
     <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
+    <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">

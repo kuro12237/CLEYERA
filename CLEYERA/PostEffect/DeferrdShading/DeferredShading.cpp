@@ -114,6 +114,10 @@ void DefferredShading::Draw( const CameraData& camera)
 	camera.buffer_->CommandCall(4);
 	camera.buffer_->CommandCall(5);
 
+	DescriptorManager::rootParamerterCommand(6, LightingManager::dsvHandle());
+	m_pList->SetGraphicsRootConstantBufferView(7, LightingManager::GetBuffer()->GetGPUVirtualAddress());
+
+
 	m_pList->DrawInstanced(6, 1, 0, 0);
 }
 

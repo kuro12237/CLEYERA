@@ -3,6 +3,7 @@
 #include"CameraData.h"
 #include"WorldTransform.h"
 #include"GraphicsPipelineManager.h"
+#include"Light/LightingManager.h"
 
 class DefferredShading
 {

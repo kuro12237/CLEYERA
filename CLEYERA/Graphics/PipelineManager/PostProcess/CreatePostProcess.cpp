@@ -13,7 +13,7 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
-	D3D12_ROOT_PARAMETER rootParameters[6] = {};
+	D3D12_ROOT_PARAMETER rootParameters[8] = {};
 
 	//matrix
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
@@ -57,6 +57,23 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[5].Descriptor.ShaderRegister = 3;
 
+	//LightData
+	D3D12_DESCRIPTOR_RANGE descriptorRangeForInstancing[1] = {};
+	descriptorRangeForInstancing[0].BaseShaderRegister = 3;
+	descriptorRangeForInstancing[0].NumDescriptors = 1;
+	descriptorRangeForInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeForInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
+	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing);
+
+	//今のLightの個数
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[7].Descriptor.ShaderRegister = 4;
+
 	//Sampler
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
@@ -78,7 +95,7 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//position
 	SettingInputElementDesc(
 		inputElementDescs[0],
@@ -95,13 +112,7 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 		DXGI_FORMAT_R32G32_FLOAT,
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
-	SettingInputElementDesc(
-		inputElementDescs[2],
-		"NORMAL",
-		0,
-		DXGI_FORMAT_R32G32B32_FLOAT,
-		D3D12_APPEND_ALIGNED_ELEMENT
-	);
+	
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
