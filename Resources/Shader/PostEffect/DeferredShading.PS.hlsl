@@ -21,7 +21,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     float4 NormalTextureColor = gNormalTexture.Sample(gSampler, transformedUV.xy);
     float DepthtextureColor = gDepthTexture.Sample(gSampler, transformedUV.xy);
 
-    float3 toEye = normalize(normalize(DepthtextureColor) - gTransformationViewMatrix.CameraPosition);
+    float3 toEye = DepthtextureColor - gTransformationViewMatrix.CameraPosition;
 
     float3 pTotalSpecular = 0;
     float3 pTotalDffuse = 0;
@@ -36,7 +36,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     //拡散
     float32_t3 pDiffuse = gMaterial.color.rgb * ColorTextureColor.rgb * pCosHalf;
     //鏡面
-    float32_t3 pSpecular = float3(1,1,1) * pSpecularPow ;
+    float32_t3 pSpecular = float3(1, 1, 1) * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 
     pTotalDffuse = pTotalDffuse + pDiffuse;
     pTotalSpecular = pTotalSpecular + pSpecular;

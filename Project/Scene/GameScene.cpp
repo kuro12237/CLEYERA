@@ -18,7 +18,7 @@ void GameScene::Initialize()
 	//ModelManager::ModelLoadNormalMap();
 	//ModelManager::ModelUseSubsurface();
 	normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
-
+	normalMonkeyHandle_ = ModelManager::LoadObjectFile("Sphere");
 	ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
