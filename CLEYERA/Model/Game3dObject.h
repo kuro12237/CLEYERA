@@ -28,6 +28,8 @@ public:
 
 	void NormalDraw(const WorldTransform& worldTransform, const CameraData& view);
 
+	void PosDraw(const WorldTransform& worldTransform, const CameraData& view);
+
 #pragma region Set
 
 	void SetUvScale(Vector3 s) { uvScale_ = s; }

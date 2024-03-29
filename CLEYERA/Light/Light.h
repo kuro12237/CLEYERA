@@ -6,8 +6,6 @@
 struct PointLight_param
 {
 	Vector4 color = {1.0f,1.0f,1.0f,1.0f};
-	Matrix4x4 matrix = MatrixTransform::Identity();
-
 	Vector3 position = {0.0f,0.0f,0.0f};
 	/// <summary>
 	/// 強さ

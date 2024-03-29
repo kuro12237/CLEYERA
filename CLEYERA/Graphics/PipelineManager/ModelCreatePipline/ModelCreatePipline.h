@@ -19,6 +19,7 @@ public:
 
 	static SPSOProperty CreateNormalModel(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
 
+	static SPSOProperty CreatePosModel(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
 
 private:
 

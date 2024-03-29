@@ -182,6 +182,29 @@ void Game3dObject::NormalDraw(const WorldTransform& worldTransform, const Camera
 	model_->Draw(view);
 }
 
+void Game3dObject::PosDraw(const WorldTransform& worldTransform, const CameraData& view)
+{
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().PosModel3d;
+	Commands command = DirectXCommon::GetInstance()->GetCommands();
+	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+
+	model_->CommandCallPipelineVertex();
+
+	cMaterialBuffer_->Map();
+	cMaterial_.color = { 1,1,1,1 };
+	cMaterialBuffer_->Setbuffer(cMaterial_);
+	cMaterialBuffer_->UnMap();
+
+	cMaterialBuffer_->CommandCall(0);
+	worldTransform.buffer_->CommandCall(1);
+	view.buffer_->CommandCall(2);
+	view.buffer_->CommandCall(3);
+
+	DescriptorManager::rootParamerterCommand(4, normalTexHandle_);
+	model_->Draw(view);
+}
+
 bool Game3dObject::CommpandPipeline(SPSOProperty &PSO)
 {
 	switch (ModelShaderSelect_)

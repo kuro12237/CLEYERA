@@ -30,6 +30,7 @@ struct SShaders
 	SShaderMode NormalModel;
 	SShaderMode ColorPostProcess;
 	SShaderMode NormalPostProcess;
+	SShaderMode PosModel;
 };
 
 class ShaderManager
@@ -70,6 +71,7 @@ private:
 
 	static void ColorModel();
 	static void NormalModel();
+	static void PosModel();
 	static void ColorPostProcess();
 	static void NormalPostProcess();
 

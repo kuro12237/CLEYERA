@@ -22,6 +22,10 @@ public:
 
 	void PostNormalDraw();
 
+	void PrePosDraw();
+
+	void PostPosDraw();
+
 
 	void PreDepthDraw();
 
@@ -44,6 +48,8 @@ private:
 	unique_ptr<BufferResource<uint32_t>>normalTexBuffer_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>depthBuffer_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>depthTexBuffer_ = nullptr;
+	unique_ptr<BufferResource<uint32_t>>PosTexBuffer_ = nullptr;
+
 
 	unique_ptr<BufferResource<VertexData>>vertexBuffer_ = nullptr;
 	vector<VertexData>vertexData_;
@@ -53,7 +59,6 @@ private:
 
 	unique_ptr<BufferResource<Vector4>>materialBuffer_ = nullptr;
 	Vector4 materialData = {};
-
 
 	unique_ptr<BufferResource<TransformationMatrix>>wvp_ = nullptr;
 	TransformationMatrix matrixData_{};

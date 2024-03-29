@@ -11,6 +11,8 @@ struct TransformationViewMatrix
     float4x4 projection;
     float4x4 orthographic;
     float3 CameraPosition;
+    float4x4 InverseProjection;
+    float4x4 InverseViewProjection;
 };
 
 struct Material
@@ -28,7 +30,6 @@ struct DirectionLightParam
 struct PointLight
 {
     float32_t4 color;
-    float32_t4x4 mat;
     float32_t3 position;
     float intensity;
     float radious;

@@ -48,14 +48,10 @@ void CameraData::TransfarMatrix()
 	BufferMatrix_.view = matView_;
 	BufferMatrix_.viewProjection = matProjection_;
 	BufferMatrix_.orthographic = OrthographicMatrix_;
+	BufferMatrix_.position = translation_;
+	BufferMatrix_.InverseViewProjection = MatrixTransform::Inverse((MatrixTransform::Multiply(BufferMatrix_.viewProjection, BufferMatrix_.view)));
+	BufferMatrix_.InverseProjection = MatrixTransform::Inverse(BufferMatrix_.viewProjection);
 
 	buffer_->Setbuffer(BufferMatrix_);
-
-	Vector3 pos{};
-	pos.x = matView_.m[3][0];
-	pos.y = matView_.m[3][1];
-	pos.z = matView_.m[3][2];
-
-	BufferMatrix_.position = translation_;
 	UnMap();
 }

@@ -102,6 +102,7 @@ void ShaderManager::ShaderComples()
 
 	ColorModel();
 	NormalModel();
+	PosModel();
 	ColorPostProcess();
 	NormalPostProcess();
 
@@ -263,6 +264,22 @@ void ShaderManager::NormalModel()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.NormalModel = shaders;
+}
+
+void ShaderManager::PosModel()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/WorldPositionObject3d.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/WorldPositionObject3d.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.PosModel = shaders;
 }
 
 void ShaderManager::ColorPostProcess()

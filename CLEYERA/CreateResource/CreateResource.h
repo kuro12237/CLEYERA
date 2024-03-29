@@ -21,6 +21,9 @@ struct  TransformationViewMatrix
 	Matrix4x4 viewProjection;
 	Matrix4x4 orthographic;
 	Vector3 position;
+	float pad[1];
+	Matrix4x4 InverseViewProjection;
+	Matrix4x4 InverseProjection;
 };
 
 struct TransformationMatrix {

@@ -5,7 +5,7 @@ ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b3
 Texture2D<float4> gTexture : register(t1);
 SamplerState gSampler : register(s0);
 
-PixelShaderOutput main(NormalVertexShaderOutput input)
+PixelShaderOutput main(WorldPositionVertexShaderOutput input)
 {
     PixelShaderOutput output;
 
@@ -13,9 +13,8 @@ PixelShaderOutput main(NormalVertexShaderOutput input)
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
     float3 result = normalize(input.normal.rgb + textureColor.rgb);
     float3 N = normalize(textureColor.rgb + normalize(input.normal.xyz));
-
-    //output.color = float4(N.x,N.y,N.z , 1.0f);
-    float4 WorldPos = float4(input.position.xyz, 1);
+    float4 WorldPos =(input.position);
+    WorldPos.xy = transformedUV.xy;
     output.color = WorldPos;
     return output;
 }

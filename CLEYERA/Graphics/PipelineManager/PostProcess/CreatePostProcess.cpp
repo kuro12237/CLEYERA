@@ -13,7 +13,7 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
-	D3D12_ROOT_PARAMETER rootParameters[10] = {};
+	D3D12_ROOT_PARAMETER rootParameters[11] = {};
 
 	//matrix
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
@@ -24,7 +24,7 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[1].Descriptor.ShaderRegister = 1;
 
-	//tex
+	//texColor
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
 	descriptorRange[0].BaseShaderRegister = 0;
 	descriptorRange[0].NumDescriptors = 1;
@@ -36,7 +36,7 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
-	//tex
+	//texNormal
 	D3D12_DESCRIPTOR_RANGE descriptorRangeNormal[1] = {};
 	descriptorRangeNormal[0].BaseShaderRegister = 1;
 	descriptorRangeNormal[0].NumDescriptors = 1;
@@ -47,48 +47,61 @@ SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Comm
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRangeNormal;
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeNormal);
-	//tex
+	
+	//texPos
+	D3D12_DESCRIPTOR_RANGE descriptorRangePos[1] = {};
+	descriptorRangePos[0].BaseShaderRegister = 2;
+	descriptorRangePos[0].NumDescriptors = 1;
+	descriptorRangePos[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangePos[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[4].DescriptorTable.pDescriptorRanges = descriptorRangePos;
+	rootParameters[4].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangePos);
+
+	//texDepth
 	D3D12_DESCRIPTOR_RANGE descriptorRangedepth[1] = {};
-	descriptorRangedepth[0].BaseShaderRegister = 2;
+	descriptorRangedepth[0].BaseShaderRegister = 3;
 	descriptorRangedepth[0].NumDescriptors = 1;
 	descriptorRangedepth[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRangedepth[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[4].DescriptorTable.pDescriptorRanges = descriptorRangedepth;
-	rootParameters[4].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangedepth);
+	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[5].DescriptorTable.pDescriptorRanges = descriptorRangedepth;
+	rootParameters[5].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangedepth);
 	
 	//view
-	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[5].Descriptor.ShaderRegister = 2;
-	//view
 	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[6].Descriptor.ShaderRegister = 3;
+	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[6].Descriptor.ShaderRegister = 2;
+	//view
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[7].Descriptor.ShaderRegister = 3;
 
 	//LightData
 	D3D12_DESCRIPTOR_RANGE descriptorRangeForInstancing[1] = {};
-	descriptorRangeForInstancing[0].BaseShaderRegister = 3;
+	descriptorRangeForInstancing[0].BaseShaderRegister = 4;
 	descriptorRangeForInstancing[0].NumDescriptors = 1;
 	descriptorRangeForInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRangeForInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[7].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
-	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing);
+	rootParameters[8].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[8].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[8].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
+	rootParameters[8].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing);
 
 	//今のLightの個数
-	rootParameters[8].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[8].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[8].Descriptor.ShaderRegister = 4;
-
-	//平行光源
 	rootParameters[9].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[9].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[9].Descriptor.ShaderRegister = 5;
+	rootParameters[9].Descriptor.ShaderRegister = 4;
+
+	//平行光源
+	rootParameters[10].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[10].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[10].Descriptor.ShaderRegister = 5;
 
 	//Sampler
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
