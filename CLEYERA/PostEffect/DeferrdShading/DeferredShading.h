@@ -6,6 +6,12 @@
 #include"Light/LightingManager.h"
 #include"Light/DirectionLIght.h"
 
+struct MaterialDefferdShading
+{
+	Vector4 color;
+	float shininess;
+};
+
 class DefferredShading
 {
 public:
@@ -57,8 +63,8 @@ private:
 	unique_ptr<BufferResource<uint32_t>>indexBuffer_ = nullptr;
 	vector<uint32_t>indexData_{};
 
-	unique_ptr<BufferResource<Vector4>>materialBuffer_ = nullptr;
-	Vector4 materialData = {};
+	unique_ptr<BufferResource<MaterialDefferdShading>>materialBuffer_ = nullptr;
+	MaterialDefferdShading materialData = {};
 
 	unique_ptr<BufferResource<TransformationMatrix>>wvp_ = nullptr;
 	TransformationMatrix matrixData_{};

@@ -6,7 +6,7 @@ void DefferredShading::Initialize()
 	vertexBuffer_->CreateResource(6);
 	vertexBuffer_->CreateVertexBufferView();
 
-	materialBuffer_ = make_unique<BufferResource<Vector4>>();
+	materialBuffer_ = make_unique<BufferResource<MaterialDefferdShading>>();
 	materialBuffer_->CreateResource();
 
 	indexBuffer_ = make_unique<BufferResource<uint32_t>>();
@@ -329,7 +329,8 @@ void DefferredShading::ColorBufferUpdate()
 	wvp_->Setbuffer(wvpMap);
 	wvp_->UnMap();
 
-	materialData = { 1,1,1,1 };
+	materialData.color = { 1,1,1,1 };
+	ImGui::DragFloat("s", &materialData.shininess,-1.0f,1.0);
 	materialBuffer_->Map();
 	materialBuffer_->Setbuffer(materialData);
 }

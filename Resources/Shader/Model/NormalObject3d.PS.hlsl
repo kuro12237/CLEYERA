@@ -14,8 +14,8 @@ PixelShaderOutput main(NormalVertexShaderOutput input)
     float3 result = normalize(input.normal.rgb + textureColor.rgb);
     float3 N = normalize(textureColor.rgb + normalize(input.normal.xyz));
 
-    //output.color = float4(N.x,N.y,N.z , 1.0f);
-    float4 WorldPos = float4(input.position.xyz, 1);
-    output.color = WorldPos;
+    output.color = float4(N.x,N.y,N.z , 1.0f);
+    //float4 WorldPos = float4(input.position.xyz, 1);
+    //output.color = WorldPos;
     return output;
 }

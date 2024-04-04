@@ -1,8 +1,7 @@
 
 struct Material
 {
-    float4 color;
-    //float32_t4x4 uv;
+    float32_t4 color;
 };
 
 struct TransformationMatrix
@@ -21,26 +20,27 @@ struct TransformationViewMatrix
 
 struct PixelShaderOutput
 {
-    float4 color : SV_TARGET0;
+    float32_t4 color : SV_TARGET0;
 };
 
 struct ColorVertexShaderOutput
 {
-    float4 position : SV_POSITION;
-    float2 texcoord : TEXCOORD0;
+    float32_t4 position : SV_POSITION;
+    float32_t2 texcoord : TEXCOORD0;
 };
 
 struct NormalVertexShaderOutput
 {
-    float4 position : SV_POSITION;
-    float2 texcoord : TEXCOORD;
-    float3 normal : Normal;
+    float32_t4 position : SV_POSITION;
+    float32_t2 texcoord : TEXCOORD;
+    float32_t3 normal : Normal;
     float32_t4x4 worldMatrix : WORLDMATRIX0;
 };
 struct WorldPositionVertexShaderOutput
 {
-    float4 position : SV_POSITION;
-    float2 texcoord : TEXCOORD;
-    float3 normal : Normal;
+    float32_t4 position : SV_POSITION;
+    float32_t2 texcoord : TEXCOORD;
+    float32_t3 normal : Normal;
     float32_t4x4 worldMatrix : WORLDMATRIX0;
 };
+

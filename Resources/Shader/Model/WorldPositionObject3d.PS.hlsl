@@ -10,9 +10,7 @@ PixelShaderOutput main(WorldPositionVertexShaderOutput input)
     PixelShaderOutput output;
 
     float4 transformedUV = float4(input.texcoord, 0.0f, 1.0f);
-    float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
-    float3 result = normalize(input.normal.rgb + textureColor.rgb);
-    float3 N = normalize(textureColor.rgb + normalize(input.normal.xyz));
+  
     float4 WorldPos =(input.position);
     WorldPos.xy = transformedUV.xy;
     output.color = WorldPos;

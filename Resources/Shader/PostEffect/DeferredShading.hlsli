@@ -18,6 +18,7 @@ struct TransformationViewMatrix
 struct Material
 {
     float4 color;
+    float32_t shininess;
 };
 
 struct DirectionLightParam
