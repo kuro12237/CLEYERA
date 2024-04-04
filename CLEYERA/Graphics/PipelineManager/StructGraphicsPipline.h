@@ -36,7 +36,6 @@ struct SPSO
 	SPSOProperty ColorModel3d;
 	SPSOProperty NormalModel3d;
 	SPSOProperty ColorPostProcess;
-	SPSOProperty NormalPostProcess;
 	SPSOProperty PosModel3d;
 	SPSOProperty PostEffectTest;
 	SPSOProperty shadow;

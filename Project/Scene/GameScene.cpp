@@ -220,44 +220,44 @@ void GameScene::Update(GameManager* Scene)
 
 void GameScene::PostProcessDraw()
 {
-	//postEffect_->PreDraw();
-	//
-	////testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
-	////testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
+	postEffect_->PreDraw();
+	gameObject_->Draw(worldTransform_, viewProjection_);
+	testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
+	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 
-	//postEffect_->PostDraw();
+	postEffect_->PostDraw();
 //color
-	defferedShading->PreColorDraw();
-	
-	gameObject_->ColorDraw(worldTransform_, viewProjection_);
-	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
-
-	defferedShading->PostColorDraw();
-
-	defferedShading->PreNormalDraw();
-	//normal
-	gameObject_->NormalDraw(worldTransform_, viewProjection_);
-	testSkyDomeGameObject_->NormalDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-    testGroundGameObject_->NormalDraw(testGroundWorldTransform_, viewProjection_);
-
-	defferedShading->PostNormalDraw();
-    //pos
-	defferedShading->PrePosDraw();
-
-	gameObject_->PosDraw(worldTransform_, viewProjection_);
-	testSkyDomeGameObject_->PosDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-	testGroundGameObject_->PosDraw(testGroundWorldTransform_, viewProjection_);
-
-	defferedShading->PostPosDraw();
-//depth
-	defferedShading->PreDepthDraw();
-
-	gameObject_->ColorDraw(worldTransform_, viewProjection_);
-	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
-
-	defferedShading->PostDepthDraw();
+//	defferedShading->PreColorDraw();
+//	
+//	gameObject_->ColorDraw(worldTransform_, viewProjection_);
+//	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
+//	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
+//
+//	defferedShading->PostColorDraw();
+//
+//	defferedShading->PreNormalDraw();
+//	//normal
+//	gameObject_->NormalDraw(worldTransform_, viewProjection_);
+//	testSkyDomeGameObject_->NormalDraw(TestSkyDomeWorldTreanform_, viewProjection_);
+//    testGroundGameObject_->NormalDraw(testGroundWorldTransform_, viewProjection_);
+//
+//	defferedShading->PostNormalDraw();
+//    //pos
+//	defferedShading->PrePosDraw();
+//
+//	gameObject_->PosDraw(worldTransform_, viewProjection_);
+//	testSkyDomeGameObject_->PosDraw(TestSkyDomeWorldTreanform_, viewProjection_);
+//	testGroundGameObject_->PosDraw(testGroundWorldTransform_, viewProjection_);
+//
+//	defferedShading->PostPosDraw();
+////depth
+//	defferedShading->PreDepthDraw();
+//
+//	gameObject_->ColorDraw(worldTransform_, viewProjection_);
+//	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
+//	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
+//
+//	defferedShading->PostDepthDraw();
 }
 
 void GameScene::Back2dSpriteDraw()
@@ -266,8 +266,8 @@ void GameScene::Back2dSpriteDraw()
 
 void GameScene::Object3dDraw()
 {
-	//postEffect_->Draw(viewProjection_);
-	defferedShading->Draw(viewProjection_);
+	postEffect_->Draw(viewProjection_);
+	//defferedShading->Draw(viewProjection_);
 }
 
 void GameScene::Flont2dSpriteDraw()

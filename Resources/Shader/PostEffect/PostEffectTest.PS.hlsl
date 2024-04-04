@@ -11,7 +11,7 @@ ConstantBuffer<PostEffectAdjustedColor> gPostEffectAdjustedColorParam_ : registe
 ConstantBuffer<DirectionLightParam> gDirectionParam : register(b4);
 
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b7);
-float32_t directionLightingShadowMap(VertexShaderOutput input)
+float32_t3 directionLightingShadowMap(VertexShaderOutput input)
 {
     float32_t4x4 LightVPV = mul(gDirectionParam.mat,gTransformationViewMatrix.projection);
     float32_t4 shadowMapPos = mul(input.position, LightVPV);
@@ -19,14 +19,10 @@ float32_t directionLightingShadowMap(VertexShaderOutput input)
     shadowMapPos = (1.0f - shadowMapPos.y) / 2.0f;
     float depth = gShadowTexture.Sample(gSampler, shadowMapPos.xy);
    
-    float shadowFactor = 0.0f;
+    float3 shadowFactor = 0.0f;
     if (shadowMapPos.z - 0.00000075f < depth)
     {
         shadowFactor = 1.0f;
-    }
-    else
-    {
-        shadowFactor = 1.0f;;
     }
 
     return shadowFactor;
@@ -103,11 +99,13 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     //if (gDirectionParam.useFlag)
     {
-        float32_t shadowColor = directionLightingShadowMap(input);
-        float32_t4 shadowColor4 = float32_t4(shadowColor, shadowColor, shadowColor, 1.0f);
-        //output.color = shadowColor4;
-
+       // float32_t3 shadowColor = directionLightingShadowMap(input);
+       // float32_t4 shadowColor4 = float32_t4(shadowColor, shadowColor, shadowColor, 1.0f);
+        //resultColor.rgb = shadowColor;
+    
     }
+    //resultColor.rgb = float3(dsp,dsp,dsp);
+
     //resultColor = textureColor;
     output.color = float32_t4(resultColor.rgb,1.0f);
 

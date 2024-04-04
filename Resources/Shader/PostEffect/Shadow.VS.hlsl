@@ -14,13 +14,12 @@ VertexShaderOutput main(VertexShaderInput input)
 {
     VertexShaderOutput output;
     float32_t4x4 resultMatrix;
-    float32_t4x4 DirectionalLightVP = mul(gDirectionParam.mat, gTransformationViewMatrix.orthographic);
+    //float32_t4x4 DirectionalLightVP = mul(gDirectionParam.mat, gTransformationViewMatrix.orthographic);
     float32_t4x4 CameraVP = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
    
-    float32_t4 pos= mul(input.position,gTransformationMatrix.world);
-
-    output.position = mul(pos, DirectionalLightVP);
-    
+    float32_t4 pos = mul(mul(input.position, gTransformationMatrix.world),CameraVP);
+    output.position = pos;
+ 
     output.texcoord = input.texcoord;
     return output;
 }

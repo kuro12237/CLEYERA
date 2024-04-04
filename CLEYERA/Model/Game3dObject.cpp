@@ -116,10 +116,10 @@ void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const Camera
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
 
-	model_->CommandCallPipelineVertex();
 
 	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+	model_->CommandCallPipelineVertex();
 
 	MaterialBuffer_->CommandCall(0);
 	worldTransform.buffer_->CommandCall(1);

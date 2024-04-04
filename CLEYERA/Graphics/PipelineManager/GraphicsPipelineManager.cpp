@@ -2653,7 +2653,5 @@ void GraphicsPipelineManager::DefferrdShading(SPSO& pso)
 	pso.ColorPostProcess = CreatePostProcess::DefferdShading(device,commands,shader.ColorPostProcess);
 	LogManager::Log("ColorPostProcessPiplineComp");
 
-	pso.NormalPostProcess = CreatePostProcess::NormalDeferrdShading(device, commands, shader.NormalPostProcess);
-	LogManager::Log("NormalPostProcessPiplineComp");
 }
 

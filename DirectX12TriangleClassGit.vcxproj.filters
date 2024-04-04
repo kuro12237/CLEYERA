@@ -553,9 +553,6 @@
     <FxCompile Include="Resources\Shader\Phong_NormalMap_Model3dObject.VS.hlsl">
       <Filter>Shader\Lighting\testShader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\LightingObject3d.CS.hlsl">
-      <Filter>Shader\Lighting</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shader\PBR_ModelObject3d.PS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
@@ -589,9 +586,8 @@
     <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl" />
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShadingNormal.VS.hlsl" />
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShadingNormal.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl" />
   </ItemGroup>
 </Project>

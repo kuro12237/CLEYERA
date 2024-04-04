@@ -11,7 +11,7 @@ PixelShaderOutput main(WorldPositionVertexShaderOutput input)
 
     float4 transformedUV = float4(input.texcoord, 0.0f, 1.0f);
   
-    float4 WorldPos =(input.position);
+    float4 WorldPos =input.position;
     WorldPos.xy = transformedUV.xy;
     output.color = WorldPos;
     return output;
