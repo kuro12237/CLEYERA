@@ -4,7 +4,6 @@
 #include"MatrixTransform.h"
 struct SDirectionLight
 {
-	Matrix4x4 matrix;
 	Vector3 pos;
 	float intensity;
 	bool useFlag;

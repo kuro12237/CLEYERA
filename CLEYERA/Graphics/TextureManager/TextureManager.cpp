@@ -9,6 +9,9 @@ TextureManager* TextureManager::GetInstance()
 void TextureManager::Initialize()
 {
 	CoInitializeEx(0, COINIT_MULTITHREADED);
+
+	UnUsedFilePath();
+	TextureManager::GetInstance()->normalDfTex_ = LoadPngTexture("Resources/Default/normalMap.png");
 }
 
 void TextureManager::Finalize()

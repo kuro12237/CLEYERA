@@ -171,6 +171,9 @@
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli">
       <Filter>Shader\PostEffect</Filter>
     </None>
+    <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
+    <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
+    <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -307,6 +310,10 @@
     <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
     <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
+    <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -512,8 +519,11 @@
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />
     <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
     <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h" />
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModeCreatePipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h" />
+    <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -543,9 +553,6 @@
     <FxCompile Include="Resources\Shader\Phong_NormalMap_Model3dObject.VS.hlsl">
       <Filter>Shader\Lighting\testShader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\LightingObject3d.CS.hlsl">
-      <Filter>Shader\Lighting</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shader\PBR_ModelObject3d.PS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
@@ -573,5 +580,14 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl" />
   </ItemGroup>
 </Project>

@@ -8,6 +8,11 @@ struct VertexShaderOutput {
  
 };
 
+struct TransformationMatrix
+{
+    float32_t4x4 WVP;
+    float32_t4x4 World;
+};
 struct TransformationViewMatrix {
 	float32_t4x4 view;
 	float32_t4x4 projection;

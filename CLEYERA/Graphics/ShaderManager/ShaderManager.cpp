@@ -100,6 +100,11 @@ void ShaderManager::ShaderComples()
 	PhongNormalModel();
 	PhongSubsurfaceModel();
 
+	ColorModel();
+	NormalModel();
+	PosModel();
+	ColorPostProcess();
+	
 	PostEffectTest();
 	ShadowMap();
 }
@@ -228,6 +233,71 @@ void ShaderManager::PhongSubsurfaceModel()
 	ShaderManager::Getinstance()->shaders_.Phong_subsurface_Model = shaders;
 }
 
+void ShaderManager::ColorModel()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/ColorObject3d.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/ColorObject3d.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.ColorModel = shaders;
+}
+
+void ShaderManager::NormalModel()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/NormalObject3d.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/NormalObject3d.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.NormalModel = shaders;
+}
+
+void ShaderManager::PosModel()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/WorldPositionObject3d.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model/WorldPositionObject3d.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.PosModel = shaders;
+}
+
+void ShaderManager::ColorPostProcess()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/PostEffect/DeferredShading.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/PostEffect/DeferredShading.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.ColorPostProcess = shaders;
+}
+
+
 void ShaderManager::PostEffectTest()
 {
 	SShaderMode shaders;
@@ -253,7 +323,7 @@ void ShaderManager::ShadowMap()
 			L"vs_6_0");
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/SpriteObject3d.PS.hlsl",
+			L"Resources/Shader/PostEffect/shadow.PS.hlsl",
 			L"ps_6_0");
 
 

@@ -4,6 +4,9 @@ void Game3dObject::Create()
 {
 	MaterialBuffer_ = make_unique<BufferResource<Material>>();
 	MaterialBuffer_->CreateResource();
+
+	cMaterialBuffer_ = make_unique<BufferResource<DefferredMaterial>>();
+	cMaterialBuffer_->CreateResource(1);
 }
 
 void Game3dObject::SetModel(uint32_t index)
@@ -13,9 +16,19 @@ void Game3dObject::SetModel(uint32_t index)
 	{
 	    model_ = ModelManager::GetModel(index);
 		texHandle_ = ModelManager::GetObjData(index).material.handle;
-		normalTexHandle_ = ModelManager::GetObjData(index).normalTexHandle;
+
+		if (ModelManager::GetObjData(index).normalTexHandle==0)
+		{
+			TextureManager::UnUsedFilePath();
+			normalTexHandle_ = TextureManager::LoadPngTexture("Resources/Default/normalMap.png");
+		}
+		else {
+			normalTexHandle_ = ModelManager::GetObjData(index).normalTexHandle;
+		}
+
 		baseTexHandle_ = ModelManager::GetObjData(index).baseTexHandle;
 	}
+
 	prevModelIndex_ = index;
 }
 
@@ -103,10 +116,10 @@ void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const Camera
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
 
-	model_->CommandCallPipelineVertex();
 
 	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+	model_->CommandCallPipelineVertex();
 
 	MaterialBuffer_->CommandCall(0);
 	worldTransform.buffer_->CommandCall(1);
@@ -118,6 +131,77 @@ void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const Camera
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
 	DirectionalLight::CommandCall(7);
 
+	model_->Draw(view);
+}
+
+void Game3dObject::ColorDraw(const WorldTransform& worldTransform, const CameraData& view)
+{
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().ColorModel3d;
+	GraphicsPipelineManager::GetInstance()->GetPso().ColorModel3d;
+
+	Commands command = DirectXCommon::GetInstance()->GetCommands();
+	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+
+	model_->CommandCallPipelineVertex();
+
+	cMaterialBuffer_->Map();
+	cMaterial_.color = { 1,1,1,1 };
+	cMaterialBuffer_->Setbuffer(cMaterial_);
+	cMaterialBuffer_->UnMap();
+
+	cMaterialBuffer_->CommandCall(0);
+	worldTransform.buffer_->CommandCall(1);
+	view.buffer_->CommandCall(2);
+	view.buffer_->CommandCall(3);
+
+	DescriptorManager::rootParamerterCommand(4,texHandle_);
+	model_->Draw(view);
+}
+
+void Game3dObject::NormalDraw(const WorldTransform& worldTransform, const CameraData& view)
+{
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().NormalModel3d;
+	Commands command = DirectXCommon::GetInstance()->GetCommands();
+	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+
+	model_->CommandCallPipelineVertex();
+
+	cMaterialBuffer_->Map();
+	cMaterial_.color = { 1,1,1,1 };
+	cMaterialBuffer_->Setbuffer(cMaterial_);
+	cMaterialBuffer_->UnMap();
+
+	cMaterialBuffer_->CommandCall(0);
+	worldTransform.buffer_->CommandCall(1);
+	view.buffer_->CommandCall(2);
+	view.buffer_->CommandCall(3);
+
+	DescriptorManager::rootParamerterCommand(4, normalTexHandle_);
+	model_->Draw(view);
+}
+
+void Game3dObject::PosDraw(const WorldTransform& worldTransform, const CameraData& view)
+{
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().PosModel3d;
+	Commands command = DirectXCommon::GetInstance()->GetCommands();
+	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+
+	model_->CommandCallPipelineVertex();
+
+	cMaterialBuffer_->Map();
+	cMaterial_.color = { 1,1,1,1 };
+	cMaterialBuffer_->Setbuffer(cMaterial_);
+	cMaterialBuffer_->UnMap();
+
+	cMaterialBuffer_->CommandCall(0);
+	worldTransform.buffer_->CommandCall(1);
+	view.buffer_->CommandCall(2);
+	view.buffer_->CommandCall(3);
+
+	DescriptorManager::rootParamerterCommand(4, normalTexHandle_);
 	model_->Draw(view);
 }
 

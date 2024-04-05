@@ -21,6 +21,9 @@ struct  TransformationViewMatrix
 	Matrix4x4 viewProjection;
 	Matrix4x4 orthographic;
 	Vector3 position;
+	float pad[1];
+	Matrix4x4 InverseViewProjection;
+	Matrix4x4 InverseProjection;
 };
 
 struct TransformationMatrix {
@@ -57,6 +60,11 @@ struct PostEffectParam
 	Matrix4x4 uvMatrix;
 	Vector2 texSize = { 0.0f,0.0f };
 
+};
+
+struct DefferredMaterial
+{
+	Vector4 color = { 1,1,1,1 };
 };
 
 struct PostEffectAdjustedColorParam
@@ -125,6 +133,8 @@ struct  Material
 	float scatterDistance=0.5f;
 };
 
+
+
 class CreateResources
 {
 public:
@@ -139,7 +149,6 @@ public:
 
 	static void CreateBufferResource(size_t sizeInbyte, ComPtr<ID3D12Resource>& Resource);
 
-	
 
 	/// <summary>
 	/// BufferView��쐬

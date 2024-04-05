@@ -6,7 +6,7 @@
 #include"Game3dObject.h"
 #include"TestScene.h"
 #include"DebugTool/DebugCamera/DebugCamera.h"
-
+#include"PostEffect/DeferrdShading/DeferredShading.h"
 
 class GameScene :public IScene
 {
@@ -71,4 +71,7 @@ private:
 	bool SmoothMoneyUseFlag_ = false;
 
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
+
+	unique_ptr<DefferredShading>defferedShading = nullptr;
+
 };

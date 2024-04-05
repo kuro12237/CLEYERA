@@ -309,6 +309,7 @@ void PostEffect::CreateTexBuffer()
 	heapPram.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
 	//色
+	
 	D3D12_CLEAR_VALUE color = {};
 	//float colorData[] = { 0.0f,0.0f,0.0f,1.0f };
 	color.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
@@ -316,6 +317,7 @@ void PostEffect::CreateTexBuffer()
 	{
 		color.Color[i] = clearColor[i];
 	}
+	
 	//resource作成
 	HRESULT hr = {};
 	hr =
@@ -396,7 +398,7 @@ void PostEffect::CreateRTV()
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
 	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-	RTVDescriptorManager::IndexIncrement();
+	RTVDescriptorManager::IndexIncrement("postEffect");
 	rtvIndex_ = RTVDescriptorManager::GetIndex();
 	RTVDescriptorManager::AddPointer(texBuffer_,rtvDesc);
 }
@@ -437,7 +439,7 @@ void PostEffect::CreateDSV()
 	desc.Format = DXGI_FORMAT_D32_FLOAT;
 	desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 
-	DSVDescriptorManager::IndexIncrement();
+	DSVDescriptorManager::IndexIncrement("posteffect");
 	dsvIndex_ = DSVDescriptorManager::GetIndex();
 	DSVDescriptorManager::AddPointer(depthBuffer_,desc);
 
@@ -496,7 +498,7 @@ void PostEffect::CreateShadowMapDSV()
 	desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 	desc.Flags= D3D12_DSV_FLAG_NONE;
 
-	DSVDescriptorManager::IndexIncrement();
+	DSVDescriptorManager::IndexIncrement("shadow");
 	dsvShadowIndex_ = DSVDescriptorManager::GetIndex();
 	DSVDescriptorManager::AddPointer(depthNormalBuffer_.Get(),desc);
 }

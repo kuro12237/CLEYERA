@@ -1,6 +1,7 @@
 #pragma once
 #include"Pch.h"
 #include"CreateResource.h"
+#include"MatrixTransform.h"
 
 struct PointLight_param
 {
@@ -18,6 +19,9 @@ struct PointLight_param
 	/// 減衰率
 	/// </summary>
 	float decay = 0.1f;
-	
+
+	Vector3 worldPos_ = {};
+
+	void UpdateMatrix();
 
 };

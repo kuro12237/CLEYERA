@@ -2,7 +2,7 @@ struct DirectionLightParam
 {
     float32_t3 pos;
     float32_t intensity;
-    bool useFlag;
+   
 };
 struct VertexShaderOutput
 {

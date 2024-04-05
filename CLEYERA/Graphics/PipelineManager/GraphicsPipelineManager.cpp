@@ -10,6 +10,8 @@ void GraphicsPipelineManager::Initialize()
 {
 	SPSO pso{};
 
+
+
 	CreatePSO(pso);
 	//2d
 	Create2dSpritePSOs(pso);
@@ -23,6 +25,7 @@ void GraphicsPipelineManager::Initialize()
 
 	CreatePostEffectPSOs(pso);
 
+	DefferrdShading(pso);
 	GraphicsPipelineManager::GetInstance()->pso = pso;
 }
 
@@ -1486,6 +1489,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
+
 	//Sampler�̐ݒ�
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
@@ -2624,5 +2628,30 @@ SPSOProperty GraphicsPipelineManager::CreateShadow(ComPtr<ID3D12Device> device, 
 	assert(SUCCEEDED(hr));
 
 	return SpritePSO;
+}
+
+void GraphicsPipelineManager::DefferrdShading(SPSO& pso)
+{
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	SShaders shader = ShaderManager::Getinstance()->GetShader();
+	
+
+	pso.ColorModel3d = ModelCreatePipline::CreateColorModel(device,commands,shader.ColorModel);
+	LogManager::Log("Create colorModelPipline\n");
+
+	pso.NormalModel3d = ModelCreatePipline::CreateNormalModel(device, commands, shader.NormalModel);
+	LogManager::Log("CreateNormalModelPipline");
+
+
+	pso.NormalModel3d = ModelCreatePipline::CreateNormalModel(device, commands, shader.NormalModel);
+	LogManager::Log("CreateNormalModelPipline");
+
+	pso.PosModel3d = ModelCreatePipline::CreatePosModel(device, commands, shader.PosModel);
+	LogManager::Log("CreatePosModel");
+
+	pso.ColorPostProcess = CreatePostProcess::DefferdShading(device,commands,shader.ColorPostProcess);
+	LogManager::Log("ColorPostProcessPiplineComp");
+
 }
 

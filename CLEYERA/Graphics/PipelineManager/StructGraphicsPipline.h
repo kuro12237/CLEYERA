@@ -1,5 +1,7 @@
 #pragma once
 #include"DirectXCommon.h"
+
+
 struct SPSOProperty
 {
 	ComPtr<ID3D12PipelineState> GraphicsPipelineState = nullptr;
@@ -31,8 +33,13 @@ struct SPSO
 	SPSOProperty PhongNormal_Model;
 	SPSOProperty PhongSubsurface_Model;
 	SBlendPSO LightingParticle3d;
+	SPSOProperty ColorModel3d;
+	SPSOProperty NormalModel3d;
+	SPSOProperty ColorPostProcess;
+	SPSOProperty PosModel3d;
 	SPSOProperty PostEffectTest;
 	SPSOProperty shadow;
+
 };
 
 enum  BlendMode
