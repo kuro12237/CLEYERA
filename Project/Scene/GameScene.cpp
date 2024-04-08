@@ -18,7 +18,7 @@ void GameScene::Initialize()
 	//ModelManager::ModelLoadNormalMap();
 	//ModelManager::ModelUseSubsurface();
 	//normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
-	normalMonkeyHandle_ = ModelManager::LoadObjectFile("Sphere");
+	normalMonkeyHandle_ = ModelManager::LoadGltfFile("TestPlane");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
@@ -209,7 +209,11 @@ void GameScene::Update(GameManager* Scene)
 
 	debugCamera_->Update();
 	viewProjection_ = debugCamera_->GetData(viewProjection_);
-
+	Matrix4x4 test = ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix;
+	test;
+	worldTransform_.matWorld = MatrixTransform::Multiply(
+		ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix, worldTransform_.matWorld);
+	worldTransform_.TransfarMatrix();
 
 	if (Input::PushKeyPressed(DIK_N))
 	{

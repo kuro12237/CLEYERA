@@ -29,6 +29,8 @@ public:
 	/// <returns></returns>
 	static uint32_t LoadObjectFile(string directoryPath);
 
+	static uint32_t LoadGltfFile(string directoryPath);
+
 	/// <summary>
 	/// ハンドルのobjデータのGet
 	/// </summary>
@@ -40,7 +42,7 @@ private:
 
 	static bool ChackLoadObj(string filePath);
 
-	static bool checkLoadNormalMap(const string filePath);
+	static NodeData ReadNodeData(aiNode*node);
 
 	map<string,unique_ptr<ModelObjData>>objModelDatas_;
 	uint32_t objHandle_ = 0;

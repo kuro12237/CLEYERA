@@ -43,10 +43,19 @@ struct MaterialData
 	string textureFilePath{};
 };
 
+struct NodeData 
+{
+	Matrix4x4 localMatrix;
+	std::string name;
+	std::vector<NodeData>children;
+
+};
+
 struct  SModelData
 {
 	vector<VertexData> vertices;
 	MaterialData material;
+	NodeData node;
 	string texFilePath;
 	uint32_t texHandle;
 	string normalilePath;
