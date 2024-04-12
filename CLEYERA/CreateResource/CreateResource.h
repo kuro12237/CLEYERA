@@ -54,6 +54,7 @@ struct NodeData
 struct  SModelData
 {
 	vector<VertexData> vertices;
+	std::vector<uint32_t>indecs;
 	MaterialData material;
 	NodeData node;
 	string texFilePath;

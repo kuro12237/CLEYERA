@@ -49,6 +49,9 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
+			//indexメモリ確保
+			modelData.indecs.resize(mesh->mNumVertices);
+
 			//Fenceの解析
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
 			{
@@ -69,10 +72,18 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 					vertex.position.x *= -1.0f;
 					vertex.normal.x *= -1.0f;
 					modelData.vertices.push_back(vertex);
-					// インデックスの解析
-	
 				}
-
+			}
+			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
+			{
+				aiFace& face = mesh->mFaces[faceIndex];
+				assert(face.mNumIndices == 3);
+				for (int32_t element = face.mNumIndices - 1; element >= 0; element--)
+				{
+					uint32_t vertexIndex = face.mIndices[element];
+					//indexPush
+					modelData.indecs.push_back(vertexIndex);
+				}
 			}
 		}
 		//materialの解析
@@ -142,6 +153,8 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
+			//メモリの確保
+			
 			//Fenceの解析
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
 			{
@@ -155,17 +168,27 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 					aiVector3D& normal = mesh->mNormals[vertexIndex];
 					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
 					VertexData vertex;
-					vertex.position = { position.x,position.y,position.z,1.0f };
-					vertex.normal = { normal.x,normal.y,normal.z };
+					vertex.position = { -position.x,position.y,position.z,1.0f };
+					vertex.normal = { -normal.x,normal.y,normal.z };
 					vertex.texcoord = { texcoord.x,texcoord.y };
 					//座標反転
-					vertex.position.x *= -1.0f;
-					vertex.normal.x *= -1.0f;
+					//vertex.position.x *= -1.0f;
+					//vertex.normal.x *= -1.0f;
 					modelData.vertices.push_back(vertex);
-				
 				}
-
 			}
+			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
+			{
+				aiFace& face = mesh->mFaces[faceIndex];
+				assert(face.mNumIndices == 3);
+				for (int32_t element =face.mNumIndices-1; element >= 0; element--)
+				{
+					uint32_t vertexIndex = face.mIndices[element];
+					//indexPush
+					modelData.indecs.push_back(vertexIndex);
+				}
+			}
+
 		}
 		//materialの解析
 		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; materialIndex++)

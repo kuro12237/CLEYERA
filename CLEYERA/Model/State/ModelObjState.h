@@ -17,4 +17,5 @@ public:
 
 private:
 	ResourcePeroperty resource_ = {};
+	unique_ptr<BufferResource<uint32_t>>index_ = nullptr;
 };

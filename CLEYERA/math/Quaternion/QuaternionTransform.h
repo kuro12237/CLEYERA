@@ -29,6 +29,14 @@ public:
 
 	static Quaternion Inverse(const Quaternion& quaternion);
 
+	static float Dot(const Quaternion& q1, const Quaternion& q2);
+
+	static Vector3 RotateVector(const Vector3& v, const Quaternion& q);
+
+	static Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float t);
+
+	static Matrix4x4 RotateMatrix(const Quaternion& q);
+
 private:
 
 };

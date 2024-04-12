@@ -7,6 +7,7 @@
 #include"TestScene.h"
 #include"DebugTool/DebugCamera/DebugCamera.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
+#include"Animation/AnimationManager.h"
 
 class GameScene :public IScene
 {
@@ -29,6 +30,11 @@ public:
 private:
 
 	void Move();
+
+	void TestAnimation();
+
+	float animationTimer_ = 0.0f;
+
 
 	CameraData viewProjection_ = {};
 	CameraData testViewProjection_ = {};

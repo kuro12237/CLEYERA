@@ -32,6 +32,9 @@ public:
 
 #pragma region Set
 
+	void SetIsIndexDraw(bool flag) { isIndexDraw = flag; }
+
+
 	void SetUvScale(Vector3 s) { uvScale_ = s; }
 	void SetUvRotate(Vector3 r) { uvRotate = r; }
 	void SetTranslate(Vector3 t) { uvTranslate = t; }
@@ -60,6 +63,7 @@ private:
     Model*model_ = nullptr;
 	uint32_t prevModelIndex_ = 0;
 
+	bool isIndexDraw = false;
 	bool CommpandPipeline(SPSOProperty &PSO);
 
 	unique_ptr<BufferResource<Material>>MaterialBuffer_ = nullptr;
@@ -95,7 +99,7 @@ private:
 #pragma endregion
 
 	bool UseLight_ = false;
-
+	
 	uint32_t texHandle_ = 0;
 	uint32_t normalTexHandle_ = 0;
 	uint32_t baseTexHandle_ = 0;

@@ -18,7 +18,10 @@ void GameScene::Initialize()
 	//ModelManager::ModelLoadNormalMap();
 	//ModelManager::ModelUseSubsurface();
 	//normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
+	gameObject_->SetIsIndexDraw(true);
 	normalMonkeyHandle_ = ModelManager::LoadGltfFile("AnimatedCube");
+
+	AnimationManager::GetInstance()->LoadAnimation("AnimatedCube");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
@@ -211,9 +214,10 @@ void GameScene::Update(GameManager* Scene)
 	viewProjection_ = debugCamera_->GetData(viewProjection_);
 	Matrix4x4 test = ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix;
 	test;
-	worldTransform_.matWorld = MatrixTransform::Multiply(
-		ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix, worldTransform_.matWorld);
-	worldTransform_.TransfarMatrix();
+	TestAnimation();
+	//worldTransform_.matWorld = MatrixTransform::Multiply(
+	//	ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix, worldTransform_.matWorld);
+	//worldTransform_.TransfarMatrix();
 
 	if (Input::PushKeyPressed(DIK_N))
 	{
@@ -297,4 +301,23 @@ void GameScene::Move()
 	{
 		worldTransform_.translate.x += speed;
 	}
+}
+
+void GameScene::TestAnimation()
+{
+	SAnimation::Animation data = AnimationManager::GetInstance()->GetData("AnimatedCube");
+	animationTimer_ += 1.0f / 60.0f;
+	animationTimer_ = std::fmod(animationTimer_, data.duration);
+	SAnimation::NodeAnimation& rootNodeAnimation = data.NodeAnimation["AnimatedCube"];
+	Vector3 translate = AnimationManager::CalculateValue(rootNodeAnimation.translate.keyframes, animationTimer_);
+	Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
+	Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
+
+	Matrix4x4 tm = MatrixTransform::TranslateMatrix(translate);
+	Matrix4x4 rm = QuaternionTransform::RotateMatrix(quaternion);
+	Matrix4x4 sm = MatrixTransform::ScaleMatrix(scale);
+	Matrix4x4 localMat = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
+	worldTransform_.matWorld = MatrixTransform::Multiply(worldTransform_.matWorld, localMat);
+	worldTransform_.TransfarMatrix();
+
 }

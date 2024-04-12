@@ -40,6 +40,7 @@ void Game3dObject::Draw(WorldTransform worldTransform ,CameraData view)
 	}
 
 	model_->UseLight(UseLight_);
+	model_->SetIsIndexDraw(isIndexDraw);
 
 	MaterialBuffer_->Map();
 

@@ -3,17 +3,6 @@
 
 namespace SAnimation
 {
-	struct KeyframeVector3
-	{
-		Vector3 value;
-		float time;
-	};
-
-	struct KeyframeQuaternion
-	{
-		Quaternion value;
-		float time;
-	};
 
 	template<typename tValue>
 	struct KeyFrame
@@ -22,17 +11,20 @@ namespace SAnimation
 		tValue value;
 	};
 
-	struct NodeAnimation
-	{
-		std::vector<KeyframeVector3>translate;
-		std::vector<KeyframeQuaternion>rotate;
-		std::vector<KeyframeVector3>scale;
-	};
+	using KeyframeQuaternion = KeyFrame<Quaternion>;
+	using KeyframeVector3 = KeyFrame<Vector3>;
 
 	template<typename tValue>
 	struct AnimationCurve
 	{
 		std::vector<KeyFrame<tValue>>keyframes;
+	};
+
+	struct NodeAnimation
+	{
+		AnimationCurve<Vector3>translate;
+		AnimationCurve<Quaternion>rotate;
+		AnimationCurve<Vector3>scale;
 	};
 
 	struct Animation

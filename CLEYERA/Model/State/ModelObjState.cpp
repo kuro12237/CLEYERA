@@ -18,6 +18,12 @@ void ModelObjState::Initialize(Model* state)
 			resource_.Vertex.Get(),
 			int(state->GetModelData().vertices.size()
 		));
+
+	//IndexBufferの作成
+	index_ = make_unique<BufferResource<uint32_t>>();
+	index_->CreateResource(uint32_t(state->GetModelData().indecs.size()));
+	index_->CreateIndexBufferView();
+
 }
 
 void ModelObjState::CallPipelinexVertex(Model* state)
@@ -33,13 +39,20 @@ void ModelObjState::CallPipelinexVertex(Model* state)
 void ModelObjState::Draw(Model* state, const CameraData& viewprojection)
 {
 	VertexData* vertexData = nullptr;
-	
+
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 
 	memcpy(vertexData, state->GetModelData().vertices.data(), sizeof(VertexData) * state->GetModelData().vertices.size());
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
-	
+	//IndexBufferのMap
+	if (state->GetIsIndexDraw())
+	{
+		index_->Map();
+		index_->Setbuffer(state->GetModelData().indecs);
+		index_->CommandIndexBufferViewCall();
+	}
+	//Light
 	if (state->GetUseLight())
 	{
 		viewprojection.buffer_->CommandCall(3);
@@ -48,6 +61,13 @@ void ModelObjState::Draw(Model* state, const CameraData& viewprojection)
 		commands.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 
 	}
+	if (state->GetIsIndexDraw())
+	{
 
-	commands.m_pList->DrawInstanced(UINT(state->GetModelData().vertices.size()), 1, 0, 0);
+		commands.m_pList->DrawIndexedInstanced(UINT(state->GetModelData().indecs.size()), 1, 0, 0, 0);
+	}
+	else
+	{
+		commands.m_pList->DrawInstanced(UINT(state->GetModelData().vertices.size()), 1, 0, 0);
+	}
 }
