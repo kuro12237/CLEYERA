@@ -44,6 +44,7 @@
     <None Include="Resources\Shader\SpriteObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp" />
     <ClCompile Include="CLEYERA\Audio\AudioManager.cpp" />
     <ClCompile Include="CLEYERA\base\DX\DirectXCommon.cpp" />
@@ -98,6 +99,8 @@
     <ClCompile Include="Project\Scene\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />
+    <ClInclude Include="CLEYERA\Animation\SAnimation.h" />
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h" />
     <ClInclude Include="CLEYERA\Audio\AudioManager.h" />
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />

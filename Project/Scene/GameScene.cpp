@@ -18,7 +18,7 @@ void GameScene::Initialize()
 	//ModelManager::ModelLoadNormalMap();
 	//ModelManager::ModelUseSubsurface();
 	//normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
-	normalMonkeyHandle_ = ModelManager::LoadGltfFile("TestPlane");
+	normalMonkeyHandle_ = ModelManager::LoadGltfFile("AnimatedCube");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
@@ -71,7 +71,7 @@ void GameScene::Update(GameManager* Scene)
 
 	if (ImGui::TreeNode("Light"))
 	{
-		ImGui::DragFloat3("translate", &light_.worldPos_.x,-0.1f,0.1f);
+		ImGui::DragFloat3("translate", &light_.position.x,-0.1f,0.1f);
 		ImGui::DragFloat("decay", &light_.decay, -0.1f, 0.1f);
 		ImGui::DragFloat("radious", &light_.radious, -0.1f, 0.1f);
 		ImGui::DragFloat("intencity", &light_.intencity, -0.1f, 0.1f);
@@ -200,7 +200,7 @@ void GameScene::Update(GameManager* Scene)
 
 	Move();
 
-	worldTransform_.rotation.y += 0.01f;
+	//worldTransform_.rotation.y += 0.01f;
 	worldTransform_.UpdateMatrix();
 	testGroundWorldTransform_.UpdateMatrix();
 	TestSkyDomeWorldTreanform_.UpdateMatrix();

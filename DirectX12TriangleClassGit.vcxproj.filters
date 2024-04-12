@@ -314,6 +314,7 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
+    <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -524,6 +525,8 @@
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h" />
     <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
+    <ClInclude Include="CLEYERA\Animation\SAnimation.h" />
+    <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
