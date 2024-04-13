@@ -2,6 +2,7 @@
 
 using namespace Math::Vector;
 using namespace Math::Matrix;
+using namespace  Math::Qua;
 
 float Math::Qua::Length(Quaternion q)
 {

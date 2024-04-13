@@ -54,7 +54,7 @@ public:
 	// 項目
 	struct Item {
 		// 項目の値
-		std::variant<int32_t, float,bool, Vector2, Vector3, Vector4,TransformQua> value;
+		std::variant<int32_t, float,bool, Math::Vector::Vector2, Math::Vector::Vector3, Math::Vector::Vector4,TransformQua> value;
 	};
 	// グループ
 	struct Group {

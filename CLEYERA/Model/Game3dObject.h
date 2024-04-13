@@ -35,9 +35,9 @@ public:
 	void SetIsIndexDraw(bool flag) { isIndexDraw = flag; }
 
 
-	void SetUvScale(Vector3 s) { uvScale_ = s; }
-	void SetUvRotate(Vector3 r) { uvRotate = r; }
-	void SetTranslate(Vector3 t) { uvTranslate = t; }
+	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
+	void SetUvRotate(Math::Vector::Vector3 r) { uvRotate = r; }
+	void SetTranslate(Math::Vector::Vector3 t) { uvTranslate = t; }
 
 	void SetTexHandle(uint32_t index) { texHandle_ = index; }
 	void SetNormalTex(uint32_t tex) { normalTexHandle_ = tex; }
@@ -45,7 +45,7 @@ public:
 
 	void UseLight(bool flag) { UseLight_ = flag; }
 
-	void SetColor(Vector4 color) { color_ = color; }
+	void SetColor(Math::Vector::Vector4 color) { color_ = color; }
 	void SetShininess(float s) { shininess = s; }
 	void SetSpecular(float s) { this->specular_ = s; };
 	void SetMetalness(float m) { this->metalness_ = m; }
@@ -74,10 +74,10 @@ private:
 	DefferredMaterial cMaterial_ = {};
 
 
-	Vector4 color_ = { 1,1,1,1 };
-	Vector3 uvScale_ = { 1,1,1 };
-	Vector3 uvRotate = { 0,0,0 };
-	Vector3 uvTranslate = { 0,0,0 };
+	Math::Vector::Vector4 color_ = { 1,1,1,1 };
+	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
+	Math::Vector::Vector3 uvRotate = { 0,0,0 };
+	Math::Vector::Vector3 uvTranslate = { 0,0,0 };
 
 #pragma region phong
 	float shininess = 70.0f;

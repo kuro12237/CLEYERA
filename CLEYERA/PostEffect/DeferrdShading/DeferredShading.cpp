@@ -291,8 +291,8 @@ void DefferredShading::PostDepthDraw()
 
 void DefferredShading::ColorBufferUpdate()
 {
-	Vector2 pos_ = {};
-	Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()) };
+	Math::Vector::Vector2 pos_ = {};
+	Math::Vector::Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()) };
 
 	vector<VertexData>vertexMap = {};
 	vertexMap.resize(6);
@@ -321,7 +321,7 @@ void DefferredShading::ColorBufferUpdate()
 	indexBuffer_->UnMap();
 
 	TransformationMatrix wvpMap = {};
-	Matrix4x4 OrthographicMatrix = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
+	Math::Matrix::Matrix4x4 OrthographicMatrix = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
 	wvpMap.world = Math::Matrix::Identity();
 	wvpMap.WVP = OrthographicMatrix;
 

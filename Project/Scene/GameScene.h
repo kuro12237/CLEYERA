@@ -40,7 +40,8 @@ private:
 	CameraData testViewProjection_ = {};
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
-	Vector2 postEffectuvScale = { 1,1 };
+
+	Math::Vector::Vector2 postEffectuvScale = { 1,1 };
 	float postEffectGrayFactor_ = 0.0f;
 	float postEffectInvertFactor_ = 0.0f;
 	float postEffectBringhtnessFactor_ = 0.0f;

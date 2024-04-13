@@ -1,8 +1,14 @@
 #pragma once
 
-struct Quaternion
+namespace Math
 {
-	float x, y, z, w;
-	NLOHMANN_DEFINE_TYPE_INTRUSIVE(Quaternion, x, y, z, w)
+	namespace Qua
+	{
+		struct Quaternion
+		{
+			float x, y, z, w;
+			NLOHMANN_DEFINE_TYPE_INTRUSIVE(Quaternion, x, y, z, w)
 
-};
+		};
+	}
+}

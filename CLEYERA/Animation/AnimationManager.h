@@ -15,8 +15,8 @@ public:
 
 	SAnimation::Animation GetData(const string& fileName);
 
-	static Vector3 CalculateValue(const std::vector<SAnimation::KeyframeVector3>& keyflames, float time);
-	static Quaternion CalculateValue(const std::vector<SAnimation::KeyframeQuaternion>& keyflames, float time);
+	static Math::Vector::Vector3 CalculateValue(const std::vector<SAnimation::KeyframeVector3>& keyflames, float time);
+	static Math::Qua::Quaternion CalculateValue(const std::vector<SAnimation::KeyframeQuaternion>& keyflames, float time);
 
 private:
 

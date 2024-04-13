@@ -1,6 +1,8 @@
 #include "AnimationManager.h"
 
 using namespace Math::Vector;
+using namespace Math::Matrix;
+using namespace Math::Qua;
 
 AnimationManager* AnimationManager::GetInstance()
 {

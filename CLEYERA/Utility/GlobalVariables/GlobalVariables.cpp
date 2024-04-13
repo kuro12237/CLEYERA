@@ -5,6 +5,8 @@
 #include <fstream>
 #include<json.hpp>
 
+using namespace Math::Vector;
+
 GlobalVariables* GlobalVariables::GetInstance() {
 	static GlobalVariables instance;
 

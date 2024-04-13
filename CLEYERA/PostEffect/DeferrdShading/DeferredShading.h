@@ -8,7 +8,7 @@
 
 struct MaterialDefferdShading
 {
-	Vector4 color;
+	Math::Vector::Vector4 color;
 	float shininess;
 };
 

@@ -48,7 +48,7 @@ void ModelPlaneState::Draw(Model* state, const CameraData& viewprojection)
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 
-	Vector4 pos = state->GetCenterPos();
+	Math::Vector::Vector4 pos = state->GetCenterPos();
 	float size = state->GetSize();
 
 	vertexData[0].position = { pos.x - size,pos.y,pos.z + size,pos.w };

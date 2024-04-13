@@ -56,12 +56,12 @@ namespace Math
 		/// <summary>
 		/// 
 		/// </summary>
-		Matrix4x4 ScaleMatrix(Vector3 s);
+		Matrix4x4 ScaleMatrix(Math::Vector::Vector3 s);
 
 		/// <summary>
 		/// 移動行列
 		/// </summary>
-		Matrix4x4 TranslateMatrix(Vector3 t);
+		Matrix4x4 TranslateMatrix(Math::Vector::Vector3 t);
 
 		/// <summary>
 		/// Xを軸とした回転
@@ -89,16 +89,16 @@ namespace Math
 		/// <param name="大きさ"></param>
 		/// <param name="回転"></param>
 		/// <param name="移動"></param>
-		Matrix4x4 AffineMatrix(const Vector3& Sv, const Vector3& Rv, const Vector3& Tv);
+		Matrix4x4 AffineMatrix(const Math::Vector::Vector3& Sv, const Math::Vector::Vector3& Rv, const Math::Vector::Vector3& Tv);
 
 		Matrix4x4 OrthographicLH(float width, float height, float nearPlane, float farPlane);
-		Matrix4x4 LookAtLH(Vector3 eyePosition, Vector3 focusPosition, Vector3 upDirection);
+		Matrix4x4 LookAtLH(Math::Vector::Vector3 eyePosition, Math::Vector::Vector3 focusPosition, Math::Vector::Vector3 upDirection);
 
-		Matrix4x4 RotateAxisAngle(const Vector3& axis, float angle);
+		Matrix4x4 RotateAxisAngle(const Math::Vector::Vector3& axis, float angle);
 
-		Matrix4x4 RotateAxisAngle(const Vector3& axis, float sin, float cos);
+		Matrix4x4 RotateAxisAngle(const Math::Vector::Vector3& axis, float sin, float cos);
 
-		Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to);
+		Matrix4x4 DirectionToDirection(const Math::Vector::Vector3& from, const Math::Vector::Vector3& to);
 
         #pragma endregion
 	}

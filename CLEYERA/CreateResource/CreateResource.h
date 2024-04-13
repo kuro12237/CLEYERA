@@ -6,38 +6,38 @@
 
 struct  VertexData
 {
-	Vector4 position;
-    Vector2 texcoord;
-	Vector3 normal;
+	Math::Vector::Vector4 position;
+	Math::Vector::Vector2 texcoord;
+	Math::Vector::Vector3 normal;
 };
 struct LightData
 {
-	Vector4 color;
-	Vector3 direction;
+	Math::Vector::Vector4 color;
+	Math::Vector::Vector3 direction;
 	float intensity;
 };
 
 struct  TransformationViewMatrix
 {
-	Matrix4x4 view;
-	Matrix4x4 viewProjection;
-	Matrix4x4 orthographic;
-	Vector3 position;
+    Math::Matrix::Matrix4x4 view;
+    Math::Matrix::Matrix4x4 viewProjection;
+    Math::Matrix::Matrix4x4 orthographic;
+	Math::Vector::Vector3 position;
 	float pad[1];
-	Matrix4x4 InverseViewProjection;
-	Matrix4x4 InverseProjection;
+	Math::Matrix::Matrix4x4 InverseViewProjection;
+	Math::Matrix::Matrix4x4 InverseProjection;
 };
 
 struct TransformationMatrix {
-	Matrix4x4 WVP;
-	Matrix4x4 world;
+	Math::Matrix::Matrix4x4 WVP;
+	Math::Matrix::Matrix4x4 world;
 };
 
 struct ParticleData{
-	Matrix4x4 WVP;
-	Matrix4x4 world;
-	Vector4 color;
-	Matrix4x4 uvTransform;
+	Math::Matrix::Matrix4x4 WVP;
+	Math::Matrix::Matrix4x4 world;
+	Math::Vector::Vector4 color;
+	Math::Matrix::Matrix4x4 uvTransform;
 };
 struct MaterialData
 {
@@ -47,7 +47,7 @@ struct MaterialData
 
 struct NodeData 
 {
-	Matrix4x4 localMatrix;
+	Math::Matrix::Matrix4x4 localMatrix;
 	std::string name;
 	std::vector<NodeData>children;
 	TransformQua transform;
@@ -62,7 +62,7 @@ struct VetexWeightData
 
 struct JointWeightData
 {
-	Matrix4x4 inverseBindPoseMatrix;
+	Math::Matrix::Matrix4x4 inverseBindPoseMatrix;
 	std::vector<aiVertexWeight>vertexWeights;
 };
 
@@ -83,14 +83,14 @@ struct  SModelData
 
 struct PostEffectParam
 {
-	Matrix4x4 uvMatrix;
-	Vector2 texSize = { 0.0f,0.0f };
+	Math::Matrix::Matrix4x4 uvMatrix;
+	Math::Vector::Vector2 texSize = { 0.0f,0.0f };
 
 };
 
 struct DefferredMaterial
 {
-	Vector4 color = { 1,1,1,1 };
+	Math::Vector::Vector4 color = { 1,1,1,1 };
 };
 
 struct PostEffectAdjustedColorParam
@@ -148,8 +148,8 @@ struct ResourcePeroperty
 
 struct  Material
 {
-	Vector4 color;
-	Matrix4x4 uvTransform;
+	Math::Vector::Vector4 color;
+	Math::Matrix::Matrix4x4 uvTransform;
 	float shininess = 70.0f;
 	float specular_ = 1.0f;
 	float metalness_ = 1.0f;

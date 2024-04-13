@@ -1,6 +1,7 @@
 #include "IsCollision.h"
 
 using namespace Math::Vector;
+using namespace Math::Matrix;
 
 namespace Collision {
 

@@ -279,9 +279,6 @@
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Graphics\NormalMap\NormalMap.cpp">
-      <Filter>CLEYERA\Graphics\NormalMap</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Scene\GameScene.cpp">
       <Filter>Project\Scene\Game</Filter>
     </ClCompile>
@@ -479,9 +476,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h">
       <Filter>CLEYERA\math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Graphics\NormalMap\NormalMap.h">
-      <Filter>CLEYERA\Graphics\NormalMap</Filter>
     </ClInclude>
     <ClInclude Include="Project\Scene\GameScene.h">
       <Filter>Project\Scene\Game</Filter>

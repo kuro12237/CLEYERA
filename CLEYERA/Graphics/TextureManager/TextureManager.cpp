@@ -1,5 +1,7 @@
 ﻿#include "TextureManager.h"
 
+using namespace Math::Vector;
+
 TextureManager* TextureManager::GetInstance()
 {
 	static TextureManager instance;
@@ -76,74 +78,7 @@ void TextureManager::AllUnLoadTexture()
 	TextureManager::GetInstance()->texDatas_.clear();
 }
 
-uint32_t TextureManager::CreateNormalTex(std::vector<vector<CreateTex_param>> texData, int32_t width, int32_t height,const string filePath)
-{
-	const string file = filePath +"_normal.dss";
-	//DescripterIndexを加算しずらす
-	DescriptorManager::IndexIncrement(file);
-	//DescripterのIndexを取得
-	uint32_t index = DescriptorManager::GetIndex();
-	TexData data;
-
-	//ヒープ設定
-	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;
-	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_COMBINE;
-	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
-	D3D12_RESOURCE_DESC resourceDesc;
-	{
-		resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-		resourceDesc.Width = width;
-		resourceDesc.Height = height;
-		resourceDesc.DepthOrArraySize = 1;
-		resourceDesc.MipLevels = 1;
-		resourceDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-		resourceDesc.SampleDesc.Count = 1;
-		resourceDesc.SampleDesc.Quality = 0;
-		resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
-		resourceDesc.Flags = D3D12_RESOURCE_FLAG_NONE;
-		resourceDesc.Alignment = D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT;
-	}
-	//リソース作成
-	DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
-		&heapProperties,
-		D3D12_HEAP_FLAG_NONE,
-		&resourceDesc,
-		D3D12_RESOURCE_STATE_COMMON,
-		nullptr,
-		IID_PPV_ARGS(&data.resource)
-	);
-
-	//CreateTexture
-	DirectX::ScratchImage image;
-	image.Initialize2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1);
-
-	uint8_t* pixels = image.GetPixels();
-	CreateNormalTexture(pixels, image, texData,width,height);
-
-	const DirectX::TexMetadata& metadata = image.GetMetadata();
-	//Upload
-	UploadMipImage(metadata, image,data);
-
-	//src設定
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = metadata.format;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
-
-	//Descripterをずらす
-	AddDescripter(index, srvDesc, data.resource.Get());
-
-	data.index = index;
-	//コンテナに保存
-	TextureManager::GetInstance()->texDatas_[file] =
-		make_unique<TexDataResource>(file, data);
-	return TextureManager::GetInstance()->texDatas_[file]->GetTexHandle();
-}
-
-Vector2 TextureManager::GetTextureSize(uint32_t texHandle)
+Math::Vector::Vector2 TextureManager::GetTextureSize(uint32_t texHandle)
 {
 	Vector2 result{};
 
@@ -158,6 +93,7 @@ Vector2 TextureManager::GetTextureSize(uint32_t texHandle)
 	}
 	return result;
 }
+
 
 bool TextureManager::CheckTexDatas(string filePath)
 {
@@ -229,37 +165,6 @@ D3D12_SHADER_RESOURCE_VIEW_DESC TextureManager::SrcDescSetting(const DirectX::Te
 	return resultSrvDesc;
 }
 
-void TextureManager::CreateNormalTexture(uint8_t*& pixels, DirectX::ScratchImage& image, std::vector<vector<CreateTex_param>>& texData, int32_t width, int32_t height)
-{
-	for (int32_t y = 0; y < height; ++y) {
-		for (int32_t x = 0; x < width; ++x)
-		{
-			//法線を取得
-			Vector3 normal{
-			normal.x = texData[y][x].color.x,
-			normal.y = texData[y][x].color.y,
-			normal.z = texData[y][x].color.z
-			};
-			//色に変換
-			Vector4 pixelColor{
-			pixelColor.x = normal.x * 0.5f + 0.5f,
-			pixelColor.y = normal.y * 0.5f + 0.5f,
-			pixelColor.z =  normal.z * 0.5f + 0.5f,
-			pixelColor.w = 0.0f
-			};
-			//コピー
-			size_t pixelIndex = (y * width + x) * sizeof(Vector4);
-			if (pixelIndex + sizeof(Vector4) <= image.GetPixelsSize())
-			{
-				memcpy(&pixels[pixelIndex], &pixelColor, sizeof(Vector4));
-			}
-			else
-			{
-			}
-		}
-	}
-	pixels;
-}
 
 
 

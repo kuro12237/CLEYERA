@@ -262,10 +262,10 @@ void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 {
 	for (SAnimation::Joint j : skeleton.joints)
 	{
-		Matrix4x4 tm = Math::Matrix::TranslateMatrix(j.transform.translate);
-		Matrix4x4 rm = Math::Qua::RotateMatrix(j.transform.quaternion);
-		Matrix4x4 sm = Math::Matrix::ScaleMatrix(j.transform.scale);
-		Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
+		Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(j.transform.translate);
+		Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(j.transform.quaternion);
+		Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix(j.transform.scale);
+		Math::Matrix::Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 		j.localMatrix = localMat;
 		if (j.parent)
 		{
@@ -302,7 +302,7 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 	result.transform.scale = { scale.x,scale.y,scale.z };
 	result.transform.quaternion = { quaternion.x,-quaternion.y,-quaternion.z,quaternion.w };
 	result.transform.translate = { translate.x,translate.y,translate.z };
-	Matrix4x4 sm, rm, tm;
+	Math::Matrix::Matrix4x4 sm, rm, tm;
 	sm = Math::Matrix::ScaleMatrix(result.transform.scale);
 	rm = Math::Qua::RotateMatrix(result.transform.quaternion);
 	tm = Math::Matrix::TranslateMatrix(result.transform.translate);

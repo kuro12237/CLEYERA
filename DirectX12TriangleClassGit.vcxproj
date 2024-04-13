@@ -55,7 +55,6 @@
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\RTVDescripterManager.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\NormalMap\NormalMap.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
@@ -114,7 +113,6 @@
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescripterData.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\RTVDescripterManager.h" />
-    <ClInclude Include="CLEYERA\Graphics\NormalMap\NormalMap.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />

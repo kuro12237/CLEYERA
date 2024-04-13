@@ -4,7 +4,7 @@
 #include"Matrix/MatrixTransform.h"
 struct SDirectionLight
 {
-	Vector3 pos;
+	Math::Vector::Vector3 pos;
 	float intensity;
 	bool useFlag;
 };
@@ -27,7 +27,7 @@ public:
 
 	static void SetIntensity(const float& i) { DirectionalLight::GetInstance()->light.intensity = i; }
 
-	static void SetPos(Vector3 p) { DirectionalLight::GetInstance()->light.pos = p; }
+	static void SetPos(Math::Vector::Vector3 p) { DirectionalLight::GetInstance()->light.pos = p; }
 
 #pragma endregion
 
@@ -41,8 +41,8 @@ private:
 	unique_ptr<BufferResource<SDirectionLight>>buffer_ = nullptr;
 
 	SDirectionLight light = {};
-	Matrix4x4 worldMat_ = {};
-	Matrix4x4 viewMat_ = {};
+	Math::Matrix::Matrix4x4 worldMat_ = {};
+	Math::Matrix::Matrix4x4 viewMat_ = {};
 
 	//Singleton
     DirectionalLight() = default;

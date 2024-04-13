@@ -2,6 +2,7 @@
 #include"Vector/VectorTransform.h"
 
 using namespace Math::Vector;
+using namespace Math::Matrix;
 
 Matrix4x4 Math::Matrix::Add(Matrix4x4 m1, Matrix4x4 m2)
 {

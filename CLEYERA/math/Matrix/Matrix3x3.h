@@ -1,6 +1,12 @@
 #pragma once
 
-struct Matrix3x3 final
+namespace Math
 {
-	float m[3][3];
-};
+	namespace Matrix
+	{
+		struct Matrix3x3 final
+		{
+			float m[3][3];
+		};
+	}
+}

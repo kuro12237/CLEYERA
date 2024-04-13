@@ -23,7 +23,7 @@ private:
 
 	const int VertexNum = 16;
 	ResourcePeroperty resource_ = {};
-	Vector3 testLightDirection = { 0,-1.0f,0 };
+	Math::Vector::Vector3 testLightDirection = { 0,-1.0f,0 };
 	float shininess = 70.0f;
 };
 

@@ -1,10 +1,12 @@
 #include "GeometryCollision.h"
 
+using namespace Math::Matrix;
+using namespace Math::Vector;
 
 namespace GeometryCollision {
 
 	// OBBのワールドマトリックス作成
-	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb) {
+	Math::Matrix::Matrix4x4 CreateOBBWorldMatrix(const OBB& obb) {
 
 		Matrix4x4 worldMatrix{};
 

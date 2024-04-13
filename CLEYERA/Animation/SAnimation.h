@@ -12,8 +12,8 @@ namespace SAnimation
 		tValue value;
 	};
 
-	using KeyframeQuaternion = KeyFrame<Quaternion>;
-	using KeyframeVector3 = KeyFrame<Vector3>;
+	using KeyframeQuaternion = KeyFrame< Math::Qua::Quaternion>;
+	using KeyframeVector3 = KeyFrame<Math::Vector::Vector3>;
 
 	template<typename tValue>
 	struct AnimationCurve
@@ -23,9 +23,9 @@ namespace SAnimation
 
 	struct NodeAnimation
 	{
-		AnimationCurve<Vector3>translate;
-		AnimationCurve<Quaternion>rotate;
-		AnimationCurve<Vector3>scale;
+		AnimationCurve<Math::Vector::Vector3>translate;
+		AnimationCurve<Math::Qua::Quaternion>rotate;
+		AnimationCurve<Math::Vector::Vector3>scale;
 	};
 
 	struct Animation
@@ -37,8 +37,8 @@ namespace SAnimation
 
 	struct Joint {
 		TransformQua transform;
-		Matrix4x4 localMatrix;
-		Matrix4x4 skeletonSpaceMatrix;
+		Math::Matrix::Matrix4x4 localMatrix;
+		Math::Matrix::Matrix4x4 skeletonSpaceMatrix;
 		std::string name;
 		std::vector<int32_t>childlen;
 		int32_t index;

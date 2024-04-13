@@ -1,5 +1,7 @@
 #include "DirectionLIght.h"
 
+using namespace Math::Matrix;
+
 DirectionalLight* DirectionalLight::GetInstance()
 {
 	static DirectionalLight instance;

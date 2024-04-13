@@ -1,5 +1,7 @@
 #include "WorldTransform.h"
 
+using namespace Math::Vector;
+
 void WorldTransform::CreateBuffer()
 {
 	buffer_ = make_shared<BufferResource<TransformationMatrix>>();

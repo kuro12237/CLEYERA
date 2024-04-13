@@ -1,5 +1,7 @@
 #include "VectorTransform.h"
 
+using namespace Math::Vector;
+
 float Math::Vector::Length(const Vector3& v)
 {
 	float result{};
@@ -43,7 +45,7 @@ Vector3 Math::Vector::Multiply(const Vector3& v1, const Vector3& v2)
 	return result;
 }
 
-Vector3 Math::Vector::TransformNormal(const Vector3& v, const Matrix4x4& m)
+Vector3 Math::Vector::TransformNormal(const Vector3& v, const Math::Matrix::Matrix4x4& m)
 {
 	Vector3 result
 	{
@@ -114,7 +116,7 @@ Vector3 Math::Vector::Cross(const Vector3 v1, const Vector3 v2)
 }
 
 
-Vector3 Math::Vector::TransformByMatrix(const Vector3 vector, const Matrix4x4 matrix)
+Vector3 Math::Vector::TransformByMatrix(const Vector3 vector, const Math::Matrix::Matrix4x4 matrix)
 {
 	Vector3 result{};
 

@@ -1,5 +1,7 @@
 #include"ParticlePlaneState.h"
 
+using namespace Math::Matrix;
+
 void ParticlePlaneState::Initialize(Particle* state)
 {
 	if (NumInstansing)

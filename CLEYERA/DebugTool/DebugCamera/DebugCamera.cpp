@@ -1,5 +1,7 @@
 #include"DebugCamera.h"
 
+using namespace Math::Matrix;
+
 void DebugCamera::Initialize() 
 {
 	cameraData_.Initialize();
@@ -30,7 +32,7 @@ void DebugCamera::ImGuiUpdate()
 void DebugCamera::Update()
 {
 	//中心地点からずらす
-	Vector3 offset = offset_;
+	Math::Vector::Vector3 offset = offset_;
 	offset = Math::Vector::TransformNormal(offset,matRot_);
 	worldTransform_.translate = offset;
 

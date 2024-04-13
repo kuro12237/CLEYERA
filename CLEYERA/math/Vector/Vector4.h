@@ -1,9 +1,15 @@
 #pragma once
 
-struct Vector4 final
+namespace Math
 {
-	float x;
-	float y;
-	float z;
-	float w;
-};
+	namespace Vector
+	{
+		struct Vector4 final
+		{
+			float x;
+			float y;
+			float z;
+			float w;
+		};
+	}
+}

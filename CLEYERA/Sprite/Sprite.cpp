@@ -1,5 +1,7 @@
 #include "Sprite.h"
 
+using namespace Math::Vector;
+
 void Sprite::Initialize(ISpriteState* state, Vector2 pos, Vector2 size)
 {
 	state_ = state;

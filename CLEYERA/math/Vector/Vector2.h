@@ -1,6 +1,12 @@
 #pragma once
 
-struct Vector2 final
+namespace Math
 {
-	float x, y;
-};
+	namespace Vector
+	{
+		struct Vector2 final
+		{
+			float x, y;
+		};
+	}
+}

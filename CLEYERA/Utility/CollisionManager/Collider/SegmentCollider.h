@@ -14,7 +14,7 @@ public:
 	/// <summary>
 	/// ワールド座標の取得
 	/// </summary>
-	virtual Vector3 GetWorldPosition() = 0;
+	virtual Math::Vector::Vector3 GetWorldPosition() = 0;
 
 #pragma region Segment
 

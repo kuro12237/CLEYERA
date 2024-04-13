@@ -1,5 +1,7 @@
 #include"Input.h"
 
+using namespace Math::Vector;
+
 Input* Input::GetInstance()
 {
 	static Input instance;

@@ -2,7 +2,6 @@
 #include"Pch.h"
 #include"ModelObjData.h"
 #include"Graphics/TextureManager/TextureManager.h"
-#include"Graphics/NormalMap/NormalMap.h"
 #include"Quaternion/QuaternionTransform.h"
 #include"Animation/SAnimation.h"
 

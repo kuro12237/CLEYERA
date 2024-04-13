@@ -25,11 +25,11 @@ namespace Math
 
 		float Dot(const Quaternion& q1, const Quaternion& q2);
 
-		Vector3 RotateVector(const Vector3& v, const Quaternion& q);
+		Math::Vector::Vector3 RotateVector(const Math::Vector::Vector3& v, const Quaternion& q);
 
 		Quaternion Slerp(const Quaternion& q1, const Quaternion& q2, float t);
 
-		Matrix4x4 RotateMatrix(const Quaternion& q);
+		Math::Matrix::Matrix4x4 RotateMatrix(const Quaternion& q);
 	}
 
 };

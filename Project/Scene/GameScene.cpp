@@ -108,8 +108,7 @@ void GameScene::Update(GameManager* Scene)
 
 	debugCamera_->Update();
 	viewProjection_ = debugCamera_->GetData(viewProjection_);
-	Matrix4x4 test = ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix;
-	test;
+
 	animationTimer_ += 1.0f / 60.0f;
 	//TestAnimation();
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
@@ -206,14 +205,14 @@ void GameScene::TestAnimation()
 	animationTimer_ += 1.0f / 60.0f;
 	animationTimer_ = std::fmod(animationTimer_, data.duration);
 	SAnimation::NodeAnimation& rootNodeAnimation = data.NodeAnimation["AnimatedCube"];
-	Vector3 translate = AnimationManager::CalculateValue(rootNodeAnimation.translate.keyframes, animationTimer_);
-	Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
-	Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
+	Math::Vector::Vector3 translate = AnimationManager::CalculateValue(rootNodeAnimation.translate.keyframes, animationTimer_);
+	Math::Qua::Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
+	Math::Vector::Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
 
-	Matrix4x4 tm = Math::Matrix::TranslateMatrix(translate);
-	Matrix4x4 rm = Math::Qua::RotateMatrix(quaternion);
-	Matrix4x4 sm = Math::Matrix::ScaleMatrix(scale);
-	Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
+	Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(translate);
+	Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(quaternion);
+	Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix(scale);
+	Math::Matrix::Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 	worldTransform_.matWorld = Math::Matrix::Multiply(worldTransform_.matWorld, localMat);
 	worldTransform_.TransfarMatrix();
 

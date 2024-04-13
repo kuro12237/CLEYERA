@@ -1,5 +1,7 @@
 #include "SpriteBoxState.h"
 
+using namespace Math::Vector;
+
 void SpriteBoxState::Initialize(Sprite* state)
 {
 	CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize,resource_.Vertex);

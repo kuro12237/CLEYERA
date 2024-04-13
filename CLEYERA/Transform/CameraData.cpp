@@ -1,5 +1,8 @@
 #include"CameraData.h"
 
+using namespace Math::Matrix;
+using namespace Math::Vector;
+
 void CameraData::Initialize(Vector3 r, Vector3 t)
 {
 	rotation_= r;
