@@ -1,5 +1,6 @@
 #pragma once
 #include"Pch.h"
+#include"Transform/STransformQua.h"
 
 namespace SAnimation
 {
@@ -32,5 +33,22 @@ namespace SAnimation
 		uint32_t indexNumber = 0;
 		float duration = 0;
 		std::map<std::string, NodeAnimation>NodeAnimation;
+	};
+
+	struct Joint {
+		TransformQua transform;
+		Matrix4x4 localMatrix;
+		Matrix4x4 skeletonSpaceMatrix;
+		std::string name;
+		std::vector<int32_t>childlen;
+		int32_t index;
+		std::optional<int32_t>parent;
+	};
+	struct Skeleton
+	{
+		int32_t root;
+		std::map<std::string, int32_t>jointMap;
+		std::vector<Joint>joints;
+
 	};
 }

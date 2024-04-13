@@ -19,9 +19,9 @@ void GameScene::Initialize()
 	//ModelManager::ModelUseSubsurface();
 	//normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
 	gameObject_->SetIsIndexDraw(true);
-	normalMonkeyHandle_ = ModelManager::LoadGltfFile("AnimatedCube");
+	normalMonkeyHandle_ = ModelManager::LoadGltfFile("SimpleSkin");
 
-	AnimationManager::GetInstance()->LoadAnimation("AnimatedCube");
+	AnimationManager::GetInstance()->LoadAnimation("SimpleSkin");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
@@ -215,10 +215,11 @@ void GameScene::Update(GameManager* Scene)
 	viewProjection_ = debugCamera_->GetData(viewProjection_);
 	Matrix4x4 test = ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix;
 	test;
-	TestAnimation();
-	//worldTransform_.matWorld = MatrixTransform::Multiply(
-	//	ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix, worldTransform_.matWorld);
-	//worldTransform_.TransfarMatrix();
+	animationTimer_ += 1.0f / 60.0f;
+	//TestAnimation();
+	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
+	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("SimpleSkin");
+	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
 
 	if (Input::PushKeyPressed(DIK_N))
 	{

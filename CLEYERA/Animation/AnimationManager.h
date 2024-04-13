@@ -11,6 +11,8 @@ public:
 
 	uint32_t LoadAnimation(const string& fileName);
 
+	void ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation::Animation& animation, float time);
+
 	SAnimation::Animation GetData(const string& fileName);
 
 	static Vector3 CalculateValue(const std::vector<SAnimation::KeyframeVector3>& keyflames, float time);

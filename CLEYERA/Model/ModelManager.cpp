@@ -205,6 +205,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
+		SkeletonUpdate(modelData.node.skeleton);
 
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
@@ -231,7 +232,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		unique_ptr<Model>model = make_unique <Model>();
 		model->CreateObj(modelData);
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
-
+		
 		return modelHandle;
 	}
 	ModelManager::GetInstance()->isLoadNormalMap_ = false;
@@ -270,6 +271,26 @@ Model* ModelManager::GetModel(uint32_t index)
 	return nullptr;
 }
 
+void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
+{
+	for (SAnimation::Joint j : skeleton.joints)
+	{
+		Matrix4x4 tm = MatrixTransform::TranslateMatrix(j.transform.translate);
+		Matrix4x4 rm = QuaternionTransform::RotateMatrix(j.transform.quaternion);
+		Matrix4x4 sm = MatrixTransform::ScaleMatrix(j.transform.scale);
+		Matrix4x4 localMat = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
+		j.localMatrix = localMat;
+		if (j.parent)
+		{
+			j.skeletonSpaceMatrix = MatrixTransform::Multiply(j.localMatrix,skeleton.joints[*j.parent].skeletonSpaceMatrix);
+		}
+		else {
+			j.skeletonSpaceMatrix = j.localMatrix;
+		}
+    }
+
+}
+
 bool ModelManager::ChackLoadObj(string filePath)
 {
 	if (ModelManager::GetInstance()->objModelDatas_.find(filePath) == ModelManager::GetInstance()->objModelDatas_.end())
@@ -286,22 +307,62 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 	aiMatrix4x4 aiLocalMatrix = node->mTransformation;
 	aiLocalMatrix.Transpose();
 
-	for (int y = 0; y < 4; y++)
-	{
-		for (int x = 0; x < 4; x++)
-		{
-			result.localMatrix.m[y][x] = aiLocalMatrix[y][x];
-		}
-	}
+	//paramをGet
+	aiVector3D scale, translate;
+	aiQuaternion quaternion;
+
+	node->mTransformation.Decompose(scale, quaternion, translate);
+	result.transform.scale = { scale.x,scale.y,scale.z };
+	result.transform.quaternion = { quaternion.x,-quaternion.y,-quaternion.z,quaternion.w };
+	result.transform.translate = { translate.x,translate.y,translate.z };
+	Matrix4x4 sm, rm, tm;
+	sm = MatrixTransform::ScaleMatrix(result.transform.scale);
+	rm = QuaternionTransform::RotateMatrix(result.transform.quaternion);
+	tm = MatrixTransform::TranslateMatrix(result.transform.translate);
+	
+	result.localMatrix = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
 
 	result.name = node->mName.C_Str();
 	result.children.resize(node->mNumChildren);
+	result.skeleton = CreateSkeleton(result);
 
 	for (uint32_t childrenIndex = 0; childrenIndex < node->mNumChildren; ++childrenIndex)
 	{
 		result.children[childrenIndex] = ReadNodeData(node->mChildren[childrenIndex]);
+		
 	}
 
 	return result;
+}
+
+SAnimation::Skeleton ModelManager::CreateSkeleton(const NodeData& rootNode)
+{
+	SAnimation::Skeleton skeleton;
+	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
+	for (const SAnimation::Joint& joint : skeleton.joints)
+	{
+		skeleton.jointMap.emplace(joint.name, joint.index);
+    }
+	return skeleton;
+}
+
+int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int32_t>& parent, std::vector<SAnimation::Joint>& joints)
+{
+	SAnimation::Joint joint;
+	joint.name = node.name;
+	joint.localMatrix = node.localMatrix;
+	joint.transform = node.transform;
+	joint.skeletonSpaceMatrix = MatrixTransform::Identity();
+	joint.index = int32_t(joints.size());
+	joint.parent = parent;
+	joints.push_back(joint);
+
+	for (const NodeData& child : node.children)
+	{
+		int32_t  childIndex = CreateJoint(child, joint.index, joints);
+		joints[joint.index].childlen.push_back(childIndex);
+
+	}
+	return joint.index;
 }
 

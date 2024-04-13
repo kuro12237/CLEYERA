@@ -16,6 +16,21 @@ uint32_t AnimationManager::LoadAnimation(const string& fileName)
     return index_;
 }
 
+void AnimationManager::ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation::Animation& animation, float time)
+{
+    for (SAnimation::Joint& joint : skeleton.joints) {
+        if (auto it=animation.NodeAnimation.find(joint.name); it!=animation.NodeAnimation.end())
+        {
+            const SAnimation::NodeAnimation& rootNodeAnimation = (*it).second;
+            joint.transform.translate = CalculateValue(rootNodeAnimation.translate.keyframes, time);
+
+            joint.transform.quaternion = CalculateValue(rootNodeAnimation.rotate.keyframes, time);
+
+            joint.transform.scale = CalculateValue(rootNodeAnimation.scale.keyframes, time);
+        }
+    }
+}
+
 SAnimation::Animation AnimationManager::GetData(const string& fileName)
 {
     return datas_[fileName];

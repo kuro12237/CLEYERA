@@ -1,7 +1,9 @@
 #pragma once
 #include"Pch.h"
 #include"DirectXCommon.h"
-#include"CreateResource.h"
+#include"Transform/STransformQua.h"
+#include"Animation/SAnimation.h"
+
 struct  VertexData
 {
 	Vector4 position;
@@ -48,7 +50,8 @@ struct NodeData
 	Matrix4x4 localMatrix;
 	std::string name;
 	std::vector<NodeData>children;
-
+	TransformQua transform;
+	SAnimation::Skeleton skeleton;
 };
 
 struct  SModelData
