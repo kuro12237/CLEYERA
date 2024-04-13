@@ -4,6 +4,28 @@
 #include"Transform/STransformQua.h"
 #include"Animation/SAnimation.h"
 
+const uint32_t kNumMaxInfluence = 4;
+struct VertexInfluence
+{
+	std::array<float, kNumMaxInfluence>weights;
+	std::array<int32_t, kNumMaxInfluence>jointIndicess;
+};
+
+struct WellForGPU
+{
+	Math::Matrix::Matrix4x4 skeletonSpaceMatrix;
+	Math::Matrix::Matrix4x4 skeletonSpaceInverseTransposeMatrix;
+};
+struct SkinCluster
+{
+	std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
+	ComPtr<ID3D12Resource>influenceResource;
+	D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
+	std::span<VertexInfluence>mappedInfluence;
+	ComPtr<ID3D12Resource>paletteResource;
+	std::span<WellForGPU>mappedPalette;
+	uint32_t srvindex;
+};
 struct  VertexData
 {
 	Math::Vector::Vector4 position;

@@ -146,7 +146,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
 			//メモリの確保
-			//Fenceの解析
+			//mesh
 			for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex)
 			{
 				aiVector3D& position = mesh->mVertices[vertexIndex];
@@ -161,8 +161,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 				//vertex.normal.x *= -1.0f;
 				modelData.vertices.push_back(vertex);
 			}
-
-			//modelData.indecs.resize(mesh->mNumFaces);
+			//index
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
 			{
 				aiFace& face = mesh->mFaces[faceIndex];
@@ -175,6 +174,36 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 					modelData.indecs.push_back(vertexIndex);
 				}
 			}
+			//bone
+			for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
+			{
+				aiBone* bone = mesh->mBones[boneIndex];
+				std::string jointName = bone->mName.C_Str();
+				JointWeightData& jointWeightData = modelData.skinClusterData[jointName];
+				aiMatrix4x4 bindPoseMatrixAssimp = bone->mOffsetMatrix.Inverse();
+				aiVector3D scale, translate;
+				aiQuaternion rotate;
+
+				bindPoseMatrixAssimp.Decompose(scale, rotate, translate);
+				Math::Matrix::Matrix4x4 sm, rm,tm;
+				Math::Vector::Vector3 sv, tv;
+				sv = { scale.x,scale.y,scale.z };
+				tv = { -translate.x,translate.y,translate.z };
+				Math::Qua::Quaternion q = { rotate.x,-rotate.y,-rotate.z,rotate.w };
+				sm = Math::Matrix::ScaleMatrix(sv);
+				rm = Math::Qua::RotateMatrix(q);
+				tm = Math::Matrix::TranslateMatrix(tv);
+
+				Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::Identity();
+				bindPoseMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
+				jointWeightData.inverseBindPoseMatrix = Math::Matrix::Inverse(bindPoseMatrix);
+				for (uint32_t weightIndex  = 0;  weightIndex < bone->mNumWeights; ++weightIndex)
+				{
+					jointWeightData.vertexWeights.push_back({ uint32_t(bone->mWeights[weightIndex].mWeight),float(bone->mWeights[weightIndex].mVertexId)});
+
+				}
+			}
+
 		}
 
 		//materialの解析

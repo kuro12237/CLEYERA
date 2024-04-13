@@ -54,7 +54,7 @@ void GameScene::Initialize()
 	testSkyDomeGameObject_= make_unique<Game3dObject>();
 	testSkyDomeGameObject_->Create();
 	testSkyDomeGameObject_->SetModel(modelHandle);
-	testSkyDomeGameObject_->UseLight(true);
+	//testSkyDomeGameObject_->UseLight(true);
 	SkyObjectDesc_.useLight = true;
 	testSkyDomeGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 	testSkyDomeGameObject_->SetDesc(SkyObjectDesc_);
