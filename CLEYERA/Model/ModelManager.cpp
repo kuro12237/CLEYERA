@@ -43,42 +43,35 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 		assert(scene->HasMeshes());
 
-		//mesh解析
 		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex)
 		{
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
-			//indexメモリ確保
-			modelData.indecs.resize(mesh->mNumVertices);
-
+			//メモリの確保
 			//Fenceの解析
-			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
+			for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex)
 			{
-				aiFace& face = mesh->mFaces[faceIndex];
-				assert(face.mNumIndices == 3);
-				//Vertex解析
-				for (uint32_t element = 0; element < face.mNumIndices; ++element)
-				{
-					uint32_t vertexIndex = face.mIndices[element];
-					aiVector3D& position = mesh->mVertices[vertexIndex];
-					aiVector3D& normal = mesh->mNormals[vertexIndex];
-					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-					VertexData vertex;
-					vertex.position = { position.x,position.y,position.z,1.0f };
-					vertex.normal = { normal.x,normal.y,normal.z };
-					vertex.texcoord = { texcoord.x,texcoord.y };
-					//座標反転
-					vertex.position.x *= -1.0f;
-					vertex.normal.x *= -1.0f;
-					modelData.vertices.push_back(vertex);
-				}
+				aiVector3D& position = mesh->mVertices[vertexIndex];
+				aiVector3D& normal = mesh->mNormals[vertexIndex];
+				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+				VertexData vertex;
+				vertex.position = { -position.x,position.y,position.z,1.0f };
+				vertex.normal = { -normal.x,normal.y,normal.z };
+				vertex.texcoord = { texcoord.x,texcoord.y };
+				//座標反転
+				//vertex.position.x *= -1.0f;
+				//vertex.normal.x *= -1.0f;
+				modelData.vertices.push_back(vertex);
 			}
+
+			//modelData.indecs.resize(mesh->mNumFaces);
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
 			{
 				aiFace& face = mesh->mFaces[faceIndex];
 				assert(face.mNumIndices == 3);
-				for (int32_t element = face.mNumIndices - 1; element >= 0; element--)
+
+				for (uint32_t element = 0; element < face.mNumIndices; ++element)
 				{
 					uint32_t vertexIndex = face.mIndices[element];
 					//indexPush
@@ -146,7 +139,6 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 		assert(scene->HasMeshes());
-
 		//mesh解析
 		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex)
 		{
@@ -154,42 +146,37 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
 			//メモリの確保
-			
 			//Fenceの解析
-			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
+			for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex)
 			{
-				aiFace& face = mesh->mFaces[faceIndex];
-				assert(face.mNumIndices == 3);
-				//Vertex解析
-				for (uint32_t element = 0; element < face.mNumIndices; ++element)
-				{
-					uint32_t vertexIndex = face.mIndices[element];
-					aiVector3D& position = mesh->mVertices[vertexIndex];
-					aiVector3D& normal = mesh->mNormals[vertexIndex];
-					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-					VertexData vertex;
-					vertex.position = { -position.x,position.y,position.z,1.0f };
-					vertex.normal = { -normal.x,normal.y,normal.z };
-					vertex.texcoord = { texcoord.x,texcoord.y };
-					//座標反転
-					//vertex.position.x *= -1.0f;
-					//vertex.normal.x *= -1.0f;
-					modelData.vertices.push_back(vertex);
-				}
+				aiVector3D& position = mesh->mVertices[vertexIndex];
+				aiVector3D& normal = mesh->mNormals[vertexIndex];
+				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+				VertexData vertex;
+				vertex.position = { position.x,position.y,position.z,1.0f };
+				vertex.normal = { -normal.x,normal.y,normal.z };
+				vertex.texcoord = { texcoord.x,texcoord.y };
+				//座標反転
+				//vertex.position.x *= -1.0f;
+				//vertex.normal.x *= -1.0f;
+				modelData.vertices.push_back(vertex);
 			}
+
+			//modelData.indecs.resize(mesh->mNumFaces);
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
 			{
 				aiFace& face = mesh->mFaces[faceIndex];
 				assert(face.mNumIndices == 3);
-				for (int32_t element =face.mNumIndices-1; element >= 0; element--)
+	
+				for (uint32_t element = 0; element < face.mNumIndices; ++element)
 				{
 					uint32_t vertexIndex = face.mIndices[element];
 					//indexPush
 					modelData.indecs.push_back(vertexIndex);
 				}
 			}
-
 		}
+
 		//materialの解析
 		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; materialIndex++)
 		{
