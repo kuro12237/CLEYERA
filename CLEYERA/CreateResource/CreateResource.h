@@ -1,7 +1,9 @@
 #pragma once
 #include"Pch.h"
 #include"DirectXCommon.h"
-#include"CreateResource.h"
+#include"Transform/STransformQua.h"
+#include"Animation/SAnimation.h"
+
 struct  VertexData
 {
 	Vector4 position;
@@ -43,10 +45,34 @@ struct MaterialData
 	string textureFilePath{};
 };
 
+struct NodeData 
+{
+	Matrix4x4 localMatrix;
+	std::string name;
+	std::vector<NodeData>children;
+	TransformQua transform;
+	SAnimation::Skeleton skeleton;
+};
+
+struct VetexWeightData
+{
+	float weight;
+	uint32_t vertexIndex;
+};
+
+struct JointWeightData
+{
+	Matrix4x4 inverseBindPoseMatrix;
+	std::vector<aiVertexWeight>vertexWeights;
+};
+
 struct  SModelData
 {
+	std::map<std::string, JointWeightData>skinClusterData;
 	vector<VertexData> vertices;
+	std::vector<uint32_t>indecs;
 	MaterialData material;
+	NodeData node;
 	string texFilePath;
 	uint32_t texHandle;
 	string normalilePath;

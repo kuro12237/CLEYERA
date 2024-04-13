@@ -24,6 +24,10 @@ public:
 	}
 	static float Dot(const Vector3& v1, const Vector3& v2);
 	
+	static Vector3 Lerp(const Vector3& a, const Vector3& b, const float t) {
+		return Vector3{ Lerp(a.x,b.x,t),Lerp(a.y,b.y,t),Lerp(a.z,b.z,t) };
+	}
+
 	static Vector3 SlerpFanc(Vector3 start, Vector3 end, float t);
 
 	static Vector4 Subtruct(const Vector4& v1, const Vector4& v2);

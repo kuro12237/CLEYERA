@@ -3,7 +3,8 @@
 #include"ModelObjData.h"
 #include"Graphics/TextureManager/TextureManager.h"
 #include"Graphics/NormalMap/NormalMap.h"
-#include<vector>
+#include"Quaternion/QuaternionTransform.h"
+#include"Animation/SAnimation.h"
 
 class ModelManager
 {
@@ -29,6 +30,8 @@ public:
 	/// <returns></returns>
 	static uint32_t LoadObjectFile(string directoryPath);
 
+	static uint32_t LoadGltfFile(string directoryPath);
+
 	/// <summary>
 	/// ハンドルのobjデータのGet
 	/// </summary>
@@ -36,11 +39,18 @@ public:
 
 	static Model* GetModel(uint32_t index);
 
+	static void SkeletonUpdate(SAnimation::Skeleton& skeleton);
+
 private:
 
 	static bool ChackLoadObj(string filePath);
 
-	static bool checkLoadNormalMap(const string filePath);
+	static NodeData ReadNodeData(aiNode*node);
+
+	static SAnimation::Skeleton CreateSkeleton(const NodeData& rootNode);
+
+	static int32_t CreateJoint(const NodeData& node, const std::optional<int32_t>& parent, std::vector<SAnimation::Joint>& joints);
+
 
 	map<string,unique_ptr<ModelObjData>>objModelDatas_;
 	uint32_t objHandle_ = 0;

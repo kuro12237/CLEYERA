@@ -145,3 +145,81 @@ Quaternion QuaternionTransform::Inverse(const Quaternion& quaternion)
 
 	return result;
 }
+
+float QuaternionTransform::Dot(const Quaternion& q1, const Quaternion& q2)
+{
+	return float(q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z);
+}
+
+Vector3 QuaternionTransform::RotateVector(const Vector3& v, const Quaternion& q)
+{
+	Quaternion vecQuat{};
+	vecQuat.w = 0.0f;
+	vecQuat.x = v.x;
+	vecQuat.y = v.y;
+	vecQuat.z = v.z;
+
+	Quaternion conjugate = Conjugation(q);
+
+	// ベクトルを回転する
+	Quaternion rotatedVec = Multiply(q, Multiply(vecQuat, conjugate));
+
+	// 回転後のベクトルを抽出して返す
+	return { rotatedVec.x, rotatedVec.y, rotatedVec.z };
+
+}
+
+Quaternion QuaternionTransform::Slerp(const Quaternion& q1, const Quaternion& q2, float t)
+{
+
+	// クォータニオンの内積を計算
+	float dot = Dot(q1, q2);
+
+	Quaternion qn1 = q1;
+	Quaternion qn2 = q2;
+
+	if (dot < 0.0f)
+	{
+		qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
+		dot = -dot;
+	}
+
+	// q1とq2の間の角度を計算
+	float theta = std::acos(dot);
+
+	float sinTheta = std::sin(theta);
+	float scale0 = std::sin((1 - t) * theta) / sinTheta;
+	float scale1 = std::sin(t * theta) / sinTheta;
+
+	// 補間されたクォータニオンを計算して返す
+	return Quaternion(
+		scale0 * qn1.x + scale1 * qn2.x,
+		scale0 * qn1.y + scale1 * qn2.y,
+		scale0 * qn1.z + scale1 * qn2.z,
+		scale0 * qn1.w + scale1 * qn2.w
+	);
+
+}
+
+Matrix4x4 QuaternionTransform::RotateMatrix(const Quaternion& q)
+{
+	Matrix4x4 result = MatrixTransform::Identity();
+
+	result.m[0][0] = (q.w * q.w) + (q.x * q.x) - (q.y * q.y) - (q.z * q.z);
+	result.m[0][1] = 2.0f * ((q.x * q.y) + (q.w * q.z));
+	result.m[0][2] = 2.0f * ((q.x * q.z) - (q.w * q.y));
+	result.m[0][3] = 0.0f;
+
+	result.m[1][0] = 2.0f * ((q.x * q.y) - (q.w * q.z));
+	result.m[1][1] = (q.w * q.w) - (q.x * q.x) + (q.y * q.y) - (q.z * q.z);
+	result.m[1][2] = 2.0f * ((q.y * q.z) + (q.w * q.x));
+	result.m[1][3] = 0.0f;
+
+	result.m[2][0] = 2.0f * ((q.x * q.z) + (q.w * q.y));
+	result.m[2][1] = 2.0f * ((q.y * q.z) - (q.w * q.x));
+	result.m[2][2] = (q.w * q.w) - (q.x * q.x) - (q.y * q.y) + (q.z * q.z);
+	result.m[2][3] = 0.0f;
+
+	return result;
+}
+

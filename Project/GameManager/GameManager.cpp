@@ -35,6 +35,8 @@ void GameManager::Run()
 			DescriptorManager::ImGuiUpdate();
 			ImGui::TreePop();
 		}
+		GlobalVariables::GetInstance()->Update();
+
 #endif //  _USE_IMGUI
 
 		LightingManager::ClearList();

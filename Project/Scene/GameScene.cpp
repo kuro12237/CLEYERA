@@ -18,7 +18,10 @@ void GameScene::Initialize()
 	//ModelManager::ModelLoadNormalMap();
 	//ModelManager::ModelUseSubsurface();
 	//normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
-	normalMonkeyHandle_ = ModelManager::LoadObjectFile("Sphere");
+	gameObject_->SetIsIndexDraw(true);
+	normalMonkeyHandle_ = ModelManager::LoadGltfFile("Walk");
+
+	AnimationManager::GetInstance()->LoadAnimation("SimpleSkin");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
@@ -43,6 +46,7 @@ void GameScene::Initialize()
 	testGroundGameObject_->SetModel(modelHandle);
 	testGroundGameObject_->UseLight(true);
 	testGroundGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
+	testGroundGameObject_->SetIsIndexDraw(true);
 
 	TestSkyDomeWorldTreanform_.Initialize();
 	TestSkyDomeWorldTreanform_.scale = { 8.0f,8.0f,8.0f };
@@ -65,13 +69,11 @@ void GameScene::Initialize()
 
 void GameScene::Update(GameManager* Scene)
 {
-#ifdef _USE_IMGUI
-
 	debugCamera_->ImGuiUpdate();
 
 	if (ImGui::TreeNode("Light"))
 	{
-		ImGui::DragFloat3("translate", &light_.worldPos_.x,-0.1f,0.1f);
+		ImGui::DragFloat3("translate", &light_.position.x,-0.1f,0.1f);
 		ImGui::DragFloat("decay", &light_.decay, -0.1f, 0.1f);
 		ImGui::DragFloat("radious", &light_.radious, -0.1f, 0.1f);
 		ImGui::DragFloat("intencity", &light_.intencity, -0.1f, 0.1f);
@@ -79,98 +81,9 @@ void GameScene::Update(GameManager* Scene)
 		ImGui::TreePop();
 	}
 
-	auto SelectPipline = [](ModelShaderSelect s)
-	{
-		switch (s)
-		{
-		case PHONG_MODEL:
-			return "PHONG_MODEL";
-		case UE4_BRDF:
-			return"UE4_BRDF";
-		case PHONG_NORMAL_MODEL:
-			return "PHONG_NORMAL_MODEL";
-		case PHONG_SUBSURFACE_MODEL:
-			return "PHONG_SUBSURFACE_MODEL";
-		default:
-			return "UnKnown";
-		}
-	};
-
-
-	if (ImGui::TreeNode("model"))
-	{
-		ImGui::Checkbox("SmoothMonkeyModel",&SmoothMoneyUseFlag_);
-		if (SmoothMoneyUseFlag_)
-		{
-			gameObject_->SetModel(smoothMonkeyHandle_);
-		}
-		else {
-			gameObject_->SetModel(normalMonkeyHandle_);
-		}
-
-		ImGui::DragFloat("absorptionCoefficient", &absorptionCoefficient_, -0.1f, 0.1f);
-		ImGui::DragFloat("scatterCoefficient_", &scatterCoefficient_, -0.1f, 0.1f);
-		ImGui::DragFloat("scatterDistance", &scatterDistance_, -0.1f, 0.1f);
-		gameObject_->SetAbsorptionCoefficient(absorptionCoefficient_);
-		gameObject_->SetScatterCoefficient(scatterCoefficient_);
-		gameObject_->SetScatterDistance(scatterDistance_);
-
-		ImGui::DragFloat3("translate", &worldTransform_.translate.x, -0.1f, 0.1f);
-
-		if (ImGui::BeginCombo("Shading",SelectPipline(modelPipline_)))
-		{
-			for (int i = 0; i < 5; i++) {
-				bool isSelected = (modelPipline_ == static_cast<ModelShaderSelect>(i));
-				if (ImGui::Selectable(SelectPipline(static_cast<ModelShaderSelect>(i)), isSelected))
-					modelPipline_ = static_cast<ModelShaderSelect>(i);
-				if (isSelected)
-					ImGui::SetItemDefaultFocus();
-			}
-			ImGui::EndCombo();
-		}
-		ImGui::TreePop();
-	}
 
 	gameObject_->SetlectModelPipeline(modelPipline_);
 
-	auto SetNamePostEffect = [](SelectPostEffect b)
-	{
-		switch (b)
-		{
-		case GRAYSCALE:
-			return "GRAYSCALE";
-		case INVERT:
-				return "INVERT";
-
-		default:
-			return "unKnown";
-		}
-	};
-
-	if (ImGui::TreeNode("postEffectParam"))
-	{
-		ImGui::DragFloat2("uvscale", &postEffectuvScale.x, -0.1f, 0.1f);
-		ImGui::DragFloat("GrayFactor", &postEffectGrayFactor_, -0.01f, 0.01f);
-		ImGui::DragFloat("invertFactor", &postEffectInvertFactor_, -0.01f, 0.01f);
-		ImGui::DragFloat("bringhtness", &postEffectBringhtnessFactor_, -0.01f, 0.01f);
-		ImGui::DragFloat("AverageIntensity", &postEffectAverageBlurIntensity_, -0.01f, 0.01f);
-		ImGui::DragFloat("ContrastFactor", &postEffectContrastFactor_, -0.01f, 0.01f);
-		ImGui::DragFloat("hueFactor", &postEffectHueFactor_, -0.01f, 0.01f);
-
-		if (ImGui::BeginCombo("BlendChange", SetNamePostEffect(selectPostEffect_)))
-		{
-			for (int i = 0; i < 2; i++) {
-				bool isSelected = (selectPostEffect_ == static_cast<SelectPostEffect>(i));
-				if (ImGui::Selectable(SetNamePostEffect(static_cast<SelectPostEffect>(i)), isSelected))
-					selectPostEffect_ = static_cast<SelectPostEffect>(i);
-				if (isSelected)
-					ImGui::SetItemDefaultFocus();
-			}
-			ImGui::EndCombo();
-		}
-		ImGui::TreePop();
-	}
-#endif // _USE_IMGUI
 
 	light_.UpdateMatrix();
 	LightingManager::AddList(light_);
@@ -181,26 +94,12 @@ void GameScene::Update(GameManager* Scene)
 	{
 		LightingManager::AddList(testLight);
 	}
-	postEffect_->SetSelectPostEffect(GRAYSCALE,true);
-	postEffect_->SetSelectPostEffect(INVERT, true);
-	postEffect_->SetSelectPostEffect(BRINGHTNESS, true);
-	postEffect_->SetSelectPostEffect(AVERAGE_BLUR, true);
-	//postEffect_->SetSelectPostEffect(HUE, true);
-	postEffect_->SetSelectPostEffect(CONTRAST, true);
 
-	postEffect_->SetBringhtnessFactor(postEffectBringhtnessFactor_);
-	postEffect_->SetGrayFactor(postEffectGrayFactor_);
-	postEffect_->SetInvertFactor(postEffectInvertFactor_);
-	postEffect_->SetBlurintensity(postEffectAverageBlurIntensity_);
-	postEffect_->SetContrastFactor(postEffectContrastFactor_);
-	postEffect_->SetHueFactor(postEffectHueFactor_);
-
-	postEffect_->SetUvScale(postEffectuvScale);
 	postEffect_->Update();
 
 	Move();
 
-	worldTransform_.rotation.y += 0.01f;
+	//worldTransform_.rotation.y += 0.01f;
 	worldTransform_.UpdateMatrix();
 	testGroundWorldTransform_.UpdateMatrix();
 	TestSkyDomeWorldTreanform_.UpdateMatrix();
@@ -209,7 +108,13 @@ void GameScene::Update(GameManager* Scene)
 
 	debugCamera_->Update();
 	viewProjection_ = debugCamera_->GetData(viewProjection_);
-
+	Matrix4x4 test = ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix;
+	test;
+	animationTimer_ += 1.0f / 60.0f;
+	//TestAnimation();
+	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
+	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("SimpleSkin");
+	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
 
 	if (Input::PushKeyPressed(DIK_N))
 	{
@@ -293,4 +198,23 @@ void GameScene::Move()
 	{
 		worldTransform_.translate.x += speed;
 	}
+}
+
+void GameScene::TestAnimation()
+{
+	SAnimation::Animation data = AnimationManager::GetInstance()->GetData("AnimatedCube");
+	animationTimer_ += 1.0f / 60.0f;
+	animationTimer_ = std::fmod(animationTimer_, data.duration);
+	SAnimation::NodeAnimation& rootNodeAnimation = data.NodeAnimation["AnimatedCube"];
+	Vector3 translate = AnimationManager::CalculateValue(rootNodeAnimation.translate.keyframes, animationTimer_);
+	Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
+	Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
+
+	Matrix4x4 tm = MatrixTransform::TranslateMatrix(translate);
+	Matrix4x4 rm = QuaternionTransform::RotateMatrix(quaternion);
+	Matrix4x4 sm = MatrixTransform::ScaleMatrix(scale);
+	Matrix4x4 localMat = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
+	worldTransform_.matWorld = MatrixTransform::Multiply(worldTransform_.matWorld, localMat);
+	worldTransform_.TransfarMatrix();
+
 }

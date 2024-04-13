@@ -23,6 +23,8 @@ void Cleyera::Initialize()
 	AudioManager::Initialize();
 	LightingManager::Initialize();
 	DirectionalLight::Initialize();
+
+	GlobalVariables::GetInstance()->LoadFiles();
 }
 
 void Cleyera::Finalize()

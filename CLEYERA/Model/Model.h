@@ -50,7 +50,11 @@ public:
 	/// </summary>
 	void UseLight(bool flag) { this->uselight_ = flag; };
 
+	void SetIsIndexDraw(bool flag) { isIndexDrawFlag_ = flag; }
+
 #pragma region Get
+
+	bool GetIsIndexDraw() { return isIndexDrawFlag_; }
 
 	Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
@@ -109,5 +113,6 @@ private:
 	unique_ptr<IModelState> state_ = nullptr;
 	SModelData modelData_;
 
+	bool isIndexDrawFlag_ = false;
 };
 

@@ -15,6 +15,7 @@
 #include"PostEffect/PostEffect.h"
 #include"Graphics/DescripterManager/RTVDescripterManager.h"
 #include"Light/DirectionLIght.h"
+#include"Utility/GlobalVariables/GlobalVariables.h"
 
 #ifdef _DEBUG
  
