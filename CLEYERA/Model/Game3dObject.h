@@ -36,7 +36,6 @@ public:
 	void SetNormalTex(uint32_t tex) { normalTexHandle_ = tex; }
 	void SetBaseTex(uint32_t tex) { baseTexHandle_ = tex; }
 
-	void UseLight(bool flag) { UseLight_ = flag; }
 
 	void SetColor(Math::Vector::Vector4 color) { color_ = color; }
 
@@ -79,8 +78,7 @@ private:
 
 	const Game3dObjectDesc* game3dObjectDesc_ = nullptr;
 
-	bool UseLight_ = false;
-	
+
 	uint32_t texHandle_ = 0;
 	uint32_t normalTexHandle_ = 0;
 	uint32_t baseTexHandle_ = 0;
