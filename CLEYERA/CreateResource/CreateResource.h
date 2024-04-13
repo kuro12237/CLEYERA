@@ -54,8 +54,21 @@ struct NodeData
 	SAnimation::Skeleton skeleton;
 };
 
+struct VetexWeightData
+{
+	float weight;
+	uint32_t vertexIndex;
+};
+
+struct JointWeightData
+{
+	Matrix4x4 inverseBindPoseMatrix;
+	std::vector<aiVertexWeight>vertexWeights;
+};
+
 struct  SModelData
 {
+	std::map<std::string, JointWeightData>skinClusterData;
 	vector<VertexData> vertices;
 	std::vector<uint32_t>indecs;
 	MaterialData material;
