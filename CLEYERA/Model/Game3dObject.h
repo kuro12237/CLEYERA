@@ -1,14 +1,8 @@
 #pragma once
 #include"ModelManager.h"
 #include"Light/DirectionLIght.h"
-
-enum ModelShaderSelect
-{
-	PHONG_MODEL = 0,
-	UE4_BRDF = 1,
-	PHONG_NORMAL_MODEL = 2,
-	PHONG_SUBSURFACE_MODEL = 3
-};
+#include"Game3dObjectDesc.h"
+#include"Graphics/PipelineManager/GraphicsPipelineManager.h"
 
 class Game3dObject
 {
@@ -32,8 +26,7 @@ public:
 
 #pragma region Set
 
-	void SetIsIndexDraw(bool flag) { isIndexDraw = flag; }
-
+	void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = &desc; }
 
 	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
 	void SetUvRotate(Math::Vector::Vector3 r) { uvRotate = r; }
@@ -46,16 +39,12 @@ public:
 	void UseLight(bool flag) { UseLight_ = flag; }
 
 	void SetColor(Math::Vector::Vector4 color) { color_ = color; }
-	void SetShininess(float s) { shininess = s; }
-	void SetSpecular(float s) { this->specular_ = s; };
+
 	void SetMetalness(float m) { this->metalness_ = m; }
 	void SetRoughness(float r) { this->roughness_ = r; }
 
 	void SetlectModelPipeline(ModelShaderSelect number) { ModelShaderSelect_ = number; }
 
-	void SetAbsorptionCoefficient(float a) { absorptionCoefficient_ = a; }
-	void SetScatterCoefficient(float s) { scatterCoefficient_ = s; }
-	void  SetScatterDistance(float s) { scatterDistance_ = s; }
 #pragma endregion
 
 private:
@@ -79,24 +68,16 @@ private:
 	Math::Vector::Vector3 uvRotate = { 0,0,0 };
 	Math::Vector::Vector3 uvTranslate = { 0,0,0 };
 
-#pragma region phong
-	float shininess = 70.0f;
-	float specular_ = 1.0f;
-#pragma endregion
+
 
 #pragma region 物理ベース
 	float metalness_ = 1.0f;
 	float roughness_ = 1.0f;
 #pragma endregion
 
-#pragma region SSS
-	// 散乱係数
-	float scatterCoefficient_=0.5f;
-	// 吸収係数 
-	float absorptionCoefficient_=0.5f;
-	//光の伝播距離
-	float scatterDistance_=0.5f;
-#pragma endregion
+
+
+	const Game3dObjectDesc* game3dObjectDesc_ = nullptr;
 
 	bool UseLight_ = false;
 	

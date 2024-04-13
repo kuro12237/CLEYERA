@@ -15,17 +15,16 @@ void GameScene::Initialize()
 	worldTransform_.translate.y = 0.5f;
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
-	//ModelManager::ModelLoadNormalMap();
-	//ModelManager::ModelUseSubsurface();
-	//normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
-	gameObject_->SetIsIndexDraw(true);
+
 	normalMonkeyHandle_ = ModelManager::LoadGltfFile("Walk");
 
 	AnimationManager::GetInstance()->LoadAnimation("SimpleSkin");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
-	
+	ObjectDesc_.useLight = true;
+	gameObject_->SetDesc(ObjectDesc_);
+
 	light_.position.y = 1.0f;
 	light_.position.z = -1.0f;
 	light_.radious = 10.0f;
@@ -35,7 +34,6 @@ void GameScene::Initialize()
 	testLight.radious = 4.0f;
 	testLight.color = { 1,0,0,1 };
 
-	gameObject_->UseLight(true);
 	gameObject_->SetlectModelPipeline(UE4_BRDF);
 
 	ModelManager::ModelLoadNormalMap();
@@ -44,9 +42,10 @@ void GameScene::Initialize()
 	testGroundGameObject_ = make_unique<Game3dObject>();
 	testGroundGameObject_->Create();
 	testGroundGameObject_->SetModel(modelHandle);
-	testGroundGameObject_->UseLight(true);
+	GroundObjectDesc_.useLight = true;
+	testGroundGameObject_->SetDesc(GroundObjectDesc_);
+
 	testGroundGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
-	testGroundGameObject_->SetIsIndexDraw(true);
 
 	TestSkyDomeWorldTreanform_.Initialize();
 	TestSkyDomeWorldTreanform_.scale = { 8.0f,8.0f,8.0f };
@@ -56,8 +55,9 @@ void GameScene::Initialize()
 	testSkyDomeGameObject_->Create();
 	testSkyDomeGameObject_->SetModel(modelHandle);
 	testSkyDomeGameObject_->UseLight(true);
+	SkyObjectDesc_.useLight = true;
 	testSkyDomeGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
-
+	testSkyDomeGameObject_->SetDesc(SkyObjectDesc_);
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
 
@@ -130,38 +130,6 @@ void GameScene::PostProcessDraw()
 	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 
 	postEffect_->PostDraw();
-//color
-//	defferedShading->PreColorDraw();
-//	
-//	gameObject_->ColorDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostColorDraw();
-//
-//	defferedShading->PreNormalDraw();
-//	//normal
-//	gameObject_->NormalDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->NormalDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//    testGroundGameObject_->NormalDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostNormalDraw();
-//    //pos
-//	defferedShading->PrePosDraw();
-//
-//	gameObject_->PosDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->PosDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//	testGroundGameObject_->PosDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostPosDraw();
-////depth
-//	defferedShading->PreDepthDraw();
-//
-//	gameObject_->ColorDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostDepthDraw();
 }
 
 void GameScene::Back2dSpriteDraw()

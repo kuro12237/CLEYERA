@@ -53,12 +53,18 @@ private:
 
 	unique_ptr<PostEffect>postEffectTest_ = nullptr;
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
+	Game3dObjectDesc ObjectDesc_ = {};
+
 	WorldTransform worldTransform_ = {};
 
 	unique_ptr<Game3dObject>testSkyDomeGameObject_ = nullptr;
+	Game3dObjectDesc SkyObjectDesc_ =  {};
+
 	WorldTransform TestSkyDomeWorldTreanform_ = {};
 	unique_ptr<Game3dObject>testGroundGameObject_ = nullptr;
+	
 	WorldTransform testGroundWorldTransform_ = {};
+	Game3dObjectDesc GroundObjectDesc_ = {};
 
 	PointLight_param light_ = {};
 	PointLight_param testLight = {};

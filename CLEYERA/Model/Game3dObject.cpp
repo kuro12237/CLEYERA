@@ -39,27 +39,26 @@ void Game3dObject::Draw(WorldTransform worldTransform ,CameraData view)
 		return;
 	}
 
-	model_->UseLight(UseLight_);
-	model_->SetIsIndexDraw(isIndexDraw);
+	model_->SetDesc(*game3dObjectDesc_);
 
 	MaterialBuffer_->Map();
 
-	material_.shininess = shininess;
+	material_.shininess = game3dObjectDesc_->shongDesc.shininess;
 	material_.color = color_;
 	material_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate, uvTranslate);
-	material_.specular_    = specular_;
+	material_.specular_    = game3dObjectDesc_->shongDesc.specular_;
 	material_.roughness_ = roughness_;
 	material_.metalness_  = metalness_;
-	material_.scatterCoefficient = scatterCoefficient_;
-	material_.scatterDistance = scatterDistance_;
-	material_.absorptionCoefficient = absorptionCoefficient_;
+	material_.scatterCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
+	material_.scatterDistance = game3dObjectDesc_->sssDesc.scatterDistance_;
+	material_.absorptionCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
 
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
-	if (UseLight_)
+	if (game3dObjectDesc_->useLight)
 	{
 		if (CommpandPipeline(PSO))
 		{
@@ -76,12 +75,14 @@ void Game3dObject::Draw(WorldTransform worldTransform ,CameraData view)
 	MaterialBuffer_->CommandCall(0);
 	worldTransform.buffer_->CommandCall(1);
 	view.buffer_->CommandCall(2);
+	view.buffer_->CommandCall(3);
+
 	DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
 	commands.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
 
-	if (UseLight_)
+	if (game3dObjectDesc_->useLight)
 	{
 		if (ModelShaderSelect_ == PHONG_NORMAL_MODEL || ModelShaderSelect_ == UE4_BRDF || ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
 		{
@@ -105,15 +106,15 @@ void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const Camera
 	model_->CommandCallPipelineVertex();
 
 	MaterialBuffer_->Map();
-	material_.shininess = shininess;
+	material_.shininess = game3dObjectDesc_->shongDesc.shininess;
 	material_.color = color_;
 	material_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate, uvTranslate);
-	material_.specular_ = specular_;
+	material_.specular_ = game3dObjectDesc_->shongDesc.specular_;
 	material_.roughness_ = roughness_;
 	material_.metalness_ = metalness_;
-	material_.scatterCoefficient = scatterCoefficient_;
-	material_.scatterDistance = scatterDistance_;
-	material_.absorptionCoefficient = absorptionCoefficient_;
+	material_.scatterCoefficient = game3dObjectDesc_->sssDesc.absorptionCoefficient_;
+	material_.scatterDistance = game3dObjectDesc_->sssDesc.scatterDistance_;
+	material_.absorptionCoefficient = game3dObjectDesc_->sssDesc.absorptionCoefficient_;
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
 
@@ -126,6 +127,7 @@ void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const Camera
 	worldTransform.buffer_->CommandCall(1);
 
 	view.buffer_->CommandCall(2);
+	view.buffer_->CommandCall(3);
 	DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
 	command.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 

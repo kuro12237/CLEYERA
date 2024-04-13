@@ -1,15 +1,16 @@
 #pragma once
 #include"Pch.h"
 #include"Graphics/TextureManager/TextureManager.h"
-
-#include"ModelPlaneState.h"
-#include"ModelLineState.h"
-#include"ModelSphereState.h"
+//
+//#include"ModelPlaneState.h"
+//#include"ModelLineState.h"
+//#include"ModelSphereState.h"
 #include"ModelObjState.h"
 
 #include"WorldTransform.h"
 #include"CameraData.h"
 #include"Light/Light.h"
+#include"Game3dObjectDesc.h"
 
 class Model
 {
@@ -45,16 +46,10 @@ public:
 
 	void Draw( const CameraData&viewprojection);
 
-	/// <summary>
-	/// ライトを使うか？
-	/// </summary>
-	void UseLight(bool flag) { this->uselight_ = flag; };
-
-	void SetIsIndexDraw(bool flag) { isIndexDrawFlag_ = flag; }
+	void SetDesc(const Game3dObjectDesc& desc) { desc_ = &desc; }
 
 #pragma region Get
 
-	bool GetIsIndexDraw() { return isIndexDrawFlag_; }
 
 	Math::Vector::Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
@@ -82,15 +77,14 @@ public:
 	/// </summary>
 	float GetSize() { return size_; }
 
-
-	bool GetUseLight(){return uselight_;}
-
 	SModelData GetModelData() { return modelData_; }
 
 	//Light GetLight() { return testLight_; }
 #pragma endregion 
 
 private:
+
+	const Game3dObjectDesc* desc_ = nullptr;
 
 	Math::Vector::Vector4 CenterPos_ = { 0,0,0,1 };
 	float size_=1.5f;
@@ -108,11 +102,8 @@ private:
 	Math::Vector::Vector3 uvRotate_ = {0,0,0};
 	Math::Vector::Vector3 uvTranslate_ = {0,0,0};
 
-	bool uselight_ = false;
-
 	unique_ptr<IModelState> state_ = nullptr;
 	SModelData modelData_;
 
-	bool isIndexDrawFlag_ = false;
 };
 

@@ -72,10 +72,7 @@
     <ClCompile Include="CLEYERA\Model\Game3dObject.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp" />
-    <ClCompile Include="CLEYERA\Model\State\ModelLineState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp" />
-    <ClCompile Include="CLEYERA\Model\State\ModelPlaneState.cpp" />
-    <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp" />
     <ClCompile Include="CLEYERA\Particle\Particle.cpp" />
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
@@ -136,14 +133,12 @@
     <ClInclude Include="CLEYERA\math\Vector\Vector4.h" />
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h" />
     <ClInclude Include="CLEYERA\Model\Game3dObject.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
     <ClInclude Include="CLEYERA\Model\Model.h" />
     <ClInclude Include="CLEYERA\Model\ModelManager.h" />
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
-    <ClInclude Include="CLEYERA\Model\State\ModelLineState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
-    <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h" />
-    <ClInclude Include="CLEYERA\Model\State\ModelSphereState.h" />
     <ClInclude Include="CLEYERA\Particle\Particle.h" />
     <ClInclude Include="CLEYERA\Particle\SParticle.h" />
     <ClInclude Include="CLEYERA\Particle\state\IParticleState.h" />
