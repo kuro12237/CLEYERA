@@ -1,18 +1,39 @@
 #pragma once
 
-#include<format>
-#include<string>
-#include<wrl.h>
 #include<cassert>
-#include<list>
-#include<vector>
+
+#include<format>
+#include<wrl.h>
+#include<cstdint>
+
 #include<numbers>
-#include<fstream>
-#include<sstream>
 #include<chrono>
 #include<random>
+
 #include<map>
 #include<array>
+#include<queue>
+#include<list>
+#include<vector>
+
+#include <variant>
+
+#include<fstream>
+#include<sstream>
+#include<string>
+
+#include<Windows.h>
+#pragma comment(lib,"winmm.lib")
+
+#include"imgui.h"
+#include"imgui_impl_dx12.h"
+#include"imgui_impl_win32.h"
+
+#pragma region Json
+
+#include<json.hpp>
+
+#pragma endregion
 
 #include<Windows.h>
 #pragma comment(lib,"winmm.lib")

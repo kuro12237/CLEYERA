@@ -46,6 +46,7 @@ void GameScene::Initialize()
 	testGroundGameObject_->SetModel(modelHandle);
 	testGroundGameObject_->UseLight(true);
 	testGroundGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
+	testGroundGameObject_->SetIsIndexDraw(true);
 
 	TestSkyDomeWorldTreanform_.Initialize();
 	TestSkyDomeWorldTreanform_.scale = { 8.0f,8.0f,8.0f };

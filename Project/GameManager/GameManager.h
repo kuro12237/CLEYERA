@@ -3,6 +3,7 @@
 #include"IScene.h"
 
 #include"GameScene.h"
+#include"Utility/GlobalVariables/GlobalVariables.h"
 
 class GameManager
 {

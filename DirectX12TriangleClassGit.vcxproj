@@ -90,6 +90,7 @@
     <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp" />
     <ClCompile Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.cpp" />
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp" />
+    <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
@@ -157,6 +158,8 @@
     <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h" />
     <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h" />
     <ClInclude Include="CLEYERA\Transform\CameraData.h" />
+    <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
+    <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
     <ClInclude Include="CLEYERA\Transform\WorldTransform.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\AABBCollider.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\ColliderConfig.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.h" />
     <ClInclude Include="CLEYERA\Utility\FileLoader\FileLoader.h" />
+    <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
@@ -590,7 +594,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;$(ProjectDir)CLEYERA/externals/pngTex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;$(ProjectDir)CLEYERA/externals/pngTex;$(ProjectDir)CLEYERA/externals/nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -617,7 +621,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;$(ProjectDir)CLEYERA/externals/pngTex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;$(ProjectDir)CLEYERA/externals/pngTex;$(ProjectDir)CLEYERA/externals/nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -647,7 +651,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USE_IMGUI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;$(ProjectDir)CLEYERA/externals/pngTex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)CLEYERA/externals/DirectXTex;$(ProjectDir)CLEYERA/externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Project/Scene;$(ProjectDir)Project/GameManager;$(ProjectDir)Project;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)CLEYERA/externals/assimp/include;$(ProjectDir)CLEYERA/externals/pngTex;$(ProjectDir)CLEYERA/externals/nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>

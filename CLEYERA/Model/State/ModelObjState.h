@@ -16,6 +16,6 @@ public:
 	void Draw(Model* state,const CameraData& viewprojection)override;
 
 private:
-	ResourcePeroperty resource_ = {};
 	unique_ptr<BufferResource<uint32_t>>index_ = nullptr;
+	unique_ptr<BufferResource<VertexData>>vertex_ = nullptr;
 };
