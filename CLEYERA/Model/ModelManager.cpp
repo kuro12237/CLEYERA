@@ -153,7 +153,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 				aiVector3D& normal = mesh->mNormals[vertexIndex];
 				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
 				VertexData vertex;
-				vertex.position = { position.x,position.y,position.z,1.0f };
+				vertex.position = { -position.x,position.y,position.z,1.0f };
 				vertex.normal = { -normal.x,normal.y,normal.z };
 				vertex.texcoord = { texcoord.x,texcoord.y };
 				//座標反転
