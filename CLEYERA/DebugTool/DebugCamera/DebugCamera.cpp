@@ -3,7 +3,7 @@
 void DebugCamera::Initialize() 
 {
 	cameraData_.Initialize();
-	matRot_ = MatrixTransform::Identity();
+	matRot_ = Math::Matrix::Identity();
 	worldTransform_.Initialize();
 }
 
@@ -17,7 +17,7 @@ void DebugCamera::ImGuiUpdate()
 		if (ImGui::Button("Initialize"))
 		{
 			offset_ = DfOffset_;
-			matRot_ = MatrixTransform::Identity();
+			matRot_ = Math::Matrix::Identity();
 		}
 		ImGui::DragFloat3("offset", &offset_.x, -0.1f, 0.1f);
 		ImGui::TreePop();
@@ -31,20 +31,20 @@ void DebugCamera::Update()
 {
 	//中心地点からずらす
 	Vector3 offset = offset_;
-	offset = VectorTransform::TransformNormal(offset,matRot_);
+	offset = Math::Vector::TransformNormal(offset,matRot_);
 	worldTransform_.translate = offset;
 
 	RotateMove();
 	//Translateの更新
 	Matrix4x4 translateMatrix =
-		MatrixTransform::TranslateMatrix(worldTransform_.translate);
+		Math::Matrix::TranslateMatrix(worldTransform_.translate);
 	//worldTransformの更新
 	worldTransform_.matWorld =
-		MatrixTransform::Multiply(matRot_, translateMatrix);
+		Math::Matrix::Multiply(matRot_, translateMatrix);
 	//view行列の更新
 	cameraData_.matView_ =
-		MatrixTransform::Multiply(MatrixTransform::Inverse(translateMatrix),
-			MatrixTransform::Inverse(matRot_));
+		Math::Matrix::Multiply(Math::Matrix::Inverse(translateMatrix),
+			Math::Matrix::Inverse(matRot_));
 
 	//cameraData_.UpdateMatrix();
 	cameraData_.TransfarMatrix();
@@ -52,26 +52,26 @@ void DebugCamera::Update()
 
 void DebugCamera::RotateMove()
 {
-	Matrix4x4 matRotate = MatrixTransform::Identity();
+	Matrix4x4 matRotate = Math::Matrix::Identity();
 	//←の回転
 	if (Input::GetInstance()->PushKey(DIK_LEFT))
 	{
-		matRotate = MatrixTransform::Multiply(matRotate, MatrixTransform::RotateYMatrix(rotateSpeed_.y));
+		matRotate = Math::Matrix::Multiply(matRotate, Math::Matrix::RotateYMatrix(rotateSpeed_.y));
 	}//→の回転
 	else if (Input::GetInstance()->PushKey(DIK_RIGHT))
 	{
-		matRotate = MatrixTransform::Multiply(matRotate, MatrixTransform::RotateYMatrix(-rotateSpeed_.y));
+		matRotate = Math::Matrix::Multiply(matRotate, Math::Matrix::RotateYMatrix(-rotateSpeed_.y));
 	}
 	//↑の回転
 	if (Input::GetInstance()->PushKey(DIK_UP))
 	{
-		matRotate = MatrixTransform::Multiply(matRotate, MatrixTransform::RotateXMatrix(rotateSpeed_.x));
+		matRotate = Math::Matrix::Multiply(matRotate, Math::Matrix::RotateXMatrix(rotateSpeed_.x));
 	}//↓の回転
 	else if (Input::GetInstance()->PushKey(DIK_DOWN))
 	{
-		matRotate = MatrixTransform::Multiply(matRotate, MatrixTransform::RotateXMatrix(-rotateSpeed_.x));
+		matRotate = Math::Matrix::Multiply(matRotate, Math::Matrix::RotateXMatrix(-rotateSpeed_.x));
 	}
-	matRot_ = MatrixTransform::Multiply(matRotate, matRot_);
+	matRot_ = Math::Matrix::Multiply(matRotate, matRot_);
 
 }
 

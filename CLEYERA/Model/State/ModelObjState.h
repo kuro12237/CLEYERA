@@ -2,7 +2,7 @@
 #include"IModelState.h"
 #include"Model.h"
 #include"ModelManager.h"
-#include"VectorTransform.h"
+#include"Vector/VectorTransform.h"
 #include"Light/LightingManager.h"
 
 class ModelObjState :public IModelState

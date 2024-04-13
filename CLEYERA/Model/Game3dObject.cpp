@@ -46,7 +46,7 @@ void Game3dObject::Draw(WorldTransform worldTransform ,CameraData view)
 
 	material_.shininess = shininess;
 	material_.color = color_;
-	material_.uvTransform = MatrixTransform::AffineMatrix(uvScale_, uvRotate, uvTranslate);
+	material_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate, uvTranslate);
 	material_.specular_    = specular_;
 	material_.roughness_ = roughness_;
 	material_.metalness_  = metalness_;
@@ -107,7 +107,7 @@ void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const Camera
 	MaterialBuffer_->Map();
 	material_.shininess = shininess;
 	material_.color = color_;
-	material_.uvTransform = MatrixTransform::AffineMatrix(uvScale_, uvRotate, uvTranslate);
+	material_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate, uvTranslate);
 	material_.specular_ = specular_;
 	material_.roughness_ = roughness_;
 	material_.metalness_ = metalness_;

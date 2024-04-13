@@ -210,11 +210,11 @@ void GameScene::TestAnimation()
 	Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
 	Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
 
-	Matrix4x4 tm = MatrixTransform::TranslateMatrix(translate);
-	Matrix4x4 rm = QuaternionTransform::RotateMatrix(quaternion);
-	Matrix4x4 sm = MatrixTransform::ScaleMatrix(scale);
-	Matrix4x4 localMat = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
-	worldTransform_.matWorld = MatrixTransform::Multiply(worldTransform_.matWorld, localMat);
+	Matrix4x4 tm = Math::Matrix::TranslateMatrix(translate);
+	Matrix4x4 rm = Math::Qua::RotateMatrix(quaternion);
+	Matrix4x4 sm = Math::Matrix::ScaleMatrix(scale);
+	Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
+	worldTransform_.matWorld = Math::Matrix::Multiply(worldTransform_.matWorld, localMat);
 	worldTransform_.TransfarMatrix();
 
 }

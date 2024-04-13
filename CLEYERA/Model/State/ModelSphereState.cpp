@@ -138,7 +138,7 @@ void ModelSphereState::Draw(Model* state,const CameraData& viewprojection)
 
 	materialData->color = state->GetColor();
 	materialData->shininess = shininess;
-	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
+	materialData->uvTransform = Math::Matrix::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 	if (state->GetUseLight())
 	{
 		LightData* lightData = nullptr;

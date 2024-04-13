@@ -19,7 +19,7 @@ void WorldTransform::UnMap()
 void WorldTransform::Initialize()
 {
 	CreateBuffer();
-	matWorld = MatrixTransform::Identity();
+	matWorld = Math::Matrix::Identity();
 	TransfarMatrix();
 }
 
@@ -33,10 +33,10 @@ void WorldTransform::SRTSetting(Vector3 s, Vector3 r, Vector3 t)
 
 void WorldTransform::UpdateMatrix()
 {
-	matWorld = MatrixTransform::AffineMatrix(scale, rotation, translate);
+	matWorld = Math::Matrix::AffineMatrix(scale, rotation, translate);
 
 	if (parent) {
-		matWorld = MatrixTransform::Multiply(matWorld, parent->matWorld);
+		matWorld = Math::Matrix::Multiply(matWorld, parent->matWorld);
 	}
 	
 	TransfarMatrix();

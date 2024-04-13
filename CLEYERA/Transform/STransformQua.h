@@ -1,7 +1,5 @@
 #pragma once
-#include"Vector3.h"
-#include"Quaternion/Quaternion.h"
-#include<json.hpp>
+#include"Pch.h"
 
 struct TransformQua
 {

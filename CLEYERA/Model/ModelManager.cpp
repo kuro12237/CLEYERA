@@ -262,14 +262,14 @@ void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 {
 	for (SAnimation::Joint j : skeleton.joints)
 	{
-		Matrix4x4 tm = MatrixTransform::TranslateMatrix(j.transform.translate);
-		Matrix4x4 rm = QuaternionTransform::RotateMatrix(j.transform.quaternion);
-		Matrix4x4 sm = MatrixTransform::ScaleMatrix(j.transform.scale);
-		Matrix4x4 localMat = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
+		Matrix4x4 tm = Math::Matrix::TranslateMatrix(j.transform.translate);
+		Matrix4x4 rm = Math::Qua::RotateMatrix(j.transform.quaternion);
+		Matrix4x4 sm = Math::Matrix::ScaleMatrix(j.transform.scale);
+		Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 		j.localMatrix = localMat;
 		if (j.parent)
 		{
-			j.skeletonSpaceMatrix = MatrixTransform::Multiply(j.localMatrix,skeleton.joints[*j.parent].skeletonSpaceMatrix);
+			j.skeletonSpaceMatrix = Math::Matrix::Multiply(j.localMatrix,skeleton.joints[*j.parent].skeletonSpaceMatrix);
 		}
 		else {
 			j.skeletonSpaceMatrix = j.localMatrix;
@@ -303,11 +303,11 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 	result.transform.quaternion = { quaternion.x,-quaternion.y,-quaternion.z,quaternion.w };
 	result.transform.translate = { translate.x,translate.y,translate.z };
 	Matrix4x4 sm, rm, tm;
-	sm = MatrixTransform::ScaleMatrix(result.transform.scale);
-	rm = QuaternionTransform::RotateMatrix(result.transform.quaternion);
-	tm = MatrixTransform::TranslateMatrix(result.transform.translate);
+	sm = Math::Matrix::ScaleMatrix(result.transform.scale);
+	rm = Math::Qua::RotateMatrix(result.transform.quaternion);
+	tm = Math::Matrix::TranslateMatrix(result.transform.translate);
 	
-	result.localMatrix = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
+	result.localMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 
 	result.name = node->mName.C_Str();
 	result.children.resize(node->mNumChildren);
@@ -339,7 +339,7 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 	joint.name = node.name;
 	joint.localMatrix = node.localMatrix;
 	joint.transform = node.transform;
-	joint.skeletonSpaceMatrix = MatrixTransform::Identity();
+	joint.skeletonSpaceMatrix = Math::Matrix::Identity();
 	joint.index = int32_t(joints.size());
 	joint.parent = parent;
 	joints.push_back(joint);

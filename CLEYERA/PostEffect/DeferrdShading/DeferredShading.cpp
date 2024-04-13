@@ -321,8 +321,8 @@ void DefferredShading::ColorBufferUpdate()
 	indexBuffer_->UnMap();
 
 	TransformationMatrix wvpMap = {};
-	Matrix4x4 OrthographicMatrix = MatrixTransform::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
-	wvpMap.world = MatrixTransform::Identity();
+	Matrix4x4 OrthographicMatrix = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
+	wvpMap.world = Math::Matrix::Identity();
 	wvpMap.WVP = OrthographicMatrix;
 
 	wvp_->Map();

@@ -1,8 +1,8 @@
 #pragma once
 
 #include"Pch.h"
-#include "VectorTransform.h"
-#include "MatrixTransform.h"
+#include "Vector/VectorTransform.h"
+#include "Matrix/MatrixTransform.h"
 #include "CollisionStructures/CollisionStructures.h"
 #include "GeometryCollision/GeometryCollision.h"
 using namespace GeometryCollision;

@@ -56,7 +56,7 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param, CameraD
 
 	materialData->color = { 1,1,1,1 };
 	materialData->color = testColor;
-	materialData->uvTransform = MatrixTransform::AffineMatrix({1,1,1}, {0,0,0},{0,0,0});
+	materialData->uvTransform = Math::Matrix::AffineMatrix({1,1,1}, {0,0,0},{0,0,0});
 	
 	//Billbord�̌v�Z
 	CarmeraBillbord(viewprojection);
@@ -67,23 +67,23 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param, CameraD
 		particleIterator != param.end(); ++particleIterator){
 
 		//�X�P�[����o��
-		sMat = MatrixTransform::ScaleMatrix((*particleIterator).worldTransform_.scale);
+		sMat = Math::Matrix::ScaleMatrix((*particleIterator).worldTransform_.scale);
 		//���s�ړ��ړ�
-		tMat = MatrixTransform::TranslateMatrix((*particleIterator).worldTransform_.translate);
+		tMat = Math::Matrix::TranslateMatrix((*particleIterator).worldTransform_.translate);
 		//Affine�ϊ�
-		Matrix4x4 matWorld = MatrixTransform::Multiply(sMat, MatrixTransform::Multiply(billboardMatrix, tMat));
+		Matrix4x4 matWorld = Math::Matrix::Multiply(sMat, Math::Matrix::Multiply(billboardMatrix, tMat));
 		//view�ϊ�
-		matWorld = MatrixTransform::Multiply(matWorld, MatrixTransform::Multiply(viewprojection.matView_, viewprojection.matProjection_));
+		matWorld = Math::Matrix::Multiply(matWorld, Math::Matrix::Multiply(viewprojection.matView_, viewprojection.matProjection_));
 		//uv��Affine
-		(*particleIterator).uvTransform_.matWorld=MatrixTransform::AffineMatrix(
+		(*particleIterator).uvTransform_.matWorld= Math::Matrix::AffineMatrix(
 			(*particleIterator).uvTransform_.scale,
-			(*particleIterator).uvTransform_.rotation, 
+			(*particleIterator).uvTransform_.rotation,
 			(*particleIterator).uvTransform_.translate
 		);
 
 		//���
 		instansingData[NumDrawInstansing].WVP = matWorld;
-		instansingData[NumDrawInstansing].world = MatrixTransform::Identity();
+		instansingData[NumDrawInstansing].world = Math::Matrix::Identity();
 		instansingData[NumDrawInstansing].color = (*particleIterator).color_;
 		instansingData[NumDrawInstansing].uvTransform = (*particleIterator).uvTransform_.matWorld;
 		NumDrawInstansing++;
@@ -102,10 +102,10 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param, CameraD
 void ParticlePlaneState::CarmeraBillbord(CameraData  view)
 {
 	//��]
-	Matrix4x4 backToFrontMatrix = MatrixTransform::Identity();
-	Matrix4x4 rm = MatrixTransform::RotateXYZMatrix(view.rotation_.x, view.rotation_.y, view.rotation_.z);
+	Matrix4x4 backToFrontMatrix = Math::Matrix::Identity();
+	Matrix4x4 rm = Math::Matrix::RotateXYZMatrix(view.rotation_.x, view.rotation_.y, view.rotation_.z);
 
-	billboardMatrix = MatrixTransform::Multiply(backToFrontMatrix, rm);
+	billboardMatrix = Math::Matrix::Multiply(backToFrontMatrix, rm);
 	billboardMatrix.m[3][0] = 0.0f;
 	billboardMatrix.m[3][1] = 0.0f;
 	billboardMatrix.m[3][2] = 0.0f;
