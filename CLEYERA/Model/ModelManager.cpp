@@ -116,7 +116,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 
 		unique_ptr<Model>model = make_unique <Model>();
 		model->CreateObj(modelData);
-		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle,move(model));
+		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
 
 		return modelHandle;
 	}
@@ -166,7 +166,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 			{
 				aiFace& face = mesh->mFaces[faceIndex];
 				assert(face.mNumIndices == 3);
-	
+
 				for (uint32_t element = 0; element < face.mNumIndices; ++element)
 				{
 					uint32_t vertexIndex = face.mIndices[element];
@@ -185,7 +185,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 				aiQuaternion rotate;
 
 				bindPoseMatrixAssimp.Decompose(scale, rotate, translate);
-				Math::Matrix::Matrix4x4 sm, rm,tm;
+				Math::Matrix::Matrix4x4 sm, rm, tm;
 				Math::Vector::Vector3 sv, tv;
 				sv = { scale.x,scale.y,scale.z };
 				tv = { -translate.x,translate.y,translate.z };
@@ -197,9 +197,9 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 				Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::Identity();
 				bindPoseMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 				jointWeightData.inverseBindPoseMatrix = Math::Matrix::Inverse(bindPoseMatrix);
-				for (uint32_t weightIndex  = 0;  weightIndex < bone->mNumWeights; ++weightIndex)
+				for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex)
 				{
-					jointWeightData.vertexWeights.push_back({ uint32_t(bone->mWeights[weightIndex].mWeight),float(bone->mWeights[weightIndex].mVertexId)});
+					jointWeightData.vertexWeights.push_back({bone->mWeights[weightIndex].mWeight,bone->mWeights[weightIndex].mVertexId});
 
 				}
 			}
@@ -222,6 +222,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
 		SkeletonUpdate(modelData.node.skeleton);
+		CreateSkinCluster(modelData.node.skeleton, modelData);
 
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
@@ -248,7 +249,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		unique_ptr<Model>model = make_unique <Model>();
 		model->CreateObj(modelData);
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
-		
+
 		return modelHandle;
 	}
 	ModelManager::GetInstance()->isLoadNormalMap_ = false;
@@ -274,7 +275,7 @@ SModelData ModelManager::GetObjData(uint32_t index)
 
 Model* ModelManager::GetModel(uint32_t index)
 {
-	Model*data =nullptr;
+	Model* data = nullptr;
 	for (const auto& [key, s] : ModelManager::GetInstance()->objModelDatas_)
 	{
 		if (s.get()->GetIndex() == index)
@@ -298,12 +299,12 @@ void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 		j.localMatrix = localMat;
 		if (j.parent)
 		{
-			j.skeletonSpaceMatrix = Math::Matrix::Multiply(j.localMatrix,skeleton.joints[*j.parent].skeletonSpaceMatrix);
+			j.skeletonSpaceMatrix = Math::Matrix::Multiply(j.localMatrix, skeleton.joints[*j.parent].skeletonSpaceMatrix);
 		}
 		else {
 			j.skeletonSpaceMatrix = j.localMatrix;
 		}
-    }
+	}
 
 }
 
@@ -335,7 +336,7 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 	sm = Math::Matrix::ScaleMatrix(result.transform.scale);
 	rm = Math::Qua::RotateMatrix(result.transform.quaternion);
 	tm = Math::Matrix::TranslateMatrix(result.transform.translate);
-	
+
 	result.localMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 
 	result.name = node->mName.C_Str();
@@ -345,7 +346,7 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 	for (uint32_t childrenIndex = 0; childrenIndex < node->mNumChildren; ++childrenIndex)
 	{
 		result.children[childrenIndex] = ReadNodeData(node->mChildren[childrenIndex]);
-		
+
 	}
 
 	return result;
@@ -358,7 +359,7 @@ SAnimation::Skeleton ModelManager::CreateSkeleton(const NodeData& rootNode)
 	for (const SAnimation::Joint& joint : skeleton.joints)
 	{
 		skeleton.jointMap.emplace(joint.name, joint.index);
-    }
+	}
 	return skeleton;
 }
 
@@ -382,3 +383,65 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 	return joint.index;
 }
 
+SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton, const SModelData& modelData)
+{
+	SkinCluster skinCluster{};
+
+	//作成
+	skinCluster.paletteResource = CreateResources::CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
+	WellForGPU* mappedPalette = nullptr;
+	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
+	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
+
+	//設定
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
+	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+	srvDesc.Buffer.FirstElement = 0;
+	srvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
+	srvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
+	srvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
+
+	//Despcripter
+	skinCluster.srvindex = DescriptorManager::CreateSRV(skinCluster.influenceResource, srvDesc);
+
+	skinCluster.influenceResource = CreateResources::CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());
+	VertexInfluence* mappedInfuence = nullptr;
+	skinCluster.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfuence));
+	std::memset(mappedInfuence, 0, sizeof(VertexInfluence) * modelData.vertices.size());
+	skinCluster.mappedInfluence = { mappedInfuence,modelData.vertices.size() };
+
+	skinCluster.influenceBufferView.BufferLocation = skinCluster.influenceResource->GetGPUVirtualAddress();
+	skinCluster.influenceBufferView.SizeInBytes = UINT(sizeof(VertexInfluence) * modelData.vertices.size());
+	skinCluster.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
+
+	skinCluster.inverseBindMatrices.resize(skeleton.joints.size());
+	std::generate(skinCluster.inverseBindMatrices.begin(), skinCluster.inverseBindMatrices.end(), Math::Matrix::Identity);
+
+	for (const auto& jointWeight : modelData.skinClusterData)
+	{
+		auto it = skeleton.jointMap.find(jointWeight.first);
+		if (it == skeleton.jointMap.end())
+		{
+			continue;
+		}
+
+		skinCluster.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
+
+		for (const auto& vertexWeight : jointWeight.second.vertexWeights)
+		{
+			auto& currentInfence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
+			for(uint32_t index = 0; index < 4; ++index)
+			{
+				if (currentInfence.weights[index] == 0.0f)
+				{
+					currentInfence.weights[index] = vertexWeight.weight;
+					currentInfence.jointIndicess[index] = (*it).second;
+					break;
+				}
+			}
+		}
+	}
+	return skinCluster;
+}

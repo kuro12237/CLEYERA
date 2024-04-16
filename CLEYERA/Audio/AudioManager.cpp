@@ -18,6 +18,9 @@ void AudioManager::Initialize()
 		assert(0);
 	}
 
+	CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
+	MFStartup(MF_VERSION, MFSTARTUP_NOSOCKET);
+
 	hr = XAudio2Create(&AudioManager::GetInstance()->xAudio, 0, XAUDIO2_DEFAULT_PROCESSOR);
 	assert(SUCCEEDED(hr));
 	//masterVoiceの作成
@@ -97,6 +100,12 @@ uint32_t AudioManager::SoundLoadWave(const char* filename)
 	}
 
 	return index;
+}
+
+uint32_t AudioManager::SoundLoadMp3(const char* fileName)
+{
+	fileName;
+	return 0;
 }
 
 void AudioManager::SoundAllUnLoad()

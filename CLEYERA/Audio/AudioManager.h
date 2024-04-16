@@ -34,6 +34,8 @@ public:
 
 	static uint32_t SoundLoadWave(const char* filename);
 
+	static uint32_t SoundLoadMp3(const char* fileName);
+
 	static void SoundAllUnLoad();
 
 	/// <summary>

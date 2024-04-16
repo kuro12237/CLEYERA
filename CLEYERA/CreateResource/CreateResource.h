@@ -85,7 +85,7 @@ struct VetexWeightData
 struct JointWeightData
 {
 	Math::Matrix::Matrix4x4 inverseBindPoseMatrix;
-	std::vector<aiVertexWeight>vertexWeights;
+	std::vector<VetexWeightData>vertexWeights;
 };
 
 struct  SModelData
