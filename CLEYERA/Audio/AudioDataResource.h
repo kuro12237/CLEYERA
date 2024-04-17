@@ -8,6 +8,7 @@ struct soundData
 	WAVEFORMATEX wfex = {};
 	BYTE* pBuffer = {};
 	unsigned int bufferSize;
+	std::vector<BYTE>mediaData;
 };
 
 class AudioDataResource

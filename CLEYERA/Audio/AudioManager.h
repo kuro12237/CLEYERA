@@ -34,7 +34,7 @@ public:
 
 	static uint32_t SoundLoadWave(const char* filename);
 
-	static uint32_t SoundLoadMp3(const char* fileName);
+	static uint32_t SoundLoadMp3(const string& fileName);
 
 	static void SoundAllUnLoad();
 
@@ -45,6 +45,8 @@ public:
 	static void AudioPlayWave(uint32_t soundHandle);
 	static void AudioStopWave(uint32_t soundHandle);
 	static void AudioVolumeControl(UINT soundHandle, float volume);
+
+	static void AudioPlayMp3(const uint32_t &soundHandle);
 private:
 
 	static bool ChackAudioDatas(string filepath);
@@ -60,6 +62,10 @@ private:
 	uint32_t AudioIndex = 0;
 	uint32_t AudioIndex2 = 0;
 	map<string, unique_ptr<AudioDataResource>>AudioDatas_;
+
+#pragma region Mp3
+
+#pragma endregion
 
 #pragma region Singleton
 	AudioManager() = default;

@@ -23,4 +23,5 @@ public:
 private:
 
 	
+	uint32_t testAudioHandle_ = 0;
 };
