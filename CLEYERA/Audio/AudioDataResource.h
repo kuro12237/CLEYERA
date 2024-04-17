@@ -9,6 +9,7 @@ struct soundData
 	BYTE* pBuffer = {};
 	unsigned int bufferSize;
 	std::vector<BYTE>mediaData;
+	IMFSourceReader* MFSourceReader;
 };
 
 class AudioDataResource

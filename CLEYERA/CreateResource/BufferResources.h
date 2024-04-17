@@ -116,7 +116,7 @@ inline void BufferResource<T>::CreateResource(DXGI_FORMAT format,const int32_t w
 
 	//後で下を関数化
 	ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
-	HRESULT hr = device->CreateCommittedResource(
+    device->CreateCommittedResource(
 		&heapPram,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -124,8 +124,7 @@ inline void BufferResource<T>::CreateResource(DXGI_FORMAT format,const int32_t w
 		&color,
 		IID_PPV_ARGS(&buffer_)
 	);
-	assert(SUCCEEDED(hr));
-
+	
 }
 
 template<typename T>
@@ -136,7 +135,7 @@ inline void BufferResource<T>::CreateResource(D3D12_RESOURCE_DESC resourceDesc, 
 
 	//後で下を関数化
 	ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
-	HRESULT hr = device->CreateCommittedResource(
+    device->CreateCommittedResource(
 		&heapPram,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -144,7 +143,6 @@ inline void BufferResource<T>::CreateResource(D3D12_RESOURCE_DESC resourceDesc, 
 		&color,
 		IID_PPV_ARGS(&buffer_)
 	);
-	assert(SUCCEEDED(hr));
 }
 
 

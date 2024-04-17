@@ -107,25 +107,26 @@ uint32_t AudioManager::SoundLoadMp3(const string& fileName)
 
 	if (ChackAudioDatas(fileName))
 	{
-		IMFSourceReader* pMFSourceReader = nullptr;
-		IMFMediaType* pMFMediaType = nullptr;
+		IMFSourceReader* MFSourceReader = nullptr;
+		IMFMediaType* MFMediaType = nullptr;
 		//文字列変換
 		int wideStrSize = MultiByteToWideChar(CP_UTF8, 0, fileName.c_str(), -1, NULL, 0);
 		WCHAR* wideStr = new WCHAR[wideStrSize];
 		MultiByteToWideChar(CP_UTF8, 0, fileName.c_str(), -1, wideStr, wideStrSize);
 
-		MFCreateSourceReaderFromURL(wideStr, NULL, &pMFSourceReader);
+		//ソースリーダーの作成
+		MFCreateSourceReaderFromURL(wideStr,nullptr, &MFSourceReader);
 
-		MFCreateMediaType(&pMFMediaType);
-		pMFMediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
-		pMFMediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM);
-		pMFSourceReader->SetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), nullptr, pMFMediaType);
+		MFCreateMediaType(&MFMediaType);
+		MFMediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
+		MFMediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM);
+		MFSourceReader->SetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), nullptr, MFMediaType);
 
-		pMFMediaType->Release();
-		pMFMediaType = nullptr;
-		pMFSourceReader->GetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), &pMFMediaType);
+		MFMediaType->Release();
+		MFMediaType = nullptr;
+		MFSourceReader->GetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), &MFMediaType);
 		WAVEFORMATEX *waveFormat = nullptr;
-		MFCreateWaveFormatExFromMFMediaType(pMFMediaType, &waveFormat, nullptr);
+		MFCreateWaveFormatExFromMFMediaType(MFMediaType, &waveFormat, nullptr);
 
 		std::vector<BYTE>mediaData;
 		while (true)
@@ -133,7 +134,7 @@ uint32_t AudioManager::SoundLoadMp3(const string& fileName)
 			IMFSample* sample = nullptr;
 			DWORD dwStreamFlags = 0;
 
-			pMFSourceReader->ReadSample(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr,& dwStreamFlags, nullptr, &sample);
+			MFSourceReader->ReadSample(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr,& dwStreamFlags, nullptr, &sample);
 
 			if (dwStreamFlags & MF_SOURCE_READERF_ENDOFSTREAM)
 			{
@@ -156,11 +157,12 @@ uint32_t AudioManager::SoundLoadMp3(const string& fileName)
 		}
 
 		soundData soundData;
+		soundData.wfex = move(*waveFormat);
 		soundData.mediaData = mediaData;
-	    AudioManager::GetInstance()->xAudio->CreateSourceVoice(&soundData.pSourcevoice,waveFormat);
 		soundData.pBuffer = mediaData.data();
 		soundData.bufferSize = unsigned int(mediaData.size());
 		soundData.index = AudioManager::GetInstance()->AudioIndex;
+		soundData.MFSourceReader = MFSourceReader;
 		AudioManager::GetInstance()->AudioDatas_[fileName] = make_unique<AudioDataResource>(fileName, soundData);
 		return AudioManager::GetInstance()->AudioIndex;
 	}
@@ -245,18 +247,30 @@ void AudioManager::AudioPlayMp3(const uint32_t& soundHandle)
 {
 	for (const auto& [key, s] : AudioManager::GetInstance()->AudioDatas_)
 	{
-		key;
+
 		if (s.get()->GetSoundData().index == soundHandle)
 		{
+			HRESULT result{};
+			IXAudio2SourceVoice* pSourcevoice = {};
+
+			WAVEFORMATEX wfex = s.get()->GetSoundData().wfex;
+			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice, &wfex);
+			assert(SUCCEEDED(result));
+			s.get()->SetsoundResource(pSourcevoice);
+			s.get()->SetsoundWfex(wfex);
+
 			XAUDIO2_BUFFER buf{};
-			buf.pAudioData = s.get()->GetSoundData().mediaData.data();
-			buf.AudioBytes = sizeof(BYTE) * static_cast<UINT32>(s.get()->GetSoundData().bufferSize);
+			buf.pAudioData = s.get()->GetSoundData().pBuffer;
+			buf.AudioBytes = s.get()->GetSoundData().bufferSize;
 			buf.Flags = XAUDIO2_END_OF_STREAM;
-		    s.get()->GetSoundData().pSourcevoice->SubmitSourceBuffer(&buf);
-		    s.get()->GetSoundData().pSourcevoice->SetVolume(1.0f);
-		    s.get()->GetSoundData().pSourcevoice->Start();
+			result = s.get()->GetSoundData().pSourcevoice->SubmitSourceBuffer(&buf);
+			result = s.get()->GetSoundData().pSourcevoice->SetVolume(1.0f);
+			result = s.get()->GetSoundData().pSourcevoice->Start();
+
+			assert(SUCCEEDED(result));
 		}
 	}
+
 }
 
 bool AudioManager::ChackAudioDatas(string filepath)
