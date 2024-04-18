@@ -268,8 +268,9 @@ void AudioManager::AudioPlayMp3(const uint32_t& soundHandle)
 			HRESULT result{};
 			IXAudio2SourceVoice* pSourcevoice = {};
 
+			soundData soundData = s.get()->GetSoundData();
 
-			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice, &s.get()->GetSoundData().wfex);
+			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice, &soundData.wfex);
 			assert(SUCCEEDED(result));
 
 			s.get()->SetsoundResource(pSourcevoice);
