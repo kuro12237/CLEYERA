@@ -31,6 +31,9 @@ void AnimationManager::ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation
             joint.transform.quaternion = CalculateValue(rootNodeAnimation.rotate.keyframes, time);
 
             joint.transform.scale = CalculateValue(rootNodeAnimation.scale.keyframes, time);
+           
+            
+
         }
     }
 }

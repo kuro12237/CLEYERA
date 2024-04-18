@@ -1,6 +1,7 @@
 #pragma once
 
 #include<cassert>
+#include<thread>
 
 #include<format>
 #include<wrl.h>

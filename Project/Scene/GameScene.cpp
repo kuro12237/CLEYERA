@@ -114,7 +114,7 @@ void GameScene::Update(GameManager* Scene)
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
 	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("SimpleSkin");
 	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
-
+	ModelManager::SkeletonUpdate(skeleton);
 	if (Input::PushKeyPressed(DIK_N))
 	{
 		Scene->ChangeState(new TestScene);

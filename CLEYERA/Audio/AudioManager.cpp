@@ -26,6 +26,16 @@ void AudioManager::Initialize()
 	//masterVoiceの作成
 	hr = AudioManager::GetInstance()->xAudio->CreateMasteringVoice(&AudioManager::GetInstance()->masterVoice);
 	assert(SUCCEEDED(hr));
+
+#ifdef _DEBUG
+
+	XAUDIO2_DEBUG_CONFIGURATION debug{};
+	debug.TraceMask = XAUDIO2_LOG_ERRORS | XAUDIO2_LOG_WARNINGS;
+	debug.BreakMask = XAUDIO2_LOG_ERRORS;
+	AudioManager::GetInstance()->xAudio->SetDebugConfiguration(&debug, 0);
+
+#endif // _DEBUG
+
 }
 
 void AudioManager::Finalize()
@@ -112,11 +122,13 @@ uint32_t AudioManager::SoundLoadMp3(const string& fileName)
 		//文字列変換
 		int wideStrSize = MultiByteToWideChar(CP_UTF8, 0, fileName.c_str(), -1, NULL, 0);
 		WCHAR* wideStr = new WCHAR[wideStrSize];
-		MultiByteToWideChar(CP_UTF8, 0, fileName.c_str(), -1, wideStr, wideStrSize);
+		HRESULT hr = MultiByteToWideChar(CP_UTF8, 0, fileName.c_str(), -1, wideStr, wideStrSize);
+		assert(SUCCEEDED(hr));
 
 		//ソースリーダーの作成
 		MFCreateSourceReaderFromURL(wideStr,nullptr, &MFSourceReader);
 
+		//メディアタイプ
 		MFCreateMediaType(&MFMediaType);
 		MFMediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
 		MFMediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM);
@@ -128,6 +140,7 @@ uint32_t AudioManager::SoundLoadMp3(const string& fileName)
 		WAVEFORMATEX *waveFormat = nullptr;
 		MFCreateWaveFormatExFromMFMediaType(MFMediaType, &waveFormat, nullptr);
 
+		//mp3の中身解析
 		std::vector<BYTE>mediaData;
 		while (true)
 		{
@@ -159,16 +172,18 @@ uint32_t AudioManager::SoundLoadMp3(const string& fileName)
 		soundData soundData;
 		soundData.wfex = move(*waveFormat);
 		soundData.mediaData = mediaData;
-		soundData.pBuffer = mediaData.data();
+		soundData.pBuffer = soundData.mediaData.data();
 		soundData.bufferSize = unsigned int(mediaData.size());
 		soundData.index = AudioManager::GetInstance()->AudioIndex;
 		soundData.MFSourceReader = MFSourceReader;
+		soundData.mediaType = MFMediaType;
+
+		//登録
 		AudioManager::GetInstance()->AudioDatas_[fileName] = make_unique<AudioDataResource>(fileName, soundData);
 		return AudioManager::GetInstance()->AudioIndex;
 	}
 	else
 	{
-
 		return AudioManager::GetInstance()->AudioDatas_[fileName].get()->GetSoundData().index;
 	}
 
@@ -247,26 +262,26 @@ void AudioManager::AudioPlayMp3(const uint32_t& soundHandle)
 {
 	for (const auto& [key, s] : AudioManager::GetInstance()->AudioDatas_)
 	{
-
 		if (s.get()->GetSoundData().index == soundHandle)
 		{
 			HRESULT result{};
 			IXAudio2SourceVoice* pSourcevoice = {};
 
-			WAVEFORMATEX wfex = s.get()->GetSoundData().wfex;
-			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice, &wfex);
+			soundData soundData = AudioManager::GetInstance()->AudioDatas_[key]->GetSoundData();
+
+			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice, &soundData.wfex);
 			assert(SUCCEEDED(result));
-			s.get()->SetsoundResource(pSourcevoice);
-			s.get()->SetsoundWfex(wfex);
-
+		
 			XAUDIO2_BUFFER buf{};
-			buf.pAudioData = s.get()->GetSoundData().pBuffer;
-			buf.AudioBytes = s.get()->GetSoundData().bufferSize;
+			buf.pAudioData = soundData.pBuffer;
+			buf.AudioBytes = soundData.bufferSize;
 			buf.Flags = XAUDIO2_END_OF_STREAM;
-			result = s.get()->GetSoundData().pSourcevoice->SubmitSourceBuffer(&buf);
-			result = s.get()->GetSoundData().pSourcevoice->SetVolume(1.0f);
-			result = s.get()->GetSoundData().pSourcevoice->Start();
 
+			result = pSourcevoice->SubmitSourceBuffer(&buf);
+			assert(SUCCEEDED(result));
+			result = pSourcevoice->SetVolume(1.0f);
+			assert(SUCCEEDED(result));
+			result = pSourcevoice->Start();
 			assert(SUCCEEDED(result));
 		}
 	}
