@@ -20,7 +20,7 @@ void Cleyera::Initialize()
 	ImGuiManager::Initialize();
 	Input::Initialize();
 
-	AudioManager::Initialize();
+	AudioManager::GetInstance()->Initialize();
 	LightingManager::Initialize();
 	DirectionalLight::Initialize();
 
@@ -30,7 +30,7 @@ void Cleyera::Initialize()
 void Cleyera::Finalize()
 {
 	ModelManager::Finalize();
-	AudioManager::Finalize();
+	AudioManager::GetInstance()->Finalize();
 	TextureManager::Finalize();
 	DescriptorManager::Clear();
 	ImGuiManager::Finalize();

@@ -2,19 +2,19 @@
 
 void TestScene::Initialize()
 {
-	testAudioHandle_ = AudioManager::SoundLoadMp3("Resources/Sounds/testSound.mp3");
-	//testAudioWaveHandle_ = AudioManager::SoundLoadWave("Resources/Sounds/hit.wav");
+	AudioManager::GetInstance()->SoundLoadMp3("Resources/Sounds/testSound.mp3");
+	AudioManager::GetInstance()->SoundLoadWave("Resources/Sounds/hit.wav");
 }
 
 void TestScene::Update(GameManager* Scene)
 {
 	if (ImGui::Button("playAudio"))
 	{
-		AudioManager::AudioPlayMp3(testAudioHandle_);
+		AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/testSound.mp3");
 	}
 	if (ImGui::Button("playhitAudio"))
 	{
-		//AudioManager::AudioPlayWave(testAudioWaveHandle_);
+		AudioManager::GetInstance()->AudioPlayWave("Resources/Sounds/hit.wav");
 	}
 	Scene;
 	/*if (Input::PushKeyPressed(DIK_B))

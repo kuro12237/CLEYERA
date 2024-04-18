@@ -76,8 +76,7 @@
 #pragma endregion
 
 #pragma region XAudio
-#include<xaudio2.h>
-#pragma comment(lib,"xaudio2.lib")
+
 
 #include <mfapi.h>
 #include <mfidl.h>
@@ -87,6 +86,10 @@
 #pragma comment(lib, "mfplat.lib")
 #pragma comment(lib, "Mfreadwrite.lib")
 #pragma comment(lib, "mfuuid.lib")
+
+#include <xaudio2.h>
+#pragma comment(lib,"xaudio2.lib")
+
 #pragma endregion
 
 using Microsoft::WRL::ComPtr;
