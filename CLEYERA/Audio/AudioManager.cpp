@@ -173,7 +173,7 @@ uint32_t AudioManager::SoundLoadMp3(const string& fileName)
 		soundData.wfex = move(*waveFormat);
 		soundData.mediaData = mediaData;
 		soundData.pBuffer = soundData.mediaData.data();
-		soundData.bufferSize = unsigned int(mediaData.size());
+		soundData.bufferSize = sizeof(BYTE) * static_cast<UINT32>(mediaData.size());
 		soundData.index = AudioManager::GetInstance()->AudioIndex;
 		soundData.MFSourceReader = MFSourceReader;
 		soundData.mediaType = MFMediaType;
@@ -221,6 +221,7 @@ void AudioManager::AudioPlayWave(uint32_t soundHandle)
 			result = s.get()->GetSoundData().pSourcevoice->Start();
 
 			assert(SUCCEEDED(result));
+		
 		}
 	}
 }
@@ -267,22 +268,21 @@ void AudioManager::AudioPlayMp3(const uint32_t& soundHandle)
 			HRESULT result{};
 			IXAudio2SourceVoice* pSourcevoice = {};
 
-			soundData soundData = AudioManager::GetInstance()->AudioDatas_[key]->GetSoundData();
 
-			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice, &soundData.wfex);
+			result = AudioManager::GetInstance()->xAudio->CreateSourceVoice(&pSourcevoice, &s.get()->GetSoundData().wfex);
 			assert(SUCCEEDED(result));
-		
+
+			s.get()->SetsoundResource(pSourcevoice);
+			//s.get()->SetsoundWfex(soundData.wfex);
+
 			XAUDIO2_BUFFER buf{};
-			buf.pAudioData = soundData.pBuffer;
-			buf.AudioBytes = soundData.bufferSize;
+			buf.pAudioData = s.get()->GetSoundData().pBuffer;
+			buf.AudioBytes = s.get()->GetSoundData().bufferSize;
 			buf.Flags = XAUDIO2_END_OF_STREAM;
+			result = s.get()->GetSoundData().pSourcevoice->SubmitSourceBuffer(&buf);
+			result = s.get()->GetSoundData().pSourcevoice->SetVolume(1.0f);
+			result = s.get()->GetSoundData().pSourcevoice->Start();
 
-			result = pSourcevoice->SubmitSourceBuffer(&buf);
-			assert(SUCCEEDED(result));
-			result = pSourcevoice->SetVolume(1.0f);
-			assert(SUCCEEDED(result));
-			result = pSourcevoice->Start();
-			assert(SUCCEEDED(result));
 		}
 	}
 
