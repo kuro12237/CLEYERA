@@ -14,6 +14,7 @@ void GameInstancing3dObject::Create(const uint32_t& kNum, const string& name)
 
 	params_.resize(kNum);
 	instancingData_.resize(kNum);
+	materialData_.color = { 1,1,1,1 };
 }
 
 void GameInstancing3dObject::Transfar()

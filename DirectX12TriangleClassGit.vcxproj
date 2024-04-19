@@ -103,6 +103,9 @@
     <ClCompile Include="Project\Scene\CGScene.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="Project\Scene\TestScene.cpp" />
+    <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp" />
+    <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp" />
+    <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />
@@ -194,6 +197,11 @@
     <ClInclude Include="Project\Scene\GameScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\TestScene.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameColliderConfig.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollider\BoxCollider.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollisionManager.h" />
+    <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h" />
+    <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h" />
     <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
   </ItemGroup>

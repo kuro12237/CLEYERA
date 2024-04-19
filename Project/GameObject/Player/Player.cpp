@@ -4,10 +4,12 @@ void Player::Initialize()
 {
 	worldTransform_.Initialize();
 
-	modelHandle_ = ModelManager::LoadObjectFile("TestPlayer");
+	modelHandle_ = ModelManager::LoadObjectFile("TestBox");
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	gameObject_->SetModel(modelHandle_);
+	gameObject_->SetDesc(game3dObjectdesc_);
+
 
 	worldTransform_.translate.y = 4.0f;
 	worldTransform_.translate.x = 4.0f;
@@ -41,7 +43,7 @@ void Player::Update()
 
 	Move();
 
-
+	worldTransform_.UpdateMatrix();
 	ClearFlag();
 }
 
@@ -93,13 +95,6 @@ void Player::OnCollision(IBoxCollider* collider)
 	worldTransform_.translate.y += extrusion.y;
 	worldTransform_.UpdateEularMatrix();
 
-	if (collider->GetId() == kLuggageId)
-	{
-		//float x = collider->GetVelocity().x;
-		//worldTransform_.translate.x += x;
-		worldTransform_.UpdateEularMatrix();
-
-	}
 	if (GetBottomFlag() && velocity_.y <= 0.0f)
 	{
 		isJamp_ = false;
@@ -119,8 +114,6 @@ void Player::GravityExc(const Math::Vector::Vector2 &g)
 
 }
 
-
-
 void Player::Move()
 {
 	Math::Vector::Vector2 Ljoy = Input::GetJoyLStickPos();
@@ -132,11 +125,6 @@ void Player::Move()
 	{
 		Ljoy.y = {};
 	}
-	//float Length = VectorTransform::Length(Vector3(Ljoy.x, Ljoy.y, 0.0f));
-	//if (Length <= 0.1f)
-	//{
-	//	Ljoy = {};
-	//}
 
 	const float Speed = 0.1f;
 	

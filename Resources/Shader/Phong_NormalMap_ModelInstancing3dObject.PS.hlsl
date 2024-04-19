@@ -49,7 +49,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         float32_t3 RimColor = gPointLight[i].color.rgb * 1.0f * rim * dotLE * factor * gPointLight[i].intensity;
 
 		//拡散
-        float32_t3 pDiffuse = gMaterial.color.rgb * textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
+        float32_t3 pDiffuse = gMaterial.color.rgb*textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
 		//鏡面
         float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 
@@ -59,7 +59,8 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     }
 
-    output.color.rgb = pTotalDffuse + pTotalSpecular + pTotalRimColor;
+    output.color.rgb = pTotalDffuse + pTotalSpecular;
+    //+pTotalRimColor;
     output.color.a = gMaterial.color.a * textureColor.a;
 
     return output;

@@ -4,6 +4,7 @@ void Sun::Initialize()
 {
 	param_.decay = 1.0f;
 	param_.position.y = 256.0f;
+	param_.position.z = -64.0f;
 	param_.radious = 128.0f*3.0f;
 	param_.position.z = -16.0f;
 }

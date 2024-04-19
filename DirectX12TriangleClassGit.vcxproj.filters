@@ -313,6 +313,9 @@
     <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp" />
     <ClCompile Include="Project\GameObject\Sun\Sun.cpp" />
+    <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp" />
+    <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp" />
+    <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -530,6 +533,11 @@
     <ClInclude Include="Project\GameObject\Player\Camera\PlayerCamera.h" />
     <ClInclude Include="Project\GameObject\Sun\Sun.h" />
     <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameColliderConfig.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollisionManager.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollider\BoxCollider.h" />
+    <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h" />
+    <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

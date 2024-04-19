@@ -110,7 +110,6 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 
 	if (CheckAudioDatas(fileName))
 	{
-
 		AudioDataResource resource;
 		AudioDatas_[fileName] = resource;
 
@@ -121,9 +120,7 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 		assert(SUCCEEDED(hr));
 
 		//ソースリーダーの作成
-
 		MFCreateSourceReaderFromURL(wideStr, nullptr, &AudioDatas_[fileName].soundData_.MFSourceReader);
-
 
 		//メディアタイプ
 		MFCreateMediaType(&AudioDatas_[fileName].soundData_.mediaType);
@@ -170,8 +167,7 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 			mediaBuff->Release();
 			sample->Release();
 		}
-		//HRESULT hr{};
-
+	
 		hr = xAudio->CreateSourceVoice(&AudioDatas_[fileName].soundData_.pSourcevoice, waveFormat);
 		assert(SUCCEEDED(hr));
 

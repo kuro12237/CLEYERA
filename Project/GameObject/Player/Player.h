@@ -58,5 +58,7 @@ private:
 	bool isJamp_ = false;
 
 	Math::Vector::Vector3 GameStartPos_ = {};
+
+	Game3dObjectDesc game3dObjectdesc_ = {};
 };
 

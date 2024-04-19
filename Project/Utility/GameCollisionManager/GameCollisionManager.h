@@ -32,8 +32,8 @@ private:
 
 	AABB SettingAABBParam(IBoxCollider* c);
 	list<IBoxCollider*>colliders_ = {};
-	Vector2 extrusionXY_A = {};
-	Vector2 extrusionXY_B = {};
+	Math::Vector::Vector2 extrusionXY_A = {};
+	Math::Vector::Vector2 extrusionXY_B = {};
 
 
 };

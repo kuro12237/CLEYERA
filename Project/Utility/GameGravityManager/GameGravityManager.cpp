@@ -7,7 +7,7 @@ void GameGravityManager::CheckAllGravity()
 	for (; itrA != objGravitysList_.end(); ++itrA) {
 
 		IGravity* g = *itrA;
-		Vector2 v = {g->GetVelocity().x, g->GetVelocity().y - gravity_ };
+		Math::Vector::Vector2 v = {g->GetVelocity().x, g->GetVelocity().y - gravity_ };
 
 		g->GravityExc(v);
 
