@@ -59,7 +59,7 @@ private:
 
 	uint32_t AudioIndex = 0;
 	uint32_t AudioIndex2 = 0;
-	map<string, unique_ptr<AudioDataResource>>AudioDatas_;
+	map<string, AudioDataResource>AudioDatas_;
 
 #pragma region Mp3
 

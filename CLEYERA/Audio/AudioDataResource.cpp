@@ -1,11 +1,6 @@
 #include"AudioDataResource.h"
 
-AudioDataResource::AudioDataResource(string filepath, soundData soundData)
-{
-	filepath_ = filepath;
-	soundData_ = soundData;
 
-}
 
 AudioDataResource::~AudioDataResource()
 {

@@ -101,8 +101,6 @@ string AudioManager::SoundLoadWave(const string& filename)
 		soundData.wfex = format.fmt;
 		soundData.pBuffer = reinterpret_cast<BYTE*>(pBuffer);
 		soundData.bufferSize = data.size;
-		soundData.index = AudioManager::GetInstance()->AudioIndex;
-		AudioManager::GetInstance()->AudioDatas_[filename] = make_unique<AudioDataResource>(filename, soundData);
 	}
 	return filename;
 }
@@ -112,7 +110,9 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 
 	if (CheckAudioDatas(fileName))
 	{
-		soundData soundData;
+
+		AudioDataResource resource;
+		AudioDatas_[fileName] = resource;
 
 		//文字列変換
 		int wideStrSize = MultiByteToWideChar(CP_UTF8, 0, fileName.c_str(), -1, NULL, 0);
@@ -122,20 +122,21 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 
 		//ソースリーダーの作成
 
-		MFCreateSourceReaderFromURL(L"Resources/Sounds/testSound.mp3", nullptr, &soundData.MFSourceReader);
+		MFCreateSourceReaderFromURL(L"Resources/Sounds/testSound.mp3", nullptr, &AudioDatas_[fileName].soundData_.MFSourceReader);
 
 
 		//メディアタイプ
-		MFCreateMediaType(&soundData.mediaType);
-		soundData.mediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
-		soundData.mediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM);
-		soundData.MFSourceReader->SetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), nullptr, soundData.mediaType);
+		MFCreateMediaType(&AudioDatas_[fileName].soundData_.mediaType);
+		AudioDatas_[fileName].soundData_.mediaType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio);
+		AudioDatas_[fileName].soundData_.mediaType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_PCM);
 
-		soundData.mediaType->Release();
-		soundData.mediaType = nullptr;
-		soundData.MFSourceReader->GetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), &soundData.mediaType);
+		AudioDatas_[fileName].soundData_.MFSourceReader->SetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), nullptr, AudioDatas_[fileName].soundData_.mediaType);
+
+		AudioDatas_[fileName].soundData_.mediaType->Release();
+		AudioDatas_[fileName].soundData_.mediaType = nullptr;
+		AudioDatas_[fileName].soundData_.MFSourceReader->GetCurrentMediaType(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), &AudioDatas_[fileName].soundData_.mediaType);
 		WAVEFORMATEX* waveFormat{};
-		MFCreateWaveFormatExFromMFMediaType(soundData.mediaType, &waveFormat, nullptr);
+		MFCreateWaveFormatExFromMFMediaType(AudioDatas_[fileName].soundData_.mediaType, &waveFormat, nullptr);
 
 		//mp3の中身解析
 		while (true)
@@ -143,7 +144,7 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 			IMFSample* sample = nullptr;
 			DWORD dwStreamFlags = 0;
 
-			hr = soundData.MFSourceReader->ReadSample(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr, &dwStreamFlags, nullptr, &sample);
+			hr = AudioDatas_[fileName].soundData_.MFSourceReader->ReadSample(DWORD(MF_SOURCE_READER_FIRST_AUDIO_STREAM), 0, nullptr, &dwStreamFlags, nullptr, &sample);
 			assert(SUCCEEDED(hr));
 
 			if (dwStreamFlags & MF_SOURCE_READERF_ENDOFSTREAM)
@@ -160,8 +161,8 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 			hr = mediaBuff->Lock(&pbuffer, nullptr, &cbCurrentLength);
 			assert(SUCCEEDED(hr));
 
-			soundData.mediaData.resize(soundData.mediaData.size() + cbCurrentLength);
-			memcpy(soundData.mediaData.data() + soundData.mediaData.size() - cbCurrentLength, pbuffer, cbCurrentLength);
+			AudioDatas_[fileName].soundData_.mediaData.resize(AudioDatas_[fileName].soundData_.mediaData.size() + cbCurrentLength);
+			memcpy(AudioDatas_[fileName].soundData_.mediaData.data() + AudioDatas_[fileName].soundData_.mediaData.size() - cbCurrentLength, pbuffer, cbCurrentLength);
 
 			hr = mediaBuff->Unlock();
 			assert(SUCCEEDED(hr));
@@ -171,63 +172,18 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 		}
 		//HRESULT hr{};
 
-		hr = xAudio->CreateSourceVoice(&soundData.pSourcevoice, waveFormat);
+		hr = xAudio->CreateSourceVoice(&AudioDatas_[fileName].soundData_.pSourcevoice, waveFormat);
 		assert(SUCCEEDED(hr));
 
-		XAUDIO2_BUFFER buf{0};
-		buf.pAudioData = soundData.mediaData.data();
-		buf.AudioBytes = sizeof(BYTE) * static_cast<UINT32>(soundData.mediaData.size());
+		AudioDatas_[fileName].soundData_.buffer.pAudioData = AudioDatas_[fileName].soundData_.mediaData.data();
+		AudioDatas_[fileName].soundData_.buffer.AudioBytes = sizeof(BYTE) * static_cast<UINT32>(AudioDatas_[fileName].soundData_.mediaData.size());
 
-		hr= soundData.pSourcevoice->SubmitSourceBuffer(&buf);
+		hr = AudioDatas_[fileName].soundData_.pSourcevoice->SubmitSourceBuffer(&AudioDatas_[fileName].soundData_.buffer);
 		assert(SUCCEEDED(hr));
-		hr = soundData.pSourcevoice->Start(0);
-		XAUDIO2_VOICE_STATE state{ 0 };
-		soundData.pSourcevoice->GetState(&state);
-		assert(SUCCEEDED(hr));
-	
-		/*auto quit{ true };
 
-		std::thread t([&quit]()
-			{
-				while (true)
-				{
-					auto c{ getchar() };
-					if (c == 'q')
-					{
-						quit = false;
-					}
-				}
-			});
+		AudioDatas_[fileName].soundData_.pSourcevoice->SetVolume(0.5f);
+		hr = AudioDatas_[fileName].soundData_.pSourcevoice->Start(0);
 
-		while (true)
-		{
-			if (!quit)
-			{
-				break;
-			}
-
-			XAUDIO2_VOICE_STATE state{ 0 };
-			soundData.pSourcevoice->GetState(&state);
-			if (state.BuffersQueued == 0)
-			{
-				break;
-			}
-			Sleep(10);
-		}
-		t.detach();*/
-
-		//CoTaskMemFree(waveFormat);
-		//soundData.mediaType->Release();
-		//soundData.MFSourceReader->Release();
-
-		//soundData.wfex = move(*waveFormat);
-		soundData.mediaData = soundData.mediaData;
-		soundData.pBuffer = soundData.mediaData.data();
-		soundData.bufferSize = sizeof(BYTE) * static_cast<UINT32>(soundData.mediaData.size());
-		soundData.index = AudioManager::GetInstance()->AudioIndex;
-
-		//登録
-        AudioDatas_[fileName] = make_unique<AudioDataResource>(fileName, soundData);
 		return fileName;
 	}
 	return fileName;
@@ -240,11 +196,13 @@ void AudioManager::SoundAllUnLoad()
 
 void AudioManager::AudioPlayWave(const string& FileName)
 {
-
+	FileName;
 	HRESULT result{};
 	IXAudio2SourceVoice* sourceVoice = {};
 
-	soundData soundData = AudioDatas_[FileName]->GetSoundData();
+	soundData soundData;// = AudioDatas_[FileName]->GetSoundData();
+
+
 	result = xAudio->CreateSourceVoice(&sourceVoice, &soundData.wfex);
 	assert(SUCCEEDED(result));
 
@@ -262,24 +220,10 @@ void AudioManager::AudioPlayWave(const string& FileName)
 void AudioManager::AudioPlayMp3(const string& FileName)
 {
 
-	XAUDIO2_VOICE_STATE state{ 0 };
+	AudioDatas_[FileName].soundData_.pSourcevoice->SubmitSourceBuffer(&AudioDatas_[FileName].soundData_.buffer);
+	AudioDatas_[FileName].soundData_.pSourcevoice->SetVolume(1.0f);
+	AudioDatas_[FileName].soundData_.pSourcevoice->Start();
 
-
-	//HRESULT result{};
-
-	soundData soundData = AudioDatas_[FileName]->GetSoundData();
-	soundData.pSourcevoice->GetState(&state);
-	//if (!state)
-	//{
-
-	//XAUDIO2_BUFFER buf{};
-	//buf.pAudioData = soundData.pBuffer;
-	//buf.AudioBytes = soundData.bufferSize;
-	//buf.Flags = XAUDIO2_END_OF_STREAM;
-	//result = soundData.pSourcevoice->SubmitSourceBuffer(&buf);
-	//result = soundData.pSourcevoice->SetVolume(1.0f);
-	//result = soundData.pSourcevoice->Start();
-	//}
 }
 
 bool AudioManager::CheckAudioDatas(string filepath)
