@@ -21,11 +21,11 @@ public:
 
 	void ImGuiUpdate();
 
-	Vector3 GetWorldPosition()override;
+	Math::Vector::Vector3 GetWorldPosition()override;
 
 	void OnCollision(IBoxCollider* collider)override;
 
-	void GravityExc(const Vector2 &g)override;
+	void GravityExc(const Math::Vector::Vector2 &g)override;
 #pragma region Command
 
 	void Move();
@@ -53,10 +53,10 @@ private:
 	WorldTransform worldTransform_{};
 
 	AABB aabb_ = {};
-	Vector2 velocity_ = {};
+	Math::Vector::Vector2 velocity_ = {};
 
 	bool isJamp_ = false;
 
-	Vector3 GameStartPos_ = {};
+	Math::Vector::Vector3 GameStartPos_ = {};
 };
 

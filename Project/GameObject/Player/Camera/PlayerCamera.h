@@ -34,5 +34,5 @@ private:
 	CameraData cameraData_ = {};
 
 
-	Vector2 distinationAngleXY = {};
+	Math::Vector::Vector2 distinationAngleXY = {};
 };

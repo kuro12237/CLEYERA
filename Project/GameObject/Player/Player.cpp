@@ -8,7 +8,6 @@ void Player::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	gameObject_->SetModel(modelHandle_);
-	gameObject_->UseLight(true);
 
 	worldTransform_.translate.y = 4.0f;
 	worldTransform_.translate.x = 4.0f;
@@ -27,8 +26,8 @@ void Player::Initialize()
 
 	GlobalVariables::GetInstance()->CreateGroup("Player");
 
-	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Vector3>("Player", "scale");
-	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Vector3>("Player", "startPos");
+	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
+	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 	worldTransform_.translate = GameStartPos_;
 }
 
@@ -37,8 +36,8 @@ void Player::Update()
 	GlobalVariables::GetInstance()->AddItem("Player", "scale", worldTransform_.scale);
 	GlobalVariables::GetInstance()->AddItem("Player", "startPos", GameStartPos_);
 
-	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Vector3>("Player", "scale");
-	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Vector3>("Player", "startPos");
+	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
+	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 
 	Move();
 
@@ -73,15 +72,15 @@ void Player::ImGuiUpdate()
 	if (ImGui::Button("Reset"))
 	{
 
-		worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Vector3>("Player", "scale");
-		GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Vector3>("Player", "startPos");
+		worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
+		GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 		worldTransform_.translate = GameStartPos_;
 		worldTransform_.UpdateEularQuaternionMatrix();
 	}
 
 }
 
-Vector3 Player::GetWorldPosition()
+Math::Vector::Vector3 Player::GetWorldPosition()
 {
 	return worldTransform_.GetWorldPosition();
 }
@@ -89,7 +88,7 @@ Vector3 Player::GetWorldPosition()
 void Player::OnCollision(IBoxCollider* collider)
 {
 	collider;
-	Vector2 extrusion = this->GetExtrusionXY();
+	Math::Vector::Vector2 extrusion = this->GetExtrusionXY();
 	worldTransform_.translate.x += extrusion.x;
 	worldTransform_.translate.y += extrusion.y;
 	worldTransform_.UpdateEularMatrix();
@@ -112,7 +111,7 @@ void Player::OnCollision(IBoxCollider* collider)
 	}
 }
 
-void Player::GravityExc(const Vector2 &g)
+void Player::GravityExc(const Math::Vector::Vector2 &g)
 {
 	velocity_ = g;
 	worldTransform_.translate.y += velocity_.y;
@@ -124,7 +123,7 @@ void Player::GravityExc(const Vector2 &g)
 
 void Player::Move()
 {
-	Vector2 Ljoy = Input::GetJoyLStickPos();
+	Math::Vector::Vector2 Ljoy = Input::GetJoyLStickPos();
 	if (Ljoy.x >= -0.1f && Ljoy.x <= 0.1f)
 	{
 		Ljoy.x = {};
