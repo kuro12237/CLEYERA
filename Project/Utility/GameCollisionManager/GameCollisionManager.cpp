@@ -21,11 +21,11 @@ void GameCollisonManager::CheckAllCollisions()
 
 			//判定
 				// コリジョンフィルタリング
-			if ((colliderA->GetAttbute() & colliderB->GetMask()) == 0 ||
+		/*	if ((colliderA->GetAttbute() & colliderB->GetMask()) == 0 ||
 				(colliderA->GetMask() & colliderB->GetAttbute()) == 0)
 			{
 				return;
-			}
+			}*/
 			if (IsCollision(a, b))
 			{
 

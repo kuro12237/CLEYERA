@@ -43,7 +43,6 @@ void Player::Update()
 
 	Move();
 
-	worldTransform_.UpdateMatrix();
 	ClearFlag();
 }
 
@@ -93,7 +92,7 @@ void Player::OnCollision(IBoxCollider* collider)
 	Math::Vector::Vector2 extrusion = this->GetExtrusionXY();
 	worldTransform_.translate.x += extrusion.x;
 	worldTransform_.translate.y += extrusion.y;
-	worldTransform_.UpdateEularMatrix();
+	worldTransform_.UpdateMatrix();
 
 	if (GetBottomFlag() && velocity_.y <= 0.0f)
 	{
@@ -110,7 +109,7 @@ void Player::GravityExc(const Math::Vector::Vector2 &g)
 {
 	velocity_ = g;
 	worldTransform_.translate.y += velocity_.y;
-	worldTransform_.UpdateEularMatrix();
+	worldTransform_.UpdateMatrix();;
 
 }
 
@@ -129,9 +128,11 @@ void Player::Move()
 	const float Speed = 0.1f;
 	
 	velocity_.x = Ljoy.x * Speed;
+	velocity_.y = Ljoy.y * Speed;
 
 	worldTransform_.translate.x +=velocity_.x;
-	//worldTransform_.translate.y += AddPos.y;
+	worldTransform_.translate.y += velocity_.y;
+	worldTransform_.UpdateEularMatrix();
 }
 
 void Player::Jamp()

@@ -34,7 +34,7 @@ void GameScene::Update(GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	sun_->ImGuiUpdate();
-
+	player_->ImGuiUpdate();
 #endif // _USE_IMGUI
 
 #pragma region
@@ -50,14 +50,12 @@ void GameScene::Update(GameManager* Scene)
 
 	MapObjectUpdate();
 
+	//CheckGravitys();
 	//blockの当たり判定
 	CheckBlockCollision();
 
-	CheckGravitys();
-
 	playerCamera_->Update();
 	cameraData_ = playerCamera_->GetData();
-	cameraData_.TransfarMatrix();
 	cameraData_.TransfarMatrix();
 
 	postEffect_->Update();
