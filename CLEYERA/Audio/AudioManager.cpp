@@ -122,7 +122,7 @@ string AudioManager::SoundLoadMp3(const string& fileName)
 
 		//ソースリーダーの作成
 
-		MFCreateSourceReaderFromURL(L"Resources/Sounds/testSound.mp3", nullptr, &AudioDatas_[fileName].soundData_.MFSourceReader);
+		MFCreateSourceReaderFromURL(wideStr, nullptr, &AudioDatas_[fileName].soundData_.MFSourceReader);
 
 
 		//メディアタイプ
@@ -200,8 +200,7 @@ void AudioManager::AudioPlayWave(const string& FileName)
 	HRESULT result{};
 	IXAudio2SourceVoice* sourceVoice = {};
 
-	soundData soundData;// = AudioDatas_[FileName]->GetSoundData();
-
+	soundData soundData;
 
 	result = xAudio->CreateSourceVoice(&sourceVoice, &soundData.wfex);
 	assert(SUCCEEDED(result));

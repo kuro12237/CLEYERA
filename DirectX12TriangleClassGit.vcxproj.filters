@@ -270,7 +270,7 @@
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\GameScene.cpp">
+    <ClCompile Include="Project\Scene\CGScene.cpp">
       <Filter>Project\Scene\Game</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
@@ -305,6 +305,9 @@
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlockManager\WoodBlock.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlockManager\WoodBlockManager.cpp" />
+    <ClCompile Include="Project\Scene\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -460,7 +463,7 @@
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Scene\GameScene.h">
+    <ClInclude Include="Project\Scene\CGScene.h">
       <Filter>Project\Scene\Game</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h">
@@ -511,6 +514,10 @@
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
     <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h" />
     <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h" />
+    <ClInclude Include="Project\GameObject\WoodBlockManager\WoodBlock.h" />
+    <ClInclude Include="Project\GameObject\WoodBlockManager\WoodBlockManager.h" />
+    <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
+    <ClInclude Include="Project\Scene\GameScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
