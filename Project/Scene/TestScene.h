@@ -23,4 +23,6 @@ public:
 private:
 
 	
+	uint32_t testAudioHandle_ = 0;
+	uint32_t testAudioWaveHandle_ = 0;
 };

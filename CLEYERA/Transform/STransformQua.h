@@ -1,13 +1,11 @@
 #pragma once
-#include"Vector3.h"
-#include"Quaternion/Quaternion.h"
-#include<json.hpp>
+#include"Pch.h"
 
 struct TransformQua
 {
-	Vector3 scale;
-	Quaternion quaternion;
-	Vector3 translate;
+	Math::Vector::Vector3 scale;
+	Math::Qua::Quaternion quaternion;
+	Math::Vector::Vector3 translate;
 
 	NLOHMANN_DEFINE_TYPE_INTRUSIVE(TransformQua, scale, quaternion, translate)
 

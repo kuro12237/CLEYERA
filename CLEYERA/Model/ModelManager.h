@@ -2,7 +2,6 @@
 #include"Pch.h"
 #include"ModelObjData.h"
 #include"Graphics/TextureManager/TextureManager.h"
-#include"Graphics/NormalMap/NormalMap.h"
 #include"Quaternion/QuaternionTransform.h"
 #include"Animation/SAnimation.h"
 
@@ -51,6 +50,7 @@ private:
 
 	static int32_t CreateJoint(const NodeData& node, const std::optional<int32_t>& parent, std::vector<SAnimation::Joint>& joints);
 
+	static SkinCluster CreateSkinCluster(const SAnimation::Skeleton& skeleton,const SModelData& modelData);
 
 	map<string,unique_ptr<ModelObjData>>objModelDatas_;
 	uint32_t objHandle_ = 0;

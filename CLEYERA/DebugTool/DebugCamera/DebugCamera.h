@@ -36,14 +36,14 @@ private:
 	CameraData saveCameraData_ = {};
 
 
-	Vector3 moveSpeed_ = { 0.25f,0.25f,0.25f };
-	Vector3 rotateSpeed_ = { 0.04f,0.04f,0.04f };
-	Vector3 prerotateSpeed_ = {};
+	Math::Vector::Vector3 moveSpeed_ = { 0.25f,0.25f,0.25f };
+	Math::Vector::Vector3 rotateSpeed_ = { 0.04f,0.04f,0.04f };
+	Math::Vector::Vector3 prerotateSpeed_ = {};
 
-	Vector3 offset_ = { 0.0f,2.0f,-16.0f };
-	Vector3 DfOffset_ = {0.0f,2.0f,-16.0f};
+	Math::Vector::Vector3 offset_ = { 0.0f,2.0f,-16.0f };
+	Math::Vector::Vector3 DfOffset_ = {0.0f,2.0f,-16.0f};
 
-	Matrix4x4 matRot_ = {};
+	Math::Matrix::Matrix4x4 matRot_ = {};
 
 	bool leftMoveFlag_ = false;
 

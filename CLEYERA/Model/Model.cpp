@@ -1,5 +1,7 @@
 #include "Model.h"
 
+using namespace Math::Vector;
+
 Model::~Model()
 {
 }

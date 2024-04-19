@@ -1,6 +1,7 @@
 #include "IsCollision.h"
 
-
+using namespace Math::Vector;
+using namespace Math::Matrix;
 
 namespace Collision {
 
@@ -8,7 +9,7 @@ namespace Collision {
 	bool IsCollision(const Sphere& s1, const Sphere& s2) {
 
 		// 中心からの距離
-		float distance = VectorTransform::Length(VectorTransform::Subtruct(s2.center, s1.center));
+		float distance = Length(Subtruct(s2.center, s1.center));
 
 		// 距離と半径を比べる
 		if (distance <= s1.radius + s2.radius) {
@@ -47,7 +48,7 @@ namespace Collision {
 			std::clamp(s.center.z, aabb.min.z, aabb.max.z), };
 
 		// 最近接点と球の中心と距離を求める
-		float dist = VectorTransform::Length(VectorTransform::Subtruct(ClosestPoint, s.center));
+		float dist = Length(Subtruct(ClosestPoint, s.center));
 
 		// 距離が半径よりも小さければ衝突
 		if (dist <= s.radius) {
@@ -122,8 +123,7 @@ namespace Collision {
 	bool IsCollision(const OBB& obb, const Sphere& s) {
 
 		Vector3 centerInOBBLocalSpace = {
-		VectorTransform::TransformByMatrix(
-			s.center, MatrixTransform::Inverse(CreateOBBWorldMatrix(obb))) };
+		TransformByMatrix(s.center, Math::Matrix::Inverse(CreateOBBWorldMatrix(obb))) };
 
 		AABB abbOBBLocal = {
 			.min = { -obb.halfSize.x, -obb.halfSize.y, -obb.halfSize.z },
@@ -151,7 +151,7 @@ namespace Collision {
 	// OBBと線の当たり判定
 	bool IsCollision(const OBB& obb, const Segment& s) {
 
-		Matrix4x4 obbInverse = MatrixTransform::Inverse(CreateOBBWorldMatrix(obb));
+		Matrix4x4 obbInverse = Math::Matrix::Inverse(CreateOBBWorldMatrix(obb));
 
 		AABB aabbOBBLocal = {
 			.min = { -obb.halfSize.x, -obb.halfSize.y, -obb.halfSize.z },
@@ -159,12 +159,12 @@ namespace Collision {
 		};
 
 
-		Vector3 localOrigin = VectorTransform::TransformByMatrix(s.origin, obbInverse);
-		Vector3 LocalEnd = VectorTransform::TransformByMatrix(VectorTransform::Add(s.origin, s.diff), obbInverse);
+		Vector3 localOrigin = TransformByMatrix(s.origin, obbInverse);
+		Vector3 LocalEnd = TransformByMatrix(Add(s.origin, s.diff), obbInverse);
 
 		Segment localSegment = {
 			.origin = localOrigin,
-			.diff = VectorTransform::Subtruct(LocalEnd, localOrigin),
+			.diff = Subtruct(LocalEnd, localOrigin),
 		};
 
 

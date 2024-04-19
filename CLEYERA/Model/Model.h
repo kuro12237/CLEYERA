@@ -1,15 +1,16 @@
 #pragma once
 #include"Pch.h"
 #include"Graphics/TextureManager/TextureManager.h"
-
-#include"ModelPlaneState.h"
-#include"ModelLineState.h"
-#include"ModelSphereState.h"
+//
+//#include"ModelPlaneState.h"
+//#include"ModelLineState.h"
+//#include"ModelSphereState.h"
 #include"ModelObjState.h"
 
 #include"WorldTransform.h"
 #include"CameraData.h"
 #include"Light/Light.h"
+#include"Game3dObjectDesc.h"
 
 class Model
 {
@@ -23,7 +24,7 @@ public:
 	/// <param name="CenterPos"></param>
 	/// <param name="size"></param>
 	/// <param name="color"></param>
-	void CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Vector4 color = { 1,1,1,1 });
+	void CreateModel(unique_ptr<IModelState> state, Math::Vector::Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Math::Vector::Vector4 color = { 1,1,1,1 });
 
 	/// <summary>
 	/// DrawLine用の初期化
@@ -31,7 +32,7 @@ public:
 	/// <param name="StertPosition"></param>
 	/// <param name="EndPosition"></param>
 	/// 
-	void CreateLine(unique_ptr<IModelState> state, Vector4 StertPosition, Vector4 EndPosition, Vector4 Color = { 1,1,1,1 });
+	void CreateLine(unique_ptr<IModelState> state, Math::Vector::Vector4 StertPosition, Math::Vector::Vector4 EndPosition, Math::Vector::Vector4 Color = { 1,1,1,1 });
 
 	/// <summary>
 	/// modelをセット(初期化の時にしか使わないように)
@@ -45,45 +46,36 @@ public:
 
 	void Draw( const CameraData&viewprojection);
 
-	/// <summary>
-	/// ライトを使うか？
-	/// </summary>
-	void UseLight(bool flag) { this->uselight_ = flag; };
-
-	void SetIsIndexDraw(bool flag) { isIndexDrawFlag_ = flag; }
+	void SetDesc(const Game3dObjectDesc& desc) { desc_ = &desc; }
 
 #pragma region Get
 
-	bool GetIsIndexDraw() { return isIndexDrawFlag_; }
 
-	Vector4 GetColor() { return color_; }
+	Math::Vector::Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 	uint32_t GetModelHandle() { return modelHandle_; }
 
-	Vector3 GetuvScale() { return uvScale_; }
-	Vector3 GetuvRotate() { return uvRotate_; }
-	Vector3 GetuvTranslate() { return uvTranslate_; }
+	Math::Vector::Vector3 GetuvScale() { return uvScale_; }
+	Math::Vector::Vector3 GetuvRotate() { return uvRotate_; }
+	Math::Vector::Vector3 GetuvTranslate() { return uvTranslate_; }
 
 	/// <summary>
 	/// GetLineStartPos
 	/// </summary>
-	Vector4 GetStartPos() { return StartPos_; }
+	Math::Vector::Vector4 GetStartPos() { return StartPos_; }
 	/// <summary>
 	/// GetLineEndPos
 	/// </summary>
-	Vector4 GetEndPos() { return EndPos_; }
+	Math::Vector::Vector4 GetEndPos() { return EndPos_; }
 
 	/// <summary>
 	/// GetModelCenterPos
 	/// </summary>
-	Vector4 GetCenterPos() { return CenterPos_; }
+	Math::Vector::Vector4 GetCenterPos() { return CenterPos_; }
 	/// <summary>
 	/// GetModelSize
 	/// </summary>
 	float GetSize() { return size_; }
-
-
-	bool GetUseLight(){return uselight_;}
 
 	SModelData GetModelData() { return modelData_; }
 
@@ -92,27 +84,26 @@ public:
 
 private:
 
-	Vector4 CenterPos_ = { 0,0,0,1 };
+	const Game3dObjectDesc* desc_ = nullptr;
+
+	Math::Vector::Vector4 CenterPos_ = { 0,0,0,1 };
 	float size_=1.5f;
 
-	Vector4 StartPos_ = {};
-	Vector4 EndPos_ = {};
+	Math::Vector::Vector4 StartPos_ = {};
+	Math::Vector::Vector4 EndPos_ = {};
 
-	Vector4 color_ = { 1,1,1,1 };
+	Math::Vector::Vector4 color_ = { 1,1,1,1 };
 
 	uint32_t texHandle_ = 0;
 	uint32_t modelHandle_ = 0;
 	uint32_t prevModelHandle_ = 0;
 	
-	Vector3 uvScale_ = {1,1,1};
-	Vector3 uvRotate_ = {0,0,0};
-	Vector3 uvTranslate_ = {0,0,0};
-
-	bool uselight_ = false;
+	Math::Vector::Vector3 uvScale_ = {1,1,1};
+	Math::Vector::Vector3 uvRotate_ = {0,0,0};
+	Math::Vector::Vector3 uvTranslate_ = {0,0,0};
 
 	unique_ptr<IModelState> state_ = nullptr;
 	SModelData modelData_;
 
-	bool isIndexDrawFlag_ = false;
 };
 

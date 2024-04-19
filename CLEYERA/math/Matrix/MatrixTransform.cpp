@@ -1,6 +1,10 @@
-#include "MatrixTransform.h"
+#include "Matrix/MatrixTransform.h"
+#include"Vector/VectorTransform.h"
 
-Matrix4x4 MatrixTransform::Add(Matrix4x4 m1, Matrix4x4 m2)
+using namespace Math::Vector;
+using namespace Math::Matrix;
+
+Matrix4x4 Math::Matrix::Add(Matrix4x4 m1, Matrix4x4 m2)
 {
 	Matrix4x4 result = {};
 
@@ -15,7 +19,7 @@ Matrix4x4 MatrixTransform::Add(Matrix4x4 m1, Matrix4x4 m2)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
+Matrix4x4 Math::Matrix::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 {
 	Matrix4x4 result = {};
 
@@ -60,7 +64,7 @@ Matrix4x4 MatrixTransform::Multiply(Matrix4x4 m1, Matrix4x4 m2)
 
 
 
-Matrix4x4 MatrixTransform::Identity()
+Matrix4x4 Math::Matrix::Identity()
 {
 	Matrix4x4 result =
 	{
@@ -71,13 +75,12 @@ Matrix4x4 MatrixTransform::Identity()
 
 	};
 
-
 	return result;
 }
 
 
 
-Matrix4x4 MatrixTransform::Inverse(Matrix4x4 m)
+Matrix4x4 Math::Matrix::Inverse(Matrix4x4 m)
 {
 	Matrix4x4 result = {};
 	float determinant = m.m[0][0] * m.m[1][1] * m.m[2][2] * m.m[3][3] +
@@ -137,7 +140,7 @@ Matrix4x4 MatrixTransform::Inverse(Matrix4x4 m)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::ViewportMatrix(float left, float top, float width, float height, float minDepth, float maxDepth)
+Matrix4x4 Math::Matrix::ViewportMatrix(float left, float top, float width, float height, float minDepth, float maxDepth)
 {
 	Matrix4x4 result = {};
 	result.m[0][0] = width / 2.0f;
@@ -164,14 +167,14 @@ Matrix4x4 MatrixTransform::ViewportMatrix(float left, float top, float width, fl
 }
 
 
-float MatrixTransform::Cot(float theta)
+float Math::Matrix::Cot(float theta)
 {
 
 	return (1.0f / tan(theta));
 
 }
 
-Matrix4x4 MatrixTransform::PerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip)
+Matrix4x4 Math::Matrix::PerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip)
 {
 	Matrix4x4 result = {};
 	float theta = fovY / 2.0f;
@@ -199,7 +202,7 @@ Matrix4x4 MatrixTransform::PerspectiveFovMatrix(float fovY, float aspectRatio, f
 	return result;
 }
 
-Matrix4x4 MatrixTransform::OrthographicMatrix(float left, float top, float right, float bottom, float neaCrlip, float farClip)
+Matrix4x4 Math::Matrix::OrthographicMatrix(float left, float top, float right, float bottom, float neaCrlip, float farClip)
 {
 	Matrix4x4 result = {};
 	result.m[0][0] = 2.0f / (right - left);
@@ -225,7 +228,7 @@ Matrix4x4 MatrixTransform::OrthographicMatrix(float left, float top, float right
 	return result;
 }
 
-Matrix4x4 MatrixTransform::ScaleMatrix(Vector3 s)
+Matrix4x4 Math::Matrix::ScaleMatrix(Vector3 s)
 {
 	Matrix4x4 result = {};
 	result.m[0][0] = s.x;
@@ -251,7 +254,7 @@ Matrix4x4 MatrixTransform::ScaleMatrix(Vector3 s)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::TranslateMatrix(Vector3 t)
+Matrix4x4 Math::Matrix::TranslateMatrix(Vector3 t)
 {
 	Matrix4x4 result = {};
 	result.m[0][0] = 1.0f;
@@ -277,7 +280,7 @@ Matrix4x4 MatrixTransform::TranslateMatrix(Vector3 t)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::RotateXMatrix(float theta)
+Matrix4x4 Math::Matrix::RotateXMatrix(float theta)
 {
 	Matrix4x4 result = {};
 
@@ -304,7 +307,7 @@ Matrix4x4 MatrixTransform::RotateXMatrix(float theta)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::RotateYMatrix(float theta)
+Matrix4x4 Math::Matrix::RotateYMatrix(float theta)
 {
 	Matrix4x4 result = {};
 
@@ -331,7 +334,7 @@ Matrix4x4 MatrixTransform::RotateYMatrix(float theta)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::RotateZMatrix(float theta)
+Matrix4x4 Math::Matrix::RotateZMatrix(float theta)
 {
 	Matrix4x4 result = {};
 
@@ -358,7 +361,7 @@ Matrix4x4 MatrixTransform::RotateZMatrix(float theta)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::RotateXYZMatrix(float x, float y, float z)
+Matrix4x4 Math::Matrix::RotateXYZMatrix(float x, float y, float z)
 {
 	Matrix4x4 result;
 
@@ -371,7 +374,7 @@ Matrix4x4 MatrixTransform::RotateXYZMatrix(float x, float y, float z)
 	return result;
 }
 
-Matrix4x4 MatrixTransform::AffineMatrix(const Vector3& Sv, const Vector3& Rv, const Vector3& Tv)
+Matrix4x4 Math::Matrix::AffineMatrix(const Vector3& Sv, const Vector3& Rv, const Vector3& Tv)
 {
 	Matrix4x4 result;
 
@@ -391,7 +394,7 @@ Matrix4x4 MatrixTransform::AffineMatrix(const Vector3& Sv, const Vector3& Rv, co
 	return result;
 }
 
-Matrix4x4 MatrixTransform::OrthographicLH(float width, float height, float nearPlane, float farPlane)
+Matrix4x4 Math::Matrix::OrthographicLH(float width, float height, float nearPlane, float farPlane)
 {
 	float invWidth = 1.0f / width;
 	float invHeight = 1.0f / height;
@@ -414,15 +417,15 @@ Matrix4x4 MatrixTransform::OrthographicLH(float width, float height, float nearP
 	return result;
 }
 
-Matrix4x4 MatrixTransform::LookAtLH(Vector3 eyePosition, Vector3 focusPosition, Vector3 upDirection)
+Matrix4x4 Math::Matrix::LookAtLH(Vector3 eyePosition, Vector3 focusPosition, Vector3 upDirection)
 {
-	Vector3 zAxis = VectorTransform::Normalize(VectorTransform::Subtruct(focusPosition, eyePosition));
-	Vector3 xAxis = VectorTransform::Normalize(VectorTransform::Cross(upDirection, zAxis));
-	Vector3 yAxis = VectorTransform::Cross(zAxis, xAxis);
+	Vector3 zAxis = Normalize(Subtruct(focusPosition, eyePosition));
+	Vector3 xAxis = Normalize(Cross(upDirection, zAxis));
+	Vector3 yAxis = Cross(zAxis, xAxis);
 
-	float tx = (VectorTransform::Dot(xAxis, eyePosition));
-	float ty = (VectorTransform::Dot(yAxis, eyePosition));
-	float tz = (VectorTransform::Dot(zAxis, eyePosition));
+	float tx = (Dot(xAxis, eyePosition));
+	float ty = (Dot(yAxis, eyePosition));
+	float tz = (Dot(zAxis, eyePosition));
 	Matrix4x4 r = {
 		xAxis.x, yAxis.x, zAxis.x, 0.0f,
 		xAxis.y, yAxis.y, zAxis.y, 0.0f,
@@ -431,4 +434,73 @@ Matrix4x4 MatrixTransform::LookAtLH(Vector3 eyePosition, Vector3 focusPosition, 
 	};
 
 	return r;
+}
+
+
+Matrix4x4 Math::Matrix::RotateAxisAngle(const Vector3& axis, float angle)
+{
+	Matrix4x4 result{};
+	float cosAngle = cosf(angle);
+	float sinAngle = sinf(angle);
+
+	result = Identity();
+
+	result.m[0][0] = (axis.x * axis.x) * (1 - cosAngle) + cosAngle;
+	result.m[0][1] = (axis.x * axis.y) * (1 - cosAngle) - axis.z * sinAngle;
+	result.m[0][2] = (axis.x * axis.z) * (1 - cosAngle) + axis.y * sinAngle;
+
+	result.m[1][0] = (axis.x * axis.y) * (1 - cosAngle) + axis.z * sinAngle;
+	result.m[1][1] = (axis.y * axis.y) * (1 - cosAngle) + cosAngle;
+	result.m[1][2] = (axis.y * axis.z) * (1 - cosAngle) - axis.x * sinAngle;
+
+	result.m[2][0] = (axis.x * axis.z) * (1 - cosAngle) - axis.y * sinAngle;
+	result.m[2][1] = (axis.y * axis.z) * (1 - cosAngle) + axis.x * sinAngle;
+	result.m[2][2] = (axis.z * axis.z) * (1 - cosAngle) + cosAngle;
+
+	return result;
+}
+
+Matrix4x4 Math::Matrix::RotateAxisAngle(const Vector3& axis, float sin, float cos)
+{
+	Matrix4x4 result = Identity();
+	result.m[0][0] = axis.x * axis.x * (1 - cos) + cos;
+	result.m[0][1] = axis.x * axis.y * (1 - cos) - axis.z * sin;
+	result.m[0][2] = axis.x * axis.z * (1 - cos) + axis.y * sin;
+
+	result.m[1][0] = axis.x * axis.y * (1 - cos) + axis.z * sin;
+	result.m[1][1] = axis.y * axis.y * (1 - cos) + cos;
+	result.m[1][2] = axis.y * axis.z * (1 - cos) - axis.x * sin;
+
+	result.m[2][0] = axis.x * axis.z * (1 - cos) - axis.y * sin;
+	result.m[2][1] = axis.y * axis.z * (1 - cos) + axis.x * sin;
+	result.m[2][2] = axis.z * axis.z * (1 - cos) + cos;
+	return result;
+}
+
+Matrix4x4 Math::Matrix::DirectionToDirection(const Vector3& from, const Vector3& to)
+{
+	Vector3 fromVec = Normalize(from);
+	Vector3 toVec = Normalize(to);
+	Vector3 n = Normalize(Cross(fromVec, toVec));
+
+	float cos = Dot(fromVec, toVec);
+	float sin = Length(Cross(fromVec, toVec));
+
+	if (from.x == -to.x && from.y == -to.y && from.z == -to.z)
+	{
+		if (from.x != 0.0f || from.y != 0.0f)
+		{
+			n = { from.y,-from.x,0.0f };
+		}
+		else if (from.x != 0.0f || from.z != 0.0f)
+		{
+			n = { from.z,0.0f,-from.x };
+		}
+	}
+
+	Matrix4x4 result{};
+
+	result = RotateAxisAngle(n, sin, cos);
+
+	return result;
 }

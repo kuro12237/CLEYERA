@@ -1,6 +1,7 @@
 #pragma once
 
 #include<cassert>
+#include<thread>
 
 #include<format>
 #include<wrl.h>
@@ -75,7 +76,18 @@
 #pragma endregion
 
 #pragma region XAudio
-#include<xaudio2.h>
+
+
+#include <mfapi.h>
+#include <mfidl.h>
+#include <mfreadwrite.h>
+
+#pragma comment(lib, "Mf.lib")
+#pragma comment(lib, "mfplat.lib")
+#pragma comment(lib, "Mfreadwrite.lib")
+#pragma comment(lib, "mfuuid.lib")
+
+#include <xaudio2.h>
 #pragma comment(lib,"xaudio2.lib")
 
 #pragma endregion
@@ -84,12 +96,12 @@ using Microsoft::WRL::ComPtr;
 using namespace std;
 using namespace std::chrono;
 
-#include"Vector2.h"
-#include"Vector3.h"
-#include"Vector4.h"
+#include"Vector/Vector2.h"
+#include"Vector/Vector3.h"
+#include"Vector/Vector4.h"
 
-#include"Matrix2x2.h"
-#include"Matrix3x3.h"
-#include"Matrix4x4.h"
+#include"Matrix/Matrix2x2.h"
+#include"Matrix/Matrix3x3.h"
+#include"Matrix/Matrix4x4.h"
 
 #include"Quaternion/Quaternion.h"

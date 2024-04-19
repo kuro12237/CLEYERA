@@ -1,10 +1,12 @@
 #include "GeometryCollision.h"
 
+using namespace Math::Matrix;
+using namespace Math::Vector;
 
 namespace GeometryCollision {
 
 	// OBBのワールドマトリックス作成
-	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb) {
+	Math::Matrix::Matrix4x4 CreateOBBWorldMatrix(const OBB& obb) {
 
 		Matrix4x4 worldMatrix{};
 
@@ -87,7 +89,7 @@ namespace GeometryCollision {
 
 		result.center = c->GetWorldPosition();
 
-		Matrix4x4 rotateMat = MatrixTransform::RotateXYZMatrix(c->GetRotate().x, c->GetRotate().y, c->GetRotate().z);
+		Matrix4x4 rotateMat = Math::Matrix::RotateXYZMatrix(c->GetRotate().x, c->GetRotate().y, c->GetRotate().z);
 		result.orientations[0].x = rotateMat.m[0][0];
 		result.orientations[0].y = rotateMat.m[0][1];
 		result.orientations[0].z = rotateMat.m[0][2];

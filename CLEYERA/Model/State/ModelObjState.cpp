@@ -25,22 +25,20 @@ void ModelObjState::CallPipelinexVertex(Model* state)
 
 void ModelObjState::Draw(Model* state, const CameraData& viewprojection)
 {
+	viewprojection;
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	vertex_->Map();
 	vertex_->Setbuffer(state->GetModelData().vertices);
+	vertex_->UnMap();
 	//IndexBufferのMap
 	index_->Map();
 	index_->Setbuffer(state->GetModelData().indecs);
-	index_->CommandIndexBufferViewCall();
-	
-	//Light
-	if (state->GetUseLight())
-	{
-		viewprojection.buffer_->CommandCall(3);
+	index_->UnMap();
 
-		DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
-		commands.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
-	}
+	vertex_->CommandVertexBufferViewCall();
+
+	index_->CommandIndexBufferViewCall();
+	vertex_->CommandPrimitiveTopologyCall();
 
 	commands.m_pList->DrawIndexedInstanced(UINT(state->GetModelData().indecs.size()), 1, 0, 0, 0);
 	

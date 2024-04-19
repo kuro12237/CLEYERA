@@ -4,7 +4,7 @@ struct  TexData
 {
 	uint32_t index;
 	ComPtr<ID3D12Resource> resource;
-	Vector2 size;
+	Math::Vector::Vector2 size;
 };
 
 class TexDataResource
@@ -15,7 +15,7 @@ public:
 
 	uint32_t GetTexHandle() { return texData_.index; }
 	void texRelease() { texData_.resource.Reset(); }
-	Vector2 GetSize() { return texData_.size; }
+	Math::Vector::Vector2 GetSize() { return texData_.size; }
 
 private:
 

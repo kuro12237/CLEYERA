@@ -40,7 +40,8 @@ private:
 	CameraData testViewProjection_ = {};
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
-	Vector2 postEffectuvScale = { 1,1 };
+
+	Math::Vector::Vector2 postEffectuvScale = { 1,1 };
 	float postEffectGrayFactor_ = 0.0f;
 	float postEffectInvertFactor_ = 0.0f;
 	float postEffectBringhtnessFactor_ = 0.0f;
@@ -52,12 +53,18 @@ private:
 
 	unique_ptr<PostEffect>postEffectTest_ = nullptr;
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
+	Game3dObjectDesc ObjectDesc_ = {};
+
 	WorldTransform worldTransform_ = {};
 
 	unique_ptr<Game3dObject>testSkyDomeGameObject_ = nullptr;
+	Game3dObjectDesc SkyObjectDesc_ =  {};
+
 	WorldTransform TestSkyDomeWorldTreanform_ = {};
 	unique_ptr<Game3dObject>testGroundGameObject_ = nullptr;
+	
 	WorldTransform testGroundWorldTransform_ = {};
+	Game3dObjectDesc GroundObjectDesc_ = {};
 
 	PointLight_param light_ = {};
 	PointLight_param testLight = {};

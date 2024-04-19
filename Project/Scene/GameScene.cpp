@@ -15,17 +15,16 @@ void GameScene::Initialize()
 	worldTransform_.translate.y = 0.5f;
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
-	//ModelManager::ModelLoadNormalMap();
-	//ModelManager::ModelUseSubsurface();
-	//normalMonkeyHandle_= ModelManager::LoadObjectFile("TestMonkey");
-	gameObject_->SetIsIndexDraw(true);
+
 	normalMonkeyHandle_ = ModelManager::LoadGltfFile("Walk");
 
 	AnimationManager::GetInstance()->LoadAnimation("SimpleSkin");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
-	
+	ObjectDesc_.useLight = true;
+	gameObject_->SetDesc(ObjectDesc_);
+
 	light_.position.y = 1.0f;
 	light_.position.z = -1.0f;
 	light_.radious = 10.0f;
@@ -35,7 +34,6 @@ void GameScene::Initialize()
 	testLight.radious = 4.0f;
 	testLight.color = { 1,0,0,1 };
 
-	gameObject_->UseLight(true);
 	gameObject_->SetlectModelPipeline(UE4_BRDF);
 
 	ModelManager::ModelLoadNormalMap();
@@ -44,9 +42,10 @@ void GameScene::Initialize()
 	testGroundGameObject_ = make_unique<Game3dObject>();
 	testGroundGameObject_->Create();
 	testGroundGameObject_->SetModel(modelHandle);
-	testGroundGameObject_->UseLight(true);
+	GroundObjectDesc_.useLight = true;
+	testGroundGameObject_->SetDesc(GroundObjectDesc_);
+
 	testGroundGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
-	testGroundGameObject_->SetIsIndexDraw(true);
 
 	TestSkyDomeWorldTreanform_.Initialize();
 	TestSkyDomeWorldTreanform_.scale = { 8.0f,8.0f,8.0f };
@@ -55,9 +54,10 @@ void GameScene::Initialize()
 	testSkyDomeGameObject_= make_unique<Game3dObject>();
 	testSkyDomeGameObject_->Create();
 	testSkyDomeGameObject_->SetModel(modelHandle);
-	testSkyDomeGameObject_->UseLight(true);
+	//testSkyDomeGameObject_->UseLight(true);
+	SkyObjectDesc_.useLight = true;
 	testSkyDomeGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
-
+	testSkyDomeGameObject_->SetDesc(SkyObjectDesc_);
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
 
@@ -108,14 +108,13 @@ void GameScene::Update(GameManager* Scene)
 
 	debugCamera_->Update();
 	viewProjection_ = debugCamera_->GetData(viewProjection_);
-	Matrix4x4 test = ModelManager::GetModel(normalMonkeyHandle_)->GetModelData().node.localMatrix;
-	test;
+
 	animationTimer_ += 1.0f / 60.0f;
 	//TestAnimation();
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
 	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("SimpleSkin");
 	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
-
+	ModelManager::SkeletonUpdate(skeleton);
 	if (Input::PushKeyPressed(DIK_N))
 	{
 		Scene->ChangeState(new TestScene);
@@ -131,38 +130,6 @@ void GameScene::PostProcessDraw()
 	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 
 	postEffect_->PostDraw();
-//color
-//	defferedShading->PreColorDraw();
-//	
-//	gameObject_->ColorDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostColorDraw();
-//
-//	defferedShading->PreNormalDraw();
-//	//normal
-//	gameObject_->NormalDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->NormalDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//    testGroundGameObject_->NormalDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostNormalDraw();
-//    //pos
-//	defferedShading->PrePosDraw();
-//
-//	gameObject_->PosDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->PosDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//	testGroundGameObject_->PosDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostPosDraw();
-////depth
-//	defferedShading->PreDepthDraw();
-//
-//	gameObject_->ColorDraw(worldTransform_, viewProjection_);
-//	testSkyDomeGameObject_->ColorDraw(TestSkyDomeWorldTreanform_, viewProjection_);
-//	testGroundGameObject_->ColorDraw(testGroundWorldTransform_, viewProjection_);
-//
-//	defferedShading->PostDepthDraw();
 }
 
 void GameScene::Back2dSpriteDraw()
@@ -206,15 +173,15 @@ void GameScene::TestAnimation()
 	animationTimer_ += 1.0f / 60.0f;
 	animationTimer_ = std::fmod(animationTimer_, data.duration);
 	SAnimation::NodeAnimation& rootNodeAnimation = data.NodeAnimation["AnimatedCube"];
-	Vector3 translate = AnimationManager::CalculateValue(rootNodeAnimation.translate.keyframes, animationTimer_);
-	Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
-	Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
+	Math::Vector::Vector3 translate = AnimationManager::CalculateValue(rootNodeAnimation.translate.keyframes, animationTimer_);
+	Math::Qua::Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
+	Math::Vector::Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
 
-	Matrix4x4 tm = MatrixTransform::TranslateMatrix(translate);
-	Matrix4x4 rm = QuaternionTransform::RotateMatrix(quaternion);
-	Matrix4x4 sm = MatrixTransform::ScaleMatrix(scale);
-	Matrix4x4 localMat = MatrixTransform::Multiply(sm, MatrixTransform::Multiply(rm, tm));
-	worldTransform_.matWorld = MatrixTransform::Multiply(worldTransform_.matWorld, localMat);
+	Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(translate);
+	Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(quaternion);
+	Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix(scale);
+	Math::Matrix::Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
+	worldTransform_.matWorld = Math::Matrix::Multiply(worldTransform_.matWorld, localMat);
 	worldTransform_.TransfarMatrix();
 
 }

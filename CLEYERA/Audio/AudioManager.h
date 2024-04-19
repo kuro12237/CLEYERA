@@ -28,26 +28,28 @@ public:
 
 	static AudioManager* GetInstance();
 
-	static void Initialize();
+    void Initialize();
 
-	static void Finalize();
+    void Finalize();
 
-	static uint32_t SoundLoadWave(const char* filename);
+    string SoundLoadWave(const string& filename);
 
-	static void SoundAllUnLoad();
+    string SoundLoadMp3(const string& fileName);
+
+    void SoundAllUnLoad();
 
 	/// <summary>
 	/// 音再生
 	/// </summary>
 	/// <param name="soundHandle"></param>
-	static void AudioPlayWave(uint32_t soundHandle);
-	static void AudioStopWave(uint32_t soundHandle);
-	static void AudioVolumeControl(UINT soundHandle, float volume);
+	void AudioPlayWave(const string& FileName);
+
+	void AudioPlayMp3(const string& FileName);
 private:
 
-	static bool ChackAudioDatas(string filepath);
+	bool CheckAudioDatas(string filepath);
 
-	static bool ChackRiff(RiffHeader &riff);
+	bool ChackRiff(RiffHeader &riff);
 
 	ComPtr<IXAudio2> xAudio=nullptr;
 	IXAudio2MasteringVoice* masterVoice = nullptr;
@@ -57,7 +59,11 @@ private:
 
 	uint32_t AudioIndex = 0;
 	uint32_t AudioIndex2 = 0;
-	map<string, unique_ptr<AudioDataResource>>AudioDatas_;
+	map<string, AudioDataResource>AudioDatas_;
+
+#pragma region Mp3
+
+#pragma endregion
 
 #pragma region Singleton
 	AudioManager() = default;

@@ -40,14 +40,14 @@ public:
 
 #pragma region Set
 
-	void SetPosition(Vector2 pos) { pos_ = pos; }
-	void SetSize(Vector2 size) { size_ = size; }
+	void SetPosition(Math::Vector::Vector2 pos) { pos_ = pos; }
+	void SetSize(Math::Vector::Vector2 size) { size_ = size; }
 
 	void SetParam(const PostEffectParam &param) { param_ = param; }
-	void SetUvScale(const Vector2 &s) { uvScale_ = { s.x, s.y, 1.0f }; }
-	void SetUvRotate(const Vector2 &r) { uvRotate_ = { r .x,r.y,1.0f}; }
-	void SetUvTranslate(const Vector2 &t) {uvTranslate_ = { t.x,t.y,1.0f };}
-	void SetUvMatrix(const Matrix4x4 &m) { param_.uvMatrix = m; }
+	void SetUvScale(const Math::Vector::Vector2 &s) { uvScale_ = { s.x, s.y, 1.0f }; }
+	void SetUvRotate(const Math::Vector::Vector2 &r) { uvRotate_ = { r .x,r.y,1.0f}; }
+	void SetUvTranslate(const Math::Vector::Vector2 &t) {uvTranslate_ = { t.x,t.y,1.0f };}
+	void SetUvMatrix(const Math::Matrix::Matrix4x4 &m) { param_.uvMatrix = m; }
 
 	void SetSelectPostEffect(SelectPostEffect s, bool flag);
 
@@ -104,8 +104,8 @@ private:
 	void CreateBloomRTV();
 	void CreateBloomSRV();
 
-	Vector2 pos_ = {};
-	Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight())};
+	Math::Vector::Vector2 pos_ = {};
+	Math::Vector::Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight())};
 
 	uint32_t srvIndex_ = 0;
 	uint32_t rtvIndex_ = 0;
@@ -134,8 +134,8 @@ private:
 	PostEffectBlurParam blurParam_ = {};
 	PostEffectParam param_ = {};
 	PostEffectAdjustedColorParam adjustedColorParam_ = {};
-	Vector3 uvScale_ = {1.0f,1.0f,1.0f};
-	Vector3 uvRotate_ = {};
-	Vector3 uvTranslate_ = {};
+	Math::Vector::Vector3 uvScale_ = {1.0f,1.0f,1.0f};
+	Math::Vector::Vector3 uvRotate_ = {};
+	Math::Vector::Vector3 uvTranslate_ = {};
 
 };

@@ -15,19 +15,19 @@ public:
 	/// <summary>
 	/// ワールド座標の取得
 	/// </summary>
-	virtual Vector3 GetWorldPosition() = 0;
+	virtual Math::Vector::Vector3 GetWorldPosition() = 0;
 
 #pragma region Size
 
 	/// <summary>
 	/// Sizeの取得
 	/// </summary>
-	virtual Vector3 GetSize() = 0;
+	virtual Math::Vector::Vector3 GetSize() = 0;
 
 	/// <summary>
 	/// Sizeの設定
 	/// </summary>
-	void SetSize(Vector3 size) { size_ = size; }
+	void SetSize(Math::Vector::Vector3 size) { size_ = size; }
 
 #pragma endregion
 
@@ -36,12 +36,12 @@ public:
 	/// <summary>
 	/// Rotateの取得
 	/// </summary>
-	virtual Vector3 GetRotate() = 0;
+	virtual Math::Vector::Vector3 GetRotate() = 0;
 
 	/// <summary>
 	/// Rotateの設定
 	/// </summary>
-	void SetRotate(Vector3 rotate) { rotate_ = rotate; }
+	void SetRotate(Math::Vector::Vector3 rotate) { rotate_ = rotate; }
 
 #pragma endregion
 
@@ -98,7 +98,7 @@ private:
 
 	uint32_t CollisionMask_ = 0xffffffff;
 
-	Vector3 size_ = { 1.0f, 1.0f ,1.0f };
+	Math::Vector::Vector3 size_ = { 1.0f, 1.0f ,1.0f };
 
-	Vector3 rotate_ = { 0.0f, 0.0f, 0.0f };
+	Math::Vector::Vector3 rotate_ = { 0.0f, 0.0f, 0.0f };
 };

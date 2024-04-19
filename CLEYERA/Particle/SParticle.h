@@ -7,8 +7,8 @@ struct Particle_param
 {
 	WorldTransform worldTransform_;
 	WorldTransform uvTransform_;
-	Vector4 color_{1,1,1,1};
+	Math::Vector::Vector4 color_{1,1,1,1};
 	bool isAlive = false;
-	Vector3 Velocity{};
+	Math::Vector::Vector3 Velocity{};
 	PointLight_param pointLight;
 };

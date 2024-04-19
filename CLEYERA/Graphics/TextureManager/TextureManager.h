@@ -5,7 +5,6 @@
 #include"CreateResource.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
 #include"Graphics/TextureManager/TexDataResource.h"
-#include"Graphics/NormalMap/NormalMap.h"
 #include<DirectXTex/DirectXTex.h>
 
 class TextureManager
@@ -20,11 +19,10 @@ public:
 	static uint32_t LoadPngTexture(const string& filePath);
 	static void UnLoadTexture(const string& filePath);
 	static void AllUnLoadTexture();
-	static uint32_t CreateNormalTex(std::vector<vector<CreateTex_param>>texData,int32_t width,int32_t height, const string filePath);
 	/// <summary>
 	/// pngのsizeを取得
 	/// </summary>
-	static Vector2 GetTextureSize(uint32_t texHandle);
+	static Math::Vector::Vector2 GetTextureSize(uint32_t texHandle);
 
 	/// <summary>
 	/// ファイルパスを一から書くときに使うやつ
@@ -44,7 +42,7 @@ private:
 
 	static D3D12_SHADER_RESOURCE_VIEW_DESC SrcDescSetting(const DirectX::TexMetadata& metadata);
 
-	static void CreateNormalTexture(uint8_t* &pixels, DirectX::ScratchImage &image, std::vector<vector<CreateTex_param>> &texData,int32_t width,int32_t height);
+	//static void CreateNormalTexture(uint8_t* &pixels, DirectX::ScratchImage &image, std::vector<vector<CreateTex_param>> &texData,int32_t width,int32_t height);
 
 	static void AddDescripter(uint32_t index, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc,ID3D12Resource *resource);
 	static bool CheckTexDatas(string filePath);

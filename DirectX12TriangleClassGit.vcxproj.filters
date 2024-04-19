@@ -197,26 +197,17 @@
     <ClCompile Include="CLEYERA\Model\Model.cpp">
       <Filter>CLEYERA\Model</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Model\State\ModelPlaneState.cpp">
-      <Filter>CLEYERA\Model\Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\math\MatrixTransform.cpp">
+    <ClCompile Include="CLEYERA\math\Matrix\MatrixTransform.cpp">
       <Filter>CLEYERA\math\Matrix</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Transform\CameraData.cpp">
       <Filter>CLEYERA\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\Model\State\ModelLineState.cpp">
-      <Filter>CLEYERA\Model\DrawLine</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.cpp">
       <Filter>CLEYERA\Utility\ImGuiManager</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\Model\State\ModelSphereState.cpp">
-      <Filter>CLEYERA\Model\Sphere</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp">
       <Filter>CLEYERA\Model\ObjState</Filter>
@@ -276,11 +267,8 @@
     <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp">
       <Filter>CLEYERA\Utility\CollisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\math\VectorTransform.cpp">
+    <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
       <Filter>CLEYERA\math\Vector</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\Graphics\NormalMap\NormalMap.cpp">
-      <Filter>CLEYERA\Graphics\NormalMap</Filter>
     </ClCompile>
     <ClCompile Include="Project\Scene\GameScene.cpp">
       <Filter>Project\Scene\Game</Filter>
@@ -345,38 +333,29 @@
     <ClInclude Include="CLEYERA\Model\State\IModelState.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Model\State\ModelPlaneState.h">
-      <Filter>CLEYERA\Model\Plane</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Transform\WorldTransform.h">
       <Filter>CLEYERA\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\MatrixTransform.h">
+    <ClInclude Include="CLEYERA\math\Matrix\MatrixTransform.h">
       <Filter>CLEYERA\math\Matrix</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\Matrix2x2.h">
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix2x2.h">
       <Filter>CLEYERA\math\Matrix</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\Matrix3x3.h">
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix3x3.h">
       <Filter>CLEYERA\math\Matrix</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\Matrix4x4.h">
+    <ClInclude Include="CLEYERA\math\Matrix\Matrix4x4.h">
       <Filter>CLEYERA\math\Matrix</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Transform\CameraData.h">
       <Filter>CLEYERA\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Model\State\ModelLineState.h">
-      <Filter>CLEYERA\Model\DrawLine</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TextureManager.h">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.h">
       <Filter>CLEYERA\Utility\ImGuiManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Model\State\ModelSphereState.h">
-      <Filter>CLEYERA\Model\Sphere</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h">
       <Filter>CLEYERA\Model\ObjState</Filter>
@@ -423,13 +402,13 @@
     <ClInclude Include="CLEYERA\math\Quaternion\QuaternionTransform.h">
       <Filter>CLEYERA\math\Quaternion</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\Vector2.h">
+    <ClInclude Include="CLEYERA\math\Vector\Vector2.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\Vector3.h">
+    <ClInclude Include="CLEYERA\math\Vector\Vector3.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\Vector4.h">
+    <ClInclude Include="CLEYERA\math\Vector\Vector4.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\ModelManager.h">
@@ -477,11 +456,8 @@
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\SphereCollider.h">
       <Filter>CLEYERA\Utility\CollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\math\VectorTransform.h">
+    <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h">
       <Filter>CLEYERA\math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Graphics\NormalMap\NormalMap.h">
-      <Filter>CLEYERA\Graphics\NormalMap</Filter>
     </ClInclude>
     <ClInclude Include="Project\Scene\GameScene.h">
       <Filter>Project\Scene\Game</Filter>
@@ -531,6 +507,7 @@
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
     <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

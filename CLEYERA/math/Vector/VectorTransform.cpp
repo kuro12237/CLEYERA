@@ -1,13 +1,15 @@
 #include "VectorTransform.h"
 
-float VectorTransform::Length(const Vector3& v)
+using namespace Math::Vector;
+
+float Math::Vector::Length(const Vector3& v)
 {
 	float result{};
 	result = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
 	return result;
 }
 
-Vector3 VectorTransform::Add(const Vector3 &v1, const Vector3 &v2)
+Vector3 Math::Vector::Add(const Vector3 &v1, const Vector3 &v2)
 {
 	Vector3 result{};
 	result.x = v1.x + v2.x;
@@ -16,7 +18,7 @@ Vector3 VectorTransform::Add(const Vector3 &v1, const Vector3 &v2)
 	return result;
 }
 
-Vector3 VectorTransform::Subtruct(const Vector3& v1, const Vector3& v2)
+Vector3 Math::Vector::Subtruct(const Vector3& v1, const Vector3& v2)
 {
 	Vector3 result{};
 	result.x = v1.x - v2.x;
@@ -25,7 +27,7 @@ Vector3 VectorTransform::Subtruct(const Vector3& v1, const Vector3& v2)
 	return result;
 }
 
-Vector3 VectorTransform::Multiply(const Vector3& v1, const float& v2)
+Vector3 Math::Vector::Multiply(const Vector3& v1, const float& v2)
 {
 	Vector3 result{};
 	result.x = v1.x * v2;
@@ -34,7 +36,7 @@ Vector3 VectorTransform::Multiply(const Vector3& v1, const float& v2)
 	return result;
 }
 
-Vector3 VectorTransform::Multiply(const Vector3& v1, const Vector3& v2)
+Vector3 Math::Vector::Multiply(const Vector3& v1, const Vector3& v2)
 {
 	Vector3 result{};
 	result.x = v1.x * v2.x;
@@ -43,7 +45,7 @@ Vector3 VectorTransform::Multiply(const Vector3& v1, const Vector3& v2)
 	return result;
 }
 
-Vector3 VectorTransform::TransformNormal(const Vector3& v, const Matrix4x4& m)
+Vector3 Math::Vector::TransformNormal(const Vector3& v, const Math::Matrix::Matrix4x4& m)
 {
 	Vector3 result
 	{
@@ -56,7 +58,7 @@ Vector3 VectorTransform::TransformNormal(const Vector3& v, const Matrix4x4& m)
 
 }
 
-Vector3 VectorTransform::Normalize(const Vector3& v)
+Vector3 Math::Vector::Normalize(const Vector3& v)
 {
 	Vector3 result{};
 	float length = Length(v);
@@ -68,15 +70,17 @@ Vector3 VectorTransform::Normalize(const Vector3& v)
 	return result;
 }
 
-
-
-float VectorTransform::Dot(const Vector3& v1, const Vector3& v2) {
+float Math::Vector::Dot(const Vector3& v1, const Vector3& v2) {
 	float result;
 	result = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 	return result;
 }
 
-Vector3 VectorTransform::SlerpFanc(Vector3 start, Vector3 end, float t)
+Vector3 Math::Vector::Lerp(const Vector3& a, const Vector3& b, const float t) {
+	return Vector3{ a.x + t * (b.x - a.x),a.y + t * (b.y - a.y),a.z + t * (b.z - a.z)};
+}
+
+Vector3 Math::Vector::SlerpFanc(Vector3 start, Vector3 end, float t)
 {
 	float dot = start.x * end.x + start.y * end.y + start.z * end.z;
 	float theta = std::acos(dot) * t;
@@ -91,7 +95,7 @@ Vector3 VectorTransform::SlerpFanc(Vector3 start, Vector3 end, float t)
 	return result;
 }
 
-Vector4 VectorTransform::Subtruct(const Vector4& v1, const Vector4& v2)
+Vector4 Math::Vector::Subtruct(const Vector4& v1, const Vector4& v2)
 {
 	Vector4 result{};
 	result.x = v1.x - v2.x;
@@ -101,7 +105,7 @@ Vector4 VectorTransform::Subtruct(const Vector4& v1, const Vector4& v2)
 	return result;
 }
 
-Vector3 VectorTransform::Cross(const Vector3 v1, const Vector3 v2)
+Vector3 Math::Vector::Cross(const Vector3 v1, const Vector3 v2)
 {
 	Vector3 result = { 0.0f,0.0f,0.0f };
 	result.x = v1.y * v2.z - v1.z * v2.y;
@@ -112,9 +116,7 @@ Vector3 VectorTransform::Cross(const Vector3 v1, const Vector3 v2)
 }
 
 
-
-
-Vector3 VectorTransform::TransformByMatrix(const Vector3 vector, const Matrix4x4 matrix)
+Vector3 Math::Vector::TransformByMatrix(const Vector3 vector, const Math::Matrix::Matrix4x4 matrix)
 {
 	Vector3 result{};
 
@@ -139,7 +141,7 @@ Vector3 VectorTransform::TransformByMatrix(const Vector3 vector, const Matrix4x4
 	return  result;
 }
 
-float VectorTransform::easeOutBounce(float t)
+float Math::Vector::easeOutBounce(float t)
 {
 
     const float n1 = 7.5625f;
@@ -161,3 +163,5 @@ float VectorTransform::easeOutBounce(float t)
       return n1 * (t - 2.625f / d1) * t + 0.984375f;
     }
 }
+
+

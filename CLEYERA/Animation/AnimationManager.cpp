@@ -1,5 +1,9 @@
 #include "AnimationManager.h"
 
+using namespace Math::Vector;
+using namespace Math::Matrix;
+using namespace Math::Qua;
+
 AnimationManager* AnimationManager::GetInstance()
 {
     static AnimationManager instance;
@@ -27,6 +31,9 @@ void AnimationManager::ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation
             joint.transform.quaternion = CalculateValue(rootNodeAnimation.rotate.keyframes, time);
 
             joint.transform.scale = CalculateValue(rootNodeAnimation.scale.keyframes, time);
+           
+            
+
         }
     }
 }
@@ -97,7 +104,7 @@ Vector3 AnimationManager::CalculateValue(const std::vector<SAnimation::KeyframeV
         if (keyflames[index].time <= time && time <= keyflames[nextIndex].time)
         {
             float t = (time - keyflames[index].time) / (keyflames[nextIndex].time - keyflames[index].time);
-            return VectorTransform::Lerp(keyflames[index].value, keyflames[nextIndex].value, t);
+            return Lerp(keyflames[index].value, keyflames[nextIndex].value, t);
 
         }
     }
@@ -118,7 +125,7 @@ Quaternion AnimationManager::CalculateValue(const std::vector<SAnimation::Keyfra
         if (keyflames[index].time <= time && time <= keyflames[nextIndex].time)
         {
             float t = (time - keyflames[index].time) / (keyflames[nextIndex].time - keyflames[index].time);
-            return QuaternionTransform::Slerp(keyflames[index].value, keyflames[nextIndex].value, t);
+            return Math::Qua::Slerp(keyflames[index].value, keyflames[nextIndex].value, t);
 
         }
     }

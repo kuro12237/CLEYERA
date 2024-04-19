@@ -1,14 +1,9 @@
 #pragma once
 #include"ModelManager.h"
 #include"Light/DirectionLIght.h"
+#include"Game3dObjectDesc.h"
+#include"Graphics/PipelineManager/GraphicsPipelineManager.h"
 
-enum ModelShaderSelect
-{
-	PHONG_MODEL = 0,
-	UE4_BRDF = 1,
-	PHONG_NORMAL_MODEL = 2,
-	PHONG_SUBSURFACE_MODEL = 3
-};
 
 class Game3dObject
 {
@@ -32,30 +27,24 @@ public:
 
 #pragma region Set
 
-	void SetIsIndexDraw(bool flag) { isIndexDraw = flag; }
+	void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = &desc; }
 
-
-	void SetUvScale(Vector3 s) { uvScale_ = s; }
-	void SetUvRotate(Vector3 r) { uvRotate = r; }
-	void SetTranslate(Vector3 t) { uvTranslate = t; }
+	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
+	void SetUvRotate(Math::Vector::Vector3 r) { uvRotate = r; }
+	void SetTranslate(Math::Vector::Vector3 t) { uvTranslate = t; }
 
 	void SetTexHandle(uint32_t index) { texHandle_ = index; }
 	void SetNormalTex(uint32_t tex) { normalTexHandle_ = tex; }
 	void SetBaseTex(uint32_t tex) { baseTexHandle_ = tex; }
 
-	void UseLight(bool flag) { UseLight_ = flag; }
 
-	void SetColor(Vector4 color) { color_ = color; }
-	void SetShininess(float s) { shininess = s; }
-	void SetSpecular(float s) { this->specular_ = s; };
+	void SetColor(Math::Vector::Vector4 color) { color_ = color; }
+
 	void SetMetalness(float m) { this->metalness_ = m; }
 	void SetRoughness(float r) { this->roughness_ = r; }
 
 	void SetlectModelPipeline(ModelShaderSelect number) { ModelShaderSelect_ = number; }
 
-	void SetAbsorptionCoefficient(float a) { absorptionCoefficient_ = a; }
-	void SetScatterCoefficient(float s) { scatterCoefficient_ = s; }
-	void  SetScatterDistance(float s) { scatterDistance_ = s; }
 #pragma endregion
 
 private:
@@ -74,32 +63,23 @@ private:
 	DefferredMaterial cMaterial_ = {};
 
 
-	Vector4 color_ = { 1,1,1,1 };
-	Vector3 uvScale_ = { 1,1,1 };
-	Vector3 uvRotate = { 0,0,0 };
-	Vector3 uvTranslate = { 0,0,0 };
+	Math::Vector::Vector4 color_ = { 1,1,1,1 };
+	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
+	Math::Vector::Vector3 uvRotate = { 0,0,0 };
+	Math::Vector::Vector3 uvTranslate = { 0,0,0 };
 
-#pragma region phong
-	float shininess = 70.0f;
-	float specular_ = 1.0f;
-#pragma endregion
+
 
 #pragma region 物理ベース
 	float metalness_ = 1.0f;
 	float roughness_ = 1.0f;
 #pragma endregion
 
-#pragma region SSS
-	// 散乱係数
-	float scatterCoefficient_=0.5f;
-	// 吸収係数 
-	float absorptionCoefficient_=0.5f;
-	//光の伝播距離
-	float scatterDistance_=0.5f;
-#pragma endregion
 
-	bool UseLight_ = false;
-	
+
+	const Game3dObjectDesc* game3dObjectDesc_ = nullptr;
+
+
 	uint32_t texHandle_ = 0;
 	uint32_t normalTexHandle_ = 0;
 	uint32_t baseTexHandle_ = 0;

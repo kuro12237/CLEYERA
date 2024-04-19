@@ -32,9 +32,9 @@ private:
 
 	uint32_t dsvIndex = 0;
 
-	Vector4 testColor = { 1,1,1,1 };
+	Math::Vector::Vector4 testColor = { 1,1,1,1 };
 
-	Vector4 pos = { 0,0,0,1 };
+	Math::Vector::Vector4 pos = { 0,0,0,1 };
 	float size = 0.5f;
 
 	const uint32_t VertexSize = 4;
@@ -42,10 +42,10 @@ private:
 	ResourcePeroperty resource_ = {};
 	
 
-	Matrix4x4 billboardMatrix{};
+	Math::Matrix::Matrix4x4 billboardMatrix{};
 
-	Matrix4x4 sMat{};
-	Matrix4x4 tMat{};
+	Math::Matrix::Matrix4x4 sMat{};
+	Math::Matrix::Matrix4x4 tMat{};
 	
 };
 

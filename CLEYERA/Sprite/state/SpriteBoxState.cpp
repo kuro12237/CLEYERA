@@ -1,5 +1,7 @@
 #include "SpriteBoxState.h"
 
+using namespace Math::Vector;
+
 void SpriteBoxState::Initialize(Sprite* state)
 {
 	CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize,resource_.Vertex);
@@ -40,7 +42,7 @@ void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform, CameraDa
 	indexData[3] = 1; indexData[4] = 3; indexData[5] = 2;
 
 	materialData->color = state->GetColor();
-	materialData->uvTransform = MatrixTransform::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
+	materialData->uvTransform = Math::Matrix::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 
 	CommandCall(state->GetTexHandle(),state,worldTransform,view);
 }

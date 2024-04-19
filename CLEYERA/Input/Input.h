@@ -70,14 +70,14 @@ public:
 	/// </summary>
 	/// <param name="mode"></param>
 	/// <returns></returns>
-	static Vector2 GetJoyLStickPos(const float &mode = SHRT_MAX);
+	static Math::Vector::Vector2 GetJoyLStickPos(const float &mode = SHRT_MAX);
 
 	/// <summary>
     /// Rstic
     /// </summary>
     /// <param name="mode"></param>
     /// <returns></returns>
-	static Vector2 GetJoyRStickPos(const float& mode = SHRT_MAX);
+	static Math::Vector::Vector2 GetJoyRStickPos(const float& mode = SHRT_MAX);
 
 
 private:

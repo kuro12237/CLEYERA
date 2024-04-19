@@ -14,7 +14,7 @@ public:
 	/// <summary>
 	/// ワールド座標の取得
 	/// </summary>
-	virtual Vector3 GetSphereColliderWorldPos() = 0;
+	virtual Math::Vector::Vector3 GetSphereColliderWorldPos() = 0;
 
 #pragma region Radius
 

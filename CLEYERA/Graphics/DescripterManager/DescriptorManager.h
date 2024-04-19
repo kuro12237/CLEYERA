@@ -27,6 +27,8 @@ public:
 	/// </summary>
 	static uint32_t CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size);
 
+	static uint32_t CreateSRV(ComPtr<ID3D12Resource>&resource,D3D12_SHADER_RESOURCE_VIEW_DESC SrvDesc);
+
 	/// <summary>
     /// CPU��GPU��ptr����炷
     /// </summary>

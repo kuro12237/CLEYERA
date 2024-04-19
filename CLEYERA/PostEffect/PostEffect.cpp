@@ -64,7 +64,7 @@ void PostEffect::Initialize(const string& name)
 
 	paramBuffer_ = std::make_unique<BufferResource<PostEffectParam>>();
 	paramBuffer_->CreateResource(1);
-	param_.uvMatrix = MatrixTransform::Identity();
+	param_.uvMatrix = Math::Matrix::Identity();
 
 	blurParamBuffer_ = make_unique<BufferResource<PostEffectBlurParam>>();
 	blurParamBuffer_->CreateResource(1);
@@ -94,8 +94,8 @@ void PostEffect::Update()
 	vertexBuffer_->Setbuffer(vertexMap);
 
 	TransformationMatrix wvpMap = {};
-	Matrix4x4 OrthographicMatrix = MatrixTransform::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
-	wvpMap.world = MatrixTransform::Identity();
+	Math::Matrix::Matrix4x4 OrthographicMatrix = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
+	wvpMap.world = Math::Matrix::Identity();
 	wvpMap.WVP =OrthographicMatrix;
 
 	wvp_->Map();
@@ -104,7 +104,7 @@ void PostEffect::Update()
 
 	paramBuffer_->Map();
 	param_.texSize = size_;
-	param_.uvMatrix = MatrixTransform::AffineMatrix(uvScale_, uvRotate_, uvTranslate_);
+	param_.uvMatrix = Math::Matrix::AffineMatrix(uvScale_, uvRotate_, uvTranslate_);
 	paramBuffer_->Setbuffer(param_);
 	paramBuffer_->UnMap();
 
