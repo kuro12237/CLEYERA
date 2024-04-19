@@ -8,6 +8,8 @@ void GameScene::Initialize()
 void GameScene::Update(GameManager* Scene)
 {
 	Scene;
+
+	cameraData.UpdateMatrix();
 }
 
 void GameScene::PostProcessDraw()
