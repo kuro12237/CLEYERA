@@ -147,6 +147,8 @@ void GraphicsPipelineManager::CreatePSO(SPSO &pso)
 	pso.PhongSubsurface_Model = CreateSubsurfaceModel(device.Get(), commands, shader.Phong_subsurface_Model);
 	LogManager::CompliteLog("PhongsubsurefacePSO");
 
+	pso.phongNormalInstancing_Model = ModelCreatePipline::CreatePhongInstancingModel(device.Get(), commands, shader.Phong_Normal_InstancingModel);
+
 }
 
 void GraphicsPipelineManager::Create2dSpritePSOs(SPSO &pso)

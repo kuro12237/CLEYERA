@@ -23,7 +23,7 @@ void ModelObjState::CallPipelinexVertex(Model* state)
 	vertex_->CommandPrimitiveTopologyCall();
 }
 
-void ModelObjState::Draw(Model* state, const CameraData& viewprojection)
+void ModelObjState::Draw(Model* state, const CameraData& viewprojection, uint32_t instancingNum)
 {
 	viewprojection;
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -40,6 +40,6 @@ void ModelObjState::Draw(Model* state, const CameraData& viewprojection)
 	index_->CommandIndexBufferViewCall();
 	vertex_->CommandPrimitiveTopologyCall();
 
-	commands.m_pList->DrawIndexedInstanced(UINT(state->GetModelData().indecs.size()), 1, 0, 0, 0);
+	commands.m_pList->DrawIndexedInstanced(UINT(state->GetModelData().indecs.size()), instancingNum, 0, 0, 0);
 	
 }

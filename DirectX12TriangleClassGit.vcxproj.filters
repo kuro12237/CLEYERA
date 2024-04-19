@@ -304,6 +304,7 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
+    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -508,6 +509,8 @@
     <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
     <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -573,5 +576,7 @@
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl" />
   </ItemGroup>
 </Project>

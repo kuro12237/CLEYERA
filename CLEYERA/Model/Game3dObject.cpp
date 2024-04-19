@@ -94,7 +94,7 @@ void Game3dObject::Draw(WorldTransform worldTransform ,CameraData view)
 			}
 		}
 	}
-	model_->Draw(view);
+	model_->Draw(view,1);
 }
 
 void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const CameraData view)
@@ -134,7 +134,7 @@ void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const Camera
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
 	DirectionalLight::CommandCall(7);
 
-	model_->Draw(view);
+	model_->Draw(view,1);
 }
 
 void Game3dObject::ColorDraw(const WorldTransform& worldTransform, const CameraData& view)
@@ -159,7 +159,7 @@ void Game3dObject::ColorDraw(const WorldTransform& worldTransform, const CameraD
 	view.buffer_->CommandCall(3);
 
 	DescriptorManager::rootParamerterCommand(4,texHandle_);
-	model_->Draw(view);
+	model_->Draw(view,1);
 }
 
 void Game3dObject::NormalDraw(const WorldTransform& worldTransform, const CameraData& view)
@@ -182,7 +182,7 @@ void Game3dObject::NormalDraw(const WorldTransform& worldTransform, const Camera
 	view.buffer_->CommandCall(3);
 
 	DescriptorManager::rootParamerterCommand(4, normalTexHandle_);
-	model_->Draw(view);
+	model_->Draw(view,1);
 }
 
 void Game3dObject::PosDraw(const WorldTransform& worldTransform, const CameraData& view)
@@ -205,7 +205,7 @@ void Game3dObject::PosDraw(const WorldTransform& worldTransform, const CameraDat
 	view.buffer_->CommandCall(3);
 
 	DescriptorManager::rootParamerterCommand(4, normalTexHandle_);
-	model_->Draw(view);
+	model_->Draw(view,1);
 }
 
 bool Game3dObject::CommpandPipeline(SPSOProperty &PSO)

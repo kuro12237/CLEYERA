@@ -99,6 +99,7 @@ void ShaderManager::ShaderComples()
 	ParticleShader();
 	PhongNormalModel();
 	PhongSubsurfaceModel();
+	PhongNormalInstancingModel();
 
 	ColorModel();
 	NormalModel();
@@ -231,6 +232,22 @@ void ShaderManager::PhongSubsurfaceModel()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.Phong_subsurface_Model = shaders;
+}
+
+void ShaderManager::PhongNormalInstancingModel()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Phong_NormalMap_ModelInstancing3dObject.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Phong_NormalMap_ModelINstancing3dObject.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.Phong_Normal_InstancingModel = shaders;
 }
 
 void ShaderManager::ColorModel()

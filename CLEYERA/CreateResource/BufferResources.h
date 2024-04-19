@@ -21,6 +21,7 @@ public:
 
 	 void Setbuffer(T t) { *param_ = t; }
 	 void Setbuffer(vector<T>t);
+	 void Setbuffer(vector<T>t, uint32_t num);
 
 	 void CommandCall(UINT number);
 	 void CommandVertexBufferViewCall();
@@ -34,6 +35,9 @@ public:
 	 void CreateResource(DXGI_FORMAT format, const int32_t width, const int32_t height);
 
 	 void CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state, D3D12_CLEAR_VALUE depthClearValue);
+
+	 void CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size);
+
 
 	 /// <summary>
 	 /// 画像bufferを更新
@@ -175,6 +179,15 @@ template<typename T>
 inline void BufferResource<T>::Setbuffer(vector<T> t)
 {
 	for (uint32_t i = 0; i < bufferNum_; i++)
+	{
+		param_[i] = t[i];
+	}
+}
+
+template<typename T>
+inline void BufferResource<T>::Setbuffer(vector<T> t, uint32_t num)
+{
+	for (uint32_t i = 0; i < num; i++)
 	{
 		param_[i] = t[i];
 	}
@@ -327,4 +340,51 @@ inline void BufferResource<T>::CreateBufferResource()
 	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
 		&ResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&buffer_));
 	assert(SUCCEEDED(hr));
+}
+
+template<typename T>
+inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size)
+{
+	if (DescriptorManager::CheckData(Name))
+	{
+		DescriptorManager::IndexIncrement(Name);
+		uint32_t index = DescriptorManager::GetIndex();
+
+		D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc;
+		instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
+		instansingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		instansingSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+		instansingSrvDesc.Buffer.FirstElement = 0;
+		instansingSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;;
+		instansingSrvDesc.Buffer.NumElements = instancingNum;
+		instansingSrvDesc.Buffer.StructureByteStride = size;
+
+		DescriptorManager::SetCPUDescripterHandle(
+			DescriptorManager::GetCPUDescriptorHandle(
+				DirectXCommon::GetInstance()->GetSrvHeap(),
+				index),
+			index
+		);
+
+		DescriptorManager::SetGPUDescripterHandle(
+			DescriptorManager::GetGPUDescriptorHandle(
+				DirectXCommon::GetInstance()->GetSrvHeap(),
+				index),
+			index
+		);
+
+		DescriptorManager::CGHandlePtr();
+
+		DescriptorManager::CreateShaderResourceView(
+			buffer_.Get(),
+			instansingSrvDesc,
+			index);
+
+		srvIndex_ = index;
+
+	}
+	else
+	{
+		srvIndex_ = DescriptorManager::CheckDatasIndex(Name);
+	}
 }

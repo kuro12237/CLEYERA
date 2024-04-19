@@ -69,6 +69,7 @@
     <ClCompile Include="CLEYERA\math\Matrix\MatrixTransform.cpp" />
     <ClCompile Include="CLEYERA\math\Quaternion\QuaternionTransform.cpp" />
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp" />
+    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dObject.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp" />
@@ -132,6 +133,8 @@
     <ClInclude Include="CLEYERA\math\Vector\Vector3.h" />
     <ClInclude Include="CLEYERA\math\Vector\Vector4.h" />
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h" />
     <ClInclude Include="CLEYERA\Model\Game3dObject.h" />
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
     <ClInclude Include="CLEYERA\Model\Model.h" />
@@ -280,6 +283,16 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Phong_ModelObject3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
