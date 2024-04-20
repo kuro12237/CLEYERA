@@ -6,6 +6,7 @@
 #include"Utility/GameCollisionManager/GameColliderConfig.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
 #include"Utility/ObjectId/GameObjectId.h"
+#include"Audio/AudioManager.h"
 
 class Player:public IBoxCollider,public IGravity
 {

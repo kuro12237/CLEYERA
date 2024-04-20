@@ -33,6 +33,8 @@ public:
 
 private:
 
+	void LoadSounds();
+
 	void CheckBlockCollision();
 
 	void CheckGravitys();

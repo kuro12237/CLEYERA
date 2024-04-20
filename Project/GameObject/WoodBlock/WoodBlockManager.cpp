@@ -5,7 +5,7 @@ void WoodBlockManager::Initialize()
 	blocksGameObject_ = make_unique<GameInstancing3dObject>();
 	blocksGameObject_->Create(BlockNum_, name_);
 
-	uint32_t modelHandle = ModelManager::LoadObjectFile("TestBox");
+	uint32_t modelHandle = ModelManager::LoadObjectFile("Block");
 	blocksGameObject_->SetModel(modelHandle);
 	FileInitialize();
 }

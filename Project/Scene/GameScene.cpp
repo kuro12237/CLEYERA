@@ -7,9 +7,8 @@ void GameScene::Initialize()
 	postEffect_ = make_unique<PostEffect>();
 	postEffect_->Initialize(sceneName_);
 
+	LoadSounds();
 	MapObjectInitialize();
-
-
 
 	blockCollisionManager_ = make_unique<GameCollisonManager>();
 
@@ -94,6 +93,11 @@ void GameScene::Object3dDraw()
 void GameScene::Flont2dSpriteDraw()
 {
 	postEffect_->Draw(cameraData_);
+}
+
+void GameScene::LoadSounds()
+{
+	AudioManager::GetInstance()->SoundLoadMp3("Resources/Sounds/Jump.mp3");
 }
 
 void GameScene::CheckBlockCollision()

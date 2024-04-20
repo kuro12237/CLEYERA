@@ -8,6 +8,8 @@ void Player::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	gameObject_->SetModel(modelHandle_);
+	game3dObjectdesc_.useLight = true;
+	gameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 	gameObject_->SetDesc(game3dObjectdesc_);
 
 	worldTransform_.translate.y = 4.0f;
@@ -128,10 +130,8 @@ void Player::Move()
 	const float Speed = 0.1f;
 	
 	velocity_.x = Ljoy.x * Speed;
-	//velocity_.y = Ljoy.y * Speed;
-
 	worldTransform_.translate.x +=velocity_.x;
-	//worldTransform_.translate.y += velocity_.y;
+
 	worldTransform_.UpdateEularMatrix();
 }
 
@@ -139,6 +139,7 @@ void Player::Jamp()
 {
 	if (!isJamp_ && velocity_.y == 0.0f)
 	{
+		AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/Jump.mp3",1.0f);
 		velocity_.y = 0.25f;
 		isJamp_ = true;
 	}

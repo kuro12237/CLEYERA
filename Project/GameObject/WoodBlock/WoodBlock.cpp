@@ -16,8 +16,6 @@ void WoodBlock::Initialize(const TransformQua &t)
 	IBoxCollider::SetId(kWoodBlockId);
 
 	SetVelocity(velocity_);
-
-
 }
 
 void WoodBlock::Update()
