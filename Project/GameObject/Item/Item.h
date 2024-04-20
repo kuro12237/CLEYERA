@@ -20,8 +20,8 @@ private:
 	Game3dObjectDesc gameObjectDesc_ = {};
 
 
-	WorldTransform worldTransoform_ = {};
+	WorldTransform worldTransform_ = {};
 	SAnimation::Animation animation{};
 	uint32_t animationHandle_ = 0;
-
+	float animationTimer_ = 0.0f;
 };
