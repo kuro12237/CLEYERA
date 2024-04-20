@@ -27,8 +27,8 @@ void GameScene::Initialize()
     blockManager_ = make_unique<WoodBlockManager>();
 	blockManager_->Initialize();
 
-	TransformQua test = {};
-	test.scale = { 1, 1, 1 };
+	item_ = make_unique<Item>();
+	item_->Initialize();
 
 }
 
@@ -51,6 +51,8 @@ void GameScene::Update(GameManager* Scene)
 	player_->Update();
 
 #pragma endregion
+
+	item_->Update();
 
 	blockManager_->Update();
 
@@ -75,6 +77,7 @@ void GameScene::PostProcessDraw()
 
 	player_->Draw(cameraData_);
 	blockManager_->Draw(cameraData_);
+	item_->Draw(cameraData_);
 
 	MapObjectDraw();
 

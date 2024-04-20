@@ -318,6 +318,7 @@
     <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
     <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
     <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
+    <ClCompile Include="Project\GameObject\Item\Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -542,6 +543,7 @@
     <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />
     <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
     <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
+    <ClInclude Include="Project\GameObject\Item\Item.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

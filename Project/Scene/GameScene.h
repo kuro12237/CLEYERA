@@ -11,6 +11,7 @@
 #include"GameObject/WoodBlock/WoodBlockManager.h"
 #include"GameObject/Terrain/Terrain.h"
 #include"GameObject/SkyDome/SkyDome.h"
+#include"GameObject/Item/Item.h"
 
 class GameScene:public IScene
 {
@@ -61,6 +62,9 @@ private:
 	unique_ptr<PlayerCamera>playerCamera_ = nullptr;
 
 	unique_ptr<WoodBlockManager>blockManager_ = nullptr;
+
+	unique_ptr<Item>item_ = nullptr;
+
 #pragma region Utility
 
 	unique_ptr<GameGravityManager>gravityManager_ = nullptr;

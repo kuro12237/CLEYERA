@@ -18,7 +18,7 @@ void Player::Initialize()
 
 	aabb_.min = { -0.5f,-0.5f,-0.5f };
 	aabb_.max = { 0.5f,0.5f,0.5f };
-	
+
 	SetAABB(aabb_);
 	SetAttbute(kPlayerAttbute);
 	SetMask(kPlayerMask);
@@ -107,7 +107,7 @@ void Player::OnCollision(IBoxCollider* collider)
 	}
 }
 
-void Player::GravityExc(const Math::Vector::Vector2 &g)
+void Player::GravityExc(const Math::Vector::Vector2& g)
 {
 	velocity_ = g;
 	worldTransform_.translate.y += velocity_.y;
@@ -128,9 +128,9 @@ void Player::Move()
 	}
 
 	const float Speed = 0.1f;
-	
+
 	velocity_.x = Ljoy.x * Speed;
-	worldTransform_.translate.x +=velocity_.x;
+	worldTransform_.translate.x += velocity_.x;
 
 	worldTransform_.UpdateEularMatrix();
 }
@@ -139,7 +139,7 @@ void Player::Jamp()
 {
 	if (!isJamp_ && velocity_.y == 0.0f)
 	{
-		AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/Jump.mp3",1.0f);
+		AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/Jump.mp3", 1.0f);
 		velocity_.y = 0.25f;
 		isJamp_ = true;
 	}
