@@ -1,5 +1,6 @@
 #pragma once
 #include"Game3dObject.h"
+#include"Animation/AnimationManager.h"
 
 class Item
 {
@@ -20,5 +21,7 @@ private:
 
 
 	WorldTransform worldTransoform_ = {};
+	SAnimation::Animation animation{};
+	uint32_t animationHandle_ = 0;
 
 };

@@ -9,12 +9,17 @@ void Item::Initialize()
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);
 
+	animationHandle_ = AnimationManager::GetInstance()->LoadAnimation("testItem");
+
 	worldTransoform_.Initialize();
 }
 
 void Item::Update()
 {
-	worldTransoform_.UpdateMatrix();
+
+	worldTransoform_.matWorld = AnimationManager;
+	worldTransoform_.TransfarMatrix();
+	//worldTransoform_.UpdateMatrix();
 }
 
 void Item::Draw(const CameraData& camera)
