@@ -44,19 +44,21 @@ void GameScene::Update(GameManager* Scene)
 
 #endif // _USE_IMGUI
 
-#pragma region
+#pragma region Player
 
 	playerInputHandler_->Handler();
 	playerInputHandler_->CommandsExc(*player_);
 
 	player_->Update();
-	
-	blockManager_->Update();
+
 #pragma endregion
 
-	
+	blockManager_->Update();
+
+	//MapのUpdate
 	MapObjectUpdate();
 
+	//重力計算
 	CheckGravitys();
 	//blockの当たり判定
 	CheckBlockCollision();
@@ -71,9 +73,12 @@ void GameScene::Update(GameManager* Scene)
 void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	MapObjectDraw();
+
 	player_->Draw(cameraData_);
 	blockManager_->Draw(cameraData_);
+
+	MapObjectDraw();
+
 	postEffect_->PostDraw();
 
 }
