@@ -4,7 +4,7 @@ void Player::Initialize()
 {
 	worldTransform_.Initialize();
 
-	modelHandle_ = ModelManager::LoadObjectFile("TestBox");
+	modelHandle_ = ModelManager::LoadObjectFile("Player");
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	gameObject_->SetModel(modelHandle_);

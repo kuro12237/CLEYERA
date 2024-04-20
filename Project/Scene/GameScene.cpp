@@ -53,7 +53,8 @@ void GameScene::Update(GameManager* Scene)
 #pragma endregion
 
 	item_->Update();
-
+	item_->Animation();
+	
 	blockManager_->Update();
 
 	//MapのUpdate

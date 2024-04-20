@@ -12,6 +12,8 @@ public:
 
 	void Update();
 
+	void Animation();
+
 	void Draw(const CameraData& camera);
 
 private:
@@ -21,7 +23,6 @@ private:
 
 
 	WorldTransform worldTransform_ = {};
-	SAnimation::Animation animation{};
 	uint32_t animationHandle_ = 0;
 	float animationTimer_ = 0.0f;
 };

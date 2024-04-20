@@ -17,9 +17,9 @@
             "mesh" : 0,
             "name" : "Cube",
             "scale" : [
-                0.5,
-                0.5,
-                0.5
+                0.25,
+                0.25,
+                0.25
             ]
         }
     ],
@@ -136,9 +136,9 @@
         {
             "bufferView" : 4,
             "componentType" : 5126,
-            "count" : 430,
+            "count" : 359,
             "max" : [
-                7.166666666666667
+                5.983333333333333
             ],
             "min" : [
                 0.016666666666666666
@@ -148,13 +148,13 @@
         {
             "bufferView" : 5,
             "componentType" : 5126,
-            "count" : 430,
+            "count" : 359,
             "type" : "VEC3"
         },
         {
             "bufferView" : 6,
             "componentType" : 5126,
-            "count" : 430,
+            "count" : 359,
             "type" : "VEC4"
         }
     ],
@@ -185,18 +185,18 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 1720,
+            "byteLength" : 1436,
             "byteOffset" : 840
         },
         {
             "buffer" : 0,
-            "byteLength" : 5160,
-            "byteOffset" : 2560
+            "byteLength" : 4308,
+            "byteOffset" : 2276
         },
         {
             "buffer" : 0,
-            "byteLength" : 6880,
-            "byteOffset" : 7720
+            "byteLength" : 5744,
+            "byteOffset" : 6584
         }
     ],
     "samplers" : [
@@ -207,7 +207,7 @@
     ],
     "buffers" : [
         {
-            "byteLength" : 14600,
+            "byteLength" : 12328,
             "uri" : "testItem.bin"
         }
     ]
