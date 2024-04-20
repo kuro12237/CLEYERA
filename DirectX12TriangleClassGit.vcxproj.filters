@@ -305,8 +305,6 @@
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
-    <ClCompile Include="Project\GameObject\WoodBlockManager\WoodBlock.cpp" />
-    <ClCompile Include="Project\GameObject\WoodBlockManager\WoodBlockManager.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
     <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp" />
@@ -316,6 +314,10 @@
     <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp" />
     <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp" />
     <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlock.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
+    <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -522,8 +524,6 @@
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
     <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h" />
     <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h" />
-    <ClInclude Include="Project\GameObject\WoodBlockManager\WoodBlock.h" />
-    <ClInclude Include="Project\GameObject\WoodBlockManager\WoodBlockManager.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
     <ClInclude Include="Project\Scene\GameScene.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
@@ -538,6 +538,10 @@
     <ClInclude Include="Project\Utility\GameCollisionManager\GameCollider\BoxCollider.h" />
     <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h" />
     <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h" />
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlock.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />
+    <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

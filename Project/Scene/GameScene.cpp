@@ -9,8 +9,7 @@ void GameScene::Initialize()
 
 	MapObjectInitialize();
 
-	woodBlockManager_ = make_unique<WoodBlockManager>();
-	woodBlockManager_->Initialize();
+
 
 	blockCollisionManager_ = make_unique<GameCollisonManager>();
 
@@ -26,6 +25,12 @@ void GameScene::Initialize()
 
 	playerInputHandler_ = make_unique<PlayerInputHandler>();
 
+    blockManager_ = make_unique<WoodBlockManager>();
+	blockManager_->Initialize();
+
+	TransformQua test = {};
+	test.scale = { 1, 1, 1 };
+
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -35,6 +40,8 @@ void GameScene::Update(GameManager* Scene)
 
 	sun_->ImGuiUpdate();
 	player_->ImGuiUpdate();
+	blockManager_->UpdateImGui();
+
 #endif // _USE_IMGUI
 
 #pragma region
@@ -43,14 +50,14 @@ void GameScene::Update(GameManager* Scene)
 	playerInputHandler_->CommandsExc(*player_);
 
 	player_->Update();
-
+	
+	blockManager_->Update();
 #pragma endregion
 
-	woodBlockManager_->Update();
-
+	
 	MapObjectUpdate();
 
-	//CheckGravitys();
+	CheckGravitys();
 	//blockの当たり判定
 	CheckBlockCollision();
 
@@ -64,10 +71,9 @@ void GameScene::Update(GameManager* Scene)
 void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-
+	MapObjectDraw();
 	player_->Draw(cameraData_);
-	woodBlockManager_->Draw(cameraData_);
-
+	blockManager_->Draw(cameraData_);
 	postEffect_->PostDraw();
 
 }
@@ -91,14 +97,13 @@ void GameScene::CheckBlockCollision()
 	
 	blockCollisionManager_->PushList(player_.get());
 
-	for (int i = 0; i < woodBlockManager_->GetBlocks().size(); i++)
+	for (int i = 0; i < blockManager_->GetBlocks().size(); i++)
 	{
-		if (woodBlockManager_->GetBlocks()[i])
+		if (blockManager_->GetBlocks()[i])
 		{
-			blockCollisionManager_->PushList(woodBlockManager_->GetBlocks()[i].get());
+			blockCollisionManager_->PushList(blockManager_->GetBlocks()[i].get());
 		}
 	}
-
 	blockCollisionManager_->CheckAllCollisions();
 }
 
@@ -115,13 +120,18 @@ void GameScene::MapObjectInitialize()
 {
 	sun_ = make_unique<Sun>();
 	sun_->Initialize();
+
+	terrain_ = make_unique<Terrain>();
+	terrain_->Initialize();
 }
 
 void GameScene::MapObjectUpdate()
 {
 	sun_->Update();
+	terrain_->Update();
 }
 
 void GameScene::MapObjectDraw()
 {
+	terrain_->Draw(cameraData_);
 }

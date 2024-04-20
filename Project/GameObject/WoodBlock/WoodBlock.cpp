@@ -6,6 +6,9 @@ void WoodBlock::Initialize(const TransformQua &t)
 	translate_ = t.translate;
 	scale_ = t.scale;
 	translate_.y += 0.5f;
+	aabb_.min = { -0.5f,-0.5f,-0.5f };
+	aabb_.max = { 0.5f,0.5f,0.5f };
+
 	SetMatWorld(worldMat_);
 	SetAABB(aabb_);
 	SetAttbute(kWoodBlockAttbute);
@@ -13,6 +16,7 @@ void WoodBlock::Initialize(const TransformQua &t)
 	IBoxCollider::SetId(kWoodBlockId);
 
 	SetVelocity(velocity_);
+
 
 }
 
@@ -22,6 +26,8 @@ void WoodBlock::Update()
 	//translate_.y += 0.1f;
 	worldMat_ = Math::Matrix::AffineMatrix(scale_, rotate_, translate_);
 }
+
+
 
 Math::Vector::Vector3 WoodBlock::GetWorldPosition()
 {

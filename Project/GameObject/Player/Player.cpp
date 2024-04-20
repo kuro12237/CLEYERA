@@ -10,9 +10,9 @@ void Player::Initialize()
 	gameObject_->SetModel(modelHandle_);
 	gameObject_->SetDesc(game3dObjectdesc_);
 
-
 	worldTransform_.translate.y = 4.0f;
 	worldTransform_.translate.x = 4.0f;
+	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 
 	aabb_.min = { -0.5f,-0.5f,-0.5f };
 	aabb_.max = { 0.5f,0.5f,0.5f };
@@ -76,7 +76,7 @@ void Player::ImGuiUpdate()
 		worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
 		GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 		worldTransform_.translate = GameStartPos_;
-		worldTransform_.UpdateEularQuaternionMatrix();
+		worldTransform_.UpdateEularMatrix();
 	}
 
 }
@@ -128,10 +128,10 @@ void Player::Move()
 	const float Speed = 0.1f;
 	
 	velocity_.x = Ljoy.x * Speed;
-	velocity_.y = Ljoy.y * Speed;
+	//velocity_.y = Ljoy.y * Speed;
 
 	worldTransform_.translate.x +=velocity_.x;
-	worldTransform_.translate.y += velocity_.y;
+	//worldTransform_.translate.y += velocity_.y;
 	worldTransform_.UpdateEularMatrix();
 }
 

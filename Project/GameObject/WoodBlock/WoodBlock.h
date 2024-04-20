@@ -35,7 +35,7 @@ private:
 	Math::Vector::Vector3 rotate_ = {};
 	Math::Vector::Vector3 translate_ = {};
 
-	AABB aabb_;
+	AABB aabb_{};
 
 	uint32_t blockNamber_ = 0;
 

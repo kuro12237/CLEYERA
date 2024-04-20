@@ -12,6 +12,8 @@ void WoodBlockManager::Initialize()
 
 void WoodBlockManager::Update()
 {
+
+
 	for (int i = 0; i < blockCount_; i++)
 	{
 		if (blocks_[i])

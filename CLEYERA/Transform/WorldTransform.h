@@ -38,9 +38,9 @@ struct WorldTransform
 
 	void UpdateEularMatrix();
 
-	void UpdateQuaternionMatrix();
+	//void UpdateQuaternionMatrix();
 
-	void UpdateEularQuaternionMatrix();
+	//void UpdateEularQuaternionMatrix();
 
 	void SetParent(const WorldTransform& w) { parent = &w; }
 	void DeleateParent();

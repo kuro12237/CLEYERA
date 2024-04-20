@@ -97,9 +97,11 @@
     <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
     <ClCompile Include="Project\GameObject\Sun\Sun.cpp" />
-    <ClCompile Include="Project\GameObject\WoodBlockManager\WoodBlock.cpp" />
-    <ClCompile Include="Project\GameObject\WoodBlockManager\WoodBlockManager.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlock.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
     <ClCompile Include="Project\Scene\CGScene.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="Project\Scene\TestScene.cpp" />
@@ -190,9 +192,11 @@
     <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
     <ClInclude Include="Project\GameObject\Sun\Sun.h" />
-    <ClInclude Include="Project\GameObject\WoodBlockManager\WoodBlock.h" />
-    <ClInclude Include="Project\GameObject\WoodBlockManager\WoodBlockManager.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlock.h" />
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
     <ClInclude Include="Project\Scene\CGScene.h" />
     <ClInclude Include="Project\Scene\GameScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />

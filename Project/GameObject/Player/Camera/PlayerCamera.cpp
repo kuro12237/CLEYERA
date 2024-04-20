@@ -3,6 +3,7 @@
 void PlayerCamera::Initialize()
 {
 	cameraData_.Initialize();
+	distinationAngleXY.x = 0.2f;
 }
 
 void PlayerCamera::Update()
@@ -12,7 +13,7 @@ void PlayerCamera::Update()
 		//t
 		targetTranslate = worldTransform_->translate;
 		//r
-        cameraData_.rotation_.y = worldTransform_->rotation.y;
+		cameraData_.rotation_.y = worldTransform_->rotation.y;
 		cameraData_.rotation_.x = worldTransform_->rotation.x;
 	}
 
@@ -21,7 +22,7 @@ void PlayerCamera::Update()
 	cameraData_.rotation_.y += distinationAngleXY.y;
 
 	Math::Matrix::Matrix4x4 rotateMatrix = Math::Matrix::RotateXYZMatrix(cameraData_.rotation_.x, cameraData_.rotation_.y, cameraData_.rotation_.z);
-	Math::Vector::Vector3 offset = { 0.0f,1.0f,-32.0f };
+	Math::Vector::Vector3 offset = { 0.0f,1.0f,-24.0f };
 	offset = Math::Vector::TransformNormal(offset, rotateMatrix);
 	cameraData_.translation_ = Math::Vector::Add(targetTranslate, offset);
 
@@ -30,17 +31,5 @@ void PlayerCamera::Update()
 
 void PlayerCamera::RotateMove()
 {
-	Math::Vector::Vector2 Rjoy = Input::GetJoyRStickPos();
-	float Length = Math::Vector::Length(Math::Vector::Vector3(Rjoy.x, Rjoy.y, 0.0f));
-	if (Length <= 0.1f)
-	{
-		Rjoy = {};
-	}
-
-	const float speed = 0.05f;
-	Math::Vector::Vector2 rotate = { Rjoy.x * -speed,Rjoy.y * speed };
-
-    distinationAngleXY.y += rotate.x;
-    distinationAngleXY.x += rotate.y;
 
 }
