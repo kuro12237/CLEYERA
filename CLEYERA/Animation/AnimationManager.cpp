@@ -92,7 +92,7 @@ SAnimation::Animation AnimationManager::LoadFile(const string& filename)
 
 Vector3 AnimationManager::CalculateValue(const std::vector<SAnimation::KeyframeVector3>& keyflames, float time)
 {
-    //assert(!keyflames.empty());
+    assert(!keyflames.empty());
     if (keyflames.size()==1||time<=keyflames[0].time)
     {
         return keyflames[0].value;
