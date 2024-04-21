@@ -10,7 +10,7 @@ void Terrain::Initialize()
 	gameObject_->SetDesc(objectDesc_);
 
 	worldTransform_.Initialize();
-	worldTransform_.scale = { 8.0f,8.0f,8.0f };
+	worldTransform_.scale = { 1.0f,1.0f,1.0f };
 }
 
 void Terrain::Update()

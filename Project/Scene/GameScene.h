@@ -13,7 +13,7 @@
 #include"GameObject/Terrain/Terrain.h"
 #include"GameObject/SkyDome/SkyDome.h"
 
-#include"GameObject/Item/Item.h"
+#include"GameObject/Item/ItemManager.h"
 
 class GameScene:public IScene
 {
@@ -67,7 +67,7 @@ private:
 
 	unique_ptr<WoodBlockManager>blockManager_ = nullptr;
 
-	unique_ptr<Item>item_ = nullptr;
+	unique_ptr<ItemManager>itemManager_ = nullptr;
 
 #pragma region Utility
 

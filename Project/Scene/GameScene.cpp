@@ -27,8 +27,8 @@ void GameScene::Initialize()
     blockManager_ = make_unique<WoodBlockManager>();
 	blockManager_->Initialize();
 
-	item_ = make_unique<Item>();
-	item_->Initialize();
+	itemManager_ = make_unique<ItemManager>();
+	itemManager_->Initialize();
 
 }
 
@@ -52,8 +52,8 @@ void GameScene::Update(GameManager* Scene)
 
 #pragma endregion
 
-	item_->Update();
-	item_->Animation();
+	itemManager_->Update();
+	itemManager_->Animation();
 	
 	blockManager_->Update();
 
@@ -80,7 +80,7 @@ void GameScene::PostProcessDraw()
 
 	player_->Draw(cameraData_);
 	blockManager_->Draw(cameraData_);
-	item_->Draw(cameraData_);
+	itemManager_->Draw(cameraData_);
 
 	MapObjectDraw();
 
@@ -125,8 +125,14 @@ void GameScene::CheckBlockCollision()
 void GameScene::CheckCollision()
 {
 	collsionManager_->ClliderClear();
-	collsionManager_->ColliderOBBPushBack(item_.get());
+	
+	for (shared_ptr<Item>item : itemManager_->GetItems())
+	{
+		collsionManager_->ColliderOBBPushBack(item.get());
+	}
+
 	collsionManager_->ColliderOBBPushBack(player_.get());
+	
 	collsionManager_->CheckAllCollision();
 }
 

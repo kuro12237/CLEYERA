@@ -319,6 +319,7 @@
     <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
     <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
     <ClCompile Include="Project\GameObject\Item\Item.cpp" />
+    <ClCompile Include="Project\GameObject\Item\ItemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -544,6 +545,7 @@
     <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
     <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
     <ClInclude Include="Project\GameObject\Item\Item.h" />
+    <ClInclude Include="Project\GameObject\Item\ItemManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

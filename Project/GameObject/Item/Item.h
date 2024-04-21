@@ -33,7 +33,6 @@ public:
 
 #pragma endregion
 
-
 private:
 
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
