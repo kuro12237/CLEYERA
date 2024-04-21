@@ -88,7 +88,17 @@ Math::Vector::Vector3 Player::GetWorldPosition()
 	return worldTransform_.GetWorldPosition();
 }
 
-void Player::OnCollision(IBoxCollider* collider)
+Math::Vector::Vector3 Player::GetSize()
+{
+	return Math::Vector::Vector3(0.5f,0.5f,0.5f);
+}
+
+Math::Vector::Vector3 Player::GetRotate()
+{
+	return worldTransform_.rotation;
+}
+
+void Player::OnBlockCollision(IBoxCollider* collider)
 {
 	collider;
 	Math::Vector::Vector2 extrusion = this->GetExtrusionXY();
@@ -105,6 +115,11 @@ void Player::OnCollision(IBoxCollider* collider)
 	{
 		velocity_ = {};
 	}
+}
+
+void Player::OnCollision(uint32_t id)
+{
+	id;
 }
 
 void Player::GravityExc(const Math::Vector::Vector2& g)

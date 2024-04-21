@@ -16,7 +16,7 @@ public:
 
 	Math::Vector::Vector3 GetWorldPosition()override;
 
-	void OnCollision(IBoxCollider* collider)override;
+	void OnBlockCollision(IBoxCollider* collider)override;
 
 	void SetTransformQua(const TransformQua& q);
 

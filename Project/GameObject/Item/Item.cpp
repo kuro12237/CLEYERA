@@ -14,10 +14,12 @@ void Item::Initialize()
 	worldTransform_.Initialize();
 	worldTransform_.translate.y = 1.25f;
 
+
 }
 
 void Item::Update()
 {
+	OBBCollider::SetRotate(worldTransform_.rotation);
 	worldTransform_.UpdateMatrix();
 }
 
@@ -45,4 +47,25 @@ void Item::Animation()
 void Item::Draw(const CameraData& camera)
 {
 	gameObject_->Draw(worldTransform_, camera);
+}
+
+void Item::OnCollision(uint32_t id)
+{
+	id;
+	isDeadFlag_ = true;
+}
+
+Math::Vector::Vector3 Item::GetWorldPosition()
+{
+	return worldTransform_.GetWorldPosition();
+}
+
+Math::Vector::Vector3 Item::GetSize()
+{
+	return Math::Vector::Vector3(0.5f, 0.5f, 0.5f);
+}
+
+Math::Vector::Vector3 Item::GetRotate()
+{
+	return Math::Vector::Vector3(worldTransform_.rotation);
 }

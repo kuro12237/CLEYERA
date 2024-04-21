@@ -38,8 +38,8 @@ void GameCollisonManager::CheckAllCollisions()
 				colliderA->SetExtrusion(extrusionXY_A);
 				colliderB->SetExtrusion(extrusionXY_B);
 
-				colliderA->OnCollision(colliderB);
-				colliderB->OnCollision(colliderA);
+				colliderA->OnBlockCollision(colliderB);
+				colliderB->OnBlockCollision(colliderA);
 			}
 			else
 			{

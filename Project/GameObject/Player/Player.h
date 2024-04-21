@@ -7,8 +7,9 @@
 #include"Utility/GlobalVariables/GlobalVariables.h"
 #include"Utility/ObjectId/GameObjectId.h"
 #include"Audio/AudioManager.h"
+#include"Utility/CollisionManager/Collider/OBBCollider.h"
 
-class Player:public IBoxCollider,public IGravity
+class Player:public IBoxCollider,public IGravity,public OBBCollider
 {
 public:
 	Player() {};
@@ -22,11 +23,11 @@ public:
 
 	void ImGuiUpdate();
 
-	Math::Vector::Vector3 GetWorldPosition()override;
-
-	void OnCollision(IBoxCollider* collider)override;
+	void OnBlockCollision(IBoxCollider* collider)override;
+	void OnCollision(uint32_t id)override;
 
 	void GravityExc(const Math::Vector::Vector2 &g)override;
+
 #pragma region Command
 
 	void Move();
@@ -38,6 +39,9 @@ public:
 #pragma region Get
 
 	const WorldTransform& GetWorldTransform() { return worldTransform_; }
+	Math::Vector::Vector3 GetWorldPosition()override;
+	Math::Vector::Vector3 GetSize()override;
+	Math::Vector::Vector3 GetRotate()override;
 
 #pragma endregion
 

@@ -32,7 +32,7 @@ Math::Vector::Vector3 WoodBlock::GetWorldPosition()
 	return Math::Vector::Vector3(worldMat_.m[3][0], worldMat_.m[3][1], worldMat_.m[3][2]);
 }
 
-void WoodBlock::OnCollision(IBoxCollider* collider)
+void WoodBlock::OnBlockCollision(IBoxCollider* collider)
 {
 	collider;
 	isHit_ = true;

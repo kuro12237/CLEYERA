@@ -60,6 +60,8 @@ void GameScene::Update(GameManager* Scene)
 	//MapのUpdate
 	MapObjectUpdate();
 
+	//clock以外の当たり判定
+	CheckCollision();
 	//重力計算
 	CheckGravitys();
 	//blockの当たり判定
@@ -118,6 +120,14 @@ void GameScene::CheckBlockCollision()
 		}
 	}
 	blockCollisionManager_->CheckAllCollisions();
+}
+
+void GameScene::CheckCollision()
+{
+	collsionManager_->ClliderClear();
+	collsionManager_->ColliderOBBPushBack(item_.get());
+	collsionManager_->ColliderOBBPushBack(player_.get());
+	collsionManager_->CheckAllCollision();
 }
 
 void GameScene::CheckGravitys()

@@ -6,11 +6,13 @@
 #include"GameObject/Player/InputHandler/PlayerInputHandler.h"
 #include"GameObject/Player/Camera/PlayerCamera.h"
 #include"Utility/GameGravityManager/GameGravityManager.h"
+#include"Utility/CollisionManager/CollisionManager.h"
 
 #include"GameObject/WoodBlock/WoodBlock.h"
 #include"GameObject/WoodBlock/WoodBlockManager.h"
 #include"GameObject/Terrain/Terrain.h"
 #include"GameObject/SkyDome/SkyDome.h"
+
 #include"GameObject/Item/Item.h"
 
 class GameScene:public IScene
@@ -37,6 +39,7 @@ private:
 	void LoadSounds();
 
 	void CheckBlockCollision();
+	void CheckCollision();
 
 	void CheckGravitys();
 
@@ -69,6 +72,8 @@ private:
 
 	unique_ptr<GameGravityManager>gravityManager_ = nullptr;
 	unique_ptr<GameCollisonManager>blockCollisionManager_ = nullptr;
+	unique_ptr<CollisionManager>collsionManager_ = nullptr;
+
 #pragma endregion
 };
 

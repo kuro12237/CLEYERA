@@ -10,7 +10,7 @@ public:
 	IBoxCollider() {};
 	~IBoxCollider() {};
 
-	virtual void OnCollision(IBoxCollider*collider) = 0;
+	virtual void OnBlockCollision(IBoxCollider*collider) = 0;
 	virtual Math::Vector::Vector3 GetWorldPosition() = 0;
 
 	void ClearFlag() { bottomHitFlag_ = false; topHitFlag_ = false; rightHitFlag_ = false; leftHitFlag_ = false; };
