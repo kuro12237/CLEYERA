@@ -57,6 +57,7 @@ private:
 
 	unique_ptr<Sun>sun_ = nullptr;
 	unique_ptr<Terrain>terrain_ = nullptr;
+	unique_ptr<SkyDome>skyDome_ = nullptr;
 
 #pragma endregion
 

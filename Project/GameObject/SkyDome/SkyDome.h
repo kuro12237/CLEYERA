@@ -19,6 +19,7 @@ private:
 
 	uint32_t modelHandle_ = 0;
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
+	Game3dObjectDesc gameObjectDesc_ = {};
 	WorldTransform worldTransform_ = {};
 
 };

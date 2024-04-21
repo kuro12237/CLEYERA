@@ -60,7 +60,7 @@ void GameScene::Update(GameManager* Scene)
 	//MapのUpdate
 	MapObjectUpdate();
 
-	//clock以外の当たり判定
+	//block以外の当たり判定
 	CheckCollision();
 	//重力計算
 	CheckGravitys();
@@ -146,15 +146,20 @@ void GameScene::MapObjectInitialize()
 
 	terrain_ = make_unique<Terrain>();
 	terrain_->Initialize();
+
+	skyDome_ = make_unique<SkyDome>();
+	skyDome_->Initialize();
 }
 
 void GameScene::MapObjectUpdate()
 {
 	sun_->Update();
 	terrain_->Update();
+	skyDome_->Update();
 }
 
 void GameScene::MapObjectDraw()
 {
 	terrain_->Draw(cameraData_);
+	skyDome_->Draw(cameraData_);
 }
