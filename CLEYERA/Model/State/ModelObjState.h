@@ -13,7 +13,7 @@ public:
 
 	void Initialize(Model* state)override;
 	void CallPipelinexVertex(Model* state)override;
-	void Draw(Model* state,const CameraData& viewprojection)override;
+	void Draw(Model* state,const CameraData& viewprojection, uint32_t instancingNum)override;
 
 private:
 	unique_ptr<BufferResource<uint32_t>>index_ = nullptr;

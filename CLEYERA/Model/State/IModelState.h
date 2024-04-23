@@ -10,7 +10,8 @@ public:
 
 	
 	virtual void CallPipelinexVertex(Model *state) = 0;
-	virtual void Draw(Model* state, const CameraData& viewprojection) = 0;
+
+	virtual void Draw(Model* state, const CameraData& viewprojection, uint32_t instancingNum) = 0;
 private:
 
 };

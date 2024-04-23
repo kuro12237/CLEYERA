@@ -2,8 +2,10 @@
 #include"Cleyera.h"
 #include"IScene.h"
 
-#include"GameScene.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
+
+#include"CGScene.h"
+#include"GameScene.h"
 
 class GameManager
 {

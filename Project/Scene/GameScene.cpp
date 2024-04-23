@@ -1,135 +1,99 @@
 #include "GameScene.h"
-#include<DirectXMath.h>
 
 void GameScene::Initialize()
 {
-	viewProjection_.Initialize();
-	viewProjection_.translation_ = { 0.0f,0.5f,-8.0f };
-	testViewProjection_.Initialize();
-	testViewProjection_.translation_ = { 0.0f,0.5f,-16.0f };
+	cameraData_.Initialize();
 
 	postEffect_ = make_unique<PostEffect>();
-	postEffect_->Initialize("GameScene");
+	postEffect_->Initialize(sceneName_);
 
-	worldTransform_.Initialize();
-	worldTransform_.translate.y = 0.5f;
-	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
+	LoadSounds();
+	MapObjectInitialize();
 
-	normalMonkeyHandle_ = ModelManager::LoadGltfFile("Walk");
+	blockCollisionManager_ = make_unique<GameCollisonManager>();
 
-	AnimationManager::GetInstance()->LoadAnimation("SimpleSkin");
-	//ModelManager::ModelUseSubsurface();
-	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
-	gameObject_->SetModel(normalMonkeyHandle_);
-	ObjectDesc_.useLight = true;
-	gameObject_->SetDesc(ObjectDesc_);
+	gravityManager_ = make_unique<GameGravityManager>();
 
-	light_.position.y = 1.0f;
-	light_.position.z = -1.0f;
-	light_.radious = 10.0f;
+	player_ = make_unique<Player>();
+	player_->Initialize();
+	player_->Update();
 
-	testLight.position.y = 1.0f;
-	testLight.position.z = 4.0f;
-	testLight.radious = 4.0f;
-	testLight.color = { 1,0,0,1 };
+	playerCamera_ = make_unique<PlayerCamera>();
+	playerCamera_->Initialize();
+	playerCamera_->SetParent(player_->GetWorldTransform());
 
-	gameObject_->SetlectModelPipeline(UE4_BRDF);
+	playerInputHandler_ = make_unique<PlayerInputHandler>();
 
-	ModelManager::ModelLoadNormalMap();
-	uint32_t modelHandle = ModelManager::LoadObjectFile("TestGround");
-	testGroundWorldTransform_.Initialize();
-	testGroundGameObject_ = make_unique<Game3dObject>();
-	testGroundGameObject_->Create();
-	testGroundGameObject_->SetModel(modelHandle);
-	GroundObjectDesc_.useLight = true;
-	testGroundGameObject_->SetDesc(GroundObjectDesc_);
+    blockManager_ = make_unique<WoodBlockManager>();
+	blockManager_->Initialize();
 
-	testGroundGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
+	itemManager_ = make_unique<ItemManager>();
+	itemManager_->Initialize();
 
-	TestSkyDomeWorldTreanform_.Initialize();
-	TestSkyDomeWorldTreanform_.scale = { 8.0f,8.0f,8.0f };
-	//ModelManager::ModelLoadNormalMap();
-	modelHandle = ModelManager::LoadObjectFile("TestSkyDome");
-	testSkyDomeGameObject_= make_unique<Game3dObject>();
-	testSkyDomeGameObject_->Create();
-	testSkyDomeGameObject_->SetModel(modelHandle);
-	//testSkyDomeGameObject_->UseLight(true);
-	SkyObjectDesc_.useLight = true;
-	testSkyDomeGameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
-	testSkyDomeGameObject_->SetDesc(SkyObjectDesc_);
-	debugCamera_ = make_unique<DebugCamera>();
-	debugCamera_->Initialize();
-
-	defferedShading = make_unique<DefferredShading>();
-	defferedShading->Initialize();
-
-	DirectionalLight::Initialize();
 }
 
 void GameScene::Update(GameManager* Scene)
 {
-	debugCamera_->ImGuiUpdate();
+	Scene;
+#ifdef _USE_IMGUI
 
-	if (ImGui::TreeNode("Light"))
+	if (ImGui::TreeNode("Control"))
 	{
-		ImGui::DragFloat3("translate", &light_.position.x,-0.1f,0.1f);
-		ImGui::DragFloat("decay", &light_.decay, -0.1f, 0.1f);
-		ImGui::DragFloat("radious", &light_.radious, -0.1f, 0.1f);
-		ImGui::DragFloat("intencity", &light_.intencity, -0.1f, 0.1f);
-		ImGui::ColorPicker4("color", &light_.color.x);
+		ImGui::Text("LJoy : Move");
+		ImGui::Text("RJoy : ReticleMove");
+		ImGui::Text("Botton A : Jamp");
 		ImGui::TreePop();
 	}
 
+	sun_->ImGuiUpdate();
+	player_->ImGuiUpdate();
+	blockManager_->UpdateImGui();
 
-	gameObject_->SetlectModelPipeline(modelPipline_);
+#endif // _USE_IMGUI
 
+#pragma region Player
 
-	light_.UpdateMatrix();
-	LightingManager::AddList(light_);
-	
+	playerInputHandler_->Handler();
+	playerInputHandler_->CommandsExc(*player_);
 
-	ImGui::Checkbox("TestRedLight", &UseTestRedLight_);
-	if (UseTestRedLight_)
-	{
-		LightingManager::AddList(testLight);
-	}
+	player_->Update();
+
+#pragma endregion
+
+	itemManager_->Update();
+	itemManager_->Animation();
+
+	blockManager_->Update();
+
+	//MapのUpdate
+	MapObjectUpdate();
+
+	//block以外の当たり判定
+	CheckCollision();
+	//重力計算
+	CheckGravitys();
+	//blockの当たり判定
+	CheckBlockCollision();
+
+	playerCamera_->Update();
+	cameraData_ = playerCamera_->GetData();
+	cameraData_.TransfarMatrix();
 
 	postEffect_->Update();
-
-	Move();
-
-	//worldTransform_.rotation.y += 0.01f;
-	worldTransform_.UpdateMatrix();
-	testGroundWorldTransform_.UpdateMatrix();
-	TestSkyDomeWorldTreanform_.UpdateMatrix();
-	
-	viewProjection_.UpdateMatrix();
-
-	debugCamera_->Update();
-	viewProjection_ = debugCamera_->GetData(viewProjection_);
-
-	animationTimer_ += 1.0f / 60.0f;
-	//TestAnimation();
-	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
-	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("SimpleSkin");
-	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
-	ModelManager::SkeletonUpdate(skeleton);
-	if (Input::PushKeyPressed(DIK_N))
-	{
-		Scene->ChangeState(new TestScene);
-		return;
-	}
 }
 
 void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	gameObject_->Draw(worldTransform_, viewProjection_);
-	testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
-	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
+
+	player_->Draw(cameraData_);
+	blockManager_->Draw(cameraData_);
+	itemManager_->Draw(cameraData_);
+
+	MapObjectDraw();
 
 	postEffect_->PostDraw();
+
 }
 
 void GameScene::Back2dSpriteDraw()
@@ -138,50 +102,79 @@ void GameScene::Back2dSpriteDraw()
 
 void GameScene::Object3dDraw()
 {
-	postEffect_->Draw(viewProjection_);
-	//defferedShading->Draw(viewProjection_);
 }
 
 void GameScene::Flont2dSpriteDraw()
 {
+	postEffect_->Draw(cameraData_);
 }
 
-void GameScene::Move()
+void GameScene::LoadSounds()
 {
-
-	const float speed = 0.1f;
-	if (Input::PushKey(DIK_W))
-	{
-		worldTransform_.translate.z += speed;
-	}
-	if (Input::PushKey(DIK_S))
-	{
-		worldTransform_.translate.z -= speed;
-	}
-	if (Input::PushKey(DIK_A))
-	{
-		worldTransform_.translate.x -= speed;
-	}if (Input::PushKey(DIK_D))
-	{
-		worldTransform_.translate.x += speed;
-	}
+	AudioManager::GetInstance()->SoundLoadMp3("Resources/Sounds/Jump.mp3");
+	AudioManager::GetInstance()->SoundLoadMp3("Resources/Sounds/GetItem.mp3");
 }
 
-void GameScene::TestAnimation()
+void GameScene::CheckBlockCollision()
 {
-	SAnimation::Animation data = AnimationManager::GetInstance()->GetData("AnimatedCube");
-	animationTimer_ += 1.0f / 60.0f;
-	animationTimer_ = std::fmod(animationTimer_, data.duration);
-	SAnimation::NodeAnimation& rootNodeAnimation = data.NodeAnimation["AnimatedCube"];
-	Math::Vector::Vector3 translate = AnimationManager::CalculateValue(rootNodeAnimation.translate.keyframes, animationTimer_);
-	Math::Qua::Quaternion quaternion = AnimationManager::CalculateValue(rootNodeAnimation.rotate.keyframes, animationTimer_);
-	Math::Vector::Vector3 scale = AnimationManager::CalculateValue(rootNodeAnimation.scale.keyframes, animationTimer_);
+	blockCollisionManager_->ClearList();
+	
+	blockCollisionManager_->PushList(player_.get());
 
-	Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(translate);
-	Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(quaternion);
-	Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix(scale);
-	Math::Matrix::Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
-	worldTransform_.matWorld = Math::Matrix::Multiply(worldTransform_.matWorld, localMat);
-	worldTransform_.TransfarMatrix();
+	for (int i = 0; i < blockManager_->GetBlocks().size(); i++)
+	{
+		if (blockManager_->GetBlocks()[i])
+		{
+			blockCollisionManager_->PushList(blockManager_->GetBlocks()[i].get());
+		}
+	}
+	blockCollisionManager_->CheckAllCollisions();
+}
 
+void GameScene::CheckCollision()
+{
+	collsionManager_->ClliderClear();
+	
+	for (shared_ptr<Item>item : itemManager_->GetItems())
+	{
+		collsionManager_->ColliderOBBPushBack(item.get());
+	}
+
+	collsionManager_->ColliderOBBPushBack(player_.get());
+	
+	collsionManager_->CheckAllCollision();
+}
+
+void GameScene::CheckGravitys()
+{
+	gravityManager_->ClearList();
+
+	gravityManager_->PushList(player_.get());
+
+	gravityManager_->CheckAllGravity();
+}
+
+void GameScene::MapObjectInitialize()
+{
+	sun_ = make_unique<Sun>();
+	sun_->Initialize();
+
+	terrain_ = make_unique<Terrain>();
+	terrain_->Initialize();
+
+	skyDome_ = make_unique<SkyDome>();
+	skyDome_->Initialize();
+}
+
+void GameScene::MapObjectUpdate()
+{
+	sun_->Update();
+	terrain_->Update();
+	skyDome_->Update();
+}
+
+void GameScene::MapObjectDraw()
+{
+	terrain_->Draw(cameraData_);
+	skyDome_->Draw(cameraData_);
 }

@@ -21,6 +21,7 @@ struct SShaders
 	SShaderMode PBR_Model;
 	SShaderMode Phong_Model;
 	SShaderMode Phong_Normal_Model;
+	SShaderMode Phong_Normal_InstancingModel;
 	SShaderMode Phong_subsurface_Model;
 	SShaderMode Particle;
 	SShaderMode LightParticle;
@@ -67,6 +68,9 @@ private:
 	static void ParticleShader();
 	static void PhongNormalModel();
 	static void PhongSubsurfaceModel();
+
+	static void PhongNormalInstancingModel();
+
 
 	static void ColorModel();
 	static void NormalModel();

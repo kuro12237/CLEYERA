@@ -270,7 +270,7 @@
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\GameScene.cpp">
+    <ClCompile Include="Project\Scene\CGScene.cpp">
       <Filter>Project\Scene\Game</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
@@ -304,6 +304,25 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
+    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
+    <ClCompile Include="Project\Scene\GameScene.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp" />
+    <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp" />
+    <ClCompile Include="Project\GameObject\Sun\Sun.cpp" />
+    <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp" />
+    <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp" />
+    <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlock.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
+    <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
+    <ClCompile Include="Project\GameObject\Item\Item.cpp" />
+    <ClCompile Include="Project\GameObject\Item\ItemManager.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -459,7 +478,7 @@
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Scene\GameScene.h">
+    <ClInclude Include="Project\Scene\CGScene.h">
       <Filter>Project\Scene\Game</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h">
@@ -508,6 +527,31 @@
     <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
     <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h" />
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h" />
+    <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
+    <ClInclude Include="Project\Scene\GameScene.h" />
+    <ClInclude Include="Project\GameObject\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\Player\Commands\IPlayerCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h" />
+    <ClInclude Include="Project\GameObject\Player\Camera\PlayerCamera.h" />
+    <ClInclude Include="Project\GameObject\Sun\Sun.h" />
+    <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameColliderConfig.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollisionManager.h" />
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollider\BoxCollider.h" />
+    <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h" />
+    <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h" />
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlock.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />
+    <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
+    <ClInclude Include="Project\GameObject\Item\Item.h" />
+    <ClInclude Include="Project\GameObject\Item\ItemManager.h" />
+    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -573,5 +617,7 @@
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl" />
   </ItemGroup>
 </Project>

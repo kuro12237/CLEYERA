@@ -1,15 +1,21 @@
 #pragma once
-#include"IScene.h"
 #include"GameManager.h"
-#include"Input.h"
-#include"PostEffect/PostEffect.h"
-#include"Game3dObject.h"
-#include"TestScene.h"
-#include"DebugTool/DebugCamera/DebugCamera.h"
-#include"PostEffect/DeferrdShading/DeferredShading.h"
-#include"Animation/AnimationManager.h"
+#include"GameObject/Sun/Sun.h"
+#include"Utility/GameCollisionManager/GameCollisionManager.h"
+#include"GameObject/Player/Player.h"
+#include"GameObject/Player/InputHandler/PlayerInputHandler.h"
+#include"GameObject/Player/Camera/PlayerCamera.h"
+#include"Utility/GameGravityManager/GameGravityManager.h"
+#include"Utility/CollisionManager/CollisionManager.h"
 
-class GameScene :public IScene
+#include"GameObject/WoodBlock/WoodBlock.h"
+#include"GameObject/WoodBlock/WoodBlockManager.h"
+#include"GameObject/Terrain/Terrain.h"
+#include"GameObject/SkyDome/SkyDome.h"
+
+#include"GameObject/Item/ItemManager.h"
+
+class GameScene:public IScene
 {
 public:
 	GameScene() {};
@@ -27,64 +33,49 @@ public:
 
 	void Flont2dSpriteDraw()override;
 
+
 private:
 
-	void Move();
+	void LoadSounds();
 
-	void TestAnimation();
+	void CheckBlockCollision();
+	void CheckCollision();
 
-	float animationTimer_ = 0.0f;
+	void CheckGravitys();
 
+	void MapObjectInitialize();
+	void MapObjectUpdate();
+	void MapObjectDraw();
 
-	CameraData viewProjection_ = {};
-	CameraData testViewProjection_ = {};
+	const string sceneName_ = "GameScene";
+
+	CameraData cameraData_ = {};
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
 
-	Math::Vector::Vector2 postEffectuvScale = { 1,1 };
-	float postEffectGrayFactor_ = 0.0f;
-	float postEffectInvertFactor_ = 0.0f;
-	float postEffectBringhtnessFactor_ = 0.0f;
-	float postEffectAverageBlurIntensity_ = 0.0f;
-	float postEffectContrastFactor_ = 0.0f;
-	float postEffectHueFactor_ = 0.0f;
+#pragma region map
 
-	SelectPostEffect selectPostEffect_ = GRAYSCALE;
+	unique_ptr<Sun>sun_ = nullptr;
+	unique_ptr<Terrain>terrain_ = nullptr;
+	unique_ptr<SkyDome>skyDome_ = nullptr;
 
-	unique_ptr<PostEffect>postEffectTest_ = nullptr;
-	unique_ptr<Game3dObject>gameObject_ = nullptr;
-	Game3dObjectDesc ObjectDesc_ = {};
+#pragma endregion
 
-	WorldTransform worldTransform_ = {};
+	unique_ptr<Player>player_ = nullptr;
+	unique_ptr<PlayerInputHandler>playerInputHandler_ = nullptr;
+	unique_ptr<PlayerCamera>playerCamera_ = nullptr;
 
-	unique_ptr<Game3dObject>testSkyDomeGameObject_ = nullptr;
-	Game3dObjectDesc SkyObjectDesc_ =  {};
+	unique_ptr<WoodBlockManager>blockManager_ = nullptr;
 
-	WorldTransform TestSkyDomeWorldTreanform_ = {};
-	unique_ptr<Game3dObject>testGroundGameObject_ = nullptr;
-	
-	WorldTransform testGroundWorldTransform_ = {};
-	Game3dObjectDesc GroundObjectDesc_ = {};
+	unique_ptr<ItemManager>itemManager_ = nullptr;
 
-	PointLight_param light_ = {};
-	PointLight_param testLight = {};
-	bool UseTestRedLight_ = false;
-	ModelShaderSelect modelPipline_ = PHONG_MODEL;
+#pragma region Utility
 
-	uint32_t normalMonkeyHandle_ = 0;
-	uint32_t smoothMonkeyHandle_ = 0;
+	unique_ptr<GameGravityManager>gravityManager_ = nullptr;
+	unique_ptr<GameCollisonManager>blockCollisionManager_ = nullptr;
+	unique_ptr<CollisionManager>collsionManager_ = nullptr;
 
-	// 散乱係数
-	float scatterCoefficient_ = 0.5f;
-	// 吸収係数 
-	float absorptionCoefficient_ = 0.5f;
-	//光の伝播距離
-	float scatterDistance_ = 0.5f;
-
-	bool SmoothMoneyUseFlag_ = false;
-
-	unique_ptr<DebugCamera>debugCamera_ = nullptr;
-
-	unique_ptr<DefferredShading>defferedShading = nullptr;
-
+#pragma endregion
 };
+
+

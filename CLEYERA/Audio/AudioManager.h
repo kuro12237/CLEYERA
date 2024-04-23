@@ -44,7 +44,7 @@ public:
 	/// <param name="soundHandle"></param>
 	void AudioPlayWave(const string& FileName);
 
-	void AudioPlayMp3(const string& FileName);
+	void AudioPlayMp3(const string& FileName, const float& Volume = 1.0f);
 private:
 
 	bool CheckAudioDatas(string filepath);

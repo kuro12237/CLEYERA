@@ -44,7 +44,7 @@ public:
 
 	void CommandCallPipelineVertex();
 
-	void Draw( const CameraData&viewprojection);
+	void Draw( const CameraData&viewprojection, uint32_t instancingNum);
 
 	void SetDesc(const Game3dObjectDesc& desc) { desc_ = &desc; }
 

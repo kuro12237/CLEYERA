@@ -49,7 +49,7 @@ void Model::CommandCallPipelineVertex()
 	state_->CallPipelinexVertex(this);
 }
 
-void Model::Draw(const CameraData& viewprojection)
+void Model::Draw(const CameraData& viewprojection, uint32_t instancingNum)
 {
 	if (state_ == nullptr)
 	{
@@ -57,7 +57,7 @@ void Model::Draw(const CameraData& viewprojection)
 		assert(0);
 	}
 	
-	state_->Draw(this,viewprojection);
+	state_->Draw(this,viewprojection,instancingNum);
 }
 
 

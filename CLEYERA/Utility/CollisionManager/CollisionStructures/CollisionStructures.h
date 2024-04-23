@@ -44,8 +44,8 @@ struct Triangle {
 
 // AABB
 struct AABB {
-	Math::Vector::Vector3 min; // !< 最少点
-	Math::Vector::Vector3 max; // !< 最大点
+	Math::Vector::Vector3 min = { -0.5f,-0.5f,-0.5f };; // !< 最少点
+	Math::Vector::Vector3 max = { 0.5f,0.5f,0.5f };; // !< 最大点
 };
 
 
