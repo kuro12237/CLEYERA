@@ -207,8 +207,7 @@ void AudioManager::AudioPlayMp3(const string& FileName,const float &Volume)
 	WAVEFORMATEX* waveFormat{};
 	MFCreateWaveFormatExFromMFMediaType(AudioDatas_[FileName].soundData_.mediaType, &waveFormat, nullptr);
 
-	HRESULT hr = xAudio->CreateSourceVoice(&AudioDatas_[FileName].soundData_.pSourcevoice, waveFormat);
-	assert(SUCCEEDED(hr));
+	xAudio->CreateSourceVoice(&AudioDatas_[FileName].soundData_.pSourcevoice, waveFormat);
 
 	AudioDatas_[FileName].soundData_.pSourcevoice->SubmitSourceBuffer(&AudioDatas_[FileName].soundData_.buffer);
 	AudioDatas_[FileName].soundData_.pSourcevoice->SetVolume(Volume);
