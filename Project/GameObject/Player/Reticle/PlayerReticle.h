@@ -29,6 +29,8 @@ public:
 
 	Math::Vector::Vector3 GetPos() { return worldTransform_.GetWorldPosition(); }
 
+	WorldTransform GetWorldTransform() { return worldTransform_; }
+
 #pragma endregion
 
 

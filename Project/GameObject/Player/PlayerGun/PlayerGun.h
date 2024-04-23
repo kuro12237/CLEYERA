@@ -1,5 +1,9 @@
 #pragma once
 #include"Game3dObject.h"
+#include"Game3dInstancingObject/GameInstancing3dObject.h"
+#include"PlayerGunBullet.h"
+
+#include"Input.h"
 
 class PlayerGun
 {
@@ -17,9 +21,11 @@ public:
 
 	void WorldTransformUpdate() { worldTransform_.UpdateMatrix(); }
 
+	void ImGuiUpdate();
+
 #pragma region Set
 
-	void ReticlePos(const Math::Vector::Vector3& pos) { reticlePos = &pos; }
+	void ReticlePos(const Math::Vector::Vector3& pos) { reticlePos = pos; }
 
 	void SetParent(const WorldTransform& w) { worldTransform_.parent = &w; }
 
@@ -34,6 +40,8 @@ private:
 	WorldTransform worldTransform_ = {};
 	uint32_t modelHandle_ = 0;
 
-	const Math::Vector::Vector3* reticlePos = nullptr;
+	Math::Vector::Vector3 reticlePos = {};
+
+	list<shared_ptr<PlayerGunBullet>>bullets_ = {};
 
 };

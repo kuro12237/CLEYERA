@@ -11,20 +11,21 @@ void Player::Initialize()
 	game3dObjectdesc_.useLight = true;
 	gameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 	gameObject_->SetDesc(game3dObjectdesc_);
+	worldTransform_.UpdateMatrix();
 
 	reticle_ = make_unique<PlayerReticle>();
 	reticle_->Initialize();
 	reticle_->SetParent(worldTransform_);
+	reticle_->Update();
 
 	gun_ = make_unique<PlayerGun>();
 	gun_->Initlalize();
 
 	gun_->SetParent(worldTransform_);
-	gun_->ReticlePos(reticle_->GetPos());
 
 	aabb_.min = { -0.5f,-0.5f,-0.5f };
 	aabb_.max = { 0.5f,0.5f,0.5f };
-
+	
 	IBoxCollider::SetAABB(aabb_);
 	IBoxCollider::SetAttbute(kPlayerAttbute);
 	IBoxCollider::SetMask(kPlayerMask);
@@ -51,7 +52,9 @@ void Player::Update()
 
 	Move();
 
+
 	reticle_->Update();
+	gun_->ReticlePos(reticle_->GetPos());
 	gun_->Update();
 
 	ClearFlag();
@@ -93,6 +96,8 @@ void Player::ImGuiUpdate()
 		worldTransform_.UpdateEularMatrix();
 	}
 
+	ImGui::Text("%f %f %f", reticle_->GetPos().x, reticle_->GetPos().y, reticle_->GetPos().z);
+	gun_->ImGuiUpdate();
 }
 
 Math::Vector::Vector3 Player::GetWorldPosition()
