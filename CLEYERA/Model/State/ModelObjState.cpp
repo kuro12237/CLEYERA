@@ -23,6 +23,7 @@ void ModelObjState::CallPipelinexVertex(Model* state)
 	vertex_->CommandPrimitiveTopologyCall();
 }
 
+
 void ModelObjState::Draw(Model* state, const CameraData& viewprojection, uint32_t instancingNum)
 {
 	viewprojection;
