@@ -212,7 +212,6 @@ void AudioManager::AudioPlayMp3(const string& FileName,const float &Volume)
 	AudioDatas_[FileName].soundData_.pSourcevoice->SubmitSourceBuffer(&AudioDatas_[FileName].soundData_.buffer);
 	AudioDatas_[FileName].soundData_.pSourcevoice->SetVolume(Volume);
 	AudioDatas_[FileName].soundData_.pSourcevoice->Start();
-
 }
 
 bool AudioManager::CheckAudioDatas(string filepath)
