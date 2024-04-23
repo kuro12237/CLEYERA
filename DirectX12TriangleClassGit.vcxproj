@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig" />
+    <None Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mtd.pdb" />
     <None Include="Resources\Shader\LightingObject3d.hlsli" />
     <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
@@ -508,6 +509,12 @@
     <ProjectReference Include="CLEYERA\externals\pngTex\pngTex.vcxproj">
       <Project>{4fba56dc-7eb7-4624-a36d-7b80966713bc}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mdd.lib" />
+    <Library Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mtd.lib" />
+    <Library Include="CLEYERA\externals\assimp\lib\Release\assimp-vc143-md.lib" />
+    <Library Include="CLEYERA\externals\assimp\lib\Release\assimp-vc143-mt.lib" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
