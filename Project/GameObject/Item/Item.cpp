@@ -52,6 +52,7 @@ void Item::Draw(const CameraData& camera)
 void Item::OnCollision(uint32_t id)
 {
 	id;
+	AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/GetItem.mp3");
 	isDeadFlag_ = true;
 }
 

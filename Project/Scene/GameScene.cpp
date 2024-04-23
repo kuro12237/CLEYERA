@@ -37,6 +37,14 @@ void GameScene::Update(GameManager* Scene)
 	Scene;
 #ifdef _USE_IMGUI
 
+	if (ImGui::TreeNode("Control"))
+	{
+		ImGui::Text("LJoy : Move");
+		ImGui::Text("RJoy : ReticleMove");
+		ImGui::Text("Botton A : Jamp");
+		ImGui::TreePop();
+	}
+
 	sun_->ImGuiUpdate();
 	player_->ImGuiUpdate();
 	blockManager_->UpdateImGui();
@@ -104,6 +112,7 @@ void GameScene::Flont2dSpriteDraw()
 void GameScene::LoadSounds()
 {
 	AudioManager::GetInstance()->SoundLoadMp3("Resources/Sounds/Jump.mp3");
+	AudioManager::GetInstance()->SoundLoadMp3("Resources/Sounds/GetItem.mp3");
 }
 
 void GameScene::CheckBlockCollision()

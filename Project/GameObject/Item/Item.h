@@ -2,6 +2,7 @@
 #include"Game3dObject.h"
 #include"Animation/AnimationManager.h"
 #include"OBBCollider.h"
+#include"AudioManager.h"
 
 class Item : public OBBCollider
 {
