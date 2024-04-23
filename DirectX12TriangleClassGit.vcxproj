@@ -99,6 +99,9 @@
     <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
     <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
     <ClCompile Include="Project\GameObject\Sun\Sun.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
@@ -196,6 +199,9 @@
     <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h" />
+    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
     <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
     <ClInclude Include="Project\GameObject\Sun\Sun.h" />
     <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />

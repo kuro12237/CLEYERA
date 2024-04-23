@@ -12,16 +12,22 @@ void Player::Initialize()
 	gameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 	gameObject_->SetDesc(game3dObjectdesc_);
 
-	worldTransform_.translate.y = 4.0f;
-	worldTransform_.translate.x = 4.0f;
-	worldTransform_.scale = { 0.5f,0.5f,0.5f };
+	reticle_ = make_unique<PlayerReticle>();
+	reticle_->Initialize();
+	reticle_->SetParent(worldTransform_);
+
+	gun_ = make_unique<PlayerGun>();
+	gun_->Initlalize();
+
+	gun_->SetParent(worldTransform_);
+	gun_->ReticlePos(reticle_->GetPos());
 
 	aabb_.min = { -0.5f,-0.5f,-0.5f };
 	aabb_.max = { 0.5f,0.5f,0.5f };
 
-	SetAABB(aabb_);
-	SetAttbute(kPlayerAttbute);
-	SetMask(kPlayerMask);
+	IBoxCollider::SetAABB(aabb_);
+	IBoxCollider::SetAttbute(kPlayerAttbute);
+	IBoxCollider::SetMask(kPlayerMask);
 	IBoxCollider::SetVelocity(velocity_);
 	IBoxCollider::SetId(kPlayerId);
 	IBoxCollider::SetWorldTransform(worldTransform_);
@@ -45,12 +51,18 @@ void Player::Update()
 
 	Move();
 
+	reticle_->Update();
+	gun_->Update();
+
 	ClearFlag();
 }
 
 void Player::Draw(const CameraData& camera)
 {
+	reticle_->Draw3d(camera);
+	gun_->Draw(camera);
 	gameObject_->Draw(worldTransform_, camera);
+
 }
 
 void Player::ImGuiUpdate()
@@ -105,6 +117,9 @@ void Player::OnBlockCollision(IBoxCollider* collider)
 	worldTransform_.translate.x += extrusion.x;
 	worldTransform_.translate.y += extrusion.y;
 	worldTransform_.UpdateMatrix();
+	
+	reticle_->WorldTransformUpdate();
+	gun_->WorldTransformUpdate();
 
 	if (GetBottomFlag() && velocity_.y <= 0.0f)
 	{
@@ -128,6 +143,8 @@ void Player::GravityExc(const Math::Vector::Vector2& g)
 	worldTransform_.translate.y += velocity_.y;
 	worldTransform_.UpdateMatrix();;
 
+	reticle_->WorldTransformUpdate();
+	gun_->WorldTransformUpdate();
 }
 
 void Player::Move()

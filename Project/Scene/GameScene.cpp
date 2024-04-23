@@ -54,7 +54,7 @@ void GameScene::Update(GameManager* Scene)
 
 	itemManager_->Update();
 	itemManager_->Animation();
-	
+
 	blockManager_->Update();
 
 	//MapのUpdate

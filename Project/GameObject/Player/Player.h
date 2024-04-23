@@ -9,6 +9,10 @@
 #include"Audio/AudioManager.h"
 #include"Utility/CollisionManager/Collider/OBBCollider.h"
 
+#include"Reticle/PlayerReticle.h"
+#include"PlayerGun/PlayerGun.h"
+
+
 class Player:public IBoxCollider,public IGravity,public OBBCollider
 {
 public:
@@ -55,6 +59,8 @@ private:
 
 	uint32_t modelHandle_ = 0;
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
+	Game3dObjectDesc game3dObjectdesc_ = {};
+
 	WorldTransform worldTransform_{};
 
 	AABB aabb_ = {};
@@ -64,6 +70,7 @@ private:
 
 	Math::Vector::Vector3 GameStartPos_ = {};
 
-	Game3dObjectDesc game3dObjectdesc_ = {};
+	unique_ptr<PlayerReticle>reticle_ = nullptr;
+	unique_ptr<PlayerGun>gun_ = nullptr;
 };
 

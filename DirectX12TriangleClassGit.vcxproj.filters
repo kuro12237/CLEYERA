@@ -320,6 +320,9 @@
     <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
     <ClCompile Include="Project\GameObject\Item\Item.cpp" />
     <ClCompile Include="Project\GameObject\Item\ItemManager.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -546,6 +549,9 @@
     <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
     <ClInclude Include="Project\GameObject\Item\Item.h" />
     <ClInclude Include="Project\GameObject\Item\ItemManager.h" />
+    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
