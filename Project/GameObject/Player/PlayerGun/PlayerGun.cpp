@@ -35,6 +35,7 @@ void PlayerGun::Update()
 
 	bulletRate_ += 1.0f;
 
+	//stateのチェック
 	prevStateno_ = currentStateNo_;
 	currentStateNo_ = states_[currentStateNo_]->GetstateNo();
 	if (prevStateno_ != currentStateNo_)
