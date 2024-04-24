@@ -13,12 +13,13 @@ void PlayerGun::Initlalize()
 	worldTransform_.Initialize();
 
 	//状態
-	StateInitialize();
+	state_ = make_unique<PlayerGunStandState>();
+	state_->Initialize();
 }
 
 void PlayerGun::Update()
 {
-	
+
 	//弾消し
 	bullets_.remove_if([](shared_ptr<PlayerGunBullet> b) {
 		if (b->GetIsDeadFlag()) {
@@ -33,17 +34,10 @@ void PlayerGun::Update()
 		b->Update();
 	}
 
-	bulletRate_ += 1.0f;
-
-	//stateのチェック
-	prevStateno_ = currentStateNo_;
-	currentStateNo_ = states_[currentStateNo_]->GetstateNo();
-	if (prevStateno_ != currentStateNo_)
+	if (state_)
 	{
-		states_[currentStateNo_]->Initialize();
+		state_->Update(this);
 	}
-
-	states_[currentStateNo_]->Update(this);
 
 	worldTransform_.UpdateMatrix();
 }
@@ -54,7 +48,7 @@ void PlayerGun::Animation()
 
 void PlayerGun::Draw(const CameraData& camera)
 {
-	gameObject_->Draw(worldTransform_,camera);
+	gameObject_->Draw(worldTransform_, camera);
 
 	for (shared_ptr<PlayerGunBullet> b : bullets_)
 	{
@@ -64,46 +58,48 @@ void PlayerGun::Draw(const CameraData& camera)
 
 void PlayerGun::ImGuiUpdate()
 {
-	ImGui::Begin("test");
-	ImGui::Text("Bulletcount %d", bulletCount_);
-	ImGui::End();
+
 }
 
 void PlayerGun::Attack()
 {
-	if (bulletCount_ < bulletCountMax_)
+	if (state_->GetstateNo() == ATTACK || state_->GetstateNo() == RELOAD)
 	{
-		if (bulletRate_ >= bulletRateMax_)
-		{
-			const Math::Vector::Vector2 randomSize = { -1.0f,1.0f };
-			Math::Vector::Vector3 randomPos = {
-				RandomGenerator::GetInstance()->GetFloat(randomSize.x, randomSize.y),
-				RandomGenerator::GetInstance()->GetFloat(randomSize.x, randomSize.y),
-				0.0f
-			};
-			reticlePos = Math::Vector::Add(reticlePos, randomPos);
-
-			Math::Vector::Vector3 prSubtruct = Math::Vector::Subtruct(reticlePos, worldTransform_.GetWorldPosition());
-			Math::Vector::Vector3 Nvelocity = Math::Vector::Normalize(prSubtruct);
-			const float speed = 0.5f;
-			Math::Vector::Vector3 velocity = Math::Vector::Multiply(Nvelocity, speed);
-
-			shared_ptr<PlayerGunBullet>b = make_shared<PlayerGunBullet>();
-			b->Initalize(worldTransform_.GetWorldPosition(), velocity);
-
-			bullets_.push_back(b);
-			bulletCount_++;
-			bulletRate_ = 0.0f;
-		}
+		return;
 	}
+	ChangeState(ATTACK);
 }
 
-void PlayerGun::StateInitialize()
+void PlayerGun::ChangeState(PLAYERGUNSTATE state)
 {
-	states_[STAND] = make_unique<PlayerGunStandState>();
-	states_[ATTACK] = make_unique<PlayerGunAttackState>();
-	states_[RELOAD] = make_unique<PlayerGunReloadState>();
+	switch (state)
+	{
+	case STAND:
+		state_ = make_unique<PlayerGunStandState>();
+		break;
+	case RELOAD:
+		state_ = make_unique<PlayerGunReloadState>();
+		break;
+	case ATTACK:
+		state_ = make_unique<PlayerGunAttackState>();
+		break;
+	default:
+		break;
+	}
+	state_->Initialize();
+}
 
-	currentStateNo_ = STAND;
-	states_[currentStateNo_]->Initialize();
-};
+bool PlayerGun::BulletPushBack(shared_ptr<PlayerGunBullet> b)
+{
+	bulletCount_++;
+	if (bulletCount_ <= bulletCountMax_)
+	{
+		bullets_.push_back(b);
+		return true;
+	}
+	else
+	{
+		ChangeState(RELOAD);
+		return false;
+	}
+}

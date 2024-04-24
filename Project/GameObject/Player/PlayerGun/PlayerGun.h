@@ -31,36 +31,42 @@ public:
 
 #pragma region Set
 
-	void ReticlePos(const Math::Vector::Vector3& pos) { reticlePos = pos; }
+	void ReticlePos(const Math::Vector::Vector3& pos) { reticlePos_ = pos; }
 
 	void SetParent(const WorldTransform& w) { worldTransform_.parent = &w; }
 
 #pragma endregion
 
+#pragma region Get
+
+	Math::Vector::Vector3 GetReticlePos() { return reticlePos_; }
+
+	WorldTransform GetworldTransform() { return worldTransform_; }
+
+#pragma endregion
+
 	void Attack();
 
+	void ChangeState(PLAYERGUNSTATE state);
 
+	bool BulletPushBack(shared_ptr<PlayerGunBullet>b);
+
+	void BulletCountReset() { bulletCount_ = 0; }
 private:
 
-	void StateInitialize();
 
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
 	Game3dObjectDesc gameObjectDesc_ = {};
 	WorldTransform worldTransform_ = {};
 	uint32_t modelHandle_ = 0;
 
-	Math::Vector::Vector3 reticlePos = {};
+	Math::Vector::Vector3 reticlePos_ = {};
 
 	list<shared_ptr<PlayerGunBullet>>bullets_ = {};
 
 	uint32_t bulletCount_ = 0;
 	const uint32_t bulletCountMax_ = 10;
 
-	float bulletRate_ = 0.0f;
-	const float bulletRateMax_ = 4.0f;
-
-	array<unique_ptr<IPlayerGunState>, 3>states_ = {};
-	int currentStateNo_ = 0;
-	int prevStateno_ = 0;
+	unique_ptr<IPlayerGunState>state_ = {};
 
 };

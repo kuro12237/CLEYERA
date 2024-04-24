@@ -32,4 +32,6 @@ private:
 
 	bool isDeadFlag_ = false;
 
+	float bulletflame_ = 0.0f;
+	const float bulletflameMax_ = 120.0f;
 };

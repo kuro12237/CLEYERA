@@ -17,6 +17,11 @@ void PlayerGunBullet::Initalize(const Math::Vector::Vector3& spownPos, const Mat
 
 void PlayerGunBullet::Update()
 {
+	bulletflame_++;
+	if (bulletflame_ >= bulletflameMax_)
+	{
+		isDeadFlag_ = true;
+	}
 	worldTransform_.translate = Math::Vector::Add(worldTransform_.translate, velocity_);
 	worldTransform_.UpdateMatrix();
 }
