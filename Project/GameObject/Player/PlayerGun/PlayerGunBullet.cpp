@@ -8,7 +8,7 @@ void PlayerGunBullet::Initalize(const Math::Vector::Vector3& spownPos, const Mat
 
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
-	modelHandle_ = ModelManager::LoadObjectFile("TestBox");
+	modelHandle_ = ModelManager::LoadObjectFile("PlayerGunBullet");
 	gameObject_->SetModel(modelHandle_);
 	gameObjectDesc_={};
 	gameObject_->SetDesc(gameObjectDesc_);

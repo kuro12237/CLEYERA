@@ -181,3 +181,8 @@ void Player::Jamp()
 		isJamp_ = true;
 	}
 }
+
+void Player::GunAttack()
+{
+	gun_->Attack();
+}

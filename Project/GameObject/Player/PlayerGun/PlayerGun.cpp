@@ -2,6 +2,7 @@
 
 void PlayerGun::Initlalize()
 {
+	//model設定
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	gameObjectDesc_.useLight = true;
@@ -10,17 +11,15 @@ void PlayerGun::Initlalize()
 	gameObject_->SetModel(modelHandle_);
 
 	worldTransform_.Initialize();
-	worldTransform_.translate.z = -3.0f;
+
+	//状態
+	StateInitialize();
 }
 
 void PlayerGun::Update()
 {
 	
-	if (Input::PushBottonPressed(XINPUT_GAMEPAD_B))
-	{
-		Attack();
-	}
-
+	//弾消し
 	bullets_.remove_if([](shared_ptr<PlayerGunBullet> b) {
 		if (b->GetIsDeadFlag()) {
 			b.reset();
@@ -33,6 +32,17 @@ void PlayerGun::Update()
 	{
 		b->Update();
 	}
+
+	bulletRate_ += 1.0f;
+
+	prevStateno_ = currentStateNo_;
+	currentStateNo_ = states_[currentStateNo_]->GetstateNo();
+	if (prevStateno_ != currentStateNo_)
+	{
+		states_[currentStateNo_]->Initialize();
+	}
+
+	states_[currentStateNo_]->Update(this);
 
 	worldTransform_.UpdateMatrix();
 }
@@ -54,18 +64,45 @@ void PlayerGun::Draw(const CameraData& camera)
 void PlayerGun::ImGuiUpdate()
 {
 	ImGui::Begin("test");
-	//ImGui::DragFloat3("velo", &Nvelocity.x);
+	ImGui::Text("Bulletcount %d", bulletCount_);
 	ImGui::End();
 }
 
 void PlayerGun::Attack()
 {
-	Math::Vector::Vector3 prSubtruct = Math::Vector::Subtruct(reticlePos, worldTransform_.GetWorldPosition());
-	Math::Vector::Vector3 Nvelocity = Math::Vector::Normalize(prSubtruct);
+	if (bulletCount_ < bulletCountMax_)
+	{
+		if (bulletRate_ >= bulletRateMax_)
+		{
+			const Math::Vector::Vector2 randomSize = { -1.0f,1.0f };
+			Math::Vector::Vector3 randomPos = {
+				RandomGenerator::GetInstance()->GetFloat(randomSize.x, randomSize.y),
+				RandomGenerator::GetInstance()->GetFloat(randomSize.x, randomSize.y),
+				0.0f
+			};
+			reticlePos = Math::Vector::Add(reticlePos, randomPos);
 
-	shared_ptr<PlayerGunBullet>b = make_shared<PlayerGunBullet>();
-	b->Initalize(worldTransform_.GetWorldPosition(),Nvelocity);
+			Math::Vector::Vector3 prSubtruct = Math::Vector::Subtruct(reticlePos, worldTransform_.GetWorldPosition());
+			Math::Vector::Vector3 Nvelocity = Math::Vector::Normalize(prSubtruct);
+			const float speed = 0.5f;
+			Math::Vector::Vector3 velocity = Math::Vector::Multiply(Nvelocity, speed);
 
-	bullets_.push_back(b);
+			shared_ptr<PlayerGunBullet>b = make_shared<PlayerGunBullet>();
+			b->Initalize(worldTransform_.GetWorldPosition(), velocity);
 
+			bullets_.push_back(b);
+			bulletCount_++;
+			bulletRate_ = 0.0f;
+		}
+	}
+}
+
+void PlayerGun::StateInitialize()
+{
+	states_[STAND] = make_unique<PlayerGunStandState>();
+	states_[ATTACK] = make_unique<PlayerGunAttackState>();
+	states_[RELOAD] = make_unique<PlayerGunReloadState>();
+
+	currentStateNo_ = STAND;
+	states_[currentStateNo_]->Initialize();
 };

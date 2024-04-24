@@ -324,6 +324,11 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -553,6 +558,11 @@
     <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h" />
+    <ClInclude Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

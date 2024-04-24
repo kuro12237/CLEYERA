@@ -2,6 +2,7 @@
 #include"GameObject/Player/Commands/IPlayerCommand.h"
 #include"Input.h"
 #include"GameObject/Player/Commands/PlayerJampCommand.h"
+#include"GameObject/Player/Commands/PlayerGunAttackCommand.h"
 
 class PlayerInputHandler
 {
