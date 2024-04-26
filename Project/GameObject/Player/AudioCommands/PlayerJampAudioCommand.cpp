@@ -2,4 +2,5 @@
 
 void PlayerJampAudioCommand::Exec(Player& player)
 {
+	player;
 }

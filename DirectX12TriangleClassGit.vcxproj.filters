@@ -70,9 +70,6 @@
     <Filter Include="CLEYERA\DebugTools\DebugGrid">
       <UniqueIdentifier>{910d38c5-eed0-437d-b10d-55ce3a3c775d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CLEYERA\Utility\GameObject">
-      <UniqueIdentifier>{8e3763ee-ab75-4802-b3ed-6bf968714386}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Model\Sphere">
       <UniqueIdentifier>{0f0d6265-9cf3-40ad-acfb-38de0182afa2}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,9 @@
     </Filter>
     <Filter Include="Shader\PostEffect">
       <UniqueIdentifier>{b34fba0f-9839-4f13-80cc-20f3ac55bd98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Animation">
+      <UniqueIdentifier>{369c9399-2d61-48c1-ac34-ea3c22c09445}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -303,7 +303,6 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
-    <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
@@ -331,6 +330,10 @@
     <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp" />
     <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp" />
     <ClCompile Include="Project\GameObject\Player\AudioHandler\AudioHandler.cpp" />
+    <ClCompile Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.cpp" />
+    <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp">
+      <Filter>CLEYERA\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -530,7 +533,6 @@
     <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
     <ClInclude Include="CLEYERA\Animation\SAnimation.h" />
-    <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
     <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
@@ -567,7 +569,11 @@
     <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h" />
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
     <ClInclude Include="Project\GameObject\Player\AudioHandler\AudioHandler.h" />
-    <ClInclude Include="Project\GameObject\Player\AudioHandler\IPlayerAudioCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\AudioCommands\IPlayerAudioCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.h" />
+    <ClInclude Include="CLEYERA\Animation\AnimationManager.h">
+      <Filter>CLEYERA\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -624,8 +630,6 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl" />
-    <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl" />
@@ -635,6 +639,12 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mdd.lib" />

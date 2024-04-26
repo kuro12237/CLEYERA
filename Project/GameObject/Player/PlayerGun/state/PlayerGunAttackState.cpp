@@ -12,7 +12,7 @@ void PlayerGunAttackState::Update(PlayerGun* gun)
 	bulletRate_++;
 	if (bulletRate_ >= bulletRateMax_)
 	{
-		const Math::Vector::Vector2 randomSize = { -1.0f,1.0f };
+		const Math::Vector::Vector2 randomSize = { -0.5f,0.5f };
 		Math::Vector::Vector3 randomPos = {
 			RandomGenerator::GetInstance()->GetFloat(randomSize.x, randomSize.y),
 			RandomGenerator::GetInstance()->GetFloat(randomSize.x, randomSize.y),

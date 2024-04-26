@@ -43,4 +43,6 @@ private:
 
 	Math::Vector::Vector2 joyPosition_{};
 
+	Math::Vector::Vector3 vecPos_ = {};
+
 };
