@@ -18,7 +18,6 @@ public:
 
 private:
 
-	unique_ptr<PlayerJampCommand>pressA_ = nullptr;
 	std::queue<unique_ptr<IPlayerCommand>>commands_{};
 
 };

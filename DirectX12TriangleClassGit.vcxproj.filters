@@ -330,6 +330,7 @@
     <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp" />
     <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp" />
+    <ClCompile Include="Project\GameObject\Player\AudioHandler\AudioHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -565,6 +566,8 @@
     <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h" />
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
+    <ClInclude Include="Project\GameObject\Player\AudioHandler\AudioHandler.h" />
+    <ClInclude Include="Project\GameObject\Player\AudioHandler\IPlayerAudioCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
