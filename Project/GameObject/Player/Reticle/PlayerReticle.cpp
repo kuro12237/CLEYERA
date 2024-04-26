@@ -25,7 +25,7 @@ void PlayerReticle::Update()
 		Rjoy.y = {};
 	}
 
-	const float speed = 0.05f;
+	const float speed = 0.1f;
 	joyPosition_.x = Rjoy.x * speed;
 	joyPosition_.y = Rjoy.y * speed;
 

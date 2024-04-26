@@ -38,6 +38,8 @@ public:
 
 	void Jamp();
 
+	void GunAttack();
+
 #pragma endregion
 
 #pragma region Get
