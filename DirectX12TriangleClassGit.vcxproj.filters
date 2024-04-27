@@ -139,6 +139,42 @@
     <Filter Include="Project\GameObject\Player">
       <UniqueIdentifier>{a80660f2-3fea-41f8-92fc-55442960f271}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Utility">
+      <UniqueIdentifier>{2df31ff6-7e31-46dd-b85b-0a148da18c19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Sun">
+      <UniqueIdentifier>{ff6c3ada-0d10-4bc1-a23f-436509fd401c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Utility\GameCollider">
+      <UniqueIdentifier>{4effafe8-ec4e-4616-acdc-dca0fe45207a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Utility\Gravity">
+      <UniqueIdentifier>{7c7a48a0-a292-4e0a-a8e0-244f69efe3cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Utility\Deltatimer">
+      <UniqueIdentifier>{f105f24d-7bbc-444d-9549-68c082336067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Trrain">
+      <UniqueIdentifier>{1b42e7e8-9a5d-4e41-96a1-1298b4786308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\block">
+      <UniqueIdentifier>{d7b2e6d2-9fce-44fd-a59d-0043a0ada381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Item">
+      <UniqueIdentifier>{4e9dd323-9912-4811-a468-382069c8c945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\SkyDome">
+      <UniqueIdentifier>{c19a959a-60d1-42be-a083-d38e9018a127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\GlobalVariables">
+      <UniqueIdentifier>{7c330eb0-0845-45a2-af73-6bb823a9a659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Utility\RandomGenetor">
+      <UniqueIdentifier>{00e9cb2a-42d6-4773-b3ab-ac0e1da2e694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\BufferResource">
+      <UniqueIdentifier>{8ec2c8d0-3091-448c-b950-a31b124c497c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -291,24 +327,6 @@
     <ClCompile Include="CLEYERA\Light\DirectionLIght.cpp">
       <Filter>CLEYERA\Light</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\TestScene.cpp" />
-    <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp" />
-    <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
-    <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
-    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
-    <ClCompile Include="Project\Scene\GameScene.cpp" />
-    <ClCompile Include="Project\GameObject\Sun\Sun.cpp" />
-    <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp" />
-    <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp" />
-    <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp" />
-    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlock.cpp" />
-    <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
-    <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
-    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
-    <ClCompile Include="Project\GameObject\Item\Item.cpp" />
-    <ClCompile Include="Project\GameObject\Item\ItemManager.cpp" />
-    <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp">
       <Filter>CLEYERA\Animation</Filter>
     </ClCompile>
@@ -366,8 +384,62 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp">
       <Filter>Project\GameObject\Player</Filter>
     </ClCompile>
+    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp">
+      <Filter>CLEYERA\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp">
+      <Filter>Project\Utility\GameCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp">
+      <Filter>Project\Utility\Deltatimer</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp">
+      <Filter>Project\Utility\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp">
+      <Filter>Project\Utility\Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Sun\Sun.cpp">
+      <Filter>Project\GameObject\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp">
+      <Filter>Project\GameObject\Trrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlock.cpp">
+      <Filter>Project\GameObject\block</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp">
+      <Filter>Project\GameObject\block</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\TestScene.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Item\Item.cpp">
+      <Filter>Project\GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Item\ItemManager.cpp">
+      <Filter>Project\GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\GameScene.cpp">
+      <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp">
+      <Filter>CLEYERA\MulitiPass</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp">
+      <Filter>Project\GameObject\SkyDome</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp">
+      <Filter>CLEYERA\Utility\GlobalVariables</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp">
+      <Filter>CLEYERA\Utility\RandomGenetor</Filter>
+    </ClCompile>
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
-      <Filter>CLEYERA</Filter>
+      <Filter>CLEYERA\Graphics\BufferResource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -551,34 +623,6 @@
     <ClInclude Include="Project\Scene\TestScene.h">
       <Filter>Project\Scene\Game</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h" />
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h" />
-    <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h" />
-    <ClInclude Include="CLEYERA\Animation\SAnimation.h" />
-    <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
-    <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
-    <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
-    <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h" />
-    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h" />
-    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h" />
-    <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
-    <ClInclude Include="Project\Scene\GameScene.h" />
-    <ClInclude Include="Project\GameObject\Sun\Sun.h" />
-    <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
-    <ClInclude Include="Project\Utility\GameCollisionManager\GameColliderConfig.h" />
-    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollisionManager.h" />
-    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollider\BoxCollider.h" />
-    <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h" />
-    <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h" />
-    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlock.h" />
-    <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />
-    <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
-    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
-    <ClInclude Include="Project\GameObject\Item\Item.h" />
-    <ClInclude Include="Project\GameObject\Item\ItemManager.h" />
-    <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h">
       <Filter>CLEYERA\Animation</Filter>
     </ClInclude>
@@ -645,11 +689,95 @@
     <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h">
       <Filter>Project\GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\CreateResource\BufferResources.h">
-      <Filter>CLEYERA</Filter>
+    <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameColliderConfig.h">
+      <Filter>Project\Utility\GameCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollisionManager.h">
+      <Filter>Project\Utility\GameCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollider\BoxCollider.h">
+      <Filter>Project\Utility\GameCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h">
+      <Filter>Project\Utility\Deltatimer</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h">
+      <Filter>Project\Utility\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h">
+      <Filter>CLEYERA\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h">
+      <Filter>Project\Utility\Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Utility\NumberString\NumberString.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Sun\Sun.h">
+      <Filter>Project\GameObject\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Terrain\Terrain.h">
+      <Filter>Project\GameObject\Trrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlock.h">
+      <Filter>Project\GameObject\block</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h">
+      <Filter>Project\GameObject\block</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Item\Item.h">
+      <Filter>Project\GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Item\ItemManager.h">
+      <Filter>Project\GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\GameScene.h">
+      <Filter>Project\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h">
+      <Filter>CLEYERA\MulitiPass</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h">
+      <Filter>CLEYERA\MulitiPass</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h">
+      <Filter>Project\GameObject\SkyDome</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h">
+      <Filter>CLEYERA\Utility\GlobalVariables</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h">
+      <Filter>CLEYERA\Utility\RandomGenetor</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\CreateResource\CreateResource.h">
-      <Filter>CLEYERA</Filter>
+      <Filter>CLEYERA\Graphics\BufferResource</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\CreateResource\BufferResources.h">
+      <Filter>CLEYERA\Graphics\BufferResource</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Transform\STransformQua.h">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Transform\STransformEular.h">
+      <Filter>CLEYERA\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Animation\SAnimation.h">
+      <Filter>CLEYERA\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -707,7 +835,6 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
@@ -736,6 +863,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
