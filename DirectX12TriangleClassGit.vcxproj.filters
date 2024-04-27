@@ -40,23 +40,14 @@
     <Filter Include="CLEYERA\Model">
       <UniqueIdentifier>{34952989-3102-48d1-a740-9c6ad56ab3ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CLEYERA\Model\Plane">
-      <UniqueIdentifier>{a25d7723-6a3e-4057-a4b6-6baa02c6eef8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Transform">
       <UniqueIdentifier>{3a8bfbae-0acc-40fc-ba35-5e6fa5bb1c93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CLEYERA\Model\CreateResource">
-      <UniqueIdentifier>{508999da-fe71-4022-a8ab-7e84d14adaf9}</UniqueIdentifier>
     </Filter>
     <Filter Include="CLEYERA\math">
       <UniqueIdentifier>{df1d8822-d2f8-42f4-b43e-f0b3d1ed1520}</UniqueIdentifier>
     </Filter>
     <Filter Include="CLEYERA\math\Matrix">
       <UniqueIdentifier>{692e5c6d-0514-47b2-8bce-9c008250ca03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CLEYERA\Model\DrawLine">
-      <UniqueIdentifier>{f85b1b84-693e-4840-a15b-a2820c64e40c}</UniqueIdentifier>
     </Filter>
     <Filter Include="CLEYERA\Graphics\TextureManager">
       <UniqueIdentifier>{597ae9e2-f16c-45fb-9f5d-7940671c8212}</UniqueIdentifier>
@@ -69,9 +60,6 @@
     </Filter>
     <Filter Include="CLEYERA\DebugTools\DebugGrid">
       <UniqueIdentifier>{910d38c5-eed0-437d-b10d-55ce3a3c775d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CLEYERA\Model\Sphere">
-      <UniqueIdentifier>{0f0d6265-9cf3-40ad-acfb-38de0182afa2}</UniqueIdentifier>
     </Filter>
     <Filter Include="CLEYERA\Model\ObjState">
       <UniqueIdentifier>{7ad064f9-c521-4fd5-a423-17a94a8c7364}</UniqueIdentifier>
@@ -145,6 +133,12 @@
     <Filter Include="CLEYERA\Animation">
       <UniqueIdentifier>{369c9399-2d61-48c1-ac34-ea3c22c09445}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject">
+      <UniqueIdentifier>{905ceaaa-5921-4a26-80c4-d2ea01e4f6ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player">
+      <UniqueIdentifier>{a80660f2-3fea-41f8-92fc-55442960f271}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -171,10 +165,15 @@
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli">
       <Filter>Shader\PostEffect</Filter>
     </None>
-    <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
-    <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
-    <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli" />
-    <None Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mtd.pdb" />
+    <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -215,9 +214,6 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp">
       <Filter>CLEYERA\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
-      <Filter>CLEYERA\Model\CreateResource</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp">
       <Filter>CLEYERA\Sprite\state</Filter>
@@ -298,18 +294,10 @@
     <ClCompile Include="Project\Scene\TestScene.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
-    <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
-    <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Player.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp" />
-    <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp" />
     <ClCompile Include="Project\GameObject\Sun\Sun.cpp" />
     <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp" />
     <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp" />
@@ -320,19 +308,66 @@
     <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
     <ClCompile Include="Project\GameObject\Item\Item.cpp" />
     <ClCompile Include="Project\GameObject\Item\ItemManager.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp" />
     <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp" />
-    <ClCompile Include="Project\GameObject\Player\AudioHandler\AudioHandler.cpp" />
-    <ClCompile Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp">
       <Filter>CLEYERA\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\AudioHandler\AudioHandler.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp">
+      <Filter>CLEYERA\MulitiPass</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp">
+      <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Player.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
+      <Filter>CLEYERA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -392,9 +427,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Sprite\Sprite.h">
       <Filter>CLEYERA\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\CreateResource\CreateResource.h">
-      <Filter>CLEYERA\Model\CreateResource</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h">
       <Filter>CLEYERA\Sprite\state</Filter>
@@ -501,9 +533,6 @@
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h">
       <Filter>CLEYERA\MulitiPass</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\CreateResource\BufferResources.h">
-      <Filter>CLEYERA\Model\CreateResource</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h">
       <Filter>CLEYERA\Graphics\Descripters</Filter>
     </ClInclude>
@@ -524,14 +553,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h" />
-    <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />
     <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
-    <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h" />
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h" />
-    <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
     <ClInclude Include="CLEYERA\Animation\SAnimation.h" />
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
@@ -541,11 +565,6 @@
     <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
     <ClInclude Include="Project\Scene\GameScene.h" />
-    <ClInclude Include="Project\GameObject\Player\Player.h" />
-    <ClInclude Include="Project\GameObject\Player\Commands\IPlayerCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h" />
-    <ClInclude Include="Project\GameObject\Player\Camera\PlayerCamera.h" />
     <ClInclude Include="Project\GameObject\Sun\Sun.h" />
     <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
     <ClInclude Include="Project\Utility\GameCollisionManager\GameColliderConfig.h" />
@@ -559,20 +578,78 @@
     <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
     <ClInclude Include="Project\GameObject\Item\Item.h" />
     <ClInclude Include="Project\GameObject\Item\ItemManager.h" />
-    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h" />
-    <ClInclude Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h" />
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
-    <ClInclude Include="Project\GameObject\Player\AudioHandler\AudioHandler.h" />
-    <ClInclude Include="Project\GameObject\Player\AudioCommands\IPlayerAudioCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.h" />
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h">
       <Filter>CLEYERA\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\AudioHandler\AudioHandler.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\AudioCommands\IPlayerAudioCommand.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Commands\IPlayerCommand.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h">
+      <Filter>CLEYERA\Utility\ImGuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h">
+      <Filter>CLEYERA\MulitiPass</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h">
+      <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Player.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Camera\PlayerCamera.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\CreateResource\BufferResources.h">
+      <Filter>CLEYERA</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\CreateResource\CreateResource.h">
+      <Filter>CLEYERA</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -630,26 +707,36 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl" />
-    <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl" />
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl" />
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl" />
-    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl" />
-    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl" />
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl" />
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mdd.lib" />
-    <Library Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mtd.lib" />
-    <Library Include="CLEYERA\externals\assimp\lib\Release\assimp-vc143-md.lib" />
-    <Library Include="CLEYERA\externals\assimp\lib\Release\assimp-vc143-mt.lib" />
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

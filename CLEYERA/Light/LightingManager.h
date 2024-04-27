@@ -3,7 +3,6 @@
 #include"Graphics/DescripterManager/DescriptorManager.h"
 #define LIGHT_MAX 50
 
-
 struct LightCount
 {
 	int32_t count;

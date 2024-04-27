@@ -28,7 +28,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig" />
-    <None Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mtd.pdb" />
     <None Include="Resources\Shader\LightingObject3d.hlsli" />
     <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
@@ -131,8 +130,8 @@
     <ClInclude Include="CLEYERA\base\DX\DirectXCommon.h" />
     <ClInclude Include="CLEYERA\Base\Win\WinApp.h" />
     <ClInclude Include="CLEYERA\Cleyera.h" />
-    <ClInclude Include="CLEYERA\CreateResource\CreateResource.h" />
     <ClInclude Include="CLEYERA\CreateResource\BufferResources.h" />
+    <ClInclude Include="CLEYERA\CreateResource\CreateResource.h" />
     <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.h" />
@@ -526,16 +525,6 @@
     <ProjectReference Include="CLEYERA\externals\pngTex\pngTex.vcxproj">
       <Project>{4fba56dc-7eb7-4624-a36d-7b80966713bc}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mdd.lib" />
-    <Library Include="CLEYERA\externals\assimp\lib\Debug\assimp-vc143-mtd.lib" />
-    <Library Include="CLEYERA\externals\assimp\lib\Release\assimp-vc143-md.lib">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
-    </Library>
-    <Library Include="CLEYERA\externals\assimp\lib\Release\assimp-vc143-mt.lib" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

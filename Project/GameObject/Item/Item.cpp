@@ -9,7 +9,7 @@ void Item::Initialize()
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);
 
-	animationHandle_ = AnimationManager::GetInstance()->LoadAnimation("Monster");
+	animationHandle_ = AnimationManager::GetInstance()->LoadAnimation("testItem");
 
 	worldTransform_.Initialize();
 	worldTransform_.translate.y = 1.25f;
@@ -25,7 +25,7 @@ void Item::Update()
 
 void Item::Animation()
 {
-	SAnimation::Animation data = AnimationManager::GetInstance()->GetData("Monster");
+	SAnimation::Animation data = AnimationManager::GetInstance()->GetData("testItem");
 	animationTimer_ += 1.0f / 60.0f;
 	animationTimer_ = std::fmod(animationTimer_, data.duration);
 
