@@ -175,6 +175,27 @@
     <Filter Include="CLEYERA\Graphics\BufferResource">
       <UniqueIdentifier>{8ec2c8d0-3091-448c-b950-a31b124c497c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerAudioHandler">
+      <UniqueIdentifier>{979548b9-f698-44f9-a4ef-dea93fa21bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerGun">
+      <UniqueIdentifier>{6bf36003-277e-41e2-8905-6705815e79b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\Camera">
+      <UniqueIdentifier>{e75e4e93-f90e-4de9-80a8-fe5470a255bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerGun\state">
+      <UniqueIdentifier>{20dbadd9-1c05-4041-aafc-e7d1a82cbce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerInputHandler">
+      <UniqueIdentifier>{28c6cabe-2e20-4451-9927-e3ce79af1948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerInputHandler\command">
+      <UniqueIdentifier>{5d8cf1a6-9971-40b7-85cd-247e5fdf6a49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Player\Reticle">
+      <UniqueIdentifier>{67cd6af7-db50-454e-aa00-b27b15b2f613}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -330,12 +351,6 @@
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp">
       <Filter>CLEYERA\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\AudioHandler\AudioHandler.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp">
       <Filter>CLEYERA\MulitiPass</Filter>
     </ClCompile>
@@ -349,39 +364,6 @@
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClCompile>
     <ClCompile Include="Project\GameObject\Player\Player.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp">
       <Filter>Project\GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp">
@@ -440,6 +422,45 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
       <Filter>CLEYERA\Graphics\BufferResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\AudioHandler\AudioHandler.cpp">
+      <Filter>Project\GameObject\Player\PlayerAudioHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp">
+      <Filter>Project\GameObject\Player\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp">
+      <Filter>Project\GameObject\Player\PlayerGun</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.cpp">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.cpp">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.cpp">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.cpp">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp">
+      <Filter>Project\GameObject\Player\PlayerInputHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.cpp">
+      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp">
+      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp">
+      <Filter>Project\GameObject\Player\Reticle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -626,18 +647,6 @@
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h">
       <Filter>CLEYERA\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\AudioHandler\AudioHandler.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\AudioCommands\IPlayerAudioCommand.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Commands\IPlayerCommand.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h">
       <Filter>CLEYERA\Utility\ImGuiManager</Filter>
     </ClInclude>
@@ -654,39 +663,6 @@
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClInclude>
     <ClInclude Include="Project\GameObject\Player\Player.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Camera\PlayerCamera.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h">
       <Filter>Project\GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h">
@@ -778,6 +754,51 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Animation\SAnimation.h">
       <Filter>CLEYERA\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\AudioHandler\AudioHandler.h">
+      <Filter>Project\GameObject\Player\PlayerAudioHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\AudioCommands\IPlayerAudioCommand.h">
+      <Filter>Project\GameObject\Player\PlayerAudioHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Commands\IPlayerCommand.h">
+      <Filter>Project\GameObject\Player\PlayerInputHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Camera\PlayerCamera.h">
+      <Filter>Project\GameObject\Player\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h">
+      <Filter>Project\GameObject\Player\PlayerGun</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.h">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.h">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.h">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h">
+      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h">
+      <Filter>Project\GameObject\Player\PlayerInputHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.h">
+      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h">
+      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h">
+      <Filter>Project\GameObject\Player\Reticle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
