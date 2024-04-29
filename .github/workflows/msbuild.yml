@@ -28,8 +28,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install Server-Media-Foundation
+      shell: powershell
+      run: |
+        Install-WindowsFeature Server-Media-Foundation
+
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.3.1
 
+    - name: Vcpkg
+      run: |
+        vcpkg install tesseract:${{matrix.arch}}-windows-static
+        vcpkg integrate install
+    
     - run: |
         msbuild -version
