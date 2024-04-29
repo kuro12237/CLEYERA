@@ -9,14 +9,11 @@ public:
 
 	static WinApp *GetInstance();
 
-	static void Initialize();
-
-	static bool WinMsg();
-
-	static void Finalize();
-
-	static void SetTiTleName(LPCWSTR  name) { SetWindowText(WinApp::GetInstance()->hwnd_, name); }
-	static void ImGuiUpdate();
+	void Initialize();
+	bool WinMsg();
+	void Finalize();
+	void SetTiTleName(LPCWSTR  name) { SetWindowText(WinApp::GetInstance()->hwnd_, name); }
+	void ImGuiUpdate();
 
 #pragma region get
 	static HWND GetHwnd() { return WinApp::GetInstance()->hwnd_; }

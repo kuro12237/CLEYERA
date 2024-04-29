@@ -9,19 +9,19 @@ WinApp *WinApp::GetInstance()
 
 void WinApp::Initialize()
 {
-	WinApp::GetInstance()->wc_.lpfnWndProc = WinApp::WindowProc;
-	WinApp::GetInstance()->wc_.lpszClassName = L"CLEYERA";
-	WinApp::GetInstance()->wc_.hInstance = GetModuleHandle(nullptr);
-	WinApp::GetInstance()->wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	RegisterClass(&WinApp::GetInstance()->wc_);
+	wc_.lpfnWndProc = WinApp::WindowProc;
+	wc_.lpszClassName = L"CLEYERA";
+	wc_.hInstance = GetModuleHandle(nullptr);
+	wc_.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	RegisterClass(&wc_);
 
 	RECT wrc = { 0,0,
 	WinApp::GetInstance()->kWindowWidth,
 	WinApp::GetInstance()->kWindowHeight };
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 	
-	WinApp::GetInstance()->hwnd_=CreateWindow(
-		WinApp::GetInstance()->wc_.lpszClassName,
+	hwnd_=CreateWindow(
+		wc_.lpszClassName,
 		L"CLEYERA",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
@@ -30,27 +30,27 @@ void WinApp::Initialize()
 		wrc.bottom - wrc.top,
 		nullptr,
 		nullptr,
-		WinApp::GetInstance()->wc_.hInstance,
+		wc_.hInstance,
 		nullptr
 	);
 	HFONT hFont = CreateFont(24, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
 		CLIP_DEFAULT_PRECIS, CLEARTYPE_NATURAL_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Arial");
-	SendMessage(WinApp::GetInstance()->hwnd_, WM_SETFONT, (WPARAM)hFont, TRUE);
+	SendMessage(hwnd_, WM_SETFONT, (WPARAM)hFont, TRUE);
 
 	// ウィンドウタイトルの変更
-	ShowWindow(WinApp::GetInstance()->hwnd_, SW_SHOW);
+	ShowWindow(hwnd_, SW_SHOW);
 
 	timeBeginPeriod(1);
 }
 
 bool WinApp::WinMsg()
 {
-	if (PeekMessage(&WinApp::GetInstance()->msg, NULL, 0, 0, PM_REMOVE)) {
-		TranslateMessage(&WinApp::GetInstance()->msg);
-		DispatchMessage(&WinApp::GetInstance()->msg);
+	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 	}
 
-	if (WinApp::GetInstance()->msg.message != WM_QUIT) {
+	if (msg.message != WM_QUIT) {
 		return true;
 	}
 
@@ -59,7 +59,7 @@ bool WinApp::WinMsg()
 
 void WinApp::Finalize()
 {
-	CloseWindow(WinApp::GetInstance()->hwnd_);
+	CloseWindow(hwnd_);
 }
 
 void WinApp::ImGuiUpdate()

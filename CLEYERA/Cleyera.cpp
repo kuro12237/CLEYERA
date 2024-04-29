@@ -10,7 +10,7 @@ void Cleyera::Initialize()
 {
 	Cleyera::GetInstance();
 
-	WinApp::Initialize();
+	WinApp::GetInstance()->Initialize();
 	DirectXCommon::initialize();
 	DescriptorManager::Initialize();
 	RTVDescriptorManager::Initialize();
@@ -35,7 +35,7 @@ void Cleyera::Finalize()
 	DescriptorManager::Clear();
 	ImGuiManager::Finalize();
 	DirectXCommon::Finalize();
-	WinApp::Finalize();
+	WinApp::GetInstance()->Finalize();
 }
 
 void Cleyera::BeginFlame()
