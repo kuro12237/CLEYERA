@@ -7,7 +7,7 @@
 #define SRV_DESCRIPTOR_MAX 6400
 #define DSV_DESCRIPTOR_MAX 32
 
-struct D3DResourceLeakChecker{
+struct D3DResourceLeakChecker {
 	//~D3DResourceLeakChecker() {
 	//	ComPtr<IDXGIDebug1>debug;
 	//	if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(&debug))))
@@ -26,36 +26,35 @@ struct Commands {
 	D3D12_COMMAND_QUEUE_DESC QueueDesc{};
 };
 
-struct SwapChain{
+struct SwapChain {
 	ComPtr<IDXGISwapChain4> m_pSwapChain;
 	ComPtr<ID3D12Resource> m_pResource[2];
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
 };
-struct  RTV{
+struct  RTV {
 	ComPtr<ID3D12DescriptorHeap> m_pDescritorHeap;
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 };
 
-class DirectXCommon{
+class DirectXCommon {
 public:
-	
+
 
 	static DirectXCommon* GetInstance();
 
-	static void initialize();
-	static void Finalize();
-
-	static void PreDraw();
-	static void PostDraw();
-	static void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
-	static void ImGuiUpdate();
+	void initialize();
+	void Finalize();
+	void PreDraw();
+	void PostDraw();
+	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
+	void ImGuiUpdate();
 
 #pragma region get
 	Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
-	ID3D12Device *GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_.Get(); }
-	ID3D12DescriptorHeap*GetSrvHeap() { return DirectXCommon::GetInstance()->m_pSrvDescriptorHeap.Get();}
+	ID3D12Device* GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_.Get(); }
+	ID3D12DescriptorHeap* GetSrvHeap() { return DirectXCommon::GetInstance()->m_pSrvDescriptorHeap.Get(); }
 	ID3D12DescriptorHeap* GetDsvHeap() { return DirectXCommon::GetInstance()->m_pDsvDescripterHeap.Get(); }
 	SwapChain GetswapChain() { return DirectXCommon::GetInstance()->swapChain; }
 	RTV GetRtv() { return DirectXCommon::GetInstance()->rtv; }
@@ -64,32 +63,32 @@ public:
 
 
 private:
-	static D3D12_VIEWPORT viewportSetting(int32_t kClientWidth, int32_t kClientHeight);
-	static D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
-	static ComPtr<ID3D12DescriptorHeap> CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
-	static ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
-	
-	static void CreateDebugLayer();
-	static void CreateInforQueue();
+	D3D12_VIEWPORT viewportSetting(int32_t kClientWidth, int32_t kClientHeight);
+	D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
+	ComPtr<ID3D12DescriptorHeap> CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
+	ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
 
-	static void CreateFactory();
-	static void CreateDevice();
-	static void CreateCommands();
-	static void CreateSwapChain();
-	static void CreateDescritorHeap();
-	static void CreateSwapChainResource();
-	static void CreateRTV();
-	static void CreateFence();
-
-	static void CreateFixFPS();
-	static void UpdateFixFPS();
+	void CreateDebugLayer();
+	void CreateInforQueue();
+	void CreateFactory();
+	void CreateDevice();
+	void CreateCommands();
+	void CreateSwapChain();
+	void CreateDescritorHeap();
+	void CreateSwapChainResource();
+	void CreateRTV();
+	void CreateFence();
+	void CreateFixFPS();
+	void UpdateFixFPS();
 
 	//DXGI+ID3D12�͊�{Comptr�ɕς���
 
-    ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
+	ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 	ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;
 	ComPtr<ID3D12Device>m_pDevice_ = nullptr;
 	ComPtr<ID3D12Debug1> m_pDebugController = nullptr;
+	ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
+
 	Commands commands = {};
 	SwapChain swapChain = {};
 	RTV rtv = {};
@@ -104,7 +103,7 @@ private:
 	chrono::steady_clock::time_point reference_ = {};
 
 	float fps = 0.0f;
-//Singleton
+	//Singleton
 	DirectXCommon() = default;
 	~DirectXCommon() = default;
 	DirectXCommon(const  DirectXCommon&) = delete;
