@@ -26,7 +26,7 @@ void GameManager::Run()
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.02f, 0.02f, 0.02f, 1.0f));
 		ImGui::Begin("DebugTreeNode");
 		WinApp::GetInstance()->ImGuiUpdate();
-		DirectXCommon::ImGuiUpdate();
+		DirectXCommon::GetInstance()->ImGuiUpdate();
 
 		if (ImGui::TreeNode("Descriptor"))
 		{
@@ -53,14 +53,14 @@ void GameManager::Run()
 
 		Scene_->PostProcessDraw();
 
-		DirectXCommon::PreDraw();
+		DirectXCommon::GetInstance()->PreDraw();
 
 		Scene_->Back2dSpriteDraw();
 		Scene_->Object3dDraw();
 		Scene_->Flont2dSpriteDraw();
 
 		Cleyera::EndFlame();
-		DirectXCommon::PostDraw();
+		DirectXCommon::GetInstance()->PostDraw();
 	}
 }
 

@@ -11,7 +11,7 @@ void Cleyera::Initialize()
 	Cleyera::GetInstance();
 
 	WinApp::GetInstance()->Initialize();
-	DirectXCommon::initialize();
+	DirectXCommon::GetInstance()->initialize();
 	DescriptorManager::Initialize();
 	RTVDescriptorManager::Initialize();
 	ShaderManager::Initialize();
@@ -34,7 +34,7 @@ void Cleyera::Finalize()
 	TextureManager::Finalize();
 	DescriptorManager::Clear();
 	ImGuiManager::Finalize();
-	DirectXCommon::Finalize();
+	DirectXCommon::GetInstance()->Finalize();
 	WinApp::GetInstance()->Finalize();
 }
 
