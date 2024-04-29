@@ -30,13 +30,13 @@ jobs:
         matrix:
           configuration: [Debug, Release]
 
-    steps:
-    - uses: actions/checkout@v4
+      steps:
+      - uses: actions/checkout@v4
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.3.1
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.3.1
 
-    - name: Build
+      - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
