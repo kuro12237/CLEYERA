@@ -168,7 +168,6 @@ void PostEffect::PreDraw()
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	commands.m_pList->ResourceBarrier(1, &barrier);
-	commands.m_pList->OMSetRenderTargets(2, &rtvHandle, false, &dsvHandle);
 	commands.m_pList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 
 	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()),static_cast<float>(WinApp::GetkCilientHeight()));
