@@ -168,20 +168,19 @@ void PostEffect::PreDraw()
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	commands.m_pList->ResourceBarrier(1, &barrier);
+	commands.m_pList->OMSetRenderTargets(2, &rtvHandle, false, &dsvHandle);
 	commands.m_pList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 
 	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()),static_cast<float>(WinApp::GetkCilientHeight()));
 	CommandCallScissor();
 
-	commands.m_pList->ClearRenderTargetView(RTVDescriptorManager::GetHandle(rtvIndex_), clearColor, 0, nullptr);
-	commands.m_pList->ClearDepthStencilView(DSVDescriptorManager::GetHandle(dsvIndex_), D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+	commands.m_pList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	commands.m_pList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 }
 
 void PostEffect::PostDraw()
 {
-
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier{};
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;

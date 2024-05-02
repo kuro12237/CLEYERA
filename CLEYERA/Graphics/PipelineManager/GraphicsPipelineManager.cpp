@@ -2397,12 +2397,19 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	inputLayoutDesc.pInputElementDescs = nullptr;
 	inputLayoutDesc.NumElements = 0;
 
+	const int numRenderTargets = 2;
+	D3D12_RT_FORMAT_ARRAY rtvFormats = {};
+	rtvFormats.NumRenderTargets = numRenderTargets;
+	rtvFormats.RTFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM; // AOutputのフォーマット
+	rtvFormats.RTFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM; // BOutputのフォーマット
+
 	//BlendState�̐ݒ��s��
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
 	SettingBlendState(blenddesc, BlendNone);
 
-	//RasterrizerState
+
+	//RasterrizerStat
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 	SettingRasterizer(
 		rasterizerDesc,
@@ -2430,9 +2437,11 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
-	//��������RTV�̏��
-	graphicsPipelineStateDesc.NumRenderTargets = 1;
+
+	//RTVの設定
+	graphicsPipelineStateDesc.NumRenderTargets = 2;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
 	//���p����g�|���W(�`��)�̃^�C�v�B�O�p�`
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
