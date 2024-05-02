@@ -2392,45 +2392,27 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	//rootSignature�̍쐬
 	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
-	//InputLayout�̐ݒ�
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
-	//position
-	SettingInputElementDesc(
-		inputElementDescs[0],
-		"POSITION",
-		0,
-		DXGI_FORMAT_R32G32B32A32_FLOAT,
-		D3D12_APPEND_ALIGNED_ELEMENT
-	);
-	//texcoord
-	SettingInputElementDesc(
-		inputElementDescs[1],
-		"TEXCOORD",
-		0,
-		DXGI_FORMAT_R32G32_FLOAT,
-		D3D12_APPEND_ALIGNED_ELEMENT
-	);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	inputLayoutDesc.pInputElementDescs = inputElementDescs;
-	inputLayoutDesc.NumElements = _countof(inputElementDescs);
+	inputLayoutDesc.pInputElementDescs = nullptr;
+	inputLayoutDesc.NumElements = 0;
 
 	//BlendState�̐ݒ��s��
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
 	SettingBlendState(blenddesc, BlendNone);
 
-	//RasterrizerState�ڐݒ�
+	//RasterrizerState
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 	SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID);
 
-	//�[�x�̐ݒ�
+	//depth
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
 	SettingDepth(despthStencilDesc,
-		true,
+		false,
 	    D3D12_DEPTH_WRITE_MASK_ALL,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
 	);

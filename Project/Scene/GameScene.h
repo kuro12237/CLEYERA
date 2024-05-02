@@ -76,6 +76,8 @@ private:
 	unique_ptr<CollisionManager>collsionManager_ = nullptr;
 
 #pragma endregion
+
+	float grayFactor_ = 0.0f;
 };
 
 

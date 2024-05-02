@@ -79,6 +79,9 @@ void GameScene::Update(GameManager* Scene)
 	cameraData_ = playerCamera_->GetData();
 	cameraData_.TransfarMatrix();
 
+	ImGui::SliderFloat("f", &grayFactor_,0.0f,1.0f);
+	postEffect_->SetSelectPostEffect(GRAYSCALE,true);
+	postEffect_->SetGrayFactor(grayFactor_);
 	postEffect_->Update();
 }
 

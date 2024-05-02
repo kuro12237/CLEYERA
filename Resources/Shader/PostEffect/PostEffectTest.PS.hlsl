@@ -37,9 +37,6 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t4 resultColor = textureColor;
     float32_t dsp = pow(gShadowTexture.Sample(gSampler, transformedUV.xy), 20);
 
-   // resultColor = float32_t4(dsp, dsp, dsp, 1);
-      // エンボス処理を適用
-   
     //平均ぼかし
     if (gPostEffectBlurParam.UseFlag)
     {
@@ -78,7 +75,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     //彩度
     if (gPostEffectAdjustedColorParam_.grayScaleFlag)
     {
-        float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.299f, 0.587f, 0.114f));
+        float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));
         float32_t3 grayscaleColor = lerp(resultColor.rgb, float32_t3(grayscaleFactor, grayscaleFactor, grayscaleFactor), gPostEffectAdjustedColorParam_.GrayFactor);
         resultColor.rgb = grayscaleColor;
     }//反転
@@ -96,17 +93,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     {
         resultColor.rgb = (resultColor.rgb - 0.5f) * 1- gPostEffectAdjustedColorParam_.ContrastFactor + 0.5f;
     }
-    
-    //if (gDirectionParam.useFlag)
-    {
-       // float32_t3 shadowColor = directionLightingShadowMap(input);
-       // float32_t4 shadowColor4 = float32_t4(shadowColor, shadowColor, shadowColor, 1.0f);
-        //resultColor.rgb = shadowColor;
-    
-    }
-    //resultColor.rgb = float3(dsp,dsp,dsp);
-
-    //resultColor = textureColor;
+ 
     output.color = float32_t4(resultColor.rgb,1.0f);
 
     return output;
