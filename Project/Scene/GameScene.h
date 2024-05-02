@@ -77,7 +77,6 @@ private:
 
 #pragma endregion
 
-	float grayFactor_ = 0.0f;
 };
 
 
