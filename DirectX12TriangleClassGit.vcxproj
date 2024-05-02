@@ -522,9 +522,6 @@
     <ProjectReference Include="CLEYERA\externals\imgui\imgui.vcxproj">
       <Project>{719a8f6d-df9d-4bcd-9334-864931730380}</Project>
     </ProjectReference>
-    <ProjectReference Include="CLEYERA\externals\pngTex\pngTex.vcxproj">
-      <Project>{4fba56dc-7eb7-4624-a36d-7b80966713bc}</Project>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
