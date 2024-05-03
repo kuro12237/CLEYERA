@@ -27,6 +27,7 @@ Skinned Skinning(VertexShaderInput input)
     skinned.pos += mul(input.position, gMatrixPallate[input.index.w].skeltonSpaceMatrix) * input.weight.w;
     skinned.pos.w = 1.0f;
     
+    //float32_t4x4 inver =
     skinned.normal = mul(input.normal, (float32_t3x3) gMatrixPallate[input.index.x].skeltonSpaceInverseTransposeMatrix) * input.weight.x;
     skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPallate[input.index.y].skeltonSpaceInverseTransposeMatrix) * input.weight.y;
     skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPallate[input.index.z].skeltonSpaceInverseTransposeMatrix) * input.weight.z;
@@ -36,16 +37,16 @@ Skinned Skinning(VertexShaderInput input)
     return skinned;
 }
 
-VertexShaderOutput main(VertexShaderInput input)
+VertexShaderOutput main(VertexShaderInput input,uint32_t vertexId : SV_VertexID)
 {
     VertexShaderOutput output;
-
+    input.index = vertexId;
     Skinned skinned = Skinning(input);
     float32_t4x4 CameraMatrix = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
 	//view変換
     float32_t4x4 worldMat = mul(gTransformationMatrix.WVP, CameraMatrix);
 
-    output.position = mul(input.position, worldMat); //mul(skinned.pos, worldMat);
+    output.position = mul(skinned.pos, worldMat);
     output.worldPosition = mul(skinned.pos, worldMat).xyz;
     output.texcoord = input.texcoord;
     output.normal = input.normal; //normalize(mul(skinned.normal,(float32_t3x3)gTransformationMatrix.Wor))

@@ -106,18 +106,18 @@ void CGScene::Update(GameManager* Scene)
 
 	animationTimer_ += 1.0f / 60.0f;
 
-	//SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
-	//SkinCluster skinCluster = ModelManager::GetObjData(normalMonkeyHandle_).skinCluster;
-	//SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("Walk");
+	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
+	SkinCluster skinCluster = ModelManager::GetObjData(normalMonkeyHandle_).skinCluster;
+	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("Walk");
 
-	////AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
-	////ModelManager::SkeletonUpdate(skeleton);
+	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
+	ModelManager::SkeletonUpdate(skeleton);
 
-	////ModelManager::SkinClusterUpdate(skinCluster, skeleton);
+	ModelManager::SkinClusterUpdate(skinCluster, skeleton);
 
-	////ModelManager::SetModel(normalMonkeyHandle_, skinCluster,skeleton);
+	ModelManager::SetModel(normalMonkeyHandle_, skinCluster,skeleton);
 
-	//ImGui::Text("%f", skeleton.joints[0].transform.scale.x);
+	ImGui::Text("%f", skeleton.joints[0].transform.scale.x);
 
 	if (Input::PushKeyPressed(DIK_N))
 	{

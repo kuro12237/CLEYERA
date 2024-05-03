@@ -317,16 +317,17 @@ void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, const SAnimation:
 {
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
-		WellForGPU* mappedPalette = nullptr;
-		skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-		skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
+		skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedPalette));
+		skinCluster.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedInfluence));
+
+		skinCluster.mappedInfluence[jointIndex].weights;
 
 		assert(jointIndex < skinCluster.inverseBindMatrices.size());
-		mappedPalette[jointIndex].skeletonSpaceMatrix =
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
 			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
-		mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
 			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
-		mappedPalette;
+		skinCluster;
 	}
 }
 
@@ -421,7 +422,7 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton, const SModelData& modelData)
 {
 	SkinCluster skinCluster{};
-
+	modelData;
 	//作成
 	skinCluster.paletteResource = CreateResources::CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
 	WellForGPU* mappedPalette = nullptr;
@@ -466,13 +467,12 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 
 		for (const auto& vertexWeight : jointWeight.second.vertexWeights)
 		{
-			auto& currentInfence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
 			for(uint32_t index = 0; index < 4; ++index)
 			{
-				if (currentInfence.weights[index] == 0.0f)
+				if (skinCluster.mappedInfluence[vertexWeight.vertexIndex].weights[index] == 0.0f)
 				{
-					currentInfence.weights[index] = vertexWeight.weight;
-					currentInfence.jointIndicess[index] = (*it).second;
+					skinCluster.mappedInfluence[vertexWeight.vertexIndex].weights[index] = vertexWeight.weight;
+					skinCluster.mappedInfluence[vertexWeight.vertexIndex].jointIndicess[index] = (*it).second;
 					break;
 				}
 			}
