@@ -31,6 +31,7 @@ struct SShaders
 	SShaderMode NormalModel;
 	SShaderMode PosModel;
 	SShaderMode ColorPostProcess;
+	SShaderMode skinningVS;
 };
 
 class ShaderManager
@@ -79,6 +80,8 @@ private:
 
 	static void PostEffectTest();
 	static void ShadowMap();
+
+	static void SkinningVS();
 
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};

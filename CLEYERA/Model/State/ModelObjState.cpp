@@ -35,7 +35,21 @@ void ModelObjState::Draw(Model* state, const CameraData& viewprojection, uint32_
 	index_->Setbuffer(state->GetModelData().indecs);
 	index_->UnMap();
 
-	vertex_->CommandVertexBufferViewCall();
+	if (state->GetModelData().fileFormat == "OBJ")
+	{
+		vertex_->CommandVertexBufferViewCall();
+	}
+	if (state->GetModelData().fileFormat == "GLTF")
+	{
+		D3D12_VERTEX_BUFFER_VIEW vbvs[2]{
+			vertex_->GetBufferView(),
+			state->GetModelData().skinCluster.influenceBufferView
+		};
+		commands.m_pList->IASetVertexBuffers(0, 2, vbvs);
+		uint32_t srvHandle = state->GetModelData().skinCluster.srvIndex;
+		DescriptorManager::rootParamerterCommand(7, srvHandle);
+		srvHandle;
+	}
 
 	index_->CommandIndexBufferViewCall();
 	vertex_->CommandPrimitiveTopologyCall();

@@ -37,6 +37,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 
 		uint32_t modelHandle = ModelManager::GetInstance()->objHandle_;
 		SModelData modelData = {};
+		modelData.fileFormat = "OBJ";
 
 		Assimp::Importer importer;
 		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".obj");
@@ -78,7 +79,10 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 					modelData.indecs.push_back(vertexIndex);
 				}
 			}
+
+	
 		}
+		modelData;
 		//materialの解析
 		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; materialIndex++)
 		{
@@ -134,7 +138,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 
 		uint32_t modelHandle = ModelManager::GetInstance()->objHandle_;
 		SModelData modelData = {};
-
+		modelData.fileFormat = "GLTF";
 		Assimp::Importer importer;
 		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -202,10 +206,11 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 					jointWeightData.vertexWeights.push_back({bone->mWeights[weightIndex].mWeight,bone->mWeights[weightIndex].mVertexId});
 
 				}
+				modelData.skinClusterData[jointName] = jointWeightData;
 			}
 
 		}
-
+		modelData;
 		//materialの解析
 		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; materialIndex++)
 		{
@@ -222,7 +227,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
 		SkeletonUpdate(modelData.node.skeleton);
-		CreateSkinCluster(modelData.node.skeleton, modelData);
+		modelData.skinCluster = CreateSkinCluster(modelData.node.skeleton, modelData);
 
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
@@ -306,6 +311,36 @@ void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 		}
 	}
 
+}
+
+void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, const SAnimation::Skeleton& skeleton)
+{
+	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
+	{
+		WellForGPU* mappedPalette = nullptr;
+		skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
+		skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
+
+		assert(jointIndex < skinCluster.inverseBindMatrices.size());
+		mappedPalette[jointIndex].skeletonSpaceMatrix =
+			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
+		mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
+			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
+		mappedPalette;
+	}
+}
+
+void ModelManager::SetModel(uint32_t modelHandle, SkinCluster skinCluster, SAnimation::Skeleton skeleton)
+{
+	for (const auto& [key, s] : ModelManager::GetInstance()->objModelDatas_)
+	{
+		if (s.get()->GetIndex() == modelHandle)
+		{
+			ModelManager::GetInstance()->objModelDatas_[key]->SetSkelton(skeleton);
+			ModelManager::GetInstance()->objModelDatas_[key]->SetSkinCluser(skinCluster);
+	
+		}
+	}
 }
 
 bool ModelManager::ChackLoadObj(string filePath)
@@ -392,7 +427,7 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 	WellForGPU* mappedPalette = nullptr;
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
 	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
-
+	
 	//設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
 	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
@@ -404,7 +439,7 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 	srvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
 
 	//Despcripter
-	skinCluster.srvindex = DescriptorManager::CreateSRV(skinCluster.influenceResource, srvDesc);
+	skinCluster.srvIndex = DescriptorManager::CreateSRV(skinCluster.paletteResource, srvDesc);
 
 	skinCluster.influenceResource = CreateResources::CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());
 	VertexInfluence* mappedInfuence = nullptr;

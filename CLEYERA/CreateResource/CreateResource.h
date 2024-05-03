@@ -24,7 +24,7 @@ struct SkinCluster
 	std::span<VertexInfluence>mappedInfluence;
 	ComPtr<ID3D12Resource>paletteResource;
 	std::span<WellForGPU>mappedPalette;
-	uint32_t srvindex;
+	uint32_t srvIndex;
 };
 struct  VertexData
 {
@@ -91,6 +91,7 @@ struct JointWeightData
 struct  SModelData
 {
 	std::map<std::string, JointWeightData>skinClusterData;
+	SkinCluster skinCluster;
 	vector<VertexData> vertices;
 	std::vector<uint32_t>indecs;
 	MaterialData material;
@@ -101,6 +102,7 @@ struct  SModelData
 	uint32_t normalTexHandle;
 	string basefilePath;
 	uint32_t baseTexHandle;
+	string fileFormat;
 };
 
 struct PostEffectParam

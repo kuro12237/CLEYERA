@@ -40,6 +40,10 @@ public:
 
 	static void SkeletonUpdate(SAnimation::Skeleton& skeleton);
 
+	static void SkinClusterUpdate(SkinCluster& skinCluster, const SAnimation::Skeleton& skeleton);
+
+	static void SetModel(uint32_t modelHandle, SkinCluster skinCluster, SAnimation::Skeleton skeleton);
+
 private:
 
 	static bool ChackLoadObj(string filePath);

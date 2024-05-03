@@ -1347,7 +1347,7 @@ SPSOProperty GraphicsPipelineManager::CreatePBR(ComPtr<ID3D12Device> device, Com
 
 
 	//Output
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[4] = {};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[6] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
 	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -1367,6 +1367,18 @@ SPSOProperty GraphicsPipelineManager::CreatePBR(ComPtr<ID3D12Device> device, Com
 	inputElementDescs[3].SemanticIndex = 0;
 	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	
+	inputElementDescs[4].SemanticName = "WEIGHT";
+	inputElementDescs[4].SemanticIndex = 0;
+	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputElementDescs[4].InputSlot = 1;
+	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	inputElementDescs[5].SemanticName = "INDEX";
+	inputElementDescs[5].SemanticIndex = 0;
+	inputElementDescs[5].Format = DXGI_FORMAT_R32G32B32A32_SINT;
+	inputElementDescs[5].InputSlot = 1;
+	inputElementDescs[5].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
 	//MORMAL�ŋN�����o�OFormat�̌^��ԈႦ�Ă���
 	//Vector3�̏ꍇ=DXGI_FORMAT_R32G32B32_FLOAT
@@ -1441,7 +1453,8 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	D3D12_ROOT_PARAMETER rootParameters[7] = {};
+	
+	D3D12_ROOT_PARAMETER rootParameters[8] = {};
 	//Material
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
@@ -1492,6 +1505,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
 
+
 	//Sampler�̐ݒ�
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
@@ -1507,9 +1521,22 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
 
-
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
+
+	//skinningPallate
+	D3D12_DESCRIPTOR_RANGE descriptorRangeSkinningPallate[1] = {};
+	descriptorRangeSkinningPallate[0].BaseShaderRegister = 7;
+	descriptorRangeSkinningPallate[0].NumDescriptors = 1;
+	descriptorRangeSkinningPallate[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeSkinningPallate[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[7].DescriptorTable.pDescriptorRanges = descriptorRangeSkinningPallate;
+	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeSkinningPallate);
+
+	descriptionRootSignature;
 
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &DirectionalLightPSO.signatureBlob, &DirectionalLightPSO.errorBlob);
@@ -1524,8 +1551,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	assert(SUCCEEDED(hr));
 
 
-	//Output
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[4] = {};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[6] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
 	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -1546,6 +1572,18 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
+	inputElementDescs[4].SemanticName = "WEIGHT";
+	inputElementDescs[4].SemanticIndex = 0;
+	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputElementDescs[4].InputSlot = 1;
+	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	inputElementDescs[5].SemanticName = "INDEX";
+	inputElementDescs[5].SemanticIndex = 0;
+	inputElementDescs[5].Format = DXGI_FORMAT_R32G32B32A32_SINT;
+	inputElementDescs[5].InputSlot = 1;
+	inputElementDescs[5].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
 	//MORMAL�ŋN�����o�OFormat�̌^��ԈႦ�Ă���
 	//Vector3�̏ꍇ=DXGI_FORMAT_R32G32B32_FLOAT
 	//Vector2�̏ꍇ=DXGI_FORMAT_R32G32_FLOAT
@@ -1554,20 +1592,12 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
-
-	//BlendState�̐ݒ��s��
 	D3D12_BLEND_DESC blendDesc{};
-	//���ׂĂ̐F�v�f���������
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
 
-
-	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-
-	//���ʁi���v���j��\�����Ȃ�
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
-	//�O�p�`�̒���h��Ԃ�
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
@@ -1578,9 +1608,13 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
+
 	graphicsPipelineStateDesc.pRootSignature = DirectionalLightPSO.rootSignature.Get(); //RootSignature
+	//graphicsPipelineStateDesc.pRootSignature[1] = *DirectionalLightPSO.skinningRootSignature.Get(); //RootSignature
+
+
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; //InputLayout
-	graphicsPipelineStateDesc.VS = { shader.vertexBlob->GetBufferPointer(),
+	graphicsPipelineStateDesc.VS = {shader.vertexBlob->GetBufferPointer(),
 	shader.vertexBlob->GetBufferSize() }; //VertexShader
 	graphicsPipelineStateDesc.PS = { shader.pixelBlob->GetBufferPointer(),
 	shader.pixelBlob->GetBufferSize() }; //PixeShader
@@ -1715,7 +1749,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhongNormalModel(ComPtr<ID3D12Device
 
 
 	//Output
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[4] = {};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[6] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
 	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -1735,6 +1769,17 @@ SPSOProperty GraphicsPipelineManager::CreatePhongNormalModel(ComPtr<ID3D12Device
 	inputElementDescs[3].SemanticIndex = 0;
 	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	inputElementDescs[4].SemanticName = "WEIGHT";
+	inputElementDescs[4].SemanticIndex = 0;
+	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputElementDescs[4].InputSlot = 1;
+	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	inputElementDescs[5].SemanticName = "INDEX";
+	inputElementDescs[5].SemanticIndex = 0;
+	inputElementDescs[5].Format = DXGI_FORMAT_R32G32B32A32_SINT;
+	inputElementDescs[5].InputSlot = 1;
+	inputElementDescs[5].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
 	//MORMAL�ŋN�����o�OFormat�̌^��ԈႦ�Ă���
 	//Vector3�̏ꍇ=DXGI_FORMAT_R32G32B32_FLOAT
@@ -1916,7 +1961,7 @@ SPSOProperty GraphicsPipelineManager::CreateSubsurfaceModel(ComPtr<ID3D12Device>
 
 
 	//Output
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[4] = {};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[6] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
 	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -1936,6 +1981,18 @@ SPSOProperty GraphicsPipelineManager::CreateSubsurfaceModel(ComPtr<ID3D12Device>
 	inputElementDescs[3].SemanticIndex = 0;
 	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	inputElementDescs[4].SemanticName = "WEIGHT";
+	inputElementDescs[4].SemanticIndex = 0;
+	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputElementDescs[4].InputSlot = 1;
+	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	inputElementDescs[5].SemanticName = "INDEX";
+	inputElementDescs[5].SemanticIndex = 0;
+	inputElementDescs[5].Format = DXGI_FORMAT_R32G32B32A32_SINT;
+	inputElementDescs[5].InputSlot = 1;
+	inputElementDescs[5].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
 	//MORMAL�ŋN�����o�OFormat�̌^��ԈႦ�Ă���
 	//Vector3�̏ꍇ=DXGI_FORMAT_R32G32B32_FLOAT

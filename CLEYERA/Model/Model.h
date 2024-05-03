@@ -82,6 +82,9 @@ public:
 	//Light GetLight() { return testLight_; }
 #pragma endregion 
 
+	void SetSkelton(SAnimation::Skeleton s) { modelData_.node.skeleton = s; }
+	void SetSkinCluser(SkinCluster s) { modelData_.skinCluster = s; }
+
 private:
 
 	const Game3dObjectDesc* desc_ = nullptr;

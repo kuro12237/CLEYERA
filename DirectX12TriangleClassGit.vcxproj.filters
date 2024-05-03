@@ -889,5 +889,8 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shader\SkinningObject3d.VS.hlsl">
+      <Filter>Shader\Lighting</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

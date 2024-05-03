@@ -24,7 +24,7 @@ public:
 	 void Setbuffer(vector<T>t, uint32_t num);
 
 	 void CommandCall(UINT number);
-	 void CommandVertexBufferViewCall();
+	 void CommandVertexBufferViewCall(uint32_t view =1);
 	 void CommandIndexBufferViewCall();
 	 void CommandPrimitiveTopologyCall();
 
@@ -62,6 +62,8 @@ public:
 	 uint32_t GetSrvIndex() { return srvIndex_; }
 	 uint32_t GetRtvIndex() { return rtvIndex_; }
 	 uint32_t GetDsvIndex() { return dsvIndex_; }
+
+	 D3D12_VERTEX_BUFFER_VIEW GetBufferView() { return vertexBufferView_; }
 
 #pragma endregion
 
@@ -207,10 +209,10 @@ inline void BufferResource<T>::CommandCall(UINT number)
 }
 
 template<typename T>
-inline void BufferResource<T>::CommandVertexBufferViewCall()
+inline void BufferResource<T>::CommandVertexBufferViewCall(uint32_t view)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	commands.m_pList->IASetVertexBuffers(0, 1, &vertexBufferView_);
+	commands.m_pList->IASetVertexBuffers(0, view, &vertexBufferView_);
 }
 
 template<typename T>

@@ -31,6 +31,8 @@ namespace Math
 		/// </summary>
 		Matrix4x4 Inverse(Matrix4x4 m);
 
+		Matrix4x4 TransposeMatrix(const Matrix4x4& matrix);
+
 		/// <summary>
 		/// 射影行列
 		/// </summary>

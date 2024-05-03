@@ -16,8 +16,7 @@ void CGScene::Initialize()
 	gameObject_->Create();
 
 	normalMonkeyHandle_ = ModelManager::LoadGltfFile("Walk");
-
-	AnimationManager::GetInstance()->LoadAnimation("SimpleSkin");
+	AnimationManager::GetInstance()->LoadAnimation("Walk");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
@@ -33,7 +32,7 @@ void CGScene::Initialize()
 	testLight.radious = 4.0f;
 	testLight.color = { 1,0,0,1 };
 
-	gameObject_->SetlectModelPipeline(UE4_BRDF);
+	gameObject_->SetlectModelPipeline(PHONG_MODEL);
 
 	ModelManager::ModelLoadNormalMap();
 	uint32_t modelHandle = ModelManager::LoadObjectFile("TestGround");
@@ -81,9 +80,6 @@ void CGScene::Update(GameManager* Scene)
 	}
 
 
-	gameObject_->SetlectModelPipeline(modelPipline_);
-
-
 	light_.UpdateMatrix();
 	LightingManager::AddList(light_);
 	
@@ -109,11 +105,20 @@ void CGScene::Update(GameManager* Scene)
 	viewProjection_ = debugCamera_->GetData(viewProjection_);
 
 	animationTimer_ += 1.0f / 60.0f;
-	//TestAnimation();
-	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
-	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("SimpleSkin");
-	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
-	ModelManager::SkeletonUpdate(skeleton);
+
+	//SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
+	//SkinCluster skinCluster = ModelManager::GetObjData(normalMonkeyHandle_).skinCluster;
+	//SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("Walk");
+
+	////AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
+	////ModelManager::SkeletonUpdate(skeleton);
+
+	////ModelManager::SkinClusterUpdate(skinCluster, skeleton);
+
+	////ModelManager::SetModel(normalMonkeyHandle_, skinCluster,skeleton);
+
+	//ImGui::Text("%f", skeleton.joints[0].transform.scale.x);
+
 	if (Input::PushKeyPressed(DIK_N))
 	{
 		Scene->ChangeState(new TestScene);

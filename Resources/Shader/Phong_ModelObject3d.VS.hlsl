@@ -1,15 +1,8 @@
 #include"LightingObject3d.hlsli"
 
-
 ConstantBuffer<TransformationMatrix > gTransformationMatrix  : register(b0);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
 
-struct VertexShaderInput {
-	float32_t4 position : POSITION0;
-	float32_t2 texcoord : TEXCOORD0;
-	float32_t3 normal : NORMAL0;
-	float32_t3 worldPosition : WORLDPOSITION0;
-};
 
 VertexShaderOutput main(VertexShaderInput input) {
 	VertexShaderOutput output;

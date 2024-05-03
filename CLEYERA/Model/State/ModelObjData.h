@@ -21,6 +21,8 @@ public:
 
 	uint32_t GetIndex() { return index_; }
 
+	void SetSkelton(SAnimation::Skeleton s) { modelData_.node.skeleton = s; }
+	void SetSkinCluser(SkinCluster s) { modelData_.skinCluster = s; }
 
 private:
 

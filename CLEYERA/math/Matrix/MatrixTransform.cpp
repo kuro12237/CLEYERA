@@ -140,6 +140,17 @@ Matrix4x4 Math::Matrix::Inverse(Matrix4x4 m)
 	return result;
 }
 
+Matrix4x4 Math::Matrix::TransposeMatrix(const Matrix4x4& matrix)
+{
+	Matrix4x4 transposedMatrix;
+	for (size_t row = 0; row < 4; row++) {
+		for (size_t col = 0; col < 4; col++) {
+			transposedMatrix.m[col][row] = matrix.m[row][col];
+		}
+	}
+	return transposedMatrix;
+}
+
 Matrix4x4 Math::Matrix::ViewportMatrix(float left, float top, float width, float height, float minDepth, float maxDepth)
 {
 	Matrix4x4 result = {};
