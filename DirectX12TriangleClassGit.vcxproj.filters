@@ -462,6 +462,9 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp">
       <Filter>Project\GameObject\Player\Reticle</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Scene\AnimationScene.cpp">
+      <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -799,6 +802,9 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h">
       <Filter>Project\GameObject\Player\Reticle</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\AnimationScene.h">
+      <Filter>Project\Scene\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

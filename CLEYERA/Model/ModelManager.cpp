@@ -229,6 +229,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		SkeletonUpdate(modelData.node.skeleton);
 		modelData.skinCluster = CreateSkinCluster(modelData.node.skeleton, modelData);
 
+
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
 		modelData.material.handle = texHandle;
@@ -396,6 +397,7 @@ SAnimation::Skeleton ModelManager::CreateSkeleton(const NodeData& rootNode)
 	{
 		skeleton.jointMap.emplace(joint.name, joint.index);
 	}
+	SkeletonUpdate(skeleton);
 	return skeleton;
 }
 
@@ -409,7 +411,6 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 	joint.index = int32_t(joints.size());
 	joint.parent = parent;
 	joints.push_back(joint);
-
 	for (const NodeData& child : node.children)
 	{
 		int32_t  childIndex = CreateJoint(child, joint.index, joints);

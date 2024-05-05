@@ -23,8 +23,8 @@ uint32_t AnimationManager::LoadAnimation(const string& fileName)
 void AnimationManager::ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation::Animation& animation, float time)
 {
     for (SAnimation::Joint& joint : skeleton.joints) {
-        if (auto it=animation.NodeAnimation.find(joint.name); it!=animation.NodeAnimation.end())
-        {
+        if (auto it = animation.NodeAnimation.find(joint.name); it != animation.NodeAnimation.end())
+        { 
             const SAnimation::NodeAnimation& rootNodeAnimation = (*it).second;
             joint.transform.translate = CalculateValue(rootNodeAnimation.translate.keyframes, time);
 

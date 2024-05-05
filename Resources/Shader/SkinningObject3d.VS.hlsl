@@ -46,7 +46,7 @@ VertexShaderOutput main(VertexShaderInput input,uint32_t vertexId : SV_VertexID)
 	//view変換
     float32_t4x4 worldMat = mul(gTransformationMatrix.WVP, CameraMatrix);
 
-    output.position = mul(skinned.pos, worldMat);
+    output.position = mul(input.position, worldMat);
     output.worldPosition = mul(skinned.pos, worldMat).xyz;
     output.texcoord = input.texcoord;
     output.normal = input.normal; //normalize(mul(skinned.normal,(float32_t3x3)gTransformationMatrix.Wor))

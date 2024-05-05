@@ -6,7 +6,7 @@
 
 #include"CGScene.h"
 #include"GameScene.h"
-
+#include"AnimationScene.h"
 class GameManager
 {
 public:

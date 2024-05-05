@@ -114,6 +114,7 @@
     <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
     <ClCompile Include="Project\GameObject\WoodBlock\WoodBlock.cpp" />
     <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp" />
+    <ClCompile Include="Project\Scene\AnimationScene.cpp" />
     <ClCompile Include="Project\Scene\CGScene.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="Project\Scene\TestScene.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />
     <ClInclude Include="Project\GameObject\WoodBlock\WoodBlock.h" />
     <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h" />
+    <ClInclude Include="Project\Scene\AnimationScene.h" />
     <ClInclude Include="Project\Scene\CGScene.h" />
     <ClInclude Include="Project\Scene\GameScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />

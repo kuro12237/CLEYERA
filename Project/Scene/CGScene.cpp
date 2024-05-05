@@ -15,8 +15,8 @@ void CGScene::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 
-	normalMonkeyHandle_ = ModelManager::LoadGltfFile("Walk");
-	AnimationManager::GetInstance()->LoadAnimation("Walk");
+	normalMonkeyHandle_ = ModelManager::LoadGltfFile("simpleSkin");
+	AnimationManager::GetInstance()->LoadAnimation("simpleSkin");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);
@@ -108,14 +108,14 @@ void CGScene::Update(GameManager* Scene)
 
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
 	SkinCluster skinCluster = ModelManager::GetObjData(normalMonkeyHandle_).skinCluster;
-	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("Walk");
+	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("simpleSkin");
 
-	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
-	ModelManager::SkeletonUpdate(skeleton);
+	//AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
+	//ModelManager::SkeletonUpdate(skeleton);
 
-	ModelManager::SkinClusterUpdate(skinCluster, skeleton);
+	//ModelManager::SkinClusterUpdate(skinCluster, skeleton);
 
-	ModelManager::SetModel(normalMonkeyHandle_, skinCluster,skeleton);
+	//ModelManager::SetModel(normalMonkeyHandle_, skinCluster,skeleton);
 
 	ImGui::Text("%f", skeleton.joints[0].transform.scale.x);
 
