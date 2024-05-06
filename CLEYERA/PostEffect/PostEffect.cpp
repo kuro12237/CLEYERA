@@ -11,9 +11,9 @@ void PostEffect::Initialize(const string& name)
 	if (PostEffectManager::GetInstance()->CheckData(name))
 	{
 		CreateTexBuffer(texBuffer_,srvIndex_);
-		CreateTexBuffer(texBuffer_, colorSrvIndex_);
+		CreateTexBuffer(colorBuffer_, colorSrvIndex_);
 		CreateRTV(texBuffer_,rtvIndex_);
-		CreateRTV(texBuffer_, colorRtvIndex_);
+		CreateRTV(colorBuffer_, colorRtvIndex_);
 		CreateDSV();
 		SPostEffectData p;
 		p.name = name;
