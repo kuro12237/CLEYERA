@@ -30,10 +30,14 @@ float32_t3 ComputeSubsurfaceScattering(float32_t3 diffuseColor, float32_t3 norma
 
     return sssColor;
 }
+struct PixelShaderOutputTest
+{
+    float32_t4 color : SV_TARGET0;
+    float32_t4 grayColor : SV_TARGET1;
+};
+PixelShaderOutputTest main(VertexShaderOutput input) {
 
-PixelShaderOutput main(VertexShaderOutput input) {
-
-	PixelShaderOutput output;
+	PixelShaderOutputTest output;
 
 	float32_t4 textureColor = gTexture.Sample(gSampler, input.texcoord);
 	float32_t3 toEye = normalize(gTransformationViewMatrix.CameraPosition - input.worldPosition);
@@ -65,8 +69,8 @@ PixelShaderOutput main(VertexShaderOutput input) {
 		pTotalSpecular = pTotalSpecular + pSpecular;
 	}
 
-    output.color.rgb = pTotalDffuse+pTotalSpecular;
+    output.color.rgb = pTotalDffuse + pTotalSpecular;
 	output.color.a = gMaterial.color.a * textureColor.a;
-
+    output.grayColor = float32_t4(1, 0, 0, 0);
 	return output;
 }

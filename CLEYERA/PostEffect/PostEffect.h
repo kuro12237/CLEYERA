@@ -34,10 +34,6 @@ public:
 	void PreDraw();
 	void PostDraw();
 
-	void ShadowMapPreDraw();
-
-	void ShadowMapPostDraw();
-
 #pragma region Set
 
 	void SetPosition(Math::Vector::Vector2 pos) { pos_ = pos; }

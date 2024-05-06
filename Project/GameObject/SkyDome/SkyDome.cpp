@@ -8,7 +8,7 @@ void SkyDome::Initialize()
 	gameObject_->SetModel(modelHandle_);
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);
-
+	gameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 	worldTransform_.Initialize();
 	worldTransform_.scale = { 128.0f,128.0f,128.0f };
 }

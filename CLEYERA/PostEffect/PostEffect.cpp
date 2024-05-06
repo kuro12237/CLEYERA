@@ -151,6 +151,8 @@ void PostEffect::Draw(const CameraData& view)
 	//view
 	view.buffer_->CommandCall(8);
 	view.buffer_->CommandCall(9);
+	DescriptorManager::rootParamerterCommand(10, colorSrvIndex_);
+
 	commands.m_pList->DrawInstanced(6, 1, 0, 0);
 }
 
@@ -163,73 +165,52 @@ void PostEffect::PreDraw()
 	// レンダーターゲットをセット
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = RTVDescriptorManager::GetHandle(rtvIndex_);
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(dsvIndex_);
-	D3D12_RESOURCE_BARRIER barrier{};
-	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier.Transition.pResource = texBuffer_.Get();
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	commands.m_pList->ResourceBarrier(1, &barrier);
-	commands.m_pList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle= RTVDescriptorManager::GetHandle(colorRtvIndex_);
 
+
+
+	D3D12_RESOURCE_BARRIER barrier[2]{};
+	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[0].Transition.pResource = texBuffer_.Get();
+	barrier[0].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier[0].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[1].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[1].Transition.pResource = colorBuffer_.Get();
+	barrier[1].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier[1].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	commands.m_pList->ResourceBarrier(2, barrier);
+
+	//commands.m_pList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[] = { rtvHandle,rtvColorHandle };
+	commands.m_pList->OMSetRenderTargets(2, rtvHandles, false, &dsvHandle);
 	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()));
 	CommandCallScissor();
 
 	commands.m_pList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	commands.m_pList->ClearRenderTargetView(rtvColorHandle, clearColor, 0, nullptr);
+
 	commands.m_pList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 }
 
 void PostEffect::PostDraw()
 {
-	D3D12_RESOURCE_BARRIER barrier{};
-	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	// 全てのサブリソースを選択
-	barrier.Transition.Subresource = 0xFFFFFFFF;
-	barrier.Transition.pResource = texBuffer_.Get();
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(1, &barrier);
-}
-
-void PostEffect::ShadowMapPreDraw()
-{
-	////shadowMapTest用
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvShadowHandle = DSVDescriptorManager::GetHandle(dsvShadowIndex_);
-
-	D3D12_RESOURCE_BARRIER barrier;
-	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	// 全てのサブリソースを選択
-	barrier.Transition.Subresource = 0xFFFFFFFF;
-	barrier.Transition.pResource = depthNormalBuffer_.Get();
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_GENERIC_READ;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
-	commands.m_pList->ResourceBarrier(1, &barrier);
-
-	commands.m_pList->OMSetRenderTargets(0, nullptr, false, &dsvShadowHandle);
-
-	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()));
-	CommandCallScissor();
-
-	commands.m_pList->ClearDepthStencilView(dsvShadowHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
-
-}
-
-void PostEffect::ShadowMapPostDraw()
-{
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	D3D12_RESOURCE_BARRIER barrier;
-	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	// 全てのサブリソースを選択
-	barrier.Transition.Subresource = 0xFFFFFFFF;
-	barrier.Transition.pResource = depthNormalBuffer_.Get();
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_DEPTH_WRITE;
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
-	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(1, &barrier);
+	D3D12_RESOURCE_BARRIER barrier[2]{};
+	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[0].Transition.Subresource = 0xFFFFFFFF;
+	barrier[0].Transition.pResource = texBuffer_.Get();
+	barrier[0].Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier[0].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[1].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[1].Transition.Subresource = 0xFFFFFFFF;
+	barrier[1].Transition.pResource = colorBuffer_.Get();
+	barrier[1].Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier[1].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(2, barrier);
 }
 
 void PostEffect::SetSelectPostEffect(SelectPostEffect s, bool flag)

@@ -10,8 +10,6 @@ void GraphicsPipelineManager::Initialize()
 {
 	SPSO pso{};
 
-
-
 	CreatePSO(pso);
 	//2d
 	Create2dSpritePSOs(pso);
@@ -1624,8 +1622,9 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
 
 	//��������RTV�̏��
-	graphicsPipelineStateDesc.NumRenderTargets = 1;
+	graphicsPipelineStateDesc.NumRenderTargets = 2;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
 	//���p����g�|���W(�`��)�̃^�C�v�B�O�p�`
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
@@ -2369,7 +2368,7 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	
-	D3D12_ROOT_PARAMETER rootParameters[10] = {};
+	D3D12_ROOT_PARAMETER rootParameters[11] = {};
 	
 	//matrix
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
@@ -2428,7 +2427,17 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	rootParameters[9].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[9].Descriptor.ShaderRegister = 7;
 
+	//shadow
+	D3D12_DESCRIPTOR_RANGE colorDescriptorRange[1] = {};
+	colorDescriptorRange[0].BaseShaderRegister = 3;
+	colorDescriptorRange[0].NumDescriptors = 1;
+	colorDescriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	colorDescriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
+	rootParameters[10].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[10].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[10].DescriptorTable.pDescriptorRanges = colorDescriptorRange;
+	rootParameters[10].DescriptorTable.NumDescriptorRanges = _countof(colorDescriptorRange);
 	//Sampler�̐ݒ�
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;

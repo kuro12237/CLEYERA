@@ -8,7 +8,7 @@ void Item::Initialize()
 	gameObject_->SetModel(modelHandle);
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);
-
+	gameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 	animationHandle_ = AnimationManager::GetInstance()->LoadAnimation("testItem");
 
 	worldTransform_.Initialize();
