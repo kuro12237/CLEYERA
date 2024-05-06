@@ -14,7 +14,7 @@ void Item::Initialize()
 	worldTransform_.Initialize();
 	worldTransform_.translate.y = 1.25f;
 
-
+	OBBCollider::SetID(kSlowMortionItem);
 }
 
 void Item::Update()

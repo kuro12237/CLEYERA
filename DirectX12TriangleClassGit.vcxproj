@@ -100,6 +100,7 @@
     <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp" />
     <ClCompile Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Hp\PlayerHp.cpp" />
     <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Project\GameObject\Player\Commands\IPlayerCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\Hp\PlayerHp.h" />
     <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h" />

@@ -12,22 +12,6 @@ ConstantBuffer<PostEffectAdjustedColor> gPostEffectAdjustedColorParam_ : registe
 ConstantBuffer<DirectionLightParam> gDirectionParam : register(b4);
 
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b7);
-float32_t3 directionLightingShadowMap(VertexShaderOutput input)
-{
-    float32_t4x4 LightVPV = mul(gDirectionParam.mat,gTransformationViewMatrix.projection);
-    float32_t4 shadowMapPos = mul(input.position, LightVPV);
-    shadowMapPos = (1.0f + shadowMapPos.x) / 2.0f;
-    shadowMapPos = (1.0f - shadowMapPos.y) / 2.0f;
-    float depth = gShadowTexture.Sample(gSampler, shadowMapPos.xy);
-   
-    float3 shadowFactor = 0.0f;
-    if (shadowMapPos.z - 0.00000075f < depth)
-    {
-        shadowFactor = 1.0f;
-    }
-
-    return shadowFactor;
-}
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
@@ -75,15 +59,13 @@ PixelShaderOutput main(VertexShaderOutput input)
     //    resultColor.rgb = float32_t3(dot(hueMatrix[0], resultColor.rgb), dot(hueMatrix[1], resultColor.rgb), dot(hueMatrix[2], resultColor.rgb));
     //}
     //彩度
-    if (grayParam.r == 1.0f)
     {
         float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));
-        float32_t3 grayscaleColor = lerp(resultColor.rgb, float32_t3(grayscaleFactor, grayscaleFactor, grayscaleFactor),grayParam.r);
+        float32_t3 grayscaleColor = lerp(resultColor.rgb, float32_t3(grayscaleFactor, grayscaleFactor, grayscaleFactor),gPostEffectAdjustedColorParam_.GrayFactor);
         resultColor.rgb = grayscaleColor;
     }
 
     output.color = float32_t4(resultColor.rgb,1.0f);
-    output.colorBoutput = float32_t4(1.0f, 0.0f, 0.0f, 1.0f);
-    
+  
     return output;
 }

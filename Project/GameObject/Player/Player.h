@@ -11,7 +11,7 @@
 
 #include"Reticle/PlayerReticle.h"
 #include"PlayerGun/PlayerGun.h"
-
+#include"Hp/PlayerHp.h"
 
 class Player:public IBoxCollider,public IGravity,public OBBCollider
 {
@@ -24,6 +24,8 @@ public:
 	void Update();
 
 	void Draw(const CameraData& camera);
+
+	void Draw2d(const CameraData& camera);
 
 	void ImGuiUpdate();
 
@@ -48,6 +50,8 @@ public:
 	Math::Vector::Vector3 GetWorldPosition()override;
 	Math::Vector::Vector3 GetSize()override;
 	Math::Vector::Vector3 GetRotate()override;
+
+	const uint32_t &GetHp() { return *hpCount_; }
 
 #pragma endregion
 
@@ -74,5 +78,9 @@ private:
 
 	unique_ptr<PlayerReticle>reticle_ = nullptr;
 	unique_ptr<PlayerGun>gun_ = nullptr;
+
+	unique_ptr<PlayerHp>hp_ = nullptr;
+	const uint32_t* hpCount_ = {};
+
 };
 

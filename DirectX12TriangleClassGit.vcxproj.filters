@@ -196,6 +196,9 @@
     <Filter Include="Project\GameObject\Player\Reticle">
       <UniqueIdentifier>{67cd6af7-db50-454e-aa00-b27b15b2f613}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Player\PlayerHp">
+      <UniqueIdentifier>{0638e986-b10d-48ff-adc6-d75df96db655}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -393,9 +396,6 @@
     <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp">
       <Filter>Project\GameObject\block</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\TestScene.cpp">
-      <Filter>Project\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Project\GameObject\Item\Item.cpp">
       <Filter>Project\GameObject\Item</Filter>
     </ClCompile>
@@ -463,6 +463,12 @@
       <Filter>Project\GameObject\Player\Reticle</Filter>
     </ClCompile>
     <ClCompile Include="Project\Scene\AnimationScene.cpp">
+      <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\Hp\PlayerHp.cpp">
+      <Filter>Project\GameObject\Player\PlayerHp</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\TestScene.cpp">
       <Filter>Project\Scene\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -805,6 +811,9 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\AnimationScene.h">
       <Filter>Project\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Hp\PlayerHp.h">
+      <Filter>Project\GameObject\Player\PlayerHp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

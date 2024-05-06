@@ -58,6 +58,15 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->Update();
 
+	if (player_->GetHp() == 2)
+	{
+		postEffect_->SetGrayFactor(0.5f);
+	}
+	if (player_->GetHp() == 1)
+	{
+		postEffect_->SetGrayFactor(1.0f);
+	}
+
 #pragma endregion
 
 	itemManager_->Update();
@@ -107,6 +116,7 @@ void GameScene::Object3dDraw()
 void GameScene::Flont2dSpriteDraw()
 {
 	postEffect_->Draw(cameraData_);
+	player_->Draw2d(cameraData_);
 }
 
 void GameScene::LoadSounds()

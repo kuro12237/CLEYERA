@@ -3,7 +3,7 @@
 #include"Animation/AnimationManager.h"
 #include"OBBCollider.h"
 #include"AudioManager.h"
-
+#include"Utility/ObjectId/GameObjectId.h"
 class Item : public OBBCollider
 {
 public:

@@ -4,3 +4,5 @@
 const static uint32_t kWoodBlockId = 0b000000001;
 const static uint32_t kPlayerId          = 0b000000010;
 const static uint32_t kLuggageId      = 0b000000100;
+
+const static uint32_t kSlowMortionItem = 0b00001000;

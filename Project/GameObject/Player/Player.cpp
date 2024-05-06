@@ -20,8 +20,12 @@ void Player::Initialize()
 
 	gun_ = make_unique<PlayerGun>();
 	gun_->Initlalize();
-
 	gun_->SetParent(worldTransform_);
+
+	hp_ = make_unique<PlayerHp>();
+	hp_->Initialize();
+
+	hpCount_ = &hp_->GetHp();
 
 	aabb_.min = { -0.5f,-0.5f,-0.5f };
 	aabb_.max = { 0.5f,0.5f,0.5f };
@@ -57,6 +61,8 @@ void Player::Update()
 	gun_->ReticlePos(reticle_->GetPos());
 	gun_->Update();
 
+	hp_->Update();
+
 	ClearFlag();
 }
 
@@ -66,6 +72,11 @@ void Player::Draw(const CameraData& camera)
 	gun_->Draw(camera);
 	gameObject_->Draw(worldTransform_, camera);
 
+}
+
+void Player::Draw2d(const CameraData& camera)
+{
+	hp_->Draw2d(camera);
 }
 
 void Player::ImGuiUpdate()
@@ -98,6 +109,7 @@ void Player::ImGuiUpdate()
 
 	ImGui::Text("%f %f %f", reticle_->GetPos().x, reticle_->GetPos().y, reticle_->GetPos().z);
 	gun_->ImGuiUpdate();
+	hp_->ImGuiUpdate();
 }
 
 Math::Vector::Vector3 Player::GetWorldPosition()
