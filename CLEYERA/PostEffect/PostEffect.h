@@ -88,11 +88,11 @@ private:
 	void CommandCallView(const float& width, const float& height);
 	void CommandCallScissor();
 
-	void CreateTexBuffer();
-	void TransfarImage();
-	void AddSRVDescripter();
+	void CreateTexBuffer(ComPtr<ID3D12Resource>&buf,uint32_t &index);
+	void TransfarImage(ComPtr<ID3D12Resource>&buf);
+	uint32_t AddSRVDescripter(ComPtr<ID3D12Resource>&buf);
 
-	void CreateRTV();
+	void CreateRTV(ComPtr<ID3D12Resource>& buf, uint32_t& rtvIndex);
 	void CreateDSV();
 	void CreateShadowMap();
 	void CreateShadowMapResource();
@@ -110,11 +110,14 @@ private:
 	uint32_t srvIndex_ = 0;
 	uint32_t rtvIndex_ = 0;
 	uint32_t dsvIndex_ = 0;
+	uint32_t colorRtvIndex_ = 0;
+	uint32_t colorSrvIndex_ = 0;
 	uint32_t srvShadowIndex_ = 0;
 	uint32_t dsvShadowIndex_ = 0;
 	uint32_t 	rtvshadowIndex_ = 0;
 	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
 
+	ComPtr<ID3D12Resource> colorBuffer_ = nullptr;
 	ComPtr<ID3D12Resource>texBuffer_ = nullptr;
 	ComPtr<ID3D12Resource>depthBuffer_ = nullptr;
 	ComPtr<ID3D12Resource>depthNormalBuffer_ = nullptr;
