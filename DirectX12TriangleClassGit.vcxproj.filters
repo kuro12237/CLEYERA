@@ -199,6 +199,9 @@
     <Filter Include="Project\GameObject\Player\PlayerHp">
       <UniqueIdentifier>{0638e986-b10d-48ff-adc6-d75df96db655}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Utility\Color">
+      <UniqueIdentifier>{1382ba80-a386-451e-b1e6-3d539446b826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -470,6 +473,9 @@
     </ClCompile>
     <ClCompile Include="Project\Scene\TestScene.cpp">
       <Filter>Project\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Utility\ColorConverter\ColorConverter.cpp">
+      <Filter>CLEYERA\Utility\Color</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -814,6 +820,9 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\Player\Hp\PlayerHp.h">
       <Filter>Project\GameObject\Player\PlayerHp</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\ColorConverter\ColorConverter.h">
+      <Filter>CLEYERA\Utility\Color</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

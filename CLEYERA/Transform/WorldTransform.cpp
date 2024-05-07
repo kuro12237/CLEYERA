@@ -40,11 +40,8 @@ void WorldTransform::UpdateMatrix()
 	if (parent) {
 		matWorld = Math::Matrix::Multiply(matWorld, parent->matWorld);
 	}
-	
 	TransfarMatrix();
 }
-
-
 
 void WorldTransform::TransfarMatrix()
 {
@@ -104,7 +101,6 @@ void WorldTransform::UpdateEularMatrix()
 void WorldTransform::DeleateParent()
 {
 }
-
 
 Vector3 WorldTransform::GetWorldPosition()
 {

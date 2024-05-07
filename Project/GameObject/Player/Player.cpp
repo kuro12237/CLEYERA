@@ -56,7 +56,6 @@ void Player::Update()
 
 	Move();
 
-
 	reticle_->Update();
 	gun_->ReticlePos(reticle_->GetPos());
 	gun_->Update();
@@ -95,21 +94,22 @@ void Player::ImGuiUpdate()
 		f = GetLeftFlag();
 		ImGui::Checkbox("L", &f);
 
+		if (ImGui::Button("Reset"))
+		{
+
+			worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
+			GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
+			worldTransform_.translate = GameStartPos_;
+			worldTransform_.UpdateEularMatrix();
+		}
+
+		//ImGui::Text("%f %f %f", reticle_->GetPos().x, reticle_->GetPos().y, reticle_->GetPos().z);
+		ImGui::Separator();
+		gun_->ImGuiUpdate();
+		ImGui::Separator();
+		hp_->ImGuiUpdate();
 		ImGui::TreePop();
 	}
-
-	if (ImGui::Button("Reset"))
-	{
-
-		worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
-		GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
-		worldTransform_.translate = GameStartPos_;
-		worldTransform_.UpdateEularMatrix();
-	}
-
-	ImGui::Text("%f %f %f", reticle_->GetPos().x, reticle_->GetPos().y, reticle_->GetPos().z);
-	gun_->ImGuiUpdate();
-	hp_->ImGuiUpdate();
 }
 
 Math::Vector::Vector3 Player::GetWorldPosition()

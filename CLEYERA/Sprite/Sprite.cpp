@@ -38,13 +38,5 @@ void Sprite::SetSrc(Vector2 TL, Vector2 BL,Vector2 TR, Vector2 BR)
 	srcBL = BL;
 }
 
-Vector4 Sprite::ColorConversion(uint32_t rgbaValue)
-{
-	Vector4 result = {};
-	result.x = ((rgbaValue >> 24) & 0xFF) / 255.0f; // Red
-	result.y = ((rgbaValue >> 16) & 0xFF) / 255.0f; // Green
-	result.z = ((rgbaValue >> 8) & 0xFF) / 255.0f;  // Blue
-	result.w = (rgbaValue & 0xFF) / 255.0f;         // Alpha
-	return result;
-}
+
 

@@ -86,6 +86,7 @@
     <ClCompile Include="CLEYERA\Utility\CollisionManager\CollisionManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp" />
     <ClCompile Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.cpp" />
+    <ClCompile Include="CLEYERA\Utility\ColorConverter\ColorConverter.cpp" />
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="CLEYERA\Utility\CollisionManager\CollisionStructures\CollisionStructures.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.h" />
+    <ClInclude Include="CLEYERA\Utility\ColorConverter\ColorConverter.h" />
     <ClInclude Include="CLEYERA\Utility\FileLoader\FileLoader.h" />
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />

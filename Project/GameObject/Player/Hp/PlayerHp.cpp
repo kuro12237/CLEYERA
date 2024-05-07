@@ -5,14 +5,17 @@ void PlayerHp::Initialize()
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initialize(new SpriteBoxState);
 
-	spriteHandle_ = TextureManager::LoadPngTexture("uvChecker.png");
+	spriteHandle_ = TextureManager::LoadPngTexture("player/Hp/hp.png");
 	sprite_->SetTexHandle(spriteHandle_);
+
+	Math::Vector::Vector4 color = ColorConverter::ColorConversion(0x00ff7fff);
+	sprite_->SetColor(color);
 
 	for (uint32_t i = 0; i < playerHpMax_; i++)
 	{
 		WorldTransform w = {};
 		w.Initialize();
-		w.translate.x = float(32 * i);
+		w.translate.x = float(64 * i);
 		worldTransform_[i] = w;
 	}
 
@@ -34,7 +37,6 @@ void PlayerHp::Update()
 
 void PlayerHp::Draw2d(const CameraData& camera)
 {
-
 	for (uint32_t i = 0; i < playerHpCount_; i++)
 	{
 		sprite_->Draw(worldTransform_[i], camera);
