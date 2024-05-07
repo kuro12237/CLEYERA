@@ -20,7 +20,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t4 transformedUV = mul(float32_t4(input.texcoord, 0.0f, 1.0f), gPostEffectParam.uvMatrix);
     float32_t4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
     float32_t4 resultColor = textureColor;
-  
+
     //彩度
     {
         float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));
