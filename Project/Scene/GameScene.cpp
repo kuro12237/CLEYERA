@@ -128,7 +128,7 @@ void GameScene::LoadSounds()
 void GameScene::CheckBlockCollision()
 {
 	blockCollisionManager_->ClearList();
-	
+
 	blockCollisionManager_->PushList(player_.get());
 
 	for (int i = 0; i < blockManager_->GetBlocks().size(); i++)

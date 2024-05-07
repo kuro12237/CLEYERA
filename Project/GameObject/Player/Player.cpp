@@ -9,7 +9,6 @@ void Player::Initialize()
 	gameObject_->Create();
 	gameObject_->SetModel(modelHandle_);
 	game3dObjectdesc_.useLight = true;
-	game3dObjectdesc_.colorDesc.grayFactor_ = 1.0f;
 	gameObject_->SetlectModelPipeline(PHONG_MODEL);
 	gameObject_->SetDesc(game3dObjectdesc_);
 	worldTransform_.UpdateMatrix();
@@ -45,6 +44,10 @@ void Player::Initialize()
 	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
 	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 	worldTransform_.translate = GameStartPos_;
+
+	state_ = make_unique<PlayerNormaState>();
+	state_->Initialize();
+
 }
 
 void Player::Update()
@@ -55,7 +58,12 @@ void Player::Update()
 	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
 	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 
-	Move();
+	//Move();
+	
+	if (state_)
+	{
+		state_->Update(this);
+	}
 
 	reticle_->Update();
 	gun_->ReticlePos(reticle_->GetPos());
@@ -153,6 +161,12 @@ void Player::OnBlockCollision(IBoxCollider* collider)
 void Player::OnCollision(uint32_t id)
 {
 	id;
+	if (id == kStoneItem)
+	{
+		ChangeState(make_unique<PlayerStoneState>());
+		return;
+	}
+
 }
 
 void Player::GravityExc(const Math::Vector::Vector2& g)
@@ -163,6 +177,12 @@ void Player::GravityExc(const Math::Vector::Vector2& g)
 
 	reticle_->WorldTransformUpdate();
 	gun_->WorldTransformUpdate();
+}
+
+void Player::ChangeState(unique_ptr<IPlayerState> state)
+{
+	state_ = move(state);
+	state_->Initialize();
 }
 
 void Player::Move()
@@ -187,15 +207,21 @@ void Player::Move()
 
 void Player::Jamp()
 {
-	if (!isJamp_ && velocity_.y == 0.0f)
+	if (behavior_ == Normal)
 	{
-		AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/Jump.mp3", 1.0f);
-		velocity_.y = 0.25f;
-		isJamp_ = true;
+		if (!isJamp_ && velocity_.y == 0.0f)
+		{
+			AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/Jump.mp3", 1.0f);
+			velocity_.y = 0.25f;
+			isJamp_ = true;
+		}
 	}
 }
 
 void Player::GunAttack()
 {
-	gun_->Attack();
+	if (behavior_ == Normal)
+	{
+		gun_->Attack();
+	}
 }

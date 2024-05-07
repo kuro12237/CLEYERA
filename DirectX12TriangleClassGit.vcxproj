@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -111,6 +111,8 @@
     <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.cpp" />
     <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerNormalState.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerStoneState.cpp" />
     <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp" />
     <ClCompile Include="Project\GameObject\Sun\Sun.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp" />
@@ -223,6 +225,9 @@
     <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h" />
     <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
+    <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerNormalState.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerStoneState.h" />
     <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h" />
     <ClInclude Include="Project\GameObject\Sun\Sun.h" />
     <ClInclude Include="Project\GameObject\Terrain\Terrain.h" />

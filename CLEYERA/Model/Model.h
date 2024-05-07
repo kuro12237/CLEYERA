@@ -42,7 +42,6 @@ public:
 
 #pragma region Get
 
-
 	Math::Vector::Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 	uint32_t GetModelHandle() { return modelHandle_; }
@@ -50,7 +49,6 @@ public:
 	Math::Vector::Vector3 GetuvScale() { return uvScale_; }
 	Math::Vector::Vector3 GetuvRotate() { return uvRotate_; }
 	Math::Vector::Vector3 GetuvTranslate() { return uvTranslate_; }
-
 
 	/// <summary>
 	/// GetModelCenterPos
@@ -63,7 +61,6 @@ public:
 
 	SModelData GetModelData() { return modelData_; }
 
-	//Light GetLight() { return testLight_; }
 #pragma endregion 
 
 	void SetSkelton(SAnimation::Skeleton s) { modelData_.node.skeleton = s; }

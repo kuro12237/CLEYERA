@@ -477,6 +477,8 @@
     <ClCompile Include="CLEYERA\Utility\ColorConverter\ColorConverter.cpp">
       <Filter>CLEYERA\Utility\Color</Filter>
     </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\state\PlayerNormalState.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerStoneState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -824,6 +826,9 @@
     <ClInclude Include="Project\GameObject\Player\Player.h">
       <Filter>Project\GameObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerNormalState.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerStoneState.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
