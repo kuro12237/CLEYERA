@@ -41,9 +41,9 @@ struct LightData
 
 struct  TransformationViewMatrix
 {
-    Math::Matrix::Matrix4x4 view;
-    Math::Matrix::Matrix4x4 viewProjection;
-    Math::Matrix::Matrix4x4 orthographic;
+	Math::Matrix::Matrix4x4 view;
+	Math::Matrix::Matrix4x4 viewProjection;
+	Math::Matrix::Matrix4x4 orthographic;
 	Math::Vector::Vector3 position;
 	float pad[1];
 	Math::Matrix::Matrix4x4 InverseViewProjection;
@@ -55,7 +55,7 @@ struct TransformationMatrix {
 	Math::Matrix::Matrix4x4 world;
 };
 
-struct ParticleData{
+struct ParticleData {
 	Math::Matrix::Matrix4x4 WVP;
 	Math::Matrix::Matrix4x4 world;
 	Math::Vector::Vector4 color;
@@ -67,7 +67,7 @@ struct MaterialData
 	string textureFilePath{};
 };
 
-struct NodeData 
+struct NodeData
 {
 	Math::Matrix::Matrix4x4 localMatrix;
 	std::string name;
@@ -130,7 +130,7 @@ struct PostEffectAdjustedColorParam
 	/// </summary>
 	bool InvertFlag = false;
 	float InvertFactor = 0.0f;
-	
+
 	/// <summary>
 	/// 明度
 	/// </summary>
@@ -178,9 +178,10 @@ struct  Material
 	float specular_ = 1.0f;
 	float metalness_ = 1.0f;
 	float roughness_ = 1.0f;
-	float scatterCoefficient=0.5f;
-	float absorptionCoefficient=0.5f;
-	float scatterDistance=0.5f;
+	float scatterCoefficient = 0.5f;
+	float absorptionCoefficient = 0.5f;
+	float scatterDistance = 0.5f;
+	float grayFactor = 0.0f;
 };
 
 

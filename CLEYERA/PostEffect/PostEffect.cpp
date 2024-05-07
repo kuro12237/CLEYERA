@@ -57,10 +57,6 @@ void PostEffect::Initialize(const string& name)
 
 	//CreateBloom();
 
-	vertexBuffer_ = make_unique<BufferResource<VertexData>>();
-	vertexBuffer_->CreateResource(6);
-	vertexBufferView_ = CreateResources::VertexCreateBufferView(sizeof(VertexData) * 6, vertexBuffer_->GetBuffer(), 6);
-
 	wvp_ = std::make_unique<BufferResource<TransformationMatrix>>();
 	wvp_->CreateResource(1);
 
@@ -77,23 +73,6 @@ void PostEffect::Initialize(const string& name)
 
 void PostEffect::Update()
 {
-	vector<VertexData>vertexMap = {};
-	vertexMap.resize(6);
-	vertexMap[0].position = { pos_.x, pos_.y + size_.y,0.0f, 1.0f }; // 左下
-	vertexMap[0].texcoord = { 0.0f, 1.0f };
-	vertexMap[1].position = { pos_.x, pos_.y, 0.0f, 1.0f }; // 左上
-	vertexMap[1].texcoord = { 0.0f, 0.0f };
-	vertexMap[2].position = { pos_.x + size_.x, pos_.y + size_.y, 0.0f,1.0f }; // 右下
-	vertexMap[2].texcoord = { 1.0f,1.0f };
-	vertexMap[3].position = { pos_.x, pos_.y, 0.0f, 1.0f }; // 左上
-	vertexMap[3].texcoord = { 0.0f, 0.0f };
-	vertexMap[4].position = { pos_.x + size_.x, pos_.y, 0.0f, 1.0f }; // 右上
-	vertexMap[4].texcoord = { 1.0f, 0.0f };
-	vertexMap[5].position = { pos_.x + size_.x, pos_.y + size_.y, 0.0f,1.0f }; // 右下
-	vertexMap[5].texcoord = { 1.0f,1.0f };
-
-	vertexBuffer_->Map();
-	vertexBuffer_->Setbuffer(vertexMap);
 
 	TransformationMatrix wvpMap = {};
 	Math::Matrix::Matrix4x4 OrthographicMatrix = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
@@ -129,7 +108,6 @@ void PostEffect::Draw(const CameraData& view)
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
-	commands.m_pList->IASetVertexBuffers(0, 1, &vertexBufferView_);
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	//matrix0
 	wvp_->CommandCall(0);
@@ -167,14 +145,13 @@ void PostEffect::PreDraw()
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(dsvIndex_);
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle= RTVDescriptorManager::GetHandle(colorRtvIndex_);
 
-
-
 	D3D12_RESOURCE_BARRIER barrier[2]{};
 	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier[0].Transition.pResource = texBuffer_.Get();
 	barrier[0].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier[0].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
 	barrier[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[1].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier[1].Transition.pResource = colorBuffer_.Get();

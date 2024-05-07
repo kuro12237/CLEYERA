@@ -41,6 +41,7 @@ struct Material
     float32_t scatterCoefficient;
     float32_t absorptionCoefficient;
     float32_t scatterDistance;
+    float32_t grayFactor;
 };
 
 struct PointLight
@@ -60,3 +61,10 @@ struct PixelShaderOutput
 {
     float32_t4 color : SV_TARGET0;
 };
+
+float32_t3 ComputeGrayscale(float32_t factor,float32_t3 color)
+{
+    float32_t grayscaleFactor = dot(color, float32_t3(0.2125f, 0.7154f, 0.0721f));
+    float32_t3 grayscaleColor = lerp(color, float32_t3(grayscaleFactor, grayscaleFactor, grayscaleFactor), factor);
+    return grayscaleColor;
+}

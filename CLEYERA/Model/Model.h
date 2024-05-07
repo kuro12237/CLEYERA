@@ -27,14 +27,6 @@ public:
 	void CreateModel(unique_ptr<IModelState> state, Math::Vector::Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Math::Vector::Vector4 color = { 1,1,1,1 });
 
 	/// <summary>
-	/// DrawLine用の初期化
-	/// </summary>
-	/// <param name="StertPosition"></param>
-	/// <param name="EndPosition"></param>
-	/// 
-	void CreateLine(unique_ptr<IModelState> state, Math::Vector::Vector4 StertPosition, Math::Vector::Vector4 EndPosition, Math::Vector::Vector4 Color = { 1,1,1,1 });
-
-	/// <summary>
 	/// modelをセット(初期化の時にしか使わないように)
 	/// </summary>
 	/// <param name="ModelHandle"></param>
@@ -59,14 +51,6 @@ public:
 	Math::Vector::Vector3 GetuvRotate() { return uvRotate_; }
 	Math::Vector::Vector3 GetuvTranslate() { return uvTranslate_; }
 
-	/// <summary>
-	/// GetLineStartPos
-	/// </summary>
-	Math::Vector::Vector4 GetStartPos() { return StartPos_; }
-	/// <summary>
-	/// GetLineEndPos
-	/// </summary>
-	Math::Vector::Vector4 GetEndPos() { return EndPos_; }
 
 	/// <summary>
 	/// GetModelCenterPos
@@ -91,9 +75,6 @@ private:
 
 	Math::Vector::Vector4 CenterPos_ = { 0,0,0,1 };
 	float size_=1.5f;
-
-	Math::Vector::Vector4 StartPos_ = {};
-	Math::Vector::Vector4 EndPos_ = {};
 
 	Math::Vector::Vector4 color_ = { 1,1,1,1 };
 

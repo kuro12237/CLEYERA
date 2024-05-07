@@ -60,11 +60,11 @@ void GameScene::Update(GameManager* Scene)
 
 	if (player_->GetHp() == 2)
 	{
-		postEffect_->SetGrayFactor(0.5f);
+		//postEffect_->SetGrayFactor(0.5f);
 	}
 	if (player_->GetHp() == 1)
 	{
-		postEffect_->SetGrayFactor(1.0f);
+		//postEffect_->SetGrayFactor(1.0f);
 	}
 
 #pragma endregion

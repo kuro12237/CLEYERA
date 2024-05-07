@@ -121,8 +121,6 @@ private:
 
 	std::array<ComPtr<ID3D12Resource>, BloomNum_>BloomBuffer_ = {};
 
-	unique_ptr<BufferResource<VertexData>>vertexBuffer_ = nullptr;
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_ = {};
 
 	unique_ptr<BufferResource<TransformationMatrix>>wvp_ = nullptr;
 

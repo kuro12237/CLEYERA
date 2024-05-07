@@ -15,8 +15,8 @@ void CGScene::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 
-	normalMonkeyHandle_ = ModelManager::LoadGltfFile("simpleSkin");
-	AnimationManager::GetInstance()->LoadAnimation("simpleSkin");
+	normalMonkeyHandle_ = ModelManager::LoadGltfFile("Walk");
+	AnimationManager::GetInstance()->LoadAnimation("walk");
 	//ModelManager::ModelUseSubsurface();
 	smoothMonkeyHandle_ = ModelManager::LoadObjectFile("SmoothTestMonkey");
 	gameObject_->SetModel(normalMonkeyHandle_);

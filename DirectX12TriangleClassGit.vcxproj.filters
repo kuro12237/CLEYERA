@@ -677,9 +677,6 @@
     <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h">
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Player.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
@@ -823,6 +820,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\ColorConverter\ColorConverter.h">
       <Filter>CLEYERA\Utility\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\Player.h">
+      <Filter>Project\GameObject\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

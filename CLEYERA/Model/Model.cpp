@@ -16,15 +16,6 @@ void Model::CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos , float
 	state_->Initialize(this);
 }
 
-void Model::CreateLine(unique_ptr<IModelState> state,Vector4 StartPosition, Vector4 EndPosition, Vector4 Color)
-{
-	state_=move(state);
-	StartPos_ = StartPosition;
-	EndPos_ = EndPosition;
-	color_ = Color;
-	state_->Initialize(this);
-}
-
 void Model::SetModel(uint32_t handle)
 {
 	prevModelHandle_ = modelHandle_;

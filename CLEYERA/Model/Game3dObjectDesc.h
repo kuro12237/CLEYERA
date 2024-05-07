@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 struct  PhongModelDesc
 {
 	float shininess = 70.0f;
@@ -15,6 +13,11 @@ struct  SSSModelDesc
 	float absorptionCoefficient_ = 0.5f;
 	//光の伝播距離
 	float scatterDistance_ = 0.5f;
+};
+
+struct ColorModelDesc
+{
+	float grayFactor_ = 0.0f;
 };
 
 enum ModelShaderSelect
@@ -31,6 +34,7 @@ struct Game3dObjectDesc
 	ModelShaderSelect select = PHONG_MODEL;
 	PhongModelDesc shongDesc;
 	SSSModelDesc sssDesc;
+	ColorModelDesc colorDesc;
 	bool useLight = false;
 
 };

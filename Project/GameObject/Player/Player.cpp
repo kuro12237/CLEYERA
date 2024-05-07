@@ -9,7 +9,8 @@ void Player::Initialize()
 	gameObject_->Create();
 	gameObject_->SetModel(modelHandle_);
 	game3dObjectdesc_.useLight = true;
-	gameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
+	game3dObjectdesc_.colorDesc.grayFactor_ = 1.0f;
+	gameObject_->SetlectModelPipeline(PHONG_MODEL);
 	gameObject_->SetDesc(game3dObjectdesc_);
 	worldTransform_.UpdateMatrix();
 
