@@ -8,8 +8,7 @@ void WoodBlock::Initialize(const TransformQua &t)
 	translate_.y += 0.5f;
 	aabb_.min = { -0.5f,-0.5f,-0.5f };
 	aabb_.max = { 0.5f,0.5f,0.5f };
-
-	IBoxCollider::SetMatWorld(worldMat_);
+	IGameInstancing3dObject::SetMatWorld(worldMat_);
 	IBoxCollider::SetAABB(aabb_);
 	IBoxCollider::SetAttbute(kWoodBlockAttbute);
 	IBoxCollider::SetMask(kWoodBlockMask);
