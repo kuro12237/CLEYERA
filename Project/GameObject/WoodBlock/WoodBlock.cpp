@@ -9,13 +9,12 @@ void WoodBlock::Initialize(const TransformQua &t)
 	aabb_.min = { -0.5f,-0.5f,-0.5f };
 	aabb_.max = { 0.5f,0.5f,0.5f };
 
-	SetMatWorld(worldMat_);
-	SetAABB(aabb_);
-	SetAttbute(kWoodBlockAttbute);
-	SetMask(kWoodBlockMask);
+	IBoxCollider::SetMatWorld(worldMat_);
+	IBoxCollider::SetAABB(aabb_);
+	IBoxCollider::SetAttbute(kWoodBlockAttbute);
+	IBoxCollider::SetMask(kWoodBlockMask);
 	IBoxCollider::SetId(kWoodBlockId);
-
-	SetVelocity(velocity_);
+	IBoxCollider::SetVelocity(velocity_);
 }
 
 void WoodBlock::Update()

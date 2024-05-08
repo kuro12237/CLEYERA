@@ -34,7 +34,7 @@ private:
 	const uint32_t BlockNum_ = Height_*Width_;
 
 	unique_ptr<GameInstancing3dObject>blocksGameObject_ = nullptr;
-	
+
 	vector<shared_ptr<WoodBlock>>blocks_;
 	vector<TransformQua>blocksParam_ = {};
 	vector<bool>blockFlag_ = {};
