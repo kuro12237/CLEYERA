@@ -9,7 +9,7 @@ void AnimationScene::Initialize()
 	gameObject_->SetDesc(gameObjetcDesc);
 	gameObjetcDesc.useLight = true;
 
-	const string fileName = "walk";
+	const string fileName = "SimpleSkin";
 	modelHandle_ = ModelManager::LoadGltfFile(fileName);
 	AnimationManager::GetInstance()->LoadAnimation(fileName);
 
@@ -45,20 +45,21 @@ void AnimationScene::Update(GameManager* Scene)
 
 	LightingManager::AddList(pointLight_);
 
-	const string fileName = "walk";
+	const string fileName = "SimpleSkin";
 	SAnimation::Animation data = AnimationManager::GetInstance()->GetData(fileName);
 	animationFlame_ += 1.0f / 60.0f;
 	animationFlame_ = std::fmod(animationFlame_, data.duration);
 
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(modelHandle_).node.skeleton;
 	SkinCluster skinCluster = ModelManager::GetObjData(modelHandle_).skinCluster;
-	
-	AnimationManager::GetInstance()->ApplyAnimation(skeleton, data, animationFlame_);
+	//Animation再生
+	//AnimationManager::GetInstance()->ApplyAnimation(skeleton, data, animationFlame_);
+	//スケルトンの更新
 	ModelManager::SkeletonUpdate(skeleton);
-
+	//SkincluserをUpdate
 	ModelManager::SkinClusterUpdate(skinCluster, skeleton);
-	ModelManager::SetModel(modelHandle_, skinCluster, skeleton);
 
+	//testModelMat
 	Math::Matrix::Matrix4x4 sm, rm, tm;
 	sm = Math::Matrix::ScaleMatrix(skeleton.joints[3].transform.scale);
 	rm = Math::Qua::RotateMatrix(skeleton.joints[3].transform.quaternion);
