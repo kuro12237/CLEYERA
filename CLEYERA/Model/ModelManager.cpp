@@ -226,6 +226,8 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
+		modelData.node.skeleton = CreateSkeleton(modelData.node);
+
 		SkeletonUpdate(modelData.node.skeleton);
 		modelData.skinCluster = CreateSkinCluster(modelData.node.skeleton, modelData);
 
@@ -316,18 +318,16 @@ void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 
 void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, const SAnimation::Skeleton& skeleton)
 {
+	WellForGPU*mappedPalette;
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
-		skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedPalette));
-		skinCluster.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedInfluence));
-
-		skinCluster.mappedInfluence[jointIndex].weights;
-
+		skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
+	
 		assert(jointIndex < skinCluster.inverseBindMatrices.size());
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
+		mappedPalette[jointIndex].skeletonSpaceMatrix =
 			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
-			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
+		//mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
+			//Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
 		skinCluster;
 	}
 }
@@ -378,7 +378,6 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 
 	result.name = node->mName.C_Str();
 	result.children.resize(node->mNumChildren);
-	result.skeleton = CreateSkeleton(result);
 
 	for (uint32_t childrenIndex = 0; childrenIndex < node->mNumChildren; ++childrenIndex)
 	{
@@ -428,7 +427,7 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 	skinCluster.paletteResource = CreateResources::CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
 	WellForGPU* mappedPalette = nullptr;
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
+	//skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size()};
 	
 	//設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
@@ -464,7 +463,7 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 			continue;
 		}
 
-		skinCluster.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
+		//skinCluster.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
 
 		for (const auto& vertexWeight : jointWeight.second.vertexWeights)
 		{

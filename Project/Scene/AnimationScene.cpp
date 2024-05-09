@@ -8,8 +8,10 @@ void AnimationScene::Initialize()
 	gameObject_->Create();
 	gameObject_->SetDesc(gameObjetcDesc);
 	gameObjetcDesc.useLight = true;
-	modelHandle_ = ModelManager::LoadGltfFile("simpleSkin");
-	AnimationManager::GetInstance()->LoadAnimation("simpleSkin");
+
+	const string fileName = "walk";
+	modelHandle_ = ModelManager::LoadGltfFile(fileName);
+	AnimationManager::GetInstance()->LoadAnimation(fileName);
 
 	gameObject_->SetModel(modelHandle_);
 
@@ -31,6 +33,7 @@ void AnimationScene::Initialize()
 	testBoxDesc_.useLight = true;
 	testBox_->SetDesc(testBoxDesc_);
 	testBox_->SetModel(debugModelHandle_);
+	testBox_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -42,7 +45,8 @@ void AnimationScene::Update(GameManager* Scene)
 
 	LightingManager::AddList(pointLight_);
 
-	SAnimation::Animation data = AnimationManager::GetInstance()->GetData("simpleSkin");
+	const string fileName = "walk";
+	SAnimation::Animation data = AnimationManager::GetInstance()->GetData(fileName);
 	animationFlame_ += 1.0f / 60.0f;
 	animationFlame_ = std::fmod(animationFlame_, data.duration);
 
@@ -52,10 +56,16 @@ void AnimationScene::Update(GameManager* Scene)
 	AnimationManager::GetInstance()->ApplyAnimation(skeleton, data, animationFlame_);
 	ModelManager::SkeletonUpdate(skeleton);
 
-	//ModelManager::SkinClusterUpdate(skinCluster, skeleton);
+	ModelManager::SkinClusterUpdate(skinCluster, skeleton);
 	ModelManager::SetModel(modelHandle_, skinCluster, skeleton);
 
-	testBoxWorldTransform_.matWorld = ModelManager::GetObjData(modelHandle_).node.children[2].localMatrix;
+	Math::Matrix::Matrix4x4 sm, rm, tm;
+	sm = Math::Matrix::ScaleMatrix(skeleton.joints[3].transform.scale);
+	rm = Math::Qua::RotateMatrix(skeleton.joints[3].transform.quaternion);
+	tm = Math::Matrix::TranslateMatrix(skeleton.joints[3].transform.translate);
+	Math::Matrix::Matrix4x4 resultMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm ));
+
+	testBoxWorldTransform_.matWorld = resultMat;
 	//camera_.UpdateMatrix();
 	worldTransform_.TransfarMatrix();
 	testBoxWorldTransform_.TransfarMatrix();;

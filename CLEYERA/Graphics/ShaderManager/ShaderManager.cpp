@@ -176,14 +176,14 @@ void ShaderManager::PBR_ModelShader()
 void ShaderManager::PhongModelShader()
 {
 	SShaderMode shaders;
-	shaders.vertexBlob =
+	/*shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Phong_ModelObject3d.VS.hlsl",
+			L"vs_6_0");*/
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SkinningObject3d.VS.hlsl",
 			L"vs_6_0");
-	//shaders.vertexBlob =
-	//	ShaderManager::CompilerShaderFanc(
-	//		L"Resources/Shader/SkinningObject3d.VS.hlsl",
-	//		L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(

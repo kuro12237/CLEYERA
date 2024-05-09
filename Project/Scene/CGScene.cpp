@@ -108,16 +108,16 @@ void CGScene::Update(GameManager* Scene)
 
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(normalMonkeyHandle_).node.skeleton;
 	SkinCluster skinCluster = ModelManager::GetObjData(normalMonkeyHandle_).skinCluster;
-	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("simpleSkin");
+	SAnimation::Animation animation = AnimationManager::GetInstance()->GetData("walk");
 
-	//AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
+	AnimationManager::GetInstance()->ApplyAnimation(skeleton, animation, animationTimer_);
 	//ModelManager::SkeletonUpdate(skeleton);
 
 	//ModelManager::SkinClusterUpdate(skinCluster, skeleton);
 
 	//ModelManager::SetModel(normalMonkeyHandle_, skinCluster,skeleton);
 
-	ImGui::Text("%f", skeleton.joints[0].transform.scale.x);
+	ImGui::Text("%f", skeleton.joints[2].transform.translate.x);
 
 	if (Input::PushKeyPressed(DIK_N))
 	{
@@ -129,7 +129,7 @@ void CGScene::Update(GameManager* Scene)
 void CGScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	gameObject_->Draw(worldTransform_, viewProjection_);
+	//gameObject_->Draw(worldTransform_, viewProjection_);
 	testSkyDomeGameObject_->Draw(TestSkyDomeWorldTreanform_, viewProjection_);
 	testGroundGameObject_->Draw(testGroundWorldTransform_, viewProjection_);
 
