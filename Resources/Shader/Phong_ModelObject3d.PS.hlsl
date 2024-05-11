@@ -7,29 +7,6 @@ ConstantBuffer<NowLightTotal> gNowLightTotal : register(b4);
 Texture2D<float32_t4>gTexture : register(t1);
 SamplerState gSampler : register(s0);
 
-float32_t3 ComputeSubsurfaceScattering(float32_t3 diffuseColor, float32_t3 normal, float32_t3 viewDir, float32_t3 lightDir)
-{
-    // SSSの計算に必要なパラメータ
-    float32_t scatterCoefficient = 0.1; // 散乱係数
-    float32_t absorptionCoefficient = 0.5; // 吸収係数
-    float32_t3 scatteringColor = float32_t3(1.0, 1.0, 0.2); // 散乱の色
-
-    float32_t scatterDistance = 0.5; // 光の伝播距離
-
-    float32_t3 scatterVector = normalize(lightDir - viewDir);
-    float32_t attenuation = exp(-scatterCoefficient * scatterDistance);
-
-    //吸収
-    float32_t3 absorbedColor = diffuseColor * exp(-absorptionCoefficient * scatterDistance);
-
-    // 散乱
-    float32_t3 scatteredColor = scatteringColor * scatteringColor * (1.0 - attenuation);
-
-    // Final
-    float32_t3 sssColor = (1.0 - attenuation) * (absorbedColor + scatteredColor);
-
-    return sssColor;
-}
 
 PixelShaderOutput main(VertexShaderOutput input) {
 

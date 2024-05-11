@@ -114,19 +114,19 @@ PixelShaderOutput main(VertexShaderOutput input) {
 	float32_t3 pTotalSpecular = 0;
 	float32_t3 pTotalDffuse = 0;
 
-	for (int32_t i = 0; i < gNowLightTotal.count; i++)
-	{
-		//点光源
-        metalness =  gMaterial.metalness;
-        roughness = gMaterial.roughness;
-        baseColor = (gMaterial.color.rgb * textureColor.rgb);
-        Supecular = gMaterial.supecular;
-        LightDir = gPointLight[i].position - input.worldPosition;
-        float32_t distance = length(LightDir);
-        float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
+	//for (int32_t i = 0; i < gNowLightTotal.count; i++)
+	//{
+	//	//点光源
+ //       metalness =  gMaterial.metalness;
+ //       roughness = gMaterial.roughness;
+ //       baseColor = (gMaterial.color.rgb * textureColor.rgb);
+ //       Supecular = gMaterial.supecular;
+ //       LightDir = gPointLight[i].position - input.worldPosition;
+ //       float32_t distance = length(LightDir);
+ //       float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
 
-        pTotalDffuse = pTotalDffuse + BRDF(normalize(gPointLight[i].position), toEye) * gPointLight[i].color.rgb * gPointLight[i].intensity * factor;
-    }
+ //       pTotalDffuse = pTotalDffuse + BRDF(normalize(gPointLight[i].position), toEye) * gPointLight[i].color.rgb * gPointLight[i].intensity * factor;
+ //   }
 
     output.color.rgb = pTotalDffuse;
     //+pTotalSpecular;

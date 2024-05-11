@@ -1502,6 +1502,17 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
+	//skinningPallate
+	D3D12_DESCRIPTOR_RANGE descriptorRangeSkinningPallate[1] = {};
+	descriptorRangeSkinningPallate[0].BaseShaderRegister = 2;
+	descriptorRangeSkinningPallate[0].NumDescriptors = 1;
+	descriptorRangeSkinningPallate[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeSkinningPallate[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[7].DescriptorTable.pDescriptorRanges = descriptorRangeSkinningPallate;
+	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeSkinningPallate);
 
 
 	//Sampler�̐ݒ�
@@ -1522,19 +1533,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
-	//skinningPallate
-	D3D12_DESCRIPTOR_RANGE descriptorRangeSkinningPallate[1] = {};
-	descriptorRangeSkinningPallate[0].BaseShaderRegister = 7;
-	descriptorRangeSkinningPallate[0].NumDescriptors = 1;
-	descriptorRangeSkinningPallate[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	descriptorRangeSkinningPallate[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[7].DescriptorTable.pDescriptorRanges = descriptorRangeSkinningPallate;
-	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeSkinningPallate);
-
-	descriptionRootSignature;
 
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &DirectionalLightPSO.signatureBlob, &DirectionalLightPSO.errorBlob);
@@ -1577,10 +1576,6 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	inputElementDescs[4].InputSlot = 1;
 	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-	//MORMAL�ŋN�����o�OFormat�̌^��ԈႦ�Ă���
-	//Vector3�̏ꍇ=DXGI_FORMAT_R32G32B32_FLOAT
-	//Vector2�̏ꍇ=DXGI_FORMAT_R32G32_FLOAT
-	//RGBA�ł������Ă���
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);

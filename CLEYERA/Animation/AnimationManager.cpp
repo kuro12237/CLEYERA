@@ -31,14 +31,7 @@ void AnimationManager::ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation
             joint.transform.quaternion = CalculateValue(rootNodeAnimation.rotate.keyframes, time);
 
             joint.transform.scale = CalculateValue(rootNodeAnimation.scale.keyframes, time);
-  
-
-            Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(joint.transform.translate);
-            Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(joint.transform.quaternion);
-            Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix(joint.transform.scale);
-            Math::Matrix::Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
-            joint.skeletonSpaceMatrix = Math::Matrix::Multiply(joint.skeletonSpaceMatrix, localMat);
-
+ 
         }
     }
 }

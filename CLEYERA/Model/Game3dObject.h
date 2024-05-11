@@ -45,6 +45,7 @@ public:
 
 	void SetlectModelPipeline(ModelShaderSelect number) { ModelShaderSelect_ = number; }
 
+	
 #pragma endregion
 
 private:
@@ -79,6 +80,7 @@ private:
 
 	const Game3dObjectDesc* game3dObjectDesc_ = nullptr;
 
+	uint32_t skinCluserSrvIndex_ = 0;
 
 	uint32_t texHandle_ = 0;
 	uint32_t normalTexHandle_ = 0;

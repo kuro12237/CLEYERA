@@ -41,6 +41,7 @@ void ModelObjState::Draw(Model* state, const CameraData& viewprojection, uint32_
 	}
 	if (state->GetModelData().fileFormat == "GLTF")
 	{
+		//skinningAnimationの際通る
 		D3D12_VERTEX_BUFFER_VIEW vbvs[2]{
 			vertex_->GetBufferView(),
 			state->GetModelData().skinCluster.influenceBufferView
@@ -48,7 +49,6 @@ void ModelObjState::Draw(Model* state, const CameraData& viewprojection, uint32_
 		commands.m_pList->IASetVertexBuffers(0, 2, vbvs);
 		uint32_t srvHandle = state->GetModelData().skinCluster.srvIndex;
 		DescriptorManager::rootParamerterCommand(7, srvHandle);
-		srvHandle;
 	}
 
 	index_->CommandIndexBufferViewCall();

@@ -40,9 +40,13 @@ public:
 
 	static void SkeletonUpdate(SAnimation::Skeleton& skeleton);
 
-	static void SkinClusterUpdate(SkinCluster& skinCluster, const SAnimation::Skeleton& skeleton);
+	static void SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skeleton& skeleton);
 
 	static void SetModel(uint32_t modelHandle, SkinCluster skinCluster, SAnimation::Skeleton skeleton);
+
+	static SAnimation::Skeleton CreateSkeleton(const NodeData& rootNode);
+
+	static SkinCluster CreateSkinCluster(const SAnimation::Skeleton& skeleton, const SModelData& modelData);
 
 private:
 
@@ -50,11 +54,9 @@ private:
 
 	static NodeData ReadNodeData(aiNode*node);
 
-	static SAnimation::Skeleton CreateSkeleton(const NodeData& rootNode);
 
 	static int32_t CreateJoint(const NodeData& node, const std::optional<int32_t>& parent, std::vector<SAnimation::Joint>& joints);
 
-	static SkinCluster CreateSkinCluster(const SAnimation::Skeleton& skeleton,const SModelData& modelData);
 
 	map<string,unique_ptr<ModelObjData>>objModelDatas_;
 	uint32_t objHandle_ = 0;

@@ -8,7 +8,8 @@
 #include"DebugTool/DebugCamera/DebugCamera.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
-#include<vector>
+
+
 class AnimationScene :public IScene
 {
 public:
@@ -35,7 +36,6 @@ private:
 
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
 	Game3dObjectDesc gameObjetcDesc{};
-
 	WorldTransform worldTransform_{};
 
 	PointLight_param pointLight_ = {};
@@ -43,8 +43,12 @@ private:
 	float animationFlame_ = 0.0f;
 	uint32_t modelHandle_ = 0;
 
-	unique_ptr<Game3dObject>testBox_ = nullptr;
+	array<unique_ptr<Game3dObject>,4>testBox_ = {};
 	Game3dObjectDesc testBoxDesc_ = {};
-	WorldTransform testBoxWorldTransform_ = {};
+	array<WorldTransform,4> testBoxWorldTransform_ = {};
 	uint32_t debugModelHandle_ = 0;
+
+	SAnimation::Animation animationData_;
+
+	const string fileName_ = "simpleSkin";
 };

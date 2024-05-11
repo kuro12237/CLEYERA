@@ -4,16 +4,6 @@ void AnimationScene::Initialize()
 {
 	camera_.Initialize();
 	camera_.translation_.z = -16;
-	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
-	gameObject_->SetDesc(gameObjetcDesc);
-	gameObjetcDesc.useLight = true;
-
-	const string fileName = "SimpleSkin";
-	modelHandle_ = ModelManager::LoadGltfFile(fileName);
-	AnimationManager::GetInstance()->LoadAnimation(fileName);
-
-	gameObject_->SetModel(modelHandle_);
 
 	worldTransform_.Initialize();
 
@@ -27,28 +17,50 @@ void AnimationScene::Initialize()
 	pointLight_.position.z = 8.0f;
 
 	debugModelHandle_ = ModelManager::LoadObjectFile("DebugTestBox");
-	testBoxWorldTransform_.Initialize();
-	testBox_ = make_unique<Game3dObject>();
-	testBox_->Create();
 	testBoxDesc_.useLight = true;
-	testBox_->SetDesc(testBoxDesc_);
-	testBox_->SetModel(debugModelHandle_);
-	testBox_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
+
+	for (int i = 0; i < 4; i++)
+	{
+		testBoxWorldTransform_[i].Initialize();
+		testBox_[i] = make_unique<Game3dObject>();
+		testBox_[i]->Create();
+
+		testBox_[i]->SetDesc(testBoxDesc_);
+		testBox_[i]->SetModel(debugModelHandle_);
+		testBox_[i]->SetlectModelPipeline(PHONG_NORMAL_MODEL);
+	}
+	gameObject_ = make_unique<Game3dObject>();
+	gameObject_->Create();
+	gameObject_->SetDesc(gameObjetcDesc);
+	gameObjetcDesc.useLight = true;
+
+	modelHandle_ = ModelManager::LoadGltfFile(fileName_);
+	AnimationManager::GetInstance()->LoadAnimation(fileName_);
+	animationData_ = AnimationManager::GetInstance()->GetData(fileName_);
+
+	gameObject_->SetModel(modelHandle_);
+
 }
 
 void AnimationScene::Update(GameManager* Scene)
 {
-	Scene;
+#ifdef _USE_IMGUI
+
+	if (ImGui::Button("SceneChange"))
+	{
+		Scene->ChangeState(new TestScene);
+		return;
+	}
+
+	if (ImGui::Button("AnimationFlameAdd"))
+	{
+		animationFlame_ += 1.0f / 60.0f;
+	}
+
 	debugCamera_->ImGuiUpdate();
-	debugCamera_->Update();
-	camera_ = debugCamera_->GetData(camera_);
+#endif // _USE_IMGUI
 
-	LightingManager::AddList(pointLight_);
-
-	const string fileName = "SimpleSkin";
-	SAnimation::Animation data = AnimationManager::GetInstance()->GetData(fileName);
-	animationFlame_ += 1.0f / 60.0f;
-	animationFlame_ = std::fmod(animationFlame_, data.duration);
+	animationFlame_ = std::fmod(animationFlame_, animationData_.duration);
 
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(modelHandle_).node.skeleton;
 	SkinCluster skinCluster = ModelManager::GetObjData(modelHandle_).skinCluster;
@@ -59,17 +71,27 @@ void AnimationScene::Update(GameManager* Scene)
 	//SkincluserをUpdate
 	ModelManager::SkinClusterUpdate(skinCluster, skeleton);
 
-	//testModelMat
-	Math::Matrix::Matrix4x4 sm, rm, tm;
-	sm = Math::Matrix::ScaleMatrix(skeleton.joints[3].transform.scale);
-	rm = Math::Qua::RotateMatrix(skeleton.joints[3].transform.quaternion);
-	tm = Math::Matrix::TranslateMatrix(skeleton.joints[3].transform.translate);
-	Math::Matrix::Matrix4x4 resultMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm ));
+	ModelManager::SetModel(modelHandle_, skinCluster, skeleton);
 
-	testBoxWorldTransform_.matWorld = resultMat;
-	//camera_.UpdateMatrix();
+	//testModelMat
+	array<string, 4>numberString = { "0","1","2","3" };
+
+	for (int i = 0; i < 4; i++)
+	{
+		testBoxWorldTransform_[i].matWorld = skeleton.joints[i].skeletonSpaceMatrix;
+		testBoxWorldTransform_[i].matWorld = skinCluster.mappedPalette[i].skeletonSpaceMatrix;
+		//testBoxWorldTransform_[i].matWorld = skinCluster.inverseBindMatrices[i];
+		ImGui::Text("%s :: %f,%f,%f", numberString[i].c_str(), testBoxWorldTransform_[i].GetWorldPosition().x, testBoxWorldTransform_[i].GetWorldPosition().y, testBoxWorldTransform_[i].GetWorldPosition().z);
+		//testBoxWorldTransform_[i].matWorld = skinCluster.inverseBindMatrices[i];
+		testBoxWorldTransform_[i].TransfarMatrix();
+	}
+
 	worldTransform_.TransfarMatrix();
-	testBoxWorldTransform_.TransfarMatrix();;
+
+	debugCamera_->Update();
+	camera_ = debugCamera_->GetData(camera_);
+
+	LightingManager::AddList(pointLight_);
 	postEffect_->Update();
 }
 
@@ -77,7 +99,10 @@ void AnimationScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 	gameObject_->Draw(worldTransform_, camera_);
-	testBox_->Draw(testBoxWorldTransform_, camera_);
+	for (int i = 0; i < 4; i++)
+	{
+		testBox_[i]->Draw(testBoxWorldTransform_[i], camera_);
+	}
 	postEffect_->PostDraw();
 }
 

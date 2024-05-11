@@ -142,6 +142,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		Assimp::Importer importer;
 		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+		
 		assert(scene->HasMeshes());
 		//mesh解析
 		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex)
@@ -150,64 +151,49 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
 			//メモリの確保
-			//mesh
-			for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex)
-			{
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-				VertexData vertex;
-				vertex.position = { -position.x,position.y,position.z,1.0f };
-				vertex.normal = { -normal.x,normal.y,normal.z };
-				vertex.texcoord = { texcoord.x,texcoord.y };
-				//座標反転
-				//vertex.position.x *= -1.0f;
-				//vertex.normal.x *= -1.0f;
-				modelData.vertices.push_back(vertex);
-			}
-			//index
-			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
-			{
+			modelData.vertices.resize(mesh->mNumVertices);
+			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 				aiFace& face = mesh->mFaces[faceIndex];
-				assert(face.mNumIndices == 3);
-
-				for (uint32_t element = 0; element < face.mNumIndices; ++element)
-				{
+				assert(face.mNumIndices == 3);//三角形のみ
+				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
 					uint32_t vertexIndex = face.mIndices[element];
-					//indexPush
+					aiVector3D& position = mesh->mVertices[vertexIndex];
+					aiVector3D& normal = mesh->mNormals[vertexIndex];
+					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+					modelData.vertices[vertexIndex].position = { -position.x,position.y,position.z,1.0f };
+					modelData.vertices[vertexIndex].normal = { -normal.x,normal.y,normal.z };
+					modelData.vertices[vertexIndex].texcoord = { texcoord.x,texcoord.y };
+					//Indexの解析
 					modelData.indecs.push_back(vertexIndex);
 				}
 			}
+
 			//bone
-			for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
-			{
+			// ここからBoneのデータを取得
+			for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
 				aiBone* bone = mesh->mBones[boneIndex];
 				std::string jointName = bone->mName.C_Str();
 				JointWeightData& jointWeightData = modelData.skinClusterData[jointName];
-				aiMatrix4x4 bindPoseMatrixAssimp = bone->mOffsetMatrix.Inverse();
+
+				aiMatrix4x4 bindPoseMatirxAssimp = bone->mOffsetMatrix.Inverse();
 				aiVector3D scale, translate;
 				aiQuaternion rotate;
-				bindPoseMatrixAssimp.Decompose(scale, rotate, translate);
-				Math::Matrix::Matrix4x4 sm, rm, tm;
-				Math::Vector::Vector3 sv, tv;
-				sv = { scale.x,scale.y,scale.z };
-				tv = { -translate.x,translate.y,translate.z };
-				Math::Qua::Quaternion q = { rotate.x,-rotate.y,-rotate.z,rotate.w };
-
+				bindPoseMatirxAssimp.Decompose(scale, rotate, translate);
+				//1 左手系のBindPoseMatrixを作る
 				//変換
-				sm = Math::Matrix::ScaleMatrix(sv);
-				rm = Math::Qua::RotateMatrix(q);
-				tm = Math::Matrix::TranslateMatrix(tv);
+				Math::Matrix::Matrix4x4 sm, rm, tm;
+		
+				sm = Math::Matrix::ScaleMatrix({ scale.x,scale.y,scale.z });
+				rm = Math::Qua::RotateMatrix({ rotate.x,-rotate.y,-rotate.z,rotate.w });
+				tm = Math::Matrix::TranslateMatrix({ -translate.x,translate.y,translate.z });
 				Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::Identity();
 				bindPoseMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 				jointWeightData.inverseBindPoseMatrix = Math::Matrix::Inverse(bindPoseMatrix);
 
-				for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex)
-				{
-					jointWeightData.vertexWeights.push_back({bone->mWeights[weightIndex].mWeight,bone->mWeights[weightIndex].mVertexId});
-
+				// Weight情報を取り出す
+				for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+					jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight,bone->mWeights[weightIndex].mVertexId });
 				}
-				modelData.skinClusterData[jointName] = jointWeightData;
 			}
 		}
 
@@ -226,11 +212,14 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
+		//スケルトンの作成
 		modelData.node.skeleton = CreateSkeleton(modelData.node);
 		//skelton更新
 		SkeletonUpdate(modelData.node.skeleton);
-		//SkinCluster
+		//SkinCluster作成
 		modelData.skinCluster = CreateSkinCluster(modelData.node.skeleton, modelData);
+		////skinCluster更新
+		SkinClusterUpdate(modelData.skinCluster, modelData.node.skeleton);
 
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
@@ -298,25 +287,25 @@ Model* ModelManager::GetModel(uint32_t index)
 
 void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 {
-	for (SAnimation::Joint j : skeleton.joints)
+	for (SAnimation::Joint &joint : skeleton.joints)
 	{
-		Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(j.transform.translate);
-		Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(j.transform.quaternion);
-		Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix(j.transform.scale);
+		Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(joint.transform.translate);
+		Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(joint.transform.quaternion);
+		Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix(joint.transform.scale);
 		Math::Matrix::Matrix4x4 localMat = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
-		j.localMatrix = localMat;
-		if (j.parent)
+		joint.localMatrix = localMat;
+		if (joint.parent)
 		{
-			j.skeletonSpaceMatrix = Math::Matrix::Multiply(j.localMatrix, skeleton.joints[*j.parent].skeletonSpaceMatrix);
+			joint.skeletonSpaceMatrix = Math::Matrix::Multiply(joint.localMatrix, skeleton.joints[*joint.parent].skeletonSpaceMatrix);
 		}
 		else {
-			j.skeletonSpaceMatrix = j.localMatrix;
+			joint.skeletonSpaceMatrix = joint.localMatrix;
 		}
 	}
 
 }
 
-void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, const SAnimation::Skeleton& skeleton)
+void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skeleton& skeleton)
 {
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedPalette));
 
@@ -324,11 +313,14 @@ void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, const SAnimation:
 	{
 		assert(jointIndex < skinCluster.inverseBindMatrices.size());
 
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = 
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
 			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
+
+		//skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = Math::Matrix::Identity();
 
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
 			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
+
 	}
 }
 
@@ -340,7 +332,6 @@ void ModelManager::SetModel(uint32_t modelHandle, SkinCluster skinCluster, SAnim
 		{
 			ModelManager::GetInstance()->objModelDatas_[key]->SetSkelton(skeleton);
 			ModelManager::GetInstance()->objModelDatas_[key]->SetSkinCluser(skinCluster);
-	
 		}
 	}
 }
@@ -358,9 +349,6 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 {
 	NodeData result;
 
-	aiMatrix4x4 aiLocalMatrix = node->mTransformation;
-	aiLocalMatrix.Transpose();
-
 	//paramをGet
 	aiVector3D scale, translate;
 	aiQuaternion quaternion;
@@ -368,7 +356,7 @@ NodeData ModelManager::ReadNodeData(aiNode* node)
 	node->mTransformation.Decompose(scale, quaternion, translate);
 	result.transform.scale = { scale.x,scale.y,scale.z };
 	result.transform.quaternion = { quaternion.x,-quaternion.y,-quaternion.z,quaternion.w };
-	result.transform.translate = { translate.x,translate.y,translate.z };
+	result.transform.translate = { -translate.x,translate.y,translate.z };
 	Math::Matrix::Matrix4x4 sm, rm, tm;
 	sm = Math::Matrix::ScaleMatrix(result.transform.scale);
 	rm = Math::Qua::RotateMatrix(result.transform.quaternion);
@@ -396,7 +384,6 @@ SAnimation::Skeleton ModelManager::CreateSkeleton(const NodeData& rootNode)
 	{
 		skeleton.jointMap.emplace(joint.name, joint.index);
 	}
-	SkeletonUpdate(skeleton);
 	return skeleton;
 }
 
@@ -406,7 +393,7 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 	joint.name = node.name;
 	joint.localMatrix = node.localMatrix;
 	joint.transform = node.transform;
-	joint.skeletonSpaceMatrix = node.localMatrix;
+	joint.skeletonSpaceMatrix = Math::Matrix::Identity();
 	joint.index = int32_t(joints.size());
 	joint.parent = parent;
 	joints.push_back(joint);
@@ -414,7 +401,6 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 	{
 		int32_t  childIndex = CreateJoint(child, joint.index, joints);
 		joints[joint.index].childlen.push_back(childIndex);
-
 	}
 	return joint.index;
 }
@@ -422,13 +408,12 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton, const SModelData& modelData)
 {
 	SkinCluster skinCluster{};
-	modelData;
-	//作成
+	//palatte
 	skinCluster.paletteResource = CreateResources::CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
 	WellForGPU* mappedPalette = nullptr;
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
 	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size()};
-	
+
 	//設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
 	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
@@ -442,6 +427,7 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 	//Despcripter
 	skinCluster.srvIndex = DescriptorManager::CreateSRV(skinCluster.paletteResource, srvDesc);
 
+	//influence
 	skinCluster.influenceResource = CreateResources::CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());
 	VertexInfluence* mappedInfuence = nullptr;
 	skinCluster.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfuence));
@@ -453,26 +439,27 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 	skinCluster.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 
 	skinCluster.inverseBindMatrices.resize(skeleton.joints.size());
-	std::generate(skinCluster.inverseBindMatrices.begin(), skinCluster.inverseBindMatrices.end(), Math::Matrix::Identity);
-
-	for (const auto& jointWeight : modelData.skinClusterData)
-	{
+	std::generate(skinCluster.inverseBindMatrices.begin(), skinCluster.inverseBindMatrices.end(),Math::Matrix::Identity);
+	for (const auto& jointWeight : modelData.skinClusterData) {
+		// jointWeight.firstはjoint名なので、skeletonに対象となるjointが含まれているか調べる
 		auto it = skeleton.jointMap.find(jointWeight.first);
-		if (it == skeleton.jointMap.end())
-		{
+		if (it == skeleton.jointMap.end()) {
+			//同じ名前のjointがなかったので次へ
 			continue;
 		}
-
+		// (*it).secondにはjointのindexが入っているので、該当のIndexのinverseBindPoseMatrixを代入
 		skinCluster.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
-
-		for (const auto& vertexWeight : jointWeight.second.vertexWeights)
-		{
-			for(uint32_t index = 0; index < 4; ++index)
-			{
-				if (skinCluster.mappedInfluence[vertexWeight.vertexIndex].weights[index] == 0.0f)
-				{
-					skinCluster.mappedInfluence[vertexWeight.vertexIndex].weights[index] = vertexWeight.weight;
-					skinCluster.mappedInfluence[vertexWeight.vertexIndex].jointIndicess[index] = (*it).second;
+		for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
+			// 該当のVertexIndexのinfluenceのinfluence情報を参照しておく
+			auto& currentInfluence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
+			// 空いているところに入れる
+			for (uint32_t index = 0; index < kNumMaxInfluence; ++index) {
+				// weight == 0 が空いている状態 その場所に代入
+				if (currentInfluence.weights[index] == 0.0f) {
+					// Weightを代入
+					currentInfluence.weights[index] = vertexWeight.weight;
+					// jointのIndexを代入
+					currentInfluence.jointIndicess[index] = (*it).second;
 					break;
 				}
 			}
