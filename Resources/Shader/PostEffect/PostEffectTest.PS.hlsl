@@ -34,7 +34,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         vignette = saturate(pow(vignette, gPostEffectAdjustedColorParam_.vignetteFactor));
         //resultColor.rgb *= vignette;
         //resultColor.rgb = lerp(resultColor.rgb, gPostEffectAdjustedColorParam_.vignetteColor.rgb, vignette);
-        resultColor.rgb = lerp(resultColor.rgb, gPostEffectAdjustedColorParam_.vignetteColor.rgb, 1-vignette);
+        resultColor.rgb = lerp(resultColor.rgb, gPostEffectAdjustedColorParam_.vignetteColor.rgb, 1- vignette);
 
     }
     output.color = float32_t4(resultColor.rgb,1.0f);
