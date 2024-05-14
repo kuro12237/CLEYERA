@@ -148,6 +148,14 @@ struct PostEffectAdjustedColorParam
 	/// </summary>
 	bool HueFlag = false;
 	float HueFactor = 0.0f;
+
+	/// <summary>
+	/// ビネット
+	/// </summary>
+	bool vignetteFlag = false;
+	float vignetteFactor = 1.0f;
+	float vignetteScale = 16.0f;
+	Math::Vector::Vector3 viganetteColor_ = { 1,0,0 };
 };
 
 struct  PostEffectBlurParam

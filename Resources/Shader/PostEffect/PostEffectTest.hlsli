@@ -18,6 +18,10 @@ struct PostEffectAdjustedColor
     float32_t ContrastFactor;
     bool HueFlag;
     float32_t HueFactor;
+    bool vignetteFlag;
+    float vignetteFactor;
+    float vignatteScale;
+    float32_t3 vignetteColor;
 };
 
 struct PostEffectBlurParam

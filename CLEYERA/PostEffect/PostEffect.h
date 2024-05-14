@@ -18,7 +18,8 @@ enum SelectPostEffect
    BRINGHTNESS,
    CONTRAST,
    HUE,
-   AVERAGE_BLUR
+   AVERAGE_BLUR,
+   VIGNETTE
 };
 
 class PostEffect

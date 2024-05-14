@@ -309,17 +309,23 @@ void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skele
 {
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedPalette));
 
+	Math::Matrix::Matrix4x4 m =
+	{
+		1.0f,1.0f,1.0f,1.0f,
+		1.0f,1.0f,1.0f,1.0f,
+		1.0f,1.0f,1.0f,1.0f,
+		1.0f,1.0f,1.0f,1.0f
+	};
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
 		assert(jointIndex < skinCluster.inverseBindMatrices.size());
 
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
-			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
 
 		//skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = Math::Matrix::Identity();
 
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
-			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
+			skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix = m;
+			//Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
 
 	}
 }

@@ -88,6 +88,8 @@ void GameScene::Update(GameManager* Scene)
 	cameraData_ = playerCamera_->GetData();
 	cameraData_.TransfarMatrix();
 
+	
+
 	postEffect_->Update();
 }
 
