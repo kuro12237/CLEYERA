@@ -1,4 +1,4 @@
-#include "PostEffectTest.hlsli"
+#include "PostEffect.hlsli"
 
 Texture2D<float32_t4> gTexture : register(t0);
 Texture2D<float32_t> gShadowTexture : register(t1);

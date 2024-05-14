@@ -326,12 +326,12 @@ void ShaderManager::PostEffectTest()
 	SShaderMode shaders;
 	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/PostEffect/PostEffectTest.VS.hlsl",
+			L"Resources/Shader/PostEffect/PostEffect.VS.hlsl",
 			L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/PostEffect/PostEffectTest.PS.hlsl",
+			L"Resources/Shader/PostEffect/PostEffect.PS.hlsl",
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.PostEffectTest = shaders;

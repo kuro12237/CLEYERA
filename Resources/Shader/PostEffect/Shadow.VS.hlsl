@@ -1,4 +1,4 @@
-#include "PostEffectTest.hlsli"
+#include "PostEffect.hlsli"
 
 ConstantBuffer<TransformationMatrix> gTransformationMatrix : register(b0);
 ConstantBuffer<DirectionLightParam> gDirectionParam : register(b5);

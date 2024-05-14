@@ -33,7 +33,7 @@
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
     <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli" />
     <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
-    <None Include="Resources\Shader\PostEffect\PostEffectTest.hlsli" />
+    <None Include="Resources\Shader\PostEffect\PostEffect.hlsli" />
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli" />
     <None Include="Resources\Shader\SpriteObject2d.hlsli" />
     <None Include="Resources\Shader\SpriteObject2d.PS.hlsl">
@@ -410,7 +410,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\PostEffectTest.PS.hlsl">
+    <FxCompile Include="Resources\Shader\PostEffect\PostEffect.PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Pixel</ShaderType>
@@ -424,7 +424,7 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0_level_9_3</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">4.0_level_9_3</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\PostEffectTest.VS.hlsl">
+    <FxCompile Include="Resources\Shader\PostEffect\PostEffect.VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Vertex</ShaderType>

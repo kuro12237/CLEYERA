@@ -222,7 +222,7 @@
     <None Include="Resources\Shader\LightingObject3d.hlsli">
       <Filter>Shader\Lighting</Filter>
     </None>
-    <None Include="Resources\Shader\PostEffect\PostEffectTest.hlsli">
+    <None Include="Resources\Shader\PostEffect\PostEffect.hlsli">
       <Filter>Shader\PostEffect</Filter>
     </None>
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli">
@@ -876,10 +876,10 @@
     <FxCompile Include="Resources\Shader\Phong_Subsurface_Model3dObject.VS.hlsl">
       <Filter>Shader\Lighting\testShader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\PostEffectTest.VS.hlsl">
+    <FxCompile Include="Resources\Shader\PostEffect\PostEffect.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\PostEffectTest.PS.hlsl">
+    <FxCompile Include="Resources\Shader\PostEffect\PostEffect.PS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
