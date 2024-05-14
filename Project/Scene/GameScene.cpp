@@ -201,9 +201,9 @@ void GameScene::HitEffectUpdate()
 
 		if (vignatteTimer_ >= vignatteTimerMax)
 		{
-
 			postEffect_->SetSelectPostEffect(VIGNETTE, false);
 			IsVignatte_ = false;
+			vignatteTimer_ = 0.0f;
 		}
 	}
 
