@@ -65,6 +65,8 @@ public:
 
 	const uint32_t &GetHp() { return *hpCount_; }
 
+	const bool& GetIsHit() { return isHit_; }
+
 #pragma endregion
 
 #pragma region Set
@@ -97,8 +99,8 @@ private:
 	PlayerBehavior behavior_ = Normal;
 
 	bool isJamp_ = false;
+	bool isHit_ = false;
 
-	
 	unique_ptr<PlayerReticle>reticle_ = nullptr;
 	unique_ptr<PlayerGun>gun_ = nullptr;
 

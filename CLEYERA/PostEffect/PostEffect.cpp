@@ -217,6 +217,10 @@ void PostEffect::SetSelectPostEffect(SelectPostEffect s, bool flag)
 	{
 		blurParam_.UseFlag = flag;
 	}
+	if (s == VIGNETTE)
+	{
+		adjustedColorParam_.vignetteFlag = flag;
+	}
 }
 
 void PostEffect::CommandCallView(const float& width, const float& height)

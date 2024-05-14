@@ -58,8 +58,8 @@ void Player::Update()
 	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
 	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 
-	//Move();
-	
+	isHit_ = false;
+
 	if (state_)
 	{
 		state_->Update(this);
@@ -160,7 +160,8 @@ void Player::OnBlockCollision(IBoxCollider* collider)
 
 void Player::OnCollision(uint32_t id)
 {
-	id;
+	isHit_ = true;
+
 	if (id == kStoneItem)
 	{
 		ChangeState(make_unique<PlayerStoneState>());

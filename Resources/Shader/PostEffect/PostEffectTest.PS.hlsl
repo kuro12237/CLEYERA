@@ -28,13 +28,13 @@ PixelShaderOutput main(VertexShaderOutput input)
         resultColor.rgb = grayscaleColor;
     }
     //ビネット
+    if (gPostEffectAdjustedColorParam_.vignetteFlag)
     {
         float32_t2 correct = transformedUV.xy * (1.0f - transformedUV.xy);
         float32_t vignette = correct.x * correct.y * gPostEffectAdjustedColorParam_.vignatteScale;
-        vignette = saturate(pow(vignette, gPostEffectAdjustedColorParam_.vignetteFactor));
-        //resultColor.rgb *= vignette;
-        //resultColor.rgb = lerp(resultColor.rgb, gPostEffectAdjustedColorParam_.vignetteColor.rgb, vignette);
-        resultColor.rgb = lerp(resultColor.rgb, gPostEffectAdjustedColorParam_.vignetteColor.rgb, 1- vignette);
+        vignette = 1 - saturate(pow(vignette, gPostEffectAdjustedColorParam_.vignetteFactor));
+
+        resultColor.rgb = lerp(resultColor.rgb, gPostEffectAdjustedColorParam_.vignetteColor.rgb, vignette);
 
     }
     output.color = float32_t4(resultColor.rgb,1.0f);

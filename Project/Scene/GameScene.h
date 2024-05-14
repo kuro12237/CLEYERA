@@ -47,6 +47,11 @@ private:
 	void MapObjectUpdate();
 	void MapObjectDraw();
 
+	/// <summary>
+	/// 当たった時のビネット処理
+	/// </summary>
+	void HitEffectUpdate();
+
 	const string sceneName_ = "GameScene";
 
 	CameraData cameraData_ = {};

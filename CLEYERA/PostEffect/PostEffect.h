@@ -78,6 +78,12 @@ public:
 	/// </summary>
 	void SetBlurintensity(float f) { blurParam_.Intensity = f; }
 
+	void SetVignetteFactor(float f) { adjustedColorParam_.vignetteFactor = f; }
+
+	void SetVignetteColor(Math::Vector::Vector3 color) { adjustedColorParam_.viganetteColor_ = color;}
+
+	void SetVignetteScale(float s) { adjustedColorParam_.vignetteScale = s; }
+
 #pragma endregion
 
 private:

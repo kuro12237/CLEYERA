@@ -58,15 +58,6 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->Update();
 
-	if (player_->GetHp() == 2)
-	{
-		//postEffect_->SetGrayFactor(0.5f);
-	}
-	if (player_->GetHp() == 1)
-	{
-		//postEffect_->SetGrayFactor(1.0f);
-	}
-
 #pragma endregion
 
 	itemManager_->Update();
@@ -84,11 +75,11 @@ void GameScene::Update(GameManager* Scene)
 	//blockの当たり判定
 	CheckBlockCollision();
 
+	HitEffectUpdate();
+
 	playerCamera_->Update();
 	cameraData_ = playerCamera_->GetData();
 	cameraData_.TransfarMatrix();
-
-	
 
 	postEffect_->Update();
 }
@@ -189,4 +180,14 @@ void GameScene::MapObjectDraw()
 {
 	terrain_->Draw(cameraData_);
 	skyDome_->Draw(cameraData_);
+}
+
+void GameScene::HitEffectUpdate()
+{
+	if (player_->GetIsHit())
+	{
+		postEffect_->SetSelectPostEffect(VIGNETTE,true);
+		postEffect_->SetVignetteFactor(0.1f);
+		postEffect_->SetVignetteScale(128.0f);
+	}
 }
