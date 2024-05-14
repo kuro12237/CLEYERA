@@ -187,7 +187,26 @@ void GameScene::HitEffectUpdate()
 	if (player_->GetIsHit())
 	{
 		postEffect_->SetSelectPostEffect(VIGNETTE,true);
-		postEffect_->SetVignetteFactor(0.1f);
-		postEffect_->SetVignetteScale(128.0f);
+		postEffect_->SetVignetteScale(64.0f);
+		postEffect_->SetVignetteFactor(1.0f);
+		IsVignatte_ = true;
 	}
+
+	if (IsVignatte_)
+	{
+		vignatteTimer_ += 1.0f / 120.0f;
+		const float vignatteTimerMax = 1.0f;
+
+		postEffect_->SetVignetteFactor(1.0f - vignatteTimer_);
+
+		if (vignatteTimer_ >= vignatteTimerMax)
+		{
+
+			postEffect_->SetSelectPostEffect(VIGNETTE, false);
+			IsVignatte_ = false;
+		}
+	}
+
 }
+
+

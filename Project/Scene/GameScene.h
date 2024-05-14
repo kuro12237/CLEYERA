@@ -58,6 +58,9 @@ private:
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
 
+	bool IsVignatte_ = false;
+	float vignatteTimer_ = 0.0f;
+
 #pragma region map
 
 	unique_ptr<Sun>sun_ = nullptr;
