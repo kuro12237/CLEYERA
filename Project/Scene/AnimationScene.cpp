@@ -42,6 +42,7 @@ void AnimationScene::Initialize()
 	AnimationManager::GetInstance()->LoadAnimation(fileName_);
 	animationData_ = AnimationManager::GetInstance()->GetData(fileName_);
 
+	modelHandle_ = modelSimpleSkinHandle_;
 	gameObject_->SetModel(modelHandle_);
 
 }
