@@ -38,13 +38,12 @@ void AnimationScene::Initialize()
 	gameObject_->SetDesc(gameObjetcDesc);
 	gameObjetcDesc.useLight = true;
 
-	modelSimpleSkinHandle_ = ModelManager::LoadGltfFile(fileName_);
+	modelHumanHandle_ = ModelManager::LoadGltfFile(fileName_);
 	AnimationManager::GetInstance()->LoadAnimation(fileName_);
 	animationData_ = AnimationManager::GetInstance()->GetData(fileName_);
 
-	modelHandle_ = modelSimpleSkinHandle_;
+	modelHandle_ = modelHumanHandle_;
 	gameObject_->SetModel(modelHandle_);
-
 }
 
 void AnimationScene::Update(GameManager* Scene)

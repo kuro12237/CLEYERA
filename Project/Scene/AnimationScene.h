@@ -43,9 +43,6 @@ private:
 	float animationFlame_ = 0.0f;
 	uint32_t modelHandle_ = 0;
 	uint32_t modelHumanHandle_ = 0;
-	uint32_t modelSimpleSkinHandle_ = 0;
-
-
 
 	array<unique_ptr<Game3dObject>,128>testBox_ = {};
 	Game3dObjectDesc testBoxDesc_ = {};
