@@ -229,13 +229,13 @@
       <Filter>Shader\PostEffect</Filter>
     </None>
     <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli">
-      <Filter>Shader</Filter>
+      <Filter>Shader\PostEffect</Filter>
     </None>
     <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli">
-      <Filter>Shader</Filter>
+      <Filter>Shader\PostEffect</Filter>
     </None>
     <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli">
-      <Filter>Shader</Filter>
+      <Filter>Shader\PostEffect</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -885,23 +885,8 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl">
-      <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl">
       <Filter>Shader</Filter>
@@ -909,16 +894,31 @@
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl">
-      <Filter>Shader</Filter>
+    <FxCompile Include="Resources\Shader\SkinningObject3d.VS.hlsl">
+      <Filter>Shader\Lighting</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
-      <Filter>Shader</Filter>
+    <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl">
+      <Filter>Shader\PostEffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl">
-      <Filter>Shader</Filter>
+      <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\SkinningObject3d.VS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl">
+      <Filter>Shader\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
   </ItemGroup>

@@ -42,13 +42,24 @@ private:
 
 	float animationFlame_ = 0.0f;
 	uint32_t modelHandle_ = 0;
+	uint32_t modelHumanHandle_ = 0;
+	uint32_t modelSimpleSkinHandle_ = 0;
 
-	array<unique_ptr<Game3dObject>,4>testBox_ = {};
+
+
+	array<unique_ptr<Game3dObject>,128>testBox_ = {};
 	Game3dObjectDesc testBoxDesc_ = {};
-	array<WorldTransform,4> testBoxWorldTransform_ = {};
+	array<WorldTransform,128> testBoxWorldTransform_ = {};
 	uint32_t debugModelHandle_ = 0;
 
 	SAnimation::Animation animationData_;
 
-	const string fileName_ = "simpleSkin";
+
+
+	string fileName_ = "SimpleSkin";
+	const string fileSimpleSkin = "SimpleSkin";
+	const string fileHumanName = "Walk";
+
+	bool isTestSkeltonDraw_ = false;
+	bool isGameObjectDraw_ = false;
 };

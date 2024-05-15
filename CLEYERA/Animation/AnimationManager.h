@@ -11,7 +11,7 @@ public:
 
 	uint32_t LoadAnimation(const string& fileName);
 
-	void ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation::Animation& animation, float time);
+	static void ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation::Animation& animation, float time);
 
 	SAnimation::Animation GetData(const string& fileName);
 

@@ -3748,9 +3748,6 @@
             "doubleSided" : true,
             "extensions" : {
                 "KHR_materials_specular" : {
-                    "specularColorTexture" : {
-                        "index" : 0
-                    },
                     "specularColorFactor" : [
                         1.5999999813950578,
                         1.5999999813950578,
@@ -3764,7 +3761,7 @@
             "name" : "None",
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
-                    "index" : 1
+                    "index" : 0
                 },
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.2928932309150696
@@ -3793,18 +3790,9 @@
         {
             "sampler" : 0,
             "source" : 0
-        },
-        {
-            "sampler" : 0,
-            "source" : 1
         }
     ],
     "images" : [
-        {
-            "mimeType" : "image/png",
-            "name" : "Image",
-            "uri" : "Image.png"
-        },
         {
             "mimeType" : "image/png",
             "name" : "white",

@@ -80,7 +80,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 				}
 			}
 
-	
+
 		}
 		modelData;
 		//materialの解析
@@ -142,7 +142,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		Assimp::Importer importer;
 		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-		
+
 		assert(scene->HasMeshes());
 		//mesh解析
 		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex)
@@ -182,12 +182,11 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 				//1 左手系のBindPoseMatrixを作る
 				//変換
 				Math::Matrix::Matrix4x4 sm, rm, tm;
-		
+
 				sm = Math::Matrix::ScaleMatrix({ scale.x,scale.y,scale.z });
 				rm = Math::Qua::RotateMatrix({ rotate.x,-rotate.y,-rotate.z,rotate.w });
 				tm = Math::Matrix::TranslateMatrix({ -translate.x,translate.y,translate.z });
-				Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::Identity();
-				bindPoseMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
+				Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
 				jointWeightData.inverseBindPoseMatrix = Math::Matrix::Inverse(bindPoseMatrix);
 
 				// Weight情報を取り出す
@@ -287,7 +286,7 @@ Model* ModelManager::GetModel(uint32_t index)
 
 void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 {
-	for (SAnimation::Joint &joint : skeleton.joints)
+	for (SAnimation::Joint& joint : skeleton.joints)
 	{
 		Math::Matrix::Matrix4x4 tm = Math::Matrix::TranslateMatrix(joint.transform.translate);
 		Math::Matrix::Matrix4x4 rm = Math::Qua::RotateMatrix(joint.transform.quaternion);
@@ -309,32 +308,24 @@ void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skele
 {
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedPalette));
 
-	Math::Matrix::Matrix4x4 m =
-	{
-		1.0f,1.0f,1.0f,1.0f,
-		1.0f,1.0f,1.0f,1.0f,
-		1.0f,1.0f,1.0f,1.0f,
-		1.0f,1.0f,1.0f,1.0f
-	};
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
 		assert(jointIndex < skinCluster.inverseBindMatrices.size());
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = skeleton.joints[jointIndex].skeletonSpaceMatrix;
 
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
-
-		//skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = Math::Matrix::Identity();
-
-			skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix = m;
-			//Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
+			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
+		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
+			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
 
 	}
 }
 
 void ModelManager::SetModel(uint32_t modelHandle, SkinCluster skinCluster, SAnimation::Skeleton skeleton)
 {
-	for (const auto& [key, s] : ModelManager::GetInstance()->objModelDatas_)
+	for (const auto& [key, model] : ModelManager::GetInstance()->objModelDatas_)
 	{
-		if (s.get()->GetIndex() == modelHandle)
+		if (model->GetIndex() == modelHandle)
 		{
 			ModelManager::GetInstance()->objModelDatas_[key]->SetSkelton(skeleton);
 			ModelManager::GetInstance()->objModelDatas_[key]->SetSkinCluser(skinCluster);
@@ -418,7 +409,7 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 	skinCluster.paletteResource = CreateResources::CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
 	WellForGPU* mappedPalette = nullptr;
 	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size()};
+	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
 
 	//設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
@@ -445,26 +436,21 @@ SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton
 	skinCluster.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 
 	skinCluster.inverseBindMatrices.resize(skeleton.joints.size());
-	std::generate(skinCluster.inverseBindMatrices.begin(), skinCluster.inverseBindMatrices.end(),Math::Matrix::Identity);
+	std::generate(skinCluster.inverseBindMatrices.begin(), skinCluster.inverseBindMatrices.end(), Math::Matrix::Identity);
 	for (const auto& jointWeight : modelData.skinClusterData) {
-		// jointWeight.firstはjoint名なので、skeletonに対象となるjointが含まれているか調べる
 		auto it = skeleton.jointMap.find(jointWeight.first);
 		if (it == skeleton.jointMap.end()) {
-			//同じ名前のjointがなかったので次へ
 			continue;
 		}
 		// (*it).secondにはjointのindexが入っているので、該当のIndexのinverseBindPoseMatrixを代入
 		skinCluster.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
 		for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
-			// 該当のVertexIndexのinfluenceのinfluence情報を参照しておく
 			auto& currentInfluence = skinCluster.mappedInfluence[vertexWeight.vertexIndex];
 			// 空いているところに入れる
 			for (uint32_t index = 0; index < kNumMaxInfluence; ++index) {
 				// weight == 0 が空いている状態 その場所に代入
 				if (currentInfluence.weights[index] == 0.0f) {
-					// Weightを代入
 					currentInfluence.weights[index] = vertexWeight.weight;
-					// jointのIndexを代入
 					currentInfluence.jointIndicess[index] = (*it).second;
 					break;
 				}

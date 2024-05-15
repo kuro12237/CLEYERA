@@ -23,7 +23,7 @@ Quaternion Math::Qua::Multiply(const Quaternion& lhs, const Quaternion& rhs)
 
 Quaternion Math::Qua::IdentityQuaternion()
 {
-	return {0.0f,0.0f,0.0f,1.0f};
+	return { 0.0f,0.0f,0.0f,1.0f };
 }
 
 Quaternion Math::Qua::Conjugation(const Quaternion& quaternion)
@@ -66,7 +66,7 @@ Quaternion Math::Qua::Inverse(const Quaternion& quaternion)
 	Quaternion qC = Conjugation(quaternion);
 	float norm = Norm(quaternion);
 	float normxnorm = norm * norm;
-	
+
 
 	Quaternion result{};
 	result.x = qC.x / normxnorm;
@@ -112,6 +112,17 @@ Quaternion Math::Qua::Slerp(const Quaternion& q1, const Quaternion& q2, float t)
 	{
 		qn1 = { -qn1.x,-qn1.y,-qn1.z,-qn1.w };
 		dot = -dot;
+	}
+	if (dot >= 1.0f - std::numeric_limits<float>::epsilon())
+	{
+		float timer = 1.0f - t;
+		return Math::Qua::Quaternion{
+			timer * qn1.x + t * qn1.x,
+            timer * qn1.y + t * qn1.y,
+            timer * qn1.z + t * qn1.z,
+            timer * qn1.w + t * qn1.w,
+
+		};
 	}
 
 	// q1とq2の間の角度を計算

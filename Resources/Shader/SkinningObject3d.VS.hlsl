@@ -40,7 +40,6 @@ Skinned Skinning(VertexShaderInput input)
 VertexShaderOutput main(VertexShaderInput input,uint32_t vertexId : SV_VertexID)
 {
     VertexShaderOutput output;
-    input.index = vertexId;
     Skinned skinned = Skinning(input);
     float32_t4x4 CameraMatrix = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
 	//view変換
