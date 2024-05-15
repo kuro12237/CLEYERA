@@ -54,12 +54,6 @@ private:
 
 	SAnimation::Animation animationData_;
 
+	string fileName_ = "Walk";
 
-
-	string fileName_ = "SimpleSkin";
-	const string fileSimpleSkin = "SimpleSkin";
-	const string fileHumanName = "Walk";
-
-	bool isTestSkeltonDraw_ = false;
-	bool isGameObjectDraw_ = false;
 };

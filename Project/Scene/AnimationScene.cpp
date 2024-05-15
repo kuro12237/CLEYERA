@@ -31,6 +31,8 @@ void AnimationScene::Initialize()
 		testBox_[i]->SetModel(debugModelHandle_);
 		testBox_[i]->SetlectModelPipeline(PHONG_NORMAL_MODEL);
 	}
+
+	//AnimationModel
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	gameObject_->SetDesc(gameObjetcDesc);
@@ -39,12 +41,6 @@ void AnimationScene::Initialize()
 	modelSimpleSkinHandle_ = ModelManager::LoadGltfFile(fileName_);
 	AnimationManager::GetInstance()->LoadAnimation(fileName_);
 	animationData_ = AnimationManager::GetInstance()->GetData(fileName_);
-
-	modelHumanHandle_ = ModelManager::LoadGltfFile(fileHumanName);
-	AnimationManager::GetInstance()->LoadAnimation(fileHumanName);
-	animationData_ = AnimationManager::GetInstance()->GetData(fileHumanName);
-
-	modelHandle_ = modelHumanHandle_;
 
 	gameObject_->SetModel(modelHandle_);
 
@@ -59,17 +55,16 @@ void AnimationScene::Update(GameManager* Scene)
 		Scene->ChangeState(new TestScene);
 		return;
 	}
-	animationFlame_ += 1.0f / 60.0f;
-	ImGui::Checkbox("DrawSkeleton", &isTestSkeltonDraw_);
-	ImGui::Checkbox("DrawHuman", &isGameObjectDraw_);
 
 	debugCamera_->ImGuiUpdate();
 #endif // _USE_IMGUI
+
+	//flame加算
+	animationFlame_ += 1.0f / 60.0f;
 	animationFlame_ = std::fmod(animationFlame_, animationData_.duration);
 
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(modelHandle_).node.skeleton;
 	SkinCluster skinCluster = ModelManager::GetObjData(modelHandle_).skinCluster;
-
 
 	//Animation再生
 	AnimationManager::ApplyAnimation(skeleton, animationData_, animationFlame_);
@@ -78,10 +73,8 @@ void AnimationScene::Update(GameManager* Scene)
 	//SkincluserをUpdate
 	ModelManager::SkinClusterUpdate(skinCluster, skeleton);
 
-
 	//testModelMat
-
-	array<string,128 >numberString;;
+	array<string, 128 >numberString;;
 	for (int i = 0; i < skinCluster.mappedPalette.size(); ++i) {
 		numberString[i] = std::to_string(i);
 	}
@@ -89,9 +82,11 @@ void AnimationScene::Update(GameManager* Scene)
 	for (int i = 0; i < skinCluster.mappedPalette.size(); i++)
 	{
 		testBoxWorldTransform_[i].matWorld = skeleton.joints[i].skeletonSpaceMatrix;
-		//testBoxWorldTransform_[i].matWorld = skinCluster.mappedPalette[i].skeletonSpaceMatrix;
+
+#ifdef _USE_IMGUI
 
 		ImGui::Text("%s :: %f,%f,%f", numberString[i].c_str(), testBoxWorldTransform_[i].GetWorldPosition().x, testBoxWorldTransform_[i].GetWorldPosition().y, testBoxWorldTransform_[i].GetWorldPosition().z);
+#endif // _USE_IMGUI
 
 		testBoxWorldTransform_[i].TransfarMatrix();
 	}
@@ -108,17 +103,12 @@ void AnimationScene::Update(GameManager* Scene)
 void AnimationScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	if (isGameObjectDraw_)
-	{
-		gameObject_->Draw(worldTransform_, camera_);
-	}
 
-	if (isTestSkeltonDraw_)
+	gameObject_->Draw(worldTransform_, camera_);
+
+	for (int i = 0; i < 65; i++)
 	{
-		for (int i = 0; i < 65; i++)
-		{
-			testBox_[i]->Draw(testBoxWorldTransform_[i], camera_);
-		}
+		testBox_[i]->Draw(testBoxWorldTransform_[i], camera_);
 	}
 
 	postEffect_->PostDraw();

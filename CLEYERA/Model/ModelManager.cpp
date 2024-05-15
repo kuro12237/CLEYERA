@@ -311,8 +311,7 @@ void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skele
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
 		assert(jointIndex < skinCluster.inverseBindMatrices.size());
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix = skeleton.joints[jointIndex].skeletonSpaceMatrix;
-
+	
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
 			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
