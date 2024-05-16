@@ -83,7 +83,7 @@ void GameInstancing3dObject::Draw(const CameraData& camera)
 			}
 		}
 	}
-	model_->Draw(camera,uint32_t(params_.size()));
+	model_->Draw(uint32_t(params_.size()));
 }
 
 void GameInstancing3dObject::SetModel(const uint32_t& index)

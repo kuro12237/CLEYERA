@@ -1,11 +1,9 @@
 #pragma once
 #include"Pch.h"
 #include"Graphics/TextureManager/TextureManager.h"
-//
-//#include"ModelPlaneState.h"
-//#include"ModelLineState.h"
-//#include"ModelSphereState.h"
+
 #include"ModelObjState.h"
+#include"ModelSkinningState.h"
 
 #include"WorldTransform.h"
 #include"CameraData.h"
@@ -26,17 +24,11 @@ public:
 	/// <param name="color"></param>
 	void CreateModel(unique_ptr<IModelState> state, Math::Vector::Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Math::Vector::Vector4 color = { 1,1,1,1 });
 
-	/// <summary>
-	/// modelをセット(初期化の時にしか使わないように)
-	/// </summary>
-	/// <param name="ModelHandle"></param>
-	void SetModel(uint32_t handle);
-
-	void CreateObj(SModelData modeldata);
+	void CreateObj(SModelData modeldata, unique_ptr<IModelState>state);
 
 	void CommandCallPipelineVertex();
 
-	void Draw( const CameraData&viewprojection, uint32_t instancingNum);
+	void Draw(uint32_t instancingNum);
 
 	void SetDesc(const Game3dObjectDesc& desc) { desc_ = &desc; }
 
@@ -61,10 +53,9 @@ public:
 
 	SModelData GetModelData() { return modelData_; }
 
-#pragma endregion 
+	Game3dObjectDesc GetDesc() { return *desc_; }
 
-	void SetSkelton(SAnimation::Skeleton s) { modelData_.node.skeleton = s; }
-	void SetSkinCluser(SkinCluster s) { modelData_.skinCluster = s; }
+#pragma endregion 
 
 private:
 

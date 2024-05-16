@@ -15,7 +15,7 @@ void Game3dObject::SetModel(uint32_t index)
 	{
 		model_ = ModelManager::GetModel(index);
 		texHandle_ = ModelManager::GetObjData(index).material.handle;
-
+		model_->SetDesc(*game3dObjectDesc_);
 		if (ModelManager::GetObjData(index).normalTexHandle == 0)
 		{
 			TextureManager::UnUsedFilePath();
@@ -66,8 +66,6 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
-	model_->CommandCallPipelineVertex();
-
 	Commands command = DirectXCommon::GetInstance()->GetCommands();
 
 	MaterialBuffer_->CommandCall(0);
@@ -92,7 +90,7 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 			}
 		}
 	}
-	model_->Draw(view, 1);
+	model_->Draw(1);
 }
 
 bool Game3dObject::CommpandPipeline(SPSOProperty& PSO)

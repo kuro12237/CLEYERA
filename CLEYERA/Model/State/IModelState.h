@@ -6,12 +6,11 @@ class IModelState
 {
 public:
 	virtual ~IModelState() {};
-	virtual void Initialize(Model *state) = 0;
+	virtual void Initialize(Model* state) = 0;
 
-	
-	virtual void CallPipelinexVertex(Model *state) = 0;
+	virtual void CallPipelinexVertex(Model* state) = 0;
 
-	virtual void Draw(Model* state, const CameraData& viewprojection, uint32_t instancingNum) = 0;
+	virtual void Draw(Model* state, uint32_t instancingNum) = 0;
 private:
 
 };

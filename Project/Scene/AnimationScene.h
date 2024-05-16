@@ -53,4 +53,6 @@ private:
 
 	string fileName_ = "walk";
 
+	SAnimation::Skeleton skeleton_{};
+	SkinCluster skinCluster_{};
 };

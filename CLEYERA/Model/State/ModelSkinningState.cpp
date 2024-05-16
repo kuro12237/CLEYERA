@@ -14,43 +14,36 @@ void ModelSkinningState::Initialize(Model* state)
 	index_ = make_unique<BufferResource<uint32_t>>();
 	index_->CreateResource(uint32_t(state->GetModelData().indecs.size()));
 	index_->CreateIndexBufferView();
-	//influenceの作成
-	influence_ = make_unique<BufferResource<VertexInfluence>>();
-	influence_->CreateResource(uint32_t(sizeof(VertexInfluence) * state->GetModelData().vertices.size()));
-	influence_->CreateIndexBufferView();
-	
-	influence_->Map();
-	vector<VertexInfluence> mappedInfuence;
-	mappedInfuence.resize(state->GetModelData().vertices.size());
-
-	SAnimation::Skeleton skeleton = state->GetModelData().node.skeleton;
-	for (const auto& jointWeight : state->GetModelData().skinClusterData) {
-		auto it = skeleton.jointMap.find(jointWeight.first);
-		if (it == skeleton.jointMap.end()) {
-			continue;
-		}
-		for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
-			auto& currentInfluence = mappedInfuence[vertexWeight.vertexIndex];
-			// 空いているところに入れる
-			for (uint32_t index = 0; index < kNumMaxInfluence; ++index) {
-				// weight == 0 が空いている状態 その場所に代入
-				if (currentInfluence.weights[index] == 0.0f) {
-					currentInfluence.weights[index] = vertexWeight.weight;
-					currentInfluence.jointIndicess[index] = (*it).second;
-					break;
-				}
-			}
-		}
-	}
-	influence_->Setbuffer(mappedInfuence);
 }
 
 void ModelSkinningState::CallPipelinexVertex(Model* state)
 {
 	state;
+	vertex_->CommandPrimitiveTopologyCall();
 }
 
-void ModelSkinningState::Draw(Model* state, const CameraData& viewprojection, uint32_t instancingNum)
+void ModelSkinningState::Draw(Model* state,uint32_t instancingNum)
 {
-	state, viewprojection, instancingNum;
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	//vertex
+	vertex_->Map();
+	vertex_->Setbuffer(state->GetModelData().vertices);
+	vertex_->UnMap();
+	//Index
+	index_->Map();
+	index_->Setbuffer(state->GetModelData().indecs);
+	index_->UnMap();
+
+	if (state->GetModelData().fileFormat == "GLTF")
+	{
+		D3D12_VERTEX_BUFFER_VIEW vbvs[2]{
+			vertex_->GetBufferView(),
+			state->GetDesc().skinCluster.influenceBufferView
+		};
+		commands.m_pList->IASetVertexBuffers(0, 2, vbvs);
+		DescriptorManager::rootParamerterCommand(7, state->GetDesc().skinCluster.srvIndex);
+	}
+	index_->CommandIndexBufferViewCall();
+	vertex_->CommandPrimitiveTopologyCall();
+	commands.m_pList->DrawIndexedInstanced(UINT(state->GetModelData().indecs.size()), instancingNum, 0, 0, 0);
 }

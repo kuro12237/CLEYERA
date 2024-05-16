@@ -15,8 +15,7 @@ public:
 
 	void SetModel(uint32_t index);
 
-	void Draw(WorldTransform worldTransform,CameraData view);
-
+	void Draw(WorldTransform worldTransform, CameraData view);
 
 #pragma region Set
 
@@ -30,7 +29,6 @@ public:
 	void SetNormalTex(uint32_t tex) { normalTexHandle_ = tex; }
 	void SetBaseTex(uint32_t tex) { baseTexHandle_ = tex; }
 
-
 	void SetColor(Math::Vector::Vector4 color) { color_ = color; }
 
 	void SetMetalness(float m) { this->metalness_ = m; }
@@ -38,16 +36,15 @@ public:
 
 	void SetlectModelPipeline(ModelShaderSelect number) { ModelShaderSelect_ = number; }
 
-	
 #pragma endregion
 
 private:
 
-    Model*model_ = nullptr;
+	Model* model_ = nullptr;
 	uint32_t prevModelIndex_ = 0;
 
 	bool isIndexDraw = false;
-	bool CommpandPipeline(SPSOProperty &PSO);
+	bool CommpandPipeline(SPSOProperty& PSO);
 
 	unique_ptr<BufferResource<Material>>MaterialBuffer_ = nullptr;
 	Material material_ = {};
@@ -62,18 +59,12 @@ private:
 	Math::Vector::Vector3 uvRotate = { 0,0,0 };
 	Math::Vector::Vector3 uvTranslate = { 0,0,0 };
 
-
-
 #pragma region 物理ベース
 	float metalness_ = 1.0f;
 	float roughness_ = 1.0f;
 #pragma endregion
 
-
-
 	const Game3dObjectDesc* game3dObjectDesc_ = nullptr;
-
-	uint32_t skinCluserSrvIndex_ = 0;
 
 	uint32_t texHandle_ = 0;
 	uint32_t normalTexHandle_ = 0;

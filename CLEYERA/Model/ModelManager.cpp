@@ -79,10 +79,8 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 					modelData.indecs.push_back(vertexIndex);
 				}
 			}
-
-
 		}
-		modelData;
+
 		//materialの解析
 		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; materialIndex++)
 		{
@@ -92,7 +90,6 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 				aiString texFilePath;
 				material->GetTexture(aiTextureType_DIFFUSE, 0, &texFilePath);
 				modelData.material.textureFilePath = "Resources/Models/" + directoryPath + "/" + texFilePath.C_Str();
-
 			}
 		}
 
@@ -119,7 +116,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		}
 
 		unique_ptr<Model>model = make_unique <Model>();
-		model->CreateObj(modelData);
+		model->CreateObj(modelData,make_unique<ModelObjState>());
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
 
 		return modelHandle;
@@ -211,39 +208,14 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
-		//スケルトンの作成
-		modelData.node.skeleton = CreateSkeleton(modelData.node);
-		//skelton更新
-		SkeletonUpdate(modelData.node.skeleton);
-		//SkinCluster作成
-		modelData.skinCluster = CreateSkinCluster(modelData.node.skeleton, modelData);
-		////skinCluster更新
-		SkinClusterUpdate(modelData.skinCluster, modelData.node.skeleton);
 
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
 		modelData.material.handle = texHandle;
 
-		if (ModelManager::GetInstance()->isLoadNormalMap_)
-		{
-			const string normalFilePath = "Resources/Models/" + directoryPath + "/normalMap.png";
-			TextureManager::UnUsedFilePath();
-			uint32_t normalHandle = TextureManager::LoadPngTexture(normalFilePath);
-			modelData.normalTexHandle = normalHandle;
-			ModelManager::GetInstance()->isLoadNormalMap_ = false;
-		}
-		if (ModelManager::GetInstance()->isUsesubsurface_)
-		{
-			const string baseFilePath = "Resources/Models/" + directoryPath + "/baseTex.png";
-			TextureManager::UnUsedFilePath();
-			uint32_t baseTexHandle = TextureManager::LoadPngTexture(baseFilePath);
-			modelData.baseTexHandle = baseTexHandle;
-			ModelManager::GetInstance()->isUsesubsurface_ = false;
-
-		}
-
 		unique_ptr<Model>model = make_unique <Model>();
-		model->CreateObj(modelData);
+		model->CreateObj(modelData,make_unique<ModelSkinningState>());
+
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
 
 		return modelHandle;

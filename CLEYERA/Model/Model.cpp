@@ -16,21 +16,9 @@ void Model::CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos , float
 	state_->Initialize(this);
 }
 
-void Model::SetModel(uint32_t handle)
+void Model::CreateObj(SModelData modeldata,unique_ptr<IModelState>state)
 {
-	prevModelHandle_ = modelHandle_;
-	modelHandle_ = handle;
-
-	if (prevModelHandle_ != modelHandle_)
-	{
-		state_=make_unique<ModelObjState>();
-		state_->Initialize(this);
-	}
-}
-
-void Model::CreateObj(SModelData modeldata)
-{
-	state_ = make_unique<ModelObjState>();
+	state_ = move(state);
 	modelData_ = modeldata;
 	state_->Initialize(this);
 }
@@ -40,7 +28,7 @@ void Model::CommandCallPipelineVertex()
 	state_->CallPipelinexVertex(this);
 }
 
-void Model::Draw(const CameraData& viewprojection, uint32_t instancingNum)
+void Model::Draw(uint32_t instancingNum)
 {
 	if (state_ == nullptr)
 	{
@@ -48,7 +36,7 @@ void Model::Draw(const CameraData& viewprojection, uint32_t instancingNum)
 		assert(0);
 	}
 	
-	state_->Draw(this,viewprojection,instancingNum);
+	state_->Draw(this,instancingNum);
 }
 
 

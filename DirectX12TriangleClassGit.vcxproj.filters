@@ -205,6 +205,9 @@
     <Filter Include="CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline">
       <UniqueIdentifier>{6315510e-7e6f-46a4-92b8-e6d5b5cd135f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Model\instancing">
+      <UniqueIdentifier>{ba0d744a-1885-4168-a500-5cee93745c18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -375,9 +378,6 @@
     <ClCompile Include="Project\GameObject\Player\Player.cpp">
       <Filter>Project\GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp">
-      <Filter>CLEYERA\Model</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp">
       <Filter>Project\Utility\GameCollider</Filter>
     </ClCompile>
@@ -482,8 +482,15 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Player\state\PlayerNormalState.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStoneState.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.cpp" />
-    <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp" />
+    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp">
+      <Filter>CLEYERA\Model\instancing</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.cpp">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -508,9 +515,6 @@
       <Filter>CLEYERA\Graphics\CompileShaders</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\Model.h">
-      <Filter>CLEYERA\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Model\State\IModelState.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Transform\WorldTransform.h">
@@ -687,9 +691,6 @@
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h">
-      <Filter>CLEYERA\Model</Filter>
-    </ClInclude>
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h">
       <Filter>Project\Utility</Filter>
     </ClInclude>
@@ -707,9 +708,6 @@
     </ClInclude>
     <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h">
       <Filter>Project\Utility\Gravity</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h">
-      <Filter>CLEYERA\Model</Filter>
     </ClInclude>
     <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h">
       <Filter>Project\Utility\Gravity</Filter>
@@ -838,6 +836,15 @@
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.h">
+      <Filter>CLEYERA\Model\instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.h">
+      <Filter>CLEYERA\Model\instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\IModelState.h">
       <Filter>CLEYERA\Model\ObjState</Filter>
     </ClInclude>
   </ItemGroup>

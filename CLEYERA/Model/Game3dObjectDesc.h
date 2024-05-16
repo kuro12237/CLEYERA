@@ -30,11 +30,13 @@ enum ModelShaderSelect
 
 struct Game3dObjectDesc
 {
-
 	ModelShaderSelect select = PHONG_MODEL;
 	PhongModelDesc shongDesc;
 	SSSModelDesc sssDesc;
 	ColorModelDesc colorDesc;
+	const SAnimation::Skeleton *skeleton;
+	SkinCluster skinCluster;
+	uint32_t srvSkinClusterHandle_;
 	bool useLight = false;
 
 };
