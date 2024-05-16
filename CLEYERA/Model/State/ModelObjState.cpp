@@ -7,6 +7,7 @@ ModelObjState::~ModelObjState()
 
 void ModelObjState::Initialize(Model* state)
 {
+	//頂点作成
 	vertex_ = make_unique<BufferResource<VertexData>>();
 	vertex_->CreateResource(uint32_t(state->GetModelData().vertices.size()));
 	vertex_->CreateVertexBufferView();
@@ -14,6 +15,9 @@ void ModelObjState::Initialize(Model* state)
 	index_ = make_unique<BufferResource<uint32_t>>();
 	index_->CreateResource(uint32_t(state->GetModelData().indecs.size()));
 	index_->CreateIndexBufferView();
+ 
+	
+
 }
 
 void ModelObjState::CallPipelinexVertex(Model* state)

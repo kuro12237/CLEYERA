@@ -105,11 +105,11 @@ void ShaderManager::ShaderComples()
 	NormalModel();
 	PosModel();
 	ColorPostProcess();
-	
+
 	PostEffectTest();
 	ShadowMap();
 
-	SkinningVS();
+	SkinningPhongModelShader();
 }
 
 void ShaderManager::ShapeShader()
@@ -353,7 +353,7 @@ void ShaderManager::ShadowMap()
 	ShaderManager::Getinstance()->shaders_.shadowMapVS = shaders;
 }
 
-void ShaderManager::SkinningVS()
+void ShaderManager::SkinningPhongModelShader()
 {
 	SShaderMode shaders{};
 	shaders.vertexBlob =
@@ -361,6 +361,9 @@ void ShaderManager::SkinningVS()
 			L"Resources/Shader/SkinningObject3d.VS.hlsl",
 			L"vs_6_0");
 
-	ShaderManager::Getinstance()->shaders_.skinningVS = shaders;
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Phong_ModelObject3d.PS.hlsl",
+			L"ps_6_0");
+	ShaderManager::Getinstance()->shaders_.skinningPhongModel = shaders;
 }
-

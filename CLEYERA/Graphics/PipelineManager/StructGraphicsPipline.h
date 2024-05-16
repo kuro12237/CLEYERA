@@ -41,7 +41,7 @@ struct SPSO
 	SPSOProperty PosModel3d;
 	SPSOProperty PostEffectTest;
 	SPSOProperty shadow;
-
+	SPSOProperty Phong_SkinningModel;
 };
 
 enum  BlendMode

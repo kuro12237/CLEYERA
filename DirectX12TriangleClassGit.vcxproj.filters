@@ -202,6 +202,9 @@
     <Filter Include="CLEYERA\Utility\Color">
       <UniqueIdentifier>{1382ba80-a386-451e-b1e6-3d539446b826}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline">
+      <UniqueIdentifier>{6315510e-7e6f-46a4-92b8-e6d5b5cd135f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -479,6 +482,8 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Player\state\PlayerNormalState.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStoneState.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.cpp" />
+    <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -829,6 +834,12 @@
     <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerNormalState.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerStoneState.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.h">
+      <Filter>CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h">
+      <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

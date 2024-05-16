@@ -4,6 +4,7 @@
 #include"ShaderManager.h"
 #include"StructGraphicsPipline.h"
 
+#include"SkinningCreatePipline/SkinningCreatePipline.h"
 #include"ModelCreatePipline/ModelCreatePipline.h"
 #include"PostProcess/CreatePostProcess.h"
 
@@ -68,7 +69,7 @@ private:
 	);
 
 	/// <summary>
-	/// �[�x�̐ݒ�
+	/// 
 	/// </summary>
 	/// <param name="despthStencilDesc"></param>
 	/// <param name="EnableFlag"></param>

@@ -11,7 +11,6 @@ void Game3dObject::Create()
 
 void Game3dObject::SetModel(uint32_t index)
 {
-
 	if (prevModelIndex_ != index)
 	{
 		model_ = ModelManager::GetModel(index);
@@ -38,8 +37,6 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 	{
 		return;
 	}
-
-	//model_->SetDesc(*game3dObjectDesc_);
 
 	MaterialBuffer_->Map();
 
@@ -98,123 +95,12 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 	model_->Draw(view, 1);
 }
 
-void Game3dObject::ShadowDraw(const WorldTransform& worldTransform, const CameraData view)
-{
-
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().shadow;
-
-	Commands command = DirectXCommon::GetInstance()->GetCommands();
-	model_->CommandCallPipelineVertex();
-
-	MaterialBuffer_->Map();
-	material_.shininess = game3dObjectDesc_->shongDesc.shininess;
-	material_.color = color_;
-	material_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate, uvTranslate);
-	material_.specular_ = game3dObjectDesc_->shongDesc.specular_;
-	material_.roughness_ = roughness_;
-	material_.metalness_ = metalness_;
-	material_.scatterCoefficient = game3dObjectDesc_->sssDesc.absorptionCoefficient_;
-	material_.scatterDistance = game3dObjectDesc_->sssDesc.scatterDistance_;
-	material_.absorptionCoefficient = game3dObjectDesc_->sssDesc.absorptionCoefficient_;
-	MaterialBuffer_->Setbuffer(material_);
-	MaterialBuffer_->UnMap();
-
-
-	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
-	model_->CommandCallPipelineVertex();
-
-	MaterialBuffer_->CommandCall(0);
-	worldTransform.buffer_->CommandCall(1);
-
-	view.buffer_->CommandCall(2);
-	view.buffer_->CommandCall(3);
-	DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
-	command.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
-
-	DescriptorManager::rootParamerterCommand(6, texHandle_);
-	DirectionalLight::CommandCall(7);
-
-	model_->Draw(view, 1);
-}
-
-void Game3dObject::ColorDraw(const WorldTransform& worldTransform, const CameraData& view)
-{
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().ColorModel3d;
-	GraphicsPipelineManager::GetInstance()->GetPso().ColorModel3d;
-
-	Commands command = DirectXCommon::GetInstance()->GetCommands();
-	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
-
-	model_->CommandCallPipelineVertex();
-
-	cMaterialBuffer_->Map();
-	cMaterial_.color = { 1,1,1,1 };
-	cMaterialBuffer_->Setbuffer(cMaterial_);
-	cMaterialBuffer_->UnMap();
-
-	cMaterialBuffer_->CommandCall(0);
-	worldTransform.buffer_->CommandCall(1);
-	view.buffer_->CommandCall(2);
-	view.buffer_->CommandCall(3);
-
-	DescriptorManager::rootParamerterCommand(4, texHandle_);
-	model_->Draw(view, 1);
-}
-
-void Game3dObject::NormalDraw(const WorldTransform& worldTransform, const CameraData& view)
-{
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().NormalModel3d;
-	Commands command = DirectXCommon::GetInstance()->GetCommands();
-	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
-
-	model_->CommandCallPipelineVertex();
-
-	cMaterialBuffer_->Map();
-	cMaterial_.color = { 1,1,1,1 };
-	cMaterialBuffer_->Setbuffer(cMaterial_);
-	cMaterialBuffer_->UnMap();
-
-	cMaterialBuffer_->CommandCall(0);
-	worldTransform.buffer_->CommandCall(1);
-	view.buffer_->CommandCall(2);
-	view.buffer_->CommandCall(3);
-
-	DescriptorManager::rootParamerterCommand(4, normalTexHandle_);
-	model_->Draw(view, 1);
-}
-
-void Game3dObject::PosDraw(const WorldTransform& worldTransform, const CameraData& view)
-{
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().PosModel3d;
-	Commands command = DirectXCommon::GetInstance()->GetCommands();
-	command.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	command.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
-
-	model_->CommandCallPipelineVertex();
-
-	cMaterialBuffer_->Map();
-	cMaterial_.color = { 1,1,1,1 };
-	cMaterialBuffer_->Setbuffer(cMaterial_);
-	cMaterialBuffer_->UnMap();
-
-	cMaterialBuffer_->CommandCall(0);
-	worldTransform.buffer_->CommandCall(1);
-	view.buffer_->CommandCall(2);
-	view.buffer_->CommandCall(3);
-
-	DescriptorManager::rootParamerterCommand(4, normalTexHandle_);
-	model_->Draw(view, 1);
-}
-
 bool Game3dObject::CommpandPipeline(SPSOProperty& PSO)
 {
 	switch (ModelShaderSelect_)
 	{
 	case PHONG_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Phong_Model;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Phong_SkinningModel;
 		break;
 
 	case UE4_BRDF:

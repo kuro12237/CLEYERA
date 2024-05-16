@@ -51,6 +51,6 @@ private:
 
 	SAnimation::Animation animationData_;
 
-	string fileName_ = "human";
+	string fileName_ = "walk";
 
 };

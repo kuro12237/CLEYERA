@@ -17,13 +17,6 @@ public:
 
 	void Draw(WorldTransform worldTransform,CameraData view);
 
-	void ShadowDraw(const WorldTransform& worldTransform, const CameraData view);
-
-	void ColorDraw(const WorldTransform& worldTransform, const CameraData& view);
-
-	void NormalDraw(const WorldTransform& worldTransform, const CameraData& view);
-
-	void PosDraw(const WorldTransform& worldTransform, const CameraData& view);
 
 #pragma region Set
 

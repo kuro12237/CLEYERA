@@ -138,12 +138,15 @@ void GraphicsPipelineManager::CreatePSO(SPSO &pso)
 	pso.PBR_Model = CreatePBR(device.Get(), commands, shader.PBR_Model);
 	LogManager::CompliteLog("CreateHerf_LightPSO");
 
-	pso.Phong_Model = CreatePhong(device.Get(), commands, shader.Phong_Model);
-	LogManager::CompliteLog("PhongModelPSO");
+	//pso.Phong_Model = CreatePhong(device.Get(), commands, shader.Phong_Model);
+	//LogManager::CompliteLog("PhongModelPSO");
 	pso.PhongNormal_Model = CreatePhongNormalModel(device.Get(), commands, shader.Phong_Normal_Model);
 	LogManager::CompliteLog("PhongNormalModelPSO");
 	pso.PhongSubsurface_Model = CreateSubsurfaceModel(device.Get(), commands, shader.Phong_subsurface_Model);
 	LogManager::CompliteLog("PhongsubsurefacePSO");
+
+	pso.Phong_SkinningModel = SkinningCreatePipline::CreateSkinningPhongModel(device.Get(), commands, shader.skinningPhongModel);
+	LogManager::CompliteLog("PhongSkinningPSO");
 
 	pso.phongNormalInstancing_Model = ModelCreatePipline::CreatePhongInstancingModel(device.Get(), commands, shader.Phong_Normal_InstancingModel);
 
@@ -1596,11 +1599,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
-
-	graphicsPipelineStateDesc.pRootSignature = DirectionalLightPSO.rootSignature.Get(); //RootSignature
-	//graphicsPipelineStateDesc.pRootSignature[1] = *DirectionalLightPSO.skinningRootSignature.Get(); //RootSignature
-
-
+	graphicsPipelineStateDesc.pRootSignature = DirectionalLightPSO.rootSignature.Get(); 
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; //InputLayout
 	graphicsPipelineStateDesc.VS = {shader.vertexBlob->GetBufferPointer(),
 	shader.vertexBlob->GetBufferSize() }; //VertexShader

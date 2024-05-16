@@ -1,0 +1,22 @@
+#pragma once
+#include"IModelState.h"
+#include"Model.h"
+#include"ModelManager.h"
+#include"Vector/VectorTransform.h"
+#include"Light/LightingManager.h"
+
+class ModelSkinningState :public IModelState
+{
+public:
+	ModelSkinningState() {};
+	~ModelSkinningState() ;
+
+	void Initialize(Model* state)override;
+	void CallPipelinexVertex(Model* state)override;
+	void Draw(Model* state, const CameraData& viewprojection, uint32_t instancingNum)override;
+
+private:
+	unique_ptr<BufferResource<uint32_t>>index_ = nullptr;
+	unique_ptr<BufferResource<VertexData>>vertex_ = nullptr;
+	unique_ptr<BufferResource<VertexInfluence>>influence_ = nullptr;
+};

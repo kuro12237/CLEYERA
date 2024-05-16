@@ -60,7 +60,7 @@ void AnimationScene::Update(GameManager* Scene)
 #endif // _USE_IMGUI
 
 	//flame加算
-	animationFlame_ += 1.0f / 60.0f;
+	animationFlame_ += 1.0f / 30.0f;
 	animationFlame_ = std::fmod(animationFlame_, animationData_.duration);
 
 	SAnimation::Skeleton skeleton = ModelManager::GetObjData(modelHandle_).node.skeleton;
@@ -108,7 +108,7 @@ void AnimationScene::PostProcessDraw()
 
 	for (int i = 0; i < 65; i++)
 	{
-		testBox_[i]->Draw(testBoxWorldTransform_[i], camera_);
+		//testBox_[i]->Draw(testBoxWorldTransform_[i], camera_);
 	}
 
 	postEffect_->PostDraw();

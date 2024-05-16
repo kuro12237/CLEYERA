@@ -59,6 +59,7 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp" />
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TextureManager.cpp" />
@@ -74,6 +75,7 @@
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp" />
+    <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp" />
     <ClCompile Include="CLEYERA\Particle\Particle.cpp" />
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
@@ -146,6 +148,7 @@
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h" />
     <ClInclude Include="CLEYERA\Graphics\ShaderManager\ShaderManager.h" />
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h" />
@@ -173,6 +176,7 @@
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
+    <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h" />
     <ClInclude Include="CLEYERA\Particle\Particle.h" />
     <ClInclude Include="CLEYERA\Particle\SParticle.h" />
     <ClInclude Include="CLEYERA\Particle\state\IParticleState.h" />
