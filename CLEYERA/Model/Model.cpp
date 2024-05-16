@@ -4,6 +4,7 @@ using namespace Math::Vector;
 
 Model::~Model()
 {
+	delete desc_;
 }
 
 void Model::CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos , float size , Vector4 color)

@@ -9,7 +9,7 @@ class Game3dObject
 {
 public:
 	Game3dObject() {};
-	~Game3dObject() { };
+	~Game3dObject() { delete game3dObjectDesc_; };
 
 	void Create();
 
