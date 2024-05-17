@@ -18,4 +18,5 @@ public:
 private:
 	unique_ptr<BufferResource<uint32_t>>index_ = nullptr;
 	unique_ptr<BufferResource<VertexData>>vertex_ = nullptr;
+
 };

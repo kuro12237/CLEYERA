@@ -116,7 +116,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		}
 
 		unique_ptr<Model>model = make_unique <Model>();
-		model->CreateObj(modelData,make_unique<ModelObjState>());
+		model->SetStateType(modelData,OBJECT);
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
 
 		return modelHandle;
@@ -171,7 +171,6 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 				aiBone* bone = mesh->mBones[boneIndex];
 				std::string jointName = bone->mName.C_Str();
 				JointWeightData& jointWeightData = modelData.skinClusterData[jointName];
-
 				aiMatrix4x4 bindPoseMatirxAssimp = bone->mOffsetMatrix.Inverse();
 				aiVector3D scale, translate;
 				aiQuaternion rotate;
@@ -208,14 +207,14 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
+		modelData.skeleton = CreateSkeleton(modelData.node);
 
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
 		modelData.material.handle = texHandle;
 
 		unique_ptr<Model>model = make_unique <Model>();
-		model->CreateObj(modelData,make_unique<ModelSkinningState>());
-
+		model->SetStateType(modelData,GLTF);
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
 
 		return modelHandle;
@@ -289,18 +288,6 @@ void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skele
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
 			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
 
-	}
-}
-
-void ModelManager::SetModel(uint32_t modelHandle, SkinCluster skinCluster, SAnimation::Skeleton skeleton)
-{
-	for (const auto& [key, model] : ModelManager::GetInstance()->objModelDatas_)
-	{
-		if (model->GetIndex() == modelHandle)
-		{
-			ModelManager::GetInstance()->objModelDatas_[key]->SetSkelton(skeleton);
-			ModelManager::GetInstance()->objModelDatas_[key]->SetSkinCluser(skinCluster);
-		}
 	}
 }
 

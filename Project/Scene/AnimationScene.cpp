@@ -46,8 +46,7 @@ void AnimationScene::Initialize()
 	////skinCluster更新
 	ModelManager::SkinClusterUpdate(skinCluster_, skeleton_);
 
-	gameObjetcDesc.skinCluster = skinCluster_;
-	gameObjetcDesc.skeleton = &skeleton_;
+	gameObjetcDesc.skinningAnimationDesc.skinCluster = skinCluster_;
 	gameObjetcDesc.useLight = true;
 
 
@@ -93,7 +92,7 @@ void AnimationScene::Update(GameManager* Scene)
 
 	for (int i = 0; i < skinCluster_.mappedPalette.size(); i++)
 	{
-		testBoxWorldTransform_[i].matWorld = gameObjetcDesc.skeleton->joints[i].skeletonSpaceMatrix;
+		//testBoxWorldTransform_[i].matWorld = gameObjetcDesc.skinningAnimationDesc.skeleton->joints[i].skeletonSpaceMatrix;
 
 #ifdef _USE_IMGUI
 		ImGui::Text("%s :: %f,%f,%f", numberString[i].c_str(), testBoxWorldTransform_[i].GetWorldPosition().x, testBoxWorldTransform_[i].GetWorldPosition().y, testBoxWorldTransform_[i].GetWorldPosition().z);

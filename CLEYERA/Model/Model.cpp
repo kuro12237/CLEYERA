@@ -24,6 +24,7 @@ void Model::CreateObj(SModelData modeldata,unique_ptr<IModelState>state)
 	state_->Initialize(this);
 }
 
+
 void Model::CommandCallPipelineVertex()
 {
 	state_->CallPipelinexVertex(this);
@@ -38,6 +39,50 @@ void Model::Draw(uint32_t instancingNum)
 	}
 	
 	state_->Draw(this,instancingNum);
+}
+
+void Model::SetStateType(SModelData modelData,ModelFormatType type)
+{
+	modelData_ = modelData;
+	if (type==OBJECT)
+	{
+		state_ = make_unique<ModelObjState>();
+		state_->Initialize(this);
+	}
+	else if (type == GLTF)
+	{
+		state_ = make_unique<ModelSkinningState>();
+		state_->Initialize(this);
+		//作成
+		influence_ = make_unique<BufferResource<VertexInfluence>>();
+		influence_->CreateResource(uint32_t(modelData_.vertices.size()));
+		influence_->CreateVertexBufferView();
+		influence_->Map();
+		//sizeを確保
+		mappedInfluence.resize(modelData_.vertices.size());
+		for (const auto& jointWeight : modelData_.skinClusterData) {
+			auto it = modelData_.skeleton.jointMap.find(jointWeight.first);
+			if (it == modelData_.skeleton.jointMap.end()) {
+				continue;
+			}
+			// (*it).secondにはjointのindexが入っているので、該当のIndexのinverseBindPoseMatrixを代入
+			//skinCluster.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
+			for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
+				auto& currentInfluence = mappedInfluence[vertexWeight.vertexIndex];
+				// 空いているところに入れる
+				for (uint32_t index = 0; index < kNumMaxInfluence; ++index) {
+					// weight == 0 が空いている状態 その場所に代入
+					if (currentInfluence.weights[index] == 0.0f) {
+						currentInfluence.weights[index] = vertexWeight.weight;
+						currentInfluence.jointIndicess[index] = (*it).second;
+						break;
+					}
+				}
+			}
+		}
+		influence_->Setbuffer(mappedInfluence);
+	}
+
 }
 
 

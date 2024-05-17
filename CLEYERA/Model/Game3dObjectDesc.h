@@ -28,15 +28,24 @@ enum ModelShaderSelect
 	PHONG_SUBSURFACE_MODEL = 3
 };
 
+struct SkinningAnimation
+{
+	SAnimation::Skeleton skeleton;
+
+	uint32_t srvSkinClusterHandle_ = 0;
+	SkinCluster skinCluster;
+};
+
+
 struct Game3dObjectDesc
 {
+
 	ModelShaderSelect select = PHONG_MODEL;
 	PhongModelDesc shongDesc;
 	SSSModelDesc sssDesc;
 	ColorModelDesc colorDesc;
-	const SAnimation::Skeleton *skeleton;
-	SkinCluster skinCluster;
-	uint32_t srvSkinClusterHandle_;
+	SkinningAnimation skinningAnimationDesc;
+
 	bool useLight = false;
 
 };

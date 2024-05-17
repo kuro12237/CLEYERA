@@ -9,13 +9,15 @@ class Game3dObject
 {
 public:
 	Game3dObject() {};
-	~Game3dObject() { delete game3dObjectDesc_; };
+	~Game3dObject() {};
 
 	void Create();
 
 	void SetModel(uint32_t index);
 
 	void Draw(WorldTransform worldTransform, CameraData view);
+
+	void CreateSkinningParameter();
 
 #pragma region Set
 
@@ -49,10 +51,17 @@ private:
 	unique_ptr<BufferResource<Material>>MaterialBuffer_ = nullptr;
 	Material material_ = {};
 
-	//defferd
-	unique_ptr<BufferResource<DefferredMaterial>>cMaterialBuffer_ = nullptr;
-	DefferredMaterial cMaterial_ = {};
+	unique_ptr<BufferResource<SkinCluster>>cSkinCluster_ = nullptr;
 
+#pragma region Skinning
+
+	SAnimation::Skeleton skeleton_;
+
+	std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
+
+	unique_ptr<BufferResource<WellForGPU>>palette_ = nullptr;
+	
+#pragma endregion
 
 	Math::Vector::Vector4 color_ = { 1,1,1,1 };
 	Math::Vector::Vector3 uvScale_ = { 1,1,1 };

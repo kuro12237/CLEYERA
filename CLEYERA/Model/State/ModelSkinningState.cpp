@@ -14,6 +14,8 @@ void ModelSkinningState::Initialize(Model* state)
 	index_ = make_unique<BufferResource<uint32_t>>();
 	index_->CreateResource(uint32_t(state->GetModelData().indecs.size()));
 	index_->CreateIndexBufferView();
+
+
 }
 
 void ModelSkinningState::CallPipelinexVertex(Model* state)
@@ -38,10 +40,11 @@ void ModelSkinningState::Draw(Model* state,uint32_t instancingNum)
 	{
 		D3D12_VERTEX_BUFFER_VIEW vbvs[2]{
 			vertex_->GetBufferView(),
-			state->GetDesc().skinCluster.influenceBufferView
+			state->GetInfluence()->GetBufferView()
+			//state->GetDesc().skinningAnimationDesc.skinCluster.influenceBufferView
 		};
 		commands.m_pList->IASetVertexBuffers(0, 2, vbvs);
-		DescriptorManager::rootParamerterCommand(7, state->GetDesc().skinCluster.srvIndex);
+		DescriptorManager::rootParamerterCommand(7, state->GetDesc().skinningAnimationDesc.skinCluster.srvIndex);
 	}
 	index_->CommandIndexBufferViewCall();
 	vertex_->CommandPrimitiveTopologyCall();

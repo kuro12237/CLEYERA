@@ -4,9 +4,6 @@ void Game3dObject::Create()
 {
 	MaterialBuffer_ = make_unique<BufferResource<Material>>();
 	MaterialBuffer_->CreateResource();
-
-	cMaterialBuffer_ = make_unique<BufferResource<DefferredMaterial>>();
-	cMaterialBuffer_->CreateResource(1);
 }
 
 void Game3dObject::SetModel(uint32_t index)
@@ -91,6 +88,22 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 		}
 	}
 	model_->Draw(1);
+}
+
+void Game3dObject::CreateSkinningParameter()
+{
+	if (!model_)
+	{
+		assert(0);
+	}
+
+	//skeltonの作成
+	skeleton_ = ModelManager::CreateSkeleton(model_->GetModelData().node);
+	ModelManager::SkeletonUpdate(skeleton_);
+	palette_ = make_unique<BufferResource<WellForGPU>>();
+	palette_->CreateInstancingResource(uint32_t(skeleton_.joints.size()), "test",sizeof(WellForGPU));
+
+
 }
 
 bool Game3dObject::CommpandPipeline(SPSOProperty& PSO)

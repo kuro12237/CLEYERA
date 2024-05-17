@@ -91,6 +91,7 @@ struct JointWeightData
 struct  SModelData
 {
 	std::map<std::string, JointWeightData>skinClusterData;
+	SAnimation::Skeleton skeleton;
 	SkinCluster skinCluster;
 	vector<VertexData> vertices;
 	std::vector<uint32_t>indecs;

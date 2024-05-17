@@ -6,7 +6,7 @@
 class ModelObjData
 {
 public:
-	
+
 	ModelObjData(SModelData modelData, uint32_t index, unique_ptr<Model> model) {
 		modelData_ = modelData,
 			index_ = index;
@@ -20,9 +20,6 @@ public:
 	Model* GetModel() { return model_.get(); }
 
 	uint32_t GetIndex() { return index_; }
-
-	void SetSkelton(SAnimation::Skeleton s) { modelData_.node.skeleton = s; }
-	void SetSkinCluser(SkinCluster s) { modelData_.skinCluster = s; }
 
 private:
 

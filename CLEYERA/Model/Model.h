@@ -10,6 +10,12 @@
 #include"Light/Light.h"
 #include"Game3dObjectDesc.h"
 
+enum ModelFormatType
+{
+	OBJECT,
+	GLTF
+};
+
 class Model
 {
 public:
@@ -26,11 +32,15 @@ public:
 
 	void CreateObj(SModelData modeldata, unique_ptr<IModelState>state);
 
+	void CreateSkinCluster();
+
 	void CommandCallPipelineVertex();
 
 	void Draw(uint32_t instancingNum);
 
 	void SetDesc(const Game3dObjectDesc& desc) { desc_ = &desc; }
+
+	void SetStateType(SModelData modelData,ModelFormatType type);
 
 #pragma region Get
 
@@ -54,12 +64,15 @@ public:
 	SModelData GetModelData() { return modelData_; }
 
 	Game3dObjectDesc GetDesc() { return *desc_; }
+	BufferResource<VertexInfluence>*GetInfluence() { return influence_.get(); }
 
-#pragma endregion 
+#pragma endregion
 
 private:
 
 	const Game3dObjectDesc* desc_ = nullptr;
+
+	ModelFormatType formatType_ = OBJECT;
 
 	Math::Vector::Vector4 CenterPos_ = { 0,0,0,1 };
 	float size_=1.5f;
@@ -77,5 +90,7 @@ private:
 	unique_ptr<IModelState> state_ = nullptr;
 	SModelData modelData_;
 
+	unique_ptr<BufferResource<VertexInfluence>>influence_;
+	vector<VertexInfluence> mappedInfluence;
 };
 
