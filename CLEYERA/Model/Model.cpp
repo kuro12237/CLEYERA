@@ -60,13 +60,16 @@ void Model::SetStateType(SModelData modelData,ModelFormatType type)
 		influence_->Map();
 		//sizeを確保
 		mappedInfluence.resize(modelData_.vertices.size());
+		modelData_.inverseBindMatrices.resize(modelData_.skeleton.joints.size());
+		std::generate(modelData_.inverseBindMatrices.begin(), modelData_.inverseBindMatrices.end(), Math::Matrix::Identity);
+
 		for (const auto& jointWeight : modelData_.skinClusterData) {
 			auto it = modelData_.skeleton.jointMap.find(jointWeight.first);
 			if (it == modelData_.skeleton.jointMap.end()) {
 				continue;
 			}
 			// (*it).secondにはjointのindexが入っているので、該当のIndexのinverseBindPoseMatrixを代入
-			//skinCluster.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
+			modelData_.inverseBindMatrices[(*it).second] = jointWeight.second.inverseBindPoseMatrix;
 			for (const auto& vertexWeight : jointWeight.second.vertexWeights) {
 				auto& currentInfluence = mappedInfluence[vertexWeight.vertexIndex];
 				// 空いているところに入れる

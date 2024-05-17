@@ -98,11 +98,9 @@ void Game3dObject::CreateSkinningParameter()
 	}
 
 	//skeltonの作成
-	skeleton_ = ModelManager::CreateSkeleton(model_->GetModelData().node);
-	ModelManager::SkeletonUpdate(skeleton_);
+	skeleton_ = model_->GetModelData().skeleton;
 	palette_ = make_unique<BufferResource<WellForGPU>>();
 	palette_->CreateInstancingResource(uint32_t(skeleton_.joints.size()), "test",sizeof(WellForGPU));
-
 
 }
 

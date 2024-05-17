@@ -41,7 +41,6 @@ void ModelSkinningState::Draw(Model* state,uint32_t instancingNum)
 		D3D12_VERTEX_BUFFER_VIEW vbvs[2]{
 			vertex_->GetBufferView(),
 			state->GetInfluence()->GetBufferView()
-			//state->GetDesc().skinningAnimationDesc.skinCluster.influenceBufferView
 		};
 		commands.m_pList->IASetVertexBuffers(0, 2, vbvs);
 		DescriptorManager::rootParamerterCommand(7, state->GetDesc().skinningAnimationDesc.skinCluster.srvIndex);

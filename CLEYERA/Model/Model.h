@@ -92,5 +92,6 @@ private:
 
 	unique_ptr<BufferResource<VertexInfluence>>influence_;
 	vector<VertexInfluence> mappedInfluence;
+
 };
 
