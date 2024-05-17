@@ -5,10 +5,9 @@ void SkyDome::Initialize()
 	modelHandle_ = ModelManager::LoadObjectFile("SkyDome");
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
-	gameObject_->SetModel(modelHandle_);
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);
-	gameObject_->SetlectModelPipeline(PHONG_MODEL);
+	gameObject_->SetModel(modelHandle_);
 	worldTransform_.Initialize();
 	worldTransform_.scale = { 128.0f,128.0f,128.0f };
 }

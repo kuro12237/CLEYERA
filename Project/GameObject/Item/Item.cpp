@@ -5,10 +5,10 @@ void Item::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	uint32_t modelHandle = ModelManager::LoadObjectFile("TestBox");
-	gameObject_->SetModel(modelHandle);
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);
-	gameObject_->SetlectModelPipeline(PHONG_NORMAL_MODEL);
+	gameObject_->SetModel(modelHandle);
+
 	animationHandle_ = AnimationManager::GetInstance()->LoadAnimation("testItem");
 
 	worldTransform_.Initialize();

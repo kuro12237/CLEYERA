@@ -49,36 +49,8 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
-			//メモリの確保
-			//Fenceの解析
-			for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex)
-			{
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-				VertexData vertex;
-				vertex.position = { -position.x,position.y,position.z,1.0f };
-				vertex.normal = { -normal.x,normal.y,normal.z };
-				vertex.texcoord = { texcoord.x,texcoord.y };
-				//座標反転
-				//vertex.position.x *= -1.0f;
-				//vertex.normal.x *= -1.0f;
-				modelData.vertices.push_back(vertex);
-			}
-
-			//modelData.indecs.resize(mesh->mNumFaces);
-			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex)
-			{
-				aiFace& face = mesh->mFaces[faceIndex];
-				assert(face.mNumIndices == 3);
-
-				for (uint32_t element = 0; element < face.mNumIndices; ++element)
-				{
-					uint32_t vertexIndex = face.mIndices[element];
-					//indexPush
-					modelData.indecs.push_back(vertexIndex);
-				}
-			}
+			//頂点作成
+			CreateVerteces(modelData, mesh);
 		}
 
 		//materialの解析
@@ -126,7 +98,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 	return ModelManager::GetInstance()->objModelDatas_[directoryPath]->GetIndex();
 }
 
-uint32_t ModelManager::LoadGltfFile(string directoryPath)
+uint32_t ModelManager::LoadGltfFile(string directoryPath, bool skinningFlag)
 {
 	if (ChackLoadObj(directoryPath))
 	{
@@ -136,6 +108,8 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		uint32_t modelHandle = ModelManager::GetInstance()->objHandle_;
 		SModelData modelData = {};
 		modelData.fileFormat = "GLTF";
+		modelData.skinningFlag_ = skinningFlag;
+
 		Assimp::Importer importer;
 		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -147,49 +121,11 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
-			//メモリの確保
-			modelData.vertices.resize(mesh->mNumVertices);
-			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
-				aiFace& face = mesh->mFaces[faceIndex];
-				assert(face.mNumIndices == 3);//三角形のみ
-				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
-					uint32_t vertexIndex = face.mIndices[element];
-					aiVector3D& position = mesh->mVertices[vertexIndex];
-					aiVector3D& normal = mesh->mNormals[vertexIndex];
-					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-					modelData.vertices[vertexIndex].position = { -position.x,position.y,position.z,1.0f };
-					modelData.vertices[vertexIndex].normal = { -normal.x,normal.y,normal.z };
-					modelData.vertices[vertexIndex].texcoord = { texcoord.x,texcoord.y };
-					//Indexの解析
-					modelData.indecs.push_back(vertexIndex);
-				}
-			}
-
-			//bone
+	        //頂点作成
+			CreateVerteces(modelData, mesh);
+			//bone作成
 			// ここからBoneのデータを取得
-			for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
-				aiBone* bone = mesh->mBones[boneIndex];
-				std::string jointName = bone->mName.C_Str();
-				JointWeightData& jointWeightData = modelData.skinClusterData[jointName];
-				aiMatrix4x4 bindPoseMatirxAssimp = bone->mOffsetMatrix.Inverse();
-				aiVector3D scale, translate;
-				aiQuaternion rotate;
-				bindPoseMatirxAssimp.Decompose(scale, rotate, translate);
-				//1 左手系のBindPoseMatrixを作る
-				//変換
-				Math::Matrix::Matrix4x4 sm, rm, tm;
-
-				sm = Math::Matrix::ScaleMatrix({ scale.x,scale.y,scale.z });
-				rm = Math::Qua::RotateMatrix({ rotate.x,-rotate.y,-rotate.z,rotate.w });
-				tm = Math::Matrix::TranslateMatrix({ -translate.x,translate.y,translate.z });
-				Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
-				jointWeightData.inverseBindPoseMatrix = Math::Matrix::Inverse(bindPoseMatrix);
-
-				// Weight情報を取り出す
-				for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
-					jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight,bone->mWeights[weightIndex].mVertexId });
-				}
-			}
+			CreateBorn(modelData,mesh);
 		}
 
 		//materialの解析
@@ -208,6 +144,7 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath)
 		//Nodeを読む
 		modelData.node = ReadNodeData(scene->mRootNode);
 		modelData.skeleton = CreateSkeleton(modelData.node);
+		SkeletonUpdate(modelData.skeleton);
 
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
@@ -358,6 +295,54 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 		joints[joint.index].childlen.push_back(childIndex);
 	}
 	return joint.index;
+}
+
+void ModelManager::CreateVerteces(SModelData& data, aiMesh* mesh)
+{
+    data.vertices.resize(mesh->mNumVertices);
+	for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+		aiFace& face = mesh->mFaces[faceIndex];
+		assert(face.mNumIndices == 3);//三角形のみ
+		for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+			uint32_t vertexIndex = face.mIndices[element];
+			aiVector3D& position = mesh->mVertices[vertexIndex];
+			aiVector3D& normal = mesh->mNormals[vertexIndex];
+			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+			data.vertices[vertexIndex].position = { -position.x,position.y,position.z,1.0f };
+			data.vertices[vertexIndex].normal = { -normal.x,normal.y,normal.z };
+			data.vertices[vertexIndex].texcoord = { texcoord.x,texcoord.y };
+			//Indexの解析
+			data.indecs.push_back(vertexIndex);
+		}
+	}
+}
+
+void ModelManager::CreateBorn(SModelData& data, aiMesh* mesh)
+{
+	for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
+		aiBone* bone = mesh->mBones[boneIndex];
+		std::string jointName = bone->mName.C_Str();
+		JointWeightData& jointWeightData = data.skinClusterData[jointName];
+		aiMatrix4x4 bindPoseMatirxAssimp = bone->mOffsetMatrix.Inverse();
+		aiVector3D scale, translate;
+		aiQuaternion rotate;
+		bindPoseMatirxAssimp.Decompose(scale, rotate, translate);
+		//1 左手系のBindPoseMatrixを作る
+		//変換
+		Math::Vector::Vector3 sv, tv;
+		Math::Qua::Quaternion rq;
+		sv = { scale.x,scale.y,scale.z };
+		tv = { -translate.x,translate.y,translate.z };
+		rq = { rotate.x,-rotate.y,-rotate.z,rotate.w };
+
+		Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::AffineMatrix(sv,rq,tv);
+		jointWeightData.inverseBindPoseMatrix = Math::Matrix::Inverse(bindPoseMatrix);
+
+		// Weight情報を取り出す
+		for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+			jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight,bone->mWeights[weightIndex].mVertexId });
+		}
+	}
 }
 
 SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton, const SModelData& modelData)

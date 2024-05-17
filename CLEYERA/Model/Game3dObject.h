@@ -3,7 +3,7 @@
 #include"Light/DirectionLIght.h"
 #include"Game3dObjectDesc.h"
 #include"Graphics/PipelineManager/GraphicsPipelineManager.h"
-
+#include"Animation/AnimationManager.h"
 
 class Game3dObject
 {
@@ -19,28 +19,27 @@ public:
 
 	void CreateSkinningParameter();
 
+	void SkeletonUpdate(string fileName, float t);
+
+	void SkinningUpdate();
+
+	void SetObjectName(const string& name) { name_ = name; }
+
 #pragma region Set
 
 	void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = &desc; }
 
-	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
-	void SetUvRotate(Math::Vector::Vector3 r) { uvRotate = r; }
-	void SetTranslate(Math::Vector::Vector3 t) { uvTranslate = t; }
+	void SetName(string name) { name_ = name; }
 
 	void SetTexHandle(uint32_t index) { texHandle_ = index; }
 	void SetNormalTex(uint32_t tex) { normalTexHandle_ = tex; }
 	void SetBaseTex(uint32_t tex) { baseTexHandle_ = tex; }
 
-	void SetColor(Math::Vector::Vector4 color) { color_ = color; }
-
-	void SetMetalness(float m) { this->metalness_ = m; }
-	void SetRoughness(float r) { this->roughness_ = r; }
-
-	void SetlectModelPipeline(ModelShaderSelect number) { ModelShaderSelect_ = number; }
-
 #pragma endregion
 
 private:
+
+	string name_;
 
 	Model* model_ = nullptr;
 	uint32_t prevModelIndex_ = 0;
@@ -60,17 +59,7 @@ private:
 	std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
 
 	unique_ptr<BufferResource<WellForGPU>>palette_ = nullptr;
-	
-#pragma endregion
-
-	Math::Vector::Vector4 color_ = { 1,1,1,1 };
-	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
-	Math::Vector::Vector3 uvRotate = { 0,0,0 };
-	Math::Vector::Vector3 uvTranslate = { 0,0,0 };
-
-#pragma region 物理ベース
-	float metalness_ = 1.0f;
-	float roughness_ = 1.0f;
+	vector<WellForGPU>paletteParam_;
 #pragma endregion
 
 	const Game3dObjectDesc* game3dObjectDesc_ = nullptr;

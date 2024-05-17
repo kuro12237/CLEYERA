@@ -4,7 +4,6 @@
 
 #include"Utility/GlobalVariables/GlobalVariables.h"
 
-#include"CGScene.h"
 #include"GameScene.h"
 #include"AnimationScene.h"
 class GameManager

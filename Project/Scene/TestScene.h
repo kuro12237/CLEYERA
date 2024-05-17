@@ -1,7 +1,6 @@
 #pragma once
 #include"GameManager.h"
 #include"IScene.h"
-#include"CGScene.h"
 
 class TestScene :public IScene
 {

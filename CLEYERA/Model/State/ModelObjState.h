@@ -12,7 +12,6 @@ public:
 	~ModelObjState() ;
 
 	void Initialize(Model* state)override;
-	void CallPipelinexVertex(Model* state)override;
 	void Draw(Model* state,uint32_t instancingNum)override;
 
 private:

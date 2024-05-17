@@ -51,8 +51,7 @@ private:
 
 	SAnimation::Animation animationData_;
 
-	string fileName_ = "SimpleSkin";
+	string fileName_ = "Walk";
 
-	SAnimation::Skeleton skeleton_{};
-	SkinCluster skinCluster_{};
+	
 };

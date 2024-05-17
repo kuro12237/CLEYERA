@@ -15,36 +15,39 @@ struct  SSSModelDesc
 	float scatterDistance_ = 0.5f;
 };
 
+struct PBRModelDesc
+{
+#pragma region 物理ベース
+	float metalness_ = 1.0f;
+	float roughness_ = 1.0f;
+#pragma endregion
+};
+
 struct ColorModelDesc
 {
+	Math::Vector:: Vector4 color_ = { 1.0f,1.0f,1.0f,1.0f };
+	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
+	Math::Vector::Vector3 uvRotate = { 0,0,0 };
+	Math::Vector::Vector3 uvTranslate = { 0,0,0 };
+    
 	float grayFactor_ = 0.0f;
 };
 
 enum ModelShaderSelect
 {
-	PHONG_MODEL = 0,
-	UE4_BRDF = 1,
-	PHONG_NORMAL_MODEL = 2,
-	PHONG_SUBSURFACE_MODEL = 3
+	UE4_BRDF = 0,
+	PHONG_NORMAL_MODEL = 1,
+	PHONG_SUBSURFACE_MODEL = 2
 };
-
-struct SkinningAnimation
-{
-	SAnimation::Skeleton skeleton;
-
-	uint32_t srvSkinClusterHandle_ = 0;
-	SkinCluster skinCluster;
-};
-
 
 struct Game3dObjectDesc
 {
 
-	ModelShaderSelect select = PHONG_MODEL;
-	PhongModelDesc shongDesc;
+	ModelShaderSelect select = PHONG_NORMAL_MODEL;
+	PhongModelDesc phongDesc;
 	SSSModelDesc sssDesc;
+	PBRModelDesc pbrDesc;
 	ColorModelDesc colorDesc;
-	SkinningAnimation skinningAnimationDesc;
 
 	bool useLight = false;
 

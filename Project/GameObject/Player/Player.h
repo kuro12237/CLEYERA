@@ -108,5 +108,9 @@ private:
 	unique_ptr<PlayerHp>hp_ = nullptr;
 	const uint32_t* hpCount_ = {};
 
+
+	//test
+	SAnimation::Animation animationData_ = {};
+	float flame_ = 0.0f;
 };
 

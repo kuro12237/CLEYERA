@@ -15,13 +15,6 @@ void ModelSkinningState::Initialize(Model* state)
 	index_->CreateResource(uint32_t(state->GetModelData().indecs.size()));
 	index_->CreateIndexBufferView();
 
-
-}
-
-void ModelSkinningState::CallPipelinexVertex(Model* state)
-{
-	state;
-	vertex_->CommandPrimitiveTopologyCall();
 }
 
 void ModelSkinningState::Draw(Model* state,uint32_t instancingNum)
@@ -43,9 +36,9 @@ void ModelSkinningState::Draw(Model* state,uint32_t instancingNum)
 			state->GetInfluence()->GetBufferView()
 		};
 		commands.m_pList->IASetVertexBuffers(0, 2, vbvs);
-		DescriptorManager::rootParamerterCommand(7, state->GetDesc().skinningAnimationDesc.skinCluster.srvIndex);
 	}
 	index_->CommandIndexBufferViewCall();
-	vertex_->CommandPrimitiveTopologyCall();
+
+	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	commands.m_pList->DrawIndexedInstanced(UINT(state->GetModelData().indecs.size()), instancingNum, 0, 0, 0);
 }

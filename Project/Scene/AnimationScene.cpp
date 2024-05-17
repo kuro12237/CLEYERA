@@ -17,38 +17,15 @@ void AnimationScene::Initialize()
 	pointLight_.position.z = 8.0f;
 
 	debugModelHandle_ = ModelManager::LoadObjectFile("DebugTestBox");
-	testBoxDesc_.useLight = true;
-
-	for (int i = 0; i < 128; i++)
-	{
-		float scale = 0.001f;
-		testBoxWorldTransform_[i].Initialize();
-		testBoxWorldTransform_[i].scale = { scale,scale ,scale };
-		testBox_[i] = make_unique<Game3dObject>();
-		testBox_[i]->Create();
-		testBox_[i]->SetDesc(testBoxDesc_);
-		testBox_[i]->SetModel(debugModelHandle_);
 	
-		testBox_[i]->SetlectModelPipeline(PHONG_NORMAL_MODEL);
-	}
-
 	//AnimationModel
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
-	
-	modelHumanHandle_ = ModelManager::LoadGltfFile(fileName_);
+
+	modelHumanHandle_ = ModelManager::LoadGltfFile(fileName_,true);
 	SModelData modelData = ModelManager::GetObjData(modelHumanHandle_);
-	skeleton_ = ModelManager::CreateSkeleton(modelData.node);
-	//skelton更新
-	ModelManager::SkeletonUpdate(skeleton_);
-	//SkinCluster作成
-    skinCluster_ = ModelManager::CreateSkinCluster(skeleton_, modelData);
-	////skinCluster更新
-	ModelManager::SkinClusterUpdate(skinCluster_, skeleton_);
 
-	gameObjetcDesc.skinningAnimationDesc.skinCluster = skinCluster_;
 	gameObjetcDesc.useLight = true;
-
 
 	AnimationManager::GetInstance()->LoadAnimation(fileName_);
 	animationData_ = AnimationManager::GetInstance()->GetData(fileName_);
@@ -56,7 +33,8 @@ void AnimationScene::Initialize()
 	modelHandle_ = modelHumanHandle_;
 	gameObject_->SetDesc(gameObjetcDesc);
 	gameObject_->SetModel(modelHandle_);
-
+	gameObject_->SetName("walk");
+	gameObject_->CreateSkinningParameter();
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -75,31 +53,8 @@ void AnimationScene::Update(GameManager* Scene)
 	//flame加算
 	animationFlame_ += 1.0f / 30.0f;
 	animationFlame_ = std::fmod(animationFlame_, animationData_.duration);
-
-
-	//Animation再生
-	AnimationManager::ApplyAnimation(skeleton_, animationData_, animationFlame_);
-	//スケルトンの更新
-	ModelManager::SkeletonUpdate(skeleton_);
-	//SkincluserをUpdate
-	ModelManager::SkinClusterUpdate(skinCluster_, skeleton_);
-
-	//testModelMat
-	array<string, 128 >numberString;;
-	for (int i = 0; i < skinCluster_.mappedPalette.size(); ++i) {
-		numberString[i] = std::to_string(i);
-	}
-
-	for (int i = 0; i < skinCluster_.mappedPalette.size(); i++)
-	{
-		//testBoxWorldTransform_[i].matWorld = gameObjetcDesc.skinningAnimationDesc.skeleton->joints[i].skeletonSpaceMatrix;
-
-#ifdef _USE_IMGUI
-		ImGui::Text("%s :: %f,%f,%f", numberString[i].c_str(), testBoxWorldTransform_[i].GetWorldPosition().x, testBoxWorldTransform_[i].GetWorldPosition().y, testBoxWorldTransform_[i].GetWorldPosition().z);
-#endif // _USE_IMGUI
-
-		testBoxWorldTransform_[i].TransfarMatrix();
-	}
+	gameObject_->SkeletonUpdate(fileName_, animationFlame_);
+	gameObject_->SkinningUpdate();
 
 	worldTransform_.TransfarMatrix();
 
@@ -115,11 +70,6 @@ void AnimationScene::PostProcessDraw()
 	postEffect_->PreDraw();
 
 	gameObject_->Draw(worldTransform_, camera_);
-
-	for (int i = 0; i < 65; i++)
-	{
-		//testBox_[i]->Draw(testBoxWorldTransform_[i], camera_);
-	}
 
 	postEffect_->PostDraw();
 }

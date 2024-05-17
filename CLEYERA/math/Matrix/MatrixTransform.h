@@ -2,6 +2,7 @@
 #include"Pch.h"
 #include"CreateResource.h"
 #include"Vector/VectorTransform.h"
+#include"Quaternion/QuaternionTransform.h"
 
 namespace Math
 {
@@ -92,6 +93,8 @@ namespace Math
 		/// <param name="回転"></param>
 		/// <param name="移動"></param>
 		Matrix4x4 AffineMatrix(const Math::Vector::Vector3& Sv, const Math::Vector::Vector3& Rv, const Math::Vector::Vector3& Tv);
+
+		Matrix4x4 AffineMatrix(const Math::Vector::Vector3& Sv, const Math::Qua::Quaternion& Rq, const Math::Vector::Vector3& Tv);
 
 		Matrix4x4 OrthographicLH(float width, float height, float nearPlane, float farPlane);
 		Matrix4x4 LookAtLH(Math::Vector::Vector3 eyePosition, Math::Vector::Vector3 focusPosition, Math::Vector::Vector3 upDirection);

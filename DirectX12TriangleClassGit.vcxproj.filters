@@ -336,9 +336,6 @@
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp">
       <Filter>CLEYERA\math\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\CGScene.cpp">
-      <Filter>Project\Scene\Game</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp">
       <Filter>CLEYERA\Audio</Filter>
     </ClCompile>
@@ -639,9 +636,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\math\Vector\VectorTransform.h">
       <Filter>CLEYERA\math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Scene\CGScene.h">
-      <Filter>Project\Scene\Game</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Audio\AudioDataResource.h">
       <Filter>CLEYERA\Audio</Filter>

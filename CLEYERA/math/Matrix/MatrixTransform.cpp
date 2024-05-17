@@ -406,6 +406,16 @@ Matrix4x4 Math::Matrix::AffineMatrix(const Vector3& Sv, const Vector3& Rv, const
 	return result;
 }
 
+Matrix4x4 Math::Matrix::AffineMatrix(const Math::Vector::Vector3& Sv, const Math::Qua::Quaternion& Rq, const Math::Vector::Vector3& Tv)
+{
+	//変換
+	Math::Matrix::Matrix4x4 sm, rm, tm;
+	sm = Math::Matrix::ScaleMatrix(Sv);
+	rm = Math::Qua::RotateMatrix(Rq);
+	tm = Math::Matrix::TranslateMatrix(Tv);
+	return  Math::Matrix::Multiply(sm, Math::Matrix::Multiply(rm, tm));
+}
+
 Matrix4x4 Math::Matrix::OrthographicLH(float width, float height, float nearPlane, float farPlane)
 {
 	float invWidth = 1.0f / width;

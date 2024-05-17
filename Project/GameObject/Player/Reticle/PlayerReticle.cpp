@@ -7,9 +7,10 @@ void PlayerReticle::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
 	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerReticle");
-	gameObject_->SetModel(modelHandle);
 	gameObjectDesc_.useLight = false;
 	gameObject_->SetDesc(gameObjectDesc_);
+	gameObject_->SetModel(modelHandle);
+
 
 }
 
@@ -49,7 +50,8 @@ void PlayerReticle::Update()
 
 void PlayerReticle::Draw3d(const CameraData& camera)
 {
-	gameObject_->Draw(worldTransform_, camera);
+	camera;
+	//gameObject_->Draw(worldTransform_, camera);
 }
 
 void PlayerReticle::Draw2d(const CameraData& camera)

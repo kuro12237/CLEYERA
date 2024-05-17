@@ -2,32 +2,12 @@
 
 using namespace Math::Vector;
 
-Model::~Model()
-{
-	delete desc_;
-}
+Model::~Model(){}
 
-void Model::CreateModel(unique_ptr<IModelState> state, Vector4 CenterPos , float size , Vector4 color)
+void Model::CreateModel(unique_ptr<IModelState> state)
 {
-	CenterPos_ = CenterPos;
-	size_ = size;
-	color_ = color;
-
 	state_=move(state);
 	state_->Initialize(this);
-}
-
-void Model::CreateObj(SModelData modeldata,unique_ptr<IModelState>state)
-{
-	state_ = move(state);
-	modelData_ = modeldata;
-	state_->Initialize(this);
-}
-
-
-void Model::CommandCallPipelineVertex()
-{
-	state_->CallPipelinexVertex(this);
 }
 
 void Model::Draw(uint32_t instancingNum)
@@ -44,12 +24,12 @@ void Model::Draw(uint32_t instancingNum)
 void Model::SetStateType(SModelData modelData,ModelFormatType type)
 {
 	modelData_ = modelData;
-	if (type==OBJECT)
+	if (type==OBJECT && !modelData.skinningFlag_)
 	{
 		state_ = make_unique<ModelObjState>();
 		state_->Initialize(this);
 	}
-	else if (type == GLTF)
+	else if (type == GLTF && modelData.skinningFlag_)
 	{
 		state_ = make_unique<ModelSkinningState>();
 		state_->Initialize(this);
@@ -85,7 +65,6 @@ void Model::SetStateType(SModelData modelData,ModelFormatType type)
 		}
 		influence_->Setbuffer(mappedInfluence);
 	}
-
 }
 
 

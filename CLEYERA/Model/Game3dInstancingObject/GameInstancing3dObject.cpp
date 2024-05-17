@@ -60,7 +60,6 @@ void GameInstancing3dObject::Draw(const CameraData& camera)
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
-	model_->CommandCallPipelineVertex();
 	material_->CommandCall(0);
 	DescriptorManager::rootParamerterCommand(1, instancing_->GetSrvIndex());
 	camera.buffer_->CommandCall(2);
@@ -122,9 +121,6 @@ bool GameInstancing3dObject::CommpandPipeline(SPSOProperty& PSO)
 {
 	switch (ModelShaderSelect_)
 	{
-	case PHONG_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Phong_Model;
-		break;
 
 	case UE4_BRDF:
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().PBR_Model;

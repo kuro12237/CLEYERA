@@ -14,13 +14,6 @@ void ModelObjState::Initialize(Model* state)
 	index_->CreateIndexBufferView();
 }
 
-void ModelObjState::CallPipelinexVertex(Model* state)
-{
-	state;
-	vertex_->CommandVertexBufferViewCall();
-	vertex_->CommandPrimitiveTopologyCall();
-}
-
 void ModelObjState::Draw(Model* state,uint32_t instancingNum)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -37,7 +30,7 @@ void ModelObjState::Draw(Model* state,uint32_t instancingNum)
 		vertex_->CommandVertexBufferViewCall();
 	}
 	index_->CommandIndexBufferViewCall();
-	vertex_->CommandPrimitiveTopologyCall();
 
+	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	commands.m_pList->DrawIndexedInstanced(UINT(state->GetModelData().indecs.size()), instancingNum, 0, 0, 0);
 }

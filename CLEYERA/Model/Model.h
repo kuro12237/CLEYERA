@@ -25,16 +25,7 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="state"></param>
-	/// <param name="CenterPos"></param>
-	/// <param name="size"></param>
-	/// <param name="color"></param>
-	void CreateModel(unique_ptr<IModelState> state, Math::Vector::Vector4 CenterPos = { 0,0,0,1 }, float size = { 0.5 }, Math::Vector::Vector4 color = { 1,1,1,1 });
-
-	void CreateObj(SModelData modeldata, unique_ptr<IModelState>state);
-
-	void CreateSkinCluster();
-
-	void CommandCallPipelineVertex();
+	void CreateModel(unique_ptr<IModelState> state);
 
 	void Draw(uint32_t instancingNum);
 
@@ -42,29 +33,18 @@ public:
 
 	void SetStateType(SModelData modelData,ModelFormatType type);
 
+	void SetSkinClusterSrvIndex(const uint32_t& index) { skinClusterSrvIndex_ = index; };
+
 #pragma region Get
 
-	Math::Vector::Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 	uint32_t GetModelHandle() { return modelHandle_; }
-
-	Math::Vector::Vector3 GetuvScale() { return uvScale_; }
-	Math::Vector::Vector3 GetuvRotate() { return uvRotate_; }
-	Math::Vector::Vector3 GetuvTranslate() { return uvTranslate_; }
-
-	/// <summary>
-	/// GetModelCenterPos
-	/// </summary>
-	Math::Vector::Vector4 GetCenterPos() { return CenterPos_; }
-	/// <summary>
-	/// GetModelSize
-	/// </summary>
-	float GetSize() { return size_; }
 
 	SModelData GetModelData() { return modelData_; }
 
 	Game3dObjectDesc GetDesc() { return *desc_; }
 	BufferResource<VertexInfluence>*GetInfluence() { return influence_.get(); }
+	uint32_t GetSkinClusterIndex() { return skinClusterSrvIndex_; }
 
 #pragma endregion
 
@@ -74,18 +54,9 @@ private:
 
 	ModelFormatType formatType_ = OBJECT;
 
-	Math::Vector::Vector4 CenterPos_ = { 0,0,0,1 };
-	float size_=1.5f;
-
-	Math::Vector::Vector4 color_ = { 1,1,1,1 };
-
 	uint32_t texHandle_ = 0;
 	uint32_t modelHandle_ = 0;
 	uint32_t prevModelHandle_ = 0;
-	
-	Math::Vector::Vector3 uvScale_ = {1,1,1};
-	Math::Vector::Vector3 uvRotate_ = {0,0,0};
-	Math::Vector::Vector3 uvTranslate_ = {0,0,0};
 
 	unique_ptr<IModelState> state_ = nullptr;
 	SModelData modelData_;
@@ -93,5 +64,6 @@ private:
 	unique_ptr<BufferResource<VertexInfluence>>influence_;
 	vector<VertexInfluence> mappedInfluence;
 
+	uint32_t skinClusterSrvIndex_;
 };
 

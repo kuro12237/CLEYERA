@@ -90,14 +90,18 @@ struct JointWeightData
 
 struct  SModelData
 {
-	std::map<std::string, JointWeightData>skinClusterData;
-	std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
-	SAnimation::Skeleton skeleton;
-	SkinCluster skinCluster;
 	vector<VertexData> vertices;
 	std::vector<uint32_t>indecs;
 	MaterialData material;
+
+#pragma region Skinning
 	NodeData node;
+	std::map<std::string, JointWeightData>skinClusterData;
+	std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
+	SAnimation::Skeleton skeleton;
+	bool skinningFlag_ = false;
+#pragma endregion
+
 	string texFilePath;
 	uint32_t texHandle;
 	string normalilePath;

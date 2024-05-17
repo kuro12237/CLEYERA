@@ -5,12 +5,18 @@ void Player::Initialize()
 	worldTransform_.Initialize();
 
 	modelHandle_ = ModelManager::LoadObjectFile("Player");
+	modelHandle_ = ModelManager::LoadGltfFile("walk",true);
+	AnimationManager::GetInstance()->LoadAnimation("walk");
+	animationData_ = AnimationManager::GetInstance()->GetData("walk");
+
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create();
-	gameObject_->SetModel(modelHandle_);
 	game3dObjectdesc_.useLight = true;
-	gameObject_->SetlectModelPipeline(PHONG_MODEL);
+	gameObject_->SetName("player");
 	gameObject_->SetDesc(game3dObjectdesc_);
+	gameObject_->SetModel(modelHandle_);
+	gameObject_->CreateSkinningParameter();
+
 	worldTransform_.UpdateMatrix();
 
 	reticle_ = make_unique<PlayerReticle>();
@@ -64,6 +70,12 @@ void Player::Update()
 	{
 		state_->Update(this);
 	}
+
+	flame_ += 1.0f / 30.0f;
+	flame_ = std::fmod(flame_, animationData_.duration);
+	gameObject_->SkeletonUpdate("walk", flame_);
+	gameObject_->SkinningUpdate();
+
 
 	reticle_->Update();
 	gun_->ReticlePos(reticle_->GetPos());

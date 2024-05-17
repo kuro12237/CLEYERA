@@ -58,7 +58,9 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param, CameraD
 
 	materialData->color = { 1,1,1,1 };
 	materialData->color = testColor;
-	materialData->uvTransform = Math::Matrix::AffineMatrix({1,1,1}, {0,0,0},{0,0,0});
+	Math::Vector::Vector3 sv, rv, tv;
+	sv = { 1.0f,1.0f,1.0f };
+	materialData->uvTransform = Math::Matrix::AffineMatrix(sv, rv,tv);
 	
 	//Billbord�̌v�Z
 	CarmeraBillbord(viewprojection);

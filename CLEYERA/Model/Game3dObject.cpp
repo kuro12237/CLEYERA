@@ -10,6 +10,11 @@ void Game3dObject::SetModel(uint32_t index)
 {
 	if (prevModelIndex_ != index)
 	{
+		if (!game3dObjectDesc_)
+		{
+			LogManager::Log("None SetGame3dObjectDesc");
+			assert(0);
+		}
 		model_ = ModelManager::GetModel(index);
 		texHandle_ = ModelManager::GetObjData(index).material.handle;
 		model_->SetDesc(*game3dObjectDesc_);
@@ -37,16 +42,24 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 
 	MaterialBuffer_->Map();
 
-	material_.shininess = game3dObjectDesc_->shongDesc.shininess;
-	material_.color = color_;
-	material_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate, uvTranslate);
-	material_.specular_ = game3dObjectDesc_->shongDesc.specular_;
-	material_.roughness_ = roughness_;
-	material_.metalness_ = metalness_;
+	material_.shininess = game3dObjectDesc_->phongDesc.shininess;
+	material_.specular_ = game3dObjectDesc_->phongDesc.specular_;
+
+	material_.color = game3dObjectDesc_->colorDesc.color_;
+	Math::Matrix::Matrix4x4 colorMat =
+		Math::Matrix::AffineMatrix(
+			game3dObjectDesc_->colorDesc.uvScale_,
+			game3dObjectDesc_->colorDesc.uvRotate,
+			game3dObjectDesc_->colorDesc.uvTranslate
+		);
+	material_.uvTransform = colorMat;
+	material_.grayFactor = game3dObjectDesc_->colorDesc.grayFactor_;
+
+	material_.roughness_ = game3dObjectDesc_->pbrDesc.roughness_;
+	material_.metalness_ = game3dObjectDesc_->pbrDesc.metalness_;
 	material_.scatterCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
 	material_.scatterDistance = game3dObjectDesc_->sssDesc.scatterDistance_;
 	material_.absorptionCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
-	material_.grayFactor = game3dObjectDesc_->colorDesc.grayFactor_;
 
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
@@ -59,6 +72,10 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 		{
 			assert(0);
 		}
+	}
+	if (model_->GetModelData().skinningFlag_)
+	{
+		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Phong_SkinningModel;
 	}
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
@@ -87,6 +104,10 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 			}
 		}
 	}
+	if (model_->GetModelData().skinningFlag_&&model_->GetModelData().fileFormat=="GLTF")
+	{
+		DescriptorManager::rootParamerterCommand(7, palette_->GetSrvIndex());
+	}
 	model_->Draw(1);
 }
 
@@ -96,21 +117,46 @@ void Game3dObject::CreateSkinningParameter()
 	{
 		assert(0);
 	}
-
-	//skeltonの作成
+	if (name_ == "")
+	{
+		LogManager::Log("None SetName");
+		assert(0);
+	}
+	//skeltonをコピー
 	skeleton_ = model_->GetModelData().skeleton;
+	inverseBindMatrices = model_->GetModelData().inverseBindMatrices;
 	palette_ = make_unique<BufferResource<WellForGPU>>();
-	palette_->CreateInstancingResource(uint32_t(skeleton_.joints.size()), "test",sizeof(WellForGPU));
+	palette_->CreateResource(uint32_t(skeleton_.joints.size()));
+	palette_->CreateInstancingResource(uint32_t(skeleton_.joints.size()), name_, sizeof(WellForGPU));
+	paletteParam_.resize(skeleton_.joints.size());
+}
 
+void Game3dObject::SkeletonUpdate(string fileName, float t)
+{
+	SAnimation::Animation animationData_ = AnimationManager::GetInstance()->GetData(fileName);
+	AnimationManager::ApplyAnimation(skeleton_, animationData_, t);
+	ModelManager::SkeletonUpdate(skeleton_);
+}
+
+void Game3dObject::SkinningUpdate()
+{
+	palette_->Map();
+	for (size_t jointIndex = 0; jointIndex < skeleton_.joints.size(); ++jointIndex)
+	{
+		assert(jointIndex < inverseBindMatrices.size());
+
+		paletteParam_[jointIndex].skeletonSpaceMatrix =
+			Math::Matrix::Multiply(inverseBindMatrices[jointIndex], skeleton_.joints[jointIndex].skeletonSpaceMatrix);
+		paletteParam_[jointIndex].skeletonSpaceInverseTransposeMatrix =
+			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(paletteParam_[jointIndex].skeletonSpaceMatrix));
+	}
+	palette_->Setbuffer(paletteParam_);
 }
 
 bool Game3dObject::CommpandPipeline(SPSOProperty& PSO)
 {
-	switch (ModelShaderSelect_)
+	switch (game3dObjectDesc_->select)
 	{
-	case PHONG_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Phong_SkinningModel;
-		break;
 
 	case UE4_BRDF:
 		PSO = GraphicsPipelineManager::GetInstance()->GetPso().PBR_Model;
@@ -125,5 +171,6 @@ bool Game3dObject::CommpandPipeline(SPSOProperty& PSO)
 	default:
 		break;
 	}
+	
 	return false;
 }

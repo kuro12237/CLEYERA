@@ -29,7 +29,7 @@ public:
 	/// <returns></returns>
 	static uint32_t LoadObjectFile(string directoryPath);
 
-	static uint32_t LoadGltfFile(string directoryPath);
+	static uint32_t LoadGltfFile(string directoryPath,bool skinningFlag = false);
 
 	/// <summary>
 	/// ハンドルのobjデータのGet
@@ -42,8 +42,6 @@ public:
 
 	static void SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skeleton& skeleton);
 
-	static void SetModel(uint32_t modelHandle, SkinCluster skinCluster, SAnimation::Skeleton skeleton);
-
 	static SAnimation::Skeleton CreateSkeleton(const NodeData& rootNode);
 
 	static SkinCluster CreateSkinCluster(const SAnimation::Skeleton& skeleton, const SModelData& modelData);
@@ -54,9 +52,10 @@ private:
 
 	static NodeData ReadNodeData(aiNode*node);
 
-
 	static int32_t CreateJoint(const NodeData& node, const std::optional<int32_t>& parent, std::vector<SAnimation::Joint>& joints);
 
+	static void CreateVerteces(SModelData& data, aiMesh* mesh);
+	static void CreateBorn(SModelData& data, aiMesh* mesh);
 
 	map<string,unique_ptr<ModelObjData>>objModelDatas_;
 	uint32_t objHandle_ = 0;
