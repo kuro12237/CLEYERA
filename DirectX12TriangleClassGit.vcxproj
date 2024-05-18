@@ -52,6 +52,11 @@
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp" />
     <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\PiplineHandler.cpp" />
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\RTVDescripterManager.cpp" />
@@ -139,6 +144,11 @@
     <ClInclude Include="CLEYERA\CreateResource\BufferResources.h" />
     <ClInclude Include="CLEYERA\CreateResource\CreateResource.h" />
     <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\PipelineHandler.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescripterData.h" />

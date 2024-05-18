@@ -17,15 +17,12 @@ void AnimationScene::Initialize()
 	pointLight_.position.z = 8.0f;
 
 	debugModelHandle_ = ModelManager::LoadObjectFile("DebugTestBox");
-	
+
 	//AnimationModel
 	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
+	gameObject_->Create(make_unique<Phong3dSkinningPipline>());
 
 	modelHumanHandle_ = ModelManager::LoadGltfFile(fileName_,true);
-	SModelData modelData = ModelManager::GetObjData(modelHumanHandle_);
-
-	gameObjetcDesc.useLight = true;
 
 	AnimationManager::GetInstance()->LoadAnimation(fileName_);
 	animationData_ = AnimationManager::GetInstance()->GetData(fileName_);
@@ -48,6 +45,16 @@ void AnimationScene::Update(GameManager* Scene)
 	}
 
 	debugCamera_->ImGuiUpdate();
+
+	if (ImGui::TreeNode("Light"))
+	{
+		ImGui::DragFloat3("t", &pointLight_.position.x,-0.1f,0.1f);
+		ImGui::DragFloat("intencity", &pointLight_.intencity,-0.1f,0.1f);
+
+		ImGui::DragFloat("factor", &pointLight_.decay, -0.1f, 0.1f);
+		ImGui::TreePop();
+	}
+
 #endif // _USE_IMGUI
 
 	//flame加算

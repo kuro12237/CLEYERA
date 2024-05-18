@@ -112,9 +112,6 @@
     <Filter Include="CLEYERA\Utility\CollisionManager">
       <UniqueIdentifier>{fdcd6478-86f6-4622-a9fa-5a063fc9b748}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CLEYERA\Graphics\NormalMap">
-      <UniqueIdentifier>{ad675539-1a74-4b2e-a5df-45982bc8d1d5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\Scene\Game">
       <UniqueIdentifier>{6c226b21-6389-4d7f-9163-44a1ffdc95f3}</UniqueIdentifier>
     </Filter>
@@ -207,6 +204,15 @@
     </Filter>
     <Filter Include="CLEYERA\Model\instancing">
       <UniqueIdentifier>{ba0d744a-1885-4168-a500-5cee93745c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\CallPipline">
+      <UniqueIdentifier>{4a26a8e6-c9ff-4174-98b3-2fabc4a9fc22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\CallPipline\commands">
+      <UniqueIdentifier>{e04d6b35-6333-42dc-ad7b-3eab8c0675e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Graphics\CallPipline\commands\3d">
+      <UniqueIdentifier>{701216fb-9d1f-454a-8081-93aa7649411a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -487,6 +493,19 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp">
       <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\PiplineHandler.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.cpp">
+      <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.cpp">
+      <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.cpp">
+      <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.cpp">
+      <Filter>CLEYERA\Graphics\CallPipline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -840,6 +859,21 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\IModelState.h">
       <Filter>CLEYERA\Model\ObjState</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\PipelineHandler.h">
+      <Filter>CLEYERA\Graphics\CallPipline</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.h">
+      <Filter>CLEYERA\Graphics\CallPipline</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.h">
+      <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.h">
+      <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.h">
+      <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

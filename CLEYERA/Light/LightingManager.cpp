@@ -42,6 +42,10 @@ void LightingManager::TransfarBuffers()
     TransfarStructureBuffer();
 }
 
+void LightingManager::CallCommand()
+{
+}
+
 void LightingManager::TransfarBuffer()
 {
     LightCount* TotalLight;

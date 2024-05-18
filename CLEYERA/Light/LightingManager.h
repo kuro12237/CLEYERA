@@ -33,6 +33,7 @@ public:
 
 	static uint32_t GetNowLight() {return  LightingManager::GetInstance()->NowTotalLightData_; }
 
+	void CallCommand();
 
 private:
 

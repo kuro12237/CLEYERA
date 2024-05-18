@@ -1,7 +1,18 @@
 #include "Game3dObject.h"
 
-void Game3dObject::Create()
+void Game3dObject::Create(unique_ptr<IPipelineCommand> piplineSelect)
 {
+	piplineHandler_ = make_unique<PipelineHandler>();
+	if (!piplineSelect)
+	{
+		unique_ptr<IPipelineCommand>pipline = make_unique<Default3dPipline>();
+		piplineHandler_->UsePipeline(pipline);
+	}
+	else
+	{
+		piplineHandler_->UsePipeline(piplineSelect);
+	}
+
 	MaterialBuffer_ = make_unique<BufferResource<Material>>();
 	MaterialBuffer_->CreateResource();
 }
@@ -64,21 +75,10 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
 
+	piplineHandler_->Call();
+
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
-	if (game3dObjectDesc_->useLight)
-	{
-		if (CommpandPipeline(PSO))
-		{
-			assert(0);
-		}
-	}
-	if (model_->GetModelData().skinningFlag_)
-	{
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Phong_SkinningModel;
-	}
-	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+
 
 	Commands command = DirectXCommon::GetInstance()->GetCommands();
 
@@ -92,7 +92,7 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
 
-	if (game3dObjectDesc_->useLight)
+	//if (game3dObjectDesc_->useLight)
 	{
 		if (ModelShaderSelect_ == PHONG_NORMAL_MODEL || ModelShaderSelect_ == UE4_BRDF || ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
 		{

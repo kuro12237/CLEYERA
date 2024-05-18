@@ -5,13 +5,15 @@
 #include"Graphics/PipelineManager/GraphicsPipelineManager.h"
 #include"Animation/AnimationManager.h"
 
+#include"Graphics/CallPipline/PipelineHandler.h"
+
 class Game3dObject
 {
 public:
 	Game3dObject() {};
 	~Game3dObject() {};
 
-	void Create();
+	void Create(unique_ptr<IPipelineCommand> piplineSelect = nullptr);
 
 	void SetModel(uint32_t index);
 
@@ -44,7 +46,8 @@ private:
 	Model* model_ = nullptr;
 	uint32_t prevModelIndex_ = 0;
 
-	bool isIndexDraw = false;
+	unique_ptr<PipelineHandler>piplineHandler_ = nullptr;
+
 	bool CommpandPipeline(SPSOProperty& PSO);
 
 	unique_ptr<BufferResource<Material>>MaterialBuffer_ = nullptr;
