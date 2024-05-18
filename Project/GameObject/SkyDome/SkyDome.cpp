@@ -4,7 +4,7 @@ void SkyDome::Initialize()
 {
 	modelHandle_ = ModelManager::LoadObjectFile("SkyDome");
 	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
+	gameObject_->Create(make_unique<Phong3dPipline>());
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);
 	gameObject_->SetModel(modelHandle_);

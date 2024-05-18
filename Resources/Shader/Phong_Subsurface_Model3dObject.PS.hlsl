@@ -63,7 +63,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t3 pTotalSSSColor = 0;
 
     //法線を行列で調整
-    N = normalize(input.normal + normalize(mul(normalColor.rgb, (float32_t3x3) input.worldMatrix)));
+    N = normalize(input.normal + normalize(normalColor.rgb));
 
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {

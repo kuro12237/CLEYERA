@@ -12,7 +12,7 @@ struct Skinned
     float32_t3 normal;
 };
 
-StructuredBuffer<Well> gMatrixPalette : register(t2);
+StructuredBuffer<Well> gMatrixPalette : register(t3);
 ConstantBuffer<TransformationMatrix> gTransformationMatrix : register(b0);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
 

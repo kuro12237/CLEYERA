@@ -13,7 +13,7 @@ public:
 
 	void UsePipeline(unique_ptr<IPipelineCommand> &usePipline);
 
-	void Call();
+	void Call(const SModelData &modelData);
 
 private:
 

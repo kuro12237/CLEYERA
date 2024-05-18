@@ -94,8 +94,8 @@ void ShaderManager::ShaderComples()
 	ShapeShader();
 	Sprite3dShader();
 	Sprite2dShader();
-	PBR_ModelShader();
-	PhongModelShader();
+	//PBR_ModelShader();
+	//PhongModelShader();
 	ParticleShader();
 	PhongNormalModel();
 	PhongSubsurfaceModel();
@@ -359,7 +359,7 @@ void ShaderManager::SkinningPhongModelShader()
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_ModelObject3d.PS.hlsl",
+			L"Resources/Shader/Phong_NormalMap_Model3dObject.PS.hlsl",
 			L"ps_6_0");
 	ShaderManager::Getinstance()->shaders_.skinningPhongModel = shaders;
 }

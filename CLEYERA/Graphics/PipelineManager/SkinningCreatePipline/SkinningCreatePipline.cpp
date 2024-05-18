@@ -91,7 +91,7 @@ void SkinningCreatePipline::CreateSkinningPhongRootSignature(ComPtr<ID3D12Device
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	D3D12_ROOT_PARAMETER rootParameters[8] = {};
+	D3D12_ROOT_PARAMETER rootParameters[9] = {};
 	//Material
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
@@ -141,17 +141,30 @@ void SkinningCreatePipline::CreateSkinningPhongRootSignature(ComPtr<ID3D12Device
 	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
+	//normalTex
+	D3D12_DESCRIPTOR_RANGE NormalDescriptorRange[1] = {};
+	NormalDescriptorRange[0].BaseShaderRegister = 2;
+	NormalDescriptorRange[0].NumDescriptors = 1;
+	NormalDescriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	NormalDescriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	//tex
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[7].DescriptorTable.pDescriptorRanges = NormalDescriptorRange;
+	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(NormalDescriptorRange);
+	
 	//skinningPallate
 	D3D12_DESCRIPTOR_RANGE descriptorRangeSkinningPallate[1] = {};
-	descriptorRangeSkinningPallate[0].BaseShaderRegister = 2;
+	descriptorRangeSkinningPallate[0].BaseShaderRegister = 3;
 	descriptorRangeSkinningPallate[0].NumDescriptors = 1;
 	descriptorRangeSkinningPallate[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRangeSkinningPallate[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[7].DescriptorTable.pDescriptorRanges = descriptorRangeSkinningPallate;
-	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeSkinningPallate);
+	rootParameters[8].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[8].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[8].DescriptorTable.pDescriptorRanges = descriptorRangeSkinningPallate;
+	rootParameters[8].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeSkinningPallate);
 
 	//Sampler�̐ݒ�
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};

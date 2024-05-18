@@ -10,7 +10,7 @@ void Player::Initialize()
 	animationData_ = AnimationManager::GetInstance()->GetData("walk");
 
 	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
+	gameObject_->Create(make_unique<Phong3dSkinningPipline>());
 	game3dObjectdesc_.useLight = true;
 	gameObject_->SetName("player");
 	gameObject_->SetDesc(game3dObjectdesc_);

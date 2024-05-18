@@ -1,5 +1,6 @@
 #pragma once
 #include"GraphicsPipelineManager.h"
+#include"CreateResource.h"
 
 class IPipelineCommand
 {
@@ -7,7 +8,7 @@ public:
 	IPipelineCommand() {};
 	virtual ~IPipelineCommand() {};
 
-	virtual void Exec() = 0;
+	virtual void Exec(const SModelData& modelData) = 0;
 
 	void SetPso(SPSOProperty pso) { pso_ = pso; }
 

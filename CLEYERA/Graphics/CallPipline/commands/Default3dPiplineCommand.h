@@ -8,7 +8,7 @@ public:
 	Default3dPipline() {};
 	~Default3dPipline() {};
 
-	void Exec()override;
+	void Exec(const SModelData& modelData)override;
 
 private:
 

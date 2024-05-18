@@ -27,18 +27,7 @@ void Game3dObject::SetModel(uint32_t index)
 			assert(0);
 		}
 		model_ = ModelManager::GetModel(index);
-		texHandle_ = ModelManager::GetObjData(index).material.handle;
 		model_->SetDesc(*game3dObjectDesc_);
-		if (ModelManager::GetObjData(index).normalTexHandle == 0)
-		{
-			TextureManager::UnUsedFilePath();
-			normalTexHandle_ = TextureManager::LoadPngTexture("Resources/Default/normalMap.png");
-		}
-		else {
-			normalTexHandle_ = ModelManager::GetObjData(index).normalTexHandle;
-		}
-
-		baseTexHandle_ = ModelManager::GetObjData(index).baseTexHandle;
 	}
 
 	prevModelIndex_ = index;
@@ -51,63 +40,36 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 		return;
 	}
 
+	modelData_ = model_->GetModelData();
+
 	MaterialBuffer_->Map();
-
-	material_.shininess = game3dObjectDesc_->phongDesc.shininess;
-	material_.specular_ = game3dObjectDesc_->phongDesc.specular_;
-
-	material_.color = game3dObjectDesc_->colorDesc.color_;
-	Math::Matrix::Matrix4x4 colorMat =
-		Math::Matrix::AffineMatrix(
-			game3dObjectDesc_->colorDesc.uvScale_,
-			game3dObjectDesc_->colorDesc.uvRotate,
-			game3dObjectDesc_->colorDesc.uvTranslate
-		);
-	material_.uvTransform = colorMat;
-	material_.grayFactor = game3dObjectDesc_->colorDesc.grayFactor_;
-
-	material_.roughness_ = game3dObjectDesc_->pbrDesc.roughness_;
-	material_.metalness_ = game3dObjectDesc_->pbrDesc.metalness_;
-	material_.scatterCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
-	material_.scatterDistance = game3dObjectDesc_->sssDesc.scatterDistance_;
-	material_.absorptionCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
-
+    //Descの情報をMaterialに変換
+	material_ = MaterialConverter();
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
 
-	piplineHandler_->Call();
-
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-
-
-	Commands command = DirectXCommon::GetInstance()->GetCommands();
-
+	//パイプラインを積む
+	piplineHandler_->Call(modelData_);
+	//マテリアル
 	MaterialBuffer_->CommandCall(0);
+	//行列
 	worldTransform.buffer_->CommandCall(1);
+	//カメラ
 	view.buffer_->CommandCall(2);
 	view.buffer_->CommandCall(3);
+	//4.5を使用
+	LightingManager::GetInstance()->CallCommand();
+	//テクスチャ
+	DescriptorManager::rootParamerterCommand(6, modelData_.material.handle);
+	//subsurface
+	//DescriptorManager::rootParamerterCommand(8, baseTexHandle_);
 
-	DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
-	commands.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
-
-	DescriptorManager::rootParamerterCommand(6, texHandle_);
-
-	//if (game3dObjectDesc_->useLight)
+	//ここを後でどうにかする
+	if (skinningFlag_)
 	{
-		if (ModelShaderSelect_ == PHONG_NORMAL_MODEL || ModelShaderSelect_ == UE4_BRDF || ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
-		{
-			DescriptorManager::rootParamerterCommand(7, normalTexHandle_);
+		DescriptorManager::rootParamerterCommand(8, palette_->GetSrvIndex());
+	}
 
-			if (ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
-			{
-				DescriptorManager::rootParamerterCommand(8, baseTexHandle_);
-			}
-		}
-	}
-	if (model_->GetModelData().skinningFlag_&&model_->GetModelData().fileFormat=="GLTF")
-	{
-		DescriptorManager::rootParamerterCommand(7, palette_->GetSrvIndex());
-	}
 	model_->Draw(1);
 }
 
@@ -129,6 +91,7 @@ void Game3dObject::CreateSkinningParameter()
 	palette_->CreateResource(uint32_t(skeleton_.joints.size()));
 	palette_->CreateInstancingResource(uint32_t(skeleton_.joints.size()), name_, sizeof(WellForGPU));
 	paletteParam_.resize(skeleton_.joints.size());
+	skinningFlag_ = true;
 }
 
 void Game3dObject::SkeletonUpdate(string fileName, float t)
@@ -153,24 +116,27 @@ void Game3dObject::SkinningUpdate()
 	palette_->Setbuffer(paletteParam_);
 }
 
-bool Game3dObject::CommpandPipeline(SPSOProperty& PSO)
+Material Game3dObject::MaterialConverter()
 {
-	switch (game3dObjectDesc_->select)
-	{
+	Material result = material_;
+	result.shininess = game3dObjectDesc_->phongDesc.shininess;
+	result.specular_ = game3dObjectDesc_->phongDesc.specular_;
 
-	case UE4_BRDF:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().PBR_Model;
-		break;
-	case PHONG_NORMAL_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().PhongNormal_Model;
-		break;
-	case PHONG_SUBSURFACE_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().PhongSubsurface_Model;
-		break;
+	result.color = game3dObjectDesc_->colorDesc.color_;
+	Math::Matrix::Matrix4x4 colorMat =
+		Math::Matrix::AffineMatrix(
+			game3dObjectDesc_->colorDesc.uvScale_,
+			game3dObjectDesc_->colorDesc.uvRotate,
+			game3dObjectDesc_->colorDesc.uvTranslate
+		);
+	result.uvTransform = colorMat;
+	result.grayFactor = game3dObjectDesc_->colorDesc.grayFactor_;
 
-	default:
-		break;
-	}
-	
-	return false;
+	result.roughness_ = game3dObjectDesc_->pbrDesc.roughness_;
+	result.metalness_ = game3dObjectDesc_->pbrDesc.metalness_;
+	result.scatterCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
+	result.scatterDistance = game3dObjectDesc_->sssDesc.scatterDistance_;
+	result.absorptionCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
+
+	return result;
 }

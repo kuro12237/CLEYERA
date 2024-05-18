@@ -3,7 +3,7 @@
 void Item::Initialize()
 {
 	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
+	gameObject_->Create(make_unique<Phong3dPipline>());
 	uint32_t modelHandle = ModelManager::LoadObjectFile("TestBox");
 	gameObjectDesc_.useLight = true;
 	gameObject_->SetDesc(gameObjectDesc_);

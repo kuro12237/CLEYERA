@@ -5,7 +5,7 @@ void PipelineHandler::UsePipeline(unique_ptr<IPipelineCommand> &usePipline)
 	command_ = move(usePipline);
 }
 
-void PipelineHandler::Call()
+void PipelineHandler::Call(const SModelData& modelData)
 {
-	command_->Exec();
+	command_->Exec(modelData);
 }

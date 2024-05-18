@@ -135,8 +135,8 @@ void GraphicsPipelineManager::CreatePSO(SPSO &pso)
 	pso.Line = CreateLine(device.Get(), commands, shader.shape);
 	LogManager::CompliteLog("CreateLinePSO");
 
-	pso.PBR_Model = CreatePBR(device.Get(), commands, shader.PBR_Model);
-	LogManager::CompliteLog("CreateHerf_LightPSO");
+	//pso.PBR_Model = CreatePBR(device.Get(), commands, shader.PBR_Model);
+	//LogManager::CompliteLog("CreateHerf_LightPSO");
 
 	//pso.Phong_Model = CreatePhong(device.Get(), commands, shader.Phong_Model);
 	//LogManager::CompliteLog("PhongModelPSO");

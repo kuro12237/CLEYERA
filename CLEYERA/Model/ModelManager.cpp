@@ -77,6 +77,13 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 			modelData.normalTexHandle = normalHandle;
 			ModelManager::GetInstance()->isLoadNormalMap_ = false;
 		}
+		else
+		{
+			TextureManager::UnUsedFilePath();
+			uint32_t normalHandle = TextureManager::LoadPngTexture("Resources/Default/normalMap.png");
+			modelData.normalTexHandle = normalHandle;
+		}
+
 		if (ModelManager::GetInstance()->isUsesubsurface_)
 		{
 			const string baseFilePath = "Resources/Models/" + directoryPath + "/baseTex.png";
@@ -88,7 +95,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		}
 
 		unique_ptr<Model>model = make_unique <Model>();
-		model->SetStateType(modelData,OBJECT);
+		model->SetStateType(modelData, OBJECT);
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
 
 		return modelHandle;
@@ -121,11 +128,11 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath, bool skinningFlag)
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals());
 			assert(mesh->HasTextureCoords(0));
-	        //頂点作成
+			//頂点作成
 			CreateVerteces(modelData, mesh);
 			//bone作成
 			// ここからBoneのデータを取得
-			CreateBorn(modelData,mesh);
+			CreateBorn(modelData, mesh);
 		}
 
 		//materialの解析
@@ -146,12 +153,18 @@ uint32_t ModelManager::LoadGltfFile(string directoryPath, bool skinningFlag)
 		modelData.skeleton = CreateSkeleton(modelData.node);
 		SkeletonUpdate(modelData.skeleton);
 
+		//tex
 		TextureManager::UnUsedFilePath();
 		uint32_t texHandle = TextureManager::LoadPngTexture(modelData.material.textureFilePath);
 		modelData.material.handle = texHandle;
 
+		//normalMap
+		TextureManager::UnUsedFilePath();
+		uint32_t normalHandle = TextureManager::LoadPngTexture("Resources/Default/normalMap.png");
+		modelData.normalTexHandle = normalHandle;
+
 		unique_ptr<Model>model = make_unique <Model>();
-		model->SetStateType(modelData,GLTF);
+		model->SetStateType(modelData, GLTF);
 		ModelManager::GetInstance()->objModelDatas_[directoryPath] = make_unique<ModelObjData>(modelData, modelHandle, move(model));
 
 		return modelHandle;
@@ -219,7 +232,7 @@ void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skele
 	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
 	{
 		assert(jointIndex < skinCluster.inverseBindMatrices.size());
-	
+
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
 			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
 		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
@@ -299,7 +312,7 @@ int32_t ModelManager::CreateJoint(const NodeData& node, const std::optional<int3
 
 void ModelManager::CreateVerteces(SModelData& data, aiMesh* mesh)
 {
-    data.vertices.resize(mesh->mNumVertices);
+	data.vertices.resize(mesh->mNumVertices);
 	for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 		aiFace& face = mesh->mFaces[faceIndex];
 		assert(face.mNumIndices == 3);//三角形のみ
@@ -335,7 +348,7 @@ void ModelManager::CreateBorn(SModelData& data, aiMesh* mesh)
 		tv = { -translate.x,translate.y,translate.z };
 		rq = { rotate.x,-rotate.y,-rotate.z,rotate.w };
 
-		Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::AffineMatrix(sv,rq,tv);
+		Math::Matrix::Matrix4x4 bindPoseMatrix = Math::Matrix::AffineMatrix(sv, rq, tv);
 		jointWeightData.inverseBindPoseMatrix = Math::Matrix::Inverse(bindPoseMatrix);
 
 		// Weight情報を取り出す

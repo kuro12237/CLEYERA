@@ -67,8 +67,10 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t3 pTotalRimColor = 0;
  
     //法線を行列で調整
-    N = normalize(input.normal + normalize(mul(normalColor.rgb, (float32_t3x3) input.worldMatrix)));
-
+    
+    N = normalize(input.normal);
+    N = input.normal * normalColor.rgb;
+    N = normalize(N);
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {
 		//点光源
@@ -94,7 +96,7 @@ PixelShaderOutput main(VertexShaderOutput input)
 		//鏡面
         float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 
-        pTotalRimColor = pTotalRimColor + RimColor;
+        //pTotalRimColor = pTotalRimColor + RimColor;
         pTotalDffuse = pTotalDffuse + pDiffuse;
         pTotalSpecular = pTotalSpecular + pSpecular;
 

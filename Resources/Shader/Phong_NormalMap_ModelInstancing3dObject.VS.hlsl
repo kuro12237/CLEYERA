@@ -18,6 +18,5 @@ VertexShaderOutput main(VertexShaderInput input, uint32_t instanceId : SV_Instan
 
     output.normal = normalize(mul(input.normal, (float32_t3x3) gTransformationMatrix[instanceId].World));
     output.worldPosition = mul(input.position, gTransformationMatrix[instanceId].WVP).xyz;
-    output.worldMatrix = resultMatrix;
     return output;
 }

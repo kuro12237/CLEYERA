@@ -2,9 +2,10 @@
 
 void Terrain::Initialize()
 {
+	ModelManager::ModelLoadNormalMap();
 	modelHandle_ = ModelManager::LoadObjectFile("Terrain");
 	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
+	gameObject_->Create(make_unique<Phong3dPipline>());
 	objectDesc_.useLight = true;
 	gameObject_->SetDesc(objectDesc_);
 
