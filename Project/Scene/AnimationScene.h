@@ -8,7 +8,7 @@
 #include"DebugTool/DebugCamera/DebugCamera.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
-
+#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 
 class AnimationScene :public IScene
 {
@@ -53,5 +53,5 @@ private:
 
 	string fileName_ = "Walk";
 
-	
+	unique_ptr<DebugSkeleton>debugSkeleton_ = nullptr;
 };

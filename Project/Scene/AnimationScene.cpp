@@ -32,6 +32,10 @@ void AnimationScene::Initialize()
 	gameObject_->SetModel(modelHandle_);
 	gameObject_->SetName("walk");
 	gameObject_->CreateSkinningParameter();
+
+	debugSkeleton_ = make_unique<DebugSkeleton>();
+	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);
+
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -77,7 +81,7 @@ void AnimationScene::PostProcessDraw()
 	postEffect_->PreDraw();
 
 	gameObject_->Draw(worldTransform_, camera_);
-
+	debugSkeleton_->Draw(camera_,gameObject_->GetSkeleton());
 	postEffect_->PostDraw();
 }
 

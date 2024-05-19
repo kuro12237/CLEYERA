@@ -13,14 +13,15 @@ public:
 
 	void Create(SAnimation::Skeleton skeleton,WorldTransform w);
 
-	void Draw(CameraData camera);
+	void Draw(CameraData camera, SAnimation::Skeleton skeleton);
 
 private:
 
 	void CreateJoint(size_t size);
 
-	const SAnimation::Skeleton* skeleton_;
 	const WorldTransform* wT_;
+	
+	size_t jointSize_ = 0;
 
 	uint32_t jointModelHandle_ = 0;
 	Game3dObjectDesc jointObjectDesc_ = {};

@@ -2,20 +2,24 @@
 
 void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 {
-	skeleton_ = &skeleton;
 	wT_ = &w;
+	jointSize_ = skeleton.joints.size();
 
-	const size_t jointCount = skeleton_->joints.size();
-
-
-
-
+	CreateJoint(jointSize_);
 }
 
-void DebugSkeleton::Draw(CameraData camera)
+void DebugSkeleton::Draw(CameraData camera, SAnimation::Skeleton skeleton)
 {
+	for (int i = 0; i < jointSize_; i++)
+	{
+		jointWt_[i].matWorld = skeleton.joints[i].skeletonSpaceMatrix;
 
+		jointWt_[i].matWorld = Math::Matrix::ScaleMatrixByAnother(jointWt_[i].matWorld, Math::Matrix::ScaleMatrix({ 20,20,20 }));
 
+		jointWt_[i].TransfarMatrix();
+
+		jointObject_[i]->Draw(jointWt_[i], camera);
+	}
 }
 
 void DebugSkeleton::CreateJoint(size_t size)
