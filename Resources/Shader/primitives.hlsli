@@ -16,3 +16,15 @@ struct Material
 {
     float32_t4 color;
 };
+struct TransformationViewMatrix
+{
+    float32_t4x4 view;
+    float32_t4x4 projection;
+    float32_t4x4 orthographic;
+    float32_t3 CameraPosition;
+};
+struct TransformationMatrix
+{
+    float32_t4x4 WVP;
+    float32_t4x4 World;
+};

@@ -35,9 +35,7 @@ void AnimationScene::Initialize()
 
 	debugSkeleton_ = make_unique<DebugSkeleton>();
 	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);
-	line_ = make_unique<LineModel>();
-	line_->Create();
-	endMat_ = Math::Matrix::Identity();
+
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -60,6 +58,8 @@ void AnimationScene::Update(GameManager* Scene)
 		ImGui::DragFloat("factor", &pointLight_.decay, -0.1f, 0.1f);
 		ImGui::TreePop();
 	}
+	ImGui::Checkbox("humanObjectDrawFlag", &humanDrawFlag_);
+	debugSkeleton_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
 
@@ -82,13 +82,13 @@ void AnimationScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
-	ImGui::DragFloat3("t", &translate_.x, -0.1f, 0.1f);
-
-	endMat_ = Math::Matrix::AffineMatrix({ 1,1,1 }, Math::Vector::Vector3(0,0,0), translate_);
-
-	//gameObject_->Draw(worldTransform_, camera_);
+	gameObjetcDesc.colorDesc.color_ = { 1,0,1,0.3f };
+	if (humanDrawFlag_)
+	{
+		gameObject_->Draw(worldTransform_, camera_);
+	}
 	debugSkeleton_->Draw(camera_,gameObject_->GetSkeleton());
-	line_->Draw(Math::Matrix::Identity(),endMat_, camera_);
+
 	postEffect_->PostDraw();
 }
 

@@ -4,6 +4,7 @@
 #include"CameraData.h"
 #include"ModelManager.h"
 #include"Game3dObject.h"
+#include"Model/primitive/Line.h"
 
 class DebugSkeleton
 {
@@ -21,6 +22,8 @@ private:
 
 	void CreateJoint(size_t size);
 
+	void SkeletonDraw(const CameraData &camera,const SAnimation::Skeleton &skeleton,uint32_t index);
+
 	const WorldTransform* wT_;
 	vector<string>numberString_;
 
@@ -32,5 +35,8 @@ private:
 	Game3dObjectDesc jointObjectDesc_ = {};
 	vector<WorldTransform>jointWt_;
 	unique_ptr<Game3dObject>jointObject_;
+
+	size_t lineSize_ = 0;
+	vector<unique_ptr<LineModel>>lineModels_{};
 
 };

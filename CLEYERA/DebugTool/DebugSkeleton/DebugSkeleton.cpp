@@ -12,6 +12,15 @@ void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 	}
 
 	CreateJoint(jointSize_);
+	lineSize_ = jointSize_;
+	lineModels_.resize(lineSize_);
+
+	for (size_t i = 0; i < lineSize_; i++)
+	{
+		lineModels_[i] = make_unique<LineModel>();
+		lineModels_[i]->Create();
+	}
+
 #endif // _DEBUG
 
 }
@@ -30,6 +39,9 @@ void DebugSkeleton::Draw(CameraData camera, SAnimation::Skeleton skeleton)
 
 		jointObject_->Draw(jointWt_[i], camera);
 	}
+
+	SkeletonDraw(camera, skeleton, skeleton.root);
+
 #endif // _DEBUG
 
 }
@@ -66,7 +78,7 @@ void DebugSkeleton::CreateJoint(size_t size)
 	jointWt_.resize(size);
 
 	jointObjectDesc_.useLight = true;
-	jointObjectDesc_.colorDesc.color_ = Math::Vector::Vector4(jointColor_.x, jointColor_.y, jointColor_.z,1.0f);
+	jointObjectDesc_.colorDesc.color_ = Math::Vector::Vector4(jointColor_.x, jointColor_.y, jointColor_.z, 1.0f);
 	jointModelHandle_ = ModelManager::LoadObjectFile("DebugTestBox");
 	for (size_t i = 0; i < size; i++)
 	{
@@ -78,4 +90,17 @@ void DebugSkeleton::CreateJoint(size_t size)
 	jointObject_->SetModel(jointModelHandle_);
 #endif // _DEBUG
 
+}
+
+void DebugSkeleton::SkeletonDraw(const CameraData &camera,const SAnimation::Skeleton &skeleton,uint32_t index)
+{
+	const SAnimation::Joint& parentJoint = skeleton.joints[index];
+	for (int32_t childIndex : parentJoint.childlen)
+	{
+		const SAnimation::Joint& childJoint = skeleton.joints[childIndex];
+		Math::Vector::Vector3 start = { parentJoint.skeletonSpaceMatrix.m[3][0],parentJoint.skeletonSpaceMatrix.m[3][1],parentJoint.skeletonSpaceMatrix.m[3][2] };
+		Math::Vector::Vector3 end = { childJoint.skeletonSpaceMatrix.m[3][0],childJoint.skeletonSpaceMatrix.m[3][1],childJoint.skeletonSpaceMatrix.m[3][2] };
+		lineModels_[childIndex]->Draw(start, end, camera);
+		SkeletonDraw(camera, skeleton,childIndex);
+	}
 }

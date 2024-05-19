@@ -55,7 +55,5 @@ private:
 	string fileName_ = "Walk";
 
 	unique_ptr<DebugSkeleton>debugSkeleton_ = nullptr;
-	unique_ptr<LineModel>line_ = nullptr;
-	Math::Matrix::Matrix4x4 endMat_;
-	Math::Vector::Vector3 translate_{};
+	bool humanDrawFlag_ = false;
 };
