@@ -52,6 +52,7 @@
     <ClCompile Include="CLEYERA\Cleyera.cpp" />
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp" />
     <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp" />
+    <ClCompile Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="CLEYERA\CreateResource\BufferResources.h" />
     <ClInclude Include="CLEYERA\CreateResource\CreateResource.h" />
     <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h" />
+    <ClInclude Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.h" />

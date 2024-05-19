@@ -214,6 +214,9 @@
     <Filter Include="CLEYERA\Graphics\CallPipline\commands\3d">
       <UniqueIdentifier>{701216fb-9d1f-454a-8081-93aa7649411a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\DebugTools\DebugSkeltonDraw">
+      <UniqueIdentifier>{1907b5a0-cd77-42dc-acc3-3665dde9d34c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -506,6 +509,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.cpp">
       <Filter>CLEYERA\Graphics\CallPipline</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.cpp">
+      <Filter>CLEYERA\DebugTools\DebugSkeltonDraw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -874,6 +880,9 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.h">
       <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.h">
+      <Filter>CLEYERA\DebugTools\DebugSkeltonDraw</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
