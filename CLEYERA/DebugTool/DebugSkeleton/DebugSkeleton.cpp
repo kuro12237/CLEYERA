@@ -13,8 +13,7 @@ void DebugSkeleton::Draw(CameraData camera, SAnimation::Skeleton skeleton)
 	for (int i = 0; i < jointSize_; i++)
 	{
 		jointWt_[i].matWorld = skeleton.joints[i].skeletonSpaceMatrix;
-
-		jointWt_[i].matWorld = Math::Matrix::ScaleMatrixByAnother(jointWt_[i].matWorld, Math::Matrix::ScaleMatrix({ 20,20,20 }));
+		jointWt_[i].matWorld = Math::Matrix::ScaleMatrixByAnother(jointWt_[i].matWorld, Math::Matrix::ScaleMatrix({ 1,1,1 }));
 
 		jointWt_[i].TransfarMatrix();
 
