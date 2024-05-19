@@ -9,6 +9,7 @@
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
+#include"Model/primitive/Line.h"
 
 class AnimationScene :public IScene
 {
@@ -54,4 +55,7 @@ private:
 	string fileName_ = "Walk";
 
 	unique_ptr<DebugSkeleton>debugSkeleton_ = nullptr;
+	unique_ptr<LineModel>line_ = nullptr;
+	Math::Matrix::Matrix4x4 endMat_;
+	Math::Vector::Vector3 translate_{};
 };

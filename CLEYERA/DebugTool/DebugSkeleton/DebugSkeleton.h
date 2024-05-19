@@ -22,11 +22,12 @@ private:
 	void CreateJoint(size_t size);
 
 	const WorldTransform* wT_;
-	
+	vector<string>numberString_;
+
 	size_t jointSize_ = 0;
 
 	float jointScale_ = 16.0f;
-
+	Math::Vector::Vector3 jointColor_ = { 0.0f,1.0f,0.0f };
 	uint32_t jointModelHandle_ = 0;
 	Game3dObjectDesc jointObjectDesc_ = {};
 	vector<WorldTransform>jointWt_;

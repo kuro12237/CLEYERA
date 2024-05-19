@@ -94,6 +94,7 @@ void ShaderManager::ShaderComples()
 	ShapeShader();
 	Sprite3dShader();
 	Sprite2dShader();
+	CreateLineShader();
 	//PBR_ModelShader();
 	//PhongModelShader();
 	ParticleShader();
@@ -250,6 +251,22 @@ void ShaderManager::PhongNormalInstancingModel()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.Phong_Normal_InstancingModel = shaders;
+}
+
+void ShaderManager::CreateLineShader()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Line.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Primitives.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.Line = shaders;
 }
 
 void ShaderManager::ColorModel()

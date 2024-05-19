@@ -35,7 +35,9 @@ void AnimationScene::Initialize()
 
 	debugSkeleton_ = make_unique<DebugSkeleton>();
 	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);
-
+	line_ = make_unique<LineModel>();
+	line_->Create();
+	endMat_ = Math::Matrix::Identity();
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -80,8 +82,14 @@ void AnimationScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
+	ImGui::DragFloat3("t", &translate_.x, -0.1f, 0.1f);
+
+	translate_.x = 100.0f;
+	endMat_ = Math::Matrix::AffineMatrix({ 1,1,1 }, Math::Vector::Vector3(0,0,0), translate_);
+
 	//gameObject_->Draw(worldTransform_, camera_);
 	debugSkeleton_->Draw(camera_,gameObject_->GetSkeleton());
+	line_->Draw(Math::Matrix::Identity(),endMat_, camera_);
 	postEffect_->PostDraw();
 }
 
