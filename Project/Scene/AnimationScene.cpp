@@ -84,7 +84,6 @@ void AnimationScene::PostProcessDraw()
 
 	ImGui::DragFloat3("t", &translate_.x, -0.1f, 0.1f);
 
-	translate_.x = 100.0f;
 	endMat_ = Math::Matrix::AffineMatrix({ 1,1,1 }, Math::Vector::Vector3(0,0,0), translate_);
 
 	//gameObject_->Draw(worldTransform_, camera_);
