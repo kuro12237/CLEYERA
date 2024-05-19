@@ -80,7 +80,7 @@ void AnimationScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
-	gameObject_->Draw(worldTransform_, camera_);
+	//gameObject_->Draw(worldTransform_, camera_);
 	debugSkeleton_->Draw(camera_,gameObject_->GetSkeleton());
 	postEffect_->PostDraw();
 }

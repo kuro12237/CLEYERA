@@ -23,9 +23,11 @@ private:
 	
 	size_t jointSize_ = 0;
 
+	float jointScale_ = 16.0f;
+
 	uint32_t jointModelHandle_ = 0;
 	Game3dObjectDesc jointObjectDesc_ = {};
 	vector<WorldTransform>jointWt_;
-	vector<unique_ptr<Game3dObject>>jointObject_;
+	unique_ptr<Game3dObject>jointObject_;
 
 };
