@@ -15,6 +15,8 @@ public:
 
 	void Draw(CameraData camera, SAnimation::Skeleton skeleton);
 
+	void ImGuiUpdate();
+
 private:
 
 	void CreateJoint(size_t size);

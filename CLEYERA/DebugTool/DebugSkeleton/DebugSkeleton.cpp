@@ -14,11 +14,33 @@ void DebugSkeleton::Draw(CameraData camera, SAnimation::Skeleton skeleton)
 	for (int i = 0; i < jointSize_; i++)
 	{
 		jointWt_[i].matWorld = skeleton.joints[i].skeletonSpaceMatrix;
-		jointWt_[i].matWorld = Math::Matrix::ScaleMatrixByAnother(jointWt_[i].matWorld,sm);
-
+		jointWt_[i].matWorld = Math::Matrix::ScaleMatrixByAnother(jointWt_[i].matWorld, sm);
 		jointWt_[i].TransfarMatrix();
 
 		jointObject_->Draw(jointWt_[i], camera);
+	}
+}
+
+void DebugSkeleton::ImGuiUpdate()
+{
+	if (ImGui::TreeNode("DebugSkeleton"))
+	{
+		if (ImGui::TreeNode("Joint"))
+		{
+			ImGui::DragFloat("scale", &jointScale_,-0.1f,0.1f);
+
+			if (ImGui::TreeNode("WorldPos"))
+			{
+				for (size_t i = 0; i < jointSize_; i++)
+				{
+
+				}
+
+				ImGui::TreePop();
+			}
+			ImGui::TreePop();
+		}
+		ImGui::TreePop();
 	}
 }
 
