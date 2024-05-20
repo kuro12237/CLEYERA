@@ -14,7 +14,7 @@ public:
 
 	void Create(SAnimation::Skeleton skeleton,WorldTransform w);
 
-	void Draw(CameraData camera, SAnimation::Skeleton skeleton);
+	void Draw(CameraData camera,WorldTransform w,SAnimation::Skeleton skeleton);
 
 	void ImGuiUpdate();
 
@@ -22,14 +22,16 @@ private:
 
 	void CreateJoint(size_t size);
 
-	void SkeletonDraw(const CameraData &camera,const SAnimation::Skeleton &skeleton,uint32_t index);
+	void SkeletonDraw(const CameraData &camera, WorldTransform w,const SAnimation::Skeleton &skeleton,uint32_t index);
+
+	void JointDraw(const CameraData& camera, const WorldTransform w, const SAnimation::Skeleton& skeleton);
 
 	const WorldTransform* wT_;
 	vector<string>numberString_;
 
 	size_t jointSize_ = 0;
 
-	float jointScale_ = 16.0f;
+	float jointScale_ = 1.0f;
 	Math::Vector::Vector3 jointColor_ = { 0.0f,1.0f,0.0f };
 	uint32_t jointModelHandle_ = 0;
 	Game3dObjectDesc jointObjectDesc_ = {};
@@ -38,5 +40,8 @@ private:
 
 	size_t lineSize_ = 0;
 	vector<unique_ptr<LineModel>>lineModels_{};
+
+	bool lineDrawFlag_ = false;
+	bool jointDrawFlag_ = false;
 
 };

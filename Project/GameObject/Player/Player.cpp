@@ -5,9 +5,9 @@ void Player::Initialize()
 	worldTransform_.Initialize();
 
 	modelHandle_ = ModelManager::LoadObjectFile("Player");
-	modelHandle_ = ModelManager::LoadGltfFile("walk",true);
-	AnimationManager::GetInstance()->LoadAnimation("walk");
-	animationData_ = AnimationManager::GetInstance()->GetData("walk");
+	modelHandle_ = ModelManager::LoadGltfFile("TestHuman",true);
+	AnimationManager::GetInstance()->LoadAnimation("TestHuman");
+	animationData_ = AnimationManager::GetInstance()->GetData("TestHuman");
 
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->Create(make_unique<Phong3dSkinningPipline>());
@@ -50,18 +50,20 @@ void Player::Initialize()
 	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
 	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 	worldTransform_.translate = GameStartPos_;
-
+	worldTransform_.rotation.y = 1.35f;
 	state_ = make_unique<PlayerNormaState>();
 	state_->Initialize();
+
+	debugSkeleton_ = make_unique<DebugSkeleton>();
+	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);;
+
 
 }
 
 void Player::Update()
 {
-	GlobalVariables::GetInstance()->AddItem("Player", "scale", worldTransform_.scale);
 	GlobalVariables::GetInstance()->AddItem("Player", "startPos", GameStartPos_);
 
-	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
 	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 
 	isHit_ = false;
@@ -71,9 +73,20 @@ void Player::Update()
 		state_->Update(this);
 	}
 
-	flame_ += 1.0f / 30.0f;
+	if (velocity_.x > 0.0f)
+	{
+		worldTransform_.rotation.y = 1.35f;
+	}
+	else if (velocity_.x < 0.0f) {
+		worldTransform_.rotation.y = -1.35f;
+	}else if (velocity_.x==0.0f)
+	{
+		flame_ = 0.0f;
+	}
+
+	flame_ += abs(velocity_.x / 2.0f);
 	flame_ = std::fmod(flame_, animationData_.duration);
-	gameObject_->SkeletonUpdate("walk", flame_);
+	gameObject_->SkeletonUpdate("TestHuman", flame_);
 	gameObject_->SkinningUpdate();
 
 
@@ -89,13 +102,16 @@ void Player::Update()
 void Player::Draw(const CameraData& camera)
 {
 	reticle_->Draw3d(camera);
-	gun_->Draw(camera);
-	gameObject_->Draw(worldTransform_, camera);
-
+	//gun_->Draw(camera);
+	if (isObjectDraw_)
+	{
+		gameObject_->Draw(worldTransform_, camera);
+	}
+	debugSkeleton_->Draw(camera,worldTransform_, gameObject_->GetSkeleton());
 }
 
-void Player::Draw2d(const CameraData& camera)
-{
+void Player::Draw2d(const CameraData& camera){
+
 	hp_->Draw2d(camera);
 }
 
@@ -103,32 +119,22 @@ void Player::ImGuiUpdate()
 {
 	if (ImGui::TreeNode("Player"))
 	{
-		bool f = GetTopFlag();
-		ImGui::Checkbox("T", &f);
-
-		f = GetBottomFlag();
-		ImGui::Checkbox("B", &f);
-
-		f = GetRightFlag();
-		ImGui::Checkbox("R", &f);
-
-		f = GetLeftFlag();
-		ImGui::Checkbox("L", &f);
-
 		if (ImGui::Button("Reset"))
 		{
-
 			worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
 			GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
 			worldTransform_.translate = GameStartPos_;
+			velocity_ = {};
 			worldTransform_.UpdateEularMatrix();
 		}
-
-		//ImGui::Text("%f %f %f", reticle_->GetPos().x, reticle_->GetPos().y, reticle_->GetPos().z);
+		ImGui::Separator();
+		ImGui::Checkbox("CharacterDrawFlag", &isObjectDraw_);
+		debugSkeleton_->ImGuiUpdate();
 		ImGui::Separator();
 		gun_->ImGuiUpdate();
 		ImGui::Separator();
 		hp_->ImGuiUpdate();
+
 		ImGui::TreePop();
 	}
 }
@@ -155,7 +161,7 @@ void Player::OnBlockCollision(IBoxCollider* collider)
 	worldTransform_.translate.x += extrusion.x;
 	worldTransform_.translate.y += extrusion.y;
 	worldTransform_.UpdateMatrix();
-	
+
 	reticle_->WorldTransformUpdate();
 	gun_->WorldTransformUpdate();
 
@@ -186,8 +192,7 @@ void Player::GravityExc(const Math::Vector::Vector2& g)
 {
 	velocity_ = g;
 	worldTransform_.translate.y += velocity_.y;
-	worldTransform_.UpdateMatrix();;
-
+	worldTransform_.UpdateMatrix();
 	reticle_->WorldTransformUpdate();
 	gun_->WorldTransformUpdate();
 }
@@ -216,6 +221,7 @@ void Player::Move()
 	worldTransform_.translate.x += velocity_.x;
 
 	worldTransform_.UpdateEularMatrix();
+
 }
 
 void Player::Jamp()

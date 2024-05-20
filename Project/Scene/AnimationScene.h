@@ -52,7 +52,7 @@ private:
 
 	SAnimation::Animation animationData_;
 
-	string fileName_ = "Walk";
+	string fileName_ = "TestHuman";
 
 	unique_ptr<DebugSkeleton>debugSkeleton_ = nullptr;
 	bool humanDrawFlag_ = false;

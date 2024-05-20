@@ -11,6 +11,7 @@ void LineModel::Create()
 
 	worldMat_ = make_unique<BufferResource<Math::Matrix::Matrix4x4>>();
 	worldMat_->CreateResource();
+	mat_ = Math::Matrix::Identity();
 }
 
 void LineModel::Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end, const CameraData& camera)
@@ -30,7 +31,7 @@ void LineModel::Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end, co
 	vertex_->UnMap();
 
 	worldMat_->Map();
-	worldMat_->Setbuffer(Math::Matrix::Identity());
+	worldMat_->Setbuffer(mat_);
 
 	//マテリアル
 	ComPtr<ID3D12GraphicsCommandList>list = DirectXCommon::GetInstance()->GetCommands().m_pList;

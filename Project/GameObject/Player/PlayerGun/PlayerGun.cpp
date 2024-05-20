@@ -58,7 +58,10 @@ void PlayerGun::Draw(const CameraData& camera)
 
 void PlayerGun::ImGuiUpdate()
 {
-
+	if (ImGui::TreeNode("Gun"))
+	{
+		ImGui::TreePop();
+	}
 }
 
 void PlayerGun::Attack()
