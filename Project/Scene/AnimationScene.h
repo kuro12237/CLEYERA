@@ -10,6 +10,7 @@
 #include"Animation/AnimationManager.h"
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 #include"Model/primitive/Line.h"
+#include"PostEffect/DeferrdShading/DeferredShading.h"
 
 class AnimationScene :public IScene
 {
@@ -55,5 +56,7 @@ private:
 	string fileName_ = "TestHuman";
 
 	unique_ptr<DebugSkeleton>debugSkeleton_ = nullptr;
-	bool humanDrawFlag_ = false;
+	bool humanDrawFlag_ = true;
+
+	unique_ptr<DefferredShading>testdf_ = nullptr;
 };

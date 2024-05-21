@@ -44,10 +44,10 @@ struct  TransformationViewMatrix
 	Math::Matrix::Matrix4x4 view;
 	Math::Matrix::Matrix4x4 viewProjection;
 	Math::Matrix::Matrix4x4 orthographic;
-	Math::Vector::Vector3 position;
-	float pad[1];
 	Math::Matrix::Matrix4x4 InverseViewProjection;
 	Math::Matrix::Matrix4x4 InverseProjection;
+	Math::Vector::Vector3 position;
+	float pad[1];
 };
 
 struct TransformationMatrix {

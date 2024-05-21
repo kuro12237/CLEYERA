@@ -24,23 +24,6 @@ public:
 
 	void PostDraw();
 
-	void PreColorDraw();
-
-	void PostColorDraw();
-
-	void PreNormalDraw();
-
-	void PostNormalDraw();
-
-	void PrePosDraw();
-
-	void PostPosDraw();
-
-
-	void PreDepthDraw();
-
-	void PostDepthDraw();
-
 	void Draw(const CameraData& camera);
 
 private:
@@ -53,7 +36,7 @@ private:
 	void CreateTexBuffer();
 
 
-
+	unique_ptr<BufferResource<uint32_t>>testBuffer_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>colorTexBuffer_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>normalTexBuffer_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>depthBuffer_ = nullptr;

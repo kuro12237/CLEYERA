@@ -35,7 +35,8 @@ void AnimationScene::Initialize()
 
 	debugSkeleton_ = make_unique<DebugSkeleton>();
 	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);
-
+	testdf_ = make_unique<DefferredShading>();
+	testdf_->Initialize();
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -80,16 +81,18 @@ void AnimationScene::Update(GameManager* Scene)
 
 void AnimationScene::PostProcessDraw()
 {
-	postEffect_->PreDraw();
+	testdf_->PreDraw();
+	//postEffect_->PreDraw();
 
 	gameObjetcDesc.colorDesc.color_ = { 1,0,1,0.3f };
 	if (humanDrawFlag_)
 	{
 		gameObject_->Draw(worldTransform_, camera_);
 	}
-	//debugSkeleton_->Draw(camera_,gameObject_->GetSkeleton());
+	debugSkeleton_->Draw(camera_,worldTransform_,gameObject_->GetSkeleton());
 
-	postEffect_->PostDraw();
+	//postEffect_->PostDraw();
+	testdf_->PostDraw();
 }
 
 void AnimationScene::Back2dSpriteDraw()
@@ -98,7 +101,8 @@ void AnimationScene::Back2dSpriteDraw()
 
 void AnimationScene::Object3dDraw()
 {
-	postEffect_->Draw(camera_);
+	//postEffect_->Draw(camera_);
+	testdf_->Draw(camera_);
 }
 
 void AnimationScene::Flont2dSpriteDraw()

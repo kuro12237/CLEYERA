@@ -20,47 +20,46 @@ static float3 toEye = 0.0f;
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
-    float4 transformedUV = (float32_t4(input.texcoord, 0.0f, 1.0f));
-    float4 ColorTextureColor = gTexture.Sample(gSampler, transformedUV.xy);
-    float4 NormalTextureColor = gNormalTexture.Sample(gSampler, transformedUV.xy);
-    N = NormalTextureColor.rgb;
-    N = normalize(N);
+    float32_t4 transformedUV = (float32_t4(input.texcoord, 0.0f, 1.0f));
+    float32_t4 ColorTextureColor = gTexture.Sample(gSampler, transformedUV.xy);
+    float32_t4 NormalTextureColor = gNormalTexture.Sample(gSampler, transformedUV.xy);
 
-    float4 PosTexColor = gPosTexture.Sample(gSampler, transformedUV.xy);
-    float DepthTextureColor =gDepthTexture.Sample(gSampler, transformedUV.xy);
+    float32_t DepthTextureColor =gDepthTexture.Sample(gSampler, transformedUV.xy);
     
-    float3 pTotalDffuse = 0.0f;
-    float3 pTotalSpecular = 0.0f;
+    float32_t4 wPos = float32_t4(transformedUV.xy, DepthTextureColor, 1);
+    float32_t4x4 vp = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
+    wPos = mul(wPos, vp);
+    //wPos = mul(wPos, gTransformationViewMatrix.InverseViewProjection).xyzw;
+    //wPos /= wPos.w;
+    
+    float32_t3 pTotalSpecular = 0;
+    float32_t3 pTotalDffuse = 0;
 
-    float4 wPos = float4(PosTexColor.gr,DepthTextureColor,1);
+    for (int32_t i = 0; i < gNowLightTotal.count; i++)
+    {
+		//点光源
+        float32_t distance = length(gPointLight[i].position - wPos.xyz);
+        float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
 
-    //////座標系テスト
-    //float4 uvProjection = float4(input.position.xy, 0, 1);
-    //uvProjection.xy = uvProjection.xy * 2.0f - float2(1, 1);
-    //wPos = (mul(float4(uvProjection.xy, DepthTextureColor, 1), gTransformationViewMatrix.InverseProjection));
-    //wPos.xyz /= wPos.w;
-    DirectionLightDirection = normalize(gDirectionLight.pos);
-    wPos = (wPos);
-    toEye = normalize(gTransformationViewMatrix.CameraPosition - wPos.xyz);
- 
-    //光処理下
-    //Direction
-    float32_t3 dLightDir = normalize(wPos.xyz - DirectionLightDirection);
-    float32_t3 dRefrectLight = reflect(DirectionLightDirection, N);
-    float32_t3 dHalfVector = normalize(-dLightDir + toEye);
-    float32_t dNdotL = dot(N, -DirectionLightDirection);
-    float32_t dCos = pow(dNdotL * 0.5f + 0.5f, 2.0f);
-    float32_t dNdotH = dot(N, dHalfVector);
-    float32_t dSpecularPow = pow(saturate(dNdotH), gMaterial.shininess);
+        float32_t3 pLightDir = normalize(wPos.xyz - gPointLight[i].position);
+        float32_t3 pRefrectLight = reflect(pLightDir, normalize(N));
+        float32_t3 pHalfVector = normalize(-pLightDir + toEye);
 
-    float32_t3 dDiffuse = gMaterial.color.rgb * ColorTextureColor.rgb * gDirectionLight.intensity * dCos;
-    float32_t3 dSpecular = dSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
+        float pNdotL = dot(normalize(N), -normalize(pLightDir));
+        float pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
+        float pNdotH = dot(normalize(N), pHalfVector);
+        float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
 
-    pTotalDffuse += dDiffuse;
-    pTotalSpecular += dSpecular;
+		//拡散
+        float32_t3 pDiffuse = gMaterial.color.rgb * ColorTextureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
+		//鏡面
+        float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 
-    float3 result = float3(pTotalDffuse+pTotalSpecular);
+        pTotalDffuse = pTotalDffuse + pDiffuse;
+        pTotalSpecular = pTotalSpecular + pSpecular;
+    }
 
-    output.color =  float4(result.rgb, 1);
+    float32_t3 result = pTotalDffuse + pTotalSpecular;
+    output.color = float4(result.rgb, 1);
     return output;
 }

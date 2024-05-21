@@ -25,6 +25,10 @@ void CameraData::UpdateMatrix()
 	matProjection_ = Math::Matrix::PerspectiveFovMatrix(fov_, aspectRatio_, nearClip_, farClip_);
 	OrthographicMatrix_ = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
 
+	matVP_ = Math::Matrix::Multiply(matView_, matProjection_);
+	matVPInverse_ = Math::Matrix::Inverse(matVP_);
+	matVPInverse_ = Math::Matrix::Inverse(matProjection_);
+
 	TransfarMatrix();
 }
 
@@ -52,8 +56,8 @@ void CameraData::TransfarMatrix()
 	BufferMatrix_.viewProjection = matProjection_;
 	BufferMatrix_.orthographic = OrthographicMatrix_;
 	BufferMatrix_.position = translation_;
-	BufferMatrix_.InverseViewProjection = Math::Matrix::Inverse((Math::Matrix::Multiply(BufferMatrix_.viewProjection, BufferMatrix_.view)));
-	BufferMatrix_.InverseProjection = Math::Matrix::Inverse(BufferMatrix_.viewProjection);
+	BufferMatrix_.InverseViewProjection = matVPInverse_;;
+	BufferMatrix_.InverseProjection =matProjInverse_;
 
 	buffer_->Setbuffer(BufferMatrix_);
 	UnMap();

@@ -21,7 +21,9 @@ struct CameraData {
 	Math::Matrix::Matrix4x4 matView_{};
 	Math::Matrix::Matrix4x4 matProjection_{};
 	Math::Matrix::Matrix4x4 OrthographicMatrix_{};
-
+	Math::Matrix::Matrix4x4 matVP_{};
+	Math::Matrix::Matrix4x4 matVPInverse_{};
+	Math::Matrix::Matrix4x4 matProjInverse_{};
 	float fov_ = 0.45f;
 	float aspectRatio_ = float(WinApp::GetkCilientWidth()) / float(WinApp::GetkCilientHeight());
 

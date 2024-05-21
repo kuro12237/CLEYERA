@@ -12,37 +12,6 @@ SamplerState gSampler : register(s0);
 
 static float32_t3 N;
 
-float32_t Harf_Lambert(float32_t3 normal, float32_t3 lightDir)
-{
-    return (dot(normal, lightDir)) * 0.5f + 0.5f;
-}
-float32_t3 ComputeSubsurfaceScattering(float32_t3 diffuseColor, float32_t3 normal, float32_t3 viewDir, float3 lightDir)
-{
-    // SSSの計算に必要なパラメータ
-    float32_t scatterCoefficient = 1.0; // 散乱係数
-    float32_t absorptionCoefficient = 10.9; // 吸収係数
-    float32_t3 scatteringColor = float32_t3(1.0, 0.0, 0.0); // 散乱の色
-
-    float32_t scatterDistance = 0.2; // 光の伝播距離
-
-    float32_t3 scatterVector = normalize(lightDir - viewDir);
-    float32_t attenuation = exp(-scatterCoefficient * scatterDistance);
-
-  
-    //吸収
-    float32_t3 absorbedColor = diffuseColor * exp(-absorptionCoefficient * scatterDistance);
-
-    // 散乱
-    float32_t3 scatteredColor = scatteringColor * scatteringColor * (1.0 - attenuation);
-
-    // Final
-    float32_t3 sssColor = (1.0 - attenuation) * (absorbedColor + scatteredColor);
-
-    return sssColor;
-}
-
-
-
 float32_t3 RimLight(float32_t3 LightDir, float3 ToEye, float rimPower, float rimIntensity,float3 LightColor)
 {
     //角度
@@ -105,7 +74,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     output.color.rgb = pTotalDffuse + pTotalSpecular+pTotalRimColor; 
     output.color.a = gMaterial.color.a * textureColor.a;
     
-    output.dfColor = float32_t4(textureColor.rgb, 1);
+    output.dfColor = float32_t4(1,1,1, 1);
     output.normalColor = float32_t4(N.rgb, 1);
     return output;
 }
