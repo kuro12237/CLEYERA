@@ -16,6 +16,7 @@
 #include"State/IPlayerState.h"
 #include"state/PlayerNormalState.h"
 #include"state/PlayerStoneState.h"
+#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 
 enum PlayerBehavior
 {
@@ -85,6 +86,7 @@ private:
 	uint32_t modelHandle_ = 0;
 	unique_ptr<Game3dObject>gameObject_ = nullptr;
 	Game3dObjectDesc game3dObjectdesc_ = {};
+	bool isObjectDraw_ = true;
 
 	//pos
 	Math::Vector::Vector3 GameStartPos_ = {};
@@ -108,9 +110,10 @@ private:
 	unique_ptr<PlayerHp>hp_ = nullptr;
 	const uint32_t* hpCount_ = {};
 
-
-	//test
+	//walkAnimation
 	SAnimation::Animation animationData_ = {};
 	float flame_ = 0.0f;
+
+	unique_ptr<DebugSkeleton>debugSkeleton_ = nullptr;
 };
 

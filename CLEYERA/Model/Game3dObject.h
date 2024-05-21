@@ -35,6 +35,13 @@ public:
 
 #pragma endregion
 
+#pragma region Get
+
+	SAnimation::Skeleton GetSkeleton() { return skeleton_; }
+
+#pragma endregion
+
+
 private:
 
 	string name_;

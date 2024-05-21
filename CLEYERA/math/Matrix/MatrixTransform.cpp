@@ -526,3 +526,21 @@ Matrix4x4 Math::Matrix::DirectionToDirection(const Vector3& from, const Vector3&
 
 	return result;
 }
+
+Matrix4x4 Math::Matrix::ScaleMatrixByAnother(Math::Matrix::Matrix4x4 A, const Math::Matrix::Matrix4x4 B)
+{
+	Math::Matrix::Matrix4x4 result = A;
+	// Bのスケール成分を抽出
+	float Sx = B.m[0][0];
+	float Sy = B.m[1][1];
+	float Sz = B.m[2][2];
+	// Aの各成分にスケールを適用
+	for (int i = 0; i < 4; ++i)
+	{
+		result.m[0][i] *= Sx;
+		result.m[1][i] *= Sy;
+		result.m[2][i] *= Sz;
+	};
+
+	return result;
+};

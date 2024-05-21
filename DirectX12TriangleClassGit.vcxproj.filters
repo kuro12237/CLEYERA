@@ -214,6 +214,15 @@
     <Filter Include="CLEYERA\Graphics\CallPipline\commands\3d">
       <UniqueIdentifier>{701216fb-9d1f-454a-8081-93aa7649411a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\DebugTools\DebugSkeltonDraw">
+      <UniqueIdentifier>{1907b5a0-cd77-42dc-acc3-3665dde9d34c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLEYERA\Model\Primitive">
+      <UniqueIdentifier>{7d583def-2b9f-4a75-9461-34a3e4c8bd37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\primitive">
+      <UniqueIdentifier>{e5533b57-22cb-4593-be54-d40c716d1bf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -248,6 +257,9 @@
     </None>
     <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli">
       <Filter>Shader\PostEffect</Filter>
+    </None>
+    <None Include="Resources\Shader\primitives.hlsli">
+      <Filter>Shader\primitive</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -506,6 +518,12 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.cpp">
       <Filter>CLEYERA\Graphics\CallPipline</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.cpp">
+      <Filter>CLEYERA\DebugTools\DebugSkeltonDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\primitive\Line.cpp">
+      <Filter>CLEYERA\Model\Primitive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -875,6 +893,12 @@
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.h">
       <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
     </ClInclude>
+    <ClInclude Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.h">
+      <Filter>CLEYERA\DebugTools\DebugSkeltonDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Model\primitive\Line.h">
+      <Filter>CLEYERA\Model\Primitive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -966,6 +990,12 @@
     </FxCompile>
     <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Line.VS.hlsl">
+      <Filter>Shader\primitive</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Primitives.PS.hlsl">
+      <Filter>Shader\primitive</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

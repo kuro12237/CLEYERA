@@ -32,6 +32,10 @@ void AnimationScene::Initialize()
 	gameObject_->SetModel(modelHandle_);
 	gameObject_->SetName("walk");
 	gameObject_->CreateSkinningParameter();
+
+	debugSkeleton_ = make_unique<DebugSkeleton>();
+	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);
+
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -54,6 +58,8 @@ void AnimationScene::Update(GameManager* Scene)
 		ImGui::DragFloat("factor", &pointLight_.decay, -0.1f, 0.1f);
 		ImGui::TreePop();
 	}
+	ImGui::Checkbox("humanObjectDrawFlag", &humanDrawFlag_);
+	debugSkeleton_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
 
@@ -76,7 +82,12 @@ void AnimationScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
-	gameObject_->Draw(worldTransform_, camera_);
+	gameObjetcDesc.colorDesc.color_ = { 1,0,1,0.3f };
+	if (humanDrawFlag_)
+	{
+		gameObject_->Draw(worldTransform_, camera_);
+	}
+	//debugSkeleton_->Draw(camera_,gameObject_->GetSkeleton());
 
 	postEffect_->PostDraw();
 }

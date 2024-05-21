@@ -18,6 +18,7 @@ struct SShaders
 	SShaderMode shape;
 	SShaderMode sprite3d;
 	SShaderMode sprite2d;
+	SShaderMode Line;
 	SShaderMode PBR_Model;
 	SShaderMode Phong_Model;
 	SShaderMode Phong_Normal_Model;
@@ -72,7 +73,7 @@ private:
 
 	static void PhongNormalInstancingModel();
 
-
+	static void CreateLineShader();
 	static void ColorModel();
 	static void NormalModel();
 	static void PosModel();

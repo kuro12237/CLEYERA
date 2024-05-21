@@ -132,7 +132,7 @@ void GraphicsPipelineManager::CreatePSO(SPSO &pso)
 	pso.shape=CreateShape(device.Get(), commands, shader.shape);
 	LogManager::CompliteLog("CreateShapePSO");
 
-	pso.Line = CreateLine(device.Get(), commands, shader.shape);
+	pso.Line = CreateLine(device.Get(), commands, shader.Line);
 	LogManager::CompliteLog("CreateLinePSO");
 
 	//pso.PBR_Model = CreatePBR(device.Get(), commands, shader.PBR_Model);
@@ -324,14 +324,15 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
-	//worldTransform
+	//カメラ
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[1].Descriptor.ShaderRegister = 0;
+	rootParameters[1].Descriptor.ShaderRegister = 1;
 
+	//行列
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-	rootParameters[2].Descriptor.ShaderRegister = 1;
+	rootParameters[2].Descriptor.ShaderRegister = 2;
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
@@ -343,7 +344,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 		result
 	);
 	
-	//InputLayout�̐ݒ�
+	//InputLayout
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[1] = {};
 	SettingInputElementDesc(inputElementDescs[0],
 		"POSITION",
@@ -394,7 +395,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
 
 	//��������RTV�̏��
 	graphicsPipelineStateDesc.NumRenderTargets = 1;

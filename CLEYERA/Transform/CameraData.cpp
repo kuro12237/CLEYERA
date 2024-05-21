@@ -10,7 +10,7 @@ void CameraData::Initialize(Vector3 r, Vector3 t)
 	CreateBuffer();
 	matProjection_ = Math::Matrix::PerspectiveFovMatrix(fov_, aspectRatio_, nearClip_, farClip_);
 	OrthographicMatrix_ = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
-
+	matView_ = Math::Matrix::Identity();
 }
 
 void CameraData::UpdateMatrix()

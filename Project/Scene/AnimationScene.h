@@ -8,7 +8,8 @@
 #include"DebugTool/DebugCamera/DebugCamera.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
-
+#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
+#include"Model/primitive/Line.h"
 
 class AnimationScene :public IScene
 {
@@ -51,7 +52,8 @@ private:
 
 	SAnimation::Animation animationData_;
 
-	string fileName_ = "Walk";
+	string fileName_ = "TestHuman";
 
-	
+	unique_ptr<DebugSkeleton>debugSkeleton_ = nullptr;
+	bool humanDrawFlag_ = false;
 };

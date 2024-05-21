@@ -105,6 +105,8 @@ namespace Math
 
 		Matrix4x4 DirectionToDirection(const Math::Vector::Vector3& from, const Math::Vector::Vector3& to);
 
+		Matrix4x4 ScaleMatrixByAnother(Math::Matrix::Matrix4x4 A, const Math::Matrix::Matrix4x4 B);
+
         #pragma endregion
 	}
 
