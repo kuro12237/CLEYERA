@@ -20,6 +20,68 @@ void DefferredShading::Initialize()
 
 }
 
+void DefferredShading::PreDraw()
+{
+	ComPtr<ID3D12GraphicsCommandList>list = DirectXCommon::GetInstance()->GetCommands().m_pList;
+	// レンダーターゲットをセット
+	D3D12_CPU_DESCRIPTOR_HANDLE testColorHandle;
+
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle =
+		RTVDescriptorManager::GetHandle(colorTexBuffer_->GetRtvIndex());
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvnormalHandle =
+		RTVDescriptorManager::GetHandle(normalTexBuffer_->GetRtvIndex());
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle =
+		DSVDescriptorManager::GetHandle(depthBuffer_->GetDsvIndex());
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvTexHandle =
+		DSVDescriptorManager::GetHandle(depthTexBuffer_->GetDsvIndex());
+
+	D3D12_RESOURCE_BARRIER barrier[4]{};
+	barrier[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[1].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[1].Transition.pResource = colorTexBuffer_->GetBuffer();
+	barrier[1].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier[1].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
+	barrier[2].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[2].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[2].Transition.pResource = normalTexBuffer_->GetBuffer();
+	barrier[2].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier[2].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
+	barrier[3].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[3].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[3].Transition.Subresource = 0xFFFFFFFF;
+	barrier[3].Transition.pResource = depthTexBuffer_->GetBuffer();
+	barrier[3].Transition.StateBefore = D3D12_RESOURCE_STATE_GENERIC_READ;
+	barrier[3].Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+
+	D3D12_CPU_DESCRIPTOR_HANDLE handles[3]
+	{
+		testColorHandle,
+		rtvColorHandle,
+		rtvnormalHandle
+	};
+
+	list->ResourceBarrier(4, barrier);
+	list->OMSetRenderTargets(3, handles, false, &dsvHandle);
+	list->OMSetRenderTargets(0, nullptr, false, &dsvTexHandle);
+
+	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
+	for (int i = 0; i < 4; i++)
+	{
+		list->ClearRenderTargetView(handles[i], clearColor, 0, nullptr);
+	}
+	list->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+	list->ClearDepthStencilView(dsvTexHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()));
+	CommandCallScissor();
+}
+
+void DefferredShading::PostDraw()
+{
+}
+
 void DefferredShading::PreColorDraw()
 {
 	

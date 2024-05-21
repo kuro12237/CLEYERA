@@ -20,6 +20,10 @@ public:
 
 	void Initialize();
 
+	void PreDraw();
+
+	void PostDraw();
+
 	void PreColorDraw();
 
 	void PostColorDraw();

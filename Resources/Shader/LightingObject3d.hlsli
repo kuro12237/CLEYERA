@@ -57,6 +57,8 @@ struct NowLightTotal
 struct PixelShaderOutput
 {
     float32_t4 color : SV_TARGET0;
+    float32_t4 dfColor : SV_TARGET1;
+    float32_t4 normalColor : SV_TARGET2;
 };
 
 float32_t3 ComputeGrayscale(float32_t factor,float32_t3 color)

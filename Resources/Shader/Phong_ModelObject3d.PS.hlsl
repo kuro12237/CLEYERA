@@ -46,6 +46,6 @@ PixelShaderOutput main(VertexShaderOutput input) {
 
     output.color.rgb = pTotalDffuse + pTotalSpecular;
 	output.color.a = gMaterial.color.a * textureColor.a;
-
+	
 	return output;
 }

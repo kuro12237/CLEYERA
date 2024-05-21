@@ -59,9 +59,10 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     }
 
-    output.color.rgb = pTotalDffuse + pTotalSpecular;
-    //+pTotalRimColor;
+    output.color.rgb = pTotalDffuse + pTotalSpecular + pTotalRimColor;
     output.color.a = gMaterial.color.a * textureColor.a;
-
+    output.dfColor = float32_t4(textureColor.rgb, 1);
+    output.normalColor = float32_t4(N.rgb, 1);
+    
     return output;
 }
