@@ -26,12 +26,10 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     float32_t DepthTextureColor =gDepthTexture.Sample(gSampler, transformedUV.xy);
     
-    float32_t4 wPos = float32_t4(transformedUV.xy, DepthTextureColor, 1);
-    float32_t4x4 vp = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
-    wPos = mul(wPos, vp);
-    //wPos = mul(wPos, gTransformationViewMatrix.InverseViewProjection).xyzw;
-    //wPos /= wPos.w;
-    
+    float32_t4 wPos = float32_t4(transformedUV.xy*2.0f-1.0f, DepthTextureColor, 1);
+    wPos = mul(gTransformationViewMatrix.InverseViewProjection, wPos);
+    wPos = wPos / wPos.w;
+   
     float32_t3 pTotalSpecular = 0;
     float32_t3 pTotalDffuse = 0;
 
@@ -60,6 +58,8 @@ PixelShaderOutput main(VertexShaderOutput input)
     }
 
     float32_t3 result = pTotalDffuse + pTotalSpecular;
-    output.color = float4(result.rgb, 1);
+    float dsp = pow(DepthTextureColor,200);
+    
+    output.color = float4(dsp,dsp,dsp, 1);
     return output;
 }
