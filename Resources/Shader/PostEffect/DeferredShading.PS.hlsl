@@ -23,13 +23,15 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t4 transformedUV = (float32_t4(input.texcoord, 0.0f, 1.0f));
     float32_t4 ColorTextureColor = gTexture.Sample(gSampler, transformedUV.xy);
     float32_t4 NormalTextureColor = gNormalTexture.Sample(gSampler, transformedUV.xy);
-
+    float32_t4 PosTexColor = gPosTexture.Sample(gSampler, transformedUV.xy);
+    
+    N = NormalTextureColor.rgb;
     float32_t DepthTextureColor =gDepthTexture.Sample(gSampler, transformedUV.xy);
     
     float32_t4 wPos = float32_t4(transformedUV.xy * 2.0f - 1.0f, DepthTextureColor, 1.0f);
-    wPos.xyz = mul(gTransformationViewMatrix.InverseViewProjection, wPos).xyz;
+    wPos.xyz = mul(gTransformationViewMatrix.InverseViewProjection, PosTexColor).xyz;
     wPos = wPos / wPos.w;
-   
+    
     float32_t3 pTotalSpecular = 0;
     float32_t3 pTotalDffuse = 0;
 
@@ -43,10 +45,10 @@ PixelShaderOutput main(VertexShaderOutput input)
         float32_t3 pRefrectLight = reflect(pLightDir, normalize(N));
         float32_t3 pHalfVector = normalize(-pLightDir + toEye);
 
-        float pNdotL = dot(normalize(N), -normalize(pLightDir));
-        float pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
-        float pNdotH = dot(normalize(N), pHalfVector);
-        float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
+        float32_t pNdotL = dot(normalize(N), -normalize(pLightDir));
+        float32_t pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
+        float32_t pNdotH = dot(normalize(N), pHalfVector);
+        float32_t pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
 
 		//拡散
         float32_t3 pDiffuse = gMaterial.color.rgb * ColorTextureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
@@ -57,12 +59,12 @@ PixelShaderOutput main(VertexShaderOutput input)
         pTotalSpecular = pTotalSpecular + pSpecular;
     }
     
-    float32_t3 result = N.rgb; //pTotalDffuse + pTotalSpecular;
- 
-    float dsp = DepthTextureColor;
-    //pow(DepthTextureColor, 200);
+    float32_t3 result = pTotalDffuse;
+    //result = PosTexColor.rgb;
+    //result = pow(result,20);
+    
+    float32_t dsp = DepthTextureColor;
     float32_t3 dspColor = float32_t3(transformedUV.xy, dsp);
-    //result.rgb = pow(dspColor.rgb,20);
-    output.color = float4(result.rgb, 1);
+    output.color = float32_t4(result.rgb, 1);
     return output;
 }

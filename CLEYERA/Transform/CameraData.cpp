@@ -5,7 +5,7 @@ using namespace Math::Vector;
 
 void CameraData::Initialize(Vector3 r, Vector3 t)
 {
-	rotation_= r;
+	rotation_ = r;
 	translation_ = t;
 	CreateBuffer();
 	matProj_ = Math::Matrix::PerspectiveFovMatrix(fov_, aspectRatio_, nearClip_, farClip_);
@@ -22,7 +22,7 @@ void CameraData::UpdateMatrix()
 	Matrix4x4 rotateYMatrix = Math::Matrix::RotateYMatrix(rotation_.y);
 	Matrix4x4 rotateZMatrix = Math::Matrix::RotateZMatrix(rotation_.z);
 	Matrix4x4 rotateMatrix = Math::Matrix::Multiply(rotateXMatrix, Math::Matrix::Multiply(rotateYMatrix, rotateZMatrix));
-	
+
 	matView_ = Math::Matrix::Multiply(Math::Matrix::Inverse(translateMatrix), Math::Matrix::Inverse(rotateMatrix));
 	matProj_ = Math::Matrix::PerspectiveFovMatrix(fov_, aspectRatio_, nearClip_, farClip_);
 	OrthographicMatrix_ = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
@@ -61,10 +61,7 @@ void CameraData::TransfarMatrix()
 	BufferMatrix_.orthographic = OrthographicMatrix_;
 	BufferMatrix_.position = translation_;
 	BufferMatrix_.InverseViewProjection = matVPInverse_;;
-	BufferMatrix_.InverseProjection =matProjInverse_;
-
-
-
+	BufferMatrix_.InverseProjection = matProjInverse_;
 
 	buffer_->Setbuffer(BufferMatrix_);
 	UnMap();

@@ -64,5 +64,6 @@ PixelShaderOutput main(VertexShaderOutput input)
     output.dfColor = float32_t4(textureColor.rgb, 1);
     output.normalColor = float32_t4(N.rgb, 1);
     
+    output.posColor = input.position;
     return output;
 }

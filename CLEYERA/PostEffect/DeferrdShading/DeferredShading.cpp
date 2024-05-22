@@ -24,18 +24,19 @@ void DefferredShading::PreDraw()
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	// レンダーターゲットをセット
-	const UINT rtvSize = 3;
+	const UINT rtvSize = 4;
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[rtvSize] =
 	{
 		 RTVDescriptorManager::GetHandle(testBuffer_->GetRtvIndex()),
 		 RTVDescriptorManager::GetHandle(colorTexBuffer_->GetRtvIndex()),
-		 RTVDescriptorManager::GetHandle(normalTexBuffer_->GetRtvIndex())
+		 RTVDescriptorManager::GetHandle(normalTexBuffer_->GetRtvIndex()),
+		 RTVDescriptorManager::GetHandle(PosTexBuffer_->GetRtvIndex())
 	};
 
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(depthBuffer_->GetDsvIndex());
 	D3D12_CPU_DESCRIPTOR_HANDLE depthTexHandle = DSVDescriptorManager::GetHandle(depthTexBuffer_->GetDsvIndex());
 
-	const UINT barrirSize = 4;
+	const UINT barrirSize = 5;
 
 	D3D12_RESOURCE_BARRIER barrier[barrirSize]{};
 	//test用
@@ -56,13 +57,19 @@ void DefferredShading::PreDraw()
 	barrier[2].Transition.pResource = normalTexBuffer_->GetBuffer();;
 	barrier[2].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier[2].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	//深度
+	//Pos
 	barrier[3].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[3].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier[3].Transition.Subresource = 0xFFFFFFFF;
-	barrier[3].Transition.pResource = depthTexBuffer_->GetBuffer();
-	barrier[3].Transition.StateBefore = D3D12_RESOURCE_STATE_GENERIC_READ;
-	barrier[3].Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+	barrier[3].Transition.pResource = PosTexBuffer_->GetBuffer();;
+	barrier[3].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	barrier[3].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	//深度
+	barrier[4].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[4].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[4].Transition.Subresource = 0xFFFFFFFF;
+	barrier[4].Transition.pResource = depthTexBuffer_->GetBuffer();
+	barrier[4].Transition.StateBefore = D3D12_RESOURCE_STATE_GENERIC_READ;
+	barrier[4].Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
 
 	commands.m_pList->ResourceBarrier(barrirSize, barrier);
 
@@ -87,7 +94,7 @@ void DefferredShading::PreDraw()
 void DefferredShading::PostDraw()
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	D3D12_RESOURCE_BARRIER barrier[4]{};
+	D3D12_RESOURCE_BARRIER barrier[5]{};
 	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier[0].Transition.Subresource = 0xFFFFFFFF;
@@ -107,15 +114,21 @@ void DefferredShading::PostDraw()
 	barrier[2].Transition.pResource = normalTexBuffer_->GetBuffer();;
 	barrier[2].Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier[2].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-	//深度
+	//Pos
 	barrier[3].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[3].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier[3].Transition.Subresource = 0xFFFFFFFF;
-	barrier[3].Transition.pResource = depthTexBuffer_->GetBuffer();
-	barrier[3].Transition.StateBefore = D3D12_RESOURCE_STATE_DEPTH_WRITE;
-	barrier[3].Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
+	barrier[3].Transition.pResource = PosTexBuffer_->GetBuffer();;
+	barrier[3].Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier[3].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	//深度
+	barrier[4].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[4].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[4].Transition.Subresource = 0xFFFFFFFF;
+	barrier[4].Transition.pResource = depthTexBuffer_->GetBuffer();
+	barrier[4].Transition.StateBefore = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+	barrier[4].Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
 
-	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(4, barrier);
+	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(5, barrier);
 }
 
 

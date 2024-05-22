@@ -60,7 +60,7 @@ void AnimationScene::Update(GameManager* Scene)
 	{
 		ImGui::DragFloat3("t", &pointLight_.position.x,-0.1f,0.1f);
 		ImGui::DragFloat("intencity", &pointLight_.intencity,-0.1f,0.1f);
-
+		ImGui::DragFloat("radious", &pointLight_.radious, -0.1f, 0.1f);
 		ImGui::DragFloat("factor", &pointLight_.decay, -0.1f, 0.1f);
 		ImGui::TreePop();
 	}
