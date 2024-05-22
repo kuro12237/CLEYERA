@@ -68,7 +68,6 @@ void DefferredShading::PreDraw()
 
 	commands.m_pList->OMSetRenderTargets(rtvSize, rtvHandles, false, &depthTexHandle);
 
-	//commands.m_pList->OMSetRenderTargets(0, nullptr, false, &depthTexHandle);
 	//シザーとview
 	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()));
 	CommandCallScissor();
@@ -79,8 +78,6 @@ void DefferredShading::PreDraw()
 	{
 		commands.m_pList->ClearRenderTargetView(rtvHandles[i], clearColor, 0, nullptr);
 	}
-
-	//commands.m_pList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 	commands.m_pList->ClearDepthStencilView(depthTexHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
@@ -117,7 +114,6 @@ void DefferredShading::PostDraw()
 	barrier[3].Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
 
 	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(4, barrier);
-
 }
 
 
