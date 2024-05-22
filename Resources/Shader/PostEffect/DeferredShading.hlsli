@@ -10,9 +10,9 @@ struct TransformationViewMatrix
     float4x4 view;
     float4x4 projection;
     float4x4 orthographic;
-    float3 CameraPosition;
     float4x4 InverseProjection;
     float4x4 InverseViewProjection;
+    float3 CameraPosition;
 };
 
 struct Material

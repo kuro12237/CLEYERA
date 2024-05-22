@@ -9,7 +9,7 @@ void SkyDome::Initialize()
 	gameObject_->SetDesc(gameObjectDesc_);
 	gameObject_->SetModel(modelHandle_);
 	worldTransform_.Initialize();
-	worldTransform_.scale = { 128.0f,128.0f,128.0f };
+	worldTransform_.scale = { 64.0f,64.0f,64.0f };
 }
 
 void SkyDome::Update()

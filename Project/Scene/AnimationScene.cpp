@@ -6,7 +6,7 @@ void AnimationScene::Initialize()
 	camera_.translation_.z = -16;
 
 	worldTransform_.Initialize();
-
+	worldTransform_.translate.y = 8.0f;
 	postEffect_ = make_unique<PostEffect>();
 	postEffect_->Initialize("AnimationScene");
 	debugCamera_ = make_unique<DebugCamera>();
@@ -37,6 +37,11 @@ void AnimationScene::Initialize()
 	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);
 	testdf_ = make_unique<DefferredShading>();
 	testdf_->Initialize();
+
+	skyDome_ = make_unique<SkyDome>();
+	skyDome_->Initialize();
+	terrain_ = make_unique<Terrain>();
+	terrain_->Initialize();
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -74,6 +79,8 @@ void AnimationScene::Update(GameManager* Scene)
 
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
+	skyDome_->Update();
+	terrain_->Update();
 
 	LightingManager::AddList(pointLight_);
 	postEffect_->Update();
@@ -90,7 +97,8 @@ void AnimationScene::PostProcessDraw()
 		gameObject_->Draw(worldTransform_, camera_);
 	}
 	debugSkeleton_->Draw(camera_,worldTransform_,gameObject_->GetSkeleton());
-
+	terrain_->Draw(camera_);
+	skyDome_->Draw(camera_);
 	//postEffect_->PostDraw();
 	testdf_->PostDraw();
 }

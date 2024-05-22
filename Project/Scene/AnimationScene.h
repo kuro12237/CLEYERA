@@ -11,6 +11,8 @@
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 #include"Model/primitive/Line.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
+#include"GameObject/SkyDome/SkyDome.h"
+#include"GameObject/Terrain/Terrain.h"
 
 class AnimationScene :public IScene
 {
@@ -59,4 +61,6 @@ private:
 	bool humanDrawFlag_ = true;
 
 	unique_ptr<DefferredShading>testdf_ = nullptr;
+	unique_ptr<SkyDome>skyDome_ = nullptr;
+	unique_ptr<Terrain>terrain_ = nullptr;
 };

@@ -77,7 +77,7 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param, CameraD
 		//Affine�ϊ�
 		Matrix4x4 matWorld = Math::Matrix::Multiply(sMat, Math::Matrix::Multiply(billboardMatrix, tMat));
 		//view�ϊ�
-		matWorld = Math::Matrix::Multiply(matWorld, Math::Matrix::Multiply(viewprojection.matView_, viewprojection.matProjection_));
+		matWorld = Math::Matrix::Multiply(matWorld, Math::Matrix::Multiply(viewprojection.matView_, viewprojection.matProj_));
 		//uv��Affine
 		(*particleIterator).uvTransform_.matWorld= Math::Matrix::AffineMatrix(
 			(*particleIterator).uvTransform_.scale,

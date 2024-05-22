@@ -19,7 +19,7 @@ struct CameraData {
 	Math::Vector::Vector3 rotation_ = { 0.0f,0.0f,0.0f };
 	Math::Vector::Vector3 translation_ = { 0.0f,0.0f,-15.0f };
 	Math::Matrix::Matrix4x4 matView_{};
-	Math::Matrix::Matrix4x4 matProjection_{};
+	Math::Matrix::Matrix4x4 matProj_{};
 	Math::Matrix::Matrix4x4 OrthographicMatrix_{};
 	Math::Matrix::Matrix4x4 matVP_{};
 	Math::Matrix::Matrix4x4 matVPInverse_{};

@@ -15,7 +15,7 @@ ConstantBuffer<DirectionLightParam> gDirectionLight : register(b5);
 
 static float32_t3 N = 0.0f;
 static float32_t3 DirectionLightDirection = 0.0f;
-static float3 toEye = 0.0f;
+static float32_t3 toEye = 0.0f;
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
@@ -26,8 +26,8 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     float32_t DepthTextureColor =gDepthTexture.Sample(gSampler, transformedUV.xy);
     
-    float32_t4 wPos = float32_t4(transformedUV.xy*2.0f-1.0f, DepthTextureColor, 1);
-    wPos = mul(gTransformationViewMatrix.InverseViewProjection, wPos);
+    float32_t4 wPos = float32_t4(transformedUV.xy * 2.0f - 1.0f, DepthTextureColor, 1.0f);
+    wPos.xyz = mul(gTransformationViewMatrix.InverseViewProjection, wPos).xyz;
     wPos = wPos / wPos.w;
    
     float32_t3 pTotalSpecular = 0;
@@ -56,10 +56,13 @@ PixelShaderOutput main(VertexShaderOutput input)
         pTotalDffuse = pTotalDffuse + pDiffuse;
         pTotalSpecular = pTotalSpecular + pSpecular;
     }
-
-    float32_t3 result = pTotalDffuse + pTotalSpecular;
-    float dsp = pow(DepthTextureColor,200);
     
-    output.color = float4(dsp,dsp,dsp, 1);
+    float32_t3 result = N.rgb; //pTotalDffuse + pTotalSpecular;
+ 
+    float dsp = DepthTextureColor;
+    //pow(DepthTextureColor, 200);
+    float32_t3 dspColor = float32_t3(transformedUV.xy, dsp);
+    //result.rgb = pow(dspColor.rgb,20);
+    output.color = float4(result.rgb, 1);
     return output;
 }
