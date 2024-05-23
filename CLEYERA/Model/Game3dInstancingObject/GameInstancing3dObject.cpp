@@ -68,7 +68,6 @@ void GameInstancing3dObject::Draw()
 	commands.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
-
 	DescriptorManager::rootParamerterCommand(7, normalTexHandle_);
 	if (UseLight_)
 	{
