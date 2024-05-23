@@ -16,7 +16,7 @@ StructuredBuffer<Well> gMatrixPalette : register(t3);
 ConstantBuffer<TransformationMatrix> gTransformationMatrix : register(b0);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
 
-Skinned Skinning(VertexShaderInput input)
+Skinned Skinning(SkinningVertexShaderInput input)
 {
     Skinned skinned;
 
@@ -37,9 +37,11 @@ Skinned Skinning(VertexShaderInput input)
     return skinned;
 }
 
-VertexShaderOutput main(VertexShaderInput input,uint32_t vertexId : SV_VertexID)
+VertexShaderOutput main(SkinningVertexShaderInput input ,uint32_t vertexId : SV_VertexID)
 {
     VertexShaderOutput output;
+  
+   
     Skinned skinned = Skinning(input);
     float32_t4x4 CameraMatrix = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
 	//view変換

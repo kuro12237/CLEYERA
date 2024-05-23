@@ -43,6 +43,9 @@ void AnimationScene::Initialize()
 	terrain_ = make_unique<Terrain>();
 	terrain_->Initialize();
 	CameraManager::GetInstance()->ResetCamera(camera_);
+	SkyBox::GetInstance()->Initialize();
+	SkyBox::GetInstance()->SetTexHandle(TextureManager::LoadDDSTexture("rostock_laage_airport_4k.dds"));
+
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -84,13 +87,16 @@ void AnimationScene::Update(GameManager* Scene)
 	terrain_->Update();
 
 	LightingManager::AddList(pointLight_);
+	
+	SkyBox::GetInstance()->Update();
+
 	postEffect_->Update();
 }
 
 void AnimationScene::PostProcessDraw()
 {
-	testdf_->PreDraw();
-	//postEffect_->PreDraw();
+	//testdf_->PreDraw();
+	postEffect_->PreDraw();
 
 	gameObjetcDesc.colorDesc.color_ = { 1,0,1,0.3f };
 	if (humanDrawFlag_)
@@ -98,10 +104,11 @@ void AnimationScene::PostProcessDraw()
 		gameObject_->Draw(worldTransform_);
 	}
 	debugSkeleton_->Draw(worldTransform_,gameObject_->GetSkeleton());
-	terrain_->Draw();
-	skyDome_->Draw();
-	//postEffect_->PostDraw();
-	testdf_->PostDraw();
+	//terrain_->Draw();
+	//skyDome_->Draw();
+	SkyBox::GetInstance()->Draw();
+	postEffect_->PostDraw();
+	//testdf_->PostDraw();
 }
 
 void AnimationScene::Back2dSpriteDraw()
@@ -110,8 +117,8 @@ void AnimationScene::Back2dSpriteDraw()
 
 void AnimationScene::Object3dDraw()
 {
-	//postEffect_->Draw(camera_);
-	testdf_->Draw();
+	postEffect_->Draw(camera_);
+	//testdf_->Draw();
 }
 
 void AnimationScene::Flont2dSpriteDraw()

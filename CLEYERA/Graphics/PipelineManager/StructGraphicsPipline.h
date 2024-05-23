@@ -35,13 +35,11 @@ struct SPSO
 	SPSOProperty PhongSubsurface_Model;
 	SPSOProperty phongNormalInstancing_Model;
 	SBlendPSO LightingParticle3d;
-	SPSOProperty ColorModel3d;
-	SPSOProperty NormalModel3d;
 	SPSOProperty ColorPostProcess;
-	SPSOProperty PosModel3d;
 	SPSOProperty PostEffectTest;
 	SPSOProperty shadow;
 	SPSOProperty Phong_SkinningModel;
+	SPSOProperty SkyBox;
 };
 
 enum  BlendMode

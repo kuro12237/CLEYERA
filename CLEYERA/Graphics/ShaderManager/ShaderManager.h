@@ -33,6 +33,7 @@ struct SShaders
 	SShaderMode PosModel;
 	SShaderMode ColorPostProcess;
 	SShaderMode skinningPhongModel;
+	SShaderMode SkyBoxModel;
 };
 
 class ShaderManager
@@ -74,15 +75,14 @@ private:
 	static void PhongNormalInstancingModel();
 
 	static void CreateLineShader();
-	static void ColorModel();
-	static void NormalModel();
-	static void PosModel();
+
 	static void ColorPostProcess();
 
 	static void PostEffectTest();
 	static void ShadowMap();
 
 	static void SkinningPhongModelShader();
+	static void SkyBoxModel();
 
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};

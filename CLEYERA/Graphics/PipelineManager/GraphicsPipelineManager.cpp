@@ -150,6 +150,7 @@ void GraphicsPipelineManager::CreatePSO(SPSO &pso)
 
 	pso.phongNormalInstancing_Model = ModelCreatePipline::CreatePhongInstancingModel(device.Get(), commands, shader.Phong_Normal_InstancingModel);
 
+	pso.SkyBox = ModelCreatePipline::CreateSkyBoxModel(device.Get(), commands, shader.SkyBoxModel);
 }
 
 void GraphicsPipelineManager::Create2dSpritePSOs(SPSO &pso)

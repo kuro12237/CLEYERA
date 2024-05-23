@@ -17,6 +17,8 @@ public:
 	static void Finalize();
 
 	static uint32_t LoadPngTexture(const string& filePath);
+	static uint32_t LoadDDSTexture(const string &filePath);
+
 	static void UnLoadTexture(const string& filePath);
 	static void AllUnLoadTexture();
 	/// <summary>
@@ -33,6 +35,7 @@ private:
 
 	static ComPtr<ID3D12Resource> CreatepngTexResource(const DirectX::TexMetadata& metadata);
 	static DirectX::ScratchImage CreateMipImage(const std::string& filePath);
+	static DirectX::ScratchImage CreateDDSMipImage(const std::string& filePath);
 
 	static D3D12_RESOURCE_DESC SettingResource(const DirectX::TexMetadata& metadata);
 

@@ -264,15 +264,13 @@
     <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli">
       <Filter>Shader\PostEffect</Filter>
     </None>
-    <None Include="Resources\Shader\Model\DeferredShadingObject3d.hlsli">
-      <Filter>Shader\PostEffect</Filter>
-    </None>
     <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli">
       <Filter>Shader\PostEffect</Filter>
     </None>
     <None Include="Resources\Shader\primitives.hlsli">
       <Filter>Shader\primitive</Filter>
     </None>
+    <None Include="Resources\Shader\SkyBox.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -546,6 +544,7 @@
     </ClCompile>
     <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
+    <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -990,12 +989,6 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.VS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shader\SkinningObject3d.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
@@ -1020,5 +1013,7 @@
     <FxCompile Include="Resources\Shader\Primitives.PS.hlsl">
       <Filter>Shader\primitive</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shader\SkyBox.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\SkyBox.PS.hlsl" />
   </ItemGroup>
 </Project>

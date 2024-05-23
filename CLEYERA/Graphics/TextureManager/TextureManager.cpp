@@ -67,6 +67,55 @@ uint32_t TextureManager::LoadPngTexture(const string& filePath)
 	return TextureManager::GetInstance()->texDatas_[FilePath]->GetTexHandle();
 }
 
+uint32_t TextureManager::LoadDDSTexture(const string& filePath)
+{
+	string FilePath = "Resources/textures/" + filePath;
+	if (TextureManager::GetInstance()->isCreateObjectLoad_)
+	{
+		FilePath = filePath;
+		TextureManager::GetInstance()->isCreateObjectLoad_ = false;
+	}
+
+	//texのファイルの名前が被った場合は入らない
+	if (CheckTexDatas(FilePath))
+	{
+		//新しく作る
+		TexData texData = {};
+		//DescripterIndexを加算しずらす
+		DescriptorManager::IndexIncrement(FilePath);
+		//DescripterのIndexを取得
+		uint32_t index = DescriptorManager::GetIndex();
+		//ハンドル登録
+		texData.index = index;
+		//MipImageを作る
+		DirectX::ScratchImage mipImages = CreateDDSMipImage(FilePath);
+		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+		texData.resource = CreatepngTexResource(metadata);
+		//MipImageを登録
+		UploadMipImage(metadata, mipImages, texData);
+		//src設定
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		srvDesc.Format = metadata.format;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
+		srvDesc.TextureCube.MostDetailedMip = 0;
+		srvDesc.TextureCube.MipLevels = UINT_MAX;
+		srvDesc.TextureCube.ResourceMinLODClamp = 0.0f;
+
+		//Descripterをずらす
+		AddDescripter(index, srvDesc, texData.resource.Get());
+
+		//texのサイズ取得
+		texData.size.x = static_cast<float>(metadata.width);
+		texData.size.y = static_cast<float>(metadata.height);
+
+		//コンテナに保存
+		TextureManager::GetInstance()->texDatas_[FilePath] =
+			make_unique<TexDataResource>(FilePath, texData);
+	}
+	return TextureManager::GetInstance()->texDatas_[FilePath]->GetTexHandle();
+}
+
 void TextureManager::UnLoadTexture(const string& filePath)
 {
 	TextureManager::GetInstance()->texDatas_[filePath]->texRelease();
@@ -114,6 +163,29 @@ DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath
 	//ミップマップの作成
 	DirectX::ScratchImage mipImage{};
 	hr = DirectX::GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImage);
+	return mipImage;
+}
+
+DirectX::ScratchImage TextureManager::CreateDDSMipImage(const std::string& filePath)
+{
+	//テクスチャファイルを読み込みプログラムで扱えるようにする
+	DirectX::ScratchImage image{};
+	std::wstring filePathW = LogManager::ConvertString(filePath);
+	HRESULT hr = DirectX::LoadFromDDSFile(filePathW.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+	assert(SUCCEEDED(hr));
+	//ミップマップの作成
+
+	DirectX::ScratchImage mipImage;
+
+	if (DirectX::IsCompressed(image.GetMetadata().format))
+	{
+		mipImage =std::move(image);
+	}
+	else
+	{
+		assert(0);
+	}
+
 	return mipImage;
 }
 

@@ -15,11 +15,7 @@ public:
 
 	static SPSOProperty CreatePhongInstancingModel(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
-	static SPSOProperty CreateColorModel(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
-
-	static SPSOProperty CreateNormalModel(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
-
-	static SPSOProperty CreatePosModel(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
+	static SPSOProperty CreateSkyBoxModel(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
 private:
 

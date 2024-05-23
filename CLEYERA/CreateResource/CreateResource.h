@@ -186,7 +186,7 @@ struct ResourcePeroperty
 
 struct  Material
 {
-	Math::Vector::Vector4 color;
+	Math::Vector::Vector4 color = {1,1,1,1};
 	Math::Matrix::Matrix4x4 uvTransform;
 	float shininess = 70.0f;
 	float specular_ = 1.0f;

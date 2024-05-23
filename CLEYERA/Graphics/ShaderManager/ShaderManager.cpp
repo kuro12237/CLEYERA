@@ -106,6 +106,7 @@ void ShaderManager::ShaderComples()
 
 	PostEffectTest();
 	ShadowMap();
+	SkyBoxModel();
 
 	SkinningPhongModelShader();
 }
@@ -266,54 +267,6 @@ void ShaderManager::CreateLineShader()
 	ShaderManager::Getinstance()->shaders_.Line = shaders;
 }
 
-void ShaderManager::ColorModel()
-{
-	SShaderMode shaders;
-	shaders.vertexBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Model/ColorObject3d.VS.hlsl",
-			L"vs_6_0");
-
-	shaders.pixelBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Model/ColorObject3d.PS.hlsl",
-			L"ps_6_0");
-
-	ShaderManager::Getinstance()->shaders_.ColorModel = shaders;
-}
-
-void ShaderManager::NormalModel()
-{
-	SShaderMode shaders;
-	shaders.vertexBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Model/NormalObject3d.VS.hlsl",
-			L"vs_6_0");
-
-	shaders.pixelBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Model/NormalObject3d.PS.hlsl",
-			L"ps_6_0");
-
-	ShaderManager::Getinstance()->shaders_.NormalModel = shaders;
-}
-
-void ShaderManager::PosModel()
-{
-	SShaderMode shaders;
-	shaders.vertexBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Model/WorldPositionObject3d.VS.hlsl",
-			L"vs_6_0");
-
-	shaders.pixelBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Model/WorldPositionObject3d.PS.hlsl",
-			L"ps_6_0");
-
-	ShaderManager::Getinstance()->shaders_.PosModel = shaders;
-}
-
 void ShaderManager::ColorPostProcess()
 {
 	SShaderMode shaders;
@@ -376,4 +329,20 @@ void ShaderManager::SkinningPhongModelShader()
 			L"Resources/Shader/Phong_NormalMap_Model3dObject.PS.hlsl",
 			L"ps_6_0");
 	ShaderManager::Getinstance()->shaders_.skinningPhongModel = shaders;
+}
+
+void ShaderManager::SkyBoxModel()
+{
+	SShaderMode shaders{};
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SkyBox.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SkyBox.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.SkyBoxModel = shaders;
 }
