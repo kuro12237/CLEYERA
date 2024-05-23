@@ -12,3 +12,8 @@ stringstream  FileLoader::CSVLoadFile(const string filepath)
 	file.close();
 	return resultData;
 }
+
+ifstream FileLoader::JsonLoadFile(const string filePath)
+{
+	return ifstream();
+}

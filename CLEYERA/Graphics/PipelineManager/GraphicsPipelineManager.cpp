@@ -2689,20 +2689,6 @@ void GraphicsPipelineManager::DefferrdShading(SPSO& pso)
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
-	
-
-	pso.ColorModel3d = ModelCreatePipline::CreateColorModel(device,commands,shader.ColorModel);
-	LogManager::Log("Create colorModelPipline\n");
-
-	pso.NormalModel3d = ModelCreatePipline::CreateNormalModel(device, commands, shader.NormalModel);
-	LogManager::Log("CreateNormalModelPipline");
-
-
-	pso.NormalModel3d = ModelCreatePipline::CreateNormalModel(device, commands, shader.NormalModel);
-	LogManager::Log("CreateNormalModelPipline");
-
-	pso.PosModel3d = ModelCreatePipline::CreatePosModel(device, commands, shader.PosModel);
-	LogManager::Log("CreatePosModel");
 
 	pso.ColorPostProcess = CreatePostProcess::DefferdShading(device,commands,shader.ColorPostProcess);
 	LogManager::Log("ColorPostProcessPiplineComp");

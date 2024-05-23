@@ -223,6 +223,9 @@
     <Filter Include="Shader\primitive">
       <UniqueIdentifier>{e5533b57-22cb-4593-be54-d40c716d1bf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\character">
+      <UniqueIdentifier>{694f639d-3f1c-490d-a5e0-d644f7e6f069}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -524,6 +527,9 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Model\primitive\Line.cpp">
       <Filter>CLEYERA\Model\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\ICharacter.cpp">
+      <Filter>Project\GameObject\character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -899,6 +905,9 @@
     <ClInclude Include="CLEYERA\Model\primitive\Line.h">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\ICharacter.h">
+      <Filter>Project\GameObject\character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -955,9 +964,6 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\ColorObject3d.VS.hlsl">
-      <Filter>Shader\PostEffect</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shader\Model\WorldPositionObject3d.PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
@@ -967,19 +973,10 @@
     <FxCompile Include="Resources\Shader\SkinningObject3d.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\ColorObject3d.PS.hlsl">
-      <Filter>Shader\PostEffect</Filter>
-    </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl">
-      <Filter>Shader\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\NormalObject3d.PS.hlsl">
-      <Filter>Shader\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\Model\NormalObject3d.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl">

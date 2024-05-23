@@ -102,9 +102,6 @@ void ShaderManager::ShaderComples()
 	PhongSubsurfaceModel();
 	PhongNormalInstancingModel();
 
-	ColorModel();
-	NormalModel();
-	PosModel();
 	ColorPostProcess();
 
 	PostEffectTest();

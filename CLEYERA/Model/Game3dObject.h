@@ -29,7 +29,7 @@ public:
 
 #pragma region Set
 
-	void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = &desc; }
+	void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = desc; }
 
 	void SetName(string name) { name_ = name; }
 
@@ -66,6 +66,6 @@ private:
 	vector<WellForGPU>paletteParam_;
 #pragma endregion
 
-	const Game3dObjectDesc* game3dObjectDesc_ = nullptr;
+	Game3dObjectDesc game3dObjectDesc_{};
 
 };

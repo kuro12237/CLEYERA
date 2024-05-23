@@ -21,13 +21,8 @@ void Game3dObject::SetModel(uint32_t index)
 {
 	if (prevModelIndex_ != index)
 	{
-		if (!game3dObjectDesc_)
-		{
-			LogManager::Log("None SetGame3dObjectDesc");
-			assert(0);
-		}
 		model_ = ModelManager::GetModel(index);
-		model_->SetDesc(*game3dObjectDesc_);
+		model_->SetDesc(game3dObjectDesc_);
 	}
 
 	prevModelIndex_ = index;
@@ -119,24 +114,24 @@ void Game3dObject::SkinningUpdate()
 Material Game3dObject::MaterialConverter()
 {
 	Material result = material_;
-	result.shininess = game3dObjectDesc_->phongDesc.shininess;
-	result.specular_ = game3dObjectDesc_->phongDesc.specular_;
+	result.shininess = game3dObjectDesc_.phongDesc.shininess;
+	result.specular_ = game3dObjectDesc_.phongDesc.specular_;
 
-	result.color = game3dObjectDesc_->colorDesc.color_;
+	result.color = game3dObjectDesc_.colorDesc.color_;
 	Math::Matrix::Matrix4x4 colorMat =
 		Math::Matrix::AffineMatrix(
-			game3dObjectDesc_->colorDesc.uvScale_,
-			game3dObjectDesc_->colorDesc.uvRotate,
-			game3dObjectDesc_->colorDesc.uvTranslate
+			game3dObjectDesc_.colorDesc.uvScale_,
+			game3dObjectDesc_.colorDesc.uvRotate,
+			game3dObjectDesc_.colorDesc.uvTranslate
 		);
 	result.uvTransform = colorMat;
-	result.grayFactor = game3dObjectDesc_->colorDesc.grayFactor_;
+	result.grayFactor = game3dObjectDesc_.colorDesc.grayFactor_;
 
-	result.roughness_ = game3dObjectDesc_->pbrDesc.roughness_;
-	result.metalness_ = game3dObjectDesc_->pbrDesc.metalness_;
-	result.scatterCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
-	result.scatterDistance = game3dObjectDesc_->sssDesc.scatterDistance_;
-	result.absorptionCoefficient = game3dObjectDesc_->sssDesc.scatterCoefficient_;
+	result.roughness_ = game3dObjectDesc_.pbrDesc.roughness_;
+	result.metalness_ = game3dObjectDesc_.pbrDesc.metalness_;
+	result.scatterCoefficient = game3dObjectDesc_.sssDesc.scatterCoefficient_;
+	result.scatterDistance = game3dObjectDesc_.sssDesc.scatterDistance_;
+	result.absorptionCoefficient = game3dObjectDesc_.sssDesc.scatterCoefficient_;
 
 	return result;
 }
