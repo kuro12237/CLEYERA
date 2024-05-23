@@ -25,6 +25,7 @@ void Cleyera::Initialize()
 	DirectionalLight::Initialize();
 
 	GlobalVariables::GetInstance()->LoadFiles();
+	CameraManager::GetInstance()->Initialize();
 }
 
 void Cleyera::Finalize()

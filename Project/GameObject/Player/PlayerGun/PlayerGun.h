@@ -23,7 +23,7 @@ public:
 
 	void Animation();
 
-	void Draw(const CameraData& camera);
+	void Draw();
 
 	void WorldTransformUpdate() { worldTransform_.UpdateMatrix(); }
 

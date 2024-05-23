@@ -14,7 +14,7 @@ void LineModel::Create()
 	mat_ = Math::Matrix::Identity();
 }
 
-void LineModel::Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end, const CameraData& camera)
+void LineModel::Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end)
 {
 	material_->Map();
 	Material m;
@@ -40,7 +40,8 @@ void LineModel::Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end, co
 	list->SetPipelineState(PSO.GraphicsPipelineState.Get());
 	vertex_->CommandVertexBufferViewCall();
 	material_->CommandCall(0);
-	camera.buffer_->CommandCall(1);
+
+	CameraManager::GetInstance()->CommandCall(1);
 	worldMat_->CommandCall(2);
 	list->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 	list->DrawInstanced(2, 1, 0, 0);

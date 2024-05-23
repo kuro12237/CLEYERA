@@ -13,7 +13,7 @@ public:
 
 	void Animation();
 
-	void Draw(const CameraData& camera);
+	void Draw();
 
 #pragma region Get
 

@@ -19,9 +19,9 @@ void Terrain::Update()
 	worldTransform_.UpdateEularMatrix();
 }
 
-void Terrain::Draw(const CameraData& camera)
+void Terrain::Draw()
 {
-	gameObject_->Draw(worldTransform_, camera);
+	gameObject_->Draw(worldTransform_);
 }
 
 void Terrain::ImGuiUpdate()

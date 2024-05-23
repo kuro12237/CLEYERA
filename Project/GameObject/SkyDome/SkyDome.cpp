@@ -17,9 +17,9 @@ void SkyDome::Update()
 	worldTransform_.UpdateEularMatrix();
 }
 
-void SkyDome::Draw(const CameraData& camera)
+void SkyDome::Draw()
 {
-	gameObject_->Draw(worldTransform_, camera);
+	gameObject_->Draw(worldTransform_);
 }
 
 void SkyDome::ImGuiUpdate()

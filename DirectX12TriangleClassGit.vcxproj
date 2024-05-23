@@ -93,6 +93,7 @@
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp" />
     <ClCompile Include="CLEYERA\Transform\CameraData.cpp" />
     <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp" />
+    <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\CollisionManager\CollisionManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\CollisionManager\GeometryCollision\GeometryCollision.cpp" />
     <ClCompile Include="CLEYERA\Utility\CollisionManager\IsCollision\IsCollision.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
     <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
     <ClInclude Include="CLEYERA\Transform\WorldTransform.h" />
+    <ClInclude Include="CLEYERA\Utility\CameraManager\CameraManager.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\AABBCollider.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\ColliderConfig.h" />
     <ClInclude Include="CLEYERA\Utility\CollisionManager\Collider\OBBCollider.h" />
@@ -227,6 +229,7 @@
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
     <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
+    <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Character\IObjectData.h" />
     <ClInclude Include="Project\GameObject\Item\Item.h" />

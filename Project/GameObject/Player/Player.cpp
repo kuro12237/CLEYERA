@@ -99,15 +99,15 @@ void Player::Update()
 	ClearFlag();
 }
 
-void Player::Draw(const CameraData& camera)
+void Player::Draw()
 {
-	reticle_->Draw3d(camera);
+	reticle_->Draw3d();
 	//gun_->Draw(camera);
 	if (isObjectDraw_)
 	{
-		gameObject_->Draw(worldTransform_, camera);
+		gameObject_->Draw(worldTransform_);
 	}
-	debugSkeleton_->Draw(camera,worldTransform_, gameObject_->GetSkeleton());
+	debugSkeleton_->Draw(worldTransform_, gameObject_->GetSkeleton());
 }
 
 void Player::Draw2d(const CameraData& camera){

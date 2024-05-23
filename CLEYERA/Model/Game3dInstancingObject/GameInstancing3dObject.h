@@ -17,7 +17,7 @@ public:
 
 	void Transfar();
 
-	void Draw(const CameraData& camera);
+	void Draw();
 
 	void SetModel(const uint32_t& index);
 

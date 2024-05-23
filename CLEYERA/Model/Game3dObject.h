@@ -19,7 +19,7 @@ public:
 
 	void SetModel(const string filePath);
 
-	void Draw(WorldTransform worldTransform, CameraData view);
+	void Draw(WorldTransform worldTransform);
 
 	void CreateSkinningParameter();
 

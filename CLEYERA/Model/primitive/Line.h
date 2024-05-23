@@ -2,6 +2,7 @@
 #include"GraphicsPipelineManager.h"
 #include"BufferResources.h"
 #include"CameraData.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 class LineModel
 {
@@ -11,7 +12,7 @@ public:
 
 	void Create();
 
-	void Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end, const CameraData& camera);
+	void Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end);
 
 	void SetWorldMat(const Math::Matrix::Matrix4x4 mat) { mat_ = mat; }
 

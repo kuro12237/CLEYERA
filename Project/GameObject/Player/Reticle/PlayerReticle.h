@@ -14,7 +14,7 @@ public:
 
 	void Update();
 
-	void Draw3d(const CameraData& camera);
+	void Draw3d();
 
 	void Draw2d(const CameraData& camera);
 

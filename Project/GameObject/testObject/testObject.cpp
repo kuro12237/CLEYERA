@@ -13,10 +13,11 @@ void testObject::Initialize()
 
 void testObject::Update()
 {
+	
 	this->UpdateMat();
 }
 
-void testObject::Draw(const CameraData& camera)
+void testObject::Draw()
 {
-	this->DrawObject(camera);
+	this->DrawObject();
 }

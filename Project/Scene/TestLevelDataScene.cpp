@@ -21,7 +21,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 void TestLevelDataScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
-	testObj_->Draw(camera_);
+	testObj_->Draw();
 	postEffect_->PostDraw();
 }
 

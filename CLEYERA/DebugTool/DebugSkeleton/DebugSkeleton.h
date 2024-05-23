@@ -14,7 +14,7 @@ public:
 
 	void Create(SAnimation::Skeleton skeleton,WorldTransform w);
 
-	void Draw(CameraData camera,WorldTransform w,SAnimation::Skeleton skeleton);
+	void Draw(WorldTransform w,SAnimation::Skeleton skeleton);
 
 	void ImGuiUpdate();
 
@@ -22,9 +22,9 @@ private:
 
 	void CreateJoint(size_t size);
 
-	void SkeletonDraw(const CameraData &camera, WorldTransform w,const SAnimation::Skeleton &skeleton,uint32_t index);
+	void SkeletonDraw(WorldTransform w,const SAnimation::Skeleton &skeleton,uint32_t index);
 
-	void JointDraw(const CameraData& camera, const WorldTransform w, const SAnimation::Skeleton& skeleton);
+	void JointDraw(const WorldTransform w, const SAnimation::Skeleton& skeleton);
 
 	const WorldTransform* wT_;
 	vector<string>numberString_;

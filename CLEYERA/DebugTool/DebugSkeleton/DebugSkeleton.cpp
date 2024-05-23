@@ -25,16 +25,16 @@ void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 
 }
 
-void DebugSkeleton::Draw(CameraData camera, WorldTransform w, SAnimation::Skeleton skeleton)
+void DebugSkeleton::Draw(WorldTransform w, SAnimation::Skeleton skeleton)
 {
 #ifdef _DEBUG
 	if (jointDrawFlag_)
 	{
-		JointDraw(camera, w, skeleton);
+		JointDraw(w, skeleton);
 	}
 	if (lineDrawFlag_)
 	{
-		SkeletonDraw(camera, w, skeleton, skeleton.root);
+		SkeletonDraw(w, skeleton, skeleton.root);
 	}
 #endif // _DEBUG
 
@@ -90,7 +90,7 @@ void DebugSkeleton::CreateJoint(size_t size)
 #endif // _DEBUG
 }
 
-void DebugSkeleton::SkeletonDraw(const CameraData& camera, WorldTransform w, const SAnimation::Skeleton& skeleton, uint32_t index)
+void DebugSkeleton::SkeletonDraw(WorldTransform w, const SAnimation::Skeleton& skeleton, uint32_t index)
 {
 	const SAnimation::Joint& parentJoint = skeleton.joints[index];
 	for (int32_t childIndex : parentJoint.childlen)
@@ -99,12 +99,12 @@ void DebugSkeleton::SkeletonDraw(const CameraData& camera, WorldTransform w, con
 		Math::Vector::Vector3 start = { parentJoint.skeletonSpaceMatrix.m[3][0],parentJoint.skeletonSpaceMatrix.m[3][1],parentJoint.skeletonSpaceMatrix.m[3][2] };
 		Math::Vector::Vector3 end = { childJoint.skeletonSpaceMatrix.m[3][0],childJoint.skeletonSpaceMatrix.m[3][1],childJoint.skeletonSpaceMatrix.m[3][2] };
 		lineModels_[childIndex]->SetWorldMat(w.matWorld);
-		lineModels_[childIndex]->Draw(start, end, camera);
-		SkeletonDraw(camera, w, skeleton, childIndex);
+		lineModels_[childIndex]->Draw(start, end);
+		SkeletonDraw(w, skeleton, childIndex);
 	}
 }
 
-void DebugSkeleton::JointDraw(const CameraData& camera, const WorldTransform w, const SAnimation::Skeleton& skeleton)
+void DebugSkeleton::JointDraw(const WorldTransform w, const SAnimation::Skeleton& skeleton)
 {
 	jointObjectDesc_.colorDesc.color_ = Math::Vector::Vector4(jointColor_.x, jointColor_.y, jointColor_.z, 1.0f);
 	Math::Matrix::Matrix4x4 sm = Math::Matrix::ScaleMatrix({ jointScale_,jointScale_,jointScale_ });
@@ -114,6 +114,6 @@ void DebugSkeleton::JointDraw(const CameraData& camera, const WorldTransform w, 
 		jointWt_[i].matWorld = Math::Matrix::ScaleMatrixByAnother(jointWt_[i].matWorld, sm);
 		jointWt_[i].TransfarMatrix();
 
-		jointObject_->Draw(jointWt_[i], camera);
+		jointObject_->Draw(jointWt_[i]);
 	}
 }

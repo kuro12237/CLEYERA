@@ -26,7 +26,7 @@ void PlayerGunBullet::Update()
 	worldTransform_.UpdateMatrix();
 }
 
-void PlayerGunBullet::Draw(const CameraData& camera)
+void PlayerGunBullet::Draw()
 {
-	gameObject_->Draw(worldTransform_, camera);
+	gameObject_->Draw(worldTransform_);
 }

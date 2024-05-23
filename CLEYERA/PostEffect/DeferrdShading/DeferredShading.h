@@ -5,6 +5,7 @@
 #include"GraphicsPipelineManager.h"
 #include"Light/LightingManager.h"
 #include"Light/DirectionLIght.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 struct MaterialDefferdShading
 {
@@ -24,7 +25,7 @@ public:
 
 	void PostDraw();
 
-	void Draw(const CameraData& camera);
+	void Draw();
 
 private:
 

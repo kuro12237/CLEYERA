@@ -16,7 +16,7 @@ public:
 
 	void Animation();
 
-	void Draw(const CameraData& camera);
+	void Draw();
 
 	void OnCollision(uint32_t id)override;
 

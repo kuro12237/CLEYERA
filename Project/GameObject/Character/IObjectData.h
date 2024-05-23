@@ -16,7 +16,7 @@ public:
 
 	void UpdateMat();
 
-	void DrawObject(CameraData camera);
+	void DrawObject();
 
 #pragma region Set
 

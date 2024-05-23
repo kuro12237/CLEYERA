@@ -41,13 +41,13 @@ void ItemManager::Animation()
 	}
 }
 
-void ItemManager::Draw(const CameraData& camera)
+void ItemManager::Draw()
 {
 	for (shared_ptr<Item> item : items_)
 	{
 		if (item)
 		{
-			item->Draw(camera);
+			item->Draw();
 		}
 	}
 }

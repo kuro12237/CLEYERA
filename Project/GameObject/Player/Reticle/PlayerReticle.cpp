@@ -48,9 +48,8 @@ void PlayerReticle::Update()
 	worldTransform_.UpdateMatrix();
 }
 
-void PlayerReticle::Draw3d(const CameraData& camera)
+void PlayerReticle::Draw3d()
 {
-	camera;
 	//gameObject_->Draw(worldTransform_, camera);
 }
 

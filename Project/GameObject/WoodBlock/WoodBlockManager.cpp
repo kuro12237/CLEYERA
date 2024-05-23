@@ -32,9 +32,9 @@ void WoodBlockManager::Update()
 	blocksGameObject_->Transfar();
 }
 
-void WoodBlockManager::Draw(const CameraData& camera)
+void WoodBlockManager::Draw()
 {
-	blocksGameObject_->Draw(camera);
+	blocksGameObject_->Draw();
 }
 
 void WoodBlockManager::UpdateImGui()

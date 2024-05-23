@@ -40,7 +40,7 @@ void Game3dObject::SetModel(const string filePath)
 	prevModelIndex_ = index;
 }
 
-void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
+void Game3dObject::Draw(WorldTransform worldTransform)
 {
 	if (model_ == nullptr)
 	{
@@ -62,8 +62,8 @@ void Game3dObject::Draw(WorldTransform worldTransform, CameraData view)
 	//行列
 	worldTransform.buffer_->CommandCall(1);
 	//カメラ
-	view.buffer_->CommandCall(2);
-	view.buffer_->CommandCall(3);
+	CameraManager::GetInstance()->CommandCall(2);
+	CameraManager::GetInstance()->CommandCall(3);
 	//4.5を使用
 	LightingManager::GetInstance()->CallCommand();
 	//テクスチャ

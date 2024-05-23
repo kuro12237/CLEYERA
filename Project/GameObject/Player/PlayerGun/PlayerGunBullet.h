@@ -11,7 +11,7 @@ public:
 
 	void Update();
 
-	void Draw(const CameraData& camera);
+	void Draw();
 
 #pragma region Get
 

@@ -45,7 +45,7 @@ void GameInstancing3dObject::Transfar()
 	material_->UnMap();
 }
 
-void GameInstancing3dObject::Draw(const CameraData& camera)
+void GameInstancing3dObject::Draw()
 {
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -62,8 +62,8 @@ void GameInstancing3dObject::Draw(const CameraData& camera)
 
 	material_->CommandCall(0);
 	DescriptorManager::rootParamerterCommand(1, instancing_->GetSrvIndex());
-	camera.buffer_->CommandCall(2);
-	camera.buffer_->CommandCall(3);
+	CameraManager::GetInstance()->CommandCall(2);
+	CameraManager::GetInstance()->CommandCall(3);
 	DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
 	commands.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 

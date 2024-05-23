@@ -46,13 +46,13 @@ void PlayerGun::Animation()
 {
 }
 
-void PlayerGun::Draw(const CameraData& camera)
+void PlayerGun::Draw()
 {
-	gameObject_->Draw(worldTransform_, camera);
+	gameObject_->Draw(worldTransform_);
 
 	for (shared_ptr<PlayerGunBullet> b : bullets_)
 	{
-		b->Draw(camera);
+		b->Draw();
 	}
 }
 

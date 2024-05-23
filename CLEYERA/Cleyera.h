@@ -16,6 +16,7 @@
 #include"Graphics/DescripterManager/RTVDescripterManager.h"
 #include"Light/DirectionLIght.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 #ifdef _DEBUG
  

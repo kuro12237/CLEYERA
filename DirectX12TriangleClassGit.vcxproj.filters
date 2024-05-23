@@ -545,6 +545,7 @@
       <Filter>Project\GameObject\testObject</Filter>
     </ClCompile>
     <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
+    <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -931,6 +932,8 @@
     <ClInclude Include="Project\Scene\TestLevelDataScene.h">
       <Filter>Project\Scene\Game\TestLevelData</Filter>
     </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />
+    <ClInclude Include="CLEYERA\Utility\CameraManager\CameraManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

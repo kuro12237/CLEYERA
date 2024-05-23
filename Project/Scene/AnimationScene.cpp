@@ -42,6 +42,7 @@ void AnimationScene::Initialize()
 	skyDome_->Initialize();
 	terrain_ = make_unique<Terrain>();
 	terrain_->Initialize();
+	CameraManager::GetInstance()->ResetCamera(camera_);
 }
 
 void AnimationScene::Update(GameManager* Scene)
@@ -94,11 +95,11 @@ void AnimationScene::PostProcessDraw()
 	gameObjetcDesc.colorDesc.color_ = { 1,0,1,0.3f };
 	if (humanDrawFlag_)
 	{
-		gameObject_->Draw(worldTransform_, camera_);
+		gameObject_->Draw(worldTransform_);
 	}
-	debugSkeleton_->Draw(camera_,worldTransform_,gameObject_->GetSkeleton());
-	terrain_->Draw(camera_);
-	skyDome_->Draw(camera_);
+	debugSkeleton_->Draw(worldTransform_,gameObject_->GetSkeleton());
+	terrain_->Draw();
+	skyDome_->Draw();
 	//postEffect_->PostDraw();
 	testdf_->PostDraw();
 }
@@ -110,7 +111,7 @@ void AnimationScene::Back2dSpriteDraw()
 void AnimationScene::Object3dDraw()
 {
 	//postEffect_->Draw(camera_);
-	testdf_->Draw(camera_);
+	testdf_->Draw();
 }
 
 void AnimationScene::Flont2dSpriteDraw()

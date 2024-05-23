@@ -13,6 +13,7 @@
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"GameObject/SkyDome/SkyDome.h"
 #include"GameObject/Terrain/Terrain.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 class AnimationScene :public IScene
 {

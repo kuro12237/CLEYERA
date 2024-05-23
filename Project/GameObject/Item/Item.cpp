@@ -44,9 +44,9 @@ void Item::Animation()
 	worldTransform_.TransfarMatrix();
 }
 
-void Item::Draw(const CameraData& camera)
+void Item::Draw()
 {
-	gameObject_->Draw(worldTransform_, camera);
+	gameObject_->Draw(worldTransform_);
 }
 
 void Item::OnCollision(uint32_t id)

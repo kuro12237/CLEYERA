@@ -29,7 +29,7 @@ void IObjectData::UpdateMat()
 	worldTransform_.UpdateMatrix();
 }
 
-void IObjectData::DrawObject(CameraData camera)
+void IObjectData::DrawObject()
 {
-	gameObject_->Draw(worldTransform_, camera);
+	gameObject_->Draw(worldTransform_);
 }

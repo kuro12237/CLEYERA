@@ -132,7 +132,7 @@ void DefferredShading::PostDraw()
 }
 
 
-void DefferredShading::Draw( const CameraData& camera)
+void DefferredShading::Draw()
 {
 	ColorBufferUpdate();
 	ComPtr<ID3D12GraphicsCommandList> m_pList = DirectXCommon::GetInstance()->GetCommands().m_pList;
@@ -151,9 +151,10 @@ void DefferredShading::Draw( const CameraData& camera)
 	DescriptorManager::rootParamerterCommand(3, normalTexBuffer_->GetSrvIndex());
 	DescriptorManager::rootParamerterCommand(4, PosTexBuffer_->GetSrvIndex());
 	DescriptorManager::rootParamerterCommand(5, depthTexBuffer_->GetSrvIndex());
-	camera.buffer_->CommandCall(6);
-	camera.buffer_->CommandCall(7);
 
+
+	CameraManager::GetInstance()->CommandCall(6);
+	CameraManager::GetInstance()->CommandCall(7);
 	DescriptorManager::rootParamerterCommand(8, LightingManager::dsvHandle());
 	m_pList->SetGraphicsRootConstantBufferView(9, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 	DirectionalLight::CommandCall(10);

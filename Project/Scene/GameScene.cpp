@@ -29,7 +29,7 @@ void GameScene::Initialize()
 
 	itemManager_ = make_unique<ItemManager>();
 	itemManager_->Initialize();
-
+	CameraManager::GetInstance()->ResetCamera(cameraData_);
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -88,9 +88,9 @@ void GameScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
-	player_->Draw(cameraData_);
-	blockManager_->Draw(cameraData_);
-	itemManager_->Draw(cameraData_);
+	player_->Draw();
+	blockManager_->Draw();
+	itemManager_->Draw();
 
 	MapObjectDraw();
 
@@ -178,8 +178,8 @@ void GameScene::MapObjectUpdate()
 
 void GameScene::MapObjectDraw()
 {
-	terrain_->Draw(cameraData_);
-	skyDome_->Draw(cameraData_);
+	terrain_->Draw();
+	skyDome_->Draw();
 }
 
 void GameScene::HitEffectUpdate()

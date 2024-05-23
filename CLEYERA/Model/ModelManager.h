@@ -4,6 +4,7 @@
 #include"Graphics/TextureManager/TextureManager.h"
 #include"Quaternion/QuaternionTransform.h"
 #include"Animation/SAnimation.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 class ModelManager
 {

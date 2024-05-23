@@ -16,7 +16,7 @@ public:
 
 	void Update();
 
-	void Draw(const CameraData &camera);
+	void Draw();
 
 	vector<shared_ptr<WoodBlock>>GetBlocks() { return blocks_; }
 
