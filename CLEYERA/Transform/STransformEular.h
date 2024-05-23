@@ -5,10 +5,10 @@
 
 struct TransformEular
 {
-	Vector3 scale;
-    Vector3 quaternion;
-	Vector3 translate;
+	Math::Vector::Vector3 scale;
+    Math::Vector::Vector3 rotate;
+	Math::Vector::Vector3 translate;
 
-	NLOHMANN_DEFINE_TYPE_INTRUSIVE(TransformEular, scale, quaternion, translate)
+	NLOHMANN_DEFINE_TYPE_INTRUSIVE(TransformEular, scale, rotate, translate)
 
 };

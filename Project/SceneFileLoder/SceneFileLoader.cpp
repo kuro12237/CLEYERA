@@ -2,5 +2,17 @@
 
 SceneFileLoader* SceneFileLoader::GetInstance()
 {
-    return nullptr;
+    static SceneFileLoader instance;
+    return &instance;
+}
+
+void SceneFileLoader::ReLoad(const string& filePath)
+{
+    if (deserialized)
+    {
+        deserialized.clear();
+    }
+
+    ifstream file = FileLoader::JsonLoadFile(filePath);
+    file >> deserialized;
 }

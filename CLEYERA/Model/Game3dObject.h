@@ -17,6 +17,8 @@ public:
 
 	void SetModel(uint32_t index);
 
+	void SetModel(const string filePath);
+
 	void Draw(WorldTransform worldTransform, CameraData view);
 
 	void CreateSkinningParameter();

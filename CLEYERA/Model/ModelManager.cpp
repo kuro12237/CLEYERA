@@ -190,6 +190,11 @@ SModelData ModelManager::GetObjData(uint32_t index)
 	return data;
 }
 
+SModelData ModelManager::GetModelData(const string filePath)
+{
+	return ModelManager::GetInstance()->objModelDatas_[filePath]->GetData();
+}
+
 Model* ModelManager::GetModel(uint32_t index)
 {
 	Model* data = nullptr;
@@ -203,6 +208,11 @@ Model* ModelManager::GetModel(uint32_t index)
 	}
 
 	return nullptr;
+}
+
+Model* ModelManager::GetModel(const string filePath)
+{
+	return ModelManager::GetInstance()->objModelDatas_[filePath]->GetModel();
 }
 
 void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)

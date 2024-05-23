@@ -15,5 +15,14 @@ stringstream  FileLoader::CSVLoadFile(const string filepath)
 
 ifstream FileLoader::JsonLoadFile(const string filePath)
 {
-	return ifstream();
+	ifstream file;
+	file.open(filePath);
+
+	if (file.fail())
+	{
+		LogManager::Log("not file open\n");
+		assert(0);
+	}
+
+	return file;
 }

@@ -226,6 +226,15 @@
     <Filter Include="Project\GameObject\character">
       <UniqueIdentifier>{694f639d-3f1c-490d-a5e0-d644f7e6f069}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\SceneFileLoader">
+      <UniqueIdentifier>{0bbb4abe-9208-48d1-85e6-e40e30f08f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\testObject">
+      <UniqueIdentifier>{18387c0a-4ec7-4337-8dc9-642df4dbdffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\Game\TestLevelData">
+      <UniqueIdentifier>{9ed4d57f-f937-4e16-a649-7102e7aea6cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -528,9 +537,14 @@
     <ClCompile Include="CLEYERA\Model\primitive\Line.cpp">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Character\ICharacter.cpp">
+    <ClCompile Include="Project\GameObject\Character\IObjectData.cpp">
       <Filter>Project\GameObject\character</Filter>
     </ClCompile>
+    <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
+    <ClCompile Include="Project\GameObject\testObject\testObject.cpp">
+      <Filter>Project\GameObject\testObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -905,8 +919,17 @@
     <ClInclude Include="CLEYERA\Model\primitive\Line.h">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Character\ICharacter.h">
+    <ClInclude Include="Project\GameObject\Character\IObjectData.h">
       <Filter>Project\GameObject\character</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h">
+      <Filter>Project\SceneFileLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\testObject\testObject.h">
+      <Filter>Project\GameObject\testObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\TestLevelDataScene.h">
+      <Filter>Project\Scene\Game\TestLevelData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
