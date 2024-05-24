@@ -6,6 +6,7 @@
 #include"Graphics/DescripterManager/DescriptorManager.h"
 #include"Graphics/TextureManager/TexDataResource.h"
 #include<DirectXTex/DirectXTex.h>
+#include"CreateResource/BufferResources.h"
 
 class TextureManager
 {
@@ -32,6 +33,8 @@ public:
 	static void UnUsedFilePath() { TextureManager::GetInstance()->isCreateObjectLoad_ = true; }
 
 private:
+	[[nodiscard]]
+	static ComPtr<ID3D12Resource> UpLoadTexData(ComPtr<ID3D12Resource>resource, const DirectX::ScratchImage& mipImage);
 
 	static ComPtr<ID3D12Resource> CreatepngTexResource(const DirectX::TexMetadata& metadata);
 	static DirectX::ScratchImage CreateMipImage(const std::string& filePath);

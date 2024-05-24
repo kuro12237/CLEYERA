@@ -11,7 +11,7 @@ VertexShaderOutput main(VertexShaderInput input)
 	//view変換
     float32_t4x4 resultMatrix = mul(gTransformationMatrix.WVP, CameraMatrix);
 
-    output.position = mul(input.position, resultMatrix).xyzw;
+    output.position = mul(input.position, resultMatrix).xyww;
     output.texcoord = input.position.xyz;
     output.normal = input.normal;
     return output;

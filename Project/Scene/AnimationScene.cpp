@@ -4,6 +4,7 @@ void AnimationScene::Initialize()
 {
 	camera_.Initialize();
 	camera_.translation_.z = -16;
+	camera_.TransfarMatrix();
 
 	worldTransform_.Initialize();
 	worldTransform_.translate.y = 8.0f;
@@ -104,8 +105,7 @@ void AnimationScene::PostProcessDraw()
 		gameObject_->Draw(worldTransform_);
 	}
 	debugSkeleton_->Draw(worldTransform_,gameObject_->GetSkeleton());
-	//terrain_->Draw();
-	//skyDome_->Draw();
+	terrain_->Draw();
 	SkyBox::GetInstance()->Draw();
 	postEffect_->PostDraw();
 	//testdf_->PostDraw();

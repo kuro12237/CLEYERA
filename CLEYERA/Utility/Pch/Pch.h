@@ -45,6 +45,7 @@
 
 #pragma region DirectX
 
+#include"externals/DirectXTex/DirectXTex/d3dx12.h"
 #include <dxgidebug.h>
 #include <dxcapi.h>
 #include <d3d12.h>

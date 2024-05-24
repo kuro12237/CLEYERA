@@ -51,6 +51,8 @@ public:
 	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
 	void ImGuiUpdate();
 
+	void CommandClosed();
+
 #pragma region get
 	Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
 	ID3D12Device* GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_.Get(); }

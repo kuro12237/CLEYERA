@@ -43,13 +43,15 @@ uint32_t TextureManager::LoadPngTexture(const string& filePath)
 		//DescripterのIndexを取得
 		uint32_t index = DescriptorManager::GetIndex();
 		//ハンドル登録
-     	texData.index = index;
+		texData.index = index;
 		//MipImageを作る
 		DirectX::ScratchImage mipImages = CreateMipImage(FilePath);
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 		texData.resource = CreatepngTexResource(metadata);
 		//MipImageを登録
-		UploadMipImage(metadata,mipImages, texData);
+		//UploadMipImage(metadata,mipImages, texData);
+		ComPtr<ID3D12Resource>intermediateResource = UpLoadTexData(texData.resource, mipImages);
+		DirectXCommon::GetInstance()->CommandClosed();
 		//src設定
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 		srvDesc = SrcDescSetting(metadata);
@@ -92,15 +94,21 @@ uint32_t TextureManager::LoadDDSTexture(const string& filePath)
 		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 		texData.resource = CreatepngTexResource(metadata);
 		//MipImageを登録
-		UploadMipImage(metadata, mipImages, texData);
+		ComPtr<ID3D12Resource>intermediateResource = UpLoadTexData(texData.resource, mipImages);
+		DirectXCommon::GetInstance()->CommandClosed();
 		//src設定
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-		srvDesc.Format = metadata.format;
-		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
-		srvDesc.TextureCube.MostDetailedMip = 0;
-		srvDesc.TextureCube.MipLevels = UINT_MAX;
-		srvDesc.TextureCube.ResourceMinLODClamp = 0.0f;
+		if (metadata.IsCubemap())
+		{
+			srvDesc.Format = metadata.format;
+			srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+			srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
+			srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+			srvDesc.TextureCube.MostDetailedMip = 0;
+			srvDesc.TextureCube.MipLevels = UINT_MAX;
+			srvDesc.TextureCube.ResourceMinLODClamp = 0.0f;
+		}
+		else { assert(0); }
 
 		//Descripterをずらす
 		AddDescripter(index, srvDesc, texData.resource.Get());
@@ -179,7 +187,7 @@ DirectX::ScratchImage TextureManager::CreateDDSMipImage(const std::string& fileP
 
 	if (DirectX::IsCompressed(image.GetMetadata().format))
 	{
-		mipImage =std::move(image);
+		mipImage = std::move(image);
 	}
 	else
 	{
@@ -205,14 +213,16 @@ D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& 
 D3D12_HEAP_PROPERTIES TextureManager::SettingHeap()
 {
 	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;
-	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
+	/*heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;*/
 	return heapProperties;
 }
 
-void TextureManager::UploadMipImage(const DirectX::TexMetadata& metadata, DirectX::ScratchImage &mipImages,TexData texData)
+void TextureManager::UploadMipImage(const DirectX::TexMetadata& metadata, DirectX::ScratchImage& mipImages, TexData texData)
 {
+
+
 	for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel)
 	{
 		const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
@@ -240,13 +250,13 @@ D3D12_SHADER_RESOURCE_VIEW_DESC TextureManager::SrcDescSetting(const DirectX::Te
 
 
 
-void TextureManager::AddDescripter(uint32_t index, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, ID3D12Resource *resource)
+void TextureManager::AddDescripter(uint32_t index, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, ID3D12Resource* resource)
 {
 	//Despcripter
 	DescriptorManager::SetCPUDescripterHandle(
 		DescriptorManager::GetCPUDescriptorHandle(
 			DirectXCommon::GetInstance()->GetSrvHeap(),
-		    index),
+			index),
 		index
 	);
 
@@ -264,6 +274,28 @@ void TextureManager::AddDescripter(uint32_t index, D3D12_SHADER_RESOURCE_VIEW_DE
 		index);
 }
 
+[[nodiscard]]
+ComPtr<ID3D12Resource>TextureManager::UpLoadTexData(ComPtr<ID3D12Resource> resource, const DirectX::ScratchImage& mipImage)
+{
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	ID3D12GraphicsCommandList* command = DirectXCommon::GetInstance()->GetCommands().m_pList.Get();
+
+	std::vector<D3D12_SUBRESOURCE_DATA>subresources;
+	DirectX::PrepareUpload(device.Get(), mipImage.GetImages(), mipImage.GetImageCount(), mipImage.GetMetadata(), subresources);
+	uint64_t intermediateSize = GetRequiredIntermediateSize(resource.Get(), 0, UINT(subresources.size()));
+	ComPtr<ID3D12Resource> intermediaResource = CreateResources::CreateBufferResource(intermediateSize);
+	UpdateSubresources(command, resource.Get(), intermediaResource.Get(), 0, 0, UINT(subresources.size()), subresources.data());
+	D3D12_RESOURCE_BARRIER barrier;
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = resource.Get();
+	barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
+	command->ResourceBarrier(1, &barrier);
+	return intermediaResource;
+}
+
 ComPtr<ID3D12Resource> TextureManager::CreatepngTexResource(const DirectX::TexMetadata& metadata)
 {
 	ComPtr<ID3D12Resource> Resource;
@@ -277,24 +309,10 @@ ComPtr<ID3D12Resource> TextureManager::CreatepngTexResource(const DirectX::TexMe
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
+		D3D12_RESOURCE_STATE_COPY_DEST,
 		nullptr,
 		IID_PPV_ARGS(&Resource));
 	return Resource;
 }
-struct CD3DX12_HEAP_PROPERTIES : public D3D12_HEAP_PROPERTIES
-{
-	CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE type, UINT creationNodeMask = 1, UINT nodeMask = 1)
-	{
-		Type = type;
-		CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
-		MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;
-		CreationNodeMask = creationNodeMask;
-		VisibleNodeMask = nodeMask;
-	}
 
-	explicit CD3DX12_HEAP_PROPERTIES(const D3D12_HEAP_PROPERTIES& o) :
-		D3D12_HEAP_PROPERTIES(o)
-	{}
-};
 

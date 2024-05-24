@@ -110,6 +110,31 @@ void DirectXCommon::ImGuiUpdate()
 
 }
 
+void DirectXCommon::CommandClosed()
+{
+	HRESULT hr = commands.m_pList->Close();
+	assert(SUCCEEDED(hr));
+
+	ID3D12CommandList* commandLists[] = { commands.m_pList.Get() };
+	commands.m_pQueue->ExecuteCommandLists(1, commandLists);
+
+	fenceValue++;
+	//Event
+	commands.m_pQueue->Signal(m_pFence_.Get(), fenceValue);
+	if (m_pFence_->GetCompletedValue() < fenceValue) {
+		HANDLE fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+		assert(fenceEvent != nullptr);
+		m_pFence_->SetEventOnCompletion(fenceValue, fenceEvent);
+		WaitForSingleObject(fenceEvent, INFINITE);
+		CloseHandle(fenceEvent);
+	}
+	//コマンドリセット
+	hr = commands.m_pAllocator->Reset();
+	assert(SUCCEEDED(hr));
+	hr = commands.m_pList->Reset(commands.m_pAllocator.Get(), nullptr);
+	assert(SUCCEEDED(hr));
+}
+
 void DirectXCommon::PostDraw()
 {
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;

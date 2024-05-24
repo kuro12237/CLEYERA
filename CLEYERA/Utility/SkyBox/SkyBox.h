@@ -20,7 +20,13 @@ public:
 
 	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
 
+	uint32_t GetTexHandle() { return texHandle_; }
+
 private:
+
+	void CreateIndex();
+	void CreateVertex();
+	void CreateMaterial();
 
 	unique_ptr<BufferResource<VertexData>>cVertex_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>cIndex = nullptr;

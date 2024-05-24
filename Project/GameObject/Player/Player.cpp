@@ -102,7 +102,7 @@ void Player::Update()
 void Player::Draw()
 {
 	reticle_->Draw3d();
-	//gun_->Draw(camera);
+	gun_->Draw();
 	if (isObjectDraw_)
 	{
 		gameObject_->Draw(worldTransform_);
