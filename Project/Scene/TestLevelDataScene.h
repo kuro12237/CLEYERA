@@ -17,6 +17,8 @@
 
 #include"GameObject/testObject/testObject.h"
 
+#include"SceneFileLoder/SceneFileLoader.h"
+
 class TestLevelDataScene :public IScene
 {
 public:
@@ -41,5 +43,8 @@ private:
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
 
-	unique_ptr<testObject>testObj_ = nullptr;
+	LevelData* levelData_ = nullptr;
+
+	PointLight_param light_{};
+
 };
