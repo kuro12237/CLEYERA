@@ -84,49 +84,6 @@ void SceneFileLoader::LoadMeshData(LevelData* levelData, nlohmann::json& object)
 
 	}
 
-
-	//if (objectType.compare("Map") == 0)
-	//{
-	//	if (levelData->objInstancing3dData.find(objectType) != levelData->objInstancing3dData.end())
-	//	{
-	//		nlohmann::json& transform = object["transform"];
-	//		TransformEular transformEular = GetTransform(transform);
-	//		shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
-	//		transforms->SetTransformEular(transformEular);
-	//		transforms->Update();
-	//		levelData->objInstancing3dData[objectType].transform_.push_back(transforms);
-	//	}
-	//	else
-	//	{
-	//		//後でオブジェクトの合計数に換える
-	//		const uint32_t instancingMax = 128;
-	//		//インスタンスの生成
-	//		obj3dInstancingData.objectType = objectType;
-	//		obj3dInstancingData.GameInstancingObject = make_unique<GameInstancing3dObject>();
-	//		obj3dInstancingData.GameInstancingObject->Create(instancingMax, objectType);
-
-	//		//modelのファイル読み込み
-	//		if (object.contains("file_name"))
-	//		{
-	//			string fileName = object["file_name"];
-	//			ModelManager::ModelLoadNormalMap();
-	//			obj3dInstancingData.modelHandle = ModelManager::LoadObjectFile(fileName);
-	//			obj3dInstancingData.GameInstancingObject->SetModel(obj3dInstancingData.modelHandle);
-	//		}
-
-	//		//transformのGet
-	//		nlohmann::json& transform = object["transform"];
-	//		TransformEular transformEular = GetTransform(transform);
-	//		//transform
-	//		shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
-	//		transforms->SetTransformEular(transformEular);
-	//		transforms->Update();
-	//		obj3dInstancingData.transform_.push_back(transforms);
-	//		//保存
-	//		levelData->objInstancing3dData[objectType] = move(obj3dInstancingData);
-	//	}
-	//}
-
 }
 
 TransformEular SceneFileLoader::GetTransform(nlohmann::json transform)
