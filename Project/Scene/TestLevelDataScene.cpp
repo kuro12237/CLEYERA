@@ -8,8 +8,7 @@ void TestLevelDataScene::Initialize()
 	camera_.translation_.z = -16.0f;
 	CameraManager::GetInstance()->ResetCamera(camera_);
 
-
-	levelData_ = SceneFileLoader::GetInstance()->ReLoad("InstancingLoadTest.json");
+	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
 	camera_.UpdateMatrix();
@@ -21,7 +20,23 @@ void TestLevelDataScene::Initialize()
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
+#ifdef _USE_IMGUI
+
 	debugCamera_->ImGuiUpdate();
+
+	if (ImGui::Button("sceneReload_1"))
+	{
+		delete levelData_;
+		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
+		return;
+	}
+	if (ImGui::Button("sceneReload_2"))
+	{
+		delete levelData_;
+		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_2.json");
+		return;
+	}
+#endif // _USE_IMGUI
 
 	//object
 	for (auto it = levelData_->obj3dData.begin(); it != levelData_->obj3dData.end(); ++it) {

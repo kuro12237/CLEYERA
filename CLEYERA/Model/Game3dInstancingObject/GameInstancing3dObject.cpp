@@ -102,8 +102,8 @@ void GameInstancing3dObject::SetModel(const uint32_t& index)
 
 		baseTexHandle_ = ModelManager::GetObjData(index).baseTexHandle;
 	}
-
-	prevModelIndex_ = index;
+	modelHandle_ = index;
+	prevModelIndex_ = modelHandle_;
 }
 
 void GameInstancing3dObject::PushVector(shared_ptr<IGameInstancing3dObject> obj,uint32_t index)
