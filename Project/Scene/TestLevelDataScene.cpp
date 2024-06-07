@@ -10,7 +10,7 @@ void TestLevelDataScene::Initialize()
 
 	levelData_= SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
 
-	
+    
 
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();

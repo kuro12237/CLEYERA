@@ -9,8 +9,6 @@ public:
 	
 	static SceneFileLoader* GetInstance();
 
-	void Initlaize();
-
 	unique_ptr<LevelData> ReLoad(const string& filePath);
 
 private:
@@ -20,7 +18,6 @@ private:
 	TransformEular GetTransform(nlohmann::json transform);
 
 	nlohmann::json deserialized = nullptr;
-
 
 #pragma region 
 	//Singleton
