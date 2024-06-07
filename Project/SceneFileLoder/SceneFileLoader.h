@@ -11,14 +11,16 @@ public:
 
 	void Initlaize();
 
-	LevelData* ReLoad(const string& filePath);
+	unique_ptr<LevelData> ReLoad(const string& filePath);
 
 private:
-	nlohmann::json deserialized = nullptr;
 
-	void LoadMeshData(LevelData* levelData, nlohmann::json& object);
+	void LoadMeshData(unique_ptr<LevelData>  &levelData, nlohmann::json& object);
 
 	TransformEular GetTransform(nlohmann::json transform);
+
+	nlohmann::json deserialized = nullptr;
+
 
 #pragma region 
 	//Singleton

@@ -6,7 +6,7 @@ SceneFileLoader* SceneFileLoader::GetInstance()
 	return &instance;
 }
 
-LevelData* SceneFileLoader::ReLoad(const string& filePath)
+unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 {
 
 	ifstream file = FileLoader::JsonLoadFile("Resources/levelData/" + filePath);
@@ -19,7 +19,7 @@ LevelData* SceneFileLoader::ReLoad(const string& filePath)
 	string name = deserialized["name"].get<string>();
 	assert(name.compare("scene") == 0);
 
-	LevelData* levelData = new LevelData();
+	unique_ptr<LevelData>  levelData = make_unique<LevelData>();
 
 
 	for (nlohmann::json& object : deserialized["objects"])
@@ -35,20 +35,19 @@ LevelData* SceneFileLoader::ReLoad(const string& filePath)
 	return levelData;
 }
 
-void SceneFileLoader::LoadMeshData(LevelData* levelData, nlohmann::json& object)
+void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::json& object)
 {
 	Game3dObjectData obj3dData = {};
 	Game3dInstancingObjectData obj3dInstancingData = {};
 
+	string drawType = object["DrawType"].get<string>();
 	string objectType = object["objectType"].get<string>();
-	string fileName = object["file_name"].get<string>();
-	//memo
-	//instancing描画かobject描画かの仕分けを作る
 
-	if (objectType.compare("Player") == 0 || objectType.compare("Map") == 0)
+	//通常表示
+	if (drawType.compare("Normal") == 0)
 	{
 		string name = object["name"].get<string>();
-		if (levelData->obj3dData.find(name) != levelData->obj3dData.end())
+		if (levelData->obj3dData.find(objectType) != levelData->obj3dData.end())
 		{
 			assert(0);
 		}
@@ -64,7 +63,8 @@ void SceneFileLoader::LoadMeshData(LevelData* levelData, nlohmann::json& object)
 			//modelのファイル読み込み
 			if (object.contains("file_name"))
 			{
-				string fileName = object["file_name"];
+				string fileName = object["file_name"].get<string>();
+
 				obj3dData.modelHandle = ModelManager::LoadObjectFile(fileName);
 				obj3dData.gameObject->SetModel(obj3dData.modelHandle);
 			}
@@ -79,11 +79,56 @@ void SceneFileLoader::LoadMeshData(LevelData* levelData, nlohmann::json& object)
 			obj3dData.worldTransform.UpdateMatrix();
 
 			//保存
-			levelData->obj3dData[name] = move(obj3dData);
+			levelData->obj3dData[objectType] = move(obj3dData);
 		}
-
 	}
+	//インスタンシング表示
+	if (drawType.compare("Instancing") == 0)
+	{
+		if (levelData->objInstancing3dData.find(objectType) != levelData->objInstancing3dData.end())
+		{
+			nlohmann::json& transform = object["transform"];
+			TransformEular transformEular = GetTransform(transform);
+			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
+			transforms->SetTransformEular(transformEular);
+			transforms->Update();
+			levelData->objInstancing3dData[objectType].transform_.push_back(transforms);
+		}
+		else
+		{
+			//後でオブジェクトの合計数に換える
+			const uint32_t instancingMax = 128;
+			//インスタンスの生成
+			obj3dInstancingData.objectType = objectType;
+			obj3dInstancingData.GameInstancingObject = make_unique<GameInstancing3dObject>();
+			obj3dInstancingData.GameInstancingObject->Create(instancingMax, objectType);
 
+			//modelのファイル読み込み
+			if (object.contains("file_name"))
+			{
+				string fileName = object["file_name"];
+				ModelManager::ModelLoadNormalMap();
+				obj3dInstancingData.modelHandle = ModelManager::LoadObjectFile(fileName);
+				obj3dInstancingData.GameInstancingObject->SetModel(obj3dInstancingData.modelHandle);
+			}
+			else
+			{
+				ModelManager::ModelLoadNormalMap();
+				obj3dInstancingData.modelHandle = ModelManager::LoadObjectFile("DfCube");
+				obj3dInstancingData.GameInstancingObject->SetModel(obj3dInstancingData.modelHandle);
+			}
+			//transformのGet
+			nlohmann::json& transform = object["transform"];
+			TransformEular transformEular = GetTransform(transform);
+			//transform
+			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
+			transforms->SetTransformEular(transformEular);
+			transforms->Update();
+			obj3dInstancingData.transform_.push_back(transforms);
+			//保存
+			levelData->objInstancing3dData[objectType] = move(obj3dInstancingData);
+		}
+	}
 }
 
 TransformEular SceneFileLoader::GetTransform(nlohmann::json transform)

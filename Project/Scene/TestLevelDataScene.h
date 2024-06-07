@@ -15,9 +15,14 @@
 #include"GameObject/SkyDome/SkyDome.h"
 #include"GameObject/Terrain/Terrain.h"
 
-#include"GameObject/testObject/testObject.h"
-
 #include"SceneFileLoder/SceneFileLoader.h"
+
+#include"Utility/GameCollisionManager/GameCollisionManager.h"
+#include"GameObject/Player/Player.h"
+#include"GameObject/Player/InputHandler/PlayerInputHandler.h"
+#include"GameObject/Player/Camera/PlayerCamera.h"
+#include"Utility/GameGravityManager/GameGravityManager.h"
+#include"Utility/CollisionManager/CollisionManager.h"
 
 class TestLevelDataScene :public IScene
 {
@@ -43,7 +48,7 @@ private:
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
 
-	LevelData* levelData_ = nullptr;
+	unique_ptr<LevelData> levelData_ = nullptr;
 
 	PointLight_param light_{};
 
