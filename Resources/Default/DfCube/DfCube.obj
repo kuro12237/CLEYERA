@@ -1,6 +1,6 @@
 # Blender 4.1.1
 # www.blender.org
-mtllib Block.mtl
+mtllib DfCube.mtl
 o Cube
 v -1.000000 1.000000 1.000000
 v -1.000000 -1.000000 1.000000

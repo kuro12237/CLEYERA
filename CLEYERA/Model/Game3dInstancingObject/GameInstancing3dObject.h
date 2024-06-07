@@ -31,8 +31,7 @@ private:
 	uint32_t instancingNum_ = 1;
 	string name_ = {};
 
-	uint32_t srvHandle_ = 0;
-
+	
 	uint32_t modelHandle_ = 0;
 	uint32_t prevModelIndex_ = 0;
 

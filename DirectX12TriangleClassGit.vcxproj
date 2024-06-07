@@ -78,6 +78,7 @@
     <ClCompile Include="CLEYERA\math\Quaternion\QuaternionTransform.cpp" />
     <ClCompile Include="CLEYERA\math\Vector\VectorTransform.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp" />
+    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dObject.cpp" />
     <ClCompile Include="CLEYERA\Model\Model.cpp" />
     <ClCompile Include="CLEYERA\Model\ModelManager.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.h" />
+    <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
     <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />

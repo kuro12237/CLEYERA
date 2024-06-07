@@ -28,6 +28,11 @@ void ModelManager::ModelUseSubsurface()
 	ModelManager::GetInstance()->isUsesubsurface_ = true;
 }
 
+void ModelManager::UnUseFilePath()
+{
+	ModelManager::GetInstance()->isUseFilePath_ = false;
+}
+
 uint32_t ModelManager::LoadObjectFile(string directoryPath)
 {
 	if (ChackLoadObj(directoryPath))
@@ -40,7 +45,16 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 		modelData.fileFormat = "OBJ";
 
 		Assimp::Importer importer;
-		string file("Resources/Models/" + directoryPath + "/" + directoryPath + ".obj");
+		string file;
+
+		if (ModelManager::GetInstance()->isUseFilePath_)
+		{
+			file = ("Resources/Models/" + directoryPath + "/" + directoryPath + ".obj");
+		}
+		else {
+
+			file = directoryPath;
+		}
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 		assert(scene->HasMeshes());
 
@@ -61,7 +75,9 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 			{
 				aiString texFilePath;
 				material->GetTexture(aiTextureType_DIFFUSE, 0, &texFilePath);
+			
 				modelData.material.textureFilePath = "Resources/Models/" + directoryPath + "/" + texFilePath.C_Str();
+				
 			}
 		}
 
@@ -102,6 +118,7 @@ uint32_t ModelManager::LoadObjectFile(string directoryPath)
 	}
 	ModelManager::GetInstance()->isLoadNormalMap_ = false;
 	ModelManager::GetInstance()->isUsesubsurface_ = false;
+	ModelManager::GetInstance()->isUseFilePath_ = true;
 	return ModelManager::GetInstance()->objModelDatas_[directoryPath]->GetIndex();
 }
 

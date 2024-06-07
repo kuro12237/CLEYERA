@@ -23,6 +23,8 @@ public:
 
 	static void ModelUseSubsurface();
 
+	static void UnUseFilePath();
+
 	/// <summary>
 	/// objファイルの読み込み
 	/// </summary>
@@ -69,6 +71,8 @@ private:
 
 	bool isLoadNormalMap_ = false;
 	bool isUsesubsurface_ = false;
+
+	bool isUseFilePath_ = true;
 
 #pragma region 
 	//Singleton

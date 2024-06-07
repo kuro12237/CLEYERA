@@ -235,6 +235,9 @@
     <Filter Include="Project\Scene\Game\TestLevelData">
       <UniqueIdentifier>{9ed4d57f-f937-4e16-a649-7102e7aea6cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CLEYERA\Utility\LevelData">
+      <UniqueIdentifier>{9547930a-9d27-4a3d-8fdc-098b93a6998e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -505,8 +508,6 @@
     <ClCompile Include="CLEYERA\Utility\ColorConverter\ColorConverter.cpp">
       <Filter>CLEYERA\Utility\Color</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\state\PlayerNormalState.cpp" />
-    <ClCompile Include="Project\GameObject\Player\state\PlayerStoneState.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp">
       <Filter>CLEYERA\Model\instancing</Filter>
     </ClCompile>
@@ -545,6 +546,13 @@
     <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerNormalState.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Player\state\PlayerStoneState.cpp">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -881,8 +889,6 @@
       <Filter>Project\GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
-    <ClInclude Include="Project\GameObject\Player\state\PlayerNormalState.h" />
-    <ClInclude Include="Project\GameObject\Player\state\PlayerStoneState.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline</Filter>
     </ClInclude>
@@ -933,6 +939,15 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />
     <ClInclude Include="CLEYERA\Utility\CameraManager\CameraManager.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerNormalState.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Player\state\PlayerStoneState.h">
+      <Filter>Project\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h">
+      <Filter>CLEYERA\Utility\LevelData</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
