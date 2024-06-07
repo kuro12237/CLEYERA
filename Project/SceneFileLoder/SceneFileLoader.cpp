@@ -64,7 +64,7 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::
 			if (object.contains("file_name"))
 			{
 				string fileName = object["file_name"].get<string>();
-
+				ModelManager::ModelLoadNormalMap();
 				obj3dData.modelHandle = ModelManager::LoadObjectFile(fileName);
 				obj3dData.gameObject->SetModel(obj3dData.modelHandle);
 			}

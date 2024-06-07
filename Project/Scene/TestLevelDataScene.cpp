@@ -18,6 +18,7 @@ void TestLevelDataScene::Initialize()
 
 	light_.radious = 128.0f;
 	light_.position.y = 64.0f;
+	light_.decay = 0.25f;
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -26,6 +27,12 @@ void TestLevelDataScene::Update(GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	debugCamera_->ImGuiUpdate();
+
+	if (ImGui::TreeNode("light"))
+	{
+		ImGui::DragFloat3("t", &light_.position.x);
+		ImGui::TreePop();
+	}
 
 	if (ImGui::Button("sceneReload_1"))
 	{
