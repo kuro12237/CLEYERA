@@ -11,9 +11,9 @@ struct  Game3dObjectData
 	std::string modelFileNmae;
 	WorldTransform worldTransform;
 	Game3dObjectDesc objectDesc;
-	unique_ptr<Game3dObject>gameObject;
 	uint32_t modelHandle = 0;
-
+	vector<Game3dObjectData>children;
+	vector<string>childrenObjectNames;
 };
 
 struct  Game3dInstancingObjectData

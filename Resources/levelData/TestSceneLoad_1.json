@@ -4,14 +4,14 @@
         {
             "type": "MESH",
             "name": "Cube",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "objectType": "Map",
+            "file_name": "DebugTestSphere",
+            "DrawType": "Normal",
+            "objectType": "Player",
             "transform": {
                 "translate": [
-                    2.0,
                     0.0,
-                    0.5
+                    0.0,
+                    0.0
                 ],
                 "rotate": [
                     0.0,
@@ -19,9 +19,9 @@
                     0.0
                 ],
                 "scale": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             },
             "collider": {
@@ -36,7 +36,83 @@
                     2.0,
                     2.0
                 ]
-            }
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "ICO球",
+                    "file_name": "DebugTestSphere",
+                    "DrawType": "Normal",
+                    "objectType": "Player2",
+                    "transform": {
+                        "translate": [
+                            3.8611607551574707,
+                            0.0,
+                            -0.5579258799552917
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "collider": {
+                        "type": "Box",
+                        "center": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "size": [
+                            2.0,
+                            2.0,
+                            2.0
+                        ]
+                    }
+                },
+                {
+                    "type": "MESH",
+                    "name": "球",
+                    "file_name": "DebugTestSphere",
+                    "DrawType": "Normal",
+                    "objectType": "Player2",
+                    "transform": {
+                        "translate": [
+                            -4.4891276359558105,
+                            0.0,
+                            0.6901177763938904
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "collider": {
+                        "type": "Box",
+                        "center": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "size": [
+                            2.0,
+                            2.0,
+                            2.0
+                        ]
+                    }
+                }
+            ]
         },
         {
             "type": "LIGHT",
@@ -78,141 +154,6 @@
                     63.559303283691406,
                     -2.664711473698844e-06,
                     46.69194793701172
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "ICO球",
-            "file_name": "DebugTestSphere",
-            "DrawType": "Normal",
-            "objectType": "Player",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    2.3607394695281982
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.001",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    0.5
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.002",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    1.0,
-                    0.0,
-                    0.5
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "平面",
-            "file_name": "Terrain",
-            "DrawType": "Normal",
-            "objectType": "Terrain",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
                 ],
                 "scale": [
                     1.0,

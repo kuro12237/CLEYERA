@@ -13,6 +13,8 @@ public:
 
 private:
 
+	Game3dObjectData  LoadGameObjectData(unique_ptr<LevelData>&levelData,nlohmann::json& object);
+
 	void LoadMeshData(unique_ptr<LevelData>  &levelData, nlohmann::json& object);
 
 	TransformEular GetTransform(nlohmann::json transform);

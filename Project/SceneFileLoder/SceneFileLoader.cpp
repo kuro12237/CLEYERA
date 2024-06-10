@@ -8,7 +8,6 @@ SceneFileLoader* SceneFileLoader::GetInstance()
 
 unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 {
-
 	ifstream file = FileLoader::JsonLoadFile("Resources/levelData/" + filePath);
 	file >> deserialized;
 	assert(deserialized.is_object());
@@ -21,7 +20,6 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 
 	unique_ptr<LevelData>  levelData = make_unique<LevelData>();
 
-
 	for (nlohmann::json& object : deserialized["objects"])
 	{
 		assert(object.contains("type"));
@@ -32,8 +30,48 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 			LoadMeshData(levelData, object);
 		}
 	}
+
 	return levelData;
 }
+
+Game3dObjectData SceneFileLoader::LoadGameObjectData(unique_ptr<LevelData>&levelData,nlohmann::json& object)
+{
+	levelData;
+	Game3dObjectData obj3dData;
+	obj3dData.objectDesc.useLight = true;
+	string objectType = object["objectType"].get<string>();
+
+	//modelのファイル読み込み
+	if (object.contains("file_name"))
+	{
+		string fileName = object["file_name"].get<string>();
+		ModelManager::ModelLoadNormalMap();
+		obj3dData.modelHandle = ModelManager::LoadObjectFile(fileName);
+	}
+
+	//transformのGet
+	nlohmann::json& transform = object["transform"];
+	TransformEular transformEular = GetTransform(transform);
+	//transform
+	obj3dData.worldTransform.Initialize();
+	obj3dData.worldTransform.translate = transformEular.translate;
+	obj3dData.worldTransform.rotation = transformEular.rotate;
+	obj3dData.worldTransform.scale = transformEular.scale;
+	obj3dData.worldTransform.UpdateMatrix();
+	/*
+	levelData->obj3dData[objectType] = obj3dData;
+	if (object.contains("children"))
+	{
+		for (auto& child : object["children"])
+		{
+			obj3dData.children.push_back(LoadGameObjectData(levelData,child));
+		}
+	}
+	*/
+	return obj3dData;
+}
+
+
 
 void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::json& object)
 {
@@ -53,31 +91,7 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::
 		}
 		else
 		{
-			obj3dData.gameObject = make_unique<Game3dObject>();
-			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
-
-			obj3dData.worldTransform.Initialize();
-
-			obj3dData.objectDesc.useLight = true;
-			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
-			//modelのファイル読み込み
-			if (object.contains("file_name"))
-			{
-				string fileName = object["file_name"].get<string>();
-				ModelManager::ModelLoadNormalMap();
-				obj3dData.modelHandle = ModelManager::LoadObjectFile(fileName);
-				obj3dData.gameObject->SetModel(obj3dData.modelHandle);
-			}
-
-			//transformのGet
-			nlohmann::json& transform = object["transform"];
-			TransformEular transformEular = GetTransform(transform);
-			//transform
-			obj3dData.worldTransform.translate = transformEular.translate;
-			obj3dData.worldTransform.rotation = transformEular.rotate;
-			obj3dData.worldTransform.scale = transformEular.scale;
-			obj3dData.worldTransform.UpdateMatrix();
-
+			obj3dData = LoadGameObjectData(levelData,object);
 			//保存
 			levelData->obj3dData[objectType] = move(obj3dData);
 		}

@@ -8,9 +8,21 @@ void TestLevelDataScene::Initialize()
 	camera_.translation_.z = -16.0f;
 	CameraManager::GetInstance()->ResetCamera(camera_);
 
-	levelData_= SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
+	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
 
-    
+	character_ = make_unique<TestCharacter>();
+
+	character_->Initialize();
+
+	for (const auto& [key, s] : levelData_->obj3dData)
+	{
+		if (key == character_->GetName())
+		{
+			character_->Create();
+			character_->MoveData(s);
+		}
+	}
+	levelData_->obj3dData.clear();
 
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
@@ -47,11 +59,6 @@ void TestLevelDataScene::Update(GameManager* Scene)
 #endif // _USE_IMGUI
 
 	//object
-	for (auto it = levelData_->obj3dData.begin(); it != levelData_->obj3dData.end(); ++it) {
-		Game3dObjectData& data = it->second;
-		data.worldTransform.UpdateMatrix();
-    }
-
 	//instancing
 	for (auto it = levelData_->objInstancing3dData.begin(); it != levelData_->objInstancing3dData.end(); ++it) {
 		Game3dInstancingObjectData& data = it->second;
@@ -68,6 +75,8 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
 
+	//character_->Update();
+
 	LightingManager::AddList(light_);
 	postEffect_->Update();
 }
@@ -76,16 +85,14 @@ void TestLevelDataScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
+	character_->Draw();
 	//gameObjectDraw
-	for (auto it = levelData_->obj3dData.begin(); it != levelData_->obj3dData.end(); ++it) {
-		Game3dObjectData& data = it->second;
-		data.gameObject->Draw(data.worldTransform);
-	}
+
 	//instancingDraw
 	for (auto it = levelData_->objInstancing3dData.begin(); it != levelData_->objInstancing3dData.end(); ++it) {
 
 		Game3dInstancingObjectData& data = it->second;
-	    data.GameInstancingObject->Draw();
+		data.GameInstancingObject->Draw();
 	}
 
 	postEffect_->PostDraw();

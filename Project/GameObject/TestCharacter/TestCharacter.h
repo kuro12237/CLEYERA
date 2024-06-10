@@ -1,11 +1,11 @@
 #pragma once
 #include"GameObject/Character/IObjectData.h"
 
-class testObject :public IObjectData
+class TestCharacter : public IObjectData
 {
 public:
-	testObject() {};
-	~testObject() {};
+	TestCharacter() {};
+	~TestCharacter() {};
 
 	void Initialize();
 
@@ -15,5 +15,6 @@ public:
 
 private:
 
-};
 
+
+};
