@@ -14,14 +14,7 @@ void TestLevelDataScene::Initialize()
 
 	character_->Initialize();
 
-	for (const auto& [key, param] : levelData_->obj3dData)
-	{
-		if (key == character_->GetName())
-		{
-			character_->Create();
-			character_->MoveData(param);
-		}
-	}
+
 	levelData_->obj3dData.clear();
 
 	debugCamera_ = make_unique<DebugCamera>();
