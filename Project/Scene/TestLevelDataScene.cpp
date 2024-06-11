@@ -14,12 +14,12 @@ void TestLevelDataScene::Initialize()
 
 	character_->Initialize();
 
-	for (const auto& [key, s] : levelData_->obj3dData)
+	for (const auto& [key, param] : levelData_->obj3dData)
 	{
 		if (key == character_->GetName())
 		{
 			character_->Create();
-			character_->MoveData(s);
+			character_->MoveData(param);
 		}
 	}
 	levelData_->obj3dData.clear();

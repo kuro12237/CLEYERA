@@ -471,6 +471,7 @@
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp" />
     <ClCompile Include="Project\GameObject\Character\IObjectData.cpp" />
     <ClCompile Include="Project\GameObject\TestCharacter\TestCharacter.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Object3dData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -767,6 +768,7 @@
       <Filter>CLEYERA\Utility\LevelData</Filter>
     </ClInclude>
     <ClInclude Include="Project\GameObject\TestCharacter\TestCharacter.h" />
+    <ClInclude Include="Project\GameObject\Character\Object3dData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

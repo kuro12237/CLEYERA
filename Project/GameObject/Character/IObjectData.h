@@ -14,7 +14,7 @@ public:
 
 	void Create();
 
-	void MoveData(Game3dObjectData data);
+	void MoveData(Game3dObjectData &data);
 
 #pragma region Set
 
