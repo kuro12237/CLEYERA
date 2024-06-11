@@ -49,6 +49,8 @@ void GameScene::Update(GameManager* Scene)
 	player_->ImGuiUpdate();
 	blockManager_->UpdateImGui();
 
+	ImGui::Text("sigma %f", gaussSigma_);
+
 #endif // _USE_IMGUI
 
 #pragma region Player
@@ -76,6 +78,7 @@ void GameScene::Update(GameManager* Scene)
 	CheckBlockCollision();
 
 	HitEffectUpdate();
+
 
 	playerCamera_->Update();
 	cameraData_ = playerCamera_->GetData();
@@ -189,6 +192,8 @@ void GameScene::HitEffectUpdate()
 		postEffect_->SetSelectPostEffect(VIGNETTE,true);
 		postEffect_->SetVignetteScale(64.0f);
 		postEffect_->SetVignetteFactor(1.0f);
+		postEffect_->SetGaussSigma(12.0f);
+		gaussSigma_ = 12.0f;
 		IsVignatte_ = true;
 	}
 
@@ -198,12 +203,16 @@ void GameScene::HitEffectUpdate()
 		const float vignatteTimerMax = 1.0f;
 
 		postEffect_->SetVignetteFactor(1.0f - vignatteTimer_);
+		gaussSigma_ -= 0.1f;
+		postEffect_->SetGaussSigma(gaussSigma_);
 
 		if (vignatteTimer_ >= vignatteTimerMax)
 		{
 			postEffect_->SetSelectPostEffect(VIGNETTE, false);
 			IsVignatte_ = false;
 			vignatteTimer_ = 0.0f;
+			postEffect_->SetGaussSigma(0.1f);
+
 		}
 	}
 

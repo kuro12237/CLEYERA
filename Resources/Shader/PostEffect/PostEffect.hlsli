@@ -22,6 +22,7 @@ struct PostEffectAdjustedColor
     float vignetteFactor;
     float vignatteScale;
     float32_t3 vignetteColor;
+    float gaussianSigma;
 };
 
 struct PostEffectBlurParam

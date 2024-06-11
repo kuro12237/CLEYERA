@@ -84,6 +84,8 @@ public:
 
 	void SetVignetteScale(float s) { adjustedColorParam_.vignetteScale = s; }
 
+	void SetGaussSigma(float sigma) { adjustedColorParam_.gaussianSigma = sigma; }
+
 #pragma endregion
 
 private:

@@ -61,6 +61,9 @@ private:
 	bool IsVignatte_ = false;
 	float vignatteTimer_ = 0.0f;
 
+	float gaussSigma_ = 0.1f;
+
+
 #pragma region map
 
 	unique_ptr<Sun>sun_ = nullptr;

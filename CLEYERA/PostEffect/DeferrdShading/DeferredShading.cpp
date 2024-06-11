@@ -24,8 +24,7 @@ void DefferredShading::PreDraw()
 {
 	ComPtr<ID3D12GraphicsCommandList>list = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	// レンダーターゲットをセット
-	D3D12_CPU_DESCRIPTOR_HANDLE testColorHandle;
-
+	
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle =
 		RTVDescriptorManager::GetHandle(colorTexBuffer_->GetRtvIndex());
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvnormalHandle =
@@ -57,7 +56,7 @@ void DefferredShading::PreDraw()
 
 	D3D12_CPU_DESCRIPTOR_HANDLE handles[3]
 	{
-		testColorHandle,
+		//testColorHandle,
 		rtvColorHandle,
 		rtvnormalHandle
 	};
