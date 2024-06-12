@@ -15,10 +15,11 @@ ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b7
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
-
     PixelShaderOutput output;
     float32_t4 transformedUV = mul(float32_t4(input.texcoord, 0.0f, 1.0f), gPostEffectParam.uvMatrix);
     float32_t4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
+    
+    float32_t depthTex = gShadowTexture.Sample(gSampler, transformedUV.xy);
     float32_t4 resultColor = textureColor;
 
     //彩度

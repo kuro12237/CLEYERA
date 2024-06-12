@@ -10,6 +10,7 @@ void GraphicsPipelineManager::Initialize()
 {
 	SPSO pso{};
 
+	CreateCompute(pso);
 	CreatePSO(pso);
 	//2d
 	Create2dSpritePSOs(pso);
@@ -121,6 +122,15 @@ void GraphicsPipelineManager::SettingDepth(D3D12_DEPTH_STENCIL_DESC& despthStenc
 	despthStencilDesc.DepthEnable = EnableFlag;
 	despthStencilDesc.DepthWriteMask = writeMask;
 	despthStencilDesc.DepthFunc = Func;
+}
+
+void GraphicsPipelineManager::CreateCompute(SPSO& pso)
+{
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	SShaders shader = ShaderManager::Getinstance()->GetShader();
+	pso.skinningCompute = SkinningCreateComputePipline::CreateSkinningPipline(device, commands, shader.skinningCompute);
+
 }
 
 void GraphicsPipelineManager::CreatePSO(SPSO &pso)

@@ -109,6 +109,7 @@ void ShaderManager::ShaderComples()
 	SkyBoxModel();
 
 	SkinningPhongModelShader();
+	CompileSkinningCs();
 }
 
 void ShaderManager::ShapeShader()
@@ -345,4 +346,16 @@ void ShaderManager::SkyBoxModel()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.SkyBoxModel = shaders;
+}
+
+void ShaderManager::CompileSkinningCs()
+{
+
+	SShaderMode shaders{};
+	shaders.csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Skinning.CS.hlsl",
+			L"cs_6_0");
+
+	ShaderManager::Getinstance()->shaders_.skinningCompute = shaders;
 }

@@ -5,6 +5,7 @@ struct  SShaderMode
 {
 	ComPtr<IDxcBlob> vertexBlob;
 	ComPtr<IDxcBlob> pixelBlob;
+	ComPtr<IDxcBlob>csBlob;
 };
 struct SDXCProperty
 {
@@ -34,6 +35,7 @@ struct SShaders
 	SShaderMode ColorPostProcess;
 	SShaderMode skinningPhongModel;
 	SShaderMode SkyBoxModel;
+	SShaderMode skinningCompute;
 };
 
 class ShaderManager
@@ -83,6 +85,8 @@ private:
 
 	static void SkinningPhongModelShader();
 	static void SkyBoxModel();
+
+	static void CompileSkinningCs();
 
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};

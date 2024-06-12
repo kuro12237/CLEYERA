@@ -40,6 +40,7 @@ struct SPSO
 	SPSOProperty shadow;
 	SPSOProperty Phong_SkinningModel;
 	SPSOProperty SkyBox;
+	SPSOProperty skinningCompute;
 };
 
 enum  BlendMode

@@ -7,7 +7,7 @@
 #include"SkinningCreatePipline/SkinningCreatePipline.h"
 #include"ModelCreatePipline/ModelCreatePipline.h"
 #include"PostProcess/CreatePostProcess.h"
-
+#include"SkinningCreateComputePipline/SkinningCreateComputePipline.h"
 
 class GraphicsPipelineManager
 {
@@ -82,6 +82,7 @@ private:
 		D3D12_COMPARISON_FUNC Func
 	);
 
+	static void CreateCompute(SPSO& pso);
 	static void CreatePSO(SPSO &pso);
 	static void Create2dSpritePSOs(SPSO &pso);
 	static void Create3dSpritePSOs(SPSO& pso);
