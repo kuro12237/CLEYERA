@@ -82,8 +82,6 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	//ここを後でどうにかする
 	if (skinningFlag_)
 	{
-
-
 		DescriptorManager::rootParamerterCommand(8, palette_->GetSrvIndex());
 	}
 
