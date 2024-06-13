@@ -49,6 +49,14 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 
 	modelData_ = model_->GetModelData();
 
+	if (skinningFlag_)
+	{
+		ComPtr<ID3D12GraphicsCommandList>command_list  = DirectXCommon::GetInstance()->GetCommands().m_pList;
+		command_list->SetComputeRootSignature(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.rootSignature.Get());
+		command_list->SetPipelineState(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.GraphicsPipelineState.Get());
+		command_list->Dispatch(UINT(modelData_.vertices.size() + 1023) / 1024, 1, 1);
+	}
+
 	MaterialBuffer_->Map();
     //Descの情報をMaterialに変換
 	material_ = MaterialConverter();
@@ -74,6 +82,8 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	//ここを後でどうにかする
 	if (skinningFlag_)
 	{
+
+
 		DescriptorManager::rootParamerterCommand(8, palette_->GetSrvIndex());
 	}
 

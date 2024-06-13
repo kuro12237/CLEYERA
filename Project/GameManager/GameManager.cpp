@@ -4,7 +4,7 @@ GameManager::GameManager()
 {
 	Cleyera::Initialize();
 
-	Scene_ = new TestLevelDataScene();
+	Scene_ = new AnimationScene();
 
 	Scene_->Initialize();
 }

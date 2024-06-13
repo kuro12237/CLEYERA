@@ -30,10 +30,10 @@ struct SkinningInfomation
 };
 
 StructuredBuffer<Well> gMatrixPalette : register(t0);
-//StructuredBuffer<Vertex> gInputVertices : register(t1);
-//StructuredBuffer<VertexInfluence> gInfluences : register(t2);
-//RWStructuredBuffer<Vertex> gOutputVertices : register(u0);
-//ConstantBuffer<SkinningInfomation> gSkinningInformation : register(b0);
+StructuredBuffer<Vertex> gInputVertices : register(t1);
+StructuredBuffer<VertexInfluence> gInfluences : register(t2);
+RWStructuredBuffer<Vertex> gOutputVertices : register(u0);
+ConstantBuffer<SkinningInfomation> gSkinningInformation : register(b0);
 
 //Skinned Skinning(VertexInfluence infuluence,Vertex input)
 //{
