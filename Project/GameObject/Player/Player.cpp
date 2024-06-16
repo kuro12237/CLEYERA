@@ -117,6 +117,11 @@ void Player::Draw2d(const CameraData& camera){
 
 void Player::ImGuiUpdate()
 {
+	ImGui::Begin("skelton");
+	ImGui::Checkbox("CharacterDrawFlag", &isObjectDraw_);
+	debugSkeleton_->ImGuiUpdate();
+	ImGui::End();
+
 	if (ImGui::TreeNode("Player"))
 	{
 		if (ImGui::Button("Reset"))
@@ -128,8 +133,6 @@ void Player::ImGuiUpdate()
 			worldTransform_.UpdateEularMatrix();
 		}
 		ImGui::Separator();
-		ImGui::Checkbox("CharacterDrawFlag", &isObjectDraw_);
-		debugSkeleton_->ImGuiUpdate();
 		ImGui::Separator();
 		gun_->ImGuiUpdate();
 		ImGui::Separator();

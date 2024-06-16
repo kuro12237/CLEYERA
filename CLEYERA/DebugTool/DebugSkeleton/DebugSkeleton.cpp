@@ -2,7 +2,7 @@
 
 void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 {
-#ifdef _DEBUG
+#ifdef  _USE_IMGUI
 	wT_ = &w;
 	jointSize_ = skeleton.joints.size();
 
@@ -21,13 +21,13 @@ void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 		lineModels_[i]->Create();
 	}
 
-#endif // _DEBUG
+#endif //  _USE_IMGUI
 
 }
 
 void DebugSkeleton::Draw(CameraData camera, WorldTransform w, SAnimation::Skeleton skeleton)
 {
-#ifdef _DEBUG
+#ifdef _USE_IMGUI
 	if (jointDrawFlag_)
 	{
 		JointDraw(camera, w, skeleton);
@@ -36,7 +36,7 @@ void DebugSkeleton::Draw(CameraData camera, WorldTransform w, SAnimation::Skelet
 	{
 		SkeletonDraw(camera, w, skeleton, skeleton.root);
 	}
-#endif // _DEBUG
+#endif //  _USE_IMGUI
 
 }
 
@@ -71,7 +71,7 @@ void DebugSkeleton::ImGuiUpdate()
 
 void DebugSkeleton::CreateJoint(size_t size)
 {
-#ifdef _DEBUG
+#ifdef _USE_IMGUI
 
 	jointWt_.resize(size);
 	for (size_t i = 0; i < size; i++)
@@ -87,7 +87,7 @@ void DebugSkeleton::CreateJoint(size_t size)
 	jointObject_->Create(make_unique<Phong3dPipline>());
 	jointObject_->SetDesc(jointObjectDesc_);
 	jointObject_->SetModel(jointModelHandle_);
-#endif // _DEBUG
+#endif // _USE_IMGUI
 }
 
 void DebugSkeleton::SkeletonDraw(const CameraData& camera, WorldTransform w, const SAnimation::Skeleton& skeleton, uint32_t index)

@@ -76,10 +76,9 @@ SPSOProperty SkinningCreatePipline::CreateSkinningPhongModel(ComPtr<ID3D12Device
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 
-	HRESULT hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
+   device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&pso.GraphicsPipelineState));
-	assert(SUCCEEDED(hr));
-    
+	
 	return pso;
 }
 
