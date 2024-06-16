@@ -71,6 +71,7 @@ void DebugSkeleton::ImGuiUpdate()
 
 void DebugSkeleton::CreateJoint(size_t size)
 {
+	size;
 #ifdef _USE_IMGUI
 
 	jointWt_.resize(size);

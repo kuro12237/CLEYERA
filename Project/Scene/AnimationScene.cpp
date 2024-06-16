@@ -40,6 +40,7 @@ void AnimationScene::Initialize()
 
 void AnimationScene::Update(GameManager* Scene)
 {
+	Scene;
 #ifdef _USE_IMGUI
 
 	if (ImGui::Button("SceneChange"))
