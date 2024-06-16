@@ -5,12 +5,6 @@ struct Well
     float32_t4x4 skeletonSpaceInverseTransposeMatrix;
 };
 
-struct Skinned
-{
-    float32_t4 pos;
-    float32_t2 texcoord;
-    float32_t3 normal;
-};
 
 struct Vertex
 {
@@ -32,39 +26,38 @@ struct SkinningInfomation
 StructuredBuffer<Well> gMatrixPalette : register(t0);
 StructuredBuffer<Vertex> gInputVertices : register(t1);
 StructuredBuffer<VertexInfluence> gInfluences : register(t2);
-RWStructuredBuffer<Vertex> gOutputVertices : register(u0);
 ConstantBuffer<SkinningInfomation> gSkinningInformation : register(b0);
+RWStructuredBuffer<Vertex> gOutputVertices : register(u0);
 
-//Skinned Skinning(VertexInfluence infuluence,Vertex input)
-//{
-//    Skinned skinned;
+Vertex Skinning(VertexInfluence infuluence, Vertex input)
+{
+    Vertex skinned;
 
-//	//位置の変換
-//    skinned.pos = mul(input.position, gMatrixPalette[infuluence.index.x].skeletonSpaceMatrix) * infuluence.weight.x;
-//    skinned.pos += mul(input.position, gMatrixPalette[infuluence.index.y].skeletonSpaceMatrix) * infuluence.weight.y;
-//    skinned.pos += mul(input.position, gMatrixPalette[infuluence.index.z].skeletonSpaceMatrix) * infuluence.weight.z;
-//    skinned.pos += mul(input.position, gMatrixPalette[infuluence.index.w].skeletonSpaceMatrix) * infuluence.weight.w;
-//    skinned.pos.w = 1.0f;
+	//位置の変換
+    skinned.position = mul(input.position, gMatrixPalette[infuluence.index.x].skeletonSpaceMatrix) * infuluence.weight.x;
+    skinned.position += mul(input.position, gMatrixPalette[infuluence.index.y].skeletonSpaceMatrix) * infuluence.weight.y;
+    skinned.position += mul(input.position, gMatrixPalette[infuluence.index.z].skeletonSpaceMatrix) * infuluence.weight.z;
+    skinned.position += mul(input.position, gMatrixPalette[infuluence.index.w].skeletonSpaceMatrix) * infuluence.weight.w;
+    skinned.position.w = 1.0f;
 
-//	//法線の変換
-//    skinned.normal = mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.x].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.x;
-//    skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.y].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.y;
-//    skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.z].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.z;
-//    skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.w].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.w;
-//    skinned.normal = normalize(skinned.normal);
+	//法線の変換
+    skinned.normal = mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.x].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.x;
+    skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.y].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.y;
+    skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.z].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.z;
+    skinned.normal += mul(input.normal, (float32_t3x3) gMatrixPalette[infuluence.index.w].skeletonSpaceInverseTransposeMatrix) * infuluence.weight.w;
+    skinned.normal = normalize(skinned.normal);
 
-//    return skinned;
-//}
+    return skinned;
+}
 
 [numthreads(1024, 1, 1)]
 void main(uint32_t DTid : SV_DispatchThreadID)
 {
-    //uint32_t vertexindex = DTid;
-    //if (vertexindex < gSkinningInformation.numVertices)
-    //{
-    //    Skinned skinned = Skinning(gInfluences[vertexindex],gInputVertices[vertexindex]);
-    //    skinned.texcoord = gInputVertices[vertexindex].texcoord;
-    //    gOutputVertices[vertexindex] = skinned;
-    //}
-
+    uint32_t vertexindex = DTid;
+    if (vertexindex < gSkinningInformation.numVertices)
+    {
+       Vertex skinned = Skinning(gInfluences[vertexindex], gInputVertices[vertexindex]);
+       skinned.texcoord = gInputVertices[vertexindex].texcoord;
+        gOutputVertices[vertexindex] = skinned;
+    }
 }

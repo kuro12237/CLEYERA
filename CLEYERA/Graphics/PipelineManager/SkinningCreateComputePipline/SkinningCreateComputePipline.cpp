@@ -29,7 +29,7 @@ void SkinningCreateComputePipline::CreateSkinningRootSignature(ComPtr<ID3D12Devi
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 	rootParameters[0].DescriptorTable.pDescriptorRanges = descriptorRangeSkinningPallate;
 	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeSkinningPallate);
-	//vertex
+	////INputvertex
 	D3D12_DESCRIPTOR_RANGE descriptorRangeInputVertex[1] = {};
 	descriptorRangeInputVertex[0].BaseShaderRegister = 1;
 	descriptorRangeInputVertex[0].NumDescriptors = 1;
@@ -53,30 +53,32 @@ void SkinningCreateComputePipline::CreateSkinningRootSignature(ComPtr<ID3D12Devi
 	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRangeinfulence;
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeinfulence);
 
+	//’¸“_‡Œv”
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+	rootParameters[3].Descriptor.ShaderRegister = 0;
+
 	//output
 	D3D12_DESCRIPTOR_RANGE descriptorRangeOutPutVertex[1] = {};
 	descriptorRangeOutPutVertex[0].BaseShaderRegister = 0;
 	descriptorRangeOutPutVertex[0].NumDescriptors = 1;
-	descriptorRangeOutPutVertex[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	descriptorRangeOutPutVertex[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRangeOutPutVertex[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRangeOutPutVertex;
-	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeOutPutVertex);
-
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-	rootParameters[4].Descriptor.ShaderRegister = 0;
+	rootParameters[4].DescriptorTable.pDescriptorRanges = descriptorRangeOutPutVertex;
+	rootParameters[4].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeOutPutVertex);
 
 
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 	descriptionRootSignature.Flags =
-		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+		D3D12_ROOT_SIGNATURE_FLAG_NONE;
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
+	descriptionRootSignature.pStaticSamplers = nullptr;
+	
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
 	if (FAILED(hr))
