@@ -10,7 +10,7 @@ void GraphicsPipelineManager::Initialize()
 {
 	SPSO pso{};
 
-	CreateCompute(pso);
+	//CreateCompute(pso);
 	CreatePSO(pso);
 	//2d
 	Create2dSpritePSOs(pso);
