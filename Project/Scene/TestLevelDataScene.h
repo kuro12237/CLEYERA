@@ -12,17 +12,13 @@
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 #include"Model/primitive/Line.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
-#include"GameObject/SkyDome/SkyDome.h"
-#include"GameObject/Terrain/Terrain.h"
-
 #include"SceneFileLoder/SceneFileLoader.h"
-
-#include"Utility/GameCollisionManager/GameCollisionManager.h"
-#include"GameObject/Player/Player.h"
-#include"GameObject/Player/InputHandler/PlayerInputHandler.h"
-#include"GameObject/Player/Camera/PlayerCamera.h"
 #include"Utility/GameGravityManager/GameGravityManager.h"
 #include"Utility/CollisionManager/CollisionManager.h"
+
+#include"GameObject/ObjectManager/GameObjectManager.h"
+
+#include"GameObject/Player/Player.h"
 
 class TestLevelDataScene :public IScene
 {
@@ -43,6 +39,7 @@ public:
 	void Flont2dSpriteDraw()override;
 
 private:
+
 	CameraData camera_{};
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
@@ -51,5 +48,9 @@ private:
 	unique_ptr<LevelData> levelData_ = nullptr;
 
 	PointLight_param light_{};
+
+	unique_ptr<GameObjectManager>objectManager_;
+
+	unique_ptr<Player>player_ = nullptr;
 
 };

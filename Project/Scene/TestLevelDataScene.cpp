@@ -10,7 +10,8 @@ void TestLevelDataScene::Initialize()
 
 	levelData_= SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
 
-    
+	objectManager_ = make_unique<GameObjectManager>();
+	objectManager_->CopyData(levelData_.get());
 
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
@@ -19,6 +20,11 @@ void TestLevelDataScene::Initialize()
 	light_.radious = 128.0f;
 	light_.position.y = 64.0f;
 	light_.decay = 0.25f;
+
+	player_ = make_unique<Player>();
+	player_->Initialize();
+	player_->GetData(objectManager_.get());
+	
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -46,24 +52,11 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	}
 #endif // _USE_IMGUI
 
-	//object
-	for (auto it = levelData_->obj3dData.begin(); it != levelData_->obj3dData.end(); ++it) {
-		Game3dObjectData& data = it->second;
-		data.worldTransform.UpdateMatrix();
-    }
+	player_->Update();
 
-	//instancing
-	for (auto it = levelData_->objInstancing3dData.begin(); it != levelData_->objInstancing3dData.end(); ++it) {
-		Game3dInstancingObjectData& data = it->second;
-		uint32_t index = 0;
-		for (shared_ptr<IGameInstancing3dObject>& transform : data.transform_)
-		{
-			transform->Update();
-			data.GameInstancingObject->PushVector(transform, index);
-			index++;
-		}
-		data.GameInstancingObject->Transfar();
-	}
+	objectManager_->ObjDataUpdate(player_.get());
+
+	objectManager_->Update();
 
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
@@ -76,17 +69,7 @@ void TestLevelDataScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
-	//gameObjectDraw
-	for (auto it = levelData_->obj3dData.begin(); it != levelData_->obj3dData.end(); ++it) {
-		Game3dObjectData& data = it->second;
-		data.gameObject->Draw(data.worldTransform);
-	}
-	//instancingDraw
-	for (auto it = levelData_->objInstancing3dData.begin(); it != levelData_->objInstancing3dData.end(); ++it) {
-
-		Game3dInstancingObjectData& data = it->second;
-	    data.GameInstancingObject->Draw();
-	}
+	objectManager_->Draw();
 
 	postEffect_->PostDraw();
 }

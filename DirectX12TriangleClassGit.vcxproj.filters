@@ -403,9 +403,6 @@
     <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp">
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Player.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp">
       <Filter>Project\Utility\GameCollider</Filter>
     </ClCompile>
@@ -418,35 +415,11 @@
     <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp">
       <Filter>Project\Utility\Gravity</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Sun\Sun.cpp">
-      <Filter>Project\GameObject\Sun</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Terrain\Terrain.cpp">
-      <Filter>Project\GameObject\Trrain</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlock.cpp">
-      <Filter>Project\GameObject\block</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\WoodBlock\WoodBlockManager.cpp">
-      <Filter>Project\GameObject\block</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Item\Item.cpp">
-      <Filter>Project\GameObject\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Item\ItemManager.cpp">
-      <Filter>Project\GameObject\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Scene\GameScene.cpp">
-      <Filter>Project\Scene\Game</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp">
       <Filter>CLEYERA\MulitiPass</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\SkyDome\SkyDome.cpp">
-      <Filter>Project\GameObject\SkyDome</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp">
       <Filter>CLEYERA\Utility\GlobalVariables</Filter>
@@ -456,51 +429,6 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
       <Filter>CLEYERA\Graphics\BufferResource</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\AudioHandler\AudioHandler.cpp">
-      <Filter>Project\GameObject\Player\PlayerAudioHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Camera\PlayerCamera.cpp">
-      <Filter>Project\GameObject\Player\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGun.cpp">
-      <Filter>Project\GameObject\Player\PlayerGun</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.cpp">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.cpp">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.cpp">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.cpp">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.cpp">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.cpp">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.cpp">
-      <Filter>Project\GameObject\Player\PlayerInputHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.cpp">
-      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Commands\PlayerJampCommand.cpp">
-      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp">
-      <Filter>Project\GameObject\Player\Reticle</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Scene\AnimationScene.cpp">
-      <Filter>Project\Scene\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\Hp\PlayerHp.cpp">
-      <Filter>Project\GameObject\Player\PlayerHp</Filter>
     </ClCompile>
     <ClCompile Include="Project\Scene\TestScene.cpp">
       <Filter>Project\Scene\Game</Filter>
@@ -536,24 +464,15 @@
     <ClCompile Include="CLEYERA\Model\primitive\Line.cpp">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Character\IObjectData.cpp">
-      <Filter>Project\GameObject\character</Filter>
-    </ClCompile>
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
-    <ClCompile Include="Project\GameObject\testObject\testObject.cpp">
-      <Filter>Project\GameObject\testObject</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
-    <ClCompile Include="Project\GameObject\Player\state\PlayerNormalState.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\GameObject\Player\state\PlayerStoneState.cpp">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\SkinningCreateComputePipline\SkinningCreateComputePipline.cpp" />
+    <ClCompile Include="Project\GameObject\ObjectManager\GameObjectManager.cpp" />
+    <ClCompile Include="Project\GameObject\ObjectManager\IObjectData.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -775,27 +694,6 @@
     <ClInclude Include="Project\Utility\NumberString\NumberString.h">
       <Filter>Project\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Sun\Sun.h">
-      <Filter>Project\GameObject\Sun</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Terrain\Terrain.h">
-      <Filter>Project\GameObject\Trrain</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlock.h">
-      <Filter>Project\GameObject\block</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\WoodBlock\WoodBlockManager.h">
-      <Filter>Project\GameObject\block</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Item\Item.h">
-      <Filter>Project\GameObject\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Item\ItemManager.h">
-      <Filter>Project\GameObject\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Scene\GameScene.h">
-      <Filter>Project\Scene\Game</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h">
       <Filter>CLEYERA\MulitiPass</Filter>
     </ClInclude>
@@ -807,9 +705,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\StructGraphicsPipline.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\SkyDome\SkyDome.h">
-      <Filter>Project\GameObject\SkyDome</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h">
       <Filter>CLEYERA\Utility\GlobalVariables</Filter>
@@ -832,64 +727,9 @@
     <ClInclude Include="CLEYERA\Animation\SAnimation.h">
       <Filter>CLEYERA\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\AudioHandler\AudioHandler.h">
-      <Filter>Project\GameObject\Player\PlayerAudioHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\AudioCommands\IPlayerAudioCommand.h">
-      <Filter>Project\GameObject\Player\PlayerAudioHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Commands\IPlayerCommand.h">
-      <Filter>Project\GameObject\Player\PlayerInputHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Camera\PlayerCamera.h">
-      <Filter>Project\GameObject\Player\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGun.h">
-      <Filter>Project\GameObject\Player\PlayerGun</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\IPlayerGunState.h">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Commands\PlayerGunAttackCommand.h">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunAttackState.h">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\PlayerGunBullet.h">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunReloadState.h">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\PlayerGun\state\PlayerGunStandState.h">
-      <Filter>Project\GameObject\Player\PlayerGun\state</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\InputHandler\PlayerInputHandler.h">
-      <Filter>Project\GameObject\Player\PlayerInputHandler</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\AudioCommands\PlayerJampAudioCommand.h">
-      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Commands\PlayerJampCommand.h">
-      <Filter>Project\GameObject\Player\PlayerInputHandler\command</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h">
-      <Filter>Project\GameObject\Player\Reticle</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Scene\AnimationScene.h">
-      <Filter>Project\Scene\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Hp\PlayerHp.h">
-      <Filter>Project\GameObject\Player\PlayerHp</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Utility\ColorConverter\ColorConverter.h">
       <Filter>CLEYERA\Utility\Color</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\Player.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline</Filter>
     </ClInclude>
@@ -926,30 +766,21 @@
     <ClInclude Include="CLEYERA\Model\primitive\Line.h">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Character\IObjectData.h">
-      <Filter>Project\GameObject\character</Filter>
-    </ClInclude>
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h">
       <Filter>Project\SceneFileLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\testObject\testObject.h">
-      <Filter>Project\GameObject\testObject</Filter>
     </ClInclude>
     <ClInclude Include="Project\Scene\TestLevelDataScene.h">
       <Filter>Project\Scene\Game\TestLevelData</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />
     <ClInclude Include="CLEYERA\Utility\CameraManager\CameraManager.h" />
-    <ClInclude Include="Project\GameObject\Player\state\PlayerNormalState.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameObject\Player\state\PlayerStoneState.h">
-      <Filter>Project\GameObject\Player</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h">
       <Filter>CLEYERA\Utility\LevelData</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\SkinningCreateComputePipline\SkinningCreateComputePipline.h" />
+    <ClInclude Include="Project\GameObject\ObjectManager\GameObjectManager.h" />
+    <ClInclude Include="Project\GameObject\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\ObjectManager\IObjectData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
