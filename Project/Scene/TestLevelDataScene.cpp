@@ -24,7 +24,7 @@ void TestLevelDataScene::Initialize()
 
 	light_.radious = 128.0f;
 	light_.position.y = 64.0f;
-	light_.decay = 0.25f;
+	light_.decay = 0.1f;
 
 	player_ = make_shared<Player>();
 	player_->Initialize();

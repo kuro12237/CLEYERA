@@ -48,6 +48,8 @@ void GameObjectManager::Update()
 		it.worldTransform.UpdateMatrix();
 	}
 
+	dataName_.clear();
+
 	for (auto& data : objInstancing3dData) {
 		auto& it = data.second;
 		//int index = 0;
