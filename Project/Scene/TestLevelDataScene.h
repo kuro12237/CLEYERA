@@ -13,12 +13,12 @@
 #include"Model/primitive/Line.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"SceneFileLoder/SceneFileLoader.h"
-#include"Utility/GameGravityManager/GameGravityManager.h"
-#include"Utility/CollisionManager/CollisionManager.h"
 
 #include"GameObject/ObjectManager/GameObjectManager.h"
+#include"GameObject/GameCollider/BoxCollisionManager.h"
 
 #include"GameObject/Player/Player.h"
+
 
 class TestLevelDataScene :public IScene
 {
@@ -40,6 +40,8 @@ public:
 
 private:
 
+	void Collision();
+
 	CameraData camera_{};
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
@@ -49,8 +51,10 @@ private:
 
 	PointLight_param light_{};
 
-	unique_ptr<GameObjectManager>objectManager_;
+	unique_ptr<GameObjectManager>objectManager_ = nullptr;
+	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
-	unique_ptr<Player>player_ = nullptr;
+	shared_ptr<Player>player_ = nullptr;
+
 
 };

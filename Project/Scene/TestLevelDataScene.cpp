@@ -4,27 +4,30 @@ void TestLevelDataScene::Initialize()
 {
 	postEffect_ = make_unique<PostEffect>();
 	postEffect_->Initialize("testScene");
+
+	//levelDataの読み込み
+	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
+
 	camera_.Initialize();
 	camera_.translation_.z = -16.0f;
-	CameraManager::GetInstance()->ResetCamera(camera_);
-
-	levelData_= SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
-
-	objectManager_ = make_unique<GameObjectManager>();
-	objectManager_->CopyData(levelData_.get());
-
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
 	camera_.UpdateMatrix();
+	CameraManager::GetInstance()->ResetCamera(camera_);
+
+	//オブジェクト管理クラスの作成
+	objectManager_ = make_unique<GameObjectManager>();
+	objectManager_->CopyData(levelData_.get());
+
+	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
 	light_.radious = 128.0f;
 	light_.position.y = 64.0f;
 	light_.decay = 0.25f;
 
-	player_ = make_unique<Player>();
+	player_ = make_shared<Player>();
 	player_->Initialize();
 	player_->GetData(objectManager_.get());
-	
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -58,6 +61,8 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	objectManager_->Update();
 
+	Collision();
+
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
 
@@ -85,4 +90,14 @@ void TestLevelDataScene::Object3dDraw()
 
 void TestLevelDataScene::Flont2dSpriteDraw()
 {
+}
+
+void TestLevelDataScene::Collision()
+{
+	gameCollisionManager_->ListClear();
+
+	gameCollisionManager_->ListPushback(player_.get());
+
+	gameCollisionManager_->CheckAllCollisoin();
+
 }

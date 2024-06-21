@@ -3,12 +3,12 @@
 void Player::Initialize()
 {
 	SetName("Player");
-	transform_;
-
+	SetObjectData(this->transform_);
 }
 
 void Player::Update()
 {
+
 	if (Input::GetInstance()->PushKey(DIK_W))
 	{
 		transform_.translate.y += 0.1f;
@@ -17,5 +17,9 @@ void Player::Update()
 	{
 		transform_.translate.y -= 0.1f;
 	}
-	transform_;
+}
+
+void Player::OnCollision(ICollider* c)
+{
+	c;
 }

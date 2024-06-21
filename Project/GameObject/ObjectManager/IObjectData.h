@@ -11,15 +11,10 @@ public:
 	virtual ~IObjectData() {};
 
 	/// <summary>
-	/// LevelDataからざふぉうをコピー
+	/// objectManagerからデータをコピー
 	/// </summary>
 	/// <param name="data"></param>
 	void GetData(GameObjectManager* data);
-
-	/// <summary>
-	/// 行列更新
-	/// </summary>
-	void MatUpdate();
 
 #pragma region Set
 
@@ -34,7 +29,6 @@ public:
 	TransformEular GetTransform() { return transform_; }
 
 #pragma endregion
-
 
 private:
 

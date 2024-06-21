@@ -108,6 +108,8 @@
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
+    <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
+    <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\IObjectData.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
@@ -115,9 +117,6 @@
     <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
     <ClCompile Include="Project\Scene\TestScene.cpp" />
     <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp" />
-    <ClCompile Include="Project\Utility\GameCollisionManager\GameCollisionManager.cpp" />
-    <ClCompile Include="Project\Utility\GameGravityManager\GameGravityManager.cpp" />
-    <ClCompile Include="Project\Utility\GameGravityManager\IGravity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />
@@ -211,6 +210,8 @@
     <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
     <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
+    <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />
+    <ClInclude Include="Project\GameObject\GameCollider\ICollider.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\IObjectData.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
@@ -219,11 +220,6 @@
     <ClInclude Include="Project\Scene\TestLevelDataScene.h" />
     <ClInclude Include="Project\Scene\TestScene.h" />
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
-    <ClInclude Include="Project\Utility\GameCollisionManager\GameColliderConfig.h" />
-    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollider\BoxCollider.h" />
-    <ClInclude Include="Project\Utility\GameCollisionManager\GameCollisionManager.h" />
-    <ClInclude Include="Project\Utility\GameGravityManager\GameGravityManager.h" />
-    <ClInclude Include="Project\Utility\GameGravityManager\IGravity.h" />
     <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
   </ItemGroup>

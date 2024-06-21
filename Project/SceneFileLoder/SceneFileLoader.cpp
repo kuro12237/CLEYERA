@@ -57,7 +57,7 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::
 			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
 
 			obj3dData.worldTransform.Initialize();
-
+			obj3dData.objectName = objectType;
 			obj3dData.objectDesc.useLight = true;
 			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
 			//model‚Ìƒtƒ@ƒCƒ‹“Ç‚İ‚İ

@@ -6,7 +6,6 @@ void GameObjectManager::CopyData(LevelData* data)
 	objInstancing3dData = move(data->objInstancing3dData);
 }
 
-
 void GameObjectManager::ObjDataUpdate(IObjectData *data)
 {
 	TransformEular transform= data->GetTransform();
@@ -31,14 +30,20 @@ void GameObjectManager::Update()
 	for (auto& data : obj3dData) {
 		auto& it = data.second;
 		int index = 0;
+		bool updateFlag = true;
 		for (string& name : dataName_) 
 		{
 			if (it.objectName == name)
 			{
 				dataName_[index].erase();
-				return;
+				updateFlag = false;
 			}
 			index++;
+		}
+		//çXêVÇµÇ»Ç¢
+		if (!updateFlag)
+		{
+			continue;
 		}
 		it.worldTransform.UpdateMatrix();
 	}
