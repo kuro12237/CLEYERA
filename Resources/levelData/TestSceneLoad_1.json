@@ -4,14 +4,14 @@
         {
             "type": "MESH",
             "name": "Cube",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "objectType": "Map",
+            "file_name": "DebugTestSphere",
+            "DrawType": "Normal",
+            "objectType": "Player",
             "transform": {
                 "translate": [
-                    2.0,
                     0.0,
-                    0.5
+                    0.0,
+                    1.0
                 ],
                 "rotate": [
                     0.0,
@@ -19,9 +19,9 @@
                     0.0
                 ],
                 "scale": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             },
             "collider": {
@@ -88,15 +88,15 @@
         },
         {
             "type": "MESH",
-            "name": "ICO球",
-            "file_name": "DebugTestSphere",
+            "name": "立方体",
+            "file_name": "DfCube",
             "DrawType": "Normal",
-            "objectType": "Player",
+            "objectType": "EnemyWalk",
             "transform": {
                 "translate": [
-                    0.0,
-                    0.0,
-                    2.3607394695281982
+                    3.2985520362854004,
+                    -0.21440792083740234,
+                    1.0
                 ],
                 "rotate": [
                     0.0,
@@ -104,83 +104,9 @@
                     0.0
                 ],
                 "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.001",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    0.5
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.002",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
                     1.0,
-                    0.0,
-                    0.5
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0
                 ]
             },
             "collider": {
@@ -218,6 +144,30 @@
                     1.0,
                     1.0,
                     1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "球",
+            "file_name": "SkyDome",
+            "DrawType": "Normal",
+            "objectType": "SkyBox",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    32.0,
+                    32.0,
+                    32.0
                 ]
             }
         }

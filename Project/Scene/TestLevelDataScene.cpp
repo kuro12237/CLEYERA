@@ -10,6 +10,7 @@ void TestLevelDataScene::Initialize()
 
 	camera_.Initialize();
 	camera_.translation_.z = -16.0f;
+	camera_.translation_.y = 2.0f;
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
 	camera_.UpdateMatrix();
@@ -28,6 +29,10 @@ void TestLevelDataScene::Initialize()
 	player_ = make_shared<Player>();
 	player_->Initialize();
 	player_->GetData(objectManager_.get());
+
+	enemyWalk_ = make_shared<EnemyWalk>();
+	enemyWalk_->Initialize();
+	enemyWalk_->GetData(objectManager_.get());
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -57,11 +62,15 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	player_->Update();
 
-	objectManager_->ObjDataUpdate(player_.get());
+	enemyWalk_->Update();
 
-	objectManager_->Update();
 
 	Collision();
+
+	objectManager_->ObjDataUpdate(player_.get());
+	objectManager_->ObjDataUpdate(enemyWalk_.get());
+
+	objectManager_->Update();
 
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
@@ -97,7 +106,7 @@ void TestLevelDataScene::Collision()
 	gameCollisionManager_->ListClear();
 
 	gameCollisionManager_->ListPushback(player_.get());
-
+	gameCollisionManager_->ListPushback(enemyWalk_.get());
 	gameCollisionManager_->CheckAllCollisoin();
 
 }

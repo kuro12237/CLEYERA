@@ -18,7 +18,7 @@
 #include"GameObject/GameCollider/BoxCollisionManager.h"
 
 #include"GameObject/Player/Player.h"
-
+#include"GameObject/EnemyWalk/EnemyWalk.h"
 
 class TestLevelDataScene :public IScene
 {
@@ -56,5 +56,6 @@ private:
 
 	shared_ptr<Player>player_ = nullptr;
 
+	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
 
 };
