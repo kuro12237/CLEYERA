@@ -467,6 +467,8 @@
     <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
+    <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
+    <ClCompile Include="Project\GameObject\Block\Block.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -763,6 +765,8 @@
     <ClInclude Include="Project\GameObject\GameCollider\ICollider.h" />
     <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
+    <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
+    <ClInclude Include="Project\GameObject\Block\Block.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

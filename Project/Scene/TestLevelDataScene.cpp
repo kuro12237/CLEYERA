@@ -33,6 +33,10 @@ void TestLevelDataScene::Initialize()
 	enemyWalk_ = make_shared<EnemyWalk>();
 	enemyWalk_->Initialize();
 	enemyWalk_->GetData(objectManager_.get());
+
+	blockManager_ = make_shared<BlockManager>();
+	blockManager_->CopyData(objectManager_.get());
+	blockManager_->Initialize();
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -48,27 +52,19 @@ void TestLevelDataScene::Update(GameManager* Scene)
 		ImGui::TreePop();
 	}
 
-	if (ImGui::Button("sceneReload_1"))
-	{
-		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
-		return;
-	}
-	if (ImGui::Button("sceneReload_2"))
-	{
-		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_2.json");
-		return;
-	}
 #endif // _USE_IMGUI
 
 	player_->Update();
 
 	enemyWalk_->Update();
 
+	blockManager_->Update();
 
 	Collision();
 
 	objectManager_->ObjDataUpdate(player_.get());
 	objectManager_->ObjDataUpdate(enemyWalk_.get());
+	objectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(), "Map");
 
 	objectManager_->Update();
 
@@ -107,6 +103,10 @@ void TestLevelDataScene::Collision()
 
 	gameCollisionManager_->ListPushback(player_.get());
 	gameCollisionManager_->ListPushback(enemyWalk_.get());
+	for (shared_ptr<Block> b : blockManager_->GetBlocks())
+	{
+		gameCollisionManager_->ListPushback(b.get());
+	}
 	gameCollisionManager_->CheckAllCollisoin();
 
 }

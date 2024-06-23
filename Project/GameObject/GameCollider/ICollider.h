@@ -29,7 +29,7 @@ public:
 
 	vector<HItDirection>GetHItDirection() { return hitDirection_; }
 
-	TransformEular GetTransform() { return *pTransform_; }
+	TransformEular GetpTransform() { return *pTransform_; }
 
 	AABB GetAABB() { return aabb; }
 

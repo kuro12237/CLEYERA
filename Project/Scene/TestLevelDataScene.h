@@ -19,6 +19,7 @@
 
 #include"GameObject/Player/Player.h"
 #include"GameObject/EnemyWalk/EnemyWalk.h"
+#include"GameObject/Block/BlockManager.h"
 
 class TestLevelDataScene :public IScene
 {
@@ -49,13 +50,13 @@ private:
 
 	unique_ptr<LevelData> levelData_ = nullptr;
 
-	PointLight_param light_{};
-
 	unique_ptr<GameObjectManager>objectManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
+
+	PointLight_param light_{};
 	shared_ptr<Player>player_ = nullptr;
 
 	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
-
+	shared_ptr<BlockManager>blockManager_ = nullptr;
 };

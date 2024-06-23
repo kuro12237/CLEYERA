@@ -23,6 +23,8 @@ public:
 
 	void PushVector(shared_ptr<IGameInstancing3dObject> obj,uint32_t index);
 
+
+
 private:
 	bool CommpandPipeline(SPSOProperty& PSO);
 

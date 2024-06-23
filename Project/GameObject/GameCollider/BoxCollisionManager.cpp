@@ -45,14 +45,14 @@ AABB BoxCollisionManager::SettingAABBParam(ICollider* c)
 	AABB result{};
 	result.min = {
 
-		.x = c->GetTransform().translate.x + (c->GetAABB().min.x),
-		.y = c->GetTransform().translate.y + (c->GetAABB().min.y),
-		.z = c->GetTransform().translate.z + (c->GetAABB().min.z),
+		.x = c->GetpTransform().translate.x + (c->GetAABB().min.x),
+		.y = c->GetpTransform().translate.y + (c->GetAABB().min.y),
+		.z = c->GetpTransform().translate.z + (c->GetAABB().min.z),
 	};
 	result.max = {
-		.x = c->GetTransform().translate.x + (c->GetAABB().max.x),
-		.y = c->GetTransform().translate.y + (c->GetAABB().max.y),
-		.z = c->GetTransform().translate.z + (c->GetAABB().max.z),
+		.x = c->GetpTransform().translate.x + (c->GetAABB().max.x),
+		.y = c->GetpTransform().translate.y + (c->GetAABB().max.y),
+		.z = c->GetpTransform().translate.z + (c->GetAABB().max.z),
 	};
 
 	return result;
@@ -105,27 +105,27 @@ bool BoxCollisionManager::CheckRightCollision(float t)
 
 float BoxCollisionManager::BottomExtrusion(ICollider* a, ICollider* b)
 {
-	return (-a->GetAABB().min.y + b->GetAABB().max.y) - (a->GetTransform().translate.y - b->GetTransform().translate.y);
+	return (-a->GetAABB().min.y + b->GetAABB().max.y) - (a->GetpTransform().translate.y - b->GetpTransform().translate.y);
 }
 
 float BoxCollisionManager::TopExtrusion(ICollider* a, ICollider* b)
 {
-	return (-a->GetAABB().max.y + b->GetAABB().min.y) - (a->GetTransform().translate.y - b->GetTransform().translate.y);
+	return (-a->GetAABB().max.y + b->GetAABB().min.y) - (a->GetpTransform().translate.y - b->GetpTransform().translate.y);
 }
 
 float BoxCollisionManager::RightExtrusion(ICollider* a, ICollider* b)
 {
-	return (-a->GetAABB().min.x + b->GetAABB().max.x) - (a->GetTransform().translate.x - b->GetTransform().translate.x);
+	return (-a->GetAABB().min.x + b->GetAABB().max.x) - (a->GetpTransform().translate.x - b->GetpTransform().translate.x);
 }
 
 float BoxCollisionManager::LeftExtrusion(ICollider* a, ICollider* b)
 {
-	return (-a->GetAABB().max.x + b->GetAABB().min.x) - (a->GetTransform().translate.x - b->GetTransform().translate.x);
+	return (-a->GetAABB().max.x + b->GetAABB().min.x) - (a->GetpTransform().translate.x - b->GetpTransform().translate.x);
 }
 
 void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 {
-	float theta = atan2(a->GetTransform().translate.y - b->GetTransform().translate.y, a->GetTransform().translate.x - b->GetTransform().translate.x);
+	float theta = atan2(a->GetpTransform().translate.y - b->GetpTransform().translate.y, a->GetpTransform().translate.x - b->GetpTransform().translate.x);
 	//A‚ğ‚à‚Æ‚É‚ß‚è‚İ“x‚ğZo
 	if (CheckBottomCollsion(theta))
 	{

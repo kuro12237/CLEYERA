@@ -19,10 +19,18 @@ void GameObjectManager::ObjDataUpdate(IObjectData *data)
 	dataName_.push_back(name);
 }
 
-void GameObjectManager::InstancingObjDataUpdate(string name)
+void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data,string name)
 {
+	uint32_t size = uint32_t(data.size());
+
+	for (uint32_t i = 0; i < size; i++)
+	{
+		data[i]->Update();
+		objInstancing3dData[name].GameInstancingObject->PushVector(data[i],i);
+	}
+
 	objInstancing3dData[name].GameInstancingObject->Transfar();
-	dataName_.push_back(name);
+	instancingDataName_.push_back(name);
 }
 
 void GameObjectManager::Update()
@@ -31,7 +39,7 @@ void GameObjectManager::Update()
 		auto& it = data.second;
 		int index = 0;
 		bool updateFlag = true;
-		for (string& name : dataName_) 
+		for (string& name : dataName_)
 		{
 			if (it.objectName == name)
 			{
@@ -52,9 +60,25 @@ void GameObjectManager::Update()
 
 	for (auto& data : objInstancing3dData) {
 		auto& it = data.second;
-		//int index = 0;
-		it.GameInstancingObject->Transfar();
+		int index = 0;
+		bool updateFlag = true;
+		
+		for (string& name : instancingDataName_)
+		{
+			if (it.objectType == name)
+			{
+			
+				updateFlag = false;
+			}
+			index++;
+		}
+		if (!updateFlag)
+		{
+			continue;
+		}
+		//it.GameInstancingObject->Transfar();
 	}
+	instancingDataName_.clear();
 }
 
 void GameObjectManager::Draw()
@@ -76,4 +100,9 @@ void GameObjectManager::Draw()
 Game3dObjectData& GameObjectManager::GetObj3dData(string name)
 {
 	return obj3dData[name];
+}
+
+Game3dInstancingObjectData& GameObjectManager::GetObjInstancingData(string name)
+{
+	return objInstancing3dData[name];
 }
