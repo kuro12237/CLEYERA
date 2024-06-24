@@ -30,6 +30,9 @@ void BoxCollisionManager::CheckAllCollisoin()
 			if (IsCollision(a, b))
 			{
 				//めり込み計算
+				colliderA->ClearExtrusion();
+				colliderA->ClearHitDirection();
+
 				CheckExtrusion(colliderA, colliderB);
 
 				colliderA->OnCollision(colliderB);
@@ -127,21 +130,22 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 {
 	float theta = atan2(a->GetpTransform().translate.y - b->GetpTransform().translate.y, a->GetpTransform().translate.x - b->GetpTransform().translate.x);
 	//Aをもとにめり込み度を算出
+	Math::Vector::Vector2 extrusionA = {};
+	Math::Vector::Vector2 extrusionB = {};
+
 	if (CheckBottomCollsion(theta))
 	{
 		//下
 		if (a->GetIsExtrusionFlag())
 		{
 			a->PushBackHitDirection(BOTTOM);
-			float extrusionA = BottomExtrusion(a, b);
-			a->SetExtrusion({ 0,extrusionA });
+			extrusionA.y = BottomExtrusion(a, b);
 		}
 		//上
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(TOP);
-			float extrusionB = TopExtrusion(a, b);
-			b->SetExtrusion({ 0,extrusionB });
+			extrusionB.y = TopExtrusion(a, b);
 		}
 	}
 
@@ -152,54 +156,47 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 		if (a->GetIsExtrusionFlag())
 		{
 			a->PushBackHitDirection(TOP);
-			float extrusionA = TopExtrusion(a, b);
-			a->SetExtrusion({ 0,extrusionA });
+			extrusionA.y = TopExtrusion(a, b);
 		}
 		//下
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(BOTTOM);
-			float extrusionB = BottomExtrusion(a, b);
-			b->SetExtrusion({ 0,extrusionB });
+			extrusionB.y = BottomExtrusion(a, b);
 		}
 	}
 
 	//左
 	if (CheckLeftCollision(theta))
 	{
-		//左
 		if (a->GetIsExtrusionFlag())
 		{
 			a->PushBackHitDirection(LEFT);
-			float extrusionA = RightExtrusion(a, b);
-			a->SetExtrusion({ extrusionA,0.0f });
+			extrusionA.x = RightExtrusion(a, b);
 		}
 		//右
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(RIGHT);
-			float extrusionB = LeftExtrusion(a, b);
-			b->SetExtrusion({ extrusionB,0.0f });
+			extrusionB.x = LeftExtrusion(a, b);
 		}
 	}
 	//右
 	if (CheckRightCollision(theta))
 	{
-		//右
 		if (a->GetIsExtrusionFlag())
 		{
 			a->PushBackHitDirection(RIGHT);
-			float extrusionA = LeftExtrusion(a, b);
-			a->SetExtrusion({ extrusionA,0.0f });
+			extrusionA.x = LeftExtrusion(a, b);
 		}
 		//左
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(LEFT);
-			float extrusionB = RightExtrusion(a, b);
-			b->SetExtrusion({ extrusionB,0.0f });
+			extrusionB.x = RightExtrusion(a, b);
 		}
 	}
-
+	a->SetExtrusion(extrusionA);
+	b->SetExtrusion(extrusionB);
 }
 

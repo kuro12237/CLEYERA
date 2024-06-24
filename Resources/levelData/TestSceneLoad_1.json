@@ -9,9 +9,9 @@
             "objectType": "Player",
             "transform": {
                 "translate": [
+                    3.5510168075561523,
                     0.0,
-                    0.0,
-                    4.645944595336914
+                    9.037257194519043
                 ],
                 "rotate": [
                     0.0,
@@ -36,6 +36,43 @@
                     -4.22255802154541,
                     0.0,
                     4.936975955963135
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.010",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -1.0,
+                    0.0,
+                    1.0
                 ],
                 "rotate": [
                     0.0,

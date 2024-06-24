@@ -4,6 +4,7 @@ void EnemyWalk::Initialize()
 {
 	SetName("EnemyWalk");
 	SetObjectData(this->transform_);
+	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
 }
 
 void EnemyWalk::Update()

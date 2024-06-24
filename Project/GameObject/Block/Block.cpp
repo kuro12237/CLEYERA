@@ -9,6 +9,8 @@ void Block::Initialize(TransformEular t)
 
 void Block::Update()
 {
+	this->ClearExtrusion();
+	this->ClearHitDirection();
 }
 
 void Block::OnCollision(ICollider* c)

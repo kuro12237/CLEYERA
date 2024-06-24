@@ -20,6 +20,8 @@
 #include"GameObject/Player/Player.h"
 #include"GameObject/EnemyWalk/EnemyWalk.h"
 #include"GameObject/Block/BlockManager.h"
+#include"GameObject/GravityManager/GravityManager.h"
+
 
 class TestLevelDataScene :public IScene
 {
@@ -43,6 +45,8 @@ private:
 
 	void Collision();
 
+	void Gravitys();
+
 	CameraData camera_{};
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
@@ -55,8 +59,11 @@ private:
 
 
 	PointLight_param light_{};
+
+	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 	shared_ptr<Player>player_ = nullptr;
 
 	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
+	shared_ptr<GravityManager>gravityManager_ = nullptr;
 };

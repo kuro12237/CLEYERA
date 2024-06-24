@@ -16,9 +16,15 @@ public:
 	/// <param name="data"></param>
 	void GetData(GameObjectManager* data);
 
+	void CalcGravity(float g);
+
 #pragma region Set
 
 	void SetName(string name) { name_ = name; }
+
+	void SetTransform(TransformEular t) { transform_ = t; }
+
+	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
 
 #pragma endregion
 
@@ -27,6 +33,8 @@ public:
 	string GetName() { return name_; }
 
 	TransformEular GetTransform() { return transform_; }
+
+	Math::Vector::Vector3 GetVelocity() { return velocity_; }
 
 #pragma endregion
 
@@ -38,6 +46,6 @@ protected:
 
 	const Math::Matrix::Matrix4x4 *worldMat_ = {};
 	TransformEular transform_{};
-
+	Math::Vector::Vector3 velocity_{};
 };
 

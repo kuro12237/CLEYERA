@@ -5,36 +5,58 @@ void Player::Initialize()
 	SetName("Player");
 	SetObjectData(this->transform_);
 	this->isExtrusion_ = true;
+
+
 }
 
 void Player::Update()
 {
-	//“–‚½‚è”»’è
-	ClearExtrusion();
-	ClearHitDirection();
 
-	if (Input::GetInstance()->PushKey(DIK_W))
+	if (ImGui::Button("b"))
 	{
-		transform_.translate.y += 0.1f;
+		velocity_ = {};
+		transform_.translate = { 0.0f,4.0f,0.0f };
 	}
-	if (Input::GetInstance()->PushKey(DIK_S))
+
+	//“–‚½‚è”»’è
+	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
+	if (Ljoy.x >= -0.1f && Ljoy.x <= 0.1f)
 	{
-		transform_.translate.y -= 0.1f;
+		Ljoy.x = {};
 	}
-	if (Input::GetInstance()->PushKey(DIK_D))
+	if (Ljoy.y >= -0.1f && Ljoy.y <= 0.1f)
 	{
-		transform_.translate.x += 0.1f;
+		Ljoy.y = {};
 	}
-	if (Input::GetInstance()->PushKey(DIK_A))
-	{
-		transform_.translate.x -= 0.1f;
-	}
+	const float Speed = 0.1f;
+	velocity_.x = Ljoy.x * Speed;
+
+	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
 
 void Player::OnCollision(ICollider* c)
 {
 	c;
+
+	for (auto& hitDirection : hitDirection_)
+	{
+		if (hitDirection == TOP)
+		{
+			velocity_ = {};
+		}
+		if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
+		{
+			velocity_ = {};
+		}
+	}
+
 	transform_.translate.x += extrusion_.x;
 	transform_.translate.y += extrusion_.y;
-	LogManager::Log("HitPlayer\n");
+}
+
+void Player::Jamp()
+{
+
+	velocity_.y = 0.25f;
+
 }

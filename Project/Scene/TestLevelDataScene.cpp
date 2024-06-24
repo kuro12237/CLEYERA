@@ -29,6 +29,8 @@ void TestLevelDataScene::Initialize()
 	player_ = make_shared<Player>();
 	player_->Initialize();
 	player_->GetData(objectManager_.get());
+	commandHandler_ = make_unique<PlayerCommandHandler>();
+
 
 	enemyWalk_ = make_shared<EnemyWalk>();
 	enemyWalk_->Initialize();
@@ -37,11 +39,16 @@ void TestLevelDataScene::Initialize()
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->CopyData(objectManager_.get());
 	blockManager_->Initialize();
+
+	gravityManager_ = make_shared<GravityManager>();
+
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
+	camera_.translation_ = player_->GetTransform().translate;
+	camera_.translation_.z = camera_.translation_.z - 16.0f;
 #ifdef _USE_IMGUI
 
 	debugCamera_->ImGuiUpdate();
@@ -54,23 +61,28 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 #endif // _USE_IMGUI
 
+	commandHandler_->Handler();
+	commandHandler_->CommandExec(*player_);
+
 	player_->Update();
 
 	enemyWalk_->Update();
 
 	blockManager_->Update();
 
+	Gravitys();
+
 	Collision();
 
 	objectManager_->ObjDataUpdate(player_.get());
 	objectManager_->ObjDataUpdate(enemyWalk_.get());
-	objectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(), "Map");
+	objectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
 
 	objectManager_->Update();
 
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
-
+	camera_.UpdateMatrix();
 	LightingManager::AddList(light_);
 	postEffect_->Update();
 }
@@ -109,4 +121,11 @@ void TestLevelDataScene::Collision()
 	}
 	gameCollisionManager_->CheckAllCollisoin();
 
+}
+
+void TestLevelDataScene::Gravitys()
+{
+	gravityManager_->ClearList();
+	gravityManager_->PushList(player_.get());
+	gravityManager_->CheckGravity();
 }

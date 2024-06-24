@@ -9,3 +9,9 @@ void IObjectData::GetData(GameObjectManager* data)
 
 }
 
+void IObjectData::CalcGravity(float g)
+{
+	velocity_.y += g;
+	transform_.translate.y += velocity_.y;
+}
+

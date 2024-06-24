@@ -5,6 +5,8 @@
 #include"GameObject/GameCollider/ICollider.h"
 #include"Input.h"
 
+#include"command/PlayerCommandHandler.h"
+
 class Player :public IObjectData,public ICollider
 {
 public:
@@ -15,9 +17,16 @@ public:
 
 	void Update();
 
-
 	void OnCollision(ICollider* c)override;
 
+#pragma region Command
+
+	void Jamp();
+
+#pragma endregion
+
+
 private:
+
 
 };
