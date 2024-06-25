@@ -26,10 +26,9 @@ void TestLevelDataScene::Initialize()
 	light_.position.y = 64.0f;
 	light_.decay = 0.1f;
 
-	player_ = make_shared<Player>();
-	player_->Initialize();
+	player_ = make_unique<PlayerManager>();
 	player_->GetData(objectManager_.get());
-	commandHandler_ = make_unique<PlayerCommandHandler>();
+	player_->GetData(objectManager_.get());
 
 
 	enemyWalk_ = make_shared<EnemyWalk>();
@@ -47,8 +46,6 @@ void TestLevelDataScene::Initialize()
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
-	camera_.translation_ = player_->GetTransform().translate;
-	camera_.translation_.z = camera_.translation_.z - 16.0f;
 #ifdef _USE_IMGUI
 
 	debugCamera_->ImGuiUpdate();
@@ -61,9 +58,6 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 #endif // _USE_IMGUI
 
-	commandHandler_->Handler();
-	commandHandler_->CommandExec(*player_);
-
 	player_->Update();
 
 	enemyWalk_->Update();
@@ -74,11 +68,15 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	Collision();
 
-	objectManager_->ObjDataUpdate(player_.get());
+	objectManager_->ObjDataUpdate(player_->GetPlayerCore());
 	objectManager_->ObjDataUpdate(enemyWalk_.get());
 	objectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
 
 	objectManager_->Update();
+
+
+	camera_.translation_ = player_->GetPlayerCore()->GetTransform().translate;
+	camera_.translation_.z = camera_.translation_.z - 16.0f;
 
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
@@ -113,7 +111,7 @@ void TestLevelDataScene::Collision()
 {
 	gameCollisionManager_->ListClear();
 
-	gameCollisionManager_->ListPushback(player_.get());
+	gameCollisionManager_->ListPushback(player_->GetPlayerCore());
 	gameCollisionManager_->ListPushback(enemyWalk_.get());
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
@@ -126,6 +124,6 @@ void TestLevelDataScene::Collision()
 void TestLevelDataScene::Gravitys()
 {
 	gravityManager_->ClearList();
-	gravityManager_->PushList(player_.get());
+	gravityManager_->PushList(player_->GetPlayerCore());
 	gravityManager_->CheckGravity();
 }

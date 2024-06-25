@@ -21,7 +21,7 @@
 #include"GameObject/EnemyWalk/EnemyWalk.h"
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
-
+#include"GameObject/Player/PlayerManager.h"
 
 class TestLevelDataScene :public IScene
 {
@@ -61,7 +61,8 @@ private:
 	PointLight_param light_{};
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
-	shared_ptr<Player>player_ = nullptr;
+
+	unique_ptr<PlayerManager>player_ = nullptr;
 
 	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;

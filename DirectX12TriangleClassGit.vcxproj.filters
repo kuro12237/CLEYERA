@@ -472,6 +472,7 @@
     <ClCompile Include="Project\GameObject\GravityManager\GravityManager.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -774,6 +775,7 @@
     <ClInclude Include="Project\GameObject\Player\command\IPlayerCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerCommandHandler.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

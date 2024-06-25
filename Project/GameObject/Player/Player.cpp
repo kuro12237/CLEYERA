@@ -5,8 +5,6 @@ void Player::Initialize()
 	SetName("Player");
 	SetObjectData(this->transform_);
 	this->isExtrusion_ = true;
-
-
 }
 
 void Player::Update()
@@ -18,7 +16,6 @@ void Player::Update()
 		transform_.translate = { 0.0f,4.0f,0.0f };
 	}
 
-	//“–‚½‚è”»’è
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
 	if (Ljoy.x >= -0.1f && Ljoy.x <= 0.1f)
 	{
@@ -56,7 +53,5 @@ void Player::OnCollision(ICollider* c)
 
 void Player::Jamp()
 {
-
 	velocity_.y = 0.25f;
-
 }
