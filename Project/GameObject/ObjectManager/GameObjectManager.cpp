@@ -1,5 +1,11 @@
 #include "GameObjectManager.h"
 
+GameObjectManager* GameObjectManager::GetInstance()
+{
+	static GameObjectManager instance;
+	return &instance;
+}
+
 void GameObjectManager::CopyData(LevelData* data)
 {
 	obj3dData = move(data->obj3dData);
@@ -43,7 +49,6 @@ void GameObjectManager::Update()
 		{
 			if (it.objectName == name)
 			{
-				dataName_[index].erase();
 				updateFlag = false;
 			}
 			index++;
@@ -62,12 +67,11 @@ void GameObjectManager::Update()
 		auto& it = data.second;
 		int index = 0;
 		bool updateFlag = true;
-		
+
 		for (string& name : instancingDataName_)
 		{
 			if (it.objectType == name)
 			{
-			
 				updateFlag = false;
 			}
 			index++;
@@ -105,4 +109,9 @@ Game3dObjectData& GameObjectManager::GetObj3dData(string name)
 Game3dInstancingObjectData& GameObjectManager::GetObjInstancingData(string name)
 {
 	return objInstancing3dData[name];
+}
+
+void GameObjectManager::SetParent(string parentName, string childName)
+{
+	obj3dData[childName].worldTransform.parent = &obj3dData[parentName].worldTransform;
 }

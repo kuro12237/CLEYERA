@@ -17,9 +17,9 @@ void TestLevelDataScene::Initialize()
 	CameraManager::GetInstance()->ResetCamera(camera_);
 
 	//オブジェクト管理クラスの作成
-	objectManager_ = make_unique<GameObjectManager>();
-	objectManager_->CopyData(levelData_.get());
-
+	
+	GameObjectManager::GetInstance()->CopyData(levelData_.get());
+	
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
 	light_.radious = 128.0f;
@@ -27,16 +27,16 @@ void TestLevelDataScene::Initialize()
 	light_.decay = 0.1f;
 
 	player_ = make_unique<PlayerManager>();
-	player_->GetData(objectManager_.get());
-	player_->GetData(objectManager_.get());
+	player_->GetData(GameObjectManager::GetInstance());
+	player_->GetData(GameObjectManager::GetInstance());
 
 
 	enemyWalk_ = make_shared<EnemyWalk>();
 	enemyWalk_->Initialize();
-	enemyWalk_->GetData(objectManager_.get());
+	enemyWalk_->GetData(GameObjectManager::GetInstance());
 
 	blockManager_ = make_shared<BlockManager>();
-	blockManager_->CopyData(objectManager_.get());
+	blockManager_->CopyData(GameObjectManager::GetInstance());
 	blockManager_->Initialize();
 
 	gravityManager_ = make_shared<GravityManager>();
@@ -56,6 +56,8 @@ void TestLevelDataScene::Update(GameManager* Scene)
 		ImGui::TreePop();
 	}
 
+	player_->ImGuiUpdate();
+
 #endif // _USE_IMGUI
 
 	player_->Update();
@@ -68,12 +70,12 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	Collision();
 
-	objectManager_->ObjDataUpdate(player_->GetPlayerCore());
-	objectManager_->ObjDataUpdate(enemyWalk_.get());
-	objectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
-
-	objectManager_->Update();
-
+	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetPlayerCore());
+	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetReticle());
+	GameObjectManager::GetInstance()->ObjDataUpdate(enemyWalk_.get());
+	GameObjectManager::GetInstance()->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
+	
+	GameObjectManager::GetInstance()->Update();
 
 	camera_.translation_ = player_->GetPlayerCore()->GetTransform().translate;
 	camera_.translation_.z = camera_.translation_.z - 16.0f;
@@ -81,6 +83,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);
 	camera_.UpdateMatrix();
+
 	LightingManager::AddList(light_);
 	postEffect_->Update();
 }
@@ -89,7 +92,7 @@ void TestLevelDataScene::PostProcessDraw()
 {
 	postEffect_->PreDraw();
 
-	objectManager_->Draw();
+	GameObjectManager::GetInstance()->Draw();
 
 	postEffect_->PostDraw();
 }
@@ -113,6 +116,7 @@ void TestLevelDataScene::Collision()
 
 	gameCollisionManager_->ListPushback(player_->GetPlayerCore());
 	gameCollisionManager_->ListPushback(enemyWalk_.get());
+
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
 		gameCollisionManager_->ListPushback(b.get());

@@ -473,6 +473,11 @@
     <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerManager.cpp" />
+    <ClCompile Include="Project\GameObject\Player\command\PlayerMoveCommand.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerStateNone.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -776,6 +781,13 @@
     <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerCommandHandler.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerManager.h" />
+    <ClInclude Include="Project\GameObject\Player\command\PlayerMoveCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerStateNone.h" />
+    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
+    <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h" />
+    <ClInclude Include="Project\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

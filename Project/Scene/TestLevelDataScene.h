@@ -54,7 +54,6 @@ private:
 
 	unique_ptr<LevelData> levelData_ = nullptr;
 
-	unique_ptr<GameObjectManager>objectManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
 

@@ -6,8 +6,8 @@ class IObjectData;
 class GameObjectManager
 {
 public:
-	GameObjectManager() {};
-	~GameObjectManager() {};
+
+	static GameObjectManager *GetInstance();
 
 	/// <summary>
 	/// levelDataの中身をコピー
@@ -34,11 +34,19 @@ public:
 
 	void Draw();
 
+	void PushObj3dData(Game3dObjectData& data, string name) { obj3dData[name] = move(data); };
+
 #pragma region Get
 
 	Game3dObjectData& GetObj3dData(string name);
 
 	Game3dInstancingObjectData& GetObjInstancingData(string name);
+
+#pragma endregion
+
+#pragma region Set
+
+	void SetParent(string parentName, string childName);
 
 #pragma endregion
 
@@ -50,6 +58,14 @@ private:
 
 	std::map<string, Game3dObjectData> obj3dData;
 	std::map<string, Game3dInstancingObjectData>objInstancing3dData;
+
+#pragma region singleton
+
+	GameObjectManager() = default;
+	~GameObjectManager() = default;
+	GameObjectManager(const  GameObjectManager&) = delete;
+	const  GameObjectManager& operator=(const GameObjectManager&) = delete;
+#pragma endregion
 
 };
 
