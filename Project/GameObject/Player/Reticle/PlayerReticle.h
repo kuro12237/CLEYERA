@@ -21,8 +21,11 @@ public:
 
 #pragma endregion
 
-
 private:
+
+	float rethickeAngle_ = 0.0f;
+	const float kRetickeRad_ = 4.0f;
+	const float kAngleSpeed_ = 1.0f;
 
 };
 

@@ -2,6 +2,13 @@
 
 using namespace Math::Vector;
 
+float Math::Vector::Length(const Vector2& v)
+{
+	float result{};
+	result = sqrtf(v.x * v.x + v.y * v.y);
+	return result;
+}
+
 float Math::Vector::Length(const Vector3& v)
 {
 	float result{};
@@ -56,6 +63,17 @@ Vector3 Math::Vector::TransformNormal(const Vector3& v, const Math::Matrix::Matr
 
 	return result;
 
+}
+
+Vector2 Math::Vector::Normalize(const Vector2& v)
+{
+	Vector2 result{};
+	float length = Length(v);
+	if (length != 0.0f) {
+		result.x = v.x / length;
+		result.y = v.y / length;
+	}
+	return result;
 }
 
 Vector3 Math::Vector::Normalize(const Vector3& v)

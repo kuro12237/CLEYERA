@@ -78,7 +78,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	GameObjectManager::GetInstance()->Update();
 
 	camera_.translation_ = player_->GetPlayerCore()->GetTransform().translate;
-	camera_.translation_.z = camera_.translation_.z - 16.0f;
+	camera_.translation_.z = camera_.translation_.z - 32.0f;
 
 	debugCamera_->Update();
 	camera_ = debugCamera_->GetData(camera_);

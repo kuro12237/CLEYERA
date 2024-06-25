@@ -33,9 +33,9 @@
             "objectType": "EnemyWalk",
             "transform": {
                 "translate": [
-                    -4.22255802154541,
+                    -5.0,
                     0.0,
-                    4.936975955963135
+                    7.0
                 ],
                 "rotate": [
                     0.0,
