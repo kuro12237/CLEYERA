@@ -55,7 +55,7 @@ public:
 
 private:
 
-	void checkChildren(string name, Game3dObjectData &data);
+	void checkChildren(Game3dObjectData &data);
 
 	vector<string>dataName_;
 	vector<string>instancingDataName_;

@@ -21,7 +21,7 @@ void GameObjectManager::SetAllParents()
 			for (string name : it.childName_)
 			{
 				SetParent(it.objectName, name);
-				checkChildren("", obj3dData[name]);
+				checkChildren(obj3dData[name]);
 			}
 		}
 	}
@@ -131,9 +131,8 @@ void GameObjectManager::SetParent(string parentName, string childName)
 	obj3dData[childName].worldTransform.parent = &obj3dData[parentName].worldTransform;
 }
 
-void GameObjectManager::checkChildren(string name, Game3dObjectData &data)
+void GameObjectManager::checkChildren(Game3dObjectData &data)
 {
-	name;
 	if (!data.childName_.empty())
 	{
 		for (string name : data.childName_)
