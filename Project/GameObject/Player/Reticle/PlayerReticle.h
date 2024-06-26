@@ -3,7 +3,7 @@
 #include"GameObject/ObjectManager/GameObjectManager.h"
 #include"Input.h"
 
-class PlayerReticle:public IObjectData
+class PlayerReticle :public IObjectData
 {
 public:
 	PlayerReticle() {};
@@ -25,7 +25,6 @@ private:
 
 	float rethickeAngle_ = 0.0f;
 	const float kRetickeRad_ = 4.0f;
-	const float kAngleSpeed_ = 1.0f;
-
+	Math::Vector::Vector2 reticlePos_ = {kRetickeRad_,0.0f};
 };
 

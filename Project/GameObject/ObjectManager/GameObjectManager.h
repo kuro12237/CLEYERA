@@ -15,6 +15,8 @@ public:
 	/// <param name="data"></param>
 	void CopyData(LevelData*data);
 
+	void SetAllParents();
+
 	/// <summary>
 	/// 指定したobj名前のデータを更新
 	/// </summary>
@@ -52,6 +54,8 @@ public:
 
 
 private:
+
+	void checkChildren(string name, Game3dObjectData &data);
 
 	vector<string>dataName_;
 	vector<string>instancingDataName_;

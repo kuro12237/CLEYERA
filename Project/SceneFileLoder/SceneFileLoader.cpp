@@ -78,6 +78,15 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 			obj3dData.worldTransform.scale = transformEular.scale;
 			obj3dData.worldTransform.UpdateMatrix();
 
+			if (object.contains("children"))
+			{
+				nlohmann::json& child = object["children"];
+
+				for (size_t i = 0; i < child.size(); i++)
+				{
+					LoadObj3dData(levelData, obj3dData, child[i]);
+				}
+			}
 			//保存
 			levelData->obj3dData[objectType] = move(obj3dData);
 		}
@@ -135,6 +144,66 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 			levelData->objInstancing3dData[objectType].GameInstancingObject->PushVector(levelData->objInstancing3dData[objectType].transform_[size - 1], size);
 		}
 	}
+}
+
+void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, Game3dObjectData& data, nlohmann::json object)
+{
+	Game3dObjectData obj3dData = {};
+	Game3dInstancingObjectData obj3dInstancingData = {};
+
+	string drawType = object["DrawType"].get<string>();
+	string objectType = object["objectType"].get<string>();
+
+	data.childName_.push_back(objectType);
+
+	//通常表示
+	if (drawType.compare("Normal") == 0)
+	{
+		string name = object["name"].get<string>();
+		if (levelData->obj3dData.find(objectType) != levelData->obj3dData.end())
+		{
+			assert(0);
+		}
+		else
+		{
+			obj3dData.gameObject = make_unique<Game3dObject>();
+			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
+
+			obj3dData.worldTransform.Initialize();
+			obj3dData.objectName = objectType;
+			obj3dData.objectDesc.useLight = true;
+			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
+			//modelのファイル読み込み
+			if (object.contains("file_name"))
+			{
+				string fileName = object["file_name"].get<string>();
+				ModelManager::ModelLoadNormalMap();
+				obj3dData.modelHandle = ModelManager::LoadObjectFile(fileName);
+				obj3dData.gameObject->SetModel(obj3dData.modelHandle);
+			}
+
+			//transformのGet
+			nlohmann::json& transform = object["transform"];
+			TransformEular transformEular = GetTransform(transform);
+			//transform
+			obj3dData.worldTransform.translate = transformEular.translate;
+			obj3dData.worldTransform.rotation = transformEular.rotate;
+			obj3dData.worldTransform.scale = transformEular.scale;
+			obj3dData.worldTransform.UpdateMatrix();
+
+			if (object.contains("children"))
+			{
+				nlohmann::json& child = object["children"];
+				for (size_t i = 0; i < child.size(); i++)
+				{
+					LoadObj3dData(levelData, obj3dData, child[i]);
+				}
+			}
+			//保存
+			levelData->obj3dData[objectType] = move(obj3dData);
+		}
+	}
+
 }
 
 TransformEular SceneFileLoader::GetTransform(nlohmann::json transform)

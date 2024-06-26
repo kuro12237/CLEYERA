@@ -12,6 +12,21 @@ void GameObjectManager::CopyData(LevelData* data)
 	objInstancing3dData = move(data->objInstancing3dData);
 }
 
+void GameObjectManager::SetAllParents()
+{
+	for (auto& data : obj3dData) {
+		auto& it = data.second;
+		if (!it.childName_.empty())
+		{
+			for (string name : it.childName_)
+			{
+				SetParent(it.objectName, name);
+				checkChildren("", obj3dData[name]);
+			}
+		}
+	}
+}
+
 void GameObjectManager::ObjDataUpdate(IObjectData *data)
 {
 	TransformEular transform= data->GetTransform();
@@ -114,4 +129,16 @@ Game3dInstancingObjectData& GameObjectManager::GetObjInstancingData(string name)
 void GameObjectManager::SetParent(string parentName, string childName)
 {
 	obj3dData[childName].worldTransform.parent = &obj3dData[parentName].worldTransform;
+}
+
+void GameObjectManager::checkChildren(string name, Game3dObjectData &data)
+{
+	name;
+	if (!data.childName_.empty())
+	{
+		for (string name : data.childName_)
+		{
+			SetParent(data.objectName, name);
+		}
+	}
 }

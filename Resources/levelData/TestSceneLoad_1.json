@@ -23,7 +23,96 @@
                     1.0,
                     1.0
                 ]
-            }
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "立方体.001",
+                    "file_name": "DfCube",
+                    "DrawType": "Normal",
+                    "objectType": "Player2",
+                    "transform": {
+                        "translate": [
+                            -3.957462787628174,
+                            0.08606332540512085,
+                            1.8213300704956055
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "collider": {
+                        "type": "Box",
+                        "center": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "size": [
+                            2.0,
+                            2.0,
+                            2.0
+                        ]
+                    },
+                    "children": [
+                        {
+                            "type": "MESH",
+                            "name": "立方体.002",
+                            "file_name": "DfCube",
+                            "DrawType": "Normal",
+                            "objectType": "Player4",
+                            "transform": {
+                                "translate": [
+                                    3.1938509941101074,
+                                    0.0,
+                                    2.6122026443481445
+                                ],
+                                "rotate": [
+                                    0.0,
+                                    -0.0,
+                                    0.0
+                                ],
+                                "scale": [
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "MESH",
+                    "name": "立方体.003",
+                    "file_name": "DfCube",
+                    "DrawType": "Normal",
+                    "objectType": "Player3",
+                    "transform": {
+                        "translate": [
+                            4.0642571449279785,
+                            0.0,
+                            2.1020288467407227
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                }
+            ]
         },
         {
             "type": "MESH",

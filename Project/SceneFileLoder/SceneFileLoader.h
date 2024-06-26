@@ -15,6 +15,8 @@ private:
 
 	void LoadMeshData(unique_ptr<LevelData>  &levelData, nlohmann::json& object);
 
+	void LoadObj3dData(unique_ptr<LevelData>& levelData,Game3dObjectData  &data,nlohmann::json object);
+
 	TransformEular GetTransform(nlohmann::json transform);
 
 	nlohmann::json deserialized = nullptr;

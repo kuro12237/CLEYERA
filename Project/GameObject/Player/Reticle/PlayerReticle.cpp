@@ -22,21 +22,18 @@ void PlayerReticle::ImGuiUpdate()
 
 void PlayerReticle::Update()
 {
-
+	transform_.translate.x = reticlePos_.x;
+	transform_.translate.y = reticlePos_.y;
 }
 
 void PlayerReticle::Move()
 {
 	Math::Vector::Vector2 Rjoy = Input::GetInstance()->GetJoyRStickPos();
+	Math::Vector::Vector2 normalizedRjoy_ = Math::Vector::Normalize(Rjoy);
 
-	Math::Vector::Vector2 normalizedRjoy = Math::Vector::Normalize(Rjoy);
 	// レティクルの位置を計算
-	Math::Vector::Vector2 reticlePos = {
-		kRetickeRad_ * normalizedRjoy.x,
-		kRetickeRad_ * normalizedRjoy.y
+    reticlePos_ = {
+		kRetickeRad_ * normalizedRjoy_.x,
+		kRetickeRad_ * normalizedRjoy_.y
 	};
-
-	transform_.translate.x = reticlePos.x;
-	transform_.translate.y = reticlePos.y;
-
 }

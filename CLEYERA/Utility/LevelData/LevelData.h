@@ -13,7 +13,7 @@ struct  Game3dObjectData
 	Game3dObjectDesc objectDesc;
 	unique_ptr<Game3dObject>gameObject;
 	uint32_t modelHandle = 0;
-
+	vector<string>childName_;
 };
 
 struct  Game3dInstancingObjectData

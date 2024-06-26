@@ -119,6 +119,7 @@
     <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerMoveCommand.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerManager.cpp" />
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="Project\GameObject\Player\command\PlayerCommandHandler.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerMoveCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\Gun\PlayerGun.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerManager.h" />
     <ClInclude Include="Project\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />

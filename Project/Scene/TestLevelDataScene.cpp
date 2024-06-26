@@ -16,10 +16,9 @@ void TestLevelDataScene::Initialize()
 	camera_.UpdateMatrix();
 	CameraManager::GetInstance()->ResetCamera(camera_);
 
-	//オブジェクト管理クラスの作成
-	
 	GameObjectManager::GetInstance()->CopyData(levelData_.get());
-	
+	GameObjectManager::GetInstance()->SetAllParents();
+
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
 	light_.radious = 128.0f;
