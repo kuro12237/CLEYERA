@@ -39,6 +39,11 @@ void PlayerManager::Update()
 	commandHandler_->Handler();
 	commandHandler_->CommandCoreExec(*playerCore_);
 	playerCore_->Update();
+
+	for (unique_ptr<PlayerBullet>& b : bullets_)
+	{
+		b->Update();
+	}
 }
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
@@ -54,6 +59,15 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	}
 	else
 	{
+		Game3dObjectData data;
+		data.gameObject = make_unique<Game3dObject>();
+		data.gameObject->Create(make_unique<Phong3dPipline>());
+		data.worldTransform.Initialize();
+		data.worldTransform.translate = pos;
+
+		//V‚µ‚¢index‚ð‚Æ‚é
+
+		//GameObjectManager::GetInstance()->PushObj3dData(data,)
 		bullets_.push_back(move(b));
 	}
 
