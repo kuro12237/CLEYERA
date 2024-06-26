@@ -43,8 +43,9 @@ void PlayerManager::Update()
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
+	pos;
 	unique_ptr<PlayerBullet> b = make_unique<PlayerBullet>();
-	b->Initlalize();
+	b->Initialize();
 	if (!deadBulletIndex_.empty())
 	{
 		uint32_t newBulletIndex = deadBulletIndex_.front();
@@ -53,7 +54,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	}
 	else
 	{
-		bullets_.push_back(b);
+		bullets_.push_back(move(b));
 	}
 
 }
