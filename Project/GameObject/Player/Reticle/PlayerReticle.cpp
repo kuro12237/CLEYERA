@@ -2,58 +2,41 @@
 
 void PlayerReticle::Initialize()
 {
-	worldTransform_.Initialize();
+	name_ = "PlayerReticle";
 
-	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create();
-	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerReticle");
-	gameObjectDesc_.useLight = false;
-	gameObject_->SetDesc(gameObjectDesc_);
-	gameObject_->SetModel(modelHandle);
+	Game3dObjectData data;
+	data.gameObject = make_unique<Game3dObject>();
+	data.gameObject->Create();
+	data.gameObject->SetModel(ModelManager::LoadObjectFile("DfCube"));
+	data.worldTransform.Initialize();
+	GameObjectManager::GetInstance()->PushObj3dData(data, name_);
+	GameObjectManager::GetInstance()->SetParent("Player", "PlayerReticle");
+	transform_.scale = { 1.0f,1.0f,1.0f };
+}
 
-
+void PlayerReticle::ImGuiUpdate()
+{
+	Math::Vector::Vector3 p = GameObjectManager::GetInstance()->GetObj3dData(name_).worldTransform.GetWorldPosition();
+	ImGui::DragFloat3("t", &p.x);
 }
 
 void PlayerReticle::Update()
 {
-	Math::Vector::Vector2 Rjoy = Input::GetJoyRStickPos();
-	if (Rjoy.x >= -0.1f && Rjoy.x <= 0.1f)
-	{
-		Rjoy.x = {};
-	}
-	if (Rjoy.y >= -0.1f && Rjoy.y <= 0.1f)
-	{
-		Rjoy.y = {};
-	}
 
-	const float speed = 0.1f;
-	joyPosition_.x = Rjoy.x * speed;
-	joyPosition_.y = Rjoy.y * speed;
-
-	worldTransform_.translate.x += joyPosition_.x;
-	worldTransform_.translate.y += joyPosition_.y;
-
-	const float kDistancePlayerTo3DReticle = 40.0f;
-	Math::Vector::Vector3 offset = { joyPosition_.x, joyPosition_.y, 0.0f };
-
-	offset = Math::Vector::TransformNormal(offset, worldTransform_.matWorld);
-	offset =  Math::Vector::Normalize(offset);
-	offset =  Math::Vector::Multiply(offset, kDistancePlayerTo3DReticle);
-
-	worldTransform_.rotation = { joyPosition_.x,joyPosition_.y,0.0f };
-
-	//worldTransform_.translate = offset;//Math::Vector::Add(offset,worldTransform_.translate);
-	vecPos_ = offset;
-
-	worldTransform_.UpdateMatrix();
 }
 
-void PlayerReticle::Draw3d()
+void PlayerReticle::Move()
 {
-	//gameObject_->Draw(worldTransform_, camera);
-}
+	Math::Vector::Vector2 Rjoy = Input::GetInstance()->GetJoyRStickPos();
 
-void PlayerReticle::Draw2d(const CameraData& camera)
-{
-	camera;
+	Math::Vector::Vector2 normalizedRjoy = Math::Vector::Normalize(Rjoy);
+	// レティクルの位置を計算
+	Math::Vector::Vector2 reticlePos = {
+		kRetickeRad_ * normalizedRjoy.x,
+		kRetickeRad_ * normalizedRjoy.y
+	};
+
+	transform_.translate.x = reticlePos.x;
+	transform_.translate.y = reticlePos.y;
+
 }

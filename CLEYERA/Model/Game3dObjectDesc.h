@@ -5,8 +5,8 @@
 
 struct  PhongModelDesc
 {
-	float shininess = 70.0f;
-	float specular_ = 1.0f;
+	float shininess = 192.0f;
+	float specular_ = 2.0f;
 };
 struct  SSSModelDesc
 {

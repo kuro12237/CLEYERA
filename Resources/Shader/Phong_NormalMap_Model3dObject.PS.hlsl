@@ -2,20 +2,20 @@
 
 ConstantBuffer<Material> gMaterial : register(b0);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
-StructuredBuffer<PointLight> gPointLight : register(t0);
 ConstantBuffer<NowLightTotal> gNowLightTotal : register(b4);
 
+StructuredBuffer<PointLight> gPointLight : register(t0);
 Texture2D<float32_t4> gTexture : register(t1);
-Texture2D <float32_t4> gNormalTexture:register(t2);
+Texture2D<float32_t4> gNormalTexture : register(t2);
 
 SamplerState gSampler : register(s0);
 
 static float32_t3 N;
 
-float32_t3 RimLight(float32_t3 LightDir, float3 ToEye, float rimPower, float rimIntensity,float3 LightColor)
+float32_t3 RimLight(float32_t3 LightDir, float3 ToEye, float rimPower, float rimIntensity, float3 LightColor)
 {
     //角度
-    float rim = dot(N,ToEye);
+    float rim = dot(N, ToEye);
     
     rim = saturate(pow(rim, rimPower));
 
@@ -38,7 +38,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     //法線を行列で調整
     
     N = normalize(input.normal);
-    N = input.normal + normalColor.rgb;
+    N = normalColor.rgb * N;
     N = normalize(N);
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {
@@ -47,12 +47,12 @@ PixelShaderOutput main(VertexShaderOutput input)
         float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
 
         float32_t3 pLightDir = normalize(input.worldPosition - gPointLight[i].position);
-        float32_t3 pRefrectLight = reflect(pLightDir, normalize(N));
+        float32_t3 pRefrectLight = reflect(pLightDir, N);
         float32_t3 pHalfVector = normalize(-pLightDir + toEye);
 
-        float pNdotL = dot(normalize(N), -normalize(pLightDir));
+        float pNdotL = dot(N, -normalize(pLightDir));
         float pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
-        float pNdotH = dot(normalize(N), pHalfVector);
+        float pNdotH = dot(N, pHalfVector);
         float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
 
         //リムライト
@@ -65,13 +65,14 @@ PixelShaderOutput main(VertexShaderOutput input)
 		//鏡面
         float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 
-        //pTotalRimColor = pTotalRimColor + RimColor;
+        pTotalRimColor = pTotalRimColor + RimColor;
         pTotalDffuse = pTotalDffuse + pDiffuse;
         pTotalSpecular = pTotalSpecular + pSpecular;
 
     }
 
-    output.color.rgb = pTotalDffuse + pTotalSpecular+pTotalRimColor; 
+    output.color.rgb = pTotalDffuse + pTotalSpecular;
+    //+pTotalRimColor;
     output.color.a = gMaterial.color.a * textureColor.a;
     
     output.dfColor = gMaterial.color * textureColor;

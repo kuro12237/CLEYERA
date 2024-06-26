@@ -12,17 +12,16 @@
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 #include"Model/primitive/Line.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
-#include"GameObject/SkyDome/SkyDome.h"
-#include"GameObject/Terrain/Terrain.h"
-
 #include"SceneFileLoder/SceneFileLoader.h"
 
-#include"Utility/GameCollisionManager/GameCollisionManager.h"
+#include"GameObject/ObjectManager/GameObjectManager.h"
+#include"GameObject/GameCollider/BoxCollisionManager.h"
+
 #include"GameObject/Player/Player.h"
-#include"GameObject/Player/InputHandler/PlayerInputHandler.h"
-#include"GameObject/Player/Camera/PlayerCamera.h"
-#include"Utility/GameGravityManager/GameGravityManager.h"
-#include"Utility/CollisionManager/CollisionManager.h"
+#include"GameObject/EnemyWalk/EnemyWalk.h"
+#include"GameObject/Block/BlockManager.h"
+#include"GameObject/GravityManager/GravityManager.h"
+#include"GameObject/Player/PlayerManager.h"
 
 class TestLevelDataScene :public IScene
 {
@@ -43,6 +42,11 @@ public:
 	void Flont2dSpriteDraw()override;
 
 private:
+
+	void Collision();
+
+	void Gravitys();
+
 	CameraData camera_{};
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
@@ -50,6 +54,16 @@ private:
 
 	unique_ptr<LevelData> levelData_ = nullptr;
 
+	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
+
+
 	PointLight_param light_{};
 
+	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
+
+	unique_ptr<PlayerManager>player_ = nullptr;
+
+	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
+	shared_ptr<BlockManager>blockManager_ = nullptr;
+	shared_ptr<GravityManager>gravityManager_ = nullptr;
 };

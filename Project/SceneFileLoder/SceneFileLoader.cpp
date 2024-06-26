@@ -35,7 +35,7 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 	return levelData;
 }
 
-void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::json& object)
+void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::json& object)
 {
 	Game3dObjectData obj3dData = {};
 	Game3dInstancingObjectData obj3dInstancingData = {};
@@ -57,7 +57,7 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::
 			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
 
 			obj3dData.worldTransform.Initialize();
-
+			obj3dData.objectName = objectType;
 			obj3dData.objectDesc.useLight = true;
 			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
 			//modelÇÃÉtÉ@ÉCÉãì«Ç›çûÇ›
@@ -93,6 +93,8 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
 			levelData->objInstancing3dData[objectType].transform_.push_back(transforms);
+			uint32_t size = uint32_t(levelData->objInstancing3dData[objectType].transform_.size());
+			levelData->objInstancing3dData[objectType].GameInstancingObject->PushVector(levelData->objInstancing3dData[objectType].transform_[size - 1], size);
 		}
 		else
 		{
@@ -125,8 +127,12 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData> & levelData, nlohmann::
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
 			obj3dInstancingData.transform_.push_back(transforms);
+
 			//ï€ë∂
 			levelData->objInstancing3dData[objectType] = move(obj3dInstancingData);
+
+			uint32_t size = uint32_t(levelData->objInstancing3dData[objectType].transform_.size());
+			levelData->objInstancing3dData[objectType].GameInstancingObject->PushVector(levelData->objInstancing3dData[objectType].transform_[size - 1], size);
 		}
 	}
 }

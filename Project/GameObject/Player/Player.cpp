@@ -2,245 +2,95 @@
 
 void Player::Initialize()
 {
-	worldTransform_.Initialize();
+	SetName("Player");
+	SetObjectData(this->transform_);
+	this->isExtrusion_ = true;
 
-	modelHandle_ = ModelManager::LoadObjectFile("Player");
-	modelHandle_ = ModelManager::LoadGltfFile("TestHuman",true);
-	AnimationManager::GetInstance()->LoadAnimation("TestHuman");
-	animationData_ = AnimationManager::GetInstance()->GetData("TestHuman");
+	state_ = make_unique<PlayerStateNone>();
+	state_->Initialize(this);
 
-	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->Create(make_unique<Phong3dSkinningPipline>());
-	game3dObjectdesc_.useLight = true;
-	gameObject_->SetName("player");
-	gameObject_->SetDesc(game3dObjectdesc_);
-	gameObject_->SetModel(modelHandle_);
-	gameObject_->CreateSkinningParameter();
+}
 
-	worldTransform_.UpdateMatrix();
+void Player::ImGuiUpdate()
+{
+	if (ImGui::TreeNode(name_.c_str()))
+	{
+		if (ImGui::TreeNode("transform"))
+		{
+			ImGui::DragFloat3("s", &transform_.scale.x, -0.1f, 0.1f);
+			ImGui::DragFloat3("r", &transform_.rotate.x, -0.1f, 0.1f);
+			ImGui::DragFloat3("t", &transform_.translate.x, -0.1f, 0.1f);
 
-	reticle_ = make_unique<PlayerReticle>();
-	reticle_->Initialize();
-	reticle_->SetParent(worldTransform_);
-	reticle_->Update();
-
-	gun_ = make_unique<PlayerGun>();
-	gun_->Initlalize();
-	gun_->SetParent(worldTransform_);
-
-	hp_ = make_unique<PlayerHp>();
-	hp_->Initialize();
-
-	hpCount_ = &hp_->GetHp();
-
-	aabb_.min = { -0.5f,-0.5f,-0.5f };
-	aabb_.max = { 0.5f,0.5f,0.5f };
-	
-	IBoxCollider::SetAABB(aabb_);
-	IBoxCollider::SetAttbute(kPlayerAttbute);
-	IBoxCollider::SetMask(kPlayerMask);
-	IBoxCollider::SetVelocity(velocity_);
-	IBoxCollider::SetId(kPlayerId);
-	IBoxCollider::SetWorldTransform(worldTransform_);
-
-	IGravity::SetVelocity(velocity_);
-
-	GlobalVariables::GetInstance()->CreateGroup("Player");
-
-	worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
-	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
-	worldTransform_.translate = GameStartPos_;
-	worldTransform_.rotation.y = 1.35f;
-	state_ = make_unique<PlayerNormaState>();
-	state_->Initialize();
-
-	debugSkeleton_ = make_unique<DebugSkeleton>();
-	debugSkeleton_->Create(gameObject_->GetSkeleton(), worldTransform_);;
-
-
+			ImGui::TreePop();
+		}
+		if (ImGui::Button("Reset"))
+		{
+			velocity_ = {};
+			transform_.translate = { 0.0f,4.0f,0.0f };
+		}
+		ImGui::TreePop();
+	}
 }
 
 void Player::Update()
 {
-	GlobalVariables::GetInstance()->AddItem("Player", "startPos", GameStartPos_);
-
-	GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
-
-	isHit_ = false;
 
 	if (state_)
 	{
 		state_->Update(this);
 	}
 
-	if (velocity_.x > 0.0f)
+
+	if (velocity_.y <= 0.0f)
 	{
-		worldTransform_.rotation.y = 1.35f;
-	}
-	else if (velocity_.x < 0.0f) {
-		worldTransform_.rotation.y = -1.35f;
-	}else if (velocity_.x==0.0f)
-	{
-		flame_ = 0.0f;
+		isJamp_ = true;
 	}
 
-	flame_ += abs(velocity_.x / 2.0f);
-	flame_ = std::fmod(flame_, animationData_.duration);
-	gameObject_->SkeletonUpdate("TestHuman", flame_);
-	gameObject_->SkinningUpdate();
-
-
-	reticle_->Update();
-	gun_->ReticlePos(reticle_->GetPos());
-	gun_->Update();
-
-	hp_->Update();
-
-	ClearFlag();
+	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
 
-void Player::Draw()
+void Player::OnCollision(ICollider* c)
 {
-	reticle_->Draw3d();
-	gun_->Draw();
-	if (isObjectDraw_)
+	c;
+
+	for (auto& hitDirection : hitDirection_)
 	{
-		gameObject_->Draw(worldTransform_);
-	}
-	debugSkeleton_->Draw(worldTransform_, gameObject_->GetSkeleton());
-}
-
-void Player::Draw2d(const CameraData& camera){
-
-	hp_->Draw2d(camera);
-}
-
-void Player::ImGuiUpdate()
-{
-	if (ImGui::TreeNode("Player"))
-	{
-		if (ImGui::Button("Reset"))
+		if (hitDirection == TOP)
 		{
-			worldTransform_.scale = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "scale");
-			GameStartPos_ = GlobalVariables::GetInstance()->GetValue<Math::Vector::Vector3>("Player", "startPos");
-			worldTransform_.translate = GameStartPos_;
 			velocity_ = {};
-			worldTransform_.UpdateEularMatrix();
 		}
-		ImGui::Separator();
-		ImGui::Checkbox("CharacterDrawFlag", &isObjectDraw_);
-		debugSkeleton_->ImGuiUpdate();
-		ImGui::Separator();
-		gun_->ImGuiUpdate();
-		ImGui::Separator();
-		hp_->ImGuiUpdate();
-
-		ImGui::TreePop();
-	}
-}
-
-Math::Vector::Vector3 Player::GetWorldPosition()
-{
-	return worldTransform_.GetWorldPosition();
-}
-
-Math::Vector::Vector3 Player::GetSize()
-{
-	return Math::Vector::Vector3(0.5f,0.5f,0.5f);
-}
-
-Math::Vector::Vector3 Player::GetRotate()
-{
-	return worldTransform_.rotation;
-}
-
-void Player::OnBlockCollision(IBoxCollider* collider)
-{
-	collider;
-	Math::Vector::Vector2 extrusion = this->GetExtrusionXY();
-	worldTransform_.translate.x += extrusion.x;
-	worldTransform_.translate.y += extrusion.y;
-	worldTransform_.UpdateMatrix();
-
-	reticle_->WorldTransformUpdate();
-	gun_->WorldTransformUpdate();
-
-	if (GetBottomFlag() && velocity_.y <= 0.0f)
-	{
-		isJamp_ = false;
-		velocity_ = {};
-	}
-	if (GetTopFlag())
-	{
-		velocity_ = {};
-	}
-}
-
-void Player::OnCollision(uint32_t id)
-{
-	isHit_ = true;
-
-	if (id == kStoneItem)
-	{
-		ChangeState(make_unique<PlayerStoneState>());
-		return;
+		if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
+		{
+			isJamp_ = false;
+			velocity_ = {};
+		}
 	}
 
+	transform_.translate.x += extrusion_.x;
+	transform_.translate.y += extrusion_.y;
 }
 
-void Player::GravityExc(const Math::Vector::Vector2& g)
+void Player::ChangeState(unique_ptr<IPlayerState> newState)
 {
-	velocity_ = g;
-	worldTransform_.translate.y += velocity_.y;
-	worldTransform_.UpdateMatrix();
-	reticle_->WorldTransformUpdate();
-	gun_->WorldTransformUpdate();
-}
-
-void Player::ChangeState(unique_ptr<IPlayerState> state)
-{
-	state_ = move(state);
-	state_->Initialize();
-}
-
-void Player::Move()
-{
-	Math::Vector::Vector2 Ljoy = Input::GetJoyLStickPos();
-	if (Ljoy.x >= -0.1f && Ljoy.x <= 0.1f)
-	{
-		Ljoy.x = {};
-	}
-	if (Ljoy.y >= -0.1f && Ljoy.y <= 0.1f)
-	{
-		Ljoy.y = {};
-	}
-
-	const float Speed = 0.1f;
-
-	velocity_.x = Ljoy.x * Speed;
-	worldTransform_.translate.x += velocity_.x;
-
-	worldTransform_.UpdateEularMatrix();
-
+	state_.release();
+	state_ = move(newState);
+	state_->Initialize(this);
 }
 
 void Player::Jamp()
 {
-	if (behavior_ == Normal)
+	if (!isJamp_)
 	{
-		if (!isJamp_ && velocity_.y == 0.0f)
-		{
-			AudioManager::GetInstance()->AudioPlayMp3("Resources/Sounds/Jump.mp3", 1.0f);
-			velocity_.y = 0.25f;
-			isJamp_ = true;
-		}
+		isJamp_ = true;
+		velocity_.y = 0.25f;
 	}
 }
 
-void Player::GunAttack()
+void Player::Move()
 {
-	if (behavior_ == Normal)
-	{
-		gun_->Attack();
-	}
+	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
+
+	const float Speed = 0.1f;
+	velocity_.x = Ljoy.x * Speed;
+
 }
