@@ -27,9 +27,7 @@ void TestLevelDataScene::Initialize()
 
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
-	player_->GetData(GameObjectManager::GetInstance());
-
-
+	
 	enemyWalk_ = make_shared<EnemyWalk>();
 	enemyWalk_->Initialize();
 	enemyWalk_->GetData(GameObjectManager::GetInstance());
@@ -71,6 +69,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetPlayerCore());
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetReticle());
+	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetGun());
 	GameObjectManager::GetInstance()->ObjDataUpdate(enemyWalk_.get());
 	GameObjectManager::GetInstance()->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
 	

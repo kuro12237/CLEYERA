@@ -30,7 +30,7 @@
                     "name": "Cube.011",
                     "file_name": "PlayerTestGun",
                     "DrawType": "Normal",
-                    "objectType": "Player2",
+                    "objectType": "PlayerGun",
                     "transform": {
                         "translate": [
                             -0.051016807556152344,

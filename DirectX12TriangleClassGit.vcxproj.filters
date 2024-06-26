@@ -479,6 +479,8 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -790,6 +792,9 @@
     <ClInclude Include="Project\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Gun\PlayerGun.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\PlayerBullet.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

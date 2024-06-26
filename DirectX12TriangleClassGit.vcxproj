@@ -116,6 +116,8 @@
     <ClCompile Include="Project\GameObject\GravityManager\GravityManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\IObjectData.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerMoveCommand.cpp" />
@@ -231,6 +233,9 @@
     <ClInclude Include="Project\GameObject\GravityManager\GravityManager.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\IObjectData.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\PlayerBullet.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
     <ClInclude Include="Project\GameObject\Player\command\IPlayerCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerCommandHandler.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
