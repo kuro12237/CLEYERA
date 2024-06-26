@@ -35,6 +35,7 @@ void PlayerReticle::Move()
 		kRetickeRad_ * normalizedRjoy.x,
 		kRetickeRad_ * normalizedRjoy.y
 	};
+
 	transform_.translate.x = reticlePos.x;
 	transform_.translate.y = reticlePos.y;
 
