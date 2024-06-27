@@ -10,8 +10,16 @@ void PlayerBullet::Initialize()
 	transform_.translate = spownPos_;
 	SetObjectData(transform_);
 
+	float velocityXZ = sqrt(pow(velocity_.x, 2.0f) + pow(velocity_.z, 2.0f));
+	float height = -velocity_.y;
+	Math::Vector::Vector3 rotate = {};
+	rotate.y = std::atan2(velocity_.x, velocity_.z);
+	rotate.x = std::atan2(height, velocityXZ);
+	transform_.rotate = rotate;
+
 	velocity_ = Math::Vector::Multiply(velocity_, { speed_,speed_,speed_ });
 	id_ = kPlayerBullet;
+	aabb_ = { {-0.1f,-0.1f,-0.1f,},{0.1f,0.1f,0.1f} };
 }
 
 void PlayerBullet::Update()

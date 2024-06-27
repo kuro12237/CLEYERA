@@ -27,18 +27,18 @@ void Game3dObject::SetModel(uint32_t index)
 
 	prevModelIndex_ = index;
 }
-
-void Game3dObject::SetModel(const string filePath)
-{
-	uint32_t index = ModelManager::GetIndex(filePath);
-	if (prevModelIndex_ != index)
-	{
-		model_ = ModelManager::GetModel(index);
-		model_->SetDesc(game3dObjectDesc_);
-	}
-
-	prevModelIndex_ = index;
-}
+//
+//void Game3dObject::SetModel(const string filePath)
+//{
+//	uint32_t index = ModelManager::GetIndex(filePath);
+//	if (prevModelIndex_ != index)
+//	{
+//		model_ = ModelManager::GetModel(index);
+//		model_->SetDesc(game3dObjectDesc_);
+//	}
+//
+//	prevModelIndex_ = index;
+//}
 
 void Game3dObject::Draw(WorldTransform worldTransform)
 {

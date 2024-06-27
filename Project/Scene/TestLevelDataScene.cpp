@@ -37,7 +37,7 @@ void TestLevelDataScene::Initialize()
 	blockManager_->Initialize();
 
 	gravityManager_ = make_shared<GravityManager>();
-	
+	ModelManager::LoadObjectFile("PlayerNormalBullet");
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -58,7 +58,11 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 	
-
+	if (ImGui::Button("sceneChange"))
+	{
+		Scene->ChangeState(new TestScene);
+		return;
+	}
 #endif // _USE_IMGUI
 
 	player_->Update();

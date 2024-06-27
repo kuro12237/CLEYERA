@@ -199,7 +199,7 @@ SModelData ModelManager::GetObjData(uint32_t index)
 		if (s.get()->GetIndex() == index)
 		{
 			data = s.get()->GetData();
-			data.texFilePath = key;
+
 			return data;
 		}
 	}

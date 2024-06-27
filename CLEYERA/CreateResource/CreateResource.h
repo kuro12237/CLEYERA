@@ -102,8 +102,6 @@ struct  SModelData
 	bool skinningFlag_ = false;
 #pragma endregion
 
-	string texFilePath;
-	uint32_t texHandle;
 	string normalilePath;
 	uint32_t normalTexHandle;
 	string basefilePath;
