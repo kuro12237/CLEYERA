@@ -119,6 +119,7 @@
     <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
+    <ClCompile Include="Project\GameObject\Player\command\PlayerShootCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerMoveCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
     <ClInclude Include="Project\GameObject\Player\command\IPlayerCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerCommandHandler.h" />
+    <ClInclude Include="Project\GameObject\Player\command\PlayerShootCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerMoveCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Gun\PlayerGun.h" />

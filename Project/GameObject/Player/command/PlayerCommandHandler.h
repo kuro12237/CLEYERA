@@ -3,6 +3,7 @@
 
 #include"PlayerJampCommand.h"
 #include"PlayerMoveCommand.h"
+#include"PlayerShootCommand.h"
 
 class PlayerCommandHandler
 {

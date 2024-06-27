@@ -37,13 +37,16 @@ void TestLevelDataScene::Initialize()
 	blockManager_->Initialize();
 
 	gravityManager_ = make_shared<GravityManager>();
-
+	
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
+	GameObjectManager* instance = GameObjectManager::GetInstance();
 #ifdef _USE_IMGUI
+
+	instance->ImGuiUpdate();
 
 	debugCamera_->ImGuiUpdate();
 
@@ -54,6 +57,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	}
 
 	player_->ImGuiUpdate();
+	
 
 #endif // _USE_IMGUI
 
@@ -70,6 +74,11 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetPlayerCore());
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetReticle());
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetGun());
+
+	for (shared_ptr<PlayerBullet> &b : player_->GetBullet()) {
+		GameObjectManager::GetInstance()->ObjDataUpdate(b.get());
+	}
+
 	GameObjectManager::GetInstance()->ObjDataUpdate(enemyWalk_.get());
 	GameObjectManager::GetInstance()->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
 	

@@ -27,11 +27,15 @@ public:
 	PlayerReticle* GetReticle() { return reticle_.get(); }
 
 	PlayerGun* GetGun() { return gun_.get(); }
+
+	vector<shared_ptr<PlayerBullet>>GetBullet() { return bullets_; }
 #pragma endregion
 
 	void PushBullet(Math::Vector::Vector3 pos);
 
 private:
+
+	void CheckisDeadBullets();
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 	unique_ptr<PlayerReticleCommandHandler>reticleCommandHandler_ = nullptr;
@@ -41,6 +45,9 @@ private:
 	shared_ptr<Player>playerCore_ = nullptr;
 	unique_ptr<PlayerReticle>reticle_ = nullptr;
 	unique_ptr<PlayerGun>gun_ = nullptr;
-	vector<unique_ptr<PlayerBullet>>bullets_{};
+	vector<shared_ptr<PlayerBullet>>bullets_{};
 	queue<uint32_t>deadBulletIndex_;
+
+	Math::Vector::Vector3 playerWorldPos = {};
+	Math::Vector::Vector3 reticleWorldPos = {};
 };

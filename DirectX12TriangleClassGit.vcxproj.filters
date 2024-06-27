@@ -481,6 +481,7 @@
     <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
     <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Project\GameObject\Player\command\PlayerShootCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -795,6 +796,7 @@
     <ClInclude Include="Project\GameObject\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Project\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
     <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
+    <ClInclude Include="Project\GameObject\Player\command\PlayerShootCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

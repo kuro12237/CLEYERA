@@ -29,15 +29,18 @@ void GameObjectManager::SetAllParents()
 
 void GameObjectManager::ObjDataUpdate(IObjectData *data)
 {
-	TransformEular transform= data->GetTransform();
-	string name = data->GetName();
-	obj3dData[name].worldTransform.scale = transform.scale;
-	obj3dData[name].worldTransform.rotation = transform.rotate;
-	obj3dData[name].worldTransform.translate = transform.translate;
+	if (data)
+	{
+		TransformEular transform = data->GetTransform();
+		string name = data->GetName();
+		obj3dData[name].worldTransform.scale = transform.scale;
+		obj3dData[name].worldTransform.rotation = transform.rotate;
+		obj3dData[name].worldTransform.translate = transform.translate;
 
-	obj3dData[name].worldTransform.UpdateMatrix();
-	obj3dData[name].worldTransform.TransfarMatrix();
-	dataName_.push_back(name);
+		obj3dData[name].worldTransform.UpdateMatrix();
+		obj3dData[name].worldTransform.TransfarMatrix();
+		dataName_.push_back(name);
+	}
 }
 
 void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data,string name)
@@ -98,6 +101,16 @@ void GameObjectManager::Update()
 		//it.GameInstancingObject->Transfar();
 	}
 	instancingDataName_.clear();
+}
+
+void GameObjectManager::ImGuiUpdate()
+{
+	if (ImGui::TreeNode("GameObjectManager"))
+	{
+		ImGui::Text("Game3dObjectSize:%d", obj3dData.size());
+
+		ImGui::TreePop();
+	}
 }
 
 void GameObjectManager::Draw()

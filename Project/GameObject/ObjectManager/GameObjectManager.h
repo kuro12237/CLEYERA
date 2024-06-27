@@ -15,7 +15,12 @@ public:
 	/// <param name="data"></param>
 	void CopyData(LevelData*data);
 
+	/// <summary>
+	/// 作ったすべてのものに親子関係があるチェックあったら親子関係をつける
+	/// </summary>
 	void SetAllParents();
+
+#pragma region Update
 
 	/// <summary>
 	/// 指定したobj名前のデータを更新
@@ -34,9 +39,15 @@ public:
 	/// </summary>
 	void Update();
 
+	void ImGuiUpdate();
+
+#pragma endregion
+
 	void Draw();
 
 	void PushObj3dData(Game3dObjectData& data, string name) { obj3dData[name] = move(data); };
+
+	void ClearObj3dData(string name) { obj3dData.erase(name); }
 
 #pragma region Get
 

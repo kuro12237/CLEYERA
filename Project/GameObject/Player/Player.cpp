@@ -34,18 +34,18 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-
+	shootTimerFlame_++;
 	if (state_)
 	{
 		state_->Update(this);
 	}
-
 
 	if (velocity_.y <= 0.0f)
 	{
 		isJamp_ = true;
 	}
 
+	isShoot_ = false;
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
 
@@ -92,5 +92,18 @@ void Player::Move()
 
 	const float Speed = 0.1f;
 	velocity_.x = Ljoy.x * Speed;
+}
+
+void Player::Shoot()
+{
+	if (shootTimerFlame_>= shootTimerMax_)
+	{
+		isShoot_ = true;
+		shootTimerFlame_ = 0;
+	}
+}
+
+void Player::ShootCoolTimer()
+{
 
 }
