@@ -5,10 +5,13 @@ void PlayerBullet::Initialize()
 	state_ = make_unique<PlayerBulletStateNone>();
 	state_->Initialize(this);
 
+	name_ = "PlayerBullet";
 	transform_.scale = { 1.0f,1.0f,1.0f };
-	SetTransform(transform_);
 	transform_.translate = spownPos_;
+	SetObjectData(transform_);
+
 	velocity_ = Math::Vector::Multiply(velocity_, { speed_,speed_,speed_ });
+	id_ = kPlayerBullet;
 }
 
 void PlayerBullet::Update()
@@ -21,4 +24,15 @@ void PlayerBullet::Update()
 	}
 
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
+}
+
+void PlayerBullet::OnCollision(ICollider* c)
+{
+	c;
+
+	if (c->GetId() == kPlayerId)
+	{
+		return;
+	}
+	isDead_ = true;
 }

@@ -35,6 +35,8 @@ public:
 
 	bool GetIsExtrusionFlag() { return isExtrusion_; }
 
+	uint32_t GetId() { return id_; }
+
 #pragma endregion
 
 #pragma region Set
@@ -53,18 +55,19 @@ public:
 protected:
 
 	bool isExtrusion_ = false;
+
 	Math::Vector::Vector2 extrusion_ = {};
+
 	vector<HItDirection>hitDirection_;
+
 	AABB aabb_{ { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
-
-private:
-
-	const TransformEular* pTransform_;
 
 	uint32_t id_ = 0b000;
 	uint32_t attribute_ = 0b000;
 	uint32_t mask_ = 0b000;
+private:
 
+	const TransformEular* pTransform_;
 
 
 };

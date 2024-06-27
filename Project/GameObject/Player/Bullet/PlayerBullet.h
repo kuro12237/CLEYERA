@@ -1,9 +1,13 @@
 #pragma once
 #include"GameObject/ObjectManager/IObjectData.h"
+#include"GameObject/GameCollider/ICollider.h"
+
 #include"state/IPlayerBulletState.h"
 #include"state/PlayerBulletStateNone.h"
 
-class PlayerBullet:public IObjectData
+#include"Utility/ObjectId/GameObjectId.h"
+
+class PlayerBullet:public IObjectData,public ICollider
 {
 public:
 	PlayerBullet() {};
@@ -12,6 +16,8 @@ public:
 	void Initialize();
 
 	void Update();
+
+	void OnCollision(ICollider* c)override;
 
 #pragma region Set
 

@@ -685,9 +685,6 @@
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h">
       <Filter>Project\Utility\Deltatimer</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Utility\NumberString\NumberString.h">
-      <Filter>Project\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h">
       <Filter>CLEYERA\MulitiPass</Filter>
     </ClInclude>

@@ -122,6 +122,15 @@ void TestLevelDataScene::Collision()
 	gameCollisionManager_->ListClear();
 
 	gameCollisionManager_->ListPushback(player_->GetPlayerCore());
+
+	for (size_t index = 0; index < player_->GetBullet().size(); index++)
+	{
+		if (player_->GetBullet()[index]) {
+			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
+		}
+	}
+
+
 	gameCollisionManager_->ListPushback(enemyWalk_.get());
 
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())

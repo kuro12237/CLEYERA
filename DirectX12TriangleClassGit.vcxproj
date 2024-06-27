@@ -256,7 +256,6 @@
     <ClInclude Include="Project\Scene\TestLevelDataScene.h" />
     <ClInclude Include="Project\Scene\TestScene.h" />
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
-    <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
   </ItemGroup>
   <ItemGroup>

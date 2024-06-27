@@ -64,11 +64,12 @@ void PlayerManager::Update()
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
+	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");
 	//オブジェクトの作成
 	Game3dObjectData data;
 	data.gameObject = make_unique<Game3dObject>();
 	data.gameObject->Create(make_unique<Phong3dPipline>());
-	data.gameObject->SetModel("DfCube");
+	data.gameObject->SetModel(modelHandle);
 	data.gameObject->SetDesc(data.objectDesc);
 	data.worldTransform.Initialize();
 	data.worldTransform.translate = pos;
@@ -119,5 +120,4 @@ void PlayerManager::CheckisDeadBullets()
 			bullets_[index].reset();
 		}
 	}
-
 }

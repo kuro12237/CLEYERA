@@ -59,6 +59,7 @@ void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancin
 
 void GameObjectManager::Update()
 {
+	//すでにアップデートしていたら更新しない
 	for (auto& data : obj3dData) {
 		auto& it = data.second;
 		int index = 0;

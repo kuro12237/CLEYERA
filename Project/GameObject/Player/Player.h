@@ -4,6 +4,7 @@
 #include"Input.h"
 
 #include"Utility/DeltaTimer/DeltaTimer.h"
+#include"Utility/ObjectId/GameObjectId.h"
 #include"GameObject/ObjectManager/IObjectData.h"
 #include"GameObject/GameCollider/ICollider.h"
 
@@ -55,7 +56,7 @@ private:
 	bool isJamp_ = false;
 
 	bool isShoot_ = false;
-	
-	uint32_t shootTimerMax_ = 30;
+
+	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
 };
