@@ -66,7 +66,4 @@ private:
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	shared_ptr<GravityManager>gravityManager_ = nullptr;
 
-	unique_ptr<Sprite>sprite_ = nullptr;
-	WorldTransform worldTransform_{ };
-
 };

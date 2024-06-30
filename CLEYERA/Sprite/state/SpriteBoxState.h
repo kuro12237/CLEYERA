@@ -5,6 +5,7 @@
 #include"GraphicsPipelineManager.h"
 #include"ShaderManager.h"
 #include"Graphics/TextureManager/TextureManager.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 class SpriteBoxState:public ISpriteState
 {
@@ -13,13 +14,13 @@ public:
 	~SpriteBoxState() {};
 
 	void Initialize(Sprite* state)override;
-	void Draw(Sprite* state, WorldTransform worldTransform, CameraData  view)override;
+	void Draw(Sprite* state, WorldTransform worldTransform)override;
 
 private:
 
 	SPSOProperty Get2dSpritePipeline(Sprite* state);
 
-	void CommandCall(uint32_t texHandle,Sprite* state,WorldTransform worldTransform, CameraData  view);
+	void CommandCall(uint32_t texHandle,Sprite* state,WorldTransform worldTransform);
 
 	ResourcePeroperty resource_ = {};
 

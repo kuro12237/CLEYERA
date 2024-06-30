@@ -36,6 +36,9 @@ struct CameraData {
 
 	void CreateBuffer();
 
+	Math::Matrix::Matrix4x4 GetViewMat() { return matView_; }
+	Math::Matrix::Matrix4x4 GetProjMat() { return matProj_; }
+
 	void Map();
 	void UnMap();
 	void TransfarMatrix();	

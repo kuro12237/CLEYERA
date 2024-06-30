@@ -62,6 +62,11 @@ void PlayerManager::Update()
 	}
 }
 
+void PlayerManager::Draw2d()
+{
+	reticle_->Draw2d();
+}
+
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
 	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");

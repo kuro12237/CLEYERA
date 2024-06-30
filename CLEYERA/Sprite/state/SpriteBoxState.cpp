@@ -13,7 +13,7 @@ void SpriteBoxState::Initialize(Sprite* state)
 	state;
 }
 
-void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform, CameraData  view)
+void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform)
 {
 	VertexData* vertexData = nullptr;
 	Material* materialData = nullptr;
@@ -44,7 +44,7 @@ void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform, CameraDa
 	materialData->color = state->GetColor();
 	materialData->uvTransform = Math::Matrix::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
 
-	CommandCall(state->GetTexHandle(),state,worldTransform,view);
+	CommandCall(state->GetTexHandle(),state,worldTransform);
 }
 
 SPSOProperty SpriteBoxState::Get2dSpritePipeline(Sprite* state)
@@ -74,7 +74,7 @@ SPSOProperty SpriteBoxState::Get2dSpritePipeline(Sprite* state)
 	}
 	return PSO;
 }
-void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransform worldTransform, CameraData  view)
+void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransform worldTransform)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
@@ -104,7 +104,7 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 	//worldTransformの行列をgpuへ
 	worldTransform.buffer_->CommandCall(1);
 	//view行列をgpu
-	view.buffer_->CommandCall(2);
+	CameraManager::GetInstance()->CommandCall(2);
 	if (!texHandle == 0)
 	{
 		DescriptorManager::rootParamerterCommand(3, texHandle);

@@ -46,6 +46,7 @@ struct WorldTransform
 	void DeleateParent();
 
 	Math::Vector::Vector3 GetWorldPosition();
+	Math::Matrix::Matrix4x4 GetMat() { return matWorld; }
 private:
 	void CreateBuffer();
 	void Map();

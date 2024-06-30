@@ -38,11 +38,7 @@ void TestLevelDataScene::Initialize()
 	gravityManager_ = make_shared<GravityManager>();
 	ModelManager::LoadObjectFile("PlayerNormalBullet");
 
-	uint32_t texHandle = TextureManager::LoadPngTexture("uvChecker.png");
-	sprite_ = make_unique<Sprite>();
-	sprite_->Initialize(new SpriteBoxState);
-	sprite_->SetTexHandle(texHandle);
-	worldTransform_.Initialize();
+
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -70,12 +66,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 		return;
 	}
 
-	if (ImGui::Button("tex"))
-	{
-		uint32_t tex= TextureManager::LoadPngTexture("normalMap.png");
-		sprite_->SetTexHandle(tex);
-		return;
-	}
+
 
 #endif // _USE_IMGUI
 
@@ -111,7 +102,6 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
-	worldTransform_.UpdateMatrix();
 }
 
 void TestLevelDataScene::PostProcessDraw()
@@ -134,7 +124,7 @@ void TestLevelDataScene::Object3dDraw()
 
 void TestLevelDataScene::Flont2dSpriteDraw()
 {
-	sprite_->Draw(worldTransform_, camera_);
+	player_->Draw2d();
 }
 
 void TestLevelDataScene::Collision()

@@ -19,9 +19,9 @@ void Sprite::Initialize(ISpriteState* state, Vector2 pos, Vector2 size)
 	blendMode_ = BlendNone;
 }
 
-void Sprite::Draw(WorldTransform worldTransform, CameraData  view)
+void Sprite::Draw(WorldTransform worldTransform)
 {
-	state_->Draw(this, worldTransform,view);
+	state_->Draw(this, worldTransform);
 }
 
 void Sprite::SetTexHandle(uint32_t texHandle)

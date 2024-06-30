@@ -119,7 +119,10 @@ void GameObjectManager::Draw()
 	//normal
 	for (auto& data : obj3dData) {
 		auto& it = data.second;
-		it.gameObject->Draw(it.worldTransform);
+		if (it.gameObject)
+		{
+			it.gameObject->Draw(it.worldTransform);
+		}
 	}
 	//instancing
 	for (auto& data : objInstancing3dData)

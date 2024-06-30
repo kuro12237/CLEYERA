@@ -20,6 +20,8 @@ public:
 
 	void Update();
 
+	void Draw2d();
+
 #pragma region Get
 
 	Player* GetPlayerCore() { return playerCore_.get(); }
