@@ -5,6 +5,7 @@ void Block::Initialize(TransformEular t)
 	this->transform_ = t;
 	name_ = "Map";
 	SetObjectData(this->transform_);
+	id_ = kNormalBlock;
 }
 
 void Block::Update()

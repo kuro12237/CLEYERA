@@ -18,7 +18,7 @@ public:
 	/// <param name="画像サイズ:texを使用する場合使用しない"></param>
 	void Initialize(ISpriteState* state, Math::Vector::Vector2 pos = {}, Math::Vector::Vector2 size = {});
 
-	void Draw(WorldTransform worldTransform, CameraData  view);
+	void Draw(WorldTransform worldTransform);
 
 #pragma region Set
 	void SetTexHandle(uint32_t texHandle);

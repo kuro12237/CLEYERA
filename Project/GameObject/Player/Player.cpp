@@ -9,6 +9,7 @@ void Player::Initialize()
 	state_ = make_unique<PlayerStateNone>();
 	state_->Initialize(this);
 
+	id_ = kPlayerId;
 }
 
 void Player::ImGuiUpdate()
@@ -34,40 +35,43 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-
+	shootTimerFlame_++;
 	if (state_)
 	{
 		state_->Update(this);
 	}
-
 
 	if (velocity_.y <= 0.0f)
 	{
 		isJamp_ = true;
 	}
 
+	isShoot_ = false;
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
 
 void Player::OnCollision(ICollider* c)
 {
 	c;
-
-	for (auto& hitDirection : hitDirection_)
+	if (c->GetId() == kNormalBlock)
 	{
-		if (hitDirection == TOP)
+		for (auto& hitDirection : hitDirection_)
 		{
-			velocity_ = {};
+			if (hitDirection == TOP)
+			{
+				velocity_ = {};
+			}
+			if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
+			{
+				isJamp_ = false;
+				velocity_ = {};
+			}
 		}
-		if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
-		{
-			isJamp_ = false;
-			velocity_ = {};
-		}
+
+		transform_.translate.x += extrusion_.x;
+		transform_.translate.y += extrusion_.y;
 	}
 
-	transform_.translate.x += extrusion_.x;
-	transform_.translate.y += extrusion_.y;
 }
 
 void Player::ChangeState(unique_ptr<IPlayerState> newState)
@@ -92,5 +96,18 @@ void Player::Move()
 
 	const float Speed = 0.1f;
 	velocity_.x = Ljoy.x * Speed;
+}
+
+void Player::Shoot()
+{
+	if (shootTimerFlame_ >= shootTimerMax_)
+	{
+		isShoot_ = true;
+		shootTimerFlame_ = 0;
+	}
+}
+
+void Player::ShootCoolTimer()
+{
 
 }

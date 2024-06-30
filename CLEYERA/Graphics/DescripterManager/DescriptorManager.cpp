@@ -111,9 +111,8 @@ uint32_t DescriptorManager::CreateSRV(ComPtr<ID3D12Resource>& resource,D3D12_SHA
 void DescriptorManager::rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle)
 {
 	Commands command = DirectXCommon::GetInstance()->GetCommands();
-
 	command.m_pList->SetGraphicsRootDescriptorTable(
-		rootPatramerterIndex, 
+		rootPatramerterIndex,
 		DescriptorManager::GetInstance()->SrvHandleGPU[texhandle]
 	);
 }
@@ -128,6 +127,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE DescriptorManager::GetCPUDescriptorHandle(ComPtr<ID3
 D3D12_GPU_DESCRIPTOR_HANDLE DescriptorManager::GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descripterHeap,uint32_t index)
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE handleGPU = descripterHeap->GetGPUDescriptorHandleForHeapStart();
+	
 	handleGPU.ptr += (DescriptorManager::GetInstance()->descripterSize_.SRV * index);
 	return handleGPU;
 }

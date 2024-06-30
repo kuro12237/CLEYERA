@@ -30,7 +30,7 @@
                     "name": "Cube.011",
                     "file_name": "PlayerTestGun",
                     "DrawType": "Normal",
-                    "objectType": "Player2",
+                    "objectType": "PlayerGun",
                     "transform": {
                         "translate": [
                             -0.051016807556152344,
@@ -126,6 +126,894 @@
             }
         },
         {
+            "type": "MESH",
+            "name": "Cube.012",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    3.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.013",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    7.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.014",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    5.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.015",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    9.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.016",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    11.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.017",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    15.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.018",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    13.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.001",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    3.0,
+                    0.0,
+                    7.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.019",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    13.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.020",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    15.045706748962402
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.021",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    11.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.022",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    9.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.023",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    5.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.024",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    7.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.025",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    3.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.026",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    1.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.027",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    15.0,
+                    0.0,
+                    1.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.028",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    13.0,
+                    0.0,
+                    1.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.029",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    9.0,
+                    0.0,
+                    1.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.030",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    11.0,
+                    0.0,
+                    1.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.031",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    12.0,
+                    0.0,
+                    8.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.008",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    10.0,
+                    0.0,
+                    8.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.032",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -1.0,
+                    0.0,
+                    12.789834976196289
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.033",
+            "file_name": "DfCube",
+            "DrawType": "Instancing",
+            "objectType": "Map",
+            "transform": {
+                "translate": [
+                    -3.0,
+                    0.0,
+                    12.789834976196289
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
             "type": "LIGHT",
             "name": "Light",
             "file_name": "Box",
@@ -183,7 +1071,7 @@
                 "translate": [
                     0.0,
                     0.0,
-                    0.0
+                    -3.462015390396118
                 ],
                 "rotate": [
                     0.0,
@@ -467,43 +1355,6 @@
                     -7.0,
                     0.0,
                     1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.008",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    5.0,
-                    0.0,
-                    5.0
                 ],
                 "rotate": [
                     0.0,

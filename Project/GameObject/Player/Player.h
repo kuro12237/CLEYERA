@@ -1,9 +1,12 @@
 #pragma once
 #include"STransformEular.h"
 #include"Pch.h"
+#include"Input.h"
+
+#include"Utility/DeltaTimer/DeltaTimer.h"
+#include"Utility/ObjectId/GameObjectId.h"
 #include"GameObject/ObjectManager/IObjectData.h"
 #include"GameObject/GameCollider/ICollider.h"
-#include"Input.h"
 
 #include"command/PlayerCommandHandler.h"
 
@@ -32,12 +35,28 @@ public:
 
 	void Move();
 
+	void Shoot();
+
+#pragma endregion
+
+#pragma region Get
+
+	bool GetIsJamp() { return isJamp_; }
+
+	bool GetIsShoot() { return isShoot_; }
+
 #pragma endregion
 
 private:
 
+	void ShootCoolTimer();
+
 	unique_ptr<IPlayerState>state_ = nullptr;
 
-	bool isJamp_ = false;;
+	bool isJamp_ = false;
 
+	bool isShoot_ = false;
+
+	uint32_t shootTimerMax_ = 10;
+	uint32_t shootTimerFlame_ = 0;
 };

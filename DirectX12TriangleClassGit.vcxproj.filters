@@ -406,9 +406,6 @@
     <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp">
       <Filter>Project\Utility\Deltatimer</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp">
-      <Filter>CLEYERA\MulitiPass</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
@@ -479,6 +476,10 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Project\GameObject\Player\command\PlayerShootCommand.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -682,15 +683,6 @@
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h">
       <Filter>Project\Utility\Deltatimer</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Utility\NumberString\NumberString.h">
-      <Filter>Project\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h">
-      <Filter>CLEYERA\MulitiPass</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h">
-      <Filter>CLEYERA\MulitiPass</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
@@ -790,6 +782,11 @@
     <ClInclude Include="Project\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Gun\PlayerGun.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\PlayerBullet.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
+    <ClInclude Include="Project\GameObject\Player\command\PlayerShootCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

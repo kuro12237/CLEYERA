@@ -6,6 +6,10 @@ void PlayerCommandHandler::Handler()
 	{
 		commands_.push(make_unique<PlayerJampCommand>());
 	}
+	if (Input::PushRShoulder())
+	{
+		commands_.push(make_unique<PlayerShootCommand>());
+	}
 
 	if (IsLJoystickActive())
 	{

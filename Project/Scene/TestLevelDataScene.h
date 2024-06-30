@@ -56,7 +56,6 @@ private:
 
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
-
 	PointLight_param light_{};
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
@@ -66,4 +65,5 @@ private:
 	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	shared_ptr<GravityManager>gravityManager_ = nullptr;
+
 };

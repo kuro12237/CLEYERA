@@ -2,8 +2,7 @@
 
 void TestLevelDataScene::Initialize()
 {
-	postEffect_ = make_unique<PostEffect>();
-	postEffect_->Initialize("testScene");
+	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
@@ -27,9 +26,7 @@ void TestLevelDataScene::Initialize()
 
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
-	player_->GetData(GameObjectManager::GetInstance());
-
-
+	
 	enemyWalk_ = make_shared<EnemyWalk>();
 	enemyWalk_->Initialize();
 	enemyWalk_->GetData(GameObjectManager::GetInstance());
@@ -39,13 +36,18 @@ void TestLevelDataScene::Initialize()
 	blockManager_->Initialize();
 
 	gravityManager_ = make_shared<GravityManager>();
+	ModelManager::LoadObjectFile("PlayerNormalBullet");
+
 
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
+	GameObjectManager* instance = GameObjectManager::GetInstance();
 #ifdef _USE_IMGUI
+
+	instance->ImGuiUpdate();
 
 	debugCamera_->ImGuiUpdate();
 
@@ -56,6 +58,15 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	}
 
 	player_->ImGuiUpdate();
+	//
+	if (ImGui::Button("sceneChange"))
+	{
+		TextureManager::LoadPngTexture("uvChecker.png");
+		//Scene->ChangeState(new TestScene);
+		return;
+	}
+
+
 
 #endif // _USE_IMGUI
 
@@ -71,6 +82,12 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetPlayerCore());
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetReticle());
+	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetGun());
+
+	for (shared_ptr<PlayerBullet> &b : player_->GetBullet()) {
+		GameObjectManager::GetInstance()->ObjDataUpdate(b.get());
+	}
+
 	GameObjectManager::GetInstance()->ObjDataUpdate(enemyWalk_.get());
 	GameObjectManager::GetInstance()->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
 	
@@ -84,16 +101,16 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	camera_.UpdateMatrix();
 
 	LightingManager::AddList(light_);
-	postEffect_->Update();
+	PostEffect::GetInstance()->Update();
 }
 
 void TestLevelDataScene::PostProcessDraw()
 {
-	postEffect_->PreDraw();
+	PostEffect::GetInstance()->PreDraw();
 
 	GameObjectManager::GetInstance()->Draw();
 
-	postEffect_->PostDraw();
+	PostEffect::GetInstance()->PostDraw();
 }
 
 void TestLevelDataScene::Back2dSpriteDraw()
@@ -102,11 +119,12 @@ void TestLevelDataScene::Back2dSpriteDraw()
 
 void TestLevelDataScene::Object3dDraw()
 {
-	postEffect_->Draw(camera_);
+	PostEffect::GetInstance()->Draw(camera_);
 }
 
 void TestLevelDataScene::Flont2dSpriteDraw()
 {
+	player_->Draw2d();
 }
 
 void TestLevelDataScene::Collision()
@@ -114,6 +132,15 @@ void TestLevelDataScene::Collision()
 	gameCollisionManager_->ListClear();
 
 	gameCollisionManager_->ListPushback(player_->GetPlayerCore());
+
+	for (size_t index = 0; index < player_->GetBullet().size(); index++)
+	{
+		if (player_->GetBullet()[index]) {
+			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
+		}
+	}
+
+
 	gameCollisionManager_->ListPushback(enemyWalk_.get());
 
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())

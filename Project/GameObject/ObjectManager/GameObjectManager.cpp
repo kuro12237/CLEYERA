@@ -29,15 +29,18 @@ void GameObjectManager::SetAllParents()
 
 void GameObjectManager::ObjDataUpdate(IObjectData *data)
 {
-	TransformEular transform= data->GetTransform();
-	string name = data->GetName();
-	obj3dData[name].worldTransform.scale = transform.scale;
-	obj3dData[name].worldTransform.rotation = transform.rotate;
-	obj3dData[name].worldTransform.translate = transform.translate;
+	if (data)
+	{
+		TransformEular transform = data->GetTransform();
+		string name = data->GetName();
+		obj3dData[name].worldTransform.scale = transform.scale;
+		obj3dData[name].worldTransform.rotation = transform.rotate;
+		obj3dData[name].worldTransform.translate = transform.translate;
 
-	obj3dData[name].worldTransform.UpdateMatrix();
-	obj3dData[name].worldTransform.TransfarMatrix();
-	dataName_.push_back(name);
+		obj3dData[name].worldTransform.UpdateMatrix();
+		obj3dData[name].worldTransform.TransfarMatrix();
+		dataName_.push_back(name);
+	}
 }
 
 void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data,string name)
@@ -56,6 +59,7 @@ void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancin
 
 void GameObjectManager::Update()
 {
+	//すでにアップデートしていたら更新しない
 	for (auto& data : obj3dData) {
 		auto& it = data.second;
 		int index = 0;
@@ -100,12 +104,25 @@ void GameObjectManager::Update()
 	instancingDataName_.clear();
 }
 
+void GameObjectManager::ImGuiUpdate()
+{
+	if (ImGui::TreeNode("GameObjectManager"))
+	{
+		ImGui::Text("Game3dObjectSize:%d", obj3dData.size());
+
+		ImGui::TreePop();
+	}
+}
+
 void GameObjectManager::Draw()
 {
 	//normal
 	for (auto& data : obj3dData) {
 		auto& it = data.second;
-		it.gameObject->Draw(it.worldTransform);
+		if (it.gameObject)
+		{
+			it.gameObject->Draw(it.worldTransform);
+		}
 	}
 	//instancing
 	for (auto& data : objInstancing3dData)

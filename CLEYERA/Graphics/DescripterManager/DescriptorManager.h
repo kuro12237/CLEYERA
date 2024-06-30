@@ -67,7 +67,6 @@ public:
 
 	static DescriptorSize GetDescripterSize() { return DescriptorManager::GetInstance()->descripterSize_; }
 
-	static 	D3D12_CPU_DESCRIPTOR_HANDLE GetHandle(uint32_t index) { return DescriptorManager::GetInstance()->SrvHandleCPU[index]; }
 #pragma endregion
 
 #pragma region Command

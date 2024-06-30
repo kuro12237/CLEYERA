@@ -90,7 +90,6 @@
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffect.cpp" />
-    <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp" />
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp" />
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp" />
     <ClCompile Include="CLEYERA\Transform\CameraData.cpp" />
@@ -116,11 +115,15 @@
     <ClCompile Include="Project\GameObject\GravityManager\GravityManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\IObjectData.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
+    <ClCompile Include="Project\GameObject\Player\command\PlayerShootCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerMoveCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerManager.cpp" />
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
@@ -193,8 +196,6 @@
     <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h" />
     <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h" />
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h" />
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h" />
     <ClInclude Include="CLEYERA\Sprite\Sprite.h" />
     <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h" />
     <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h" />
@@ -231,12 +232,17 @@
     <ClInclude Include="Project\GameObject\GravityManager\GravityManager.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\IObjectData.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\PlayerBullet.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
+    <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
     <ClInclude Include="Project\GameObject\Player\command\IPlayerCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerCommandHandler.h" />
+    <ClInclude Include="Project\GameObject\Player\command\PlayerShootCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerMoveCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Gun\PlayerGun.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerManager.h" />
     <ClInclude Include="Project\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h" />
@@ -249,7 +255,6 @@
     <ClInclude Include="Project\Scene\TestLevelDataScene.h" />
     <ClInclude Include="Project\Scene\TestScene.h" />
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
-    <ClInclude Include="Project\Utility\NumberString\NumberString.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
   </ItemGroup>
   <ItemGroup>

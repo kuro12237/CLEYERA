@@ -68,7 +68,7 @@ void GameManager::ChangeState(IScene *newScene)
 {
 	delete Scene_;
 
-	Scene_ = newScene;
+	Scene_ = move(newScene);
 
 	Scene_->Initialize();
 	Scene_->Update(this);

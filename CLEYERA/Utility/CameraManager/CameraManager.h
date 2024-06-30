@@ -17,6 +17,13 @@ public:
 
 	void ResetCamera(const CameraData& camera);
 
+#pragma region Get
+
+	const CameraData* GetCameraData() { return cameraData_; }
+
+#pragma endregion
+
+
 private:
 
 	const CameraData* cameraData_ = nullptr;

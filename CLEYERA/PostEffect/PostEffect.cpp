@@ -8,54 +8,15 @@ PostEffect* PostEffect::GetInstance()
 
 void PostEffect::Initialize(const string& name)
 {
-	if (PostEffectManager::GetInstance()->CheckData(name))
-	{
-		CreateTexBuffer(texBuffer_,srvIndex_);
-		CreateTexBuffer(colorBuffer_, colorSrvIndex_);
-		CreateRTV(texBuffer_,rtvIndex_);
-		CreateRTV(colorBuffer_, colorRtvIndex_);
-		CreateDSV();
-		SPostEffectData p;
-		p.name = name;
-		p.depthBuffer_ = depthBuffer_;
-		p.resource = texBuffer_;
-		p.rtvIndex = rtvIndex_;
-		p.dsvindex = dsvIndex_;
-		p.srvIndex = srvIndex_;
-		PostEffectManager::GetInstance()->SetData(name, p);
-	}
-	else
-	{
-		SPostEffectData data = PostEffectManager::GetInstance()->GetData(name);
-		rtvIndex_ = data.rtvIndex;
-		srvIndex_ = data.srvIndex;
-		dsvIndex_ = data.dsvindex;
-		texBuffer_ = data.resource;
-		depthBuffer_ = data.depthBuffer_;
-	}
+	name;
 
+	CreateTexBuffer(texBuffer_, srvIndex_);
+	CreateTexBuffer(colorBuffer_, colorSrvIndex_);
+	CreateRTV(texBuffer_, rtvIndex_);
+	CreateRTV(colorBuffer_, colorRtvIndex_);
+	CreateDSV();
 
-	if (PostEffectManager::GetInstance()->CheckData(name + "shadow"))
-	{
-		CreateShadowMap();
-		SPostEffectData p;
-		p.name = name + "shadow";
-		p.resource = depthNormalBuffer_;
-		p.rtvIndex = rtvshadowIndex_;
-		p.srvIndex = srvShadowIndex_;
-		p.dsvindex = dsvShadowIndex_;
-		PostEffectManager::GetInstance()->SetData(name + "shadow", p);
-	}
-	else
-	{
-		SPostEffectData data = PostEffectManager::GetInstance()->GetData(name + "shadow");
-		rtvshadowIndex_ = data.rtvIndex;
-		srvShadowIndex_ = data.srvIndex;
-		dsvShadowIndex_ = data.dsvindex;
-		depthNormalBuffer_ = data.resource;
-	}
-
-	//CreateBloom();
+	CreateShadowMap();
 
 	wvp_ = std::make_unique<BufferResource<TransformationMatrix>>();
 	wvp_->CreateResource(1);
@@ -143,7 +104,7 @@ void PostEffect::PreDraw()
 	// レンダーターゲットをセット
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = RTVDescriptorManager::GetHandle(rtvIndex_);
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(dsvIndex_);
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle= RTVDescriptorManager::GetHandle(colorRtvIndex_);
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle = RTVDescriptorManager::GetHandle(colorRtvIndex_);
 
 	D3D12_RESOURCE_BARRIER barrier[2]{};
 	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
@@ -249,7 +210,7 @@ void PostEffect::CommandCallScissor()
 	commands.m_pList->RSSetScissorRects(1, &scissorRect);
 }
 
-void PostEffect::CreateTexBuffer(ComPtr<ID3D12Resource>&buf,uint32_t &index)
+void PostEffect::CreateTexBuffer(ComPtr<ID3D12Resource>& buf, uint32_t& index)
 {
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
 
@@ -295,7 +256,7 @@ void PostEffect::CreateTexBuffer(ComPtr<ID3D12Resource>&buf,uint32_t &index)
 	index = AddSRVDescripter(buf);
 }
 
-void PostEffect::TransfarImage(ComPtr<ID3D12Resource>&buf)
+void PostEffect::TransfarImage(ComPtr<ID3D12Resource>& buf)
 {
 	const UINT pixCount = WinApp::GetkCilientWidth() * WinApp::GetkCilientHeight();
 
@@ -321,7 +282,7 @@ void PostEffect::TransfarImage(ComPtr<ID3D12Resource>&buf)
 
 }
 
-uint32_t PostEffect::AddSRVDescripter(ComPtr<ID3D12Resource>&buf)
+uint32_t PostEffect::AddSRVDescripter(ComPtr<ID3D12Resource>& buf)
 {
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = { };
 	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
@@ -355,7 +316,7 @@ uint32_t PostEffect::AddSRVDescripter(ComPtr<ID3D12Resource>&buf)
 	return index;
 }
 
-void PostEffect::CreateRTV(ComPtr<ID3D12Resource>&buf,uint32_t &rtvIndex)
+void PostEffect::CreateRTV(ComPtr<ID3D12Resource>& buf, uint32_t& rtvIndex)
 {
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
 	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
