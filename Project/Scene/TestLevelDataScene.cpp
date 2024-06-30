@@ -2,8 +2,7 @@
 
 void TestLevelDataScene::Initialize()
 {
-	postEffect_ = make_unique<PostEffect>();
-	postEffect_->Initialize("testScene");
+	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
@@ -38,6 +37,12 @@ void TestLevelDataScene::Initialize()
 
 	gravityManager_ = make_shared<GravityManager>();
 	ModelManager::LoadObjectFile("PlayerNormalBullet");
+
+	uint32_t texHandle = TextureManager::LoadPngTexture("uvChecker.png");
+	sprite_ = make_unique<Sprite>();
+	sprite_->Initialize(new SpriteBoxState);
+	sprite_->SetTexHandle(texHandle);
+	worldTransform_.Initialize();
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
@@ -57,12 +62,21 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	}
 
 	player_->ImGuiUpdate();
-	
+	//
 	if (ImGui::Button("sceneChange"))
 	{
-		Scene->ChangeState(new TestScene);
+		TextureManager::LoadPngTexture("uvChecker.png");
+		//Scene->ChangeState(new TestScene);
 		return;
 	}
+
+	if (ImGui::Button("tex"))
+	{
+		uint32_t tex= TextureManager::LoadPngTexture("normalMap.png");
+		sprite_->SetTexHandle(tex);
+		return;
+	}
+
 #endif // _USE_IMGUI
 
 	player_->Update();
@@ -96,16 +110,17 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	camera_.UpdateMatrix();
 
 	LightingManager::AddList(light_);
-	postEffect_->Update();
+	PostEffect::GetInstance()->Update();
+	worldTransform_.UpdateMatrix();
 }
 
 void TestLevelDataScene::PostProcessDraw()
 {
-	postEffect_->PreDraw();
+	PostEffect::GetInstance()->PreDraw();
 
 	GameObjectManager::GetInstance()->Draw();
 
-	postEffect_->PostDraw();
+	PostEffect::GetInstance()->PostDraw();
 }
 
 void TestLevelDataScene::Back2dSpriteDraw()
@@ -114,11 +129,12 @@ void TestLevelDataScene::Back2dSpriteDraw()
 
 void TestLevelDataScene::Object3dDraw()
 {
-	postEffect_->Draw(camera_);
+	PostEffect::GetInstance()->Draw(camera_);
 }
 
 void TestLevelDataScene::Flont2dSpriteDraw()
 {
+	sprite_->Draw(worldTransform_, camera_);
 }
 
 void TestLevelDataScene::Collision()

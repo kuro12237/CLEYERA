@@ -90,7 +90,6 @@
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffect.cpp" />
-    <ClCompile Include="CLEYERA\PostEffect\PostEffectManager.cpp" />
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp" />
     <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp" />
     <ClCompile Include="CLEYERA\Transform\CameraData.cpp" />
@@ -196,8 +195,6 @@
     <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h" />
     <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h" />
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectData.h" />
-    <ClInclude Include="CLEYERA\PostEffect\PostEffectManager.h" />
     <ClInclude Include="CLEYERA\Sprite\Sprite.h" />
     <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h" />
     <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h" />

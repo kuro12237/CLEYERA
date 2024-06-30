@@ -2,8 +2,7 @@
 
 void TestScene::Initialize()
 {
-	postEffect_ = make_unique<PostEffect>();
-	postEffect_->Initialize("testScene2");
+	PostEffect::GetInstance()->Initialize("testScene2");
 
 
 	camera_.Initialize();
@@ -15,9 +14,9 @@ void TestScene::Initialize()
 	gameObject_ = make_unique<Game3dObject>();
 	gameObject_->SetDesc(desc_);
 	gameObject_->Create(make_unique<Phong3dPipline>());
-	
-	
-	gameObject_->SetModel(ModelManager::LoadObjectFile("TestGround"));
+
+	ModelManager::GetInstance()->LoadObjectFile("TestGround");
+	//gameObject_->SetModel(ModelManager::GetInstance()->LoadObjectFile("TestGround"));
 
 
 	wT_.Initialize();
@@ -29,7 +28,7 @@ void TestScene::Initialize()
 
 void TestScene::Update(GameManager* Scene)
 {
-	
+
 	Scene;
 
 	if (ImGui::Button("sceneChange"))
@@ -41,17 +40,17 @@ void TestScene::Update(GameManager* Scene)
 	wT_.UpdateMatrix();
 	camera_.UpdateMatrix();
 
-	postEffect_->Update();
+	PostEffect::GetInstance()->Update();
 	LightingManager::AddList(light_);
 }
 
 void TestScene::PostProcessDraw()
 {
-	postEffect_->PreDraw();
+	//PostEffect::GetInstance()->PreDraw();
 
-	gameObject_->Draw(wT_);
+	//gameObject_->Draw(wT_);
 
-	postEffect_->PostDraw();
+	//PostEffect::GetInstance()->PostDraw();
 }
 
 void TestScene::Back2dSpriteDraw()
@@ -60,8 +59,7 @@ void TestScene::Back2dSpriteDraw()
 
 void TestScene::Object3dDraw()
 {
-
-	postEffect_->Draw(camera_);
+	//PostEffect::GetInstance()->Draw(camera_);
 }
 
 void TestScene::Flont2dSpriteDraw()

@@ -9,7 +9,6 @@
 #include"Graphics/DescripterManager/DSVDescriptorManager.h"
 #include"CreateResource/BufferResources.h"
 #include"Light/DirectionLIght.h"
-#include"PostEffectManager.h"
 
 enum SelectPostEffect
 {

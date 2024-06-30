@@ -50,8 +50,10 @@ uint32_t TextureManager::LoadPngTexture(const string& filePath)
 		texData.resource = CreatepngTexResource(metadata);
 		//MipImageを登録
 		//UploadMipImage(metadata,mipImages, texData);
-		ComPtr<ID3D12Resource>intermediateResource = UpLoadTexData(texData.resource, mipImages);
-		DirectXCommon::GetInstance()->CommandClosed();
+		//ComPtr<ID3D12Resource>intermediateResource = UpLoadTexData(texData.resource, mipImages);
+		//DirectXCommon::GetInstance()->CommandClosed();
+
+		UploadMipImage(metadata, mipImages, texData);
 		//src設定
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 		srvDesc = SrcDescSetting(metadata);
@@ -213,9 +215,10 @@ D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& 
 D3D12_HEAP_PROPERTIES TextureManager::SettingHeap()
 {
 	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
-	/*heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;*/
+	//heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
+	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;
+	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 	return heapProperties;
 }
 
@@ -309,7 +312,7 @@ ComPtr<ID3D12Resource> TextureManager::CreatepngTexResource(const DirectX::TexMe
 		&heapProperties,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
-		D3D12_RESOURCE_STATE_COPY_DEST,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
 		IID_PPV_ARGS(&Resource));
 	return Resource;
