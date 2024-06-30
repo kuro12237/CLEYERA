@@ -225,7 +225,6 @@ D3D12_HEAP_PROPERTIES TextureManager::SettingHeap()
 void TextureManager::UploadMipImage(const DirectX::TexMetadata& metadata, DirectX::ScratchImage& mipImages, TexData texData)
 {
 
-
 	for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel)
 	{
 		const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
