@@ -42,5 +42,4 @@ private:
 	uint32_t timer_ = 0;
 	const float speed_ = 0.5f;
 
-
 };
