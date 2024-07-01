@@ -58,15 +58,16 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	}
 
 	player_->ImGuiUpdate();
-	//
-	if (ImGui::Button("sceneChange"))
+
+	if (ImGui::Button("SceneReload"))
 	{
-		TextureManager::LoadPngTexture("uvChecker.png");
-		//Scene->ChangeState(new TestScene);
+		instance->ClearAllData();
+		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
+		instance->CopyData(levelData_.get());
+		instance->SetAllParents();
+
 		return;
 	}
-
-
 
 #endif // _USE_IMGUI
 
@@ -139,8 +140,6 @@ void TestLevelDataScene::Collision()
 			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
 		}
 	}
-
-
 	gameCollisionManager_->ListPushback(enemyWalk_.get());
 
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
@@ -155,5 +154,6 @@ void TestLevelDataScene::Gravitys()
 {
 	gravityManager_->ClearList();
 	gravityManager_->PushList(player_->GetPlayerCore());
+	gravityManager_->PushList(enemyWalk_.get());
 	gravityManager_->CheckGravity();
 }

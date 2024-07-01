@@ -19,8 +19,6 @@ void DescriptorManager::BeginFlame()
 {
 	if (DescriptorManager::GetInstance()->index >= SRV_DESCRIPTOR_MAX)
 	{
-		//DescripterIndex�̐�������𒴂���
-		//#define DescripterMax �̐��𑝂₷���e�N�X�`���EParticle�̗��p�������
 		LogManager::Log("DescripterManager index Overflow\n");
 		assert(0);
 	}

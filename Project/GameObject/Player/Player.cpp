@@ -52,7 +52,8 @@ void Player::Update()
 
 void Player::OnCollision(ICollider* c)
 {
-	c;
+
+
 	if (c->GetId() == kNormalBlock)
 	{
 		for (auto& hitDirection : hitDirection_)

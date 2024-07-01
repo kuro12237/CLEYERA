@@ -25,6 +25,15 @@ struct  Game3dInstancingObjectData
 	uint32_t modelHandle = 0;
 };
 
+struct GameCameraData
+{
+	string type;
+	CameraData camera;
+	WorldTransform worldTransform;
+	bool isParent = false;
+
+};
+
 struct LevelData
 {
 	uint32_t objectNum = 0;

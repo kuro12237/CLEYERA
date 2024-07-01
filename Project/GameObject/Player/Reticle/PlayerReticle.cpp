@@ -25,8 +25,7 @@ void PlayerReticle::Initialize()
 
 void PlayerReticle::ImGuiUpdate()
 {
-	Math::Vector::Vector3 p = GameObjectManager::GetInstance()->GetObj3dData(name_).worldTransform.GetWorldPosition();
-	ImGui::DragFloat3("t", &p.x);
+	
 }
 
 void PlayerReticle::Update()

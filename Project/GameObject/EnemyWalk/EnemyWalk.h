@@ -4,6 +4,7 @@
 #include"GameObject/ObjectManager/IObjectData.h"
 #include"GameObject/GameCollider/ICollider.h"
 #include"Input.h"
+#include"Utility/ObjectId/GameObjectId.h"
 
 class EnemyWalk :public IObjectData, public ICollider
 {

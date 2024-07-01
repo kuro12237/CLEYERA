@@ -7,7 +7,6 @@ void GravityManager::CheckGravity()
 	for (; itrA != objectDatas_.end(); ++itrA) {
 
 		IObjectData* objA = *itrA;
-	
 		objA->CalcGravity(-gravity_);
 	}
 }

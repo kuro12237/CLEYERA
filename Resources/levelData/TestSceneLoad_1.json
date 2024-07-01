@@ -3,15 +3,14 @@
     "objects": [
         {
             "type": "MESH",
-            "name": "球",
+            "name": "Player",
             "file_name": "DebugTestSphere",
             "DrawType": "Normal",
-            "objectType": "Player",
             "transform": {
                 "translate": [
-                    3.5510168075561523,
+                    1.3228836059570312,
                     0.0,
-                    9.037257194519043
+                    8.598325729370117
                 ],
                 "rotate": [
                     0.0,
@@ -24,21 +23,33 @@
                     1.0
                 ]
             },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
             "children": [
                 {
                     "type": "MESH",
-                    "name": "Cube.011",
+                    "name": "PlayerGun",
                     "file_name": "PlayerTestGun",
                     "DrawType": "Normal",
-                    "objectType": "PlayerGun",
                     "transform": {
                         "translate": [
-                            -0.051016807556152344,
+                            -0.03588581085205078,
                             0.0,
-                            -0.03725719451904297
+                            0.11348438262939453
                         ],
                         "rotate": [
-                            0.0,
+                            90.00000762939453,
                             -0.0,
                             0.0
                         ],
@@ -53,15 +64,14 @@
         },
         {
             "type": "MESH",
-            "name": "立方体",
+            "name": "EnemyWalk",
             "file_name": "DfCube",
             "DrawType": "Normal",
-            "objectType": "EnemyWalk",
             "transform": {
                 "translate": [
-                    -5.0,
+                    11.470123291015625,
                     0.0,
-                    7.0
+                    12.672232627868652
                 ],
                 "rotate": [
                     0.0,
@@ -90,15 +100,14 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.010",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
+            "name": "地面",
+            "file_name": "Terrain",
+            "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -1.0,
                     0.0,
-                    1.0
+                    0.0,
+                    -2.785444736480713
                 ],
                 "rotate": [
                     0.0,
@@ -106,268 +115,9 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.012",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    3.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.013",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    7.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.014",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    5.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.015",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    9.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.016",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    11.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.017",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    15.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.018",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    13.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    2.7593934535980225,
+                    2.7593934535980225,
+                    2.7593934535980225
                 ]
             },
             "collider": {
@@ -387,569 +137,14 @@
         {
             "type": "MESH",
             "name": "立方体.001",
-            "file_name": "DfCube",
+            "file_name": "Block",
             "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    3.0,
-                    0.0,
-                    7.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.019",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    13.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.020",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    15.045706748962402
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.021",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    11.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.022",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    9.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.023",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    5.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.024",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    7.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.025",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    3.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.026",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    17.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.027",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    15.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.028",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    13.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.029",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    9.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.030",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    11.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.031",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    12.0,
-                    0.0,
-                    8.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.008",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    10.0,
-                    0.0,
-                    8.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.032",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
+            "instancingObjName": "Map",
             "transform": {
                 "translate": [
                     -1.0,
                     0.0,
-                    12.789834976196289
+                    0.0
                 ],
                 "rotate": [
                     0.0,
@@ -978,124 +173,15 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.033",
-            "file_name": "DfCube",
+            "name": "立方体.002",
+            "file_name": "Block",
             "DrawType": "Instancing",
-            "objectType": "Map",
+            "instancingObjName": "Map",
             "transform": {
                 "translate": [
-                    -3.0,
-                    0.0,
-                    12.789834976196289
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
                     1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
                     0.0,
                     0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "LIGHT",
-            "name": "Light",
-            "file_name": "Box",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -1.3099641799926758,
-                    5.118108749389648,
-                    8.764559745788574
-                ],
-                "rotate": [
-                    37.261043548583984,
-                    3.1637072563171387,
-                    106.93630981445312
-                ],
-                "scale": [
-                    1.0,
-                    0.9999999403953552,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "CAMERA",
-            "name": "Camera",
-            "file_name": "Box",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    7.358891487121582,
-                    -6.925790786743164,
-                    4.958309173583984
-                ],
-                "rotate": [
-                    63.559303283691406,
-                    -2.664711473698844e-06,
-                    46.69194793701172
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "平面",
-            "file_name": "Terrain",
-            "DrawType": "Normal",
-            "objectType": "Terrain",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    -3.462015390396118
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    3.0,
-                    0.0,
-                    1.0
                 ],
                 "rotate": [
                     0.0,
@@ -1124,237 +210,15 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.001",
-            "file_name": "DfCube",
+            "name": "立方体.003",
+            "file_name": "Block",
             "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    1.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.002",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    5.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.003",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    7.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.004",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -3.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.005",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -5.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.006",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -9.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.007",
-            "file_name": "DfCube",
-            "DrawType": "Instancing",
-            "objectType": "Map",
+            "instancingObjName": "Map",
             "transform": {
                 "translate": [
                     -7.0,
                     0.0,
-                    1.0
+                    0.0
                 ],
                 "rotate": [
                     0.0,
@@ -1383,15 +247,2642 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.009",
-            "file_name": "DfCube",
+            "name": "立方体.004",
+            "file_name": "Block",
             "DrawType": "Instancing",
-            "objectType": "Map",
+            "instancingObjName": "Map",
             "transform": {
                 "translate": [
                     3.0,
                     0.0,
-                    5.0
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.005",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    3.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.006",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    3.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.007",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    5.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.008",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    7.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.009",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -5.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.010",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -3.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.011",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -13.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.012",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -15.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.013",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -17.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.014",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.015",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -11.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.016",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.010822296142578,
+                    0.0,
+                    5.976561546325684
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.017",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.01506233215332,
+                    0.0,
+                    7.976557731628418
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.018",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -18.998098373413086,
+                    0.0,
+                    -0.02342510223388672
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.019",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.00234031677246,
+                    0.0,
+                    1.9765710830688477
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.020",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.006580352783203,
+                    0.0,
+                    3.976567268371582
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.021",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.027786254882812,
+                    0.0,
+                    13.976544380187988
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.022",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.023544311523438,
+                    0.0,
+                    11.97654914855957
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.023",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.048992156982422,
+                    0.0,
+                    23.97652244567871
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.024",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.044750213623047,
+                    0.0,
+                    21.97652816772461
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.025",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.040508270263672,
+                    0.0,
+                    19.976531982421875
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.028",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.019304275512695,
+                    0.0,
+                    9.976552963256836
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.029",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.03626823425293,
+                    0.0,
+                    17.97653579711914
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.030",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -19.032026290893555,
+                    0.0,
+                    15.976539611816406
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.031",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.990150451660156,
+                    -0.013827770948410034,
+                    15.97653865814209
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.032",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.99439239501953,
+                    -0.013835549354553223,
+                    17.97653579711914
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.033",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.97742462158203,
+                    -0.013804465532302856,
+                    9.976552963256836
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.034",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.99863052368164,
+                    -0.013843297958374023,
+                    19.976531982421875
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.036",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.99863052368164,
+                    -0.013843297958374023,
+                    19.976531982421875
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.037",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    35.002872467041016,
+                    -0.013851076364517212,
+                    21.97652816772461
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.038",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    35.00711441040039,
+                    -0.0138588547706604,
+                    23.976520538330078
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.039",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.981666564941406,
+                    -0.013812214136123657,
+                    11.97654914855957
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.040",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.98590850830078,
+                    -0.013820022344589233,
+                    13.976543426513672
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.041",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.96470260620117,
+                    -0.013781189918518066,
+                    3.976567506790161
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.042",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.96046447753906,
+                    -0.01377338171005249,
+                    1.9765715599060059
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.043",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.95622253417969,
+                    -0.01376563310623169,
+                    -0.023424625396728516
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.044",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.97318649291992,
+                    -0.013796716928482056,
+                    7.976557731628418
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.045",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    34.96894454956055,
+                    -0.013788968324661255,
+                    5.976561546325684
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.046",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    26.958139419555664,
+                    0.0008779875934123993,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.047",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    24.958141326904297,
+                    0.004539802670478821,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.048",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    32.958126068115234,
+                    -0.010107368230819702,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.049",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    30.958131790161133,
+                    -0.006445556879043579,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.050",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    28.9581356048584,
+                    -0.0027838125824928284,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.051",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    18.95815086364746,
+                    0.015525102615356445,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.052",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    20.958148956298828,
+                    0.011863261461257935,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.053",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    8.958169937133789,
+                    0.03383392095565796,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.054",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    10.95816421508789,
+                    0.030172288417816162,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.055",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    12.958162307739258,
+                    0.02651047706604004,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.056",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    12.958162307739258,
+                    0.02651047706604004,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.057",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    12.958162307739258,
+                    0.02651047706604004,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.058",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    22.958145141601562,
+                    0.008201554417610168,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.059",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    14.958158493041992,
+                    0.022848665714263916,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.060",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    16.958154678344727,
+                    0.01918691396713257,
+                    4.76837158203125e-07
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.026",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -5.0,
+                    0.0,
+                    6.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.035",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    6.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.061",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -7.0,
+                    0.0,
+                    6.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.027",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    7.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.062",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    1.0,
+                    0.0,
+                    12.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.063",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -1.0,
+                    0.0,
+                    12.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.064",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    3.0,
+                    0.0,
+                    12.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.065",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -5.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.066",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -9.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.067",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -7.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.068",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    5.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.069",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    9.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.070",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    19.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.071",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    15.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.072",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    17.0,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.073",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    27.075489044189453,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.074",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    25.075489044189453,
+                    0.0,
+                    18.306360244750977
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体.075",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "instancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    29.075489044189453,
+                    0.0,
+                    18.306360244750977
                 ],
                 "rotate": [
                     0.0,

@@ -27,10 +27,18 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 		assert(object.contains("type"));
 
 		std::string type = object["type"].get<string>();
+
 		if (type.compare("MESH") == 0)
 		{
 			LoadMeshData(levelData, object);
 		}
+
+		if (type.compare("Camera")==0)
+		{
+			LoadCameraData(levelData, object);
+		}
+
+
 	}
 	return levelData;
 }
@@ -41,13 +49,13 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 	Game3dInstancingObjectData obj3dInstancingData = {};
 
 	string drawType = object["DrawType"].get<string>();
-	string objectType = object["objectType"].get<string>();
+	string objectName = object["name"].get<string>();
 
 	//通常表示
 	if (drawType.compare("Normal") == 0)
 	{
 		string name = object["name"].get<string>();
-		if (levelData->obj3dData.find(objectType) != levelData->obj3dData.end())
+		if (levelData->obj3dData.find(objectName) != levelData->obj3dData.end())
 		{
 			assert(0);
 		}
@@ -57,7 +65,7 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
 
 			obj3dData.worldTransform.Initialize();
-			obj3dData.objectName = objectType;
+			obj3dData.objectName = objectName;
 			obj3dData.objectDesc.useLight = true;
 			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
 			//modelのファイル読み込み
@@ -88,31 +96,34 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 				}
 			}
 			//保存
-			levelData->obj3dData[objectType] = move(obj3dData);
+			levelData->obj3dData[objectName] = move(obj3dData);
 		}
 	}
 	//インスタンシング表示
 	if (drawType.compare("Instancing") == 0)
 	{
-		if (levelData->objInstancing3dData.find(objectType) != levelData->objInstancing3dData.end())
+		string objectINstancingGrop = object["instancingObjName"].get<string>();
+		if (levelData->objInstancing3dData.find(objectINstancingGrop) != levelData->objInstancing3dData.end())
 		{
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
-			levelData->objInstancing3dData[objectType].transform_.push_back(transforms);
-			uint32_t size = uint32_t(levelData->objInstancing3dData[objectType].transform_.size());
-			levelData->objInstancing3dData[objectType].GameInstancingObject->PushVector(levelData->objInstancing3dData[objectType].transform_[size - 1], size);
+			levelData->objInstancing3dData[objectINstancingGrop].transform_.push_back(transforms);
+			uint32_t size = uint32_t(levelData->objInstancing3dData[objectINstancingGrop].transform_.size());
+
+			levelData->objInstancing3dData[objectINstancingGrop].GameInstancingObject->
+				PushVector(levelData->objInstancing3dData[objectINstancingGrop].transform_[size - 1], size);
 		}
 		else
 		{
 			//後でオブジェクトの合計数に換える
 			const uint32_t instancingMax = 128;
 			//インスタンスの生成
-			obj3dInstancingData.objectType = objectType;
+			obj3dInstancingData.objectType = objectINstancingGrop;
 			obj3dInstancingData.GameInstancingObject = make_unique<GameInstancing3dObject>();
-			obj3dInstancingData.GameInstancingObject->Create(instancingMax, objectType);
+			obj3dInstancingData.GameInstancingObject->Create(instancingMax, objectINstancingGrop);
 
 			//modelのファイル読み込み
 			if (object.contains("file_name"))
@@ -138,10 +149,10 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 			obj3dInstancingData.transform_.push_back(transforms);
 
 			//保存
-			levelData->objInstancing3dData[objectType] = move(obj3dInstancingData);
+			levelData->objInstancing3dData[objectINstancingGrop] = move(obj3dInstancingData);
 
-			uint32_t size = uint32_t(levelData->objInstancing3dData[objectType].transform_.size());
-			levelData->objInstancing3dData[objectType].GameInstancingObject->PushVector(levelData->objInstancing3dData[objectType].transform_[size - 1], size);
+			uint32_t size = uint32_t(levelData->objInstancing3dData[objectINstancingGrop].transform_.size());
+			levelData->objInstancing3dData[objectINstancingGrop].GameInstancingObject->PushVector(levelData->objInstancing3dData[objectINstancingGrop].transform_[size - 1], size);
 		}
 	}
 }
@@ -152,15 +163,15 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, Game3dObje
 	Game3dInstancingObjectData obj3dInstancingData = {};
 
 	string drawType = object["DrawType"].get<string>();
-	string objectType = object["objectType"].get<string>();
+	string objectName = object["name"].get<string>();
 
-	data.childName_.push_back(objectType);
+	data.childName_.push_back(objectName);
 
 	//通常表示
 	if (drawType.compare("Normal") == 0)
 	{
 		string name = object["name"].get<string>();
-		if (levelData->obj3dData.find(objectType) != levelData->obj3dData.end())
+		if (levelData->obj3dData.find(objectName) != levelData->obj3dData.end())
 		{
 			assert(0);
 		}
@@ -170,7 +181,7 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, Game3dObje
 			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
 
 			obj3dData.worldTransform.Initialize();
-			obj3dData.objectName = objectType;
+			obj3dData.objectName = objectName;
 			obj3dData.objectDesc.useLight = true;
 			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
 			//modelのファイル読み込み
@@ -200,9 +211,17 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, Game3dObje
 				}
 			}
 			//保存
-			levelData->obj3dData[objectType] = move(obj3dData);
+			levelData->obj3dData[objectName] = move(obj3dData);
 		}
 	}
+
+}
+
+void SceneFileLoader::LoadCameraData(unique_ptr<LevelData>& levelData, nlohmann::json& object)
+{
+	GameCameraData data;
+	object, levelData;
+
 
 }
 
