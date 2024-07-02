@@ -9,7 +9,7 @@ void PlayerGun::Initialize() {
 
 void PlayerGun::Update() 
 {
-	Math::Vector::Vector3 worldPos = GameObjectManager::GetInstance()->GetObj3dData(name_).worldTransform.GetWorldPosition();
+	Math::Vector::Vector3 worldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().GetWorldPosition();
 
 	Math::Vector::Vector3 lerp = Math::Vector::Normalize(Math::Vector::Subtruct(targetPos_, worldPos));
 

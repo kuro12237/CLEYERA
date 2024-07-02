@@ -6,10 +6,11 @@
 class BlockManager
 {
 public:
+
+
 	BlockManager() {};
 	~BlockManager() {};
-
-	void CopyData(GameObjectManager *data);
+	void CopyData(GameObjectManager* data);
 
 	void Initialize();
 
@@ -24,5 +25,12 @@ private:
 
 	vector<shared_ptr<IGameInstancing3dObject>>transforms_;
 	vector<shared_ptr<Block>>blocks_;
+
+	bool isInitialize = false;
+
+#pragma region Singleton
+
+#pragma endregion
+
 };
 

@@ -26,15 +26,15 @@ void PlayerManager::ImGuiUpdate()
 	if (ImGui::Button("bulleSpown"))
 	{
 		GameObjectManager* instance = GameObjectManager::GetInstance();
-		PushBullet(instance->GetObj3dData(playerCore_->GetName()).worldTransform.GetWorldPosition());
+		PushBullet(instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
 	}
 }
 
 void PlayerManager::Update()
 {
 	GameObjectManager* instance = GameObjectManager::GetInstance();
-	reticleWorldPos = instance->GetObj3dData(reticle_->GetName()).worldTransform.GetWorldPosition();
-	playerWorldPos = instance->GetObj3dData(playerCore_->GetName()).worldTransform.GetWorldPosition();
+	reticleWorldPos = instance->GetObj3dData(reticle_->GetName())->GetWorldTransform().GetWorldPosition();
+	playerWorldPos = instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
 
 	gun_->SetTarget(reticleWorldPos);
 
@@ -71,13 +71,12 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
 	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");
 	//オブジェクトの作成
-	Game3dObjectData data;
-	data.gameObject = make_unique<Game3dObject>();
-	data.gameObject->Create(make_unique<Phong3dPipline>());
-	data.gameObject->SetModel(modelHandle);
-	data.gameObject->SetDesc(data.objectDesc);
-	data.worldTransform.Initialize();
-	data.worldTransform.translate = pos;
+	unique_ptr<Game3dObjectData> data;
+	data = make_unique<Game3dObjectData>();
+	TransformEular transform;
+	transform.scale = { 1.0f,1.0f,1.0f };
+	transform.translate = pos;
+	data->Initialize(transform, {}, modelHandle);
 
 	shared_ptr<PlayerBullet> b = make_shared<PlayerBullet>();
 	//velocityの計算

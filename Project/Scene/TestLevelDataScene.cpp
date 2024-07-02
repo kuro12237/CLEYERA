@@ -15,6 +15,8 @@ void TestLevelDataScene::Initialize()
 	camera_.UpdateMatrix();
 	CameraManager::GetInstance()->ResetCamera(camera_);
 
+	GameObjectManager* instance = GameObjectManager::GetInstance();
+	instance;
 	GameObjectManager::GetInstance()->CopyData(levelData_.get());
 	GameObjectManager::GetInstance()->SetAllParents();
 
@@ -65,7 +67,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
 		instance->CopyData(levelData_.get());
 		instance->SetAllParents();
-
+		Sleep(2);
 		return;
 	}
 

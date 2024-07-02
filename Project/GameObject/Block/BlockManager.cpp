@@ -1,8 +1,9 @@
 #include "BlockManager.h"
 
+
 void BlockManager::CopyData(GameObjectManager* data)
 {
-	transforms_ = move(data->GetObjInstancingData(name_).transform_);
+	transforms_ = move(data->GetObjInstancingData(name_)->GetTransforms());
 }
 
 void BlockManager::Initialize()

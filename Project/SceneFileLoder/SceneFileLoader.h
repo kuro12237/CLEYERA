@@ -15,7 +15,7 @@ private:
 
 	void LoadMeshData(unique_ptr<LevelData>  &levelData, nlohmann::json& object);
 
-	void LoadObj3dData(unique_ptr<LevelData>& levelData,Game3dObjectData  &data,nlohmann::json object);
+	void LoadObj3dData(unique_ptr<LevelData>& levelData,unique_ptr<Game3dObjectData>  &data,nlohmann::json object);
 
 	void LoadCameraData(unique_ptr<LevelData>& levelData, nlohmann::json& object);
 

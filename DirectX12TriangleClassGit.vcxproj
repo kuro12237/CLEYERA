@@ -102,6 +102,8 @@
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
@@ -218,6 +220,8 @@
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.h" />
+    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.h" />
+    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dObjectData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />

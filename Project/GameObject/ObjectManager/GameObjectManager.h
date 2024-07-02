@@ -45,7 +45,7 @@ public:
 
 	void Draw();
 
-	void PushObj3dData(Game3dObjectData& data, string name) { obj3dData_[name] = move(data); };
+	void PushObj3dData(unique_ptr<Game3dObjectData> &data, string name) { obj3dData_[name] = move(data); };
 
 	void ClearObj3dData(string name) { obj3dData_.erase(name); }
 
@@ -53,9 +53,9 @@ public:
 
 #pragma region Get
 
-	Game3dObjectData& GetObj3dData(string name);
+	unique_ptr<Game3dObjectData>& GetObj3dData(string name);
 
-	Game3dInstancingObjectData& GetObjInstancingData(string name);
+	shared_ptr<Game3dInstancingObjectData>& GetObjInstancingData(string name);
 
 #pragma endregion
 
@@ -68,13 +68,13 @@ public:
 
 private:
 
-	void checkChildren(Game3dObjectData &data);
+	void checkChildren(unique_ptr<Game3dObjectData>&data);
 
 	vector<string>dataName_;
 	vector<string>instancingDataName_;
 
-	std::map<string, Game3dObjectData> obj3dData_;
-	std::map<string, Game3dInstancingObjectData>objInstancing3dData_;
+	std::map<string, unique_ptr<Game3dObjectData>> obj3dData_;
+	std::map<string, shared_ptr<Game3dInstancingObjectData>>objInstancing3dData_;
 	std::map<string, GameCameraData>cameraData_;
 
 #pragma region singleton

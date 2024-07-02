@@ -9,18 +9,19 @@ GameObjectManager* GameObjectManager::GetInstance()
 void GameObjectManager::CopyData(LevelData* data)
 {
 	obj3dData_ = move(data->obj3dData);
-	objInstancing3dData_ = move(data->objInstancing3dData);
+	objInstancing3dData_ = data->objInstancing3dData;
+
 }
 
 void GameObjectManager::SetAllParents()
 {
 	for (auto& data : obj3dData_) {
 		auto& it = data.second;
-		if (!it.childName_.empty())
+		if (!it->GetChildsName().empty())
 		{
-			for (string name : it.childName_)
+			for (string name : it->GetChildsName())
 			{
-				SetParent(it.objectName, name);
+				SetParent(it->GetObjectName(), name);
 				checkChildren(obj3dData_[name]);
 			}
 		}
@@ -33,12 +34,7 @@ void GameObjectManager::ObjDataUpdate(IObjectData *data)
 	{
 		TransformEular transform = data->GetTransform();
 		string name = data->GetName();
-		obj3dData_[name].worldTransform.scale = transform.scale;
-		obj3dData_[name].worldTransform.rotation = transform.rotate;
-		obj3dData_[name].worldTransform.translate = transform.translate;
-
-		obj3dData_[name].worldTransform.UpdateMatrix();
-		obj3dData_[name].worldTransform.TransfarMatrix();
+		obj3dData_[name]->WtUpdate(transform);
 		dataName_.push_back(name);
 	}
 }
@@ -50,10 +46,10 @@ void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancin
 	for (uint32_t i = 0; i < size; i++)
 	{
 		data[i]->Update();
-		objInstancing3dData_[name].GameInstancingObject->PushVector(data[i],i);
+		objInstancing3dData_[name]->PushObjectData(data[i],i);
 	}
 
-	objInstancing3dData_[name].GameInstancingObject->Transfar();
+	objInstancing3dData_[name]->TransfarData();
 	instancingDataName_.push_back(name);
 }
 
@@ -66,7 +62,7 @@ void GameObjectManager::Update()
 		bool updateFlag = true;
 		for (string& name : dataName_)
 		{
-			if (it.objectName == name)
+			if (it->GetObjectName() == name)
 			{
 				updateFlag = false;
 			}
@@ -77,7 +73,8 @@ void GameObjectManager::Update()
 		{
 			continue;
 		}
-		it.worldTransform.UpdateMatrix();
+		auto& itWt = data.second->GetWorldTransform();
+		itWt.UpdateMatrix();
 	}
 
 	dataName_.clear();
@@ -89,7 +86,7 @@ void GameObjectManager::Update()
 
 		for (string& name : instancingDataName_)
 		{
-			if (it.objectType == name)
+			if (it->GetObjectType() == name)
 			{
 				updateFlag = false;
 			}
@@ -118,17 +115,18 @@ void GameObjectManager::Draw()
 {
 	//normal
 	for (auto& data : obj3dData_) {
-		auto& it = data.second;
-		if (it.gameObject)
+		auto& itObj = data.second->GetGameObject();
+		auto& itWt = data.second->GetWorldTransform();
+		if (itObj)
 		{
-			it.gameObject->Draw(it.worldTransform);
+			itObj->Draw(itWt);
 		}
 	}
 	//instancing
 	for (auto& data : objInstancing3dData_)
 	{
-		auto& it = data.second;
-		it.GameInstancingObject->Draw();
+		auto& it = data.second->GetGameObject();
+		it->Draw();
 	}
 
 }
@@ -137,33 +135,39 @@ void GameObjectManager::ClearAllData()
 {
 	obj3dData_.clear();
 	cameraData_.clear();
-	objInstancing3dData_.clear();
+
+	for (auto& data : objInstancing3dData_)
+	{
+		auto& it = data.second->GetTransforms();
+		it.clear();
+	}
+
 	dataName_.clear();
 	instancingDataName_.clear();
 }
 
-Game3dObjectData& GameObjectManager::GetObj3dData(string name)
+unique_ptr<Game3dObjectData>& GameObjectManager::GetObj3dData(string name)
 {
 	return obj3dData_[name];
 }
 
-Game3dInstancingObjectData& GameObjectManager::GetObjInstancingData(string name)
+shared_ptr<Game3dInstancingObjectData>& GameObjectManager::GetObjInstancingData(string name)
 {
 	return objInstancing3dData_[name];
 }
 
 void GameObjectManager::SetParent(string parentName, string childName)
 {
-	obj3dData_[childName].worldTransform.parent = &obj3dData_[parentName].worldTransform;
+	obj3dData_[childName]->SetParent(obj3dData_[parentName]->GetWorldTransform());
 }
 
-void GameObjectManager::checkChildren(Game3dObjectData &data)
+void GameObjectManager::checkChildren(unique_ptr<Game3dObjectData> &data)
 {
-	if (!data.childName_.empty())
+	if (!data->GetChildsName().empty())
 	{
-		for (string name : data.childName_)
+		for (string name : data->GetChildsName())
 		{
-			SetParent(data.objectName, name);
+			SetParent(data->GetObjectName(), name);
 		}
 	}
 }

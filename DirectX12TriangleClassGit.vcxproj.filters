@@ -480,6 +480,8 @@
     <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerShootCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -787,6 +789,8 @@
     <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerShootCommand.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.h" />
+    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.h" />
+    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dObjectData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

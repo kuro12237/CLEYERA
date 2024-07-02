@@ -45,11 +45,12 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 
 void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::json& object)
 {
-	Game3dObjectData obj3dData = {};
-	Game3dInstancingObjectData obj3dInstancingData = {};
+	unique_ptr<Game3dObjectData> obj3dData = {};
+	shared_ptr<Game3dInstancingObjectData> obj3dInstancingData = {};
 
 	string drawType = object["DrawType"].get<string>();
 	string objectName = object["name"].get<string>();
+	uint32_t modelHandle = 0;
 
 	//通常表示
 	if (drawType.compare("Normal") == 0)
@@ -61,30 +62,28 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 		}
 		else
 		{
-			obj3dData.gameObject = make_unique<Game3dObject>();
-			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
+			obj3dData = make_unique<Game3dObjectData>();
 
-			obj3dData.worldTransform.Initialize();
-			obj3dData.objectName = objectName;
-			obj3dData.objectDesc.useLight = true;
-			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
+			obj3dData->SetObjName(objectName);
+
+			std::string modelFileName;
+			Game3dObjectDesc objectDesc;
+			vector<string>childName;
+
+			objectDesc.useLight = true;
+
 			//modelのファイル読み込み
 			if (object.contains("file_name"))
 			{
 				string fileName = object["file_name"].get<string>();
 				ModelManager::ModelLoadNormalMap();
-				obj3dData.modelHandle = ModelManager::LoadObjectFile(fileName);
-				obj3dData.gameObject->SetModel(obj3dData.modelHandle);
+				modelHandle = ModelManager::LoadObjectFile(fileName);
 			}
 
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
 			//transform
-			obj3dData.worldTransform.translate = transformEular.translate;
-			obj3dData.worldTransform.rotation = transformEular.rotate;
-			obj3dData.worldTransform.scale = transformEular.scale;
-			obj3dData.worldTransform.UpdateMatrix();
 
 			if (object.contains("children"))
 			{
@@ -96,6 +95,8 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 				}
 			}
 			//保存
+			obj3dData->Initialize(transformEular, objectDesc, modelHandle);
+
 			levelData->obj3dData[objectName] = move(obj3dData);
 		}
 	}
@@ -110,35 +111,33 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
-			levelData->objInstancing3dData[objectINstancingGrop].transform_.push_back(transforms);
-			uint32_t size = uint32_t(levelData->objInstancing3dData[objectINstancingGrop].transform_.size());
+			levelData->objInstancing3dData[objectINstancingGrop]->PushBackTransform(transforms);
 
-			levelData->objInstancing3dData[objectINstancingGrop].GameInstancingObject->
-				PushVector(levelData->objInstancing3dData[objectINstancingGrop].transform_[size - 1], size);
+			uint32_t size = uint32_t(levelData->objInstancing3dData[objectINstancingGrop]->GetTransforms().size());
+
+			levelData->objInstancing3dData[objectINstancingGrop]->PushObjectData(
+				levelData->objInstancing3dData[objectINstancingGrop]->GetTransforms()[size - 1], size);
 		}
 		else
 		{
-			//後でオブジェクトの合計数に換える
-			const uint32_t instancingMax = 128;
 			//インスタンスの生成
-			obj3dInstancingData.objectType = objectINstancingGrop;
-			obj3dInstancingData.GameInstancingObject = make_unique<GameInstancing3dObject>();
-			obj3dInstancingData.GameInstancingObject->Create(instancingMax, objectINstancingGrop);
+			obj3dInstancingData = make_shared<Game3dInstancingObjectData>();
 
 			//modelのファイル読み込み
 			if (object.contains("file_name"))
 			{
 				string fileName = object["file_name"];
 				ModelManager::ModelLoadNormalMap();
-				obj3dInstancingData.modelHandle = ModelManager::LoadObjectFile(fileName);
-				obj3dInstancingData.GameInstancingObject->SetModel(obj3dInstancingData.modelHandle);
+				modelHandle = ModelManager::LoadObjectFile(fileName);
 			}
 			else
 			{
 				ModelManager::ModelLoadNormalMap();
-				obj3dInstancingData.modelHandle = ModelManager::LoadObjectFile("DfCube");
-				obj3dInstancingData.GameInstancingObject->SetModel(obj3dInstancingData.modelHandle);
+				modelHandle = ModelManager::LoadObjectFile("DfCube");
 			}
+
+			obj3dInstancingData->Initialize(objectINstancingGrop, modelHandle);
+
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
@@ -146,26 +145,26 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
-			obj3dInstancingData.transform_.push_back(transforms);
-
+			obj3dInstancingData->PushBackTransform(transforms);
 			//保存
 			levelData->objInstancing3dData[objectINstancingGrop] = move(obj3dInstancingData);
 
-			uint32_t size = uint32_t(levelData->objInstancing3dData[objectINstancingGrop].transform_.size());
-			levelData->objInstancing3dData[objectINstancingGrop].GameInstancingObject->PushVector(levelData->objInstancing3dData[objectINstancingGrop].transform_[size - 1], size);
+			uint32_t size = uint32_t(levelData->objInstancing3dData[objectINstancingGrop]->GetTransforms().size());
+			levelData->objInstancing3dData[objectINstancingGrop]->PushObjectData(
+				levelData->objInstancing3dData[objectINstancingGrop]->GetTransforms()[size - 1], size);
 		}
 	}
 }
 
-void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, Game3dObjectData& data, nlohmann::json object)
+void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, unique_ptr<Game3dObjectData>& data, nlohmann::json object)
 {
-	Game3dObjectData obj3dData = {};
-	Game3dInstancingObjectData obj3dInstancingData = {};
+	unique_ptr<Game3dObjectData> obj3dData = {};
+	shared_ptr<Game3dInstancingObjectData> obj3dInstancingData = {};
 
 	string drawType = object["DrawType"].get<string>();
 	string objectName = object["name"].get<string>();
 
-	data.childName_.push_back(objectName);
+	data->PushBackChildren(objectName);
 
 	//通常表示
 	if (drawType.compare("Normal") == 0)
@@ -177,30 +176,27 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, Game3dObje
 		}
 		else
 		{
-			obj3dData.gameObject = make_unique<Game3dObject>();
-			obj3dData.gameObject->Create(make_unique<Phong3dPipline>());
+			obj3dData = make_unique<Game3dObjectData>();
+			obj3dData->SetObjName(objectName);
 
-			obj3dData.worldTransform.Initialize();
-			obj3dData.objectName = objectName;
-			obj3dData.objectDesc.useLight = true;
-			obj3dData.gameObject->SetDesc(obj3dData.objectDesc);
+			std::string modelFileName;
+			Game3dObjectDesc objectDesc;
+			uint32_t modelHandle = 0;
+			vector<string>childName;
+
+			objectDesc.useLight = true;
 			//modelのファイル読み込み
 			if (object.contains("file_name"))
 			{
 				string fileName = object["file_name"].get<string>();
 				ModelManager::ModelLoadNormalMap();
-				obj3dData.modelHandle = ModelManager::LoadObjectFile(fileName);
-				obj3dData.gameObject->SetModel(obj3dData.modelHandle);
+				modelHandle = ModelManager::LoadObjectFile(fileName);
 			}
 
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
-			//transform
-			obj3dData.worldTransform.translate = transformEular.translate;
-			obj3dData.worldTransform.rotation = transformEular.rotate;
-			obj3dData.worldTransform.scale = transformEular.scale;
-			obj3dData.worldTransform.UpdateMatrix();
+	
 
 			if (object.contains("children"))
 			{
@@ -211,6 +207,7 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, Game3dObje
 				}
 			}
 			//保存
+			obj3dData->Initialize(transformEular, objectDesc, modelHandle);
 			levelData->obj3dData[objectName] = move(obj3dData);
 		}
 	}
