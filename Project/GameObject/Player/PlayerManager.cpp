@@ -37,7 +37,7 @@ void PlayerManager::Update()
 	playerWorldPos = instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
 
 	gun_->SetTarget(reticleWorldPos);
-
+	gun_->Update();
 	reticleCommandHandler_->Handler();
 	reticleCommandHandler_->Exec(*reticle_);
 	reticle_->Update();
@@ -71,8 +71,8 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
 	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");
 	//オブジェクトの作成
-	unique_ptr<Game3dObjectData> data;
-	data = make_unique<Game3dObjectData>();
+	shared_ptr<Game3dObjectData> data;
+	data = make_shared<Game3dObjectData>();
 	TransformEular transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = pos;
@@ -83,6 +83,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(reticleWorldPos,playerWorldPos);
 	velocity = Math::Vector::Normalize(velocity);
 
+	b->SetPlayerSpeed(playerCore_->GetVelocity());
 	b->SetVelocity(velocity);
 	b->SetSpownPos(pos);
 	b->Initialize();

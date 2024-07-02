@@ -25,6 +25,7 @@ public:
 
 	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
 
+	void SetPlayerSpeed(Math::Vector::Vector3 v) { playerSpeed_ = v; }
 #pragma endregion
 
 #pragma region Get
@@ -37,6 +38,7 @@ private:
 
 	unique_ptr<IPlayerBulletState>state_ = nullptr;
 
+	Math::Vector::Vector3 playerSpeed_ = {};
 	Math::Vector::Vector3 spownPos_ = {};
 	bool isDead_ = false;
 	uint32_t timer_ = 0;

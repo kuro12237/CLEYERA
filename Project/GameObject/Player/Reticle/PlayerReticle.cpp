@@ -4,8 +4,8 @@ void PlayerReticle::Initialize()
 {
 	name_ = "PlayerReticle";
 
-	unique_ptr<Game3dObjectData> data;
-	data = make_unique<Game3dObjectData>();
+	shared_ptr<Game3dObjectData> data;
+	data = make_shared<Game3dObjectData>();
 
 	data->Initialize(transform_, {},0);
 	transform_.scale = { 1.0f,1.0f,1.0f };

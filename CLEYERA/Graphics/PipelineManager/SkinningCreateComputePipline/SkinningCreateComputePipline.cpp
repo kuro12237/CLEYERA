@@ -10,7 +10,8 @@ SPSOProperty SkinningCreateComputePipline::CreateSkinningPipline(ComPtr<ID3D12De
 	};
 	CreateSkinningRootSignature(device, result);
 	computePiplineStateDesc.pRootSignature = result.rootSignature.Get();
-	HRESULT hr = device->CreateComputePipelineState(&computePiplineStateDesc, IID_PPV_ARGS(&result.GraphicsPipelineState));
+	HRESULT hr;
+	hr = device->CreateComputePipelineState(&computePiplineStateDesc, IID_PPV_ARGS(&result.GraphicsPipelineState));
 	assert(SUCCEEDED(hr));
 	return result;
 }

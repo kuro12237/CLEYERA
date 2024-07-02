@@ -67,7 +67,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
 		instance->CopyData(levelData_.get());
 		instance->SetAllParents();
-		Sleep(2);
+		player_->GetData(instance);
 		return;
 	}
 

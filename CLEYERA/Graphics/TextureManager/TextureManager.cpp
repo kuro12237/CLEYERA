@@ -181,7 +181,8 @@ DirectX::ScratchImage TextureManager::CreateDDSMipImage(const std::string& fileP
 	//テクスチャファイルを読み込みプログラムで扱えるようにする
 	DirectX::ScratchImage image{};
 	std::wstring filePathW = LogManager::ConvertString(filePath);
-	HRESULT hr = DirectX::LoadFromDDSFile(filePathW.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+	HRESULT hr;
+	hr = DirectX::LoadFromDDSFile(filePathW.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
 	assert(SUCCEEDED(hr));
 	//ミップマップの作成
 

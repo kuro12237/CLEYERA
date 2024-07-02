@@ -8,7 +8,7 @@ GameObjectManager* GameObjectManager::GetInstance()
 
 void GameObjectManager::CopyData(LevelData* data)
 {
-	obj3dData_ = move(data->obj3dData);
+	obj3dData_ = data->obj3dData;
 	objInstancing3dData_ = data->objInstancing3dData;
 
 }
@@ -126,6 +126,7 @@ void GameObjectManager::Draw()
 	for (auto& data : objInstancing3dData_)
 	{
 		auto& it = data.second->GetGameObject();
+		it;
 		it->Draw();
 	}
 
@@ -146,7 +147,7 @@ void GameObjectManager::ClearAllData()
 	instancingDataName_.clear();
 }
 
-unique_ptr<Game3dObjectData>& GameObjectManager::GetObj3dData(string name)
+shared_ptr<Game3dObjectData>& GameObjectManager::GetObj3dData(string name)
 {
 	return obj3dData_[name];
 }
@@ -161,7 +162,7 @@ void GameObjectManager::SetParent(string parentName, string childName)
 	obj3dData_[childName]->SetParent(obj3dData_[parentName]->GetWorldTransform());
 }
 
-void GameObjectManager::checkChildren(unique_ptr<Game3dObjectData> &data)
+void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData> &data)
 {
 	if (!data->GetChildsName().empty())
 	{

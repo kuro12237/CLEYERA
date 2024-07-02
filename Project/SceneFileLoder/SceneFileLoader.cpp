@@ -45,7 +45,7 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 
 void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::json& object)
 {
-	unique_ptr<Game3dObjectData> obj3dData = {};
+	shared_ptr<Game3dObjectData> obj3dData = {};
 	shared_ptr<Game3dInstancingObjectData> obj3dInstancingData = {};
 
 	string drawType = object["DrawType"].get<string>();
@@ -62,7 +62,7 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 		}
 		else
 		{
-			obj3dData = make_unique<Game3dObjectData>();
+			obj3dData = make_shared<Game3dObjectData>();
 
 			obj3dData->SetObjName(objectName);
 
@@ -156,9 +156,9 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 	}
 }
 
-void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, unique_ptr<Game3dObjectData>& data, nlohmann::json object)
+void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, shared_ptr<Game3dObjectData>& data, nlohmann::json object)
 {
-	unique_ptr<Game3dObjectData> obj3dData = {};
+	shared_ptr<Game3dObjectData> obj3dData = {};
 	shared_ptr<Game3dInstancingObjectData> obj3dInstancingData = {};
 
 	string drawType = object["DrawType"].get<string>();
@@ -176,7 +176,7 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, unique_ptr
 		}
 		else
 		{
-			obj3dData = make_unique<Game3dObjectData>();
+			obj3dData = make_shared<Game3dObjectData>();
 			obj3dData->SetObjName(objectName);
 
 			std::string modelFileName;

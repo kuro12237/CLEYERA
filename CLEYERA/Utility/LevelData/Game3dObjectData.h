@@ -35,7 +35,7 @@ public:
 
 	void SetWorldTrasform(WorldTransform wt) { worldTransform_ = wt; }
 
-	void SetParent(const WorldTransform& wt) { worldTransform_.parent = &wt; }
+	void SetParent(const WorldTransform& wt) { worldTransform_.SetParent(wt); }
 
 #pragma endregion
 

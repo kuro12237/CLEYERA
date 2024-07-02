@@ -32,6 +32,7 @@ void PlayerBullet::Update()
 	}
 
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
+	transform_.translate = Math::Vector::Add(transform_.translate, playerSpeed_);
 }
 
 void PlayerBullet::OnCollision(ICollider* c)
