@@ -50,7 +50,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	Scene;
 	//GameObjectManager* instance = GameObjectManager::GetInstance();
 #ifdef _USE_IMGUI
-
+	GameObjectManager* instance = GameObjectManager::GetInstance();
 	instance->ImGuiUpdate();
 
 	debugCamera_->ImGuiUpdate();
