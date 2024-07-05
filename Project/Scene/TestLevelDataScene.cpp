@@ -48,7 +48,7 @@ void TestLevelDataScene::Initialize()
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
-	GameObjectManager* instance = GameObjectManager::GetInstance();
+	//GameObjectManager* instance = GameObjectManager::GetInstance();
 #ifdef _USE_IMGUI
 
 	instance->ImGuiUpdate();
