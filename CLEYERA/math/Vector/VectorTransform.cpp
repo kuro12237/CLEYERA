@@ -65,6 +65,16 @@ Vector3 Math::Vector::TransformNormal(const Vector3& v, const Math::Matrix::Matr
 
 }
 
+float Math::Vector::Normalize(const float& v)
+{
+	float result{};
+	float length = sqrtf(v * v);
+	if (length != 0.0f) {
+		result = v / length;
+	}
+	return result;
+}
+
 Vector2 Math::Vector::Normalize(const Vector2& v)
 {
 	Vector2 result{};

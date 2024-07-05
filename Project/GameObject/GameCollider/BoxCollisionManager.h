@@ -21,10 +21,10 @@ private:
 	bool IsCollision(const AABB& aabb1, const AABB& aabb2);
 
 	//l•ûŒü‚Ì”»’è
-	bool CheckBottomCollsion(float t);
-	bool CheckTopCollision(float t);
-	bool CheckLeftCollision(float t);
-	bool CheckRightCollision(float t);
+	bool CheckBottomCollsion(float t,ICollider *a,ICollider*b);
+	bool CheckTopCollision(float t, ICollider* a, ICollider* b);
+	bool CheckLeftCollision(float t, ICollider* a, ICollider* b);
+	bool CheckRightCollision(float t, ICollider* a, ICollider* b);
 
 	//‰Ÿ‚µo‚µ
 	float BottomExtrusion(ICollider* a, ICollider* b);

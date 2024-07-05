@@ -95,8 +95,21 @@ void Player::Move()
 {
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
 
+	if (Ljoy.x >= -0.1f && Ljoy.x <= 0.1f)
+	{
+		Ljoy.x = {};
+		velocity_ = {};
+	}
+	if (Ljoy.y >= -0.1f && Ljoy.y <= 0.1f)
+	{
+		Ljoy.y = {};
+		
+	}
+
+	velocity_ = {};
 	const float Speed = 0.1f;
 	velocity_.x = Ljoy.x * Speed;
+	velocity_.y = Ljoy.y * Speed;
 }
 
 void Player::Shoot()

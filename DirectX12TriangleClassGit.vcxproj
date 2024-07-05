@@ -111,6 +111,7 @@
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\GameObject\Block\Block.cpp" />
     <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
+    <ClCompile Include="Project\GameObject\collisionTest\CollisionTestBox.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Block\Block.h" />
     <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
+    <ClInclude Include="Project\GameObject\collisionTest\CollisionTestBox.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
     <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />
     <ClInclude Include="Project\GameObject\GameCollider\ICollider.h" />

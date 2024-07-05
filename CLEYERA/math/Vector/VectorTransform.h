@@ -17,6 +17,7 @@ namespace Math
 		Vector3 Multiply(const Vector3& v1, const Vector3& v2);
 
 		Vector3 TransformNormal(const Vector3& v, const Math::Matrix::Matrix4x4& m);
+		float Normalize(const float& v);
 		Vector2 Normalize(const Vector2& v);
 		Vector3 Normalize(const Vector3& v);
 

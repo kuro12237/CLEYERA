@@ -40,6 +40,8 @@ void TestLevelDataScene::Initialize()
 	gravityManager_ = make_shared<GravityManager>();
 	ModelManager::LoadObjectFile("PlayerNormalBullet");
 
+	testBox_ = make_shared<CollisionTestBox>();
+	testBox_->Initialize();
 
 }
 
@@ -70,6 +72,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 		player_->GetData(instance);
 		return;
 	}
+	testBox_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
 
@@ -82,7 +85,8 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	Gravitys();
 
 	Collision();
-
+	
+	GameObjectManager::GetInstance()->ObjDataUpdate(testBox_.get());
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetPlayerCore());
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetReticle());
 	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetGun());
@@ -143,6 +147,7 @@ void TestLevelDataScene::Collision()
 		}
 	}
 	gameCollisionManager_->ListPushback(enemyWalk_.get());
+	gameCollisionManager_->ListPushback(testBox_.get());
 
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
@@ -155,7 +160,7 @@ void TestLevelDataScene::Collision()
 void TestLevelDataScene::Gravitys()
 {
 	gravityManager_->ClearList();
-	gravityManager_->PushList(player_->GetPlayerCore());
-	gravityManager_->PushList(enemyWalk_.get());
+	//gravityManager_->PushList(player_->GetPlayerCore());
+	//gravityManager_->PushList(enemyWalk_.get());
 	gravityManager_->CheckGravity();
 }
