@@ -5,7 +5,7 @@ void TestLevelDataScene::Initialize()
 	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
-	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
+	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_2.json");
 	
 	camera_.Initialize();
 	camera_.translation_.z = -16.0f;
@@ -15,10 +15,10 @@ void TestLevelDataScene::Initialize()
 	camera_.UpdateMatrix();
 	CameraManager::GetInstance()->ResetCamera(camera_);
 
-	GameObjectManager* instance = GameObjectManager::GetInstance();
-	instance;
-	GameObjectManager::GetInstance()->CopyData(levelData_.get());
-	GameObjectManager::GetInstance()->SetAllParents();
+	gameObjectManager_ = GameObjectManager::GetInstance();
+	gameObjectManager_->CopyData(levelData_.get());
+	gameObjectManager_->SetAllParents();
+	gameObjectManager_->Update();
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
@@ -48,10 +48,8 @@ void TestLevelDataScene::Initialize()
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
-	//GameObjectManager* instance = GameObjectManager::GetInstance();
 #ifdef _USE_IMGUI
-	GameObjectManager* instance = GameObjectManager::GetInstance();
-	instance->ImGuiUpdate();
+	gameObjectManager_->ImGuiUpdate();
 
 	debugCamera_->ImGuiUpdate();
 
@@ -65,11 +63,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	if (ImGui::Button("SceneReload"))
 	{
-		instance->ClearAllData();
-		levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_1.json");
-		instance->CopyData(levelData_.get());
-		instance->SetAllParents();
-		player_->GetData(instance);
+		Scene->ChangeState(new TestLevelDataScene());
 		return;
 	}
 	testBox_->ImGuiUpdate();
@@ -83,10 +77,10 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	{
 		enemyWalk_->Update();
 
-		GameObjectManager::GetInstance()->ObjDataUpdate(enemyWalk_.get());
+		gameObjectManager_->ObjDataUpdate(enemyWalk_.get());
 		if (enemyWalk_->GetIsDead())
 		{
-			GameObjectManager::GetInstance()->ClearObj3dData(enemyWalk_->GetName());
+			gameObjectManager_->ClearObj3dData(enemyWalk_->GetName());
 			enemyWalk_.reset();
 		}
 
@@ -98,18 +92,17 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	Collision();
 	
-	GameObjectManager::GetInstance()->ObjDataUpdate(testBox_.get());
-	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetPlayerCore());
-	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetReticle());
-	GameObjectManager::GetInstance()->ObjDataUpdate(player_->GetGun());
+	gameObjectManager_->ObjDataUpdate(testBox_.get());
+	gameObjectManager_->ObjDataUpdate(player_->GetPlayerCore());
+	gameObjectManager_->ObjDataUpdate(player_->GetReticle());
+	gameObjectManager_->ObjDataUpdate(player_->GetGun());
 
 	for (shared_ptr<PlayerBullet> &b : player_->GetBullet()) {
-		GameObjectManager::GetInstance()->ObjDataUpdate(b.get());
+		gameObjectManager_->ObjDataUpdate(b.get());
 	}
+	gameObjectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
 
-	GameObjectManager::GetInstance()->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
-	
-	GameObjectManager::GetInstance()->Update();
+	gameObjectManager_->Update();
 
 	camera_.translation_ = player_->GetPlayerCore()->GetTransform().translate;
 	camera_.translation_.z = camera_.translation_.z - 32.0f;
@@ -126,7 +119,7 @@ void TestLevelDataScene::PostProcessDraw()
 {
 	PostEffect::GetInstance()->PreDraw();
 
-	GameObjectManager::GetInstance()->Draw();
+	gameObjectManager_->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
 }
@@ -174,7 +167,7 @@ void TestLevelDataScene::Collision()
 void TestLevelDataScene::Gravitys()
 {
 	gravityManager_->ClearList();
-	//gravityManager_->PushList(player_->GetPlayerCore());
+	gravityManager_->PushList(player_->GetPlayerCore());
 	if (enemyWalk_)
 	{
 		gravityManager_->PushList(enemyWalk_.get());

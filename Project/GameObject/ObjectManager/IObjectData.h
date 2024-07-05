@@ -26,6 +26,7 @@ public:
 
 	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
 
+	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
 #pragma endregion
 
 #pragma region Get
@@ -35,6 +36,7 @@ public:
 	TransformEular GetTransform() { return transform_; }
 
 	Math::Vector::Vector3 GetVelocity() { return velocity_; }
+	Math::Vector::Vector3 GetUvScale() { return uvScale_; }
 
 #pragma endregion
 
@@ -47,5 +49,8 @@ protected:
 	const Math::Matrix::Matrix4x4 *worldMat_ = {};
 	TransformEular transform_{};
 	Math::Vector::Vector3 velocity_{};
+
+	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
+
 };
 

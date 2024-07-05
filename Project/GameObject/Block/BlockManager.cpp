@@ -11,7 +11,9 @@ void BlockManager::Initialize()
 	for (int i = 0; i < int(transforms_.size()); i++)
 	{
 		shared_ptr<Block>block = make_shared<Block>();
-		block->Initialize(transforms_[i]->GetTransform());
+		block->Initialize(transforms_[i]->GetTransform(),transforms_[i]->GetAABB());
+		transforms_[i]->SetUvScale(block->GetUvScale());
+
 		blocks_.push_back(block);
 	}
 }

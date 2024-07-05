@@ -9,12 +9,14 @@ public:
 	Block() {};
 	~Block() {};
 
-	void Initialize(TransformEular t);
+	void Initialize(TransformEular t, AABB aabb);
 
 	void Update();
 
 	void OnCollision(ICollider* c)override;
 
+
 private:
 
+	
 };

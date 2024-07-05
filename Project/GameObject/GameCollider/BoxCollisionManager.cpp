@@ -47,6 +47,15 @@ void BoxCollisionManager::CheckAllCollisoin()
 
 }
 
+float BoxCollisionManager::CalculateAngle(float x, float y)
+{
+	float angle = std::acosf(x / std::sqrt(x * x + y * y)) * (180.0f / static_cast<float>(std::numbers::pi));
+	if (x < 0) {
+		angle = 360.0f - angle;
+	}
+	return NomalizeDegree(angle);
+}
+
 float BoxCollisionManager::NomalizeDegree(float theta)
 {
 	while (theta < 0.0f) {
@@ -158,18 +167,20 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 
 	//b‚Ì‘ÎŠpü‚ÌŠp“xŽZo
 	//xRT/yRB/zLT/wLB
+
 	Math::Vector::Vector4 vertexDegrees = {
-	std::atan2(b->GetAABB().max.y, b->GetAABB().max.x) * (180.0f / float(std::numbers::pi)),
-	std::atan2(b->GetAABB().min.y, b->GetAABB().max.x) * (180.0f / float(std::numbers::pi)),
-	std::atan2(b->GetAABB().max.y, b->GetAABB().min.x) * (180.0f / float(std::numbers::pi)),
-	std::atan2(b->GetAABB().min.y, b->GetAABB().min.x) * (180.0f / float(std::numbers::pi))
+		std::atan2(b->GetAABB().max.y, b->GetAABB().max.x)* (180.0f / float(std::numbers::pi)),
+		std::atan2(b->GetAABB().min.y, b->GetAABB().max.x)* (180.0f / float(std::numbers::pi)),
+		std::atan2(b->GetAABB().max.y, b->GetAABB().min.x)* (180.0f / float(std::numbers::pi)),
+		std::atan2(b->GetAABB().min.y, b->GetAABB().min.x)* (180.0f / float(std::numbers::pi))
 	};
+
 	vertexDegrees.x = NomalizeDegree(vertexDegrees.x);
 	vertexDegrees.y = NomalizeDegree(vertexDegrees.y);
 	vertexDegrees.z = NomalizeDegree(vertexDegrees.z);
 	vertexDegrees.w = NomalizeDegree(vertexDegrees.w);
 
-	float theta = atan2(a->GetpTransform().translate.y - b->GetpTransform().translate.y, a->GetpTransform().translate.x - b->GetpTransform().translate.x);
+	float theta =atan2(a->GetpTransform().translate.y - b->GetpTransform().translate.y, a->GetpTransform().translate.x - b->GetpTransform().translate.x);
 	theta = theta * (180.0f / float(std::numbers::pi));
 	theta = NomalizeDegree(theta);
 

@@ -2,51 +2,38 @@
     "name": "scene",
     "objects": [
         {
-            "type": "MESH",
-            "name": "Cube",
-            "file_name": "Block",
-            "objectType": "Map",
+            "type": "CAMERA",
+            "name": "Camera",
+            "file_name": "Box",
+            "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    0.0,
-                    0.0,
-                    0.0
+                    7.358891487121582,
+                    -6.925790786743164,
+                    4.958309173583984
                 ],
                 "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
+                    63.559303283691406,
+                    -2.664711473698844e-06,
+                    46.69194793701172
                 ],
                 "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.001",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
                     1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Player",
+            "file_name": "DebugTestSphere",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
                     0.0,
-                    0.0
+                    0.0,
+                    3.061379909515381
                 ],
                 "rotate": [
                     0.0,
@@ -54,9 +41,9 @@
                     0.0
                 ],
                 "scale": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             },
             "collider": {
@@ -71,18 +58,56 @@
                     2.0,
                     2.0
                 ]
-            }
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "PlayerGun",
+                    "file_name": "PlayerTestGun",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            0.0,
+                            0.0,
+                            -0.018993854522705078
+                        ],
+                        "rotate": [
+                            90.00000762939453,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "collider": {
+                        "type": "Box",
+                        "center": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "size": [
+                            2.0,
+                            2.0,
+                            2.0
+                        ]
+                    }
+                }
+            ]
         },
         {
             "type": "MESH",
-            "name": "Cube.002",
-            "file_name": "Block",
-            "objectType": "Map",
+            "name": "EnemyWalk",
+            "file_name": "DfCube",
+            "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -1.0,
+                    8.0,
                     0.0,
-                    0.0
+                    5.0
                 ],
                 "rotate": [
                     0.0,
@@ -90,9 +115,9 @@
                     0.0
                 ],
                 "scale": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             },
             "collider": {
@@ -113,10 +138,11 @@
             "type": "MESH",
             "name": "Cube.003",
             "file_name": "Block",
-            "objectType": "Map",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    2.0,
+                    0.0,
                     0.0,
                     0.0
                 ],
@@ -126,295 +152,7 @@
                     0.0
                 ],
                 "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.004",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    3.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.005",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    4.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.006",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    5.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.007",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    6.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "球",
-            "file_name": "DebugTestSphere",
-            "objectType": "Player",
-            "transform": {
-                "translate": [
-                    1.0,
-                    0.0,
-                    2.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.008",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    2.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.009",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    2.0,
-                    0.0,
-                    2.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
-                    0.5,
-                    0.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.010",
-            "file_name": "Block",
-            "objectType": "Map",
-            "transform": {
-                "translate": [
-                    -1.0,
-                    0.0,
-                    1.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    0.5,
+                    10.0,
                     0.5,
                     0.5
                 ]

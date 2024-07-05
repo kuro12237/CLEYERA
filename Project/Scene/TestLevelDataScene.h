@@ -48,12 +48,14 @@ private:
 
 	void Gravitys();
 
+	GameObjectManager* gameObjectManager_;
+
 	CameraData camera_{};
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
 
-	unique_ptr<LevelData> levelData_ = nullptr;
+	shared_ptr<LevelData> levelData_ = nullptr;
 
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 

@@ -44,6 +44,8 @@ public:
 
 	void SetId(uint32_t id) { id_ = id; };
 
+	void SetAABB(AABB aabb) { aabb_ = aabb; }
+
 	void SetExtrusion(Math::Vector::Vector2 v) {
 		Math::Vector::Vector3 va = Math::Vector::Add({ extrusion_.x, extrusion_.y, 0.0f }, { v.x,v.y,0.0f });
 		extrusion_.x = va.x, extrusion_.y = va.y;

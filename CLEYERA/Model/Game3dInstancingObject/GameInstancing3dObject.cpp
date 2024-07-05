@@ -26,6 +26,8 @@ void GameInstancing3dObject::Transfar()
 		{
 			if (!p->GetBreakFlag())
 			{
+			
+				materialData_.uvTransform = Math::Matrix::AffineMatrix(p->GetUvScale(), Math::Vector::Vector3(0, 0, 0), { 0,0,0 });
 				instancingData_[count].WVP = p->GetMatrix();
 				instancingData_[count].world = p->GetMatrix();
 				count++;

@@ -17,6 +17,7 @@ public:
 
 private:
 
+	float CalculateAngle(float x, float y);
 	float NomalizeDegree(float theta);
 
 	AABB SettingAABBParam(ICollider* c);

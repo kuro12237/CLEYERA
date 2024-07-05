@@ -6,7 +6,7 @@ SceneFileLoader* SceneFileLoader::GetInstance()
 	return &instance;
 }
 
-unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
+shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 {
 
 	ifstream file = FileLoader::JsonLoadFile("Resources/levelData/" + filePath);
@@ -19,8 +19,12 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 	string name = deserialized["name"].get<string>();
 	assert(name.compare("scene") == 0);
 
-	unique_ptr<LevelData>  levelData = make_unique<LevelData>();
+	if (!levelData)
+	{
+		levelData = make_unique<LevelData>();
 
+	}
+	
 
 	for (nlohmann::json& object : deserialized["objects"])
 	{
@@ -33,7 +37,7 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 			LoadMeshData(levelData, object);
 		}
 
-		if (type.compare("Camera")==0)
+		if (type.compare("Camera") == 0)
 		{
 			LoadCameraData(levelData, object);
 		}
@@ -43,7 +47,24 @@ unique_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 	return levelData;
 }
 
-void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::json& object)
+AABB SceneFileLoader::LoadCollider(nlohmann::json& object)
+{
+	AABB aabb = {};
+	string type = object["type"].get<string>();
+	if (type == "Box")
+	{
+		aabb.max.x = float(object["size"][0]);
+		aabb.max.y = float(object["size"][1]);
+		aabb.max.z = float(object["size"][2]);
+		aabb.min.x = -float(object["size"][0]);
+		aabb.min.y = -float(object["size"][1]);
+		aabb.min.z = -float(object["size"][2]);
+
+	}
+	return aabb;
+}
+
+void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::json& object)
 {
 	shared_ptr<Game3dObjectData> obj3dData = {};
 	shared_ptr<Game3dInstancingObjectData> obj3dInstancingData = {};
@@ -56,11 +77,6 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 	if (drawType.compare("Normal") == 0)
 	{
 		string name = object["name"].get<string>();
-		if (levelData->obj3dData.find(objectName) != levelData->obj3dData.end())
-		{
-			assert(0);
-		}
-		else
 		{
 			obj3dData = make_shared<Game3dObjectData>();
 
@@ -79,11 +95,15 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 				ModelManager::ModelLoadNormalMap();
 				modelHandle = ModelManager::LoadObjectFile(fileName);
 			}
-
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
-			//transform
+
+			if (object.contains("collider"))
+			{
+				AABB aabb = LoadCollider(object["collider"]);
+				obj3dData->SetAABB(aabb);
+			}
 
 			if (object.contains("children"))
 			{
@@ -103,12 +123,17 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 	//インスタンシング表示
 	if (drawType.compare("Instancing") == 0)
 	{
-		string objectINstancingGrop = object["instancingObjName"].get<string>();
+		string objectINstancingGrop = object["InstancingObjName"].get<string>();
 		if (levelData->objInstancing3dData.find(objectINstancingGrop) != levelData->objInstancing3dData.end())
 		{
+			
 			nlohmann::json& transform = object["transform"];
+
+			AABB aabb = LoadCollider(object["collider"]);
 			TransformEular transformEular = GetTransform(transform);
+			
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
+			transforms->SetAABB(aabb);
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
 			levelData->objInstancing3dData[objectINstancingGrop]->PushBackTransform(transforms);
@@ -138,11 +163,14 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 
 			obj3dInstancingData->Initialize(objectINstancingGrop, modelHandle);
 
+			AABB aabb = LoadCollider(object["collider"]);
+		
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
-			//transform
+			
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
+			transforms->SetAABB(aabb);
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
 			obj3dInstancingData->PushBackTransform(transforms);
@@ -156,7 +184,7 @@ void SceneFileLoader::LoadMeshData(unique_ptr<LevelData>& levelData, nlohmann::j
 	}
 }
 
-void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, shared_ptr<Game3dObjectData>& data, nlohmann::json object)
+void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr<Game3dObjectData>& data, nlohmann::json object)
 {
 	shared_ptr<Game3dObjectData> obj3dData = {};
 	shared_ptr<Game3dInstancingObjectData> obj3dInstancingData = {};
@@ -170,11 +198,7 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, shared_ptr
 	if (drawType.compare("Normal") == 0)
 	{
 		string name = object["name"].get<string>();
-		if (levelData->obj3dData.find(objectName) != levelData->obj3dData.end())
-		{
-			assert(0);
-		}
-		else
+
 		{
 			obj3dData = make_shared<Game3dObjectData>();
 			obj3dData->SetObjName(objectName);
@@ -196,7 +220,7 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, shared_ptr
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
-	
+
 
 			if (object.contains("children"))
 			{
@@ -214,7 +238,7 @@ void SceneFileLoader::LoadObj3dData(unique_ptr<LevelData>& levelData, shared_ptr
 
 }
 
-void SceneFileLoader::LoadCameraData(unique_ptr<LevelData>& levelData, nlohmann::json& object)
+void SceneFileLoader::LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object)
 {
 	GameCameraData data;
 	object, levelData;

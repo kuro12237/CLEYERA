@@ -37,6 +37,8 @@ public:
 
 	void SetParent(const WorldTransform& wt) { worldTransform_.SetParent(wt); }
 
+	void SetAABB(AABB aabb) { aabb_ = aabb; }
+
 #pragma endregion
 
 #pragma region Get
@@ -51,6 +53,7 @@ public:
 
 	Game3dObjectDesc GetDesc() { return objectDesc_; }
 
+	AABB GetAABB() { return aabb_; }
 #pragma endregion
 
 private:
@@ -61,5 +64,6 @@ private:
 	unique_ptr<Game3dObject>gameObject_;
 	uint32_t modelHandle_ = 0;
 	vector<string>childName_;
+	AABB aabb_;
 };
 

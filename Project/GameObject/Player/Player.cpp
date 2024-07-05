@@ -133,7 +133,6 @@ void Player::Move()
 
 	const float Speed = 0.1f;
 	velocity_.x = Ljoy.x * Speed;
-	velocity_.y = Ljoy.y * Speed;
 }
 
 void Player::Shoot()
