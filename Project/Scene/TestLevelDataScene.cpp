@@ -174,7 +174,7 @@ void TestLevelDataScene::Collision()
 void TestLevelDataScene::Gravitys()
 {
 	gravityManager_->ClearList();
-	gravityManager_->PushList(player_->GetPlayerCore());
+	//gravityManager_->PushList(player_->GetPlayerCore());
 	if (enemyWalk_)
 	{
 		gravityManager_->PushList(enemyWalk_.get());

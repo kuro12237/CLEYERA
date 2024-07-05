@@ -10,6 +10,7 @@ void Player::Initialize()
 	state_->Initialize(this);
 
 	id_ = kPlayerId;
+	
 }
 
 void Player::ImGuiUpdate()
@@ -29,12 +30,17 @@ void Player::ImGuiUpdate()
 			velocity_ = {};
 			transform_.translate = { 0.0f,4.0f,0.0f };
 		}
+
+		ImGui::DragFloat3("min", &aabb_.min.x, 0.1f);
+		ImGui::DragFloat3("max", &aabb_.max.x, 0.1f);
 		ImGui::TreePop();
 	}
 }
 
 void Player::Update()
 {
+
+	//velocity_ = {};
 	shootTimerFlame_++;
 	if (state_)
 	{
@@ -50,7 +56,6 @@ void Player::Update()
 	{
 		DamageUpdate();
 	}
-
 	isShoot_ = false;
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
@@ -128,6 +133,7 @@ void Player::Move()
 
 	const float Speed = 0.1f;
 	velocity_.x = Ljoy.x * Speed;
+	velocity_.y = Ljoy.y * Speed;
 }
 
 void Player::Shoot()

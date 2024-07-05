@@ -17,14 +17,16 @@ public:
 
 private:
 
+	float NomalizeDegree(float theta);
+
 	AABB SettingAABBParam(ICollider* c);
 	bool IsCollision(const AABB& aabb1, const AABB& aabb2);
 
 	//élï˚å¸ÇÃîªíË
-	bool CheckBottomCollsion(float t,ICollider *a,ICollider*b);
-	bool CheckTopCollision(float t, ICollider* a, ICollider* b);
-	bool CheckLeftCollision(float t, ICollider* a, ICollider* b);
-	bool CheckRightCollision(float t, ICollider* a, ICollider* b);
+	bool CheckBottomCollsion(float t,Math::Vector::Vector4 bDegree);
+	bool CheckTopCollision(float t, Math::Vector::Vector4 bDegree);
+	bool CheckLeftCollision(float t, Math::Vector::Vector4 bDegree);
+	bool CheckRightCollision(float t, Math::Vector::Vector4 bDegree);
 
 	//âüÇµèoÇµ
 	float BottomExtrusion(ICollider* a, ICollider* b);
