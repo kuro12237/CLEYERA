@@ -7,34 +7,35 @@ void EnemyWalk::Initialize()
 	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
 	isExtrusion_ = true;
 	id_ = kEnemyWalkId;
+
+	state_ = make_unique<EnemyWalkStateMove>();
+	state_->Initialize();
 }
 
 void EnemyWalk::Update()
 {
+	state_->Update(this);
+
 	ClearExtrusion();
 	ClearHitDirection();
-
-	if (Input::GetInstance()->PushKey(DIK_UP))
-	{
-		transform_.translate.y += 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_DOWN))
-	{
-		transform_.translate.y -= 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_RIGHT))
-	{
-		transform_.translate.x += 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_LEFT))
-	{
-		transform_.translate.x -= 0.1f;
-	}
+	IsHit_ = false;
 }
 
 void EnemyWalk::OnCollision(ICollider* c)
 {
 	c;
+	IsHit_ = true;
+
+	if (kPlayerBullet ==c->GetId())
+	{
+		isDead_ = true;
+	}
+
+	if (kPlayerId == c->GetId())
+	{
+
+		isDead_ = true;
+	}
 
 	if (kNormalBlock == c->GetId()) {
 		for (auto& hitDirection : hitDirection_)

@@ -2,6 +2,7 @@
 #include"STransformEular.h"
 #include"Pch.h"
 #include"Input.h"
+#include"PostEffect/PostEffect.h"
 
 #include"Utility/DeltaTimer/DeltaTimer.h"
 #include"Utility/ObjectId/GameObjectId.h"
@@ -12,6 +13,7 @@
 
 #include"state/IPlayerState.h"
 #include"state/PlayerStateNone.h"
+#include"state/PlayerStateRock.h"
 
 class Player :public IObjectData, public ICollider
 {
@@ -47,15 +49,32 @@ public:
 
 #pragma endregion
 
+#pragma region Set
+
+	void SetRockState(bool f) { isRockState_ = f; }
+
+	void SetDamageFlag(bool f) { isDamage_ = f; }
+
+#pragma endregion
+
 private:
+
+	void DamageUpdate();
 
 	void ShootCoolTimer();
 
 	unique_ptr<IPlayerState>state_ = nullptr;
 
 	bool isJamp_ = false;
-
 	bool isShoot_ = false;
+	bool isRockState_ = false;
+	bool isDamage_ = false;
+
+	float damegeFlame_ = 0.0f;
+	uint32_t damegeCoolTimer_ = 0;
+	uint32_t damageCoolTimerMax_ = 2;
+
+	float vinatteFactor_ = 1.0f;
 
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;

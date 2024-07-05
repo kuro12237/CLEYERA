@@ -27,7 +27,7 @@ public:
 
 	void SetGameObject(unique_ptr<Game3dObject> data) { gameObject_ = move(data); }
 
-	void SetGameObjeDesc(Game3dObjectDesc desc) { objectDesc_ = desc; }
+	void SetGameObjeDesc(Game3dObjectDesc desc) { gameObject_->SetDesc( desc); }
 
 	void SetChildName(vector<string>name) { childName_ = name; }
 
@@ -48,6 +48,8 @@ public:
 	WorldTransform& GetWorldTransform() { return worldTransform_; }
 
 	unique_ptr<Game3dObject>& GetGameObject() { return gameObject_; }
+
+	Game3dObjectDesc GetDesc() { return objectDesc_; }
 
 #pragma endregion
 

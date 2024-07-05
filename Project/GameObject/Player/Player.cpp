@@ -46,13 +46,26 @@ void Player::Update()
 		isJamp_ = true;
 	}
 
+	if (isDamage_)
+	{
+		DamageUpdate();
+	}
+
 	isShoot_ = false;
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
 
 void Player::OnCollision(ICollider* c)
 {
+	if (!isDamage_)
+	{
+		if (c->GetId() == kEnemyWalkId)
+		{
+			ChangeState(make_unique<PlayerStateRock>());
 
+			isDamage_ = true;
+		}
+	}
 
 	if (c->GetId() == kNormalBlock)
 	{
@@ -68,7 +81,6 @@ void Player::OnCollision(ICollider* c)
 				velocity_ = {};
 			}
 		}
-
 		transform_.translate.x += extrusion_.x;
 		transform_.translate.y += extrusion_.y;
 	}
@@ -84,6 +96,10 @@ void Player::ChangeState(unique_ptr<IPlayerState> newState)
 
 void Player::Jamp()
 {
+	if (isRockState_)
+	{
+		return;
+	}
 	if (!isJamp_)
 	{
 		isJamp_ = true;
@@ -93,23 +109,25 @@ void Player::Jamp()
 
 void Player::Move()
 {
+	if (isRockState_)
+	{
+		return;
+	}
+
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
 
 	if (Ljoy.x >= -0.1f && Ljoy.x <= 0.1f)
 	{
 		Ljoy.x = {};
-		velocity_ = {};
 	}
 	if (Ljoy.y >= -0.1f && Ljoy.y <= 0.1f)
 	{
 		Ljoy.y = {};
-		
+
 	}
 
-	velocity_ = {};
 	const float Speed = 0.1f;
 	velocity_.x = Ljoy.x * Speed;
-	velocity_.y = Ljoy.y * Speed;
 }
 
 void Player::Shoot()
@@ -119,6 +137,25 @@ void Player::Shoot()
 		isShoot_ = true;
 		shootTimerFlame_ = 0;
 	}
+}
+
+void Player::DamageUpdate()
+{
+
+	PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, true);
+	PostEffect::GetInstance()->SetVignetteScale(64.0f);
+	PostEffect::GetInstance()->SetVignetteFactor(vinatteFactor_);
+
+	damegeCoolTimer_ += DeltaTimer(damegeFlame_);
+	vinatteFactor_ -= 0.007f;
+
+	if (damegeCoolTimer_ >= damageCoolTimerMax_)
+	{
+		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
+		PostEffect::GetInstance()->SetVignetteFactor(0.0f);
+		isDamage_ = false;
+	}
+
 }
 
 void Player::ShootCoolTimer()

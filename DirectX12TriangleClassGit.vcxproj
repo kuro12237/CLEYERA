@@ -113,6 +113,7 @@
     <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
     <ClCompile Include="Project\GameObject\collisionTest\CollisionTestBox.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
+    <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
     <ClCompile Include="Project\GameObject\GravityManager\GravityManager.cpp" />
@@ -132,6 +133,7 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateNone.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
     <ClCompile Include="Project\Scene\TestScene.cpp" />
@@ -233,6 +235,8 @@
     <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
     <ClInclude Include="Project\GameObject\collisionTest\CollisionTestBox.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
     <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />
     <ClInclude Include="Project\GameObject\GameCollider\ICollider.h" />
     <ClInclude Include="Project\GameObject\GravityManager\GravityManager.h" />
@@ -256,6 +260,7 @@
     <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
     <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerStateNone.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\TestLevelDataScene.h" />

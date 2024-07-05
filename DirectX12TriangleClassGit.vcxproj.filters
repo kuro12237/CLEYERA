@@ -483,6 +483,8 @@
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
     <ClCompile Include="Project\GameObject\collisionTest\CollisionTestBox.cpp" />
+    <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -793,6 +795,9 @@
     <ClInclude Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\Game3dObjectData.h" />
     <ClInclude Include="Project\GameObject\collisionTest\CollisionTestBox.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerStateRock.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

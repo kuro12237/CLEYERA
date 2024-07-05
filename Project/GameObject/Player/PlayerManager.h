@@ -7,6 +7,7 @@
 #include"Reticle/command/PlayerReticleCommandHandler.h"
 #include"Gun/PlayerGun.h"
 #include"Bullet/PlayerBullet.h"
+#include"Utility/RandomGenerator/RandomGenerator.h"
 
 class PlayerManager
 {

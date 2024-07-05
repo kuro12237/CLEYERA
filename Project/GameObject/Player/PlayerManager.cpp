@@ -79,8 +79,19 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	data->Initialize(transform, {}, modelHandle);
 
 	shared_ptr<PlayerBullet> b = make_shared<PlayerBullet>();
-	//velocity‚ÌŒvŽZ
+
+	//’e‚ÌŠgŽU”ÍˆÍŒvŽZ
+	//xMin/yMax
+	const Math::Vector::Vector2 spreadRangeMax = { -0.5f,0.5f };
+	Math::Vector::Vector2 spreadRange = { 
+		RandomGenerator::GetFloat(spreadRangeMax.x,spreadRangeMax.y),
+		RandomGenerator::GetFloat(spreadRangeMax.x,spreadRangeMax.y)
+	};
+
+    //velocity‚ÌŒvŽZ
 	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(reticleWorldPos,playerWorldPos);
+	velocity.x += spreadRange.x;
+	velocity.y += spreadRange.y;
 	velocity = Math::Vector::Normalize(velocity);
 
 	b->SetPlayerSpeed(playerCore_->GetVelocity());

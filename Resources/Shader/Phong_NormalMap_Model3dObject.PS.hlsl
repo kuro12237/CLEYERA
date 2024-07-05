@@ -71,9 +71,14 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     }
 
-    output.color.rgb = pTotalDffuse + pTotalSpecular;
+    float32_t4 resultColor;
+    resultColor.rgb = pTotalDffuse + pTotalSpecular;
+    resultColor.a = gMaterial.color.a * textureColor.a;
 
-    output.color.a = gMaterial.color.a * textureColor.a;
+    float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));
+    float32_t3 grayscaleColor = lerp(resultColor.rgb, float32_t3(grayscaleFactor, grayscaleFactor, grayscaleFactor), gMaterial.grayFactor);
+    output.color.rgb = grayscaleColor;
+    output.color.a = resultColor.a;
     
     output.dfColor = gMaterial.color * textureColor;
     output.normalColor = float32_t4(N.rgb, 1);
