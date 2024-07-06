@@ -121,10 +121,6 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 						LoadObj3dData(levelData, obj3dData, child[i]);
 					}
 					else
-					{
-						int a = 0;
-						a = 1;
-					}
 
 				}
 			}
