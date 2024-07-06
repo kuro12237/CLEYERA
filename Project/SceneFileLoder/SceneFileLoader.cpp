@@ -114,7 +114,18 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 
 				for (size_t i = 0; i < child.size(); i++)
 				{
-					LoadObj3dData(levelData, obj3dData, child[i]);
+					std::string type = child[i]["type"].get<string>();
+
+					if (type.compare("MESH") == 0)
+					{
+						LoadObj3dData(levelData, obj3dData, child[i]);
+					}
+					else
+					{
+						int a = 0;
+						a = 1;
+					}
+
 				}
 			}
 			//•Û‘¶
@@ -131,13 +142,12 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 		{
 
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
-		
+
 			AABB aabb = LoadCollider(object["collider"]);
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
-
-			aabb.max = Math::Vector::Multiply(transformEular.scale, 0.5f);
-			aabb.min = Math::Vector::Multiply(transformEular.scale, 0.5f);
+			aabb.max = transformEular.scale;
+			aabb.min = transformEular.scale;
 			aabb.min = Math::Vector::Multiply(aabb.min, -1.0f);
 			transforms->SetAABB(aabb);
 			transforms->SetTransformEular(transformEular);
@@ -179,7 +189,7 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			AABB aabb = LoadCollider(object["collider"]);
 			aabb.max = transformEular.scale;
 			aabb.min = transformEular.scale;
-			aabb.min = Math::Vector::Multiply(aabb.min,-1.0f);
+			aabb.min = Math::Vector::Multiply(aabb.min, -1.0f);
 			transforms->SetAABB(aabb);
 
 			transforms->Update();

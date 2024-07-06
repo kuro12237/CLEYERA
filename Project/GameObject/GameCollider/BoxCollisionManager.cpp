@@ -100,7 +100,7 @@ bool BoxCollisionManager::CheckBottomCollsion(float t, Math::Vector::Vector4 bDe
 	float RTtheta = bDegree.x;
 	float LTtheta = bDegree.z;
 
-	if (t > RTtheta && t < LTtheta) {
+	if (t >= RTtheta+1.0f && t <= LTtheta-1.0f) {
 		return true;
 	}
 	return false;
@@ -167,7 +167,6 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 
 	//bÇÃëŒäpê¸ÇÃäpìxéZèo
 	//xRT/yRB/zLT/wLB
-
 	Math::Vector::Vector4 vertexDegrees = {
 		std::atan2(b->GetAABB().max.y, b->GetAABB().max.x)* (180.0f / float(std::numbers::pi)),
 		std::atan2(b->GetAABB().min.y, b->GetAABB().max.x)* (180.0f / float(std::numbers::pi)),
@@ -198,9 +197,8 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 			b->PushBackHitDirection(TOP);
 			extrusionB.y = TopExtrusion(a, b);
 		}
-	}
+	}//è„
 
-	//è„
 	if (CheckTopCollision(theta, vertexDegrees))
 	{
 		//è„

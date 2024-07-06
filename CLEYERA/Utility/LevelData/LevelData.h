@@ -14,7 +14,6 @@ struct GameCameraData
 	CameraData camera;
 	WorldTransform worldTransform;
 	bool isParent = false;
-
 };
 
 struct LevelData
@@ -22,4 +21,5 @@ struct LevelData
 	uint32_t objectNum = 0;
 	std::map<string,shared_ptr<Game3dObjectData>> obj3dData;
 	std::map<string,shared_ptr<Game3dInstancingObjectData>>objInstancing3dData;
+	std::map<string, shared_ptr<GameCameraData>>cameraData;
 };
