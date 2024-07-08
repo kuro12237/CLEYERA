@@ -37,7 +37,7 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 			LoadMeshData(levelData, object);
 		}
 
-		if (type.compare("Camera") == 0)
+		if (type.compare("CAMERA") == 0)
 		{
 			LoadCameraData(levelData, object);
 		}
@@ -54,11 +54,11 @@ AABB SceneFileLoader::LoadCollider(nlohmann::json& object)
 	if (type == "Box")
 	{
 		aabb.max.x = float(object["size"][0]) / 2.0f;
-		aabb.max.y = float(object["size"][1]) / 2.0f;
-		aabb.max.z = float(object["size"][2]) / 2.0f;
+		aabb.max.y = float(object["size"][2]) / 2.0f;
+		aabb.max.z = float(object["size"][1]) / 2.0f;
 		aabb.min.x = -float(object["size"][0]) / 2.0f;
-		aabb.min.y = -float(object["size"][1]) / 2.0f;
-		aabb.min.z = -float(object["size"][2]) / 2.0f;
+		aabb.min.y = -float(object["size"][2]) / 2.0f;
+		aabb.min.z = -float(object["size"][1]) / 2.0f;
 
 	}
 	return aabb;
@@ -102,9 +102,8 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			if (object.contains("collider"))
 			{
 				AABB aabb = LoadCollider(object["collider"]);
-				aabb.max = transformEular.scale;
-				aabb.min = transformEular.scale;
-				aabb.min = Math::Vector::Multiply(aabb.min, -1.0f);
+				aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
+				aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
 				obj3dData->SetAABB(aabb);
 			}
 
@@ -120,8 +119,6 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 					{
 						LoadObj3dData(levelData, obj3dData, child[i]);
 					}
-					else
-
 				}
 			}
 			//保存
@@ -142,9 +139,9 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			AABB aabb = LoadCollider(object["collider"]);
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
-			aabb.max = transformEular.scale;
-			aabb.min = transformEular.scale;
-			aabb.min = Math::Vector::Multiply(aabb.min, -1.0f);
+			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
+			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
+
 			transforms->SetAABB(aabb);
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
@@ -183,9 +180,9 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			transforms->SetTransformEular(transformEular);
 
 			AABB aabb = LoadCollider(object["collider"]);
-			aabb.max = transformEular.scale;
-			aabb.min = transformEular.scale;
-			aabb.min = Math::Vector::Multiply(aabb.min, -1.0f);
+			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
+			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
+
 			transforms->SetAABB(aabb);
 
 			transforms->Update();
@@ -214,53 +211,85 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 	//通常表示
 	if (drawType.compare("Normal") == 0)
 	{
+		obj3dData = make_shared<Game3dObjectData>();
 		string name = object["name"].get<string>();
+		obj3dData->SetObjName(objectName);
 
+		std::string modelFileName;
+		Game3dObjectDesc objectDesc;
+		uint32_t modelHandle = 0;
+		vector<string>childName;
+
+		objectDesc.useLight = true;
+		//modelのファイル読み込み
+		if (object.contains("file_name"))
 		{
-			obj3dData = make_shared<Game3dObjectData>();
-			obj3dData->SetObjName(objectName);
+			string fileName = object["file_name"].get<string>();
+			ModelManager::ModelLoadNormalMap();
+			modelHandle = ModelManager::LoadObjectFile(fileName);
+		}
 
-			std::string modelFileName;
-			Game3dObjectDesc objectDesc;
-			uint32_t modelHandle = 0;
-			vector<string>childName;
+		//transformのGet
+		nlohmann::json& transform = object["transform"];
+		TransformEular transformEular = GetTransform(transform);
 
-			objectDesc.useLight = true;
-			//modelのファイル読み込み
-			if (object.contains("file_name"))
+
+		if (object.contains("children"))
+		{
+			nlohmann::json& child = object["children"];
+			for (size_t i = 0; i < child.size(); i++)
 			{
-				string fileName = object["file_name"].get<string>();
-				ModelManager::ModelLoadNormalMap();
-				modelHandle = ModelManager::LoadObjectFile(fileName);
-			}
+				std::string childType = child[i]["type"].get<string>();
 
-			//transformのGet
-			nlohmann::json& transform = object["transform"];
-			TransformEular transformEular = GetTransform(transform);
-
-
-			if (object.contains("children"))
-			{
-				nlohmann::json& child = object["children"];
-				for (size_t i = 0; i < child.size(); i++)
+				if (childType.compare("MESH") == 0)
 				{
 					LoadObj3dData(levelData, obj3dData, child[i]);
 				}
+				if (childType.compare("CAMERA") == 0)
+				{
+					LoadCameraData(levelData, child[i]);
+				}
 			}
-			//保存
-			obj3dData->Initialize(transformEular, objectDesc, modelHandle);
-			levelData->obj3dData[objectName] = move(obj3dData);
 		}
+		//保存
+		obj3dData->Initialize(transformEular, objectDesc, modelHandle);
+		levelData->obj3dData[objectName] = move(obj3dData);
+
 	}
 
 }
 
 void SceneFileLoader::LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object)
 {
-	GameCameraData data;
-	object, levelData;
+	shared_ptr<GameCameraData> cameraData;
 
+	//objectの名前
+	string name = object["name"].get<string>();
+	//transormGet
+	TransformEular transformEular = GetTransform(object["transform"]);
 
+	//data作成
+	cameraData = make_shared<GameCameraData>();
+	cameraData->Create(transformEular);
+
+	levelData->cameraData[name] = cameraData;
+}
+
+void SceneFileLoader::LoadChildCameraData(shared_ptr<LevelData>& levelData, shared_ptr<GameCameraData>& data, nlohmann::json& object)
+{
+	data;
+	shared_ptr<GameCameraData> cameraData;
+
+	//objectの名前
+	string name = object["name"].get<string>();
+	//transormGet
+	TransformEular transformEular = GetTransform(object["transform"]);
+
+	//data作成
+	cameraData = make_shared<GameCameraData>();
+	cameraData->Create(transformEular);
+	
+	levelData->cameraData[name] = cameraData;
 }
 
 TransformEular SceneFileLoader::GetTransform(nlohmann::json transform)

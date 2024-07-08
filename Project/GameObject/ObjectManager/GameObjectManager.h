@@ -34,6 +34,8 @@ public:
 	/// <param name="name"></param>
 	void InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data, string name);
 
+	void CameraUpdate(string name) { cameraData_[name]->Update(); }
+
 	/// <summary>
 	/// éwíËÇµÇ»Ç©Ç¡ÇΩÇ‡ÇÃÇÃçXêV
 	/// </summary>
@@ -49,7 +51,191 @@ public:
 
 	void ClearObj3dData(string name) { obj3dData_.erase(name); }
 
-	void ClearAllData();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void ClearAllData();
 
 #pragma region Get
 
@@ -63,6 +249,8 @@ public:
 
 	void SetParent(string parentName, string childName);
 
+	void CameraReset(string name);
+
 #pragma endregion
 
 
@@ -75,7 +263,7 @@ private:
 
 	std::map<string, shared_ptr<Game3dObjectData>> obj3dData_;
 	std::map<string, shared_ptr<Game3dInstancingObjectData>>objInstancing3dData_;
-	std::map<string, GameCameraData>cameraData_;
+	std::map<string, shared_ptr<GameCameraData>>cameraData_;
 
 #pragma region singleton
 

@@ -13,12 +13,16 @@ void TestLevelDataScene::Initialize()
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
 	camera_.UpdateMatrix();
-	CameraManager::GetInstance()->ResetCamera(camera_);
-
+	
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
+	gameObjectManager_->CameraReset("Camera");
+	CameraManager::GetInstance();
 	gameObjectManager_->Update();
+	//GameObjectManager::GetInstance()->CameraUpdate("Camera");
+
+	//CameraManager::GetInstance()->ResetCamera(camera_);
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
@@ -40,6 +44,7 @@ void TestLevelDataScene::Initialize()
 	gravityManager_ = make_shared<GravityManager>();
 	ModelManager::LoadObjectFile("PlayerNormalBullet");
 
+	
 	testBox_ = make_shared<CollisionTestBox>();
 	testBox_->Initialize();
 
@@ -104,15 +109,12 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	gameObjectManager_->Update();
 
-	camera_.translation_ = player_->GetPlayerCore()->GetTransform().translate;
-	camera_.translation_.z = camera_.translation_.z - 32.0f;
-
 	debugCamera_->Update();
-	camera_ = debugCamera_->GetData(camera_);
-	camera_.UpdateMatrix();
-
+	
+	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
+	
 }
 
 void TestLevelDataScene::PostProcessDraw()

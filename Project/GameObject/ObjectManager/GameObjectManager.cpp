@@ -10,7 +10,7 @@ void GameObjectManager::CopyData(LevelData* data)
 {
 	obj3dData_ = data->obj3dData;
 	objInstancing3dData_ = data->objInstancing3dData;
-
+	cameraData_ = data->cameraData;
 }
 
 void GameObjectManager::SetAllParents()
@@ -99,6 +99,7 @@ void GameObjectManager::Update()
 		//it.GameInstancingObject->Transfar();
 	}
 	instancingDataName_.clear();
+	cameraData_["Camera"]->Update();
 }
 
 void GameObjectManager::ImGuiUpdate()
@@ -160,6 +161,14 @@ shared_ptr<Game3dInstancingObjectData>& GameObjectManager::GetObjInstancingData(
 void GameObjectManager::SetParent(string parentName, string childName)
 {
 	obj3dData_[childName]->SetParent(obj3dData_[parentName]->GetWorldTransform());
+}
+
+void GameObjectManager::CameraReset(string name)
+{
+	cameraData_[name]->Update();
+	CameraManager::GetInstance()->ResetCamera(cameraData_[name]->GetCamera());
+	CameraManager::GetInstance();
+	cameraData_;
 }
 
 void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData> &data)

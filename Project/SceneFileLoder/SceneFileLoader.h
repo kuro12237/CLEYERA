@@ -8,7 +8,7 @@
 class SceneFileLoader
 {
 public:
-	
+
 	static SceneFileLoader* GetInstance();
 
 	shared_ptr<LevelData> ReLoad(const string& filePath);
@@ -17,11 +17,14 @@ private:
 
 	AABB LoadCollider(nlohmann::json& object);
 
-	void LoadMeshData(shared_ptr<LevelData>  &levelData, nlohmann::json& object);
 
-	void LoadObj3dData(shared_ptr<LevelData>& levelData,shared_ptr<Game3dObjectData>  &data,nlohmann::json object);
+	void LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::json& object);
+
+	void LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr<Game3dObjectData>& data, nlohmann::json object);
 
 	void LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object);
+
+	void LoadChildCameraData(shared_ptr<LevelData>& levelData, shared_ptr<GameCameraData>& data, nlohmann::json& object);
 
 	TransformEular GetTransform(nlohmann::json transform);
 

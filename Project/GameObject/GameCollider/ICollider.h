@@ -18,6 +18,7 @@ public:
 
 	virtual void OnCollision(ICollider* c) = 0;
 
+
 	void ClearExtrusion() { extrusion_={}; }
 
 	void ClearHitDirection() { hitDirection_.clear(); }

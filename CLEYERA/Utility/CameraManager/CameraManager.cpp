@@ -13,6 +13,7 @@ void CameraManager::Initialize()
 
 void CameraManager::Update()
 {
+
 }
 
 void CameraManager::CommandCall(uint32_t num)

@@ -4,13 +4,15 @@ void Player::Initialize()
 {
 	SetName("Player");
 	SetObjectData(this->transform_);
+
 	this->isExtrusion_ = true;
 
 	state_ = make_unique<PlayerStateNone>();
 	state_->Initialize(this);
 
 	id_ = kPlayerId;
-	
+
+	aabb_ = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetAABB();
 }
 
 void Player::ImGuiUpdate()

@@ -7,14 +7,7 @@
 
 #include"Game3dInstancingObjectData.h"
 #include"Game3dObjectData.h"
-
-struct GameCameraData
-{
-	string type;
-	CameraData camera;
-	WorldTransform worldTransform;
-	bool isParent = false;
-};
+#include"GameCameraData.h"
 
 struct LevelData
 {
