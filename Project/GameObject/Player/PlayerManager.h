@@ -8,6 +8,7 @@
 #include"Gun/PlayerGun.h"
 #include"Bullet/PlayerBullet.h"
 #include"Utility/RandomGenerator/RandomGenerator.h"
+#include"PlayerCamera/PlayerCamera.h"
 
 class PlayerManager
 {
@@ -31,6 +32,8 @@ public:
 
 	PlayerGun* GetGun() { return gun_.get(); }
 
+	PlayerCamera* GetCamera(){ return camera_.get(); }
+
 	vector<shared_ptr<PlayerBullet>>GetBullet() { return bullets_; }
 #pragma endregion
 
@@ -48,6 +51,8 @@ private:
 	shared_ptr<Player>playerCore_ = nullptr;
 	unique_ptr<PlayerReticle>reticle_ = nullptr;
 	unique_ptr<PlayerGun>gun_ = nullptr;
+	unique_ptr<PlayerCamera>camera_ = nullptr;
+
 	vector<shared_ptr<PlayerBullet>>bullets_{};
 	queue<uint32_t>deadBulletIndex_;
 

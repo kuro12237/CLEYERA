@@ -112,7 +112,6 @@
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\GameObject\Block\Block.cpp" />
     <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
-    <ClCompile Include="Project\GameObject\collisionTest\CollisionTestBox.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
@@ -236,7 +235,6 @@
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Block\Block.h" />
     <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
-    <ClInclude Include="Project\GameObject\collisionTest\CollisionTestBox.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
@@ -253,6 +251,7 @@
     <ClInclude Include="Project\GameObject\Player\command\PlayerShootCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerMoveCommand.h" />
+    <ClInclude Include="Project\GameObject\Player\command\PlayerSquatCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Gun\PlayerGun.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
     <ClInclude Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.h" />

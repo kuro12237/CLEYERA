@@ -7,13 +7,13 @@ class GameObjectManager
 {
 public:
 
-	static GameObjectManager *GetInstance();
+	static GameObjectManager* GetInstance();
 
 	/// <summary>
 	/// levelDataの中身をコピー
 	/// </summary>
 	/// <param name="data"></param>
-	void CopyData(LevelData*data);
+	void CopyData(LevelData* data);
 
 	/// <summary>
 	/// 作ったすべてのものに親子関係があるチェックあったら親子関係をつける
@@ -26,7 +26,7 @@ public:
 	/// 指定したobj名前のデータを更新
 	/// </summary>
 	/// <param name="name"></param>
-	void ObjDataUpdate(IObjectData *data);
+	void ObjDataUpdate(IObjectData* data);
 
 	/// <summary>
 	/// 指定したInstancing名前のデータを更新
@@ -34,7 +34,7 @@ public:
 	/// <param name="name"></param>
 	void InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data, string name);
 
-	void CameraUpdate(string name) { cameraData_[name]->Update(); }
+	void CameraUpdate(IObjectData* data);
 
 	/// <summary>
 	/// 指定しなかったものの更新
@@ -47,195 +47,11 @@ public:
 
 	void Draw();
 
-	void PushObj3dData(shared_ptr<Game3dObjectData> &data, string name) { obj3dData_[name] = move(data); };
+	void PushObj3dData(shared_ptr<Game3dObjectData>& data, string name) { obj3dData_[name] = move(data); };
 
 	void ClearObj3dData(string name) { obj3dData_.erase(name); }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void ClearAllData();
+	void ClearAllData();
 
 #pragma region Get
 
@@ -256,7 +72,7 @@ void ClearAllData();
 
 private:
 
-	void checkChildren(shared_ptr<Game3dObjectData>&data);
+	void checkChildren(shared_ptr<Game3dObjectData>& data);
 
 	vector<string>dataName_;
 	vector<string>instancingDataName_;

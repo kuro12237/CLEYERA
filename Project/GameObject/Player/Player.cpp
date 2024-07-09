@@ -110,7 +110,8 @@ void Player::Jamp()
 	if (!isJamp_)
 	{
 		isJamp_ = true;
-		velocity_.y = 0.25f;
+		const float jampMax = 0.35f;
+		velocity_.y = jampMax;
 	}
 }
 

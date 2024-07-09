@@ -81,6 +81,7 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			obj3dData = make_shared<Game3dObjectData>();
 
 			obj3dData->SetObjName(objectName);
+			obj3dData->SetObjectType("MESH");
 
 			std::string modelFileName;
 			Game3dObjectDesc objectDesc;
@@ -118,6 +119,10 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 					if (type.compare("MESH") == 0)
 					{
 						LoadObj3dData(levelData, obj3dData, child[i]);
+					}
+					if (type.compare("CAMERA") == 0)
+					{
+						LoadChildCameraData(levelData, obj3dData.get(), child[i]);
 					}
 				}
 			}
@@ -212,8 +217,8 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 	if (drawType.compare("Normal") == 0)
 	{
 		obj3dData = make_shared<Game3dObjectData>();
-		string name = object["name"].get<string>();
 		obj3dData->SetObjName(objectName);
+		obj3dData->SetObjectType("MESH");
 
 		std::string modelFileName;
 		Game3dObjectDesc objectDesc;
@@ -247,7 +252,7 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 				}
 				if (childType.compare("CAMERA") == 0)
 				{
-					LoadCameraData(levelData, child[i]);
+					LoadChildCameraData(levelData,obj3dData.get(), child[i]);
 				}
 			}
 		}
@@ -262,33 +267,29 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 void SceneFileLoader::LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object)
 {
 	shared_ptr<GameCameraData> cameraData;
-
 	//objectÇÃñºëO
 	string name = object["name"].get<string>();
 	//transormGet
 	TransformEular transformEular = GetTransform(object["transform"]);
-
 	//dataçÏê¨
 	cameraData = make_shared<GameCameraData>();
+	cameraData->SetObjectType("CAMERA");
 	cameraData->Create(transformEular);
-
 	levelData->cameraData[name] = cameraData;
 }
 
-void SceneFileLoader::LoadChildCameraData(shared_ptr<LevelData>& levelData, shared_ptr<GameCameraData>& data, nlohmann::json& object)
+void SceneFileLoader::LoadChildCameraData(shared_ptr<LevelData>& levelData, IGameObjectData* data, nlohmann::json& object)
 {
-	data;
 	shared_ptr<GameCameraData> cameraData;
-
 	//objectÇÃñºëO
 	string name = object["name"].get<string>();
+	data->PushBackChildren(name);
 	//transormGet
 	TransformEular transformEular = GetTransform(object["transform"]);
-
 	//dataçÏê¨
 	cameraData = make_shared<GameCameraData>();
+	cameraData->SetObjectType("MESH");
 	cameraData->Create(transformEular);
-	
 	levelData->cameraData[name] = cameraData;
 }
 

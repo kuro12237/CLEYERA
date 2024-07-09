@@ -22,7 +22,6 @@
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
-#include"GameObject/collisionTest/CollisionTestBox.h"
 
 class TestLevelDataScene :public IScene
 {
@@ -68,7 +67,5 @@ private:
 	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	shared_ptr<GravityManager>gravityManager_ = nullptr;
-
-	shared_ptr<CollisionTestBox>testBox_ = nullptr;
 
 };

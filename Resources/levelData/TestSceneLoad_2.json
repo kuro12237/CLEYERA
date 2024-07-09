@@ -19,7 +19,7 @@
                     0.0
                 ],
                 "scale": [
-                    10.0,
+                    20.0,
                     1.0,
                     1.0
                 ]
@@ -63,38 +63,15 @@
             }
         },
         {
-            "type": "CAMERA",
-            "name": "Camera",
-            "file_name": "Box",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    -0.42206907272338867,
-                    -15.6774320602417,
-                    3.9184329509735107
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
             "type": "MESH",
             "name": "Player",
             "file_name": "TestPlayer",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -3.1895182132720947,
                     0.0,
-                    3.369555711746216
+                    0.0,
+                    3.8042469024658203
                 ],
                 "rotate": [
                     0.0,
@@ -122,15 +99,39 @@
             },
             "children": [
                 {
+                    "type": "CAMERA",
+                    "name": "PlayerCamera",
+                    "file_name": "Box",
+                    "DrawType": "Instancing",
+                    "InstancingObjName": "Map",
+                    "transform": {
+                        "translate": [
+                            0.4703044891357422,
+                            -6.925790786743164,
+                            1.154062271118164
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                },
+                {
                     "type": "MESH",
                     "name": "PlayerGun",
                     "file_name": "PlayerTestGun",
                     "DrawType": "Normal",
                     "transform": {
                         "translate": [
-                            0.16846561431884766,
                             0.0,
-                            -0.6712424755096436
+                            0.0,
+                            -0.3504292964935303
                         ],
                         "rotate": [
                             90.00000762939453,
@@ -153,9 +154,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    4.921844959259033,
-                    0.0,
-                    2.8745505809783936
+                    4.5258026123046875,
+                    0.046619802713394165,
+                    8.741047859191895
                 ],
                 "rotate": [
                     0.0,
@@ -179,6 +180,237 @@
                     2.0,
                     2.0,
                     2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.001",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -10.0,
+                    0.0,
+                    8.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.002",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -21.0,
+                    0.0,
+                    19.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    20.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.003",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    21.0,
+                    0.0,
+                    19.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    20.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.004",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    10.0,
+                    0.0,
+                    17.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.005",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -1.0,
+                    0.0,
+                    24.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "SkyDome",
+            "file_name": "SkyDome",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    64.0,
+                    64.0,
+                    64.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Terrain",
+            "file_name": "Terrain",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    32.0,
+                    32.0,
+                    32.0
                 ]
             }
         }

@@ -21,10 +21,10 @@ private:
 	void LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::json& object);
 
 	void LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr<Game3dObjectData>& data, nlohmann::json object);
-
+	
 	void LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object);
 
-	void LoadChildCameraData(shared_ptr<LevelData>& levelData, shared_ptr<GameCameraData>& data, nlohmann::json& object);
+	void LoadChildCameraData(shared_ptr<LevelData>& levelData, IGameObjectData* data, nlohmann::json& object);
 
 	TransformEular GetTransform(nlohmann::json transform);
 
