@@ -4,14 +4,13 @@
 
 #include"Game3dInstancingObject/GameInstancing3dObject.h"
 #include"Transform/STransformEular.h"
+#include"IGameObjectData.h"
 
-class  Game3dObjectData
+class  Game3dObjectData:public IGameObjectData
 {
 public:
 
-
-	void PushBackChildren(string name) { childName_.push_back(name); }
-
+	
 	void Initialize(TransformEular transform, Game3dObjectDesc desc, uint32_t modelHandle);
 
 	void WtUpdate(TransformEular transform);
@@ -29,13 +28,8 @@ public:
 
 	void SetGameObjeDesc(Game3dObjectDesc desc) { gameObject_->SetDesc( desc); }
 
-	void SetChildName(vector<string>name) { childName_ = name; }
-
 	void SetMOdelHandle(uint32_t handle) { modelHandle_ = handle; }
 
-	void SetWorldTrasform(WorldTransform wt) { worldTransform_ = wt; }
-
-	void SetParent(const WorldTransform& wt) { worldTransform_.SetParent(wt); }
 
 	void SetAABB(AABB aabb) { aabb_ = aabb; }
 
@@ -43,11 +37,8 @@ public:
 
 #pragma region Get
 
-	vector<string> GetChildsName() { return childName_; }
-
+	
 	string GetObjectName() { return objectName_; }
-
-	WorldTransform& GetWorldTransform() { return worldTransform_; }
 
 	unique_ptr<Game3dObject>& GetGameObject() { return gameObject_; }
 
@@ -59,11 +50,9 @@ public:
 private:
 	std::string objectName_;
 	std::string modelFileName_;
-	WorldTransform worldTransform_;
 	Game3dObjectDesc objectDesc_;
 	unique_ptr<Game3dObject>gameObject_;
 	uint32_t modelHandle_ = 0;
-	vector<string>childName_;
 	AABB aabb_;
 };
 

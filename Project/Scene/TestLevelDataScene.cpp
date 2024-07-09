@@ -17,19 +17,17 @@ void TestLevelDataScene::Initialize()
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
-	gameObjectManager_->CameraReset("Camera");
+	gameObjectManager_->CameraReset("PlayerCamera");
 	CameraManager::GetInstance();
 	gameObjectManager_->Update();
-	//GameObjectManager::GetInstance()->CameraUpdate("Camera");
-
-	//CameraManager::GetInstance()->ResetCamera(camera_);
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
 	light_.radious = 128.0f;
 	light_.position.y = 64.0f;
+	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
-
+	
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
 	
@@ -42,20 +40,15 @@ void TestLevelDataScene::Initialize()
 	blockManager_->Initialize();
 
 	gravityManager_ = make_shared<GravityManager>();
-	ModelManager::LoadObjectFile("PlayerNormalBullet");
-
 	
-	testBox_ = make_shared<CollisionTestBox>();
-	testBox_->Initialize();
-
 }
 
 void TestLevelDataScene::Update(GameManager* Scene)
 {
 	Scene;
 #ifdef _USE_IMGUI
-	gameObjectManager_->ImGuiUpdate();
 
+	gameObjectManager_->ImGuiUpdate();
 	debugCamera_->ImGuiUpdate();
 
 	if (ImGui::TreeNode("light"))
@@ -71,12 +64,10 @@ void TestLevelDataScene::Update(GameManager* Scene)
 		Scene->ChangeState(new TestLevelDataScene());
 		return;
 	}
-	testBox_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
 
 	player_->Update();
-
 
 	if (enemyWalk_)
 	{
@@ -88,7 +79,6 @@ void TestLevelDataScene::Update(GameManager* Scene)
 			gameObjectManager_->ClearObj3dData(enemyWalk_->GetName());
 			enemyWalk_.reset();
 		}
-
 	}
 
 	blockManager_->Update();
@@ -96,15 +86,16 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	Gravitys();
 
 	Collision();
-	
-	gameObjectManager_->ObjDataUpdate(testBox_.get());
+
 	gameObjectManager_->ObjDataUpdate(player_->GetPlayerCore());
 	gameObjectManager_->ObjDataUpdate(player_->GetReticle());
 	gameObjectManager_->ObjDataUpdate(player_->GetGun());
+	gameObjectManager_->CameraUpdate(player_->GetCamera());
 
 	for (shared_ptr<PlayerBullet> &b : player_->GetBullet()) {
 		gameObjectManager_->ObjDataUpdate(b.get());
 	}
+
 	gameObjectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
 
 	gameObjectManager_->Update();
@@ -156,7 +147,6 @@ void TestLevelDataScene::Collision()
 	{
 		gameCollisionManager_->ListPushback(enemyWalk_.get());
 	}
-	gameCollisionManager_->ListPushback(testBox_.get());
 
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{

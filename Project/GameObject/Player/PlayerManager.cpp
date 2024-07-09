@@ -14,13 +14,15 @@ void PlayerManager::GetData(GameObjectManager* data)
 
 	gun_ = make_unique<PlayerGun>();
 	gun_->Initialize();
+
+	camera_ = make_unique<PlayerCamera>();
+	camera_->Initialize();
 }
 
 void PlayerManager::ImGuiUpdate()
 {
 	playerCore_->ImGuiUpdate();
 	reticle_->ImGuiUpdate();
-	gun_->Update();
 
 	ImGui::Text("PlayerBulletSize::%d", bullets_.size());
 	if (ImGui::Button("bulleSpown"))
@@ -41,6 +43,8 @@ void PlayerManager::Update()
 	reticleCommandHandler_->Handler();
 	reticleCommandHandler_->Exec(*reticle_);
 	reticle_->Update();
+
+	camera_->Update();
 
 	commandHandler_->Handler();
 	commandHandler_->CommandCoreExec(*playerCore_);

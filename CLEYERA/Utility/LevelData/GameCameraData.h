@@ -2,8 +2,9 @@
 #include"CameraData.h"
 #include"Transform/STransformEular.h"
 #include"WorldTransform.h"
+#include"IGameObjectData.h"
 
-class GameCameraData
+class GameCameraData :public IGameObjectData
 {
 public:
 
@@ -11,6 +12,9 @@ public:
 	~GameCameraData() {};
 
 	void Create(TransformEular t);
+
+
+	void WtUpdate(TransformEular transform);
 
 	void Update();
 
@@ -23,6 +27,5 @@ public:
 private:
 	string type_;
 	CameraData camera_;
-	WorldTransform worldTransform_;
 	bool isParent_ = false;
 };

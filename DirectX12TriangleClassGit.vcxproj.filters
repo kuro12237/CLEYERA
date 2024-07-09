@@ -482,7 +482,6 @@
     <ClCompile Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
-    <ClCompile Include="Project\GameObject\collisionTest\CollisionTestBox.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
@@ -795,12 +794,12 @@
     <ClInclude Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\Game3dObjectData.h" />
-    <ClInclude Include="Project\GameObject\collisionTest\CollisionTestBox.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\GameCameraData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\IGameObjectData.h" />
+    <ClInclude Include="Project\GameObject\Player\command\PlayerSquatCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

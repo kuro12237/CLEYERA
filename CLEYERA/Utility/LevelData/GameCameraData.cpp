@@ -9,6 +9,15 @@ void GameCameraData::Create(TransformEular t)
 	camera_.UpdateMatrix();
 }
 
+void GameCameraData::WtUpdate(TransformEular transform)
+{
+
+	worldTransform_.scale = transform.scale;
+	worldTransform_.rotation = transform.rotate;
+	worldTransform_.translate = transform.translate;
+	worldTransform_.UpdateMatrix();
+}
+
 void GameCameraData::Update()
 {
 	worldTransform_.UpdateMatrix();

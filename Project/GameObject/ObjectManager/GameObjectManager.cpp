@@ -21,8 +21,16 @@ void GameObjectManager::SetAllParents()
 		{
 			for (string name : it->GetChildsName())
 			{
-				SetParent(it->GetObjectName(), name);
-				checkChildren(obj3dData_[name]);
+				
+				if (obj3dData_.find(name) != obj3dData_.end())
+				{
+					SetParent(it->GetObjectName(), name);
+					checkChildren(obj3dData_[name]);
+				}
+				else
+				{
+					cameraData_[name]->SetParent(obj3dData_[it->GetObjectName()]->GetWorldTransform());
+				}
 			}
 		}
 	}
@@ -51,6 +59,18 @@ void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancin
 
 	objInstancing3dData_[name]->TransfarData();
 	instancingDataName_.push_back(name);
+}
+
+void GameObjectManager::CameraUpdate(IObjectData* data)
+{
+	if (data)
+	{
+		TransformEular transform = data->GetTransform();
+		string name = data->GetName();
+		cameraData_[data->GetName()]->WtUpdate(transform);
+		cameraData_[data->GetName()]->Update();
+		dataName_.push_back(name);
+	}
 }
 
 void GameObjectManager::Update()
@@ -99,7 +119,7 @@ void GameObjectManager::Update()
 		//it.GameInstancingObject->Transfar();
 	}
 	instancingDataName_.clear();
-	cameraData_["Camera"]->Update();
+	cameraData_["PlayerCamera"]->Update();
 }
 
 void GameObjectManager::ImGuiUpdate()
@@ -167,8 +187,6 @@ void GameObjectManager::CameraReset(string name)
 {
 	cameraData_[name]->Update();
 	CameraManager::GetInstance()->ResetCamera(cameraData_[name]->GetCamera());
-	CameraManager::GetInstance();
-	cameraData_;
 }
 
 void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData> &data)
@@ -177,6 +195,11 @@ void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData> &data)
 	{
 		for (string name : data->GetChildsName())
 		{
+			if (obj3dData_.find(name) != obj3dData_.end())
+			{
+				cameraData_[name]->SetParent(obj3dData_[data->GetObjectName()]->GetWorldTransform());
+				continue;
+			}
 			SetParent(data->GetObjectName(), name);
 		}
 	}
