@@ -10,6 +10,7 @@ public:
 
 	void Exec(Player& p)override;
 
+	void UnExec(Player& p)override;
 private:
 
 };

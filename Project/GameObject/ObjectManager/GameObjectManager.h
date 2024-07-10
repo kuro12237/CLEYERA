@@ -59,6 +59,8 @@ public:
 
 	shared_ptr<Game3dInstancingObjectData>& GetObjInstancingData(string name);
 
+	map<string, shared_ptr<Game3dObjectData>>& GetObj3dDatas() { return obj3dData_; };
+
 #pragma endregion
 
 #pragma region Set

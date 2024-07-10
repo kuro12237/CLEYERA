@@ -100,7 +100,7 @@ bool BoxCollisionManager::CheckBottomCollsion(float t, Math::Vector::Vector4 bDe
 	float RTtheta = bDegree.x;
 	float LTtheta = bDegree.z;
 
-	if (t >= RTtheta+1.0f && t <= LTtheta-1.0f) {
+	if (t > RTtheta && t < LTtheta) {
 		return true;
 	}
 	return false;

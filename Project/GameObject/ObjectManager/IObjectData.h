@@ -32,7 +32,6 @@ public:
 #pragma region Get
 
 	string GetName() { return name_; }
-
 	TransformEular GetTransform() { return transform_; }
 
 	Math::Vector::Vector3 GetVelocity() { return velocity_; }

@@ -19,6 +19,7 @@
 
 #include"GameObject/Player/Player.h"
 #include"GameObject/EnemyWalk/EnemyWalk.h"
+#include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
@@ -63,9 +64,10 @@ private:
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 
 	unique_ptr<PlayerManager>player_ = nullptr;
-
-	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	shared_ptr<GravityManager>gravityManager_ = nullptr;
+	
+	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
+
 
 };

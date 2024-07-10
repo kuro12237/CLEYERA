@@ -41,8 +41,6 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-
-	//velocity_ = {};
 	shootTimerFlame_++;
 	if (state_)
 	{
@@ -52,6 +50,13 @@ void Player::Update()
 	if (velocity_.y <= 0.0f)
 	{
 		isJamp_ = true;
+	}
+
+	isPrevSquatState_ = isSquatState_;
+
+	if (!isSquatState_ && isPrevSquatState_)
+	{
+		ChangeState(make_unique<PlayerStateNone>());
 	}
 
 	if (isDamage_)
@@ -78,7 +83,7 @@ void Player::OnCollision(ICollider* c)
 	{
 		for (auto& hitDirection : hitDirection_)
 		{
-			if (hitDirection == TOP)
+			if (hitDirection == TOP && velocity_.y >= 0.0f)
 			{
 				velocity_ = {};
 			}
@@ -131,11 +136,9 @@ void Player::Move()
 	if (Ljoy.y >= -0.1f && Ljoy.y <= 0.1f)
 	{
 		Ljoy.y = {};
-
 	}
 
-	const float Speed = 0.1f;
-	velocity_.x = Ljoy.x * Speed;
+	velocity_.x = Ljoy.x * Speed_;
 }
 
 void Player::Shoot()
@@ -144,6 +147,23 @@ void Player::Shoot()
 	{
 		isShoot_ = true;
 		shootTimerFlame_ = 0;
+	}
+}
+
+void Player::Squat()
+{
+	if (!isSquatState_)
+	{
+		ChangeState(make_unique<PlayerStateSquat>());
+	}
+}
+
+void Player::UnSquat()
+{
+	if (!isRockState_)
+	{
+		ChangeState(make_unique<PlayerStateNone>());
+		isSquatState_ = false;
 	}
 }
 
@@ -161,6 +181,9 @@ void Player::DamageUpdate()
 	{
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
 		PostEffect::GetInstance()->SetVignetteFactor(0.0f);
+		damegeCoolTimer_ = 0;
+		vinatteFactor_ = 1.0f;;
+
 		isDamage_ = false;
 	}
 

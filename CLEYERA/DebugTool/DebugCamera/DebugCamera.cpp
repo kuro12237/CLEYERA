@@ -24,7 +24,6 @@ void DebugCamera::ImGuiUpdate()
 		ImGui::DragFloat3("offset", &offset_.x, -0.1f, 0.1f);
 		ImGui::TreePop();
 	}
-
 #endif // _USE_IMGUI
 
 }

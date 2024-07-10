@@ -2,15 +2,15 @@
 #include"GameObject/Player/Player.h"
 #include"GameObject/Player/state/IPlayerState.h"
 
-class PlayerStateNone :public IPlayerState
+class PlayerStateSquat :public IPlayerState
 {
 public:
-	PlayerStateNone() {};
-	~PlayerStateNone() {};
+	PlayerStateSquat() {};
+	~PlayerStateSquat() {};
 
 	void Initialize(Player* p)override;
 
-	void Update(Player * p)override;
+	void Update(Player* p)override;
 
 private:
 };

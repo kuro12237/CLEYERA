@@ -14,6 +14,7 @@
 #include"state/IPlayerState.h"
 #include"state/PlayerStateNone.h"
 #include"state/PlayerStateRock.h"
+#include"state/PlayerStateSquat.h"
 
 class Player :public IObjectData, public ICollider
 {
@@ -38,6 +39,9 @@ public:
 	void Move();
 
 	void Shoot();
+
+	void Squat();
+	void UnSquat();
 
 #pragma endregion
 
@@ -68,6 +72,9 @@ private:
 	bool isJamp_ = false;
 	bool isShoot_ = false;
 	bool isRockState_ = false;
+	bool isSquatState_ = false;
+	bool isPrevSquatState_ = false;
+
 	bool isDamage_ = false;
 
 	float damegeFlame_ = 0.0f;
@@ -75,6 +82,9 @@ private:
 	uint32_t damageCoolTimerMax_ = 2;
 
 	float vinatteFactor_ = 1.0f;
+
+	float speedNormal_ = 0.1f;
+	float Speed_ = speedNormal_;
 
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;

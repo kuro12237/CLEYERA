@@ -10,13 +10,11 @@ class  Game3dObjectData:public IGameObjectData
 {
 public:
 
-	
 	void Initialize(TransformEular transform, Game3dObjectDesc desc, uint32_t modelHandle);
 
 	void WtUpdate(TransformEular transform);
 
 #pragma region Set
-
 
 	void SetData(Game3dObjectData* data);
 
@@ -30,14 +28,12 @@ public:
 
 	void SetMOdelHandle(uint32_t handle) { modelHandle_ = handle; }
 
-
 	void SetAABB(AABB aabb) { aabb_ = aabb; }
 
 #pragma endregion
 
 #pragma region Get
 
-	
 	string GetObjectName() { return objectName_; }
 
 	unique_ptr<Game3dObject>& GetGameObject() { return gameObject_; }
@@ -54,5 +50,10 @@ private:
 	unique_ptr<Game3dObject>gameObject_;
 	uint32_t modelHandle_ = 0;
 	AABB aabb_;
+
+	SAnimation::Skeleton skelton_ = {};
+	SAnimation::Animation animationData_;
+
+	float animationFlame_ = 0.0f;
 };
 

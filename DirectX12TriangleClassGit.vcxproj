@@ -105,6 +105,7 @@
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Project\GameObject\Block\Block.cpp" />
     <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
+    <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
@@ -125,6 +127,7 @@
     <ClCompile Include="Project\GameObject\Player\command\PlayerShootCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerMoveCommand.cpp" />
+    <ClCompile Include="Project\GameObject\Player\command\PlayerSquatCommand.cpp" />
     <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
     <ClCompile Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
@@ -134,6 +137,7 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
+    <ClCompile Include="Project\GameObject\Player\state\PlayerStateSquat.cpp" />
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
     <ClCompile Include="Project\Scene\TestScene.cpp" />
@@ -236,6 +240,7 @@
     <ClInclude Include="Project\GameObject\Block\Block.h" />
     <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
     <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />
@@ -261,6 +266,7 @@
     <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h" />
     <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
     <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
+    <ClInclude Include="Project\GameObject\Player\state\PlayerStateSquat.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerStateNone.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h" />

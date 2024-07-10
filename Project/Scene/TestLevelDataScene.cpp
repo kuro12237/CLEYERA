@@ -31,9 +31,8 @@ void TestLevelDataScene::Initialize()
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
 	
-	enemyWalk_ = make_shared<EnemyWalk>();
-	enemyWalk_->Initialize();
-	enemyWalk_->GetData(GameObjectManager::GetInstance());
+	enemyWalkManager_ = make_unique<EnemyWalkManager>();
+	enemyWalkManager_->Initialize(GameObjectManager::GetInstance());
 
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->CopyData(GameObjectManager::GetInstance());
@@ -50,14 +49,13 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	gameObjectManager_->ImGuiUpdate();
 	debugCamera_->ImGuiUpdate();
+	player_->ImGuiUpdate();
 
 	if (ImGui::TreeNode("light"))
 	{
 		ImGui::DragFloat3("t", &light_.position.x);
 		ImGui::TreePop();
 	}
-
-	player_->ImGuiUpdate();
 
 	if (ImGui::Button("SceneReload"))
 	{
@@ -69,17 +67,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	player_->Update();
 
-	if (enemyWalk_)
-	{
-		enemyWalk_->Update();
-
-		gameObjectManager_->ObjDataUpdate(enemyWalk_.get());
-		if (enemyWalk_->GetIsDead())
-		{
-			gameObjectManager_->ClearObj3dData(enemyWalk_->GetName());
-			enemyWalk_.reset();
-		}
-	}
+	enemyWalkManager_->Update();
 
 	blockManager_->Update();
 
@@ -105,7 +93,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
-	
+
 }
 
 void TestLevelDataScene::PostProcessDraw()
@@ -143,11 +131,13 @@ void TestLevelDataScene::Collision()
 			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
 		}
 	}
-	if (enemyWalk_)
+	for (shared_ptr<EnemyWalk>e : enemyWalkManager_->GetData())
 	{
-		gameCollisionManager_->ListPushback(enemyWalk_.get());
+		if (e)
+		{
+			gameCollisionManager_->ListPushback(e.get());
+		}
 	}
-
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
 		gameCollisionManager_->ListPushback(b.get());
@@ -160,9 +150,14 @@ void TestLevelDataScene::Gravitys()
 {
 	gravityManager_->ClearList();
 	gravityManager_->PushList(player_->GetPlayerCore());
-	if (enemyWalk_)
+	
+	for (shared_ptr<EnemyWalk>e : enemyWalkManager_->GetData())
 	{
-		gravityManager_->PushList(enemyWalk_.get());
+		if (e)
+		{
+			gravityManager_->PushList(e.get());
+		}
 	}
+
 	gravityManager_->CheckGravity();
 }

@@ -6,14 +6,37 @@ void PlayerCommandHandler::Handler()
 	{
 		commands_.push(make_unique<PlayerJampCommand>());
 	}
+	else
+	{
+		unCommands_.push(make_unique<PlayerJampCommand>());
+	}
+
 	if (Input::PushRShoulder())
 	{
 		commands_.push(make_unique<PlayerShootCommand>());
 	}
+	else
+	{
 
+		unCommands_.push(make_unique<PlayerShootCommand>());
+	}
+
+	if (Input::PushLShoulder())
+	{
+		commands_.push(make_unique<PlayerSquatCommand>());
+	}
+	else
+	{
+
+		unCommands_.push(make_unique<PlayerSquatCommand>());
+	}
 	if (IsLJoystickActive())
 	{
 		commands_.push(make_unique<PlayerMoveCommand>());
+	}
+	else
+	{
+		unCommands_.push(make_unique<PlayerMoveCommand>());
 	}
 }
 
@@ -24,6 +47,12 @@ void PlayerCommandHandler::CommandCoreExec(Player& p)
 		IPlayerCommand* c = commands_.front().get();
 		c->Exec(p);
 		commands_.pop();
+	}
+	while (!unCommands_.empty())
+	{
+		IPlayerCommand* c = unCommands_.front().get();
+		c->UnExec(p);
+		unCommands_.pop();
 	}
 
 }

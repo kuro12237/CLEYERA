@@ -9,6 +9,7 @@ public:
 
 	virtual void Exec(Player& p) = 0;
 
+	virtual void UnExec(Player& p) = 0;
 private:
 
 };
