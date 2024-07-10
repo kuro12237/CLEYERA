@@ -1,19 +1,19 @@
-#include "TestLevelDataScene.h"
+#include"GameScene.h"
 
-void TestLevelDataScene::Initialize()
+void GameScene::Initialize()
 {
 	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_2.json");
-	
+
 	camera_.Initialize();
 	camera_.translation_.z = -16.0f;
 	camera_.translation_.y = 2.0f;
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
 	camera_.UpdateMatrix();
-	
+
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
@@ -27,10 +27,10 @@ void TestLevelDataScene::Initialize()
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
-	
+
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
-	
+
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize(GameObjectManager::GetInstance());
 
@@ -39,12 +39,11 @@ void TestLevelDataScene::Initialize()
 	blockManager_->Initialize();
 
 	gravityManager_ = make_shared<GravityManager>();
-	
+
 }
 
-void TestLevelDataScene::Update(GameManager* Scene)
+void  GameScene::Update(GameManager* Scene)
 {
-	Scene;
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
@@ -59,7 +58,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	if (ImGui::Button("SceneReload"))
 	{
-		Scene->ChangeState(new TestLevelDataScene());
+		Scene->ChangeState(new  GameScene());
 		return;
 	}
 
@@ -89,14 +88,14 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	gameObjectManager_->Update();
 
 	debugCamera_->Update();
-	
+
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 
 }
 
-void TestLevelDataScene::PostProcessDraw()
+void  GameScene::PostProcessDraw()
 {
 	PostEffect::GetInstance()->PreDraw();
 
@@ -105,21 +104,21 @@ void TestLevelDataScene::PostProcessDraw()
 	PostEffect::GetInstance()->PostDraw();
 }
 
-void TestLevelDataScene::Back2dSpriteDraw()
+void  GameScene::Back2dSpriteDraw()
 {
 }
 
-void TestLevelDataScene::Object3dDraw()
+void  GameScene::Object3dDraw()
 {
 	PostEffect::GetInstance()->Draw(camera_);
 }
 
-void TestLevelDataScene::Flont2dSpriteDraw()
+void  GameScene::Flont2dSpriteDraw()
 {
 	player_->Draw2d();
 }
 
-void TestLevelDataScene::Collision()
+void  GameScene::Collision()
 {
 	gameCollisionManager_->ListClear();
 
@@ -146,11 +145,11 @@ void TestLevelDataScene::Collision()
 
 }
 
-void TestLevelDataScene::Gravitys()
+void  GameScene::Gravitys()
 {
 	gravityManager_->ClearList();
 	gravityManager_->PushList(player_->GetPlayerCore());
-	
+
 	for (shared_ptr<EnemyWalk>e : enemyWalkManager_->GetData())
 	{
 		if (e)

@@ -123,15 +123,15 @@ void GameObjectManager::Update()
 
 void GameObjectManager::ImGuiUpdate()
 {
-	int index = 0;
+	//int index = 0;
 	if (ImGui::TreeNode("GameObjectManager"))
 	{
 		ImGui::Text("Game3dObjectSize:%d", obj3dData_.size());
-		for (auto& data : obj3dData_) {
+	/*	for (auto& data : obj3dData_) {
 			auto& it = data.second;
 			it->ImGuiUpdate(to_string(index));
 			index++;
-		}
+		}*/
 		ImGui::TreePop();
 	}
 }

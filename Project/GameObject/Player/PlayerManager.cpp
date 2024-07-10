@@ -17,6 +17,7 @@ void PlayerManager::GetData(GameObjectManager* data)
 
 	camera_ = make_unique<PlayerCamera>();
 	camera_->Initialize();
+
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -73,7 +74,7 @@ void PlayerManager::Draw2d()
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
-	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");
+	uint32_t modelHandle = ModelManager::LoadObjectFile("DfCube");
 	//オブジェクトの作成
 	shared_ptr<Game3dObjectData> data;
 	data = make_shared<Game3dObjectData>();

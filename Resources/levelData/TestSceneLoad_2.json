@@ -2,53 +2,27 @@
     "name": "scene",
     "objects": [
         {
-            "type": "ARMATURE",
-            "name": "Armature",
-            "file_name": "Box",
+            "type": "MESH",
+            "name": "立方体",
+            "file_name": "DfCube",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    1.9693366289138794,
                     0.0,
-                    1.6059269905090332
+                    0.0,
+                    0.0
                 ],
                 "rotate": [
-                    90.00000762939453,
+                    0.0,
                     -0.0,
                     0.0
                 ],
                 "scale": [
-                    0.75,
-                    0.7500000596046448,
-                    0.7500000596046448
+                    1.0,
+                    1.0,
+                    1.0
                 ]
-            },
-            "children": [
-                {
-                    "type": "MESH",
-                    "name": "立方体",
-                    "file_name": "Box",
-                    "DrawType": "Instancing",
-                    "InstancingObjName": "Map",
-                    "transform": {
-                        "translate": [
-                            0.0,
-                            0.0,
-                            2.842170943040401e-14
-                        ],
-                        "rotate": [
-                            8.142220079589146e-13,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    }
-                }
-            ]
+            }
         },
         {
             "type": "LIGHT",
