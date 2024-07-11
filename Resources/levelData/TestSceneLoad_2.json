@@ -2,43 +2,6 @@
     "name": "scene",
     "objects": [
         {
-            "type": "MESH",
-            "name": "Block",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    20.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
             "type": "LIGHT",
             "name": "Light",
             "file_name": "Box",
@@ -69,7 +32,7 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    0.0,
+                    -3.9029178619384766,
                     0.0,
                     3.8042469024658203
                 ],
@@ -111,7 +74,7 @@
                             1.154062271118164
                         ],
                         "rotate": [
-                            0.0,
+                            90.00000762939453,
                             -0.0,
                             0.0
                         ],
@@ -149,14 +112,37 @@
         },
         {
             "type": "MESH",
-            "name": "EnemyWalk",
-            "file_name": "DebugTestSphere",
+            "name": "SkyDome",
+            "file_name": "SkyDome",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    4.5258026123046875,
-                    0.046619802713394165,
-                    8.741047859191895
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    64.0,
+                    64.0,
+                    64.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Terrain",
+            "file_name": "Terrain",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "rotate": [
                     0.0,
@@ -164,22 +150,9 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
+                    32.0,
+                    32.0,
+                    32.0
                 ]
             }
         },
@@ -202,6 +175,43 @@
                 ],
                 "scale": [
                     10.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block",
+            "file_name": "Block",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    20.0,
                     1.0,
                     1.0
                 ]
@@ -370,37 +380,50 @@
         },
         {
             "type": "MESH",
-            "name": "SkyDome",
-            "file_name": "SkyDome",
+            "name": "EnemyWalk_1",
+            "file_name": "DebugTestSphere",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    0.0,
-                    0.0,
-                    0.0
+                    8.578821182250977,
+                    0.046619802713394165,
+                    12.177349090576172
                 ],
                 "rotate": [
-                    90.00000762939453,
+                    0.0,
                     -0.0,
                     0.0
                 ],
                 "scale": [
-                    64.0,
-                    64.0,
-                    64.0
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             }
         },
         {
             "type": "MESH",
-            "name": "Terrain",
-            "file_name": "Terrain",
+            "name": "EnemyWalk_0",
+            "file_name": "DebugTestSphere",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    0.0,
-                    0.0,
-                    0.0
+                    4.5258026123046875,
+                    0.046619802713394165,
+                    8.741047859191895
                 ],
                 "rotate": [
                     0.0,
@@ -408,9 +431,22 @@
                     0.0
                 ],
                 "scale": [
-                    32.0,
-                    32.0,
-                    32.0
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             }
         }

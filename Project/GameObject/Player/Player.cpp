@@ -41,8 +41,6 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-
-	//velocity_ = {};
 	shootTimerFlame_++;
 	if (state_)
 	{
@@ -58,6 +56,7 @@ void Player::Update()
 	{
 		DamageUpdate();
 	}
+
 	isShoot_ = false;
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
@@ -78,7 +77,7 @@ void Player::OnCollision(ICollider* c)
 	{
 		for (auto& hitDirection : hitDirection_)
 		{
-			if (hitDirection == TOP)
+			if (hitDirection == TOP && velocity_.y >= 0.0f)
 			{
 				velocity_ = {};
 			}
@@ -87,6 +86,7 @@ void Player::OnCollision(ICollider* c)
 				isJamp_ = false;
 				velocity_ = {};
 			}
+			
 		}
 		transform_.translate.x += extrusion_.x;
 		transform_.translate.y += extrusion_.y;

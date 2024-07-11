@@ -38,6 +38,8 @@ public:
 	Math::Vector::Vector3 GetVelocity() { return velocity_; }
 	Math::Vector::Vector3 GetUvScale() { return uvScale_; }
 
+	
+
 #pragma endregion
 
 private:

@@ -139,7 +139,6 @@ Quaternion Math::Qua::Slerp(const Quaternion& q1, const Quaternion& q2, float t)
 		scale0 * qn1.z + scale1 * qn2.z,
 		scale0 * qn1.w + scale1 * qn2.w
 	);
-
 }
 
 Matrix4x4 Math::Qua::RotateMatrix(const Quaternion& q)

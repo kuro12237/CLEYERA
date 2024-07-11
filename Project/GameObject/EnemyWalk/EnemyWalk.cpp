@@ -48,6 +48,10 @@ void EnemyWalk::OnCollision(ICollider* c)
 			{
 				velocity_ = {};
 			}
+			if (hitDirection == LEFT)
+			{
+			   speed_ *= -1.0f;
+			}
 		}
 		transform_.translate.x += extrusion_.x;
 		transform_.translate.y += extrusion_.y;
