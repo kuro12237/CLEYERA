@@ -25,7 +25,7 @@ public:
 	void SetWorldTrasform(WorldTransform wt) { worldTransform_ = wt; }
 	void SetObjectType(string type) { ObjectType_ = type; }
 	void SetParent(const WorldTransform& wt) { worldTransform_.SetParent(wt); }
-
+	void SetModelFilePath(string filePath) { modelFilePath_ = filePath; }
 #pragma endregion
 
 protected:
@@ -33,7 +33,7 @@ protected:
 	string ObjectType_ = "";
 	WorldTransform worldTransform_;
 	vector<string>childName_;
-
+	string modelFilePath_ = "";
 private:
 
 };

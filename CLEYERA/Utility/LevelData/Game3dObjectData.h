@@ -54,5 +54,11 @@ private:
 	unique_ptr<Game3dObject>gameObject_;
 	uint32_t modelHandle_ = 0;
 	AABB aabb_;
+
+
+	SAnimation::Skeleton skelton_ = {};
+	SAnimation::Animation animationData_;
+
+	float animationFlame_ = 0.0f;
 };
 

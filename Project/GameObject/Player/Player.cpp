@@ -86,7 +86,6 @@ void Player::OnCollision(ICollider* c)
 				isJamp_ = false;
 				velocity_ = {};
 			}
-			
 		}
 		transform_.translate.x += extrusion_.x;
 		transform_.translate.y += extrusion_.y;
@@ -161,6 +160,8 @@ void Player::DamageUpdate()
 	{
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
 		PostEffect::GetInstance()->SetVignetteFactor(0.0f);
+		vinatteFactor_ = 1.0f;
+		damegeCoolTimer_ = 0;
 		isDamage_ = false;
 	}
 

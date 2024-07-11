@@ -80,6 +80,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	TransformEular transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = pos;
+	data->SetObjectType("MESH");
 	data->Initialize(transform, {}, modelHandle);
 
 	shared_ptr<PlayerBullet> b = make_shared<PlayerBullet>();

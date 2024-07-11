@@ -9,12 +9,32 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 	worldTransform_.translate = transform.translate;
 	worldTransform_.scale = transform.scale;
 	worldTransform_.rotation = transform.rotate;
-
 	gameObject_ = make_unique<Game3dObject>();
-	gameObject_->SetDesc(objectDesc_);
-	gameObject_->Create(make_unique<Phong3dPipline>());
-	gameObject_->SetModel(modelHandle_);
 
+	if (ObjectType_ == "MESH")
+	{
+		gameObject_->Create(make_unique<Phong3dPipline>());
+		gameObject_->SetDesc(objectDesc_);
+		gameObject_->SetModel(modelHandle_);
+
+	}
+	if (ObjectType_ == "ARMATURE")
+	{
+		gameObject_->Create(make_unique<Phong3dSkinningPipline>());
+		gameObject_->SetModel(modelHandle_);
+		gameObject_->SetName(objectName_);
+		gameObject_->SetDesc(objectDesc_);
+
+		AnimationManager::GetInstance()->LoadAnimation(modelFilePath_);
+		animationData_ = AnimationManager::GetInstance()->GetData(modelFilePath_);
+
+		animationFlame_ += 1.0f / 30.0f;
+		animationFlame_ = std::fmod(animationFlame_, animationData_.duration);
+
+		gameObject_->CreateSkinningParameter();
+		gameObject_->SkeletonUpdate(modelFilePath_, animationFlame_);
+		gameObject_->SkinningUpdate();
+	}
 }
 
 void Game3dObjectData::WtUpdate(TransformEular transform)

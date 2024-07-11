@@ -92,9 +92,19 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			//model‚Ìƒtƒ@ƒCƒ‹“Ç‚İ‚İ
 			if (object.contains("file_name"))
 			{
+				string fileType = object["ModelFileType"].get<string>();
 				string fileName = object["file_name"].get<string>();
-				ModelManager::ModelLoadNormalMap();
-				modelHandle = ModelManager::LoadObjectFile(fileName);
+				if (fileType == "obj")
+				{
+					ModelManager::ModelLoadNormalMap();
+					modelHandle = ModelManager::LoadObjectFile(fileName);
+				}
+				if (fileType == "gltf")
+				{
+					modelHandle = ModelManager::LoadGltfFile(fileName, true);
+					obj3dData->SetModelFilePath(fileName);
+					obj3dData->SetObjectType("ARMATURE");
+				}
 			}
 			//transform‚ÌGet
 			nlohmann::json& transform = object["transform"];
@@ -286,6 +296,8 @@ void SceneFileLoader::LoadChildCameraData(shared_ptr<LevelData>& levelData, IGam
 	data->PushBackChildren(name);
 	//transormGet
 	TransformEular transformEular = GetTransform(object["transform"]);
+	//transformEular.rotate.x += 90.0f;
+	
 	//dataì¬
 	cameraData = make_shared<GameCameraData>();
 	cameraData->SetObjectType("MESH");
