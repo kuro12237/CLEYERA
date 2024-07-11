@@ -2,32 +2,10 @@
     "name": "scene",
     "objects": [
         {
-            "type": "MESH",
-            "name": "立方体",
-            "file_name": "DfCube",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
             "type": "LIGHT",
             "name": "Light",
             "file_name": "Box",
+            "ModelFileType": "obj",
             "DrawType": "Instancing",
             "InstancingObjName": "Map",
             "transform": {
@@ -51,11 +29,12 @@
         {
             "type": "MESH",
             "name": "Player",
-            "file_name": "TestPlayer",
+            "file_name": "TestHuman",
+            "ModelFileType": "gltf",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -3.9029178619384766,
+                    0.0,
                     0.0,
                     3.8042469024658203
                 ],
@@ -88,6 +67,7 @@
                     "type": "CAMERA",
                     "name": "PlayerCamera",
                     "file_name": "Box",
+                    "ModelFileType": "obj",
                     "DrawType": "Instancing",
                     "InstancingObjName": "Map",
                     "transform": {
@@ -112,6 +92,7 @@
                     "type": "MESH",
                     "name": "PlayerGun",
                     "file_name": "PlayerTestGun",
+                    "ModelFileType": "obj",
                     "DrawType": "Normal",
                     "transform": {
                         "translate": [
@@ -135,37 +116,52 @@
         },
         {
             "type": "MESH",
-            "name": "SkyDome",
-            "file_name": "SkyDome",
+            "name": "EnemyWalk_0",
+            "file_name": "DebugTestSphere",
+            "ModelFileType": "obj",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    0.0,
-                    0.0,
-                    0.0
+                    7.36773681640625,
+                    0.046619802713394165,
+                    8.741047859191895
                 ],
                 "rotate": [
-                    90.00000762939453,
+                    0.0,
                     -0.0,
                     0.0
                 ],
                 "scale": [
-                    64.0,
-                    64.0,
-                    64.0
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             }
         },
         {
             "type": "MESH",
-            "name": "Terrain",
-            "file_name": "Terrain",
+            "name": "EnemyWalk_1",
+            "file_name": "DebugTestSphere",
+            "ModelFileType": "obj",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    0.0,
-                    0.0,
-                    0.0
+                    14.456574440002441,
+                    0.046619802713394165,
+                    9.469439506530762
                 ],
                 "rotate": [
                     0.0,
@@ -173,31 +169,7 @@
                     0.0
                 ],
                 "scale": [
-                    32.0,
-                    32.0,
-                    32.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Block.001",
-            "file_name": "Block",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
-            "transform": {
-                "translate": [
-                    -10.0,
-                    0.0,
-                    8.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    10.0,
+                    1.0,
                     1.0,
                     1.0
                 ]
@@ -220,6 +192,7 @@
             "type": "MESH",
             "name": "Block",
             "file_name": "Block",
+            "ModelFileType": "obj",
             "DrawType": "Instancing",
             "InstancingObjName": "Map",
             "transform": {
@@ -255,8 +228,47 @@
         },
         {
             "type": "MESH",
+            "name": "Block.001",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -10.0,
+                    0.0,
+                    8.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
             "name": "Block.002",
             "file_name": "Block",
+            "ModelFileType": "obj",
             "DrawType": "Instancing",
             "InstancingObjName": "Map",
             "transform": {
@@ -294,6 +306,7 @@
             "type": "MESH",
             "name": "Block.003",
             "file_name": "Block",
+            "ModelFileType": "obj",
             "DrawType": "Instancing",
             "InstancingObjName": "Map",
             "transform": {
@@ -331,6 +344,7 @@
             "type": "MESH",
             "name": "Block.004",
             "file_name": "Block",
+            "ModelFileType": "obj",
             "DrawType": "Instancing",
             "InstancingObjName": "Map",
             "transform": {
@@ -368,6 +382,7 @@
             "type": "MESH",
             "name": "Block.005",
             "file_name": "Block",
+            "ModelFileType": "obj",
             "DrawType": "Instancing",
             "InstancingObjName": "Map",
             "transform": {
@@ -383,78 +398,6 @@
                 ],
                 "scale": [
                     10.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "EnemyWalk_1",
-            "file_name": "DebugTestSphere",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    8.578821182250977,
-                    0.046619802713394165,
-                    12.177349090576172
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "EnemyWalk_0",
-            "file_name": "DebugTestSphere",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    4.5258026123046875,
-                    0.046619802713394165,
-                    8.741047859191895
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
                     1.0,
                     1.0
                 ]

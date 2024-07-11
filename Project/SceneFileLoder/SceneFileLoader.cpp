@@ -42,11 +42,6 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 			LoadCameraData(levelData, object);
 		}
 
-		if (type.compare("ARMATURE")==0)
-		{
-			LoadAmature3dData(levelData,object);
-		}
-
 	}
 	return levelData;
 }
@@ -96,9 +91,19 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			//modelのファイル読み込み
 			if (object.contains("file_name"))
 			{
+				string fileType = object["ModelFileType"].get<string>();
 				string fileName = object["file_name"].get<string>();
-				ModelManager::ModelLoadNormalMap();
-				modelHandle = ModelManager::LoadObjectFile(fileName);
+				if (fileType == "obj")
+				{
+					ModelManager::ModelLoadNormalMap();
+					modelHandle = ModelManager::LoadObjectFile(fileName);
+				}
+				if (fileType == "gltf")
+				{
+					modelHandle = ModelManager::LoadGltfFile(fileName, true);
+					obj3dData->SetModelFilePath(fileName);
+					obj3dData->SetObjectType("ARMATURE");
+				}
 			}
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
@@ -282,74 +287,6 @@ void SceneFileLoader::LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann:
 	levelData->cameraData[name] = cameraData;
 }
 
-void SceneFileLoader::LoadAmature3dData(shared_ptr<LevelData>& levelData, nlohmann::json& object)
-{
-	shared_ptr<Game3dObjectData> obj3dData = {};
-
-	string drawType = object["DrawType"].get<string>();
-	string objectName = object["name"].get<string>();
-	uint32_t modelHandle = 0;
-
-	//通常表示
-	if (drawType.compare("Normal") == 0)
-	{
-		obj3dData = make_shared<Game3dObjectData>();
-		obj3dData->SetObjName(objectName);
-		obj3dData->SetObjectType("ARMATURE");
-
-		std::string modelFileName;
-		Game3dObjectDesc objectDesc;
-		vector<string>childName;
-
-		objectDesc.useLight = true;
-
-		//modelのファイル読み込み
-		if (object.contains("file_name"))
-		{
-			string fileName = object["file_name"].get<string>();
-			ModelManager::ModelLoadNormalMap();
-			obj3dData->SetModelFilePath(fileName);
-			modelHandle = ModelManager::LoadGltfFile(fileName,true);
-		}
-		//transformのGet
-		nlohmann::json& transform = object["transform"];
-		TransformEular transformEular = GetTransform(transform);
-
-		if (object.contains("collider"))
-		{
-			AABB aabb = LoadCollider(object["collider"]);
-			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
-			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
-			obj3dData->SetAABB(aabb);
-		}
-
-		if (object.contains("children"))
-		{
-			nlohmann::json& child = object["children"];
-
-			for (size_t i = 0; i < child.size(); i++)
-			{
-				std::string type = child[i]["type"].get<string>();
-
-				if (type.compare("MESH") == 0)
-				{
-					LoadObj3dData(levelData, obj3dData, child[i]);
-				}
-				if (type.compare("CAMERA") == 0)
-				{
-					LoadChildCameraData(levelData, obj3dData.get(), child[i]);
-				}
-			}
-		}
-		//保存
-		obj3dData->Initialize(transformEular, objectDesc, modelHandle);
-		levelData->obj3dData[objectName] = move(obj3dData);
-	}
-	else
-	{
-		assert(0);
-	}
-}
 
 void SceneFileLoader::LoadChildCameraData(shared_ptr<LevelData>& levelData, IGameObjectData* data, nlohmann::json& object)
 {
