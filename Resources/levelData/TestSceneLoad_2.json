@@ -2,31 +2,6 @@
     "name": "scene",
     "objects": [
         {
-            "type": "LIGHT",
-            "name": "Light",
-            "file_name": "Box",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
-            "transform": {
-                "translate": [
-                    4.076245307922363,
-                    1.0054539442062378,
-                    5.903861999511719
-                ],
-                "rotate": [
-                    37.261043548583984,
-                    3.1637072563171387,
-                    106.93630981445312
-                ],
-                "scale": [
-                    1.0,
-                    0.9999999403953552,
-                    1.0
-                ]
-            }
-        },
-        {
             "type": "MESH",
             "name": "Player",
             "file_name": "TestHuman",
@@ -77,7 +52,7 @@
                             1.154062271118164
                         ],
                         "rotate": [
-                            0.0,
+                            90.00000762939453,
                             -0.0,
                             0.0
                         ],
@@ -185,6 +160,31 @@
                     2.0,
                     2.0,
                     2.0
+                ]
+            }
+        },
+        {
+            "type": "CAMERA",
+            "name": "Camera",
+            "file_name": "Box",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -0.6279411315917969,
+                    -32.19134521484375,
+                    6.829558372497559
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             }
         },

@@ -3,15 +3,16 @@
 void PlayerReticle::Initialize()
 {
 	name_ = "PlayerReticle";
-
+	uint32_t modelHandle = ModelManager::LoadObjectFile("DfCube");
 	shared_ptr<Game3dObjectData> data;
 	data = make_shared<Game3dObjectData>();
-
+	data->SetObjName(name_);
+	data->SetModelHandle(modelHandle);
 	data->Initialize(transform_, {},0);
 	transform_.scale = { 1.0f,1.0f,1.0f };
 
 	GameObjectManager::GetInstance()->PushObj3dData(data, name_);
-	GameObjectManager::GetInstance()->SetParent("Player", "PlayerReticle");
+	GameObjectManager::GetInstance()->SetParent("Player", name_);
 
 	uint32_t texHandle = TextureManager::LoadPngTexture("Player/Reticle/Reticle.png");
 	Math::Vector::Vector2 texPos = TextureManager::GetTextureSize(texHandle);

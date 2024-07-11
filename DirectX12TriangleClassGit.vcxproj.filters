@@ -486,6 +486,7 @@
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">

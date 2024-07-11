@@ -76,6 +76,8 @@ private:
 
 	void checkChildren(shared_ptr<Game3dObjectData>& data);
 
+	string inputTextSelectCamera_ = "";
+
 	vector<string>dataName_;
 	vector<string>instancingDataName_;
 

@@ -17,14 +17,10 @@ public:
 #pragma region Get
 
 	vector<shared_ptr<IGameInstancing3dObject>>&GetTransforms() { return transform_; }
-
 	unique_ptr<GameInstancing3dObject>&GetGameObject() { return gameInstancingObject_; }
-
 	string GetObjectType() { return objectType_; }
 
 #pragma endregion
-
-
 private:
 	string objectType_;
 	std::string modelFileName_;

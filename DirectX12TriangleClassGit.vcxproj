@@ -105,6 +105,7 @@
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />

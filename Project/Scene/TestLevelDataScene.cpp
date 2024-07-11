@@ -13,7 +13,7 @@ void TestLevelDataScene::Initialize()
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
-	gameObjectManager_->CameraReset("PlayerCamera");
+	gameObjectManager_->CameraReset("Camera");
 	CameraManager::GetInstance();
 	gameObjectManager_->Update();
 
@@ -75,7 +75,6 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	gameObjectManager_->ObjDataUpdate(player_->GetPlayerCore());
 	gameObjectManager_->ObjDataUpdate(player_->GetReticle());
 	gameObjectManager_->ObjDataUpdate(player_->GetGun());
-	gameObjectManager_->CameraUpdate(player_->GetCamera());
 
 	for (shared_ptr<PlayerBullet> &b : player_->GetBullet()) {
 		gameObjectManager_->ObjDataUpdate(b.get());
