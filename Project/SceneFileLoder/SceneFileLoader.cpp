@@ -296,8 +296,6 @@ void SceneFileLoader::LoadChildCameraData(shared_ptr<LevelData>& levelData, IGam
 	data->PushBackChildren(name);
 	//transormGet
 	TransformEular transformEular = GetTransform(object["transform"]);
-	//transformEular.rotate.x += 90.0f;
-	
 	//dataçÏê¨
 	cameraData = make_shared<GameCameraData>();
 	cameraData->SetObjectType("MESH");
