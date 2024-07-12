@@ -36,9 +36,13 @@ void DescriptorManager::Clear()
 	DescriptorManager::GetInstance()->index = 0;
 }
 
-uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size)
+uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size,string name)
 {
-	DescriptorManager::GetInstance()->index++;
+	if (CheckData(name))
+	{
+
+	}
+
 	D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc;
 	instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
 	instansingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -71,6 +75,7 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<I
 		&instansingSrvDesc,
 		DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index]
 	);
+
 
 	return DescriptorManager::GetInstance()->index;
 }
@@ -141,12 +146,13 @@ void DescriptorManager::CGHandlePtr()
 void DescriptorManager::IndexIncrement(const string& name)
 {
 	DescriptorManager::GetInstance()->index++;
-	DescriptorManager::GetInstance()->descripterDatas_[name] = std::make_unique<DescripterData>(DescriptorManager::GetInstance()->index, name);
+	name;
+	//DescriptorManager::GetInstance()->descripterDatas_[name] = std::make_unique<DescripterData>(DescriptorManager::GetInstance()->index, name);
 }
 
 bool DescriptorManager::CheckData(const string& name)
 {
-	if (DescriptorManager::GetInstance()->descripterDatas_.find(name) == DescriptorManager::GetInstance()->descripterDatas_.end())
+	if (DescriptorManager::GetInstance()->descripterDatas_.find(name) != DescriptorManager::GetInstance()->descripterDatas_.end())
 	{
 		return true;
 	}
@@ -157,7 +163,6 @@ uint32_t DescriptorManager::CheckDatasIndex(const string& name)
 {
 	return DescriptorManager::GetInstance()->descripterDatas_[name]->GetIndex();
 }
-
 
 void DescriptorManager::CreateShaderResourceView(ID3D12Resource* resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index)
 {

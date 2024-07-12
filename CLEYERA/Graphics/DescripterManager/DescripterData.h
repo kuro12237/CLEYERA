@@ -1,5 +1,6 @@
 #pragma once
 #include"DirectXCommon.h"
+#include"BufferResources.h"
 
 class DescripterData
 {
@@ -13,6 +14,8 @@ public:
 
 	uint32_t GetIndex() { return index; }
 	string GetName() { return name; }
+
+	void SetBuffer()
 
 private:
 

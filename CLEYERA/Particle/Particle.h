@@ -44,6 +44,9 @@ public:
 #pragma endregion 
 
 #pragma region get
+
+	string GetName() { return name_; }
+
 	/// <summary>
 	/// GetTex
 	/// </summary>

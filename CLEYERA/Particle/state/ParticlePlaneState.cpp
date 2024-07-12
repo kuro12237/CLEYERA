@@ -14,7 +14,7 @@ void ParticlePlaneState::Initialize(Particle* state)
 	NumInstansingLock = true;
 
 	resource_.instancingResource = CreateResources::CreateBufferResource(sizeof(ParticleData) * NumInstansing);
-	dsvIndex = DescriptorManager::CreateInstancingSRV(NumInstansing, resource_.instancingResource, sizeof(ParticleData));
+	dsvIndex = DescriptorManager::CreateInstancingSRV(NumInstansing, resource_.instancingResource, sizeof(ParticleData),state->GetName());
 
 	resource_.Vertex = CreateResources::CreateBufferResource(sizeof(VertexData) * VertexSize);
 	resource_.BufferView = CreateResources::VertexCreateBufferView(sizeof(VertexData) * VertexSize, resource_.Vertex.Get(), VertexSize);

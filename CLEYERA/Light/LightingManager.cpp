@@ -18,7 +18,8 @@ void LightingManager::Initialize()
 	LightingManager::GetInstance()->dsvHandle_ = DescriptorManager::CreateInstancingSRV(
 		LightingManager::GetInstance()->NumLight_,
 		LightingManager::GetInstance()->structureBuffer_,
-		sizeof(PointLight_param)
+		sizeof(PointLight_param),
+		"Light"
 	);
 }
 

@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// Instancing��SRV��쐬
 	/// </summary>
-	static uint32_t CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size);
+	static uint32_t CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size, string name);
 
 	static uint32_t CreateSRV(ComPtr<ID3D12Resource>&resource,D3D12_SHADER_RESOURCE_VIEW_DESC SrvDesc);
 
@@ -47,9 +47,7 @@ public:
 
 	static void SetCPUDescripterHandle(D3D12_CPU_DESCRIPTOR_HANDLE CpuDescripterHandle, uint32_t index)
 	{
-		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
-			index),
+
 		DescriptorManager::GetInstance()->SrvHandleCPU[index] = CpuDescripterHandle;
 	}
 
