@@ -17,14 +17,14 @@ void Player::Initialize()
 
 void Player::ImGuiUpdate()
 {
-	if (ImGui::TreeNode(name_.c_str()))
+	string imguiTreeName = name_ + "core";
+	if (ImGui::TreeNode(imguiTreeName.c_str()))
 	{
 		if (ImGui::TreeNode("transform"))
 		{
 			ImGui::DragFloat3("s", &transform_.scale.x, -0.1f, 0.1f);
 			ImGui::DragFloat3("r", &transform_.rotate.x, -0.1f, 0.1f);
 			ImGui::DragFloat3("t", &transform_.translate.x, -0.1f, 0.1f);
-
 			ImGui::TreePop();
 		}
 		if (ImGui::Button("Reset"))
@@ -148,7 +148,6 @@ void Player::Shoot()
 
 void Player::DamageUpdate()
 {
-
 	PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, true);
 	PostEffect::GetInstance()->SetVignetteScale(64.0f);
 	PostEffect::GetInstance()->SetVignetteFactor(vinatteFactor_);

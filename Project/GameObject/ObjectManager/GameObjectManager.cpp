@@ -136,30 +136,45 @@ void GameObjectManager::ImGuiUpdate()
 {
 	if (ImGui::TreeNode("GameObjectManager"))
 	{
-		ImGui::Text("Game3dObjectSize:%d", obj3dData_.size());
-
-		for (auto& data : obj3dData_)
+		ImGui::Text("Game3dObjectSize:: %d", obj3dData_.size());
+		//normal3dData
+		if (ImGui::TreeNode("obj3dData"))
 		{
-			auto& it = data.second;
-			it->ImGuiUpdate(it->GetObjectName());
+			for (auto& data : obj3dData_)
+			{
+				auto& it = data.second;
+				it->ImGuiUpdate(it->GetObjectName());
+			}
+			ImGui::TreePop();
 		}
-		for (auto& data : cameraData_)
+		ImGui::Separator();
+		//cameraData
+		if (ImGui::TreeNode("cameraData"))
 		{
-			auto& it = data.second;
-			it->ImGuiUpdate(it->GetObjectName());
+			for (auto& data : cameraData_)
+			{
+				auto& it = data.second;
+				it->ImGuiUpdate(it->GetObjectName());
 
+			}
+			ImGui::TreePop();
 		}
+		ImGui::Separator();
 		//ƒJƒƒ‰Ý’è
-		static char buffer[256] = "";
-		if (ImGui::InputText("Text Input", buffer, sizeof(buffer))) {
-			inputTextSelectCamera_ = std::string(buffer);
-		}
-		string bottonTitle = "Select_" + inputTextSelectCamera_;
-		if (ImGui::Button(bottonTitle.c_str()))
+		if (ImGui::TreeNode("CmareSelect")) 
 		{
-			CameraReset(inputTextSelectCamera_);
+			static char buffer[256] = "";
+			if (ImGui::InputText("Text Input", buffer, sizeof(buffer)))
+			{
+				inputTextSelectCamera_ = std::string(buffer);
+			}
+			string bottonTitle = "Select_" + inputTextSelectCamera_;
+			if (ImGui::Button(bottonTitle.c_str()))
+			{
+				CameraReset(inputTextSelectCamera_);
+			}
+			ImGui::TreePop();
 		}
-
 		ImGui::TreePop();
 	}
 }
@@ -188,7 +203,7 @@ void GameObjectManager::Draw()
 
 void GameObjectManager::ClearAllData()
 {
-	obj3dData_.clear();
+	//obj3dData_.clear();
 	cameraData_.clear();
 
 	for (auto& data : objInstancing3dData_)
@@ -218,6 +233,14 @@ void GameObjectManager::SetParent(string parentName, string childName)
 
 void GameObjectManager::CameraReset(string name)
 {
+	if (name == "")
+	{
+		auto data = cameraData_.begin();
+		auto it = data->second;
+		it->Update();
+		CameraManager::GetInstance()->ResetCamera(it->GetCamera());
+		return;
+	}
 	if (cameraData_.find(name) != cameraData_.end())
 	{
 		cameraData_[name]->Update();

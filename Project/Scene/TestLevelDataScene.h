@@ -53,18 +53,16 @@ private:
 	unique_ptr<PostEffect>postEffect_ = nullptr;
 
 	shared_ptr<LevelData> levelData_ = nullptr;
-
-	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
-
+	string inputLevelDataFileName_ = "LevelData_1.json";
+	
 	PointLight_param light_{};
-
-	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 
 	shared_ptr<BlockManager>blockManager_ = nullptr;
-	shared_ptr<GravityManager>gravityManager_ = nullptr;
+	unique_ptr<GravityManager>gravityManager_ = nullptr;
+	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
 };

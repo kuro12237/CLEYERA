@@ -25,7 +25,6 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 
 	}
 
-
 	for (nlohmann::json& object : deserialized["objects"])
 	{
 		assert(object.contains("type"));
@@ -41,8 +40,6 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 		{
 			LoadCameraData(levelData, object);
 		}
-
-
 	}
 	return levelData;
 }

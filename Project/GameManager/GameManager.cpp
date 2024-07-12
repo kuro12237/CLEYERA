@@ -22,18 +22,23 @@ void GameManager::Run()
 		Cleyera::BeginFlame();
 
 #ifdef  _USE_IMGUI
+
 		ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.08f, 0.08f, 0.08f, 1.0f));
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.02f, 0.02f, 0.02f, 1.0f));
-		ImGui::Begin("DebugTreeNode");
-		WinApp::GetInstance()->ImGuiUpdate();
-		DirectXCommon::GetInstance()->ImGuiUpdate();
-
-		if (ImGui::TreeNode("Descriptor"))
+		ImGui::Begin("Debug");
+	
+		if (ImGui::BeginMenu("System"))
 		{
-			DSVDescriptorManager::ImGuiUpdate();
-			RTVDescriptorManager::ImGuiUpdate();
-			DescriptorManager::ImGuiUpdate();
-			ImGui::TreePop();
+			WinApp::GetInstance()->ImGuiUpdate();
+			DirectXCommon::GetInstance()->ImGuiUpdate();
+			if (ImGui::TreeNode("Descriptor"))
+			{
+				DSVDescriptorManager::ImGuiUpdate();
+				RTVDescriptorManager::ImGuiUpdate();
+				DescriptorManager::ImGuiUpdate();
+				ImGui::TreePop();
+			}
+			ImGui::EndMenu();
 		}
 		GlobalVariables::GetInstance()->Update();
 
@@ -64,7 +69,7 @@ void GameManager::Run()
 	}
 }
 
-void GameManager::ChangeState(IScene *newScene)
+void GameManager::ChangeState(IScene* newScene)
 {
 	delete Scene_;
 

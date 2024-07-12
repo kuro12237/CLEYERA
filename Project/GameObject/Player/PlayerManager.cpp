@@ -21,14 +21,18 @@ void PlayerManager::GetData(GameObjectManager* data)
 
 void PlayerManager::ImGuiUpdate()
 {
-	playerCore_->ImGuiUpdate();
-	reticle_->ImGuiUpdate();
-
-	ImGui::Text("PlayerBulletSize::%d", bullets_.size());
-	if (ImGui::Button("bulleSpown"))
+	if (ImGui::TreeNode(playerCore_->GetName().c_str()))
 	{
-		GameObjectManager* instance = GameObjectManager::GetInstance();
-		PushBullet(instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
+		playerCore_->ImGuiUpdate();
+		reticle_->ImGuiUpdate();
+
+		ImGui::Text("PlayerBulletSize::%d", bullets_.size());
+		if (ImGui::Button("bulleSpown"))
+		{
+			GameObjectManager* instance = GameObjectManager::GetInstance();
+			PushBullet(instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
+		}
+		ImGui::TreePop();
 	}
 }
 

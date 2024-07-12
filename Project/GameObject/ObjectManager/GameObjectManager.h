@@ -67,7 +67,7 @@ public:
 
 	void SetParent(string parentName, string childName);
 
-	void CameraReset(string name);
+	void CameraReset(string name="");
 
 #pragma endregion
 

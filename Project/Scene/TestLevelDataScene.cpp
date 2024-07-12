@@ -5,7 +5,7 @@ void TestLevelDataScene::Initialize()
 	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
-	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_2.json");
+	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
 
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
@@ -13,20 +13,17 @@ void TestLevelDataScene::Initialize()
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
-	gameObjectManager_->CameraReset("Camera");
-	CameraManager::GetInstance();
+	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
 
-	gameCollisionManager_ = make_unique<BoxCollisionManager>();
-
-	light_.radious = 128.0f;
+	light_.radious = 256.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 	
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
-	
+
     enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize(GameObjectManager::GetInstance());
 
@@ -34,7 +31,8 @@ void TestLevelDataScene::Initialize()
 	blockManager_->CopyData(GameObjectManager::GetInstance());
 	blockManager_->Initialize();
 
-	gravityManager_ = make_shared<GravityManager>();
+	gameCollisionManager_ = make_unique<BoxCollisionManager>();
+	gravityManager_ = make_unique<GravityManager>();
 	
 }
 
@@ -44,11 +42,28 @@ void TestLevelDataScene::Update(GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
-	debugCamera_->ImGuiUpdate();
+	ImGui::Separator();
+	ImGui::Text("SceneReload");
+	static char buffer[256] = "";
+	if (ImGui::InputText("SelectLevelDataFilePath", buffer, sizeof(buffer)))
+	{
+		inputLevelDataFileName_ = std::string(buffer);
+	}
+	string bottonTitle = "Select_" + inputLevelDataFileName_;
+	if (ImGui::Button(bottonTitle.c_str()))
+	{
+		Initialize();
+		return;
+	}
 
+	ImGui::Separator();
 	if (ImGui::TreeNode("light"))
 	{
 		ImGui::DragFloat3("t", &light_.position.x);
+		ImGui::DragFloat("radious", &light_.radious);
+		ImGui::DragFloat("decay", &light_.decay);
+		ImGui::DragFloat("intencity", &light_.intencity);
+
 		ImGui::TreePop();
 	}
 
