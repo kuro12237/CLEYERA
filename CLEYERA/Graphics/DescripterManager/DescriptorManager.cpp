@@ -38,10 +38,8 @@ void DescriptorManager::Clear()
 
 uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size,string name)
 {
-	if (CheckData(name))
-	{
 
-	}
+	uint32_t index = DescriptorManager::GetInstance()->index;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc;
 	instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
@@ -55,13 +53,13 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<I
 	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index] = 
 		GetCPUDescriptorHandle(
 			DirectXCommon::GetInstance()->GetSrvHeap(),
-			DescriptorManager::GetInstance()->index
+			index
 		);
 
 	DescriptorManager::GetInstance()->SrvHandleGPU[DescriptorManager::GetInstance()->index] =
 		GetGPUDescriptorHandle(
 		    DirectXCommon::GetInstance()->GetSrvHeap(),
-			DescriptorManager::GetInstance()->index
+			index
  	    );
 
 	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index].ptr +=
@@ -73,11 +71,10 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<I
 	DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
 		resource.Get(),
 		&instansingSrvDesc,
-		DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index]
+		DescriptorManager::GetInstance()->SrvHandleCPU[index]
 	);
 
-
-	return DescriptorManager::GetInstance()->index;
+	return index;
 }
 
 uint32_t DescriptorManager::CreateSRV(ComPtr<ID3D12Resource>& resource,D3D12_SHADER_RESOURCE_VIEW_DESC SrvDesc)
@@ -146,8 +143,8 @@ void DescriptorManager::CGHandlePtr()
 void DescriptorManager::IndexIncrement(const string& name)
 {
 	DescriptorManager::GetInstance()->index++;
-	name;
-	//DescriptorManager::GetInstance()->descripterDatas_[name] = std::make_unique<DescripterData>(DescriptorManager::GetInstance()->index, name);
+	
+	DescriptorManager::GetInstance()->descripterDatas_[name] = std::make_unique<DescripterData>(DescriptorManager::GetInstance()->index, name);
 }
 
 bool DescriptorManager::CheckData(const string& name)
