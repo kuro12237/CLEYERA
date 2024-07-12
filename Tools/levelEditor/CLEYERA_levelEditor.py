@@ -46,7 +46,7 @@ class MYADDON_OT_export_scene(bpy.types.Operator,bpy_extras.io_utils.ExportHelpe
  
         
     def parse_scene_recursive_json(self,data_parent,object,level):
-        json_object=dict()
+        json_object = dict()
         json_object["type"] = object.type
         json_object["name"] = object.name
         
@@ -54,9 +54,15 @@ class MYADDON_OT_export_scene(bpy.types.Operator,bpy_extras.io_utils.ExportHelpe
             json_object["file_name"] = object["file_name"]
         else:
             json_object["file_name"] = "Box"
-        
-        json_object["objectType"] = object.gameObject_type.gameObject_enum
+        #拡張子
+        json_object["ModelFileType"] = object.modelFile_type.modelFile_enum 
 
+        #instancingの場合オブジェクトの種類を書き込む
+        json_object["DrawType"] = object.draw_type.draw_enum
+
+        if object.draw_type.draw_enum == "Instancing":
+            json_object["InstancingObjName"] = object.gameObject_type.gameObject_enum
+        
         trans,rotate,scale=object.matrix_local.decompose()
         rotate = rotate.to_euler()
         rotate.x = math.degrees(rotate.x)
@@ -81,7 +87,6 @@ class MYADDON_OT_export_scene(bpy.types.Operator,bpy_extras.io_utils.ExportHelpe
             json_object["children"] = list()
             for child in object.children:
                 self.parse_scene_recursive_json(json_object["children"],child,level +1)
-
 
     def export_json(self):
         #保存情報をまとめるdict
@@ -126,6 +131,44 @@ class TOPBAR_MT_my_menu(bpy.types.Menu):
     def submenuExport(self,context):
         self.layout.menu(MYADDON_OT_export_scene.bl_idname)
 
+
+#instancingGroup
+class ObjectType(bpy.types.PropertyGroup):
+    gameObject_enum : EnumProperty(
+        name="オブジェクトの種類",
+        description="objectの種類",
+        items=[
+            ('None',"None","None"),
+            ('Map', "ブロック", "ブロック"),
+        ],
+        #items=get_enum_items,
+        default='Map'
+    ) # type: ignore
+
+#DrawGrop
+class DrawType(bpy.types.PropertyGroup):
+    draw_enum : EnumProperty(
+        name="オブジェクトの表示の種類",
+        description="objectの表示種類",
+        items=[
+            ('Normal',"通常","通常"),
+            ('Instancing', "インスタンシング", "インスタンシング"),
+        ],
+        default='Instancing'
+    ) # type: ignore
+
+#modelFilePath
+class ModelFileType(bpy.types.PropertyGroup):
+    modelFile_enum : EnumProperty(
+        name="モデルのフォルダの拡張子",
+        description="objectの表示種類",
+        items=[
+            ('obj',"obj","obj"),
+            ('gltf', "gltf", "gltf"),
+        ],
+        default='obj'
+    ) # type: ignore
+
 #objectごとの
 
 class MYADDON_OT_add_filename(bpy.types.Operator):
@@ -135,20 +178,13 @@ class MYADDON_OT_add_filename(bpy.types.Operator):
     bl_options = {"REGISTER","UNDO"}
 
     def execute(self,context):
-        context.object["file_name"] = ""
+        obj = context.object
+        
+        obj["file_name"] = ""
+        if not hasattr(obj,"modelFile_type"):
+           obj.modelFile_type = bpy.data.objects.new("Object", None).modelFile_type
+           obj.modelFile_type.modelFile_enum = 'obj'
         return {"FINISHED"}
-
-class ObjectType(bpy.types.PropertyGroup):
-    gameObject_enum : EnumProperty(
-        name="オブジェクトの種類",
-        description="objectの種類",
-        items=[
-            ('Map', "ブロック", "ブロック"),
-            ('Player', "プレイヤー", "プレイヤー"),
-            ('Enemy', "敵", "敵")
-        ],
-        default='Map'
-    ) # type: ignore
 
 class MYADDON_OT_add_object_property(bpy.types.Operator):
     """objectの固有の設定"""
@@ -163,6 +199,10 @@ class MYADDON_OT_add_object_property(bpy.types.Operator):
         if not hasattr(obj,"gameObject_type"):
             obj.gameObject_type = bpy.data.objects.new("Object", None).gameObject_type
             obj.gameObject_type.gameObject_enum = 'Map'
+        
+        if not hasattr(obj,"draw_type"):
+            obj.draw_type = bpy.data.objects.new("object",None).draw_type,
+            obj.draw_type.draw_enum = 'Instancing'
 
         return {"FINISHED"}
 
@@ -170,7 +210,7 @@ class OBJECT_PT_Object(bpy.types.Panel):
     """ objectの名前 """
 
     bl_idname = "OBJECT_PT_Object"
-    bl_label = "ObjectFilename"
+    bl_label = "ObjectFileProperty"
     bl_space_type = "PROPERTIES" 
     bl_region_type = "WINDOW"
     bl_context = "object"
@@ -179,16 +219,19 @@ class OBJECT_PT_Object(bpy.types.Panel):
         obj = context.object
 
         if "file_name" in obj:
-            self.layout.prop(obj,'["file_name"]',text = self.bl_label)
+            self.layout.prop(obj,'["file_name"]',text = "modelFilePath")
+            self.layout.prop(obj.modelFile_type,"modelFile_enum",text="拡張子選択")
         else:
             self.layout.operator(MYADDON_OT_add_filename.bl_idname)
 
         if "gameObject_type"in obj:
+        
             self.layout.prop(obj.gameObject_type,"gameObject_enum",text="property")
+            self.layout.prop(obj.draw_type,"draw_enum",text="表示方法")
         else:
             self.layout.operator(MYADDON_OT_add_object_property.bl_idname)
 
-
+       
 #Colliderのenumの定義
 class ColliderType(bpy.types.PropertyGroup):
       collider_enum : EnumProperty(
@@ -328,6 +371,8 @@ classes =(
     ###構造体
     ColliderType,
     ObjectType,
+    DrawType,
+    ModelFileType,
     ###トップメニュー
     MYADDON_OT_export_scene,
     TOPBAR_MT_my_menu,
@@ -350,13 +395,12 @@ def register():
   
     bpy.types.Object.collider_type = PointerProperty(type = ColliderType)
     bpy.types.Object.gameObject_type = PointerProperty(type = ObjectType)
-
-
+    bpy.types.Object.draw_type = PointerProperty(type = DrawType)
+    bpy.types.Object.modelFile_type = PointerProperty(type = ModelFileType)
     #メニュー
     bpy.types.TOPBAR_MT_editor_menus.append(TOPBAR_MT_my_menu.submenu)
     bpy.types.TOPBAR_MT_editor_menus.append(TOPBAR_MT_my_menu.submenuExport)
     
-
     #プロパティ
     DrawCollider.handle = bpy.types.SpaceView3D.draw_handler_add(DrawCollider.draw_collider,(),"WINDOW","POST_VIEW")
 
