@@ -59,13 +59,15 @@ public:
 
 	shared_ptr<Game3dInstancingObjectData>& GetObjInstancingData(string name);
 
+	std::map<string, shared_ptr<Game3dObjectData>>& GetObj3dDatas() { return obj3dData_; }
+
 #pragma endregion
 
 #pragma region Set
 
 	void SetParent(string parentName, string childName);
 
-	void CameraReset(string name);
+	void CameraReset(string name="");
 
 #pragma endregion
 
@@ -73,6 +75,8 @@ public:
 private:
 
 	void checkChildren(shared_ptr<Game3dObjectData>& data);
+
+	string inputTextSelectCamera_ = "";
 
 	vector<string>dataName_;
 	vector<string>instancingDataName_;

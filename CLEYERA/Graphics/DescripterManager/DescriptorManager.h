@@ -47,6 +47,9 @@ public:
 
 	static void SetCPUDescripterHandle(D3D12_CPU_DESCRIPTOR_HANDLE CpuDescripterHandle, uint32_t index)
 	{
+		DescriptorManager::GetCPUDescriptorHandle(
+			DirectXCommon::GetInstance()->GetSrvHeap(),
+			index),
 		DescriptorManager::GetInstance()->SrvHandleCPU[index] = CpuDescripterHandle;
 	}
 

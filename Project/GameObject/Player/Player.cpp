@@ -17,14 +17,14 @@ void Player::Initialize()
 
 void Player::ImGuiUpdate()
 {
-	if (ImGui::TreeNode(name_.c_str()))
+	string imguiTreeName = name_ + "core";
+	if (ImGui::TreeNode(imguiTreeName.c_str()))
 	{
 		if (ImGui::TreeNode("transform"))
 		{
 			ImGui::DragFloat3("s", &transform_.scale.x, -0.1f, 0.1f);
 			ImGui::DragFloat3("r", &transform_.rotate.x, -0.1f, 0.1f);
 			ImGui::DragFloat3("t", &transform_.translate.x, -0.1f, 0.1f);
-
 			ImGui::TreePop();
 		}
 		if (ImGui::Button("Reset"))
@@ -41,8 +41,6 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-
-	//velocity_ = {};
 	shootTimerFlame_++;
 	if (state_)
 	{
@@ -58,6 +56,7 @@ void Player::Update()
 	{
 		DamageUpdate();
 	}
+
 	isShoot_ = false;
 	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
 }
@@ -78,7 +77,7 @@ void Player::OnCollision(ICollider* c)
 	{
 		for (auto& hitDirection : hitDirection_)
 		{
-			if (hitDirection == TOP)
+			if (hitDirection == TOP && velocity_.y >= 0.0f)
 			{
 				velocity_ = {};
 			}
@@ -149,7 +148,6 @@ void Player::Shoot()
 
 void Player::DamageUpdate()
 {
-
 	PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, true);
 	PostEffect::GetInstance()->SetVignetteScale(64.0f);
 	PostEffect::GetInstance()->SetVignetteFactor(vinatteFactor_);
@@ -161,6 +159,8 @@ void Player::DamageUpdate()
 	{
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
 		PostEffect::GetInstance()->SetVignetteFactor(0.0f);
+		vinatteFactor_ = 1.0f;
+		damegeCoolTimer_ = 0;
 		isDamage_ = false;
 	}
 

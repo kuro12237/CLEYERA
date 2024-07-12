@@ -21,14 +21,18 @@ void PlayerManager::GetData(GameObjectManager* data)
 
 void PlayerManager::ImGuiUpdate()
 {
-	playerCore_->ImGuiUpdate();
-	reticle_->ImGuiUpdate();
-
-	ImGui::Text("PlayerBulletSize::%d", bullets_.size());
-	if (ImGui::Button("bulleSpown"))
+	if (ImGui::TreeNode(playerCore_->GetName().c_str()))
 	{
-		GameObjectManager* instance = GameObjectManager::GetInstance();
-		PushBullet(instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
+		playerCore_->ImGuiUpdate();
+		reticle_->ImGuiUpdate();
+
+		ImGui::Text("PlayerBulletSize::%d", bullets_.size());
+		if (ImGui::Button("bulleSpown"))
+		{
+			GameObjectManager* instance = GameObjectManager::GetInstance();
+			PushBullet(instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
+		}
+		ImGui::TreePop();
 	}
 }
 
@@ -80,6 +84,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	TransformEular transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = pos;
+	data->SetObjectType("MESH");
 	data->Initialize(transform, {}, modelHandle);
 
 	shared_ptr<PlayerBullet> b = make_shared<PlayerBullet>();

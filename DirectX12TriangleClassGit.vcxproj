@@ -105,6 +105,7 @@
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Project\GameObject\Block\Block.cpp" />
     <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
+    <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
@@ -236,6 +238,7 @@
     <ClInclude Include="Project\GameObject\Block\Block.h" />
     <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
     <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />

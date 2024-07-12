@@ -347,46 +347,6 @@ inline void BufferResource<T>::CreateBufferResource()
 template<typename T>
 inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size)
 {
-	if (DescriptorManager::CheckData(Name))
-	{
-		DescriptorManager::IndexIncrement(Name);
-		uint32_t index = DescriptorManager::GetIndex();
-
-		D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc;
-		instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-		instansingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-		instansingSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-		instansingSrvDesc.Buffer.FirstElement = 0;
-		instansingSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;;
-		instansingSrvDesc.Buffer.NumElements = instancingNum;
-		instansingSrvDesc.Buffer.StructureByteStride = size;
-
-		DescriptorManager::SetCPUDescripterHandle(
-			DescriptorManager::GetCPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvHeap(),
-				index),
-			index
-		);
-
-		DescriptorManager::SetGPUDescripterHandle(
-			DescriptorManager::GetGPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvHeap(),
-				index),
-			index
-		);
-
-		DescriptorManager::CGHandlePtr();
-
-		DescriptorManager::CreateShaderResourceView(
-			buffer_.Get(),
-			instansingSrvDesc,
-			index);
-
-		srvIndex_ = index;
-
-	}
-	else
-	{
-		srvIndex_ = DescriptorManager::CheckDatasIndex(Name);
-	}
+	Name;
+	srvIndex_ = DescriptorManager::CreateInstancingSRV(instancingNum, buffer_, size);
 }

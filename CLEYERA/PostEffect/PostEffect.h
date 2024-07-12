@@ -9,6 +9,7 @@
 #include"Graphics/DescripterManager/DSVDescriptorManager.h"
 #include"CreateResource/BufferResources.h"
 #include"Light/DirectionLIght.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 enum SelectPostEffect
 {
@@ -29,7 +30,7 @@ public:
 
 	void Initialize(const string& name);
 	void Update();
-	void Draw(const CameraData&view);
+	void Draw();
 
 	void PreDraw();
 	void PostDraw();

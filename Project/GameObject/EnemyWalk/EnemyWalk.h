@@ -27,12 +27,17 @@ public:
 
 	bool GetIsDead() { return isDead_; }
 
+	float GetSpeed() { return speed_; }
+
 #pragma endregion
 
 private:
 
 	bool IsHit_ = false;
 	bool isDead_ = false;
+
+
+	float speed_ = -0.01f;
 
 	unique_ptr<IEnemyWalkState>state_ = nullptr;
 

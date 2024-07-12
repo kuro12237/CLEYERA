@@ -5,41 +5,34 @@ void TestLevelDataScene::Initialize()
 	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
-	levelData_ = SceneFileLoader::GetInstance()->ReLoad("TestSceneLoad_2.json");
-	
-	camera_.Initialize();
-	camera_.translation_.z = -16.0f;
-	camera_.translation_.y = 2.0f;
+	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
+
 	debugCamera_ = make_unique<DebugCamera>();
 	debugCamera_->Initialize();
-	camera_.UpdateMatrix();
-	
+
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
-	gameObjectManager_->CameraReset("PlayerCamera");
-	CameraManager::GetInstance();
+	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
 
-	gameCollisionManager_ = make_unique<BoxCollisionManager>();
-
-	light_.radious = 128.0f;
+	light_.radious = 256.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 	
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
-	
-	enemyWalk_ = make_shared<EnemyWalk>();
-	enemyWalk_->Initialize();
-	enemyWalk_->GetData(GameObjectManager::GetInstance());
+
+    enemyWalkManager_ = make_unique<EnemyWalkManager>();
+	enemyWalkManager_->Initialize(GameObjectManager::GetInstance());
 
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->CopyData(GameObjectManager::GetInstance());
 	blockManager_->Initialize();
 
-	gravityManager_ = make_shared<GravityManager>();
+	gameCollisionManager_ = make_unique<BoxCollisionManager>();
+	gravityManager_ = make_unique<GravityManager>();
 	
 }
 
@@ -49,11 +42,28 @@ void TestLevelDataScene::Update(GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
-	debugCamera_->ImGuiUpdate();
+	ImGui::Separator();
+	ImGui::Text("SceneReload");
+	static char buffer[256] = "";
+	if (ImGui::InputText("SelectLevelDataFilePath", buffer, sizeof(buffer)))
+	{
+		inputLevelDataFileName_ = std::string(buffer);
+	}
+	string bottonTitle = "Select_" + inputLevelDataFileName_;
+	if (ImGui::Button(bottonTitle.c_str()))
+	{
+		Initialize();
+		return;
+	}
 
+	ImGui::Separator();
 	if (ImGui::TreeNode("light"))
 	{
 		ImGui::DragFloat3("t", &light_.position.x);
+		ImGui::DragFloat("radious", &light_.radious);
+		ImGui::DragFloat("decay", &light_.decay);
+		ImGui::DragFloat("intencity", &light_.intencity);
+
 		ImGui::TreePop();
 	}
 
@@ -69,17 +79,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	player_->Update();
 
-	if (enemyWalk_)
-	{
-		enemyWalk_->Update();
-
-		gameObjectManager_->ObjDataUpdate(enemyWalk_.get());
-		if (enemyWalk_->GetIsDead())
-		{
-			gameObjectManager_->ClearObj3dData(enemyWalk_->GetName());
-			enemyWalk_.reset();
-		}
-	}
+	enemyWalkManager_->Update();
 
 	blockManager_->Update();
 
@@ -90,7 +90,6 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	gameObjectManager_->ObjDataUpdate(player_->GetPlayerCore());
 	gameObjectManager_->ObjDataUpdate(player_->GetReticle());
 	gameObjectManager_->ObjDataUpdate(player_->GetGun());
-	gameObjectManager_->CameraUpdate(player_->GetCamera());
 
 	for (shared_ptr<PlayerBullet> &b : player_->GetBullet()) {
 		gameObjectManager_->ObjDataUpdate(b.get());
@@ -101,11 +100,11 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	gameObjectManager_->Update();
 
 	debugCamera_->Update();
-	
+
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
-	
+
 }
 
 void TestLevelDataScene::PostProcessDraw()
@@ -123,7 +122,7 @@ void TestLevelDataScene::Back2dSpriteDraw()
 
 void TestLevelDataScene::Object3dDraw()
 {
-	PostEffect::GetInstance()->Draw(camera_);
+	PostEffect::GetInstance()->Draw();
 }
 
 void TestLevelDataScene::Flont2dSpriteDraw()
@@ -143,9 +142,14 @@ void TestLevelDataScene::Collision()
 			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
 		}
 	}
-	if (enemyWalk_)
+
+
+	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
-		gameCollisionManager_->ListPushback(enemyWalk_.get());
+		if (e)
+		{
+			gameCollisionManager_->ListPushback(e.get());
+		}
 	}
 
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
@@ -160,9 +164,13 @@ void TestLevelDataScene::Gravitys()
 {
 	gravityManager_->ClearList();
 	gravityManager_->PushList(player_->GetPlayerCore());
-	if (enemyWalk_)
+
+	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
-		gravityManager_->PushList(enemyWalk_.get());
+		if (e)
+		{
+			gravityManager_->PushList(e.get());
+		}
 	}
 	gravityManager_->CheckGravity();
 }

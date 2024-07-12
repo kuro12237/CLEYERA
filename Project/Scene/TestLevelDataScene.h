@@ -17,8 +17,7 @@
 #include"GameObject/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
 
-#include"GameObject/Player/Player.h"
-#include"GameObject/EnemyWalk/EnemyWalk.h"
+#include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
@@ -49,23 +48,21 @@ private:
 
 	GameObjectManager* gameObjectManager_;
 
-	CameraData camera_{};
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
 	unique_ptr<PostEffect>postEffect_ = nullptr;
 
 	shared_ptr<LevelData> levelData_ = nullptr;
-
-	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
-
+	string inputLevelDataFileName_ = "LevelData_1.json";
+	
 	PointLight_param light_{};
-
-	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 
-	shared_ptr<EnemyWalk>enemyWalk_ = nullptr;
+	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
+
 	shared_ptr<BlockManager>blockManager_ = nullptr;
-	shared_ptr<GravityManager>gravityManager_ = nullptr;
+	unique_ptr<GravityManager>gravityManager_ = nullptr;
+	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
 };

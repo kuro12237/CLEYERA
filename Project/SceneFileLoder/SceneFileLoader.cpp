@@ -25,7 +25,6 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 
 	}
 
-
 	for (nlohmann::json& object : deserialized["objects"])
 	{
 		assert(object.contains("type"));
@@ -41,8 +40,6 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 		{
 			LoadCameraData(levelData, object);
 		}
-
-
 	}
 	return levelData;
 }
@@ -92,9 +89,19 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			//modelのファイル読み込み
 			if (object.contains("file_name"))
 			{
+				string fileType = object["ModelFileType"].get<string>();
 				string fileName = object["file_name"].get<string>();
-				ModelManager::ModelLoadNormalMap();
-				modelHandle = ModelManager::LoadObjectFile(fileName);
+				if (fileType == "obj")
+				{
+					ModelManager::ModelLoadNormalMap();
+					modelHandle = ModelManager::LoadObjectFile(fileName);
+				}
+				if (fileType == "gltf")
+				{
+					modelHandle = ModelManager::LoadGltfFile(fileName, true);
+					obj3dData->SetModelFilePath(fileName);
+					obj3dData->SetObjectType("ARMATURE");
+				}
 			}
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
@@ -252,7 +259,7 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 				}
 				if (childType.compare("CAMERA") == 0)
 				{
-					LoadChildCameraData(levelData,obj3dData.get(), child[i]);
+					LoadChildCameraData(levelData, obj3dData.get(), child[i]);
 				}
 			}
 		}
@@ -271,8 +278,15 @@ void SceneFileLoader::LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann:
 	string name = object["name"].get<string>();
 	//transormGet
 	TransformEular transformEular = GetTransform(object["transform"]);
+    //補正
+	transformEular.rotate.x += 90.0f;
+	//ラジアン二変換
+	transformEular.rotate.x = transformEular.rotate.x * float(std::numbers::pi) / 180.0f;
+	transformEular.rotate.y = transformEular.rotate.y * float(std::numbers::pi) / 180.0f;
+	transformEular.rotate.z = transformEular.rotate.z * float(std::numbers::pi) / 180.0f;
 	//data作成
 	cameraData = make_shared<GameCameraData>();
+	cameraData->SetObjName(name);
 	cameraData->SetObjectType("CAMERA");
 	cameraData->Create(transformEular);
 	levelData->cameraData[name] = cameraData;
@@ -286,9 +300,17 @@ void SceneFileLoader::LoadChildCameraData(shared_ptr<LevelData>& levelData, IGam
 	data->PushBackChildren(name);
 	//transormGet
 	TransformEular transformEular = GetTransform(object["transform"]);
+	//補正
+	transformEular.rotate.x += 90.0f;
+	//ラジアン二変換
+	transformEular.rotate.x = transformEular.rotate.x * float(std::numbers::pi) / 180.0f;
+	transformEular.rotate.y = transformEular.rotate.y * float(std::numbers::pi) / 180.0f;
+	transformEular.rotate.z = transformEular.rotate.z * float(std::numbers::pi) / 180.0f;
+
 	//data作成
 	cameraData = make_shared<GameCameraData>();
-	cameraData->SetObjectType("MESH");
+	cameraData->SetObjName(name);
+	cameraData->SetObjectType("CAMERA");
 	cameraData->Create(transformEular);
 	levelData->cameraData[name] = cameraData;
 }

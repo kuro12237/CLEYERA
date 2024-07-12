@@ -21,7 +21,7 @@ void GameObjectManager::SetAllParents()
 		{
 			for (string name : it->GetChildsName())
 			{
-				
+
 				if (obj3dData_.find(name) != obj3dData_.end())
 				{
 					SetParent(it->GetObjectName(), name);
@@ -36,7 +36,7 @@ void GameObjectManager::SetAllParents()
 	}
 }
 
-void GameObjectManager::ObjDataUpdate(IObjectData *data)
+void GameObjectManager::ObjDataUpdate(IObjectData* data)
 {
 	if (data)
 	{
@@ -47,14 +47,14 @@ void GameObjectManager::ObjDataUpdate(IObjectData *data)
 	}
 }
 
-void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data,string name)
+void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data, string name)
 {
 	uint32_t size = uint32_t(data.size());
 
 	for (uint32_t i = 0; i < size; i++)
 	{
 		data[i]->Update();
-		objInstancing3dData_[name]->PushObjectData(data[i],i);
+		objInstancing3dData_[name]->PushObjectData(data[i], i);
 	}
 
 	objInstancing3dData_[name]->TransfarData();
@@ -75,6 +75,15 @@ void GameObjectManager::CameraUpdate(IObjectData* data)
 
 void GameObjectManager::Update()
 {
+	//camera
+	for (auto& data : cameraData_)
+	{
+		auto& it = data.second;
+		it->Update();
+	}
+
+
+	// normal
 	//すでにアップデートしていたら更新しない
 	for (auto& data : obj3dData_) {
 		auto& it = data.second;
@@ -99,6 +108,7 @@ void GameObjectManager::Update()
 
 	dataName_.clear();
 
+	//instancing
 	for (auto& data : objInstancing3dData_) {
 		auto& it = data.second;
 		int index = 0;
@@ -126,8 +136,45 @@ void GameObjectManager::ImGuiUpdate()
 {
 	if (ImGui::TreeNode("GameObjectManager"))
 	{
-		ImGui::Text("Game3dObjectSize:%d", obj3dData_.size());
+		ImGui::Text("Game3dObjectSize:: %d", obj3dData_.size());
+		//normal3dData
+		if (ImGui::TreeNode("obj3dData"))
+		{
+			for (auto& data : obj3dData_)
+			{
+				auto& it = data.second;
+				it->ImGuiUpdate(it->GetObjectName());
+			}
+			ImGui::TreePop();
+		}
+		ImGui::Separator();
+		//cameraData
+		if (ImGui::TreeNode("cameraData"))
+		{
+			for (auto& data : cameraData_)
+			{
+				auto& it = data.second;
+				it->ImGuiUpdate(it->GetObjectName());
 
+			}
+			ImGui::TreePop();
+		}
+		ImGui::Separator();
+		//カメラ設定
+		if (ImGui::TreeNode("CmareSelect")) 
+		{
+			static char buffer[256] = "";
+			if (ImGui::InputText("Text Input", buffer, sizeof(buffer)))
+			{
+				inputTextSelectCamera_ = std::string(buffer);
+			}
+			string bottonTitle = "Select_" + inputTextSelectCamera_;
+			if (ImGui::Button(bottonTitle.c_str()))
+			{
+				CameraReset(inputTextSelectCamera_);
+			}
+			ImGui::TreePop();
+		}
 		ImGui::TreePop();
 	}
 }
@@ -136,18 +183,19 @@ void GameObjectManager::Draw()
 {
 	//normal
 	for (auto& data : obj3dData_) {
-		auto& itObj = data.second->GetGameObject();
-		auto& itWt = data.second->GetWorldTransform();
-		if (itObj)
+		auto& it = data.second;
+
+		auto& obj = it->GetGameObject();
+		if (obj && it->GetIsDraw())
 		{
-			itObj->Draw(itWt);
+			auto& wt = it->GetWorldTransform();
+			obj->Draw(wt);
 		}
 	}
 	//instancing
 	for (auto& data : objInstancing3dData_)
 	{
 		auto& it = data.second->GetGameObject();
-		it;
 		it->Draw();
 	}
 
@@ -155,7 +203,7 @@ void GameObjectManager::Draw()
 
 void GameObjectManager::ClearAllData()
 {
-	obj3dData_.clear();
+	//obj3dData_.clear();
 	cameraData_.clear();
 
 	for (auto& data : objInstancing3dData_)
@@ -185,11 +233,27 @@ void GameObjectManager::SetParent(string parentName, string childName)
 
 void GameObjectManager::CameraReset(string name)
 {
-	cameraData_[name]->Update();
-	CameraManager::GetInstance()->ResetCamera(cameraData_[name]->GetCamera());
+	if (name == "")
+	{
+		auto data = cameraData_.begin();
+		auto it = data->second;
+		it->Update();
+		CameraManager::GetInstance()->ResetCamera(it->GetCamera());
+		return;
+	}
+	if (cameraData_.find(name) != cameraData_.end())
+	{
+		cameraData_[name]->Update();
+		CameraManager::GetInstance()->ResetCamera(cameraData_[name]->GetCamera());
+	}
+	else
+	{
+		//入力したの名前のカメラオブジェクトは存在しない
+		assert(0);
+	}
 }
 
-void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData> &data)
+void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData>& data)
 {
 	if (!data->GetChildsName().empty())
 	{

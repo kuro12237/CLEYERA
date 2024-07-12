@@ -59,7 +59,7 @@ void PostEffect::Update()
 	adjustedColorBuffer_->UnMap();
 }
 
-void PostEffect::Draw(const CameraData& view)
+void PostEffect::Draw()
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
@@ -88,8 +88,9 @@ void PostEffect::Draw(const CameraData& view)
 
 	DirectionalLight::CommandCall(7);
 	//view
-	view.buffer_->CommandCall(8);
-	view.buffer_->CommandCall(9);
+	CameraManager::GetInstance()->CommandCall(8);
+	CameraManager::GetInstance()->CommandCall(9);
+
 	DescriptorManager::rootParamerterCommand(10, colorSrvIndex_);
 
 	commands.m_pList->DrawInstanced(6, 1, 0, 0);

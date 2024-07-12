@@ -26,7 +26,7 @@ void EnemyWalk::OnCollision(ICollider* c)
 	c;
 	IsHit_ = true;
 
-	if (kPlayerBullet ==c->GetId())
+	if (kPlayerBullet == c->GetId())
 	{
 		isDead_ = true;
 	}
@@ -47,6 +47,10 @@ void EnemyWalk::OnCollision(ICollider* c)
 			if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
 			{
 				velocity_ = {};
+			}
+			if (hitDirection == LEFT || hitDirection == RIGHT)
+			{
+				speed_ *= -1.0f;
 			}
 		}
 		transform_.translate.x += extrusion_.x;

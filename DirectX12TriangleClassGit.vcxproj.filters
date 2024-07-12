@@ -485,6 +485,8 @@
     <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
+    <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
+    <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -800,6 +802,7 @@
     <ClInclude Include="CLEYERA\Utility\LevelData\GameCameraData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\IGameObjectData.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerSquatCommand.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

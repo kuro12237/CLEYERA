@@ -18,7 +18,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     PixelShaderOutput output;
 
     float32_t4 textureColor = gTexture.Sample(gSampler, input.texcoord);
-    float32_t4 normalColor = gNormalTexture.Sample(gSampler, input.texcoord);
+    float32_t4 normalColor = gNormalTexture.Sample(gSampler, input.texcoord) * 2.0f - 1.0f;
     float32_t3 toEye = normalize(gTransformationViewMatrix.CameraPosition - input.worldPosition);
 
     float32_t3 pTotalSpecular = 0;
@@ -26,8 +26,8 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t3 pTotalRimColor = 0;
  
     //法線を行列で調整
-    N = normalize(input.normal + normalize(normalColor.rgb));
-    N = normalize(N);
+    N = normalize(normalColor.rgb);
+ 
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {
 		//点光源
@@ -49,7 +49,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         float32_t3 RimColor = gPointLight[i].color.rgb * 1.0f * rim * dotLE * factor * gPointLight[i].intensity;
 
 		//拡散
-        float32_t3 pDiffuse = gMaterial.color.rgb*textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
+        float32_t3 pDiffuse = gMaterial.color.rgb * textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
 		//鏡面
         float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 

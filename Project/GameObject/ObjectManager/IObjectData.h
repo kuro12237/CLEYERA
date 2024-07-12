@@ -49,7 +49,6 @@ protected:
 	const Math::Matrix::Matrix4x4 *worldMat_ = {};
 	TransformEular transform_{};
 	Math::Vector::Vector3 velocity_{};
-
 	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
 
 };
