@@ -28,7 +28,6 @@ void GameScene::Initialize()
 	enemyWalkManager_->Initialize(GameObjectManager::GetInstance());
 
 	blockManager_ = make_shared<BlockManager>();
-	blockManager_->CopyData(GameObjectManager::GetInstance());
 	blockManager_->Initialize();
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
@@ -86,16 +85,6 @@ void GameScene::Update(GameManager* Scene)
 	Gravitys();
 
 	Collision();
-
-	//gameObjectManager_->ObjDataUpdate(player_->GetPlayerCore());
-	gameObjectManager_->ObjDataUpdate(player_->GetReticle());
-	gameObjectManager_->ObjDataUpdate(player_->GetGun());
-
-	for (shared_ptr<PlayerBullet>& b : player_->GetBullet()) {
-		gameObjectManager_->ObjDataUpdate(b.get());
-	}
-
-	gameObjectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(), "Map");
 
 	gameObjectManager_->Update();
 

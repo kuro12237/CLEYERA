@@ -11,8 +11,13 @@ class Game3dInstancingObjectData
 public:
 
 	void Initialize(string objectType, uint32_t modelHandle);
+	
+	void ImGuiUpdate();
+
 	void PushBackTransform(shared_ptr<IGameInstancing3dObject>t) { transform_.push_back(t); }
 	void PushObjectData(shared_ptr<IGameInstancing3dObject>t, uint32_t size) { gameInstancingObject_->PushVector(t, size); }
+	void PushObjectData(uint32_t size);
+
 	void TransfarData() { gameInstancingObject_->Transfar(); }
 #pragma region Get
 

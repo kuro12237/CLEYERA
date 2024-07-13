@@ -9,7 +9,7 @@ GameObjectManager* GameObjectManager::GetInstance()
 void GameObjectManager::CopyData(LevelData* data)
 {
 	obj3dData_ = data->obj3dData;
-	objInstancing3dData_ = data->objInstancing3dData;
+	objInstancing3dData_ = move(data->objInstancing3dData);
 	cameraData_ = data->cameraData;
 }
 
@@ -36,37 +36,6 @@ void GameObjectManager::SetAllParents()
 	}
 }
 
-void GameObjectManager::ObjDataUpdate(IObjectData* data)
-{
-	data;
-}
-
-void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data, string name)
-{
-	uint32_t size = uint32_t(data.size());
-
-	for (uint32_t i = 0; i < size; i++)
-	{
-		data[i]->Update();
-		objInstancing3dData_[name]->PushObjectData(data[i], i);
-	}
-
-	objInstancing3dData_[name]->TransfarData();
-	instancingDataName_.push_back(name);
-}
-
-void GameObjectManager::CameraUpdate(IObjectData* data)
-{
-	if (data)
-	{
-		TransformEular transform;
-		string name = data->GetName();
-		cameraData_[data->GetName()]->WtUpdate(transform);
-		cameraData_[data->GetName()]->Update();
-		dataName_.push_back(name);
-	}
-}
-
 void GameObjectManager::Update()
 {
 	//camera
@@ -76,54 +45,24 @@ void GameObjectManager::Update()
 		it->Update();
 	}
 
-
 	// normal
 	//すでにアップデートしていたら更新しない
 	for (auto& data : obj3dData_) {
-		auto& it = data.second;
-		int index = 0;
-		bool updateFlag = true;
-		for (string& name : dataName_)
-		{
-			if (it->GetObjectName() == name)
-			{
-				updateFlag = false;
-			}
-			index++;
-		}
-		//更新しない
-		if (!updateFlag)
-		{
-			continue;
-		}
-		auto& itWt = data.second->GetWorldTransform();
-		itWt.UpdateMatrix();
+		auto& it = data.second->GetWorldTransform();
+		it.UpdateMatrix();
 	}
-
-	dataName_.clear();
 
 	//instancing
 	for (auto& data : objInstancing3dData_) {
 		auto& it = data.second;
-		int index = 0;
-		bool updateFlag = true;
 
-		for (string& name : instancingDataName_)
+		for (uint32_t i = 0; i < it->GetTransforms().size(); i++)
 		{
-			if (it->GetObjectType() == name)
-			{
-				updateFlag = false;
-			}
-			index++;
+			it->GetTransforms()[i]->Update();
+			it->PushObjectData(i);
 		}
-		if (!updateFlag)
-		{
-			continue;
-		}
-		//it.GameInstancingObject->Transfar();
+		it->GetGameObject()->Transfar();
 	}
-	instancingDataName_.clear();
-	cameraData_["PlayerCamera"]->Update();
 }
 
 void GameObjectManager::ImGuiUpdate()
@@ -144,6 +83,25 @@ void GameObjectManager::ImGuiUpdate()
 			ImGui::TreePop();
 		}
 		ImGui::Separator();
+		//instancingData
+		if (ImGui::TreeNode("InstancingData"))
+		{
+			for (auto& data : objInstancing3dData_)
+			{
+				auto& it = data.second;
+
+				ImGui::BeginChild("objInstancingData", ImVec2(250, 100));
+				if (ImGui::TreeNode(it->GetObjectType().c_str()))
+				{
+					it->ImGuiUpdate();
+					ImGui::TreePop();
+				}
+
+				ImGui::EndChild();
+			}
+			ImGui::TreePop();
+		}
+
 		//cameraData
 		if (ImGui::TreeNode("cameraData"))
 		{
@@ -159,20 +117,17 @@ void GameObjectManager::ImGuiUpdate()
 		}
 		ImGui::Separator();
 		//カメラ設定
-		if (ImGui::TreeNode("CmareSelect")) 
+		static char buffer[256] = "";
+		if (ImGui::InputText("Text Input", buffer, sizeof(buffer)))
 		{
-			static char buffer[256] = "";
-			if (ImGui::InputText("Text Input", buffer, sizeof(buffer)))
-			{
-				inputTextSelectCamera_ = std::string(buffer);
-			}
-			string bottonTitle = "Select_" + inputTextSelectCamera_;
-			if (ImGui::Button(bottonTitle.c_str()))
-			{
-				CameraReset(inputTextSelectCamera_);
-			}
-			ImGui::TreePop();
+			inputTextSelectCamera_ = std::string(buffer);
 		}
+		string bottonTitle = "Select_" + inputTextSelectCamera_;
+		if (ImGui::Button(bottonTitle.c_str()))
+		{
+			CameraReset(inputTextSelectCamera_);
+		}
+
 		ImGui::TreePop();
 	}
 }
@@ -201,7 +156,7 @@ void GameObjectManager::Draw()
 
 void GameObjectManager::ClearAllData()
 {
-	//obj3dData_.clear();
+	obj3dData_.clear();
 	cameraData_.clear();
 
 	for (auto& data : objInstancing3dData_)
@@ -209,9 +164,6 @@ void GameObjectManager::ClearAllData()
 		auto& it = data.second->GetTransforms();
 		it.clear();
 	}
-
-	dataName_.clear();
-	instancingDataName_.clear();
 }
 
 shared_ptr<Game3dObjectData>& GameObjectManager::GetObj3dData(string name)

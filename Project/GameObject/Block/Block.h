@@ -9,7 +9,7 @@ public:
 	Block() {};
 	~Block() {};
 
-	void Initialize(TransformEular t, AABB aabb);
+	void Initialize(string name,uint32_t index);
 
 	void Update();
 

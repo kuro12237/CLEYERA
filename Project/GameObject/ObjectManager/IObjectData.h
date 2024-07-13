@@ -21,9 +21,6 @@ public:
 #pragma region Set
 
 	void SetName(string name) { name_ = name; }
-
-	void SetTransform(TransformEular t) { transform_ = t; }
-
 	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
 
 	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
@@ -32,8 +29,6 @@ public:
 #pragma region Get
 
 	string GetName() { return name_; }
-
-	TransformEular GetTransform() { return transform_; }
 
 	Math::Vector::Vector3 GetVelocity() { return velocity_; }
 	Math::Vector::Vector3 GetUvScale() { return uvScale_; }
@@ -47,7 +42,6 @@ protected:
 	string name_ = "";
 
 	const Math::Matrix::Matrix4x4 *worldMat_ = {};
-	TransformEular transform_{};
 	Math::Vector::Vector3 velocity_{};
 	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
 

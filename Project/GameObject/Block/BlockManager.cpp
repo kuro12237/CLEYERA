@@ -1,29 +1,22 @@
 #include "BlockManager.h"
 
-
-void BlockManager::CopyData(GameObjectManager* data)
-{
-	transforms_ = move(data->GetObjInstancingData(name_)->GetTransforms());
-}
-
 void BlockManager::Initialize()
 {
-	for (int i = 0; i < int(transforms_.size()); i++)
+	auto& transforms = GameObjectManager::GetInstance()->GetObjInstancingData(name_)->GetTransforms();
+
+	for (int i = 0; i < int(transforms.size()); i++)
 	{
 		shared_ptr<Block>block = make_shared<Block>();
-		block->Initialize(transforms_[i]->GetTransform(),transforms_[i]->GetAABB());
-		transforms_[i]->SetUvScale(block->GetUvScale());
-
+		block->Initialize(name_, i);
+		transforms[i]->SetUvScale(block->GetUvScale());
 		blocks_.push_back(block);
 	}
 }
 
 void BlockManager::Update()
 {
-	uint32_t size = uint32_t(blocks_.size());
-	for (int i = 0; i < int(size); i++)
+	for (shared_ptr<Block>& b : blocks_)
 	{
-		transforms_[i]->SetTransformEular(blocks_[i]->GetTransform());
+		b->Update();
 	}
-
 }

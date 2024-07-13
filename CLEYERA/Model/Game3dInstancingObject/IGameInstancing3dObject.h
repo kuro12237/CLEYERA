@@ -24,7 +24,7 @@ public:
 
 	bool GetBreakFlag() { return breakFlag_; }
 
-	TransformEular GetTransform() { return transform_; }
+	TransformEular &GetTransform() { return transform_; }
 
 	AABB GetAABB() { return aabb_; }
 

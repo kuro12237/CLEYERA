@@ -23,20 +23,6 @@ public:
 #pragma region Update
 
 	/// <summary>
-	/// 指定したobj名前のデータを更新
-	/// </summary>
-	/// <param name="name"></param>
-	void ObjDataUpdate(IObjectData* data);
-
-	/// <summary>
-	/// 指定したInstancing名前のデータを更新
-	/// </summary>
-	/// <param name="name"></param>
-	void InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data, string name);
-
-	void CameraUpdate(IObjectData* data);
-
-	/// <summary>
 	/// 指定しなかったものの更新
 	/// </summary>
 	void Update();
@@ -79,9 +65,6 @@ private:
 	void checkChildren(shared_ptr<Game3dObjectData>& data);
 
 	string inputTextSelectCamera_ = "";
-
-	vector<string>dataName_;
-	vector<string>instancingDataName_;
 
 	std::map<string, shared_ptr<Game3dObjectData>> obj3dData_;
 	std::map<string, shared_ptr<Game3dInstancingObjectData>>objInstancing3dData_;

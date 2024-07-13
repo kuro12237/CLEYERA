@@ -37,7 +37,6 @@ void EnemyWalkManager::Update()
 		if (enemy)
 		{
 			enemy->Update();
-			GameObjectManager::GetInstance()->ObjDataUpdate(enemy.get());
 			//Ž€‚ñ‚¾‚çÁ‚·
 			if (enemy->GetIsDead())
 			{
