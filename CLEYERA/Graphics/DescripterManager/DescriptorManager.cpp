@@ -38,7 +38,7 @@ void DescriptorManager::Clear()
 
 uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size)
 {
-	DescriptorManager::GetInstance()->index++;
+	
 	D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc;
 	instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
 	instansingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -142,6 +142,11 @@ void DescriptorManager::IndexIncrement(const string& name)
 {
 	DescriptorManager::GetInstance()->index++;
 	DescriptorManager::GetInstance()->descripterDatas_[name] = std::make_unique<DescripterData>(DescriptorManager::GetInstance()->index, name);
+}
+
+void DescriptorManager::SetBuffer(const string& name, ComPtr<ID3D12Resource> buf)
+{
+	DescriptorManager::GetInstance()->descripterDatas_[name]->SetBuf(buf);
 }
 
 bool DescriptorManager::CheckData(const string& name)

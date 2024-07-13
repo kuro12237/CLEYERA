@@ -11,59 +11,59 @@ public:
 	BufferResource() {};
 	~BufferResource() {};
 
-	 void CreateResource(uint32_t n = 1);
+	void CreateResource(uint32_t n = 1);
 
-	 void CreateVertexBufferView();
-	 void CreateIndexBufferView();
+	void CreateVertexBufferView();
+	void CreateIndexBufferView();
 
-	 void Map();
-	 void UnMap();
+	void Map();
+	void UnMap();
 
-	 void Setbuffer(T t) { *param_ = t; }
-	 void Setbuffer(vector<T>t);
-	 void Setbuffer(vector<T>t, uint32_t num);
+	void Setbuffer(T t) { *param_ = t; }
+	void Setbuffer(vector<T>t);
+	void Setbuffer(vector<T>t, uint32_t num);
 
-	 void CommandCall(UINT number);
-	 void CommandVertexBufferViewCall(uint32_t view =1);
-	 void CommandIndexBufferViewCall();
-	 void CommandPrimitiveTopologyCall();
+	void CommandCall(UINT number);
+	void CommandVertexBufferViewCall(uint32_t view = 1);
+	void CommandIndexBufferViewCall();
+	void CommandPrimitiveTopologyCall();
 
 #pragma region 書き込みリソース
-	 /// <summary>
-	 /// 書き込みリソース
-	 /// </summary>
-	 void CreateResource(DXGI_FORMAT format, const int32_t width, const int32_t height);
+	/// <summary>
+	/// 書き込みリソース
+	/// </summary>
+	void CreateResource(DXGI_FORMAT format, const int32_t width, const int32_t height);
 
-	 void CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state, D3D12_CLEAR_VALUE depthClearValue);
+	void CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state, D3D12_CLEAR_VALUE depthClearValue);
 
-	 void CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size);
+	void CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size);
 
 
-	 /// <summary>
-	 /// 画像bufferを更新
-	 /// </summary>
-	 void TransfarImage(const UINT pixCount, const UINT rowPitch, const UINT depthPitch);
+	/// <summary>
+	/// 画像bufferを更新
+	/// </summary>
+	void TransfarImage(const UINT pixCount, const UINT rowPitch, const UINT depthPitch);
 
-	 /// <summary>
-	 /// srvに登録
-	 /// </summary>
-	 void RegisterSRV(DXGI_FORMAT format, const string &name);
+	/// <summary>
+	/// srvに登録
+	/// </summary>
+	void RegisterSRV(DXGI_FORMAT format, const string& name);
 
-	 void RegisterRTV(DXGI_FORMAT format,const string &name);
+	void RegisterRTV(DXGI_FORMAT format, const string& name);
 
-	 void RegisterDSV(DXGI_FORMAT format, const string &name);
+	void RegisterDSV(DXGI_FORMAT format, const string& name);
 
 #pragma endregion
 
 #pragma region Get
 
-	 ID3D12Resource* GetBuffer() { return buffer_.Get(); }
+	ID3D12Resource* GetBuffer() { return buffer_.Get(); }
 
-	 uint32_t GetSrvIndex() { return srvIndex_; }
-	 uint32_t GetRtvIndex() { return rtvIndex_; }
-	 uint32_t GetDsvIndex() { return dsvIndex_; }
+	uint32_t GetSrvIndex() { return srvIndex_; }
+	uint32_t GetRtvIndex() { return rtvIndex_; }
+	uint32_t GetDsvIndex() { return dsvIndex_; }
 
-	 D3D12_VERTEX_BUFFER_VIEW GetBufferView() { return vertexBufferView_; }
+	D3D12_VERTEX_BUFFER_VIEW GetBufferView() { return vertexBufferView_; }
 
 #pragma endregion
 
@@ -90,7 +90,7 @@ inline void BufferResource<T>::CreateResource(uint32_t n)
 }
 
 template<typename T>
-inline void BufferResource<T>::CreateResource(DXGI_FORMAT format,const int32_t width,const int32_t height)
+inline void BufferResource<T>::CreateResource(DXGI_FORMAT format, const int32_t width, const int32_t height)
 {
 	//resourceDesc設定
 	D3D12_RESOURCE_DESC resourceDesc = {};
@@ -122,7 +122,7 @@ inline void BufferResource<T>::CreateResource(DXGI_FORMAT format,const int32_t w
 
 	//後で下を関数化
 	ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
-    device->CreateCommittedResource(
+	device->CreateCommittedResource(
 		&heapPram,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -130,18 +130,18 @@ inline void BufferResource<T>::CreateResource(DXGI_FORMAT format,const int32_t w
 		&color,
 		IID_PPV_ARGS(&buffer_)
 	);
-	
+
 }
 
 template<typename T>
-inline void BufferResource<T>::CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state,D3D12_CLEAR_VALUE depthClearValue)
+inline void BufferResource<T>::CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state, D3D12_CLEAR_VALUE depthClearValue)
 {
 	//色
 	D3D12_CLEAR_VALUE color = depthClearValue;
 
 	//後で下を関数化
 	ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
-    device->CreateCommittedResource(
+	device->CreateCommittedResource(
 		&heapPram,
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc,
@@ -230,7 +230,7 @@ inline void BufferResource<T>::CommandPrimitiveTopologyCall()
 }
 
 template<typename T>
-inline void BufferResource<T>::TransfarImage(const UINT pixCount, const UINT rowPitch,const UINT depthPitch)
+inline void BufferResource<T>::TransfarImage(const UINT pixCount, const UINT rowPitch, const UINT depthPitch)
 {
 	UINT* img = new UINT[pixCount];
 	for (int i = 0; i < int(pixCount); i++)
@@ -250,7 +250,7 @@ inline void BufferResource<T>::TransfarImage(const UINT pixCount, const UINT row
 }
 
 template<typename T>
-inline void BufferResource<T>::RegisterSRV(DXGI_FORMAT format,const string &name)
+inline void BufferResource<T>::RegisterSRV(DXGI_FORMAT format, const string& name)
 {
 	if (DescriptorManager::CheckData(name))
 	{
@@ -285,7 +285,7 @@ inline void BufferResource<T>::RegisterSRV(DXGI_FORMAT format,const string &name
 			index);
 		srvIndex_ = index;
 	}
-	else if(!DescriptorManager::CheckData(name))
+	else if (!DescriptorManager::CheckData(name))
 	{
 		srvIndex_ = DescriptorManager::CheckDatasIndex(name);
 	}
@@ -347,6 +347,14 @@ inline void BufferResource<T>::CreateBufferResource()
 template<typename T>
 inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size)
 {
-	Name;
-	srvIndex_ = DescriptorManager::CreateInstancingSRV(instancingNum, buffer_, size);
+	if (DescriptorManager::CheckData(Name))
+	{
+		DescriptorManager::IndexIncrement(Name);
+		DescriptorManager::SetBuffer(Name, buffer_);
+		srvIndex_ = DescriptorManager::CreateInstancingSRV(instancingNum, buffer_, size);
+	}
+	else {
+		buffer_ = DescriptorManager::GetData(Name)->GetBuf();
+		srvIndex_ = DescriptorManager::GetData(Name)->GetIndex();
+	}
 }
