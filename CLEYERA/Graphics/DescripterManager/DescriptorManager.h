@@ -35,9 +35,11 @@ public:
 	static void CGHandlePtr();
 
 	/// <summary>
-	/// index��C���N�������g����descripter����炷
+	/// indexを増やす
 	/// </summary>
 	static void IndexIncrement(const string &name);
+
+	static void SetBuffer(const string& name, ComPtr<ID3D12Resource>buf);
 
 	static bool CheckData(const string& name);
 
@@ -69,6 +71,8 @@ public:
 	static uint32_t GetIndex() { return DescriptorManager::GetInstance()->index; }
 
 	static DescriptorSize GetDescripterSize() { return DescriptorManager::GetInstance()->descripterSize_; }
+
+	static DescripterData* GetData(string name) { return DescriptorManager::GetInstance()->descripterDatas_[name].get(); }
 
 #pragma endregion
 

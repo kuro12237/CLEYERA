@@ -107,6 +107,8 @@ private:
 	void CreateBloomRTV();
 	void CreateBloomSRV();
 
+	bool isInitialize_ = false;
+
 	Math::Vector::Vector2 pos_ = {};
 	Math::Vector::Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight())};
 

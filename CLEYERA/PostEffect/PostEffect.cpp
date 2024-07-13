@@ -9,7 +9,11 @@ PostEffect* PostEffect::GetInstance()
 void PostEffect::Initialize(const string& name)
 {
 	name;
-
+	if (isInitialize_)
+	{
+		return;
+	}
+	isInitialize_ = true;
 	CreateTexBuffer(texBuffer_, srvIndex_);
 	CreateTexBuffer(colorBuffer_, colorSrvIndex_);
 	CreateRTV(texBuffer_, rtvIndex_);

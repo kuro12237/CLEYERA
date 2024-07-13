@@ -797,6 +797,7 @@
     <ClInclude Include="CLEYERA\Utility\LevelData\IGameObjectData.h" />
     <ClInclude Include="Project\GameObject\Player\command\PlayerSquatCommand.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
+    <ClInclude Include="CLEYERA\CreateResource\IBufferResource.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
