@@ -16,6 +16,8 @@ void GameScene::Initialize()
 	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
 
+
+
 	light_.radious = 256.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;

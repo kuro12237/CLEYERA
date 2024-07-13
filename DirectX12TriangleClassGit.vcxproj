@@ -176,6 +176,7 @@
     <ClInclude Include="CLEYERA\Light\DirectionLIght.h" />
     <ClInclude Include="CLEYERA\Light\Light.h" />
     <ClInclude Include="CLEYERA\Light\LightingManager.h" />
+    <ClInclude Include="CLEYERA\math\MathLib.h" />
     <ClInclude Include="CLEYERA\math\Matrix\Matrix2x2.h" />
     <ClInclude Include="CLEYERA\math\Matrix\Matrix3x3.h" />
     <ClInclude Include="CLEYERA\math\Matrix\Matrix4x4.h" />
@@ -552,6 +553,9 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MathLib\MathLib.vcxproj">
+      <Project>{c19340c9-2122-4999-8e96-5b2faf2f1e7b}</Project>
+    </ProjectReference>
     <ProjectReference Include="CLEYERA\externals\DirectXTex\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
     </ProjectReference>
@@ -703,7 +707,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <AdditionalLibraryDirectories>$(ProjectDir)CLEYERA/externals/assimp/lib/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;MathLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll

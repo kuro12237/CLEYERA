@@ -21,6 +21,8 @@
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
 
+#include"math/MathLib.h"
+
 class GameScene :public IScene
 {
 public:
