@@ -8,9 +8,9 @@ GameObjectManager* GameObjectManager::GetInstance()
 
 void GameObjectManager::CopyData(LevelData* data)
 {
-	obj3dData_ = data->obj3dData;
+	obj3dData_ = move(data->obj3dData);
 	objInstancing3dData_ = move(data->objInstancing3dData);
-	cameraData_ = data->cameraData;
+	cameraData_ = move(data->cameraData);
 }
 
 void GameObjectManager::SetAllParents()
