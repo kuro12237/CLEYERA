@@ -137,8 +137,7 @@
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
-    <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
-    <ClCompile Include="Project\Scene\TestScene.cpp" />
+    <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -268,8 +267,7 @@
     <ClInclude Include="Project\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
-    <ClInclude Include="Project\Scene\TestLevelDataScene.h" />
-    <ClInclude Include="Project\Scene\TestScene.h" />
+    <ClInclude Include="Project\Scene\GameScene.h" />
     <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
   </ItemGroup>

@@ -4,7 +4,7 @@
 
 #include"Utility/GlobalVariables/GlobalVariables.h"
 
-#include"TestLevelDataScene.h"
+#include"GameScene.h"
 
 class GameManager
 {

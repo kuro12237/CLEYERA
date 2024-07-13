@@ -5,7 +5,6 @@
 #include"Input.h"
 #include"PostEffect/PostEffect.h"
 #include"Game3dObject.h"
-#include"TestScene.h"
 #include"DebugTool/DebugCamera/DebugCamera.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
@@ -22,11 +21,11 @@
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
 
-class TestLevelDataScene :public IScene
+class GameScene :public IScene
 {
 public:
-	TestLevelDataScene() {};
-	~TestLevelDataScene() {};
+	GameScene() {};
+	~GameScene() {};
 
 	void Initialize()override;
 
@@ -46,15 +45,13 @@ private:
 
 	void Gravitys();
 
+	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
-	unique_ptr<PostEffect>postEffect_ = nullptr;
-
-	shared_ptr<LevelData> levelData_ = nullptr;
 	string inputLevelDataFileName_ = "LevelData_1.json";
-	
+
 	PointLight_param light_{};
 
 	unique_ptr<PlayerManager>player_ = nullptr;
@@ -64,5 +61,4 @@ private:
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
-
 };

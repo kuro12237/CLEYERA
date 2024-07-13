@@ -418,9 +418,6 @@
     <ClCompile Include="CLEYERA\CreateResource\CreateResource.cpp">
       <Filter>CLEYERA\Graphics\BufferResource</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Scene\TestScene.cpp">
-      <Filter>Project\Scene\Game</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Utility\ColorConverter\ColorConverter.cpp">
       <Filter>CLEYERA\Utility\Color</Filter>
     </ClCompile>
@@ -453,7 +450,7 @@
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClCompile>
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
-    <ClCompile Include="Project\Scene\TestLevelDataScene.cpp" />
+    <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp" />
@@ -660,9 +657,6 @@
     <ClInclude Include="CLEYERA\Light\DirectionLIght.h">
       <Filter>CLEYERA\Light</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Scene\TestScene.h">
-      <Filter>Project\Scene\Game</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h">
       <Filter>CLEYERA\Animation</Filter>
     </ClInclude>
@@ -759,7 +753,7 @@
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h">
       <Filter>Project\SceneFileLoader</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Scene\TestLevelDataScene.h">
+    <ClInclude Include="Project\Scene\GameScene.h">
       <Filter>Project\Scene\Game\TestLevelData</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />

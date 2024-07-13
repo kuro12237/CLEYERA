@@ -1,6 +1,6 @@
-#include "TestLevelDataScene.h"
+#include "GameScene.h"
 
-void TestLevelDataScene::Initialize()
+void GameScene::Initialize()
 {
 	PostEffect::GetInstance()->Initialize("p");
 
@@ -20,11 +20,11 @@ void TestLevelDataScene::Initialize()
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
-	
+
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
 
-    enemyWalkManager_ = make_unique<EnemyWalkManager>();
+	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize(GameObjectManager::GetInstance());
 
 	blockManager_ = make_shared<BlockManager>();
@@ -33,10 +33,10 @@ void TestLevelDataScene::Initialize()
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
-	
+
 }
 
-void TestLevelDataScene::Update(GameManager* Scene)
+void GameScene::Update(GameManager* Scene)
 {
 	Scene;
 #ifdef _USE_IMGUI
@@ -71,7 +71,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 	if (ImGui::Button("SceneReload"))
 	{
-		Scene->ChangeState(new TestLevelDataScene());
+		Scene->ChangeState(new GameScene());
 		return;
 	}
 
@@ -91,11 +91,11 @@ void TestLevelDataScene::Update(GameManager* Scene)
 	gameObjectManager_->ObjDataUpdate(player_->GetReticle());
 	gameObjectManager_->ObjDataUpdate(player_->GetGun());
 
-	for (shared_ptr<PlayerBullet> &b : player_->GetBullet()) {
+	for (shared_ptr<PlayerBullet>& b : player_->GetBullet()) {
 		gameObjectManager_->ObjDataUpdate(b.get());
 	}
 
-	gameObjectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(),"Map");
+	gameObjectManager_->InstancingObjDataUpdate(blockManager_->GetTransforms(), "Map");
 
 	gameObjectManager_->Update();
 
@@ -107,7 +107,7 @@ void TestLevelDataScene::Update(GameManager* Scene)
 
 }
 
-void TestLevelDataScene::PostProcessDraw()
+void GameScene::PostProcessDraw()
 {
 	PostEffect::GetInstance()->PreDraw();
 
@@ -116,21 +116,21 @@ void TestLevelDataScene::PostProcessDraw()
 	PostEffect::GetInstance()->PostDraw();
 }
 
-void TestLevelDataScene::Back2dSpriteDraw()
+void GameScene::Back2dSpriteDraw()
 {
 }
 
-void TestLevelDataScene::Object3dDraw()
+void GameScene::Object3dDraw()
 {
 	PostEffect::GetInstance()->Draw();
 }
 
-void TestLevelDataScene::Flont2dSpriteDraw()
+void GameScene::Flont2dSpriteDraw()
 {
 	player_->Draw2d();
 }
 
-void TestLevelDataScene::Collision()
+void GameScene::Collision()
 {
 	gameCollisionManager_->ListClear();
 
@@ -160,7 +160,7 @@ void TestLevelDataScene::Collision()
 
 }
 
-void TestLevelDataScene::Gravitys()
+void GameScene::Gravitys()
 {
 	gravityManager_->ClearList();
 	gravityManager_->PushList(player_->GetPlayerCore());
