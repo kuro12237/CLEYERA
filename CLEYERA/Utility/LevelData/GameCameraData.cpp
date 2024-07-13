@@ -3,8 +3,8 @@
 void GameCameraData::Create(TransformEular t)
 {
 	worldTransform_.Initialize();
-	worldTransform_.rotation = t.rotate;
-	worldTransform_.translate = t.translate;
+	worldTransform_.transform.rotate = t.rotate;
+	worldTransform_.transform.translate = t.translate;
 	camera_.Initialize();
 	camera_.UpdateMatrix();
 }
@@ -12,9 +12,7 @@ void GameCameraData::Create(TransformEular t)
 void GameCameraData::WtUpdate(TransformEular transform)
 {
 
-	worldTransform_.scale = transform.scale;
-	worldTransform_.rotation = transform.rotate;
-	worldTransform_.translate = transform.translate;
+	worldTransform_.transform = transform;
 	worldTransform_.UpdateMatrix();
 }
 

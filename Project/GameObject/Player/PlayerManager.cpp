@@ -88,17 +88,18 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	data->Initialize(transform, {}, modelHandle);
 
 	shared_ptr<PlayerBullet> b = make_shared<PlayerBullet>();
+	string name = "PlayerBullet";
 
 	//’e‚ÌŠgŽU”ÍˆÍŒvŽZ
 	//xMin/yMax
 	const Math::Vector::Vector2 spreadRangeMax = { -0.5f,0.5f };
-	Math::Vector::Vector2 spreadRange = { 
+	Math::Vector::Vector2 spreadRange = {
 		RandomGenerator::GetFloat(spreadRangeMax.x,spreadRangeMax.y),
 		RandomGenerator::GetFloat(spreadRangeMax.x,spreadRangeMax.y)
 	};
 
-    //velocity‚ÌŒvŽZ
-	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(reticleWorldPos,playerWorldPos);
+	//velocity‚ÌŒvŽZ
+	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(reticleWorldPos, playerWorldPos);
 	velocity.x += spreadRange.x;
 	velocity.y += spreadRange.y;
 	velocity = Math::Vector::Normalize(velocity);
@@ -106,15 +107,14 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	b->SetPlayerSpeed(playerCore_->GetVelocity());
 	b->SetVelocity(velocity);
 	b->SetSpownPos(pos);
-	b->Initialize();
+
 	//Žg‚Á‚Ä‚¢‚È‚¢’e‚Ì”z—ñ‚ª‚ ‚éŽžÄ—˜—p
 	if (!deadBulletIndex_.empty())
 	{
 		uint32_t newBulletIndex = deadBulletIndex_.front();
-		string name = b->GetName() + to_string(newBulletIndex);
-		b->SetName(name);
-
-		GameObjectManager::GetInstance()->PushObj3dData(data, b->GetName());
+		string name_num = name + to_string(newBulletIndex);
+		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
+		b->Initialize(name_num);
 		bullets_[newBulletIndex] = move(b);
 		deadBulletIndex_.pop();
 	}
@@ -122,9 +122,9 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	{
 		//V‚µ‚¢index‚ð‚ÆƒŠ’e‚ÉƒZƒbƒg
 		int size = int(bullets_.size());
-		string name = b->GetName() + to_string(size);
-		b->SetName(name);
-		GameObjectManager::GetInstance()->PushObj3dData(data, b->GetName());
+		string name_num = name + to_string(size);
+		GameObjectManager::GetInstance()->PushObj3dData(data,name_num);
+		b->Initialize(name_num);
 		bullets_.push_back(move(b));
 	}
 }

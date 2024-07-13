@@ -125,5 +125,5 @@ void SkyBox::CreateMaterial()
 	cMaterial_->CreateResource();
 
 	worldTransform_.Initialize();
-	worldTransform_.scale = { 24.0f,24.0f,24.0f };
+	worldTransform_.transform.scale = { 24.0f,24.0f,24.0f };
 }

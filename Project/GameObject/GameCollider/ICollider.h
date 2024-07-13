@@ -41,7 +41,7 @@ public:
 
 #pragma region Set
 
-	void SetObjectData(const TransformEular& t) { pTransform_ = &t; }
+	void SetObjectData(const TransformEular &t) { pTransform_ = &t; }
 
 	void SetId(uint32_t id) { id_ = id; };
 

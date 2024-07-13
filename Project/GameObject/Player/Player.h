@@ -15,6 +15,8 @@
 #include"state/PlayerStateNone.h"
 #include"state/PlayerStateRock.h"
 
+#include"GameObject/ObjectManager/GameObjectManager.h"
+
 class Player :public IObjectData, public ICollider
 {
 public:
@@ -78,4 +80,5 @@ private:
 
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
+
 };

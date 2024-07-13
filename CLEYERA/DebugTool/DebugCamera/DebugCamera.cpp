@@ -34,12 +34,12 @@ void DebugCamera::Update()
 	//中心地点からずらす
 	Math::Vector::Vector3 offset = offset_;
 	offset = Math::Vector::TransformNormal(offset,matRot_);
-	worldTransform_.translate = offset;
+	worldTransform_.transform.translate = offset;
 
 	RotateMove();
 	//Translateの更新
 	Matrix4x4 translateMatrix =
-		Math::Matrix::TranslateMatrix(worldTransform_.translate);
+		Math::Matrix::TranslateMatrix(worldTransform_.transform.translate);
 	//worldTransformの更新
 	worldTransform_.matWorld =
 		Math::Matrix::Multiply(matRot_, translateMatrix);

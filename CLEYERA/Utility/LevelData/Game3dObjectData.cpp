@@ -6,9 +6,7 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 	modelHandle_ = modelHandle;
 
 	worldTransform_.Initialize();
-	worldTransform_.translate = transform.translate;
-	worldTransform_.scale = transform.scale;
-	worldTransform_.rotation = transform.rotate;
+	worldTransform_.transform = transform;
 	gameObject_ = make_unique<Game3dObject>();
 
 	if (ObjectType_ == "MESH")
@@ -39,9 +37,7 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 
 void Game3dObjectData::WtUpdate(TransformEular transform)
 {
-	worldTransform_.scale = transform.scale;
-	worldTransform_.rotation = transform.rotate;
-	worldTransform_.translate = transform.translate;
+	worldTransform_.transform = transform;
 	worldTransform_.UpdateMatrix();
 	worldTransform_.TransfarMatrix();
 }

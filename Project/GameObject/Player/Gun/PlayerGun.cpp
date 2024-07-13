@@ -3,8 +3,9 @@
 void PlayerGun::Initialize() {
 
 	name_ = "PlayerGun";
-	this->SetTransform(transform_);
-	transform_.scale = { 1,1,1 };
+
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	transform.scale = { 1,1,1 };
 }
 
 void PlayerGun::Update() 
@@ -30,5 +31,6 @@ void PlayerGun::Update()
 
 	rotate.x = std::asin(height / sqrt(pow(height, 2.0f) + pow(rotateXZ, 2.0f)));
 
-	transform_.rotate = rotate;
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	transform.rotate = rotate;
 }

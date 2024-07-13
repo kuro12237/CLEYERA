@@ -14,7 +14,7 @@ void EnemyWalkManager::Initialize(GameObjectManager* data)
 
 			shared_ptr<EnemyWalk>enemyWalk = nullptr;
 			enemyWalk = make_shared<EnemyWalk>();
-
+			enemyWalk->SetName(name+count);
 			enemyWalk->Initialize();
 			enemyWalk->SetName(name + count);
 			enemyWalk->GetData(GameObjectManager::GetInstance());

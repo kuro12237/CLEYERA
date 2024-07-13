@@ -2,8 +2,9 @@
 
 void EnemyWalk::Initialize()
 {
-	SetName("EnemyWalk");
-	SetObjectData(this->transform_);
+
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	SetObjectData(transform);
 	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
 	isExtrusion_ = true;
 	id_ = kEnemyWalkId;
@@ -53,7 +54,9 @@ void EnemyWalk::OnCollision(ICollider* c)
 				speed_ *= -1.0f;
 			}
 		}
-		transform_.translate.x += extrusion_.x;
-		transform_.translate.y += extrusion_.y;
+
+		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+		transform.translate.x += extrusion_.x;
+		transform.translate.y += extrusion_.y;
 	}
 }

@@ -2,6 +2,7 @@
 
 void Block::Initialize(TransformEular t, AABB aabb)
 {
+
 	this->transform_ = t;
 	name_ = "Map";
 	SetObjectData(this->transform_);

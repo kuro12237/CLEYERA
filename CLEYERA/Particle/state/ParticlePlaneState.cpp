@@ -71,18 +71,18 @@ void ParticlePlaneState::Draw(Particle* state,list<Particle_param>param, CameraD
 		particleIterator != param.end(); ++particleIterator){
 
 		//�X�P�[����o��
-		sMat = Math::Matrix::ScaleMatrix((*particleIterator).worldTransform_.scale);
+		sMat = Math::Matrix::ScaleMatrix((*particleIterator).worldTransform_.transform.scale);
 		//���s�ړ��ړ�
-		tMat = Math::Matrix::TranslateMatrix((*particleIterator).worldTransform_.translate);
+		tMat = Math::Matrix::TranslateMatrix((*particleIterator).worldTransform_.transform.translate);
 		//Affine�ϊ�
 		Matrix4x4 matWorld = Math::Matrix::Multiply(sMat, Math::Matrix::Multiply(billboardMatrix, tMat));
 		//view�ϊ�
 		matWorld = Math::Matrix::Multiply(matWorld, Math::Matrix::Multiply(viewprojection.matView_, viewprojection.matProj_));
 		//uv��Affine
 		(*particleIterator).uvTransform_.matWorld= Math::Matrix::AffineMatrix(
-			(*particleIterator).uvTransform_.scale,
-			(*particleIterator).uvTransform_.rotation,
-			(*particleIterator).uvTransform_.translate
+			(*particleIterator).uvTransform_.transform.scale,
+			(*particleIterator).uvTransform_.transform.rotate,
+			(*particleIterator).uvTransform_.transform.translate
 		);
 
 		//���

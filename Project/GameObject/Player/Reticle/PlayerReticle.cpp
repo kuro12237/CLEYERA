@@ -8,8 +8,7 @@ void PlayerReticle::Initialize()
 	data = make_shared<Game3dObjectData>();
 	data->SetObjName(name_);
 	data->SetModelHandle(modelHandle);
-	data->Initialize(transform_, {},0);
-	transform_.scale = { 1.0f,1.0f,1.0f };
+	data->Initialize({}, {}, 0);
 
 	GameObjectManager::GetInstance()->PushObj3dData(data, name_);
 	GameObjectManager::GetInstance()->SetParent("Player", name_);
@@ -23,7 +22,7 @@ void PlayerReticle::Initialize()
 	sprite_->SetTexHandle(texHandle);
 	worldTransform_.Initialize();
 	const float kScale = 0.05f;
-	worldTransform_.scale = { kScale,kScale,kScale };
+	worldTransform_.transform.scale = { kScale,kScale,kScale };
 }
 
 void PlayerReticle::ImGuiUpdate()
@@ -33,8 +32,10 @@ void PlayerReticle::ImGuiUpdate()
 
 void PlayerReticle::Update()
 {
-	transform_.translate.x = reticlePos_.x;
-	transform_.translate.y = reticlePos_.y;
+
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	transform.translate.x = reticlePos_.x;
+	transform.translate.y = reticlePos_.y;
 
 	//Get
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
@@ -45,7 +46,7 @@ void PlayerReticle::Update()
 	Math::Matrix::Matrix4x4 matViewport = Math::Matrix::ViewportMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0, 1);
 	Math::Matrix::Matrix4x4 matViewProjViewPort = Math::Matrix::Multiply(viewMat, Math::Matrix::Multiply(ProjMat, matViewport));
 
-	worldTransform_.translate =Math::Vector::TransformByMatrix(reticleWorldPos, matViewProjViewPort);
+	worldTransform_.transform.translate =Math::Vector::TransformByMatrix(reticleWorldPos, matViewProjViewPort);
 	worldTransform_.UpdateMatrix();
 }
 

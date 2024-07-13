@@ -56,10 +56,12 @@ public:
 #pragma region Get
 
 	shared_ptr<Game3dObjectData>& GetObj3dData(string name);
+	const shared_ptr<Game3dObjectData>& GetObj3dData_ptr(string name) { return obj3dData_[name]; }
+	std::map<string, shared_ptr<Game3dObjectData>>& GetObj3dDatas() { return obj3dData_; }
+
+	shared_ptr<GameCameraData>& GetCameraData(string name) { return cameraData_[name]; }
 
 	shared_ptr<Game3dInstancingObjectData>& GetObjInstancingData(string name);
-
-	std::map<string, shared_ptr<Game3dObjectData>>& GetObj3dDatas() { return obj3dData_; }
 
 #pragma endregion
 

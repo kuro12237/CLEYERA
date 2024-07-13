@@ -1,21 +1,22 @@
 #include "PlayerBullet.h"
 
-void PlayerBullet::Initialize()
+void PlayerBullet::Initialize(string number)
 {
 	state_ = make_unique<PlayerBulletStateNone>();
 	state_->Initialize(this);
 
-	name_ = "PlayerBullet";
-	transform_.scale = { 1.0f,1.0f,1.0f };
-	transform_.translate = spownPos_;
-	SetObjectData(transform_);
+	name_ =  number;
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	transform.scale = { 1.0f,1.0f,1.0f };
+	transform.translate = spownPos_;
+	SetObjectData(transform);
 
 	float velocityXZ = sqrt(pow(velocity_.x, 2.0f) + pow(velocity_.z, 2.0f));
 	float height = -velocity_.y;
 	Math::Vector::Vector3 rotate = {};
 	rotate.y = std::atan2(velocity_.x, velocity_.z);
 	rotate.x = std::atan2(height, velocityXZ);
-	transform_.rotate = rotate;
+	transform.rotate = rotate;
 
 	velocity_ = Math::Vector::Multiply(velocity_, { speed_,speed_,speed_ });
 	id_ = kPlayerBullet;
@@ -31,13 +32,13 @@ void PlayerBullet::Update()
 		isDead_ = true;
 	}
 
-	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
-	transform_.translate = Math::Vector::Add(transform_.translate, playerSpeed_);
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	transform.translate = Math::Vector::Add(transform.translate, velocity_);
+	transform.translate = Math::Vector::Add(transform.translate, playerSpeed_);
 }
 
 void PlayerBullet::OnCollision(ICollider* c)
 {
-	c;
 
 	if (c->GetId() == kPlayerId)
 	{

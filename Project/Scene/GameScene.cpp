@@ -87,7 +87,7 @@ void GameScene::Update(GameManager* Scene)
 
 	Collision();
 
-	gameObjectManager_->ObjDataUpdate(player_->GetPlayerCore());
+	//gameObjectManager_->ObjDataUpdate(player_->GetPlayerCore());
 	gameObjectManager_->ObjDataUpdate(player_->GetReticle());
 	gameObjectManager_->ObjDataUpdate(player_->GetGun());
 

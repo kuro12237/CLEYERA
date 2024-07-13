@@ -3,7 +3,8 @@
 void Player::Initialize()
 {
 	SetName("Player");
-	SetObjectData(this->transform_);
+
+	SetObjectData(GameObjectManager::GetInstance()->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
 
 	this->isExtrusion_ = true;
 
@@ -20,17 +21,9 @@ void Player::ImGuiUpdate()
 	string imguiTreeName = name_ + "core";
 	if (ImGui::TreeNode(imguiTreeName.c_str()))
 	{
-		if (ImGui::TreeNode("transform"))
-		{
-			ImGui::DragFloat3("s", &transform_.scale.x, -0.1f, 0.1f);
-			ImGui::DragFloat3("r", &transform_.rotate.x, -0.1f, 0.1f);
-			ImGui::DragFloat3("t", &transform_.translate.x, -0.1f, 0.1f);
-			ImGui::TreePop();
-		}
 		if (ImGui::Button("Reset"))
 		{
 			velocity_ = {};
-			transform_.translate = { 0.0f,4.0f,0.0f };
 		}
 
 		ImGui::DragFloat3("min", &aabb_.min.x, 0.1f);
@@ -58,7 +51,8 @@ void Player::Update()
 	}
 
 	isShoot_ = false;
-	transform_.translate = Math::Vector::Add(transform_.translate, velocity_);
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 }
 
 void Player::OnCollision(ICollider* c)
@@ -87,8 +81,12 @@ void Player::OnCollision(ICollider* c)
 				velocity_ = {};
 			}
 		}
-		transform_.translate.x += extrusion_.x;
-		transform_.translate.y += extrusion_.y;
+		//transform_.translate.x += extrusion_.x;
+		//transform_.translate.y += extrusion_.y;
+		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.translate;
+		//transform = Math::Vector::Add(transform, velocity_);
+		transform.x += extrusion_.x;
+		transform.y += extrusion_.y;
 	}
 
 }

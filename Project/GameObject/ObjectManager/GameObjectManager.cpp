@@ -38,13 +38,7 @@ void GameObjectManager::SetAllParents()
 
 void GameObjectManager::ObjDataUpdate(IObjectData* data)
 {
-	if (data)
-	{
-		TransformEular transform = data->GetTransform();
-		string name = data->GetName();
-		obj3dData_[name]->WtUpdate(transform);
-		dataName_.push_back(name);
-	}
+	data;
 }
 
 void GameObjectManager::InstancingObjDataUpdate(vector<shared_ptr<IGameInstancing3dObject>>data, string name)
@@ -65,7 +59,7 @@ void GameObjectManager::CameraUpdate(IObjectData* data)
 {
 	if (data)
 	{
-		TransformEular transform = data->GetTransform();
+		TransformEular transform;
 		string name = data->GetName();
 		cameraData_[data->GetName()]->WtUpdate(transform);
 		cameraData_[data->GetName()]->Update();
@@ -140,23 +134,27 @@ void GameObjectManager::ImGuiUpdate()
 		//normal3dData
 		if (ImGui::TreeNode("obj3dData"))
 		{
+			ImGui::BeginChild("obj3dData", ImVec2(250, 100));
 			for (auto& data : obj3dData_)
 			{
 				auto& it = data.second;
 				it->ImGuiUpdate(it->GetObjectName());
 			}
+			ImGui::EndChild();
 			ImGui::TreePop();
 		}
 		ImGui::Separator();
 		//cameraData
 		if (ImGui::TreeNode("cameraData"))
 		{
+			ImGui::BeginChild("cameraData", ImVec2(250, 100));
 			for (auto& data : cameraData_)
 			{
 				auto& it = data.second;
 				it->ImGuiUpdate(it->GetObjectName());
 
 			}
+			ImGui::EndChild();
 			ImGui::TreePop();
 		}
 		ImGui::Separator();

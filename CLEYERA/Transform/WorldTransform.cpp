@@ -27,15 +27,15 @@ void WorldTransform::Initialize()
 
 void WorldTransform::SRTSetting(Vector3 s, Vector3 r, Vector3 t)
 {
-	scale = s;
-	rotation = r;
-	translate = t;
+	transform.scale = s;
+	transform.rotate = r;
+	transform.translate = t;
 	UpdateMatrix();
 }
 
 void WorldTransform::UpdateMatrix()
 {
-	matWorld = Math::Matrix::AffineMatrix(scale, rotation, translate);
+	matWorld = Math::Matrix::AffineMatrix(transform.scale, transform.rotate, transform.translate);
 
 	if (parent) {
 		matWorld = Math::Matrix::Multiply(matWorld, parent->matWorld);
@@ -55,7 +55,7 @@ void WorldTransform::TransfarMatrix()
 
 void WorldTransform::UpdateEularMatrix()
 {
-	matWorld = Math::Matrix::AffineMatrix(scale, rotation, translate);
+	matWorld = Math::Matrix::AffineMatrix(transform.scale, transform.rotate, transform.translate);
 
 	if (parent) {
 		matWorld = Math::Matrix::Multiply(matWorld, parent->matWorld);

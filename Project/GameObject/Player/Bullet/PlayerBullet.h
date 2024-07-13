@@ -13,7 +13,7 @@ public:
 	PlayerBullet() {};
 	~PlayerBullet() {};
 
-	void Initialize();
+	void Initialize(string number);
 
 	void Update();
 
