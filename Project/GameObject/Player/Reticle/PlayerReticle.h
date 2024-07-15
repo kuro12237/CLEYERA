@@ -29,12 +29,13 @@ private:
 	Math::Vector::Vector3 NDCToScreen(const Math::Vector::Vector3& ndc, float screenWidth, float screenHeight);
 
 	float rethickeAngle_ = 0.0f;
-	const float kRetickeRad_ = 4.0f;
+	const float kRetickeRad_ = 3.0f;
 	Math::Vector::Vector2 reticlePos_ = {kRetickeRad_,0.0f};
 
 	Math::Vector::Vector2 pos2d_ = {};
 
 	unique_ptr<Sprite>sprite_ = nullptr;
 	WorldTransform worldTransform_;
+	Math::Vector::Vector3 interTarget_ = {};
 };
 

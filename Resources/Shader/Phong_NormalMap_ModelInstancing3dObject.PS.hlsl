@@ -26,7 +26,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t3 pTotalRimColor = 0;
  
     //法線を行列で調整
-    N = normalize(normalColor.rgb);
+    N = normalize(normalColor.rgb+input.normal);
  
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {

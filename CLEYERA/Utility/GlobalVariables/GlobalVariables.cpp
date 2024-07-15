@@ -212,7 +212,8 @@ void GlobalVariables::Update()
 	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.02f, 0.02f, 0.02f, 1.0f));
 	if (!ImGui::Begin("Global Variables", nullptr, ImGuiWindowFlags_MenuBar)) {
 		ImGui::End();
-
+		ImGui::PopStyleColor();
+		ImGui::PopStyleColor();
 		return;
 	}
 

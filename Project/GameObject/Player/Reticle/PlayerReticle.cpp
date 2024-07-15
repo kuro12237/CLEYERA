@@ -34,13 +34,16 @@ void PlayerReticle::Update()
 {
 
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
-	transform.translate.x = reticlePos_.x;
-	transform.translate.y = reticlePos_.y;
+
+	interTarget_ = Math::Vector::Lerp(interTarget_, Math::Vector::Vector3(reticlePos_.x, reticlePos_.y, 0.0f), 0.5f);
 
 	//Get
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
 	Math::Vector::Vector3 reticleWorldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().GetWorldPosition();
+	reticleWorldPos = Math::Vector::Add(reticleWorldPos, interTarget_);
+	transform.translate.x = reticlePos_.x;
+	transform.translate.y = reticlePos_.y;
 
 	//çsóÒïœä∑
 	Math::Matrix::Matrix4x4 matViewport = Math::Matrix::ViewportMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0, 1);
