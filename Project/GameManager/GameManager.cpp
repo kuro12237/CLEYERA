@@ -40,7 +40,7 @@ void GameManager::Run()
 			}
 			ImGui::EndMenu();
 		}
-		GlobalVariables::GetInstance()->Update();
+		//GlobalVariables::GetInstance()->Update();
 
 #endif //  _USE_IMGUI
 

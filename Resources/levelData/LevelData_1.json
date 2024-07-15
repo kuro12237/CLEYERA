@@ -29,8 +29,8 @@
         {
             "type": "MESH",
             "name": "Player",
-            "file_name": "TestHuman",
-            "ModelFileType": "gltf",
+            "file_name": "TestPlayer",
+            "ModelFileType": "obj",
             "DrawType": "Normal",
             "transform": {
                 "translate": [

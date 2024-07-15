@@ -77,6 +77,8 @@ void PlayerManager::Draw2d()
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
+
+	ModelManager::ModelLoadNormalMap();
 	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");
 	//オブジェクトの作成
 	shared_ptr<Game3dObjectData> data;
