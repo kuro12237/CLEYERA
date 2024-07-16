@@ -2,5 +2,5 @@
 
 void PlayerMoveCommand::Exec(Player& p)
 {
-	p.Move();
+	p.Move(0.1f);
 }

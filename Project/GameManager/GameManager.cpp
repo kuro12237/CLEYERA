@@ -4,14 +4,15 @@ GameManager::GameManager()
 {
 	Cleyera::Initialize();
 
-	Scene_ = new GameScene();
-
+	Scene_ = new  GameScene();
 	Scene_->Initialize();
 }
 
 GameManager::~GameManager()
 {
 	delete Scene_;
+	Input::GetInstance()->VibrateController(0,0);
+
 	Cleyera::Finalize();
 }
 

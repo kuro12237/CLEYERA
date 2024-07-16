@@ -37,7 +37,7 @@ public:
 
 	void Jamp();
 
-	void Move();
+	void Move(float speed);
 
 	void Shoot();
 

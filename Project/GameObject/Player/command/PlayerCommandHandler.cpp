@@ -13,7 +13,9 @@ void PlayerCommandHandler::Handler()
 
 	if (IsLJoystickActive())
 	{
+
 		commands_.push(make_unique<PlayerMoveCommand>());
+
 	}
 }
 

@@ -4,6 +4,7 @@
 #include"PlayerJampCommand.h"
 #include"PlayerMoveCommand.h"
 #include"PlayerShootCommand.h"
+#include"playerDashMoveCommand.h"
 
 class PlayerCommandHandler
 {

@@ -62,7 +62,7 @@ void Player::OnCollision(ICollider* c)
 		if (c->GetId() == kEnemyWalkId)
 		{
 			ChangeState(make_unique<PlayerStateRock>());
-
+			Input::VibrateController(65000, 65000,20.0f);
 			isDamage_ = true;
 		}
 	}
@@ -81,10 +81,7 @@ void Player::OnCollision(ICollider* c)
 				velocity_ = {};
 			}
 		}
-		//transform_.translate.x += extrusion_.x;
-		//transform_.translate.y += extrusion_.y;
 		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.translate;
-		//transform = Math::Vector::Add(transform, velocity_);
 		transform.x += extrusion_.x;
 		transform.y += extrusion_.y;
 	}
@@ -112,7 +109,7 @@ void Player::Jamp()
 	}
 }
 
-void Player::Move()
+void Player::Move(float speed)
 {
 	if (isRockState_)
 	{
@@ -131,8 +128,7 @@ void Player::Move()
 
 	}
 
-	const float Speed = 0.1f;
-	velocity_.x = Ljoy.x * Speed;
+	velocity_.x = Ljoy.x * speed;
 }
 
 void Player::Shoot()
