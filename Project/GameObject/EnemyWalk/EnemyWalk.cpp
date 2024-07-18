@@ -2,7 +2,6 @@
 
 void EnemyWalk::Initialize()
 {
-
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	SetObjectData(transform);
 	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };

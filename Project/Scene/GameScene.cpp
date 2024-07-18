@@ -37,6 +37,7 @@ void GameScene::Initialize()
 
 void GameScene::Update(GameManager* Scene)
 {
+	
 	Scene;
 #ifdef _USE_IMGUI
 

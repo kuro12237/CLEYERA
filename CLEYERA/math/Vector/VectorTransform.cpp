@@ -16,7 +16,7 @@ float Math::Vector::Length(const Vector3& v)
 	return result;
 }
 
-Vector3 Math::Vector::Add(const Vector3 &v1, const Vector3 &v2)
+Vector3 Math::Vector::Add(const Vector3& v1, const Vector3& v2)
 {
 	Vector3 result{};
 	result.x = v1.x + v2.x;
@@ -105,7 +105,12 @@ float Math::Vector::Dot(const Vector3& v1, const Vector3& v2) {
 }
 
 Vector3 Math::Vector::Lerp(const Vector3& a, const Vector3& b, const float t) {
-	return Vector3{ a.x + t * (b.x - a.x),a.y + t * (b.y - a.y),a.z + t * (b.z - a.z)};
+
+	Vector3 P;
+	P.x = a.x + t * (b.x - a.x);
+	P.y = a.y + t * (b.y - a.y);
+	P.z = a.z + t * (b.z - a.z);
+	return P;
 }
 
 Vector3 Math::Vector::SlerpFanc(Vector3 start, Vector3 end, float t)
@@ -172,24 +177,24 @@ Vector3 Math::Vector::TransformByMatrix(const Vector3 vector, const Math::Matrix
 float Math::Vector::easeOutBounce(float t)
 {
 
-    const float n1 = 7.5625f;
-    const float d1 = 2.75f;
-    
-    if (t < 1.0f / d1) {
-    	return n1 * t * t;
-    }
-     else if (t < 2.0f / d1) 
+	const float n1 = 7.5625f;
+	const float d1 = 2.75f;
+
+	if (t < 1.0f / d1) {
+		return n1 * t * t;
+	}
+	else if (t < 2.0f / d1)
 	{
-      return n1 * (t - 1.5f / d1) * t + 0.75f;
-    }
-     else if (t < 2.5f / d1) 
+		return n1 * (t - 1.5f / d1) * t + 0.75f;
+	}
+	else if (t < 2.5f / d1)
 	{
-      return n1 * (t - 2.25f / d1) * t + 0.9375f;
-    }
-     else 
+		return n1 * (t - 2.25f / d1) * t + 0.9375f;
+	}
+	else
 	{
-      return n1 * (t - 2.625f / d1) * t + 0.984375f;
-    }
+		return n1 * (t - 2.625f / d1) * t + 0.984375f;
+	}
 }
 
 

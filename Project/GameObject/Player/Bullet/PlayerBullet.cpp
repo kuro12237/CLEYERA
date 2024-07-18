@@ -34,7 +34,7 @@ void PlayerBullet::Update()
 
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
-	transform.translate = Math::Vector::Add(transform.translate, playerSpeed_);
+	
 }
 
 void PlayerBullet::OnCollision(ICollider* c)

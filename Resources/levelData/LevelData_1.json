@@ -15,9 +15,9 @@
                     5.903861999511719
                 ],
                 "rotate": [
-                    37.261043548583984,
-                    3.1637072563171387,
-                    106.93630981445312
+                    37.26104736328125,
+                    3.1637091636657715,
+                    106.93632507324219
                 ],
                 "scale": [
                     1.0,
@@ -27,16 +27,41 @@
             }
         },
         {
+            "type": "CAMERA",
+            "name": "PlayerCamera",
+            "file_name": "Box",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    5.849818706512451,
+                    -32.0,
+                    7.017513275146484
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
             "type": "MESH",
             "name": "Player",
-            "file_name": "TestPlayer",
-            "ModelFileType": "obj",
+            "file_name": "TestHuman",
+            "ModelFileType": "gltf",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
+                    4.054643630981445,
                     0.0,
-                    0.0,
-                    3.8042469024658203
+                    10.020990371704102
                 ],
                 "rotate": [
                     0.0,
@@ -64,31 +89,6 @@
             },
             "children": [
                 {
-                    "type": "CAMERA",
-                    "name": "PlayerCamera",
-                    "file_name": "Box",
-                    "ModelFileType": "obj",
-                    "DrawType": "Instancing",
-                    "InstancingObjName": "Map",
-                    "transform": {
-                        "translate": [
-                            0.4703044891357422,
-                            -32.0,
-                            0.1957530975341797
-                        ],
-                        "rotate": [
-                            90.00000762939453,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    }
-                },
-                {
                     "type": "MESH",
                     "name": "PlayerGun",
                     "file_name": "PlayerTestGun",
@@ -98,10 +98,10 @@
                         "translate": [
                             0.0,
                             0.0,
-                            -0.3504292964935303
+                            -0.3504295349121094
                         ],
                         "rotate": [
-                            90.00000762939453,
+                            90.00001525878906,
                             -0.0,
                             0.0
                         ],
@@ -154,50 +154,13 @@
                 ],
                 "rotate": [
                     70.56507110595703,
-                    0.7581609487533569,
+                    0.7581616640090942,
                     16.02165412902832
                 ],
                 "scale": [
                     0.9999999403953552,
                     1.0,
                     0.9999999403953552
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Terrain",
-            "file_name": "Terrain",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    -0.20340919494628906
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    5.0,
-                    5.0,
-                    5.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
                 ]
             }
         },
@@ -247,6 +210,56 @@
                     1.0,
                     1.0,
                     1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Terrain",
+            "file_name": "Terrain",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    6.0,
+                    6.0,
+                    6.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             }
         },
@@ -373,7 +386,7 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    21.0,
+                    23.068099975585938,
                     0.0,
                     19.0
                 ],
@@ -383,7 +396,7 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
+                    3.0,
                     1.0,
                     20.0
                 ]
@@ -676,9 +689,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    7.36773681640625,
-                    0.046619802713394165,
-                    8.741047859191895
+                    -10.075838088989258,
+                    0.0,
+                    15.169554710388184
                 ],
                 "rotate": [
                     0.0,
@@ -713,120 +726,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    14.456574440002441,
-                    0.046619802713394165,
-                    9.469439506530762
-                ],
-                "rotate": [
+                    14.104496002197266,
                     0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "EnemyWalk_2",
-            "file_name": "DebugTestSphere",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    -6.411321640014648,
-                    0.046619802713394165,
-                    14.145730018615723
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "EnemyWalk_3",
-            "file_name": "DebugTestSphere",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    3.5931997299194336,
-                    0.046619802713394165,
-                    29.541589736938477
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "EnemyWalk_4",
-            "file_name": "DebugTestSphere",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    11.237981796264648,
-                    0.046619802713394165,
-                    37.90562438964844
+                    20.930519104003906
                 ],
                 "rotate": [
                     0.0,

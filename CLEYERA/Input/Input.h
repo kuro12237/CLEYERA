@@ -8,7 +8,7 @@ class Input
 public:
 
 
-	static Input * GetInstance();
+	static Input* GetInstance();
 
 	static void Initialize();
 
@@ -18,7 +18,7 @@ public:
 
 	static bool PushKeyPressed(uint32_t keyNum);
 
-	
+
 	static bool GetJoystickState();
 
 	/// <summary>
@@ -43,10 +43,10 @@ public:
 	static bool PushLShoulder();
 
 	/// <summary>
-    /// ZL一瞬
-    /// </summary>
-    /// <param name="mode"></param>
-    /// <returns></returns>
+	/// ZL一瞬
+	/// </summary>
+	/// <param name="mode"></param>
+	/// <returns></returns>
 	static bool PushLShoulderPressed();
 
 
@@ -70,15 +70,28 @@ public:
 	/// </summary>
 	/// <param name="mode"></param>
 	/// <returns></returns>
-	static Math::Vector::Vector2 GetJoyLStickPos(const float &mode = SHRT_MAX);
+	static Math::Vector::Vector2 GetJoyLStickPos(const float& mode = SHRT_MAX);
 
 	/// <summary>
-    /// Rstic
-    /// </summary>
-    /// <param name="mode"></param>
-    /// <returns></returns>
+	/// Lsyic押し込み検知
+	/// </summary>
+	/// <returns></returns>
+	static bool GetLJoyTHUMB();
+
+	/// <summary>
+	/// Rstic
+	/// </summary>
+	/// <param name="mode"></param>
+	/// <returns></returns>
 	static Math::Vector::Vector2 GetJoyRStickPos(const float& mode = SHRT_MAX);
 
+	/// <summary>
+    /// Lsyic押し込み検知
+    /// </summary>
+    /// <returns></returns>
+	static bool GetRJoyTHUMB();
+
+	static void VibrateController(int leftMotor, int rightMotor, float max = 60.0f);
 
 private:
 
@@ -92,8 +105,14 @@ private:
 
 	XINPUT_STATE joyState_{};
 	XINPUT_STATE preJoyState_{};
+	XINPUT_VIBRATION vibration_;
+	WORD rightMotor_ = 0;
+	WORD leftMotor_ = 0;
+	float moterFlame_ = 0.0f;
+	float moterFlameMax_ = 30.0f;
+	bool isMoter_ = false;
 
-	bool isInitialize=false;
+	bool isInitialize = false;
 
 
 	Input() = default;

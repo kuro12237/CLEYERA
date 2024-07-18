@@ -4,14 +4,15 @@ GameManager::GameManager()
 {
 	Cleyera::Initialize();
 
-	Scene_ = new GameScene();
-
+	Scene_ = new  GameScene();
 	Scene_->Initialize();
 }
 
 GameManager::~GameManager()
 {
 	delete Scene_;
+	Input::GetInstance()->VibrateController(0,0);
+
 	Cleyera::Finalize();
 }
 
@@ -40,7 +41,7 @@ void GameManager::Run()
 			}
 			ImGui::EndMenu();
 		}
-		//GlobalVariables::GetInstance()->Update();
+		GlobalVariables::GetInstance()->Update();
 
 #endif //  _USE_IMGUI
 

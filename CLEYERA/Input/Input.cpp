@@ -17,7 +17,7 @@ void Input::Initialize()
 		assert(0);
 	}
 
-	//InputDevice�̍쐬
+	//InputDevice
 	result = DirectInput8Create(WinApp::GetInstance()->GetWc().hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8,
 		(void**)&Input::GetInstance()->directInput, nullptr);
 
@@ -35,6 +35,19 @@ void Input::BeginFlame()
 
 	//前のゲームパッドの状態をコピー
 	Input::GetInstance()->preJoyState_ = Input::GetInstance()->joyState_;
+	Input::GetInstance()->moterFlame_ ++;
+	if (Input::GetInstance()->moterFlame_>Input::GetInstance()->moterFlameMax_)
+	{
+		std::memset(&Input::GetInstance()->vibration_, 0, sizeof(XINPUT_VIBRATION));
+		// Set the vibration levels
+		Input::GetInstance()->vibration_.wLeftMotorSpeed = WORD(0);
+		Input::GetInstance()->vibration_.wRightMotorSpeed = WORD(0);
+		Input::GetInstance()->leftMotor_ = 0;
+		Input::GetInstance()->rightMotor_ = 0;
+		Input::GetInstance()->isMoter_ = false;;
+	}
+
+	XInputSetState(0, &Input::GetInstance()->vibration_);
 	//今のゲームパッドを更新
     GetJoystickState();
 }
@@ -134,6 +147,15 @@ Vector2 Input::GetJoyLStickPos(const float &mode)
 	);
 }
 
+bool Input::GetLJoyTHUMB()
+{
+	if (Input::GetInstance()->joyState_.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)
+	{
+		return true;
+	}
+	return false;
+}
+
 Vector2 Input::GetJoyRStickPos(const float& mode)
 {
 	return Vector2
@@ -141,6 +163,31 @@ Vector2 Input::GetJoyRStickPos(const float& mode)
 		Input::GetInstance()->joyState_.Gamepad.sThumbRX / mode,
 		Input::GetInstance()->joyState_.Gamepad.sThumbRY / mode
 	);
+}
+
+bool Input::GetRJoyTHUMB()
+{
+	if (Input::GetInstance()->joyState_.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB)
+	{
+		return true;
+	}
+	return false;
+}
+
+void Input::VibrateController(int leftMotor, int rightMotor,float max)
+{
+	Input::GetInstance()->moterFlameMax_ = max;
+	Input::GetInstance()->moterFlame_ = 0.0f;
+	Input::GetInstance()->isMoter_ = true;
+	Input::GetInstance()->leftMotor_ = WORD(leftMotor);
+	Input::GetInstance()->rightMotor_ = WORD(rightMotor);
+
+	std::memset(&Input::GetInstance()->vibration_, 0, sizeof(XINPUT_VIBRATION));
+
+	// Set the vibration levels
+	Input::GetInstance()->vibration_.wLeftMotorSpeed = WORD(leftMotor); 
+	Input::GetInstance()->vibration_.wRightMotorSpeed = WORD(rightMotor); 
+
 }
 
 void Input::CreateKeybordDevice()

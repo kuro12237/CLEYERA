@@ -28,7 +28,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     PixelShaderOutput output;
 
     float32_t4 textureColor = gTexture.Sample(gSampler, input.texcoord);
-    float32_t4 normalColor = gNormalTexture.Sample(gSampler, input.texcoord);
+    //float32_t4 normalColor = gNormalTexture.Sample(gSampler, input.texcoord);
     float32_t3 toEye = normalize(gTransformationViewMatrix.CameraPosition - input.worldPosition);
 
     float32_t3 pTotalSpecular = 0;
@@ -38,7 +38,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     //法線を行列で調整
     
     N = normalize(input.normal);
-    N = normalColor.rgb * N;
+    //N = normalColor.rgb * N;
     N = normalize(N);
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {

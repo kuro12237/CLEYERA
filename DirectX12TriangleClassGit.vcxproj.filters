@@ -484,6 +484,7 @@
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
+    <ClCompile Include="Project\GameObject\Player\command\playerDashMoveCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -798,6 +799,7 @@
     <ClInclude Include="Project\GameObject\Player\command\PlayerSquatCommand.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
     <ClInclude Include="CLEYERA\CreateResource\IBufferResource.h" />
+    <ClInclude Include="Project\GameObject\Player\command\playerDashMoveCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

@@ -16,7 +16,10 @@ void PlayerManager::GetData(GameObjectManager* data)
 	gun_->Initialize();
 
 	camera_ = make_unique<PlayerCamera>();
+	camera_->SetTargetName(playerCore_->GetName());
 	camera_->Initialize();
+
+	data->CameraReset(camera_->GetName());
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -125,7 +128,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 		//新しいindexをとリ弾にセット
 		int size = int(bullets_.size());
 		string name_num = name + to_string(size);
-		GameObjectManager::GetInstance()->PushObj3dData(data,name_num);
+		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
 		b->Initialize(name_num);
 		bullets_.push_back(move(b));
 	}
