@@ -2,5 +2,6 @@
 
 void PlayerMoveCommand::Exec(Player& p)
 {
-	p.Move(0.1f);
+	const float speed = 0.25f;
+	p.Move(speed);
 }

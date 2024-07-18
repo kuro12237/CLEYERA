@@ -6,7 +6,7 @@ void PlayerCamera::Initialize()
 	gameObjInstance_ = GameObjectManager::GetInstance();
 	auto& transform = gameObjInstance_->GetCameraData(name_)->GetWorldTransform().transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
-	
+
 	target_ = &gameObjInstance_->GetObj3dData_ptr(targetName_)->GetWorldTransform();
 }
 

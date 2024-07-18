@@ -42,6 +42,6 @@ private:
 	Math::Vector::Vector3 spownPos_ = {};
 	bool isDead_ = false;
 	uint32_t timer_ = 0;
-	const float speed_ = 0.5f;
+	const float speed_ = 0.75f;
 
 };

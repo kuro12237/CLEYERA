@@ -27,6 +27,31 @@
             }
         },
         {
+            "type": "CAMERA",
+            "name": "PlayerCamera",
+            "file_name": "Box",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    5.849818706512451,
+                    -32.0,
+                    7.017513275146484
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
             "type": "MESH",
             "name": "Player",
             "file_name": "TestHuman",
@@ -34,9 +59,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
+                    4.054643630981445,
                     0.0,
-                    0.0,
-                    3.8042469024658203
+                    10.020990371704102
                 ],
                 "rotate": [
                     0.0,
@@ -64,31 +89,6 @@
             },
             "children": [
                 {
-                    "type": "CAMERA",
-                    "name": "PlayerCamera",
-                    "file_name": "Box",
-                    "ModelFileType": "obj",
-                    "DrawType": "Instancing",
-                    "InstancingObjName": "Map",
-                    "transform": {
-                        "translate": [
-                            0.4703044891357422,
-                            -32.0,
-                            0.1957530975341797
-                        ],
-                        "rotate": [
-                            90.00000762939453,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    }
-                },
-                {
                     "type": "MESH",
                     "name": "PlayerGun",
                     "file_name": "PlayerTestGun",
@@ -98,7 +98,7 @@
                         "translate": [
                             0.0,
                             0.0,
-                            -0.3504292964935303
+                            -0.3504295349121094
                         ],
                         "rotate": [
                             90.00001525878906,
@@ -386,7 +386,7 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    21.0,
+                    23.068099975585938,
                     0.0,
                     19.0
                 ],
@@ -396,7 +396,7 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
+                    3.0,
                     1.0,
                     20.0
                 ]
