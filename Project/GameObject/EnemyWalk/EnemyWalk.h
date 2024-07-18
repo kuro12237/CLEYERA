@@ -36,7 +36,6 @@ private:
 	bool IsHit_ = false;
 	bool isDead_ = false;
 
-
 	float speed_ = -0.1f;
 
 	unique_ptr<IEnemyWalkState>state_ = nullptr;
