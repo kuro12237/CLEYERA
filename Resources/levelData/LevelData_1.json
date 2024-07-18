@@ -15,9 +15,9 @@
                     5.903861999511719
                 ],
                 "rotate": [
-                    37.261043548583984,
-                    3.1637072563171387,
-                    106.93630981445312
+                    37.26104736328125,
+                    3.1637091636657715,
+                    106.93632507324219
                 ],
                 "scale": [
                     1.0,
@@ -27,39 +27,14 @@
             }
         },
         {
-            "type": "CAMERA",
-            "name": "PlayerCamera",
-            "file_name": "Box",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
-            "transform": {
-                "translate": [
-                    0.4703044891357422,
-                    -32.0,
-                    4.0
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
             "type": "MESH",
             "name": "Player",
-            "file_name": "TestPlayer",
-            "ModelFileType": "obj",
+            "file_name": "TestHuman",
+            "ModelFileType": "gltf",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -0.5533698201179504,
+                    0.0,
                     0.0,
                     3.8042469024658203
                 ],
@@ -89,6 +64,31 @@
             },
             "children": [
                 {
+                    "type": "CAMERA",
+                    "name": "PlayerCamera",
+                    "file_name": "Box",
+                    "ModelFileType": "obj",
+                    "DrawType": "Instancing",
+                    "InstancingObjName": "Map",
+                    "transform": {
+                        "translate": [
+                            0.4703044891357422,
+                            -32.0,
+                            0.1957530975341797
+                        ],
+                        "rotate": [
+                            90.00000762939453,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                },
+                {
                     "type": "MESH",
                     "name": "PlayerGun",
                     "file_name": "PlayerTestGun",
@@ -101,7 +101,7 @@
                             -0.3504292964935303
                         ],
                         "rotate": [
-                            90.00000762939453,
+                            90.00001525878906,
                             -0.0,
                             0.0
                         ],
@@ -154,7 +154,7 @@
                 ],
                 "rotate": [
                     70.56507110595703,
-                    0.7581609487533569,
+                    0.7581616640090942,
                     16.02165412902832
                 ],
                 "scale": [
@@ -202,7 +202,7 @@
                     0.0
                 ],
                 "rotate": [
-                    90.00000762939453,
+                    0.0,
                     -0.0,
                     0.0
                 ],
@@ -694,7 +694,7 @@
                     15.169554710388184
                 ],
                 "rotate": [
-                    90.00000762939453,
+                    0.0,
                     -0.0,
                     0.0
                 ],
@@ -731,7 +731,7 @@
                     20.930519104003906
                 ],
                 "rotate": [
-                    90.00000762939453,
+                    0.0,
                     -0.0,
                     0.0
                 ],

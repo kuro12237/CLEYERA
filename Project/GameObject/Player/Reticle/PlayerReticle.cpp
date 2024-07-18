@@ -32,7 +32,6 @@ void PlayerReticle::ImGuiUpdate()
 
 void PlayerReticle::Update()
 {
-
 	//Get
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
