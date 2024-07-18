@@ -8,7 +8,7 @@ SPSOProperty SkinningCreateComputePipline::CreateSkinningPipline(ComPtr<ID3D12De
 		.pShaderBytecode = shader.csBlob->GetBufferPointer(),
 		.BytecodeLength = shader.csBlob->GetBufferSize()
 	};
-	CreateSkinningRootSignature(device, result);
+	CreateSkinningRootSignature(result);
 	computePiplineStateDesc.pRootSignature = result.rootSignature.Get();
 	HRESULT hr;
 	hr = device->CreateComputePipelineState(&computePiplineStateDesc, IID_PPV_ARGS(&result.GraphicsPipelineState));
@@ -16,70 +16,71 @@ SPSOProperty SkinningCreateComputePipline::CreateSkinningPipline(ComPtr<ID3D12De
 	return result;
 }
 
-void SkinningCreateComputePipline::CreateSkinningRootSignature(ComPtr<ID3D12Device> device, SPSOProperty& pso)
+void SkinningCreateComputePipline::CreateSkinningRootSignature(SPSOProperty& pso)
 {
-	D3D12_ROOT_PARAMETER rootParameters[5];
-	//skinningPallate
-	D3D12_DESCRIPTOR_RANGE descriptorRangeSkinningPallate[1] = {};
-	descriptorRangeSkinningPallate[0].BaseShaderRegister = 0;
-	descriptorRangeSkinningPallate[0].NumDescriptors = 1;
-	descriptorRangeSkinningPallate[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	descriptorRangeSkinningPallate[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+    D3D12_ROOT_PARAMETER rootParameters[5] = {};
+
+	// 0: MatrixPalette
+	D3D12_DESCRIPTOR_RANGE descriptorRangeForMatrixPalette[1] = {};
+	descriptorRangeForMatrixPalette[0].BaseShaderRegister = 0;
+	descriptorRangeForMatrixPalette[0].NumDescriptors = 1;
+	descriptorRangeForMatrixPalette[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeForMatrixPalette[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-	rootParameters[0].DescriptorTable.pDescriptorRanges = descriptorRangeSkinningPallate;
-	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeSkinningPallate);
-	////INputvertex
-	D3D12_DESCRIPTOR_RANGE descriptorRangeInputVertex[1] = {};
-	descriptorRangeInputVertex[0].BaseShaderRegister = 1;
-	descriptorRangeInputVertex[0].NumDescriptors = 1;
-	descriptorRangeInputVertex[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	descriptorRangeInputVertex[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	rootParameters[0].DescriptorTable.pDescriptorRanges = descriptorRangeForMatrixPalette;
+	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForMatrixPalette);
+
+	// 1: InputVertices
+	D3D12_DESCRIPTOR_RANGE descriptorRangeForInputVertices[1] = {};
+	descriptorRangeForInputVertices[0].BaseShaderRegister = 1;
+	descriptorRangeForInputVertices[0].NumDescriptors = 1;
+	descriptorRangeForInputVertices[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeForInputVertices[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-	rootParameters[1].DescriptorTable.pDescriptorRanges = descriptorRangeInputVertex;
-	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeInputVertex);
+	rootParameters[1].DescriptorTable.pDescriptorRanges = descriptorRangeForInputVertices;
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInputVertices);
 
-	////infulence
-	D3D12_DESCRIPTOR_RANGE descriptorRangeinfulence[1] = {};
-	descriptorRangeinfulence[0].BaseShaderRegister = 2;
-	descriptorRangeinfulence[0].NumDescriptors = 1;
-	descriptorRangeinfulence[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	descriptorRangeinfulence[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	// 2: Influences
+	D3D12_DESCRIPTOR_RANGE descriptorRangeForInfluences[1] = {};
+	descriptorRangeForInfluences[0].BaseShaderRegister = 2;
+	descriptorRangeForInfluences[0].NumDescriptors = 1;
+	descriptorRangeForInfluences[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeForInfluences[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRangeinfulence;
-	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeinfulence);
+	rootParameters[2].DescriptorTable.pDescriptorRanges = descriptorRangeForInfluences;
+	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInfluences);
 
-	//í∏ì_çáåvêî
-	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	// 3: OutputVertices
+	D3D12_DESCRIPTOR_RANGE descriptorRangeForOutputVertices[1] = {};
+	descriptorRangeForOutputVertices[0].BaseShaderRegister = 0;
+	descriptorRangeForOutputVertices[0].NumDescriptors = 1;
+	descriptorRangeForOutputVertices[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	descriptorRangeForOutputVertices[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-	rootParameters[3].Descriptor.ShaderRegister = 0;
+	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRangeForOutputVertices;
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForOutputVertices);
 
-	//output
-	D3D12_DESCRIPTOR_RANGE descriptorRangeOutPutVertex[1] = {};
-	descriptorRangeOutPutVertex[0].BaseShaderRegister = 0;
-	descriptorRangeOutPutVertex[0].NumDescriptors = 1;
-	descriptorRangeOutPutVertex[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	descriptorRangeOutPutVertex[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
-
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	// 4: SkinningInformation
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-	rootParameters[4].DescriptorTable.pDescriptorRanges = descriptorRangeOutPutVertex;
-	rootParameters[4].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeOutPutVertex);
+	rootParameters[4].Descriptor.ShaderRegister = 0;
 
 
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
-	descriptionRootSignature.Flags =
-		D3D12_ROOT_SIGNATURE_FLAG_NONE;
+	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 	descriptionRootSignature.pStaticSamplers = nullptr;
-	
+
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
 	if (FAILED(hr))
@@ -88,6 +89,7 @@ void SkinningCreateComputePipline::CreateSkinningRootSignature(ComPtr<ID3D12Devi
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
+	hr = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
 		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	assert(SUCCEEDED(hr));
 }

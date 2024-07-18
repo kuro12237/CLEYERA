@@ -54,6 +54,7 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 		ComPtr<ID3D12GraphicsCommandList>command_list  = DirectXCommon::GetInstance()->GetCommands().m_pList;
 		command_list->SetComputeRootSignature(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.rootSignature.Get());
 		command_list->SetPipelineState(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.GraphicsPipelineState.Get());
+	
 		command_list->Dispatch(UINT(modelData_.vertices.size() + 1023) / 1024, 1, 1);
 	}*/
 
