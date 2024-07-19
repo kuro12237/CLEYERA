@@ -29,6 +29,7 @@ public:
 	void CommandPrimitiveTopologyCall();
 
 #pragma region 書き込みリソース
+
 	/// <summary>
 	/// 書き込みリソース
 	/// </summary>
@@ -37,7 +38,6 @@ public:
 	void CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state, D3D12_CLEAR_VALUE depthClearValue);
 
 	void CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size);
-
 
 	/// <summary>
 	/// 画像bufferを更新
@@ -351,7 +351,17 @@ inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instanci
 	{
 		DescriptorManager::IndexIncrement(Name);
 		DescriptorManager::SetBuffer(Name, buffer_);
-		srvIndex_ = DescriptorManager::CreateInstancingSRV(instancingNum, buffer_, size);
+
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
+		srvDesc.Format = DXGI_FORMAT_UNKNOWN;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+		srvDesc.Buffer.FirstElement = 0;
+		srvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;;
+		srvDesc.Buffer.NumElements = instancingNum;
+		srvDesc.Buffer.StructureByteStride = size;
+
+		srvIndex_ = DescriptorManager::CreateSRV(buffer_, srvDesc);
 	}
 	else {
 		buffer_ = DescriptorManager::GetData(Name)->GetBuf();

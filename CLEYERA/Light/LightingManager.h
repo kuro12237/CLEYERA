@@ -2,6 +2,7 @@
 #include"Light.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
 #define LIGHT_MAX 50
+#include"BufferResources.h"
 
 struct LightCount
 {
@@ -15,7 +16,7 @@ public:
 	
 	static LightingManager* GetInstance();
 
-	static void Initialize();
+	void Initialize();
 
 	static void ClearList()
 	{
@@ -26,10 +27,9 @@ public:
 
 	static list<PointLight_param> GetLightData();
 
-	static uint32_t dsvHandle() {return LightingManager::GetInstance()->dsvHandle_; }
-	static ID3D12Resource* GetBuffer() {return LightingManager::GetInstance()->buffer_.Get();}
+	static ID3D12Resource* GetBuffer() {return LightingManager::GetInstance()->lightCountBuf_->GetBuffer();}
 
-	static void TransfarBuffers();
+	void TransfarBuffers();
 
 	static uint32_t GetNowLight() {return  LightingManager::GetInstance()->NowTotalLightData_; }
 
@@ -37,25 +37,25 @@ public:
 
 private:
 
-	static void TransfarBuffer();
+	void TransfarBuffer();
 
-	static void TransfarStructureBuffer();
+	void TransfarStructureBuffer();
 
 	/// <summary>
 	/// Lightの合計の数値を送る用
 	/// </summary>
-	ComPtr<ID3D12Resource>buffer_ = nullptr;
+	
+	unique_ptr<BufferResource<uint32_t>>lightCountBuf_;
+
 
 	/// <summary>
-	/// ストラクチャーバッファ
+	/// ァ糸のパラメータを送る
 	/// </summary>
-	ComPtr<ID3D12Resource>structureBuffer_ = nullptr;
+	unique_ptr<BufferResource<PointLight_param>>lightParamsBuf_;
 
 	const uint32_t NumLight_ = LIGHT_MAX;
 
 	uint32_t NowTotalLightData_ = 0;
-
-	uint32_t dsvHandle_ = 0;
 
 	list<PointLight_param>LightDatas_;
 

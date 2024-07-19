@@ -155,8 +155,8 @@ void DefferredShading::Draw()
 
 	CameraManager::GetInstance()->CommandCall(6);
 	CameraManager::GetInstance()->CommandCall(7);
-	DescriptorManager::rootParamerterCommand(8, LightingManager::dsvHandle());
-	m_pList->SetGraphicsRootConstantBufferView(9, LightingManager::GetBuffer()->GetGPUVirtualAddress());
+	//DescriptorManager::rootParamerterCommand(8, LightingManager::dsvHandle());
+	//m_pList->SetGraphicsRootConstantBufferView(9, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 	DirectionalLight::CommandCall(10);
 
 	m_pList->DrawInstanced(6, 1, 0, 0);

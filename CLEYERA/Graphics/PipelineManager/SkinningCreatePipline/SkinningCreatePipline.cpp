@@ -142,14 +142,14 @@ void SkinningCreatePipline::CreateSkinningPhongRootSignature(ComPtr<ID3D12Device
 	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
-	//normalTex
+	//
 	D3D12_DESCRIPTOR_RANGE NormalDescriptorRange[1] = {};
 	NormalDescriptorRange[0].BaseShaderRegister = 2;
 	NormalDescriptorRange[0].NumDescriptors = 1;
 	NormalDescriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	NormalDescriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	//tex
+	//inflience
 	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[7].DescriptorTable.pDescriptorRanges = NormalDescriptorRange;
