@@ -9,17 +9,16 @@ LightingManager* LightingManager::GetInstance()
 void LightingManager::Initialize()
 {
 	//Buffer生成
-	LightingManager::GetInstance()->buffer_ =
-		CreateResources::CreateBufferResource(sizeof(LightCount));
-	LightingManager::GetInstance()->structureBuffer_ =
-		CreateResources::CreateBufferResource(sizeof(PointLight_param) * LightingManager::GetInstance()->NumLight_);
+	lightCountBuf_ = make_unique<BufferResource<uint32_t>>();
+	lightCountBuf_->CreateResource(1);
+	lightCountBuf_->Map();
+	lightCountBuf_->Setbuffer(NowTotalLightData_);
+	lightCountBuf_->UnMap();
 
-	//descripter生成
-	LightingManager::GetInstance()->dsvHandle_ = DescriptorManager::CreateInstancingSRV(
-		LightingManager::GetInstance()->NumLight_,
-		LightingManager::GetInstance()->structureBuffer_,
-		sizeof(PointLight_param)
-	);
+	lightParamsBuf_ = make_unique<BufferResource<PointLight_param>>();
+	lightParamsBuf_->CreateResource(NumLight_);
+	lightParamsBuf_->CreateInstancingResource(NumLight_, "Light", UINT(sizeof(PointLight_param)));
+
 }
 
 void LightingManager::AddList(PointLight_param& instance)
@@ -45,29 +44,27 @@ void LightingManager::TransfarBuffers()
 void LightingManager::CallCommand()
 {
 	ComPtr<ID3D12GraphicsCommandList>list = DirectXCommon::GetInstance()->GetCommands().m_pList;
-	DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
-	list->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
-
+	DescriptorManager::rootParamerterCommand(4, lightParamsBuf_->GetSrvIndex());
+	lightCountBuf_->CommandCall(5);
 }
 
 void LightingManager::TransfarBuffer()
 {
-	LightCount* TotalLight;
-	LightingManager::GetInstance()->buffer_->Map(0, nullptr, reinterpret_cast<void**>(&TotalLight));
-	TotalLight->count = LightingManager::GetInstance()->NowTotalLightData_;
-	LightingManager::GetInstance()->buffer_->Unmap(0, nullptr);
+	lightCountBuf_->Map();
+	lightCountBuf_->Setbuffer(NowTotalLightData_);
+	lightCountBuf_->UnMap();
 }
 
 void LightingManager::TransfarStructureBuffer()
 {
-	PointLight_param* param;
-	LightingManager::GetInstance()->structureBuffer_->Map(0, nullptr, reinterpret_cast<void**>(&param));
+	vector<PointLight_param> param;
 
-	uint32_t count = 0;
-	for (PointLight_param p : LightingManager::GetInstance()->LightDatas_)
+	lightParamsBuf_->Map();
+
+	for (auto& light : LightDatas_)
 	{
-		param[count] = p;
-		count++;
+		param.push_back(light);
 	}
-	LightingManager::GetInstance()->structureBuffer_->Unmap(0, nullptr);
+	lightParamsBuf_->Setbuffer(param,uint32_t(LightDatas_.size()));
+	lightParamsBuf_->UnMap();
 }

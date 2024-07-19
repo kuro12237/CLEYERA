@@ -69,12 +69,6 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 
-	if (ImGui::Button("SceneReload"))
-	{
-		Scene->ChangeState(new GameScene());
-		return;
-	}
-
 #endif // _USE_IMGUI
 
 	player_->Update();

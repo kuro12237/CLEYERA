@@ -118,6 +118,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	{
 		uint32_t newBulletIndex = deadBulletIndex_.front();
 		string name_num = name + to_string(newBulletIndex);
+		data->SetObjName(name_num);
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
 		b->Initialize(name_num);
 		bullets_[newBulletIndex] = move(b);
@@ -128,6 +129,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 		//新しいindexをとリ弾にセット
 		int size = int(bullets_.size());
 		string name_num = name + to_string(size);
+		data->SetObjName(name_num);
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
 		b->Initialize(name_num);
 		bullets_.push_back(move(b));

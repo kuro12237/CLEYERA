@@ -10,7 +10,7 @@ void GraphicsPipelineManager::Initialize()
 {
 	SPSO pso{};
 
-	//CreateCompute(pso);
+	CreateCompute(pso);
 	CreatePSO(pso);
 	//2d
 	Create2dSpritePSOs(pso);
@@ -130,7 +130,6 @@ void GraphicsPipelineManager::CreateCompute(SPSO& pso)
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
 	pso.skinningCompute = SkinningCreateComputePipline::CreateSkinningPipline(device, commands, shader.skinningCompute);
-
 }
 
 void GraphicsPipelineManager::CreatePSO(SPSO &pso)

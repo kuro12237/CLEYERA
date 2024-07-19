@@ -1,5 +1,6 @@
 #include"DescriptorManager.h"
 
+
 DescriptorManager *DescriptorManager::GetInstance()
 {
 	static DescriptorManager instance;
@@ -36,49 +37,8 @@ void DescriptorManager::Clear()
 	DescriptorManager::GetInstance()->index = 0;
 }
 
-uint32_t DescriptorManager::CreateInstancingSRV(uint32_t NumInstansing, ComPtr<ID3D12Resource>& resource, UINT size)
-{
-	
-	D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc;
-	instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	instansingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	instansingSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-	instansingSrvDesc.Buffer.FirstElement = 0;
-	instansingSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;;
-	instansingSrvDesc.Buffer.NumElements = NumInstansing;
-	instansingSrvDesc.Buffer.StructureByteStride = size;
-
-	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index] = 
-		GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
-			DescriptorManager::GetInstance()->index
-		);
-
-	DescriptorManager::GetInstance()->SrvHandleGPU[DescriptorManager::GetInstance()->index] =
-		GetGPUDescriptorHandle(
-		    DirectXCommon::GetInstance()->GetSrvHeap(),
-			DescriptorManager::GetInstance()->index
- 	    );
-
-	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index].ptr +=
-		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	
-	DescriptorManager::GetInstance()->SrvHandleGPU[DescriptorManager::GetInstance()->index].ptr +=
-		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-
-	DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
-		resource.Get(),
-		&instansingSrvDesc,
-		DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index]
-	);
-
-	return DescriptorManager::GetInstance()->index;
-}
-
 uint32_t DescriptorManager::CreateSRV(ComPtr<ID3D12Resource>& resource,D3D12_SHADER_RESOURCE_VIEW_DESC SrvDesc)
 {
-	DescriptorManager::GetInstance()->index++;
-
 	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index] =
 		GetCPUDescriptorHandle(
 			DirectXCommon::GetInstance()->GetSrvHeap(),

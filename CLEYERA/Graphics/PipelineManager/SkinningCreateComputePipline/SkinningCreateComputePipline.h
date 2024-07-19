@@ -10,8 +10,8 @@ public:
 
 private:
 
-	static void CreateSkinningRootSignature(ComPtr<ID3D12Device> device, SPSOProperty& pso);
-
+	static void CreateSkinningRootSignature(SPSOProperty& pso);
+	//static void CreateComputeRootSignatures( SPSOProperty& pso);
 
 };
 

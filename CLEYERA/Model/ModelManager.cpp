@@ -252,22 +252,6 @@ void ModelManager::SkeletonUpdate(SAnimation::Skeleton& skeleton)
 
 }
 
-void ModelManager::SkinClusterUpdate(SkinCluster& skinCluster, SAnimation::Skeleton& skeleton)
-{
-	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&skinCluster.mappedPalette));
-
-	for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex)
-	{
-		assert(jointIndex < skinCluster.inverseBindMatrices.size());
-
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix =
-			Math::Matrix::Multiply(skinCluster.inverseBindMatrices[jointIndex], skeleton.joints[jointIndex].skeletonSpaceMatrix);
-		skinCluster.mappedPalette[jointIndex].skeletonSpaceInverseTransposeMatrix =
-			Math::Matrix::TransposeMatrix(Math::Matrix::Inverse(skinCluster.mappedPalette[jointIndex].skeletonSpaceMatrix));
-
-	}
-}
-
 bool ModelManager::ChackLoadObj(string filePath)
 {
 	if (ModelManager::GetInstance()->objModelDatas_.find(filePath) == ModelManager::GetInstance()->objModelDatas_.end())
@@ -388,24 +372,6 @@ void ModelManager::CreateBorn(SModelData& data, aiMesh* mesh)
 SkinCluster ModelManager::CreateSkinCluster(const SAnimation::Skeleton& skeleton, const SModelData& modelData)
 {
 	SkinCluster skinCluster{};
-	//palatte
-	skinCluster.paletteResource = CreateResources::CreateBufferResource(sizeof(WellForGPU) * skeleton.joints.size());
-	WellForGPU* mappedPalette = nullptr;
-	skinCluster.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-	skinCluster.mappedPalette = { mappedPalette,skeleton.joints.size() };
-
-	//設定
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc;
-	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-	srvDesc.Buffer.FirstElement = 0;
-	srvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-	srvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
-	srvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
-
-	//Despcripter
-	skinCluster.srvIndex = DescriptorManager::CreateSRV(skinCluster.paletteResource, srvDesc);
 
 	//influence
 	skinCluster.influenceResource = CreateResources::CreateBufferResource(sizeof(VertexInfluence) * modelData.vertices.size());

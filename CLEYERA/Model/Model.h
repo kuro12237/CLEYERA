@@ -44,6 +44,8 @@ public:
 
 	Game3dObjectDesc GetDesc() { return *desc_; }
 	BufferResource<VertexInfluence>*GetInfluence() { return influence_.get(); }
+	BufferResource<uint32_t>* GetVertexNum() { return vertexNum_.get(); }
+
 	uint32_t GetSkinClusterIndex() { return skinClusterSrvIndex_; }
 
 #pragma endregion
@@ -60,6 +62,9 @@ private:
 
 	unique_ptr<IModelState> state_ = nullptr;
 	SModelData modelData_;
+
+	unique_ptr<BufferResource<uint32_t>>vertexNum_;
+	uint32_t vertexCountNum_ = 0;
 
 	unique_ptr<BufferResource<VertexInfluence>>influence_;
 	vector<VertexInfluence> mappedInfluence;

@@ -6,7 +6,6 @@ struct SPSOProperty
 {
 	ComPtr<ID3D12PipelineState> GraphicsPipelineState = nullptr;
 	ComPtr<ID3D12RootSignature> rootSignature = nullptr;
-	ComPtr<ID3D12RootSignature> skinningRootSignature = nullptr;
 	ComPtr<ID3DBlob> signatureBlob = nullptr;
 	ComPtr<ID3DBlob> errorBlob = nullptr;
 

@@ -66,6 +66,7 @@ private:
 	std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
 	unique_ptr<BufferResource<WellForGPU>>palette_ = nullptr;
 	vector<WellForGPU>paletteParam_;
+	//unique_ptr<BufferResource<>>
 #pragma endregion
 
 	Game3dObjectDesc game3dObjectDesc_{};

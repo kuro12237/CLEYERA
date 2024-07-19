@@ -118,7 +118,7 @@ void GameObjectManager::ImGuiUpdate()
 		ImGui::Separator();
 		//ƒJƒƒ‰İ’è
 		static char buffer[256] = "";
-		if (ImGui::InputText("Text Input", buffer, sizeof(buffer)))
+		if (ImGui::InputText("SelectCameraName", buffer, sizeof(buffer)))
 		{
 			inputTextSelectCamera_ = std::string(buffer);
 		}

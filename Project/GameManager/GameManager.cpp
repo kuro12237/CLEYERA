@@ -49,7 +49,7 @@ void GameManager::Run()
 		Scene_->Update(this);
 
 		DirectionalLight::Update();
-		LightingManager::TransfarBuffers();
+		LightingManager::GetInstance()->TransfarBuffers();
 
 #ifdef  _USE_IMGUI
 		ImGui::End();

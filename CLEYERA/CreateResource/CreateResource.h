@@ -22,8 +22,6 @@ struct SkinCluster
 	ComPtr<ID3D12Resource>influenceResource;
 	D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
 	std::span<VertexInfluence>mappedInfluence;
-	ComPtr<ID3D12Resource>paletteResource;
-	std::span<WellForGPU>mappedPalette;
 	uint32_t srvIndex;
 };
 struct  VertexData

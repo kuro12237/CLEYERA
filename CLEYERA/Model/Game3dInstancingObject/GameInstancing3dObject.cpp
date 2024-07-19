@@ -66,9 +66,8 @@ void GameInstancing3dObject::Draw()
 	DescriptorManager::rootParamerterCommand(1, instancing_->GetSrvIndex());
 	CameraManager::GetInstance()->CommandCall(2);
 	CameraManager::GetInstance()->CommandCall(3);
-	DescriptorManager::rootParamerterCommand(4, LightingManager::dsvHandle());
-	commands.m_pList->SetGraphicsRootConstantBufferView(5, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 
+	LightingManager::GetInstance()->CallCommand();
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
 	DescriptorManager::rootParamerterCommand(7, normalTexHandle_);
 	if (UseLight_)
