@@ -8,6 +8,7 @@ void IGameObjectData::ImGuiUpdate(string name)
 		ImGui::DragFloat3("scale", &worldTransform_.transform.scale.x, 0.1f);
 		ImGui::DragFloat3("rotate", &worldTransform_.transform.rotate.x, 0.1f);
 		ImGui::DragFloat3("translate", &worldTransform_.transform.translate.x, 0.1f);
+		ImGui::Separator();
 		ImGui::TreePop();
 	}
 }
