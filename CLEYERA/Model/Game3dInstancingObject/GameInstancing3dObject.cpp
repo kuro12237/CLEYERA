@@ -7,7 +7,7 @@ void GameInstancing3dObject::Create(const uint32_t& kNum, const string& name)
 	
 	instancing_ = make_unique<BufferResource<TransformationMatrix>>();
 	instancing_->CreateResource(sizeof(TransformationMatrix) * kNum);
-	instancing_->CreateInstancingResource(kNum, name_, sizeof(TransformationMatrix));
+	instancing_->CreateInstancingResource(kNum, name_);
 
 	material_ = make_unique<BufferResource<Material>>();
 	material_->CreateResource();

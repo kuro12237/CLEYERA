@@ -50,7 +50,7 @@ private:
 
 	unique_ptr<DebugCamera>debugCamera_ = nullptr;
 
-	string inputLevelDataFileName_ = "LevelData_1.json";
+	string inputLevelDataFileName_ = "LevelData_2.json";
 
 	PointLight_param light_{};
 

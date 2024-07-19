@@ -29,14 +29,7 @@ void ModelSkinningState::Draw(Model* state,uint32_t instancingNum)
 	index_->Setbuffer(state->GetModelData().indecs);
 	index_->UnMap();
 
-	if (state->GetModelData().fileFormat == "GLTF")
-	{
-		D3D12_VERTEX_BUFFER_VIEW vbvs[2]{
-			vertex_->GetBufferView(),
-			state->GetInfluence()->GetBufferView()
-		};
-		commands.m_pList->IASetVertexBuffers(0, 2, vbvs);
-	}
+
 	index_->CommandIndexBufferViewCall();
 
 	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

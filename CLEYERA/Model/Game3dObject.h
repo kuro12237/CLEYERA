@@ -64,9 +64,16 @@ private:
 	bool skinningFlag_ = false;
 	SAnimation::Skeleton skeleton_;
 	std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
+	//structure
 	unique_ptr<BufferResource<WellForGPU>>palette_ = nullptr;
 	vector<WellForGPU>paletteParam_;
-	//unique_ptr<BufferResource<>>
+	//structure
+	unique_ptr<BufferResource<VertexData>>inputVertex_ = nullptr;
+	vector<VertexData>inputVertexParam_;
+	//uav
+	unique_ptr<BufferResource<VertexData>>outputVertex_ = nullptr;
+	vector<VertexData>outputVertexParam_;
+
 #pragma endregion
 
 	Game3dObjectDesc game3dObjectDesc_{};

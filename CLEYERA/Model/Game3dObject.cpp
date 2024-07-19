@@ -27,18 +27,6 @@ void Game3dObject::SetModel(uint32_t index)
 
 	prevModelIndex_ = index;
 }
-//
-//void Game3dObject::SetModel(const string filePath)
-//{
-//	uint32_t index = ModelManager::GetIndex(filePath);
-//	if (prevModelIndex_ != index)
-//	{
-//		model_ = ModelManager::GetModel(index);
-//		model_->SetDesc(game3dObjectDesc_);
-//	}
-//
-//	prevModelIndex_ = index;
-//}
 
 void Game3dObject::Draw(WorldTransform worldTransform)
 {
@@ -51,15 +39,22 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 
 	if (skinningFlag_)
 	{
-		//ComPtr<ID3D12GraphicsCommandList>command_list  = DirectXCommon::GetInstance()->GetCommands().m_pList;
-		//command_list->SetComputeRootSignature(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.rootSignature.Get());
-		//command_list->SetPipelineState(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.GraphicsPipelineState.Get());
+		ComPtr<ID3D12GraphicsCommandList>command_list = DirectXCommon::GetInstance()->GetCommands().m_pList;
+		command_list->SetComputeRootSignature(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.rootSignature.Get());
+		command_list->SetPipelineState(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.GraphicsPipelineState.Get());
 
-		//command_list->Dispatch(UINT(modelData_.vertices.size() + 1023) / 1024, 1, 1);
+		DescriptorManager::rootParamerterCommand(0, palette_->GetSrvIndex());
+		DescriptorManager::rootParamerterCommand(1, inputVertex_->GetSrvIndex());
+		DescriptorManager::rootParamerterCommand(2, model_->GetInfluence()->GetSrvIndex());
+		DescriptorManager::rootParamerterCommand(3, outputVertex_->GetSrvIndex());
+		//頂点数
+		command_list->SetComputeRootConstantBufferView(4, model_->GetVertexNum()->GetBuffer()->GetGPUVirtualAddress());
+
+		command_list->Dispatch(UINT(modelData_.vertices.size() + 1023) / 1024, 1, 1);
 	}
 
 	MaterialBuffer_->Map();
-    //Descの情報をMaterialに変換
+	//Descの情報をMaterialに変換
 	material_ = MaterialConverter();
 	MaterialBuffer_->Setbuffer(material_);
 	MaterialBuffer_->UnMap();
@@ -83,7 +78,7 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	//ここを後でどうにかする
 	if (skinningFlag_)
 	{
-		DescriptorManager::rootParamerterCommand(8, palette_->GetSrvIndex());
+		outputVertex_->CommandVertexBufferViewCall();
 	}
 
 	model_->Draw(1);
@@ -100,13 +95,57 @@ void Game3dObject::CreateSkinningParameter()
 		LogManager::Log("None SetName");
 		assert(0);
 	}
+	modelData_ = model_->GetModelData();
 	//skeltonをコピー
 	skeleton_ = model_->GetModelData().skeleton;
 	inverseBindMatrices = model_->GetModelData().inverseBindMatrices;
+#pragma region Pallete作成
+
+	string paletteName = name_ + "Pallette";
 	palette_ = make_unique<BufferResource<WellForGPU>>();
 	palette_->CreateResource(uint32_t(skeleton_.joints.size()));
-	palette_->CreateInstancingResource(uint32_t(skeleton_.joints.size()), name_, sizeof(WellForGPU));
+	palette_->CreateInstancingResource(uint32_t(skeleton_.joints.size()), paletteName);
 	paletteParam_.resize(skeleton_.joints.size());
+
+#pragma endregion
+
+#pragma region inputVertex作成
+
+	string inputVertexName = name_ + "inputVertex";
+	inputVertex_ = make_unique<BufferResource<VertexData>>();
+	inputVertex_->CreateResource(uint32_t(modelData_.vertices.size()));
+	inputVertex_->CreateInstancingResource(uint32_t(modelData_.vertices.size()), inputVertexName);
+	inputVertexParam_.resize(modelData_.vertices.size());
+	
+	for (int i = 0; i < int(modelData_.vertices.size()); i++)
+	{
+		inputVertexParam_[i] = modelData_.vertices[i];
+	}
+	inputVertex_->Map();
+	inputVertex_->Setbuffer(inputVertexParam_);
+#pragma endregion
+
+#pragma region OutputVertex作成
+
+	string outputVertexName = name_ + "outputVertex";
+	outputVertex_ = make_unique<BufferResource<VertexData>>();
+	D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc;
+	uavDesc.Format = DXGI_FORMAT_UNKNOWN;
+	uavDesc.ViewDimension = D3D12_UAV_DIMENSION_BUFFER;
+	uavDesc.Buffer.FirstElement = 0;
+	uavDesc.Buffer.NumElements = UINT(modelData_.vertices.size());
+	uavDesc.Buffer.CounterOffsetInBytes = 0;
+	uavDesc.Buffer.Flags = D3D12_BUFFER_UAV_FLAG_NONE;
+	uavDesc.Buffer.StructureByteStride = sizeof(VertexData);
+
+	outputVertex_->CreateUAVResource(uavDesc, outputVertexName, UINT(modelData_.vertices.size()));
+	outputVertex_->CreateVertexBufferView();
+	outputVertexParam_.resize(modelData_.vertices.size());
+
+
+#pragma endregion
+
+
 	skinningFlag_ = true;
 }
 

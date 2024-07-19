@@ -37,7 +37,9 @@ public:
 
 	void CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapPram, D3D12_RESOURCE_STATES state, D3D12_CLEAR_VALUE depthClearValue);
 
-	void CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size);
+	void CreateInstancingResource(const uint32_t& instancingNum, const string& Name);
+	void CreateSRVComputeResource(const uint32_t& instancingNum, const string& Name);
+	void CreateUAVResource(D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc, string Name,uint32_t n = 1);
 
 	/// <summary>
 	/// 画像bufferを更新
@@ -70,6 +72,7 @@ public:
 private:
 
 	void CreateBufferResource();
+
 
 	uint32_t srvIndex_ = 0;
 	uint32_t rtvIndex_ = 0;
@@ -345,7 +348,7 @@ inline void BufferResource<T>::CreateBufferResource()
 }
 
 template<typename T>
-inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size)
+inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instancingNum, const string& Name)
 {
 	if (DescriptorManager::CheckData(Name))
 	{
@@ -359,7 +362,7 @@ inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instanci
 		srvDesc.Buffer.FirstElement = 0;
 		srvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;;
 		srvDesc.Buffer.NumElements = instancingNum;
-		srvDesc.Buffer.StructureByteStride = size;
+		srvDesc.Buffer.StructureByteStride = sizeof(T);
 
 		srvIndex_ = DescriptorManager::CreateSRV(buffer_, srvDesc);
 	}
@@ -367,4 +370,49 @@ inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instanci
 		buffer_ = DescriptorManager::GetData(Name)->GetBuf();
 		srvIndex_ = DescriptorManager::GetData(Name)->GetIndex();
 	}
+}
+
+
+
+template<typename T>
+inline void BufferResource<T>::CreateUAVResource(D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc, string Name,uint32_t n)
+{
+
+	bufferNum_ = n;
+	if (DescriptorManager::CheckData(Name))
+	{
+		DescriptorManager::IndexIncrement(Name);
+		DescriptorManager::SetBuffer(Name, buffer_);
+
+		size_t sizeInbyte = sizeof(T) * bufferNum_;
+		ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+		D3D12_HEAP_PROPERTIES heapProperties = {};
+		heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
+		heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
+		heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;
+		heapProperties.CreationNodeMask = 1;
+		heapProperties.VisibleNodeMask = 1;
+
+		D3D12_RESOURCE_DESC ResourceDesc{};
+		ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+		ResourceDesc.Width = sizeInbyte;
+		ResourceDesc.Height = 1;
+		ResourceDesc.DepthOrArraySize = 1;
+		ResourceDesc.MipLevels = 1;
+		ResourceDesc.SampleDesc.Count = 1;
+		ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+		ResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+
+		HRESULT hr = {};
+		hr = device->CreateCommittedResource(&heapProperties, D3D12_HEAP_FLAG_NONE,
+			&ResourceDesc, D3D12_RESOURCE_STATE_COMMON, nullptr, IID_PPV_ARGS(&buffer_));
+		assert(SUCCEEDED(hr));
+
+		srvIndex_ = DescriptorManager::CreateUAV(buffer_, uavDesc);
+	}
+	else {
+		buffer_ = DescriptorManager::GetData(Name)->GetBuf();
+		srvIndex_ = DescriptorManager::GetData(Name)->GetIndex();
+	}
+
 }

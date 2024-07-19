@@ -17,7 +17,7 @@ void LightingManager::Initialize()
 
 	lightParamsBuf_ = make_unique<BufferResource<PointLight_param>>();
 	lightParamsBuf_->CreateResource(NumLight_);
-	lightParamsBuf_->CreateInstancingResource(NumLight_, "Light", UINT(sizeof(PointLight_param)));
+	lightParamsBuf_->CreateInstancingResource(NumLight_, "Light");
 
 }
 

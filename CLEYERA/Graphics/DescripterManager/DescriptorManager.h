@@ -24,6 +24,7 @@ public:
 
 	static uint32_t CreateSRV(ComPtr<ID3D12Resource>&resource,D3D12_SHADER_RESOURCE_VIEW_DESC SrvDesc);
 
+	static uint32_t CreateUAV(ComPtr<ID3D12Resource>& resource, D3D12_UNORDERED_ACCESS_VIEW_DESC desc);
 
 	/// <summary>
     /// CPU��GPU��ptr����炷
