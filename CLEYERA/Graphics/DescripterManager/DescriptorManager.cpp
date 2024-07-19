@@ -1,5 +1,6 @@
 #include"DescriptorManager.h"
 
+
 DescriptorManager *DescriptorManager::GetInstance()
 {
 	static DescriptorManager instance;
