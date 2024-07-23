@@ -47,6 +47,7 @@ struct Material
     float32_t absorptionCoefficient;
     float32_t scatterDistance;
     float32_t grayFactor;
+    float32_t3 hsv;
 };
 
 struct PointLight

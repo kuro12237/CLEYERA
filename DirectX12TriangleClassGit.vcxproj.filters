@@ -274,6 +274,7 @@
       <Filter>Shader\primitive</Filter>
     </None>
     <None Include="Resources\Shader\SkyBox.hlsli" />
+    <None Include="Resources\Shader\ColorConverter.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">

@@ -81,4 +81,5 @@ private:
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
 
+	Game3dObjectDesc desc;
 };

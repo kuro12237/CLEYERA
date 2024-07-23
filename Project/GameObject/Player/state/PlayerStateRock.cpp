@@ -6,7 +6,8 @@ void PlayerStateRock::Initialize(Player* p)
 	gameInst = GameObjectManager::GetInstance();
 
 	Game3dObjectDesc desc;
-	desc.colorDesc.grayFactor_ = 1.0f;
+	desc.colorDesc.hsv.y = -0.75f;
+	//desc.colorDesc.grayFactor_ = 1.0f;
 	gameInst->GetObj3dData(p->GetName())->SetGameObjeDesc(desc);
 	p->SetRockState(true);
 }

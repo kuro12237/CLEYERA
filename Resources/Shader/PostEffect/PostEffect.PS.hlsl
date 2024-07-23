@@ -1,4 +1,5 @@
 #include "PostEffect.hlsli"
+#include"../ColorConverter.hlsli"
 
 Texture2D<float32_t4> gTexture : register(t0);
 Texture2D<float32_t> gShadowTexture : register(t1);
@@ -21,7 +22,13 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     float32_t depthTex = gShadowTexture.Sample(gSampler, transformedUV.xy);
     float32_t4 resultColor = textureColor;
-
+    float32_t3 hsvMaterial = RGBtoHSV(resultColor.rgb);
+    
+    hsvMaterial.r = WrapValue(hsvMaterial.r, 0.0f, 1.0f);
+    hsvMaterial.g = saturate(hsvMaterial.g);
+    hsvMaterial.b = saturate(hsvMaterial.b);
+    
+   resultColor.rgb = HSVtoRGB(hsvMaterial);
     //彩度
     {
         float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));

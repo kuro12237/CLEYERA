@@ -1,4 +1,5 @@
 #include"LightingObject3d.hlsli"
+#include"ColorConverter.hlsli"
 
 ConstantBuffer<Material> gMaterial : register(b0);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
@@ -24,8 +25,9 @@ float32_t3 RimLight(float32_t3 LightDir, float3 ToEye, float rimPower, float rim
 }
 PixelShaderOutput main(VertexShaderOutput input)
 {
-
     PixelShaderOutput output;
+
+    float32_t3 material = gMaterial.color.rgb;
 
     float32_t4 textureColor = gTexture.Sample(gSampler, input.texcoord);
     //float32_t4 normalColor = gNormalTexture.Sample(gSampler, input.texcoord);
@@ -61,7 +63,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         float32_t3 RimColor = gPointLight[i].color.rgb * 1.0f * rim * dotLE * factor * gPointLight[i].intensity;
 
 		//拡散
-        float32_t3 pDiffuse = gMaterial.color.rgb * textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
+        float32_t3 pDiffuse = material.rgb * textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
 		//鏡面
         float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 
@@ -74,6 +76,18 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t4 resultColor;
     resultColor.rgb = pTotalDffuse + pTotalSpecular;
     resultColor.a = gMaterial.color.a * textureColor.a;
+
+    //色調整
+    float32_t3 hsvMaterial = RGBtoHSV(resultColor.rgb);
+    hsvMaterial.r += gMaterial.hsv.r;
+    hsvMaterial.g += gMaterial.hsv.g;
+    hsvMaterial.b += gMaterial.hsv.b;
+
+    hsvMaterial.r = WrapValue(hsvMaterial.r, 0.0f, 1.0f);
+    hsvMaterial.g = saturate(hsvMaterial.g);
+    hsvMaterial.b = saturate(hsvMaterial.b);
+    
+    resultColor.rgb = HSVtoRGB(hsvMaterial);
 
     float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));
     float32_t3 grayscaleColor = lerp(resultColor.rgb, float32_t3(grayscaleFactor, grayscaleFactor, grayscaleFactor), gMaterial.grayFactor);

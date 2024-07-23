@@ -33,6 +33,7 @@ struct ColorModelDesc
 	Math::Vector::Vector3 uvRotate = { 0,0,0 };
 	Math::Vector::Vector3 uvTranslate = { 0,0,0 };
     
+	Math::Vector::Vector3 hsv = { 0.0f,0.0f,0.0f };
 	float grayFactor_ = 0.0f;
 };
 

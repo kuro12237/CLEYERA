@@ -158,3 +158,4 @@ void GameScene::Gravitys()
 	}
 	gravityManager_->CheckGravity();
 }
+

@@ -192,6 +192,7 @@ struct  Material
 	float absorptionCoefficient = 0.5f;
 	float scatterDistance = 0.5f;
 	float grayFactor = 0.0f;
+	Math::Vector::Vector3 hsv = { 1,1,1};
 };
 
 

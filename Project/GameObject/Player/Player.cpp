@@ -30,6 +30,9 @@ void Player::ImGuiUpdate()
 		ImGui::DragFloat3("max", &aabb_.max.x, 0.1f);
 		ImGui::TreePop();
 	}
+	ImGui::DragFloat3("hsv", &desc.colorDesc.hsv.x, 0.1f);
+
+	GameObjectManager::GetInstance()->GetObj3dData(GetName())->SetGameObjeDesc(desc);
 }
 
 void Player::Update()

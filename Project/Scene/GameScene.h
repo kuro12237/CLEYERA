@@ -45,6 +45,8 @@ private:
 
 	void Gravitys();
 
+	void PushCollision(ICollider* c,size_t size);
+
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 

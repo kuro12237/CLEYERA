@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig" />
+    <None Include="Resources\Shader\ColorConverter.hlsli" />
     <None Include="Resources\Shader\LightingObject3d.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
     <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli" />

@@ -153,6 +153,6 @@ Material Game3dObject::MaterialConverter()
 	result.scatterCoefficient = game3dObjectDesc_.sssDesc.scatterCoefficient_;
 	result.scatterDistance = game3dObjectDesc_.sssDesc.scatterDistance_;
 	result.absorptionCoefficient = game3dObjectDesc_.sssDesc.scatterCoefficient_;
-
+	result.hsv = game3dObjectDesc_.colorDesc.hsv;
 	return result;
 }
