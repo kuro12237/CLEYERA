@@ -50,6 +50,11 @@ void GameObjectManager::Update()
 	for (auto& data : obj3dData_) {
 		auto& it = data.second->GetWorldTransform();
 		it.UpdateMatrix();
+		auto& object = data.second->GetGameObject();
+		if (object->GetSkinningFlag())
+		{
+			object->SkinningUpdate();
+		}
 	}
 
 	//instancing

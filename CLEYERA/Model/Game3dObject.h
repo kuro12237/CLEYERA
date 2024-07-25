@@ -39,8 +39,8 @@ public:
 
 #pragma region Get
 
-	SAnimation::Skeleton GetSkeleton() { return skeleton_; }
-
+	SAnimation::Skeleton &GetSkeleton() { return skeleton_; }
+	bool GetSkinningFlag() { return skinningFlag_; }
 #pragma endregion
 
 

@@ -10,10 +10,19 @@ void Player::Initialize()
 
 	state_ = make_unique<PlayerStateNone>();
 	state_->Initialize(this);
-
+	//id設定
 	id_ = kPlayerId;
-
+	//当たり判定
 	aabb_ = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetAABB();
+	//スケール値セット
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	const float kScale = 0.4f;
+	transform.scale = { kScale,kScale,kScale };
+
+	string filePath = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetMOdelFilePath();
+	AnimationManager::GetInstance()->LoadAnimation(filePath);
+	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
+
 }
 
 void Player::ImGuiUpdate()
@@ -34,6 +43,12 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
+
+	string filePath = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetMOdelFilePath();
+
+	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
+	GameObjectManager::GetInstance()->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+
 	shootTimerFlame_++;
 	if (state_)
 	{
@@ -62,7 +77,7 @@ void Player::OnCollision(ICollider* c)
 		if (c->GetId() == kEnemyWalkId)
 		{
 			ChangeState(make_unique<PlayerStateRock>());
-			Input::VibrateController(65000, 65000,20.0f);
+			//Input::VibrateController(65000, 65000, 20.0f);
 			isDamage_ = true;
 		}
 	}
@@ -129,6 +144,24 @@ void Player::Move(float speed)
 	}
 
 	velocity_.x = Ljoy.x * speed;
+
+	{//回転制御
+
+		auto& rotate = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.rotate;
+
+		if (velocity_.x >= 0.0f)
+		{
+			float radian = Math::Vector::degreesToRadians(90.0f);
+			rotate.y = radian;
+		}
+		if (velocity_.x < 0.0f)
+		{
+			float radian = Math::Vector::degreesToRadians(-90.0f);
+			rotate.y = radian;
+		}
+	}
+
+	walkAnimationFlame_ += (1.0f / 30.0f) * fabsf(Ljoy.x);
 }
 
 void Player::Shoot()

@@ -45,13 +45,6 @@ void PlayerManager::Update()
 	reticleWorldPos = instance->GetObj3dData(reticle_->GetName())->GetWorldTransform().GetWorldPosition();
 	playerWorldPos = instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
 
-	gun_->SetTarget(reticleWorldPos);
-	gun_->Update();
-	reticleCommandHandler_->Handler();
-	reticleCommandHandler_->Exec(*reticle_);
-	reticle_->Update();
-
-	camera_->Update();
 
 	commandHandler_->Handler();
 	commandHandler_->CommandCoreExec(*playerCore_);
@@ -61,6 +54,14 @@ void PlayerManager::Update()
 	}
 
 	playerCore_->Update();
+
+	gun_->SetTarget(reticleWorldPos);
+	gun_->Update();
+	reticleCommandHandler_->Handler();
+	reticleCommandHandler_->Exec(*reticle_);
+	reticle_->Update();
+
+	camera_->Update();
 
 	CheckisDeadBullets();
 

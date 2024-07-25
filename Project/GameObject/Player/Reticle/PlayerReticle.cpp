@@ -11,7 +11,7 @@ void PlayerReticle::Initialize()
 	data->Initialize({}, {}, 0);
 
 	GameObjectManager::GetInstance()->PushObj3dData(data, name_);
-	GameObjectManager::GetInstance()->SetParent("Player", name_);
+	//GameObjectManager::GetInstance()->SetParent("Player", name_);
 
 	uint32_t texHandle = TextureManager::LoadPngTexture("Player/Reticle/Reticle.png");
 	Math::Vector::Vector2 texPos = TextureManager::GetTextureSize(texHandle);
@@ -37,12 +37,17 @@ void PlayerReticle::Update()
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
 	Math::Vector::Vector3 reticleWorldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().GetWorldPosition();
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	Math::Vector::Vector3 playerPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().GetWorldPosition();
 
 	interTarget_ = Math::Vector::Lerp(interTarget_, Math::Vector::Vector3(reticlePos_.x, reticlePos_.y, 0.0f), 0.5f);
 	reticleWorldPos = Math::Vector::Add(reticleWorldPos, interTarget_);
-	transform.translate.x = reticlePos_.x;
-	transform.translate.y = reticlePos_.y;
+	transform.translate.x = playerPos.x;
+	transform.translate.y = playerPos.y;
 
+	transform.translate.x += reticlePos_.x;
+	transform.translate.y += reticlePos_.y;
+	transform.translate.z = 0.0f;
+	transform.rotate = { 0.0f,0.0f,0.0f };
 	//çsóÒïœä∑
 	Math::Matrix::Matrix4x4 matViewport = Math::Matrix::ViewportMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0, 1);
 	Math::Matrix::Matrix4x4 matViewProjViewPort = Math::Matrix::Multiply(viewMat, Math::Matrix::Multiply(ProjMat, matViewport));

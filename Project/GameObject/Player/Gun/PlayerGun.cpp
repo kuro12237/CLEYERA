@@ -8,14 +8,15 @@ void PlayerGun::Initialize() {
 	transform.scale = { 1,1,1 };
 }
 
-void PlayerGun::Update() 
+void PlayerGun::Update()
 {
+	Math::Vector::Vector3 targetPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().transform.translate;
 	Math::Vector::Vector3 worldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().GetWorldPosition();
-
 	Math::Vector::Vector3 lerp = Math::Vector::Normalize(Math::Vector::Subtruct(targetPos_, worldPos));
 
 	Math::Vector::Vector3 Nlerp = Math::Vector::Normalize(lerp);
 	Math::Vector::Vector3 rotate = {};
+
 	float rotateXZ = sqrt(pow(Nlerp.x, 2.0f) + pow(Nlerp.z, 2.0f));
 	float height = -Nlerp.y;
 
@@ -33,4 +34,5 @@ void PlayerGun::Update()
 
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.rotate = rotate;
+	transform.translate = targetPos;
 }

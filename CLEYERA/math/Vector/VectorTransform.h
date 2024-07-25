@@ -6,6 +6,7 @@ namespace Math
 	namespace Vector
 	{
 
+		float degreesToRadians(float degrees);
 		float Length(const Vector2& v);
 		float Length(const Vector3& v);
 
