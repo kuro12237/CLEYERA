@@ -23,20 +23,29 @@ void EnemyWalk::Update()
 
 void EnemyWalk::OnCollision(ICollider* c)
 {
-	c;
 	IsHit_ = true;
 
-	if (kPlayerBullet == c->GetId())
-	{
-		isDead_ = true;
+	{//敵同士の処理
+		if (kEnemyWalkId == c->GetId())
+		{
+			speed_ *= -1.0f;
+		}
 	}
 
-	if (kPlayerId == c->GetId())
-	{
+	{//プレイヤーとの処理
+		if (kPlayerBullet == c->GetId())
+		{
+			isDead_ = true;
+		}
 
-		isDead_ = true;
+		if (kPlayerId == c->GetId())
+		{
+
+			isDead_ = true;
+		}
 	}
 
+	//ブロックとの処理
 	if (kNormalBlock == c->GetId()) {
 		for (auto& hitDirection : hitDirection_)
 		{
@@ -53,7 +62,6 @@ void EnemyWalk::OnCollision(ICollider* c)
 				speed_ *= -1.0f;
 			}
 		}
-
 		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 		transform.translate.x += extrusion_.x;
 		transform.translate.y += extrusion_.y;

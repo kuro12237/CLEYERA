@@ -2,24 +2,25 @@
 
 void Player::Initialize()
 {
-	SetName("Player");
-
-	SetObjectData(GameObjectManager::GetInstance()->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
-
+	gameObjIns_ = GameObjectManager::GetInstance();
+	name_= "Player";
+	
+	//押し出し
 	this->isExtrusion_ = true;
-
+	//状態異常のステート
 	state_ = make_unique<PlayerStateNone>();
 	state_->Initialize(this);
 	//id設定
 	id_ = kPlayerId;
 	//当たり判定
-	aabb_ = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetAABB();
+	SetObjectData(gameObjIns_->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
+	aabb_ = gameObjIns_->GetObj3dData(name_)->GetAABB();
 	//スケール値セット
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = gameObjIns_->GetObj3dData(name_)->GetWorldTransform().transform;
 	const float kScale = 0.4f;
 	transform.scale = { kScale,kScale,kScale };
 
-	string filePath = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetMOdelFilePath();
+	string filePath = gameObjIns_->GetObj3dData(name_)->GetMOdelFilePath();
 	AnimationManager::GetInstance()->LoadAnimation(filePath);
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
@@ -126,42 +127,39 @@ void Player::Jamp()
 
 void Player::Move(float speed)
 {
+	//石化のときは通さない
 	if (isRockState_)
 	{
 		return;
 	}
 
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
+	auto& rotate = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.rotate;
 
-	if (Ljoy.x >= -0.1f && Ljoy.x <= 0.1f)
-	{
-		Ljoy.x = {};
+	{//移動処理
+		ControlDeadZone(Ljoy);
+		velocity_.x = Ljoy.x * speed;
 	}
-	if (Ljoy.y >= -0.1f && Ljoy.y <= 0.1f)
-	{
-		Ljoy.y = {};
-
-	}
-
-	velocity_.x = Ljoy.x * speed;
 
 	{//回転制御
-
-		auto& rotate = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.rotate;
-
-		if (velocity_.x >= 0.0f)
+		//右
+		const float degrees = 90.0f;
+		float radian = 0.0f;
+		if (velocity_.x > 0.0f)
 		{
-			float radian = Math::Vector::degreesToRadians(90.0f);
-			rotate.y = radian;
+			radian = Math::Vector::degreesToRadians(degrees);
 		}
+		//左
 		if (velocity_.x < 0.0f)
 		{
-			float radian = Math::Vector::degreesToRadians(-90.0f);
-			rotate.y = radian;
+			radian = Math::Vector::degreesToRadians(-degrees);
 		}
+		rotate.y = radian;
 	}
 
-	walkAnimationFlame_ += (1.0f / 30.0f) * fabsf(Ljoy.x);
+	{//アニメーション
+		walkAnimationFlame_ += (1.0f / 30.0f) * fabsf(Ljoy.x);
+	}
 }
 
 void Player::Shoot()
@@ -175,25 +173,41 @@ void Player::Shoot()
 
 void Player::DamageUpdate()
 {
-	PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, true);
-	PostEffect::GetInstance()->SetVignetteScale(64.0f);
-	PostEffect::GetInstance()->SetVignetteFactor(vinatteFactor_);
+	//ビネットをかける
+	PostEffect* instance = PostEffect::GetInstance();
+	instance->SetSelectPostEffect(VIGNETTE, true);
+	const float vinatteScale = 64.0f;
+	instance->SetVignetteScale(vinatteScale);
+	instance->SetVignetteFactor(vinatteFactor_);
 
+	const float vinateFactorSpeed = 0.007f;
 	damegeCoolTimer_ += DeltaTimer(damegeFlame_);
-	vinatteFactor_ -= 0.007f;
+	vinatteFactor_ -= vinateFactorSpeed;
 
 	if (damegeCoolTimer_ >= damageCoolTimerMax_)
 	{
-		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
-		PostEffect::GetInstance()->SetVignetteFactor(0.0f);
+		instance->SetSelectPostEffect(VIGNETTE, false);
+		instance->SetVignetteFactor(0.0f);
 		vinatteFactor_ = 1.0f;
 		damegeCoolTimer_ = 0;
 		isDamage_ = false;
 	}
-
 }
 
 void Player::ShootCoolTimer()
 {
 
+}
+
+void Player::ControlDeadZone(Math::Vector::Vector2& v)
+{
+	const float deadNum = 0.1f;
+	if (v.x >= -deadNum && v.x <= deadNum)
+	{
+		v.x = {};
+	}
+	if (v.y >= -deadNum && v.y <= deadNum)
+	{
+		v.y = {};
+	}
 }

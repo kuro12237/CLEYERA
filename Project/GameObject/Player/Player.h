@@ -65,6 +65,8 @@ private:
 
 	void ShootCoolTimer();
 
+	void ControlDeadZone(Math::Vector::Vector2 &v);
+
 	unique_ptr<IPlayerState>state_ = nullptr;
 
 	//singleton
