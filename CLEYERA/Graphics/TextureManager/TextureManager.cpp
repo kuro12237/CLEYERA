@@ -258,14 +258,12 @@ void TextureManager::AddDescripter(uint32_t index, D3D12_SHADER_RESOURCE_VIEW_DE
 	//Despcripter
 	DescriptorManager::SetCPUDescripterHandle(
 		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
 			index),
 		index
 	);
 
 	DescriptorManager::SetGPUDescripterHandle(
 		DescriptorManager::GetGPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
 			index),
 		index
 	);

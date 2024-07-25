@@ -39,6 +39,8 @@ public:
 
 	void CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size);
 
+	void CreateUAVResource(const uint32_t& Num, const string& Name,UINT size);
+
 	/// <summary>
 	/// 画像bufferを更新
 	/// </summary>
@@ -266,14 +268,12 @@ inline void BufferResource<T>::RegisterSRV(DXGI_FORMAT format, const string& nam
 
 		DescriptorManager::SetCPUDescripterHandle(
 			DescriptorManager::GetCPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvHeap(),
 				index),
 			index
 		);
 
 		DescriptorManager::SetGPUDescripterHandle(
 			DescriptorManager::GetGPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvHeap(),
 				index),
 			index
 		);
@@ -362,6 +362,54 @@ inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instanci
 		srvDesc.Buffer.StructureByteStride = size;
 
 		srvIndex_ = DescriptorManager::CreateSRV(buffer_, srvDesc);
+	}
+	else {
+		buffer_ = DescriptorManager::GetData(Name)->GetBuf();
+		srvIndex_ = DescriptorManager::GetData(Name)->GetIndex();
+	}
+}
+
+template<typename T>
+inline void BufferResource<T>::CreateUAVResource(const uint32_t& Num, const string& Name,UINT size)
+{
+
+	if (DescriptorManager::CheckData(Name))
+	{
+		{//buffer作成
+			bufferNum_ = Num;
+			size_t sizeInbyte = sizeof(T) * bufferNum_;
+			ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+			D3D12_HEAP_PROPERTIES uploadHeapProperties{};
+			uploadHeapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+			D3D12_RESOURCE_DESC ResourceDesc{};
+			ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+			ResourceDesc.Width = sizeInbyte;
+			ResourceDesc.Height = 1;
+			ResourceDesc.DepthOrArraySize = 1;
+			ResourceDesc.MipLevels = 1;
+			ResourceDesc.SampleDesc.Count = 1;
+			ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+			ResourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+			HRESULT hr = {};
+			hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
+				&ResourceDesc, D3D12_RESOURCE_STATE_COMMON, nullptr, IID_PPV_ARGS(&buffer_));
+			assert(SUCCEEDED(hr));
+		}
+
+		DescriptorManager::IndexIncrement(Name);
+		DescriptorManager::SetBuffer(Name, buffer_);
+
+		D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc{};
+		uavDesc.Format = DXGI_FORMAT_UNKNOWN;
+		uavDesc.ViewDimension = D3D12_UAV_DIMENSION_BUFFER;
+		uavDesc.Buffer.FirstElement = 0;
+		uavDesc.Buffer.NumElements = bufferNum_;
+		uavDesc.Buffer.CounterOffsetInBytes = 0;
+		uavDesc.Buffer.Flags = D3D12_BUFFER_UAV_FLAG_NONE;
+		uavDesc.Buffer.StructureByteStride = size;
+
+		srvIndex_ = DescriptorManager::GetInstance()->CreateUAV(buffer_, uavDesc);
 	}
 	else {
 		buffer_ = DescriptorManager::GetData(Name)->GetBuf();

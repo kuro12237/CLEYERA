@@ -38,6 +38,11 @@ struct SShaders
 	SShaderMode skinningCompute;
 };
 
+struct  GpuParticleShader
+{
+	SShaderMode particleInit;
+};
+
 class ShaderManager
 {
 public:
@@ -48,6 +53,7 @@ public:
 
 #pragma region Get
 	SShaders GetShader() { return ShaderManager::Getinstance()->shaders_; }
+	GpuParticleShader GetParticleShader() { return ShaderManager::Getinstance()->particleShader_; }
 
 #pragma endregion
 private:
@@ -88,8 +94,11 @@ private:
 
 	static void CompileSkinningCs();
 
+	static void Particles();
+	static void Particle_Init();
+
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};
-
+	GpuParticleShader particleShader_ = {};
 };
 

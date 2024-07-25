@@ -485,6 +485,8 @@
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\playerDashMoveCommand.cpp" />
+    <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -800,6 +802,8 @@
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
     <ClInclude Include="CLEYERA\CreateResource\IBufferResource.h" />
     <ClInclude Include="Project\GameObject\Player\command\playerDashMoveCommand.h" />
+    <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -883,5 +887,6 @@
     <FxCompile Include="Resources\Shader\SkyBox.VS.hlsl" />
     <FxCompile Include="Resources\Shader\SkyBox.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Skinning.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Particle_Init.CS.hlsl" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@ void ShaderManager::Initialize()
 	DxcCreate();
 	includeHandlerSetting();
 	ShaderComples();
+	Particles();
 }
 
 IDxcBlob* ShaderManager::CompilerShaderFanc(const std::wstring& filePath, const wchar_t* profile)
@@ -358,4 +359,20 @@ void ShaderManager::CompileSkinningCs()
 			L"cs_6_0");
 
 	ShaderManager::Getinstance()->shaders_.skinningCompute = shaders;
+}
+
+void ShaderManager::Particles()
+{
+	Particle_Init();
+}
+
+void ShaderManager::Particle_Init()
+{
+	SShaderMode shaders{};
+	shaders.csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Particle_Init.CS.hlsl",
+			L"cs_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.particleInit = shaders;
 }

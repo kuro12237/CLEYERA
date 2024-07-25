@@ -8,6 +8,7 @@
 #include"ModelCreatePipline/ModelCreatePipline.h"
 #include"PostProcess/CreatePostProcess.h"
 #include"SkinningCreateComputePipline/SkinningCreateComputePipline.h"
+#include"GpuParticlePipline/CreateGpuParticlePipline.h"
 
 class GraphicsPipelineManager
 {
@@ -113,6 +114,6 @@ private:
 	static void DefferrdShading(SPSO &pso);
 
 	SPSO pso = {};
-
+	GpuParticlePso gpuParticlePso_ = {};
 };
 
