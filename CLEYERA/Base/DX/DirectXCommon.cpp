@@ -175,6 +175,7 @@ ComPtr<ID3D12DescriptorHeap>  DirectXCommon::CreateDescripterHeap(D3D12_DESCRIPT
 	D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc{};
 	descriptorHeapDesc.Type = heapType;
 	descriptorHeapDesc.NumDescriptors = numDescriptors;
+	
 	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
 	m_pDevice_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
@@ -350,6 +351,7 @@ void DirectXCommon::CreateDescritorHeap()
 		m_pDepthResource.Get(),&dsvDesc,
 		m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart()
 	);
+
 }
 
 void DirectXCommon::CreateSwapChainResource()

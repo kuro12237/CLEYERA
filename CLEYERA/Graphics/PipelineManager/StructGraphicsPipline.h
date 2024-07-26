@@ -44,6 +44,9 @@ struct SPSO
 
 struct GpuParticlePso {
 	SPSOProperty particleInit;
+
+	//Draw
+	SPSOProperty debugDraw;
 };
 
 enum  BlendMode

@@ -39,7 +39,6 @@ void GameScene::Initialize()
 
 void GameScene::Update(GameManager* Scene)
 {
-	
 	Scene;
 #ifdef _USE_IMGUI
 
@@ -97,7 +96,8 @@ void GameScene::PostProcessDraw()
 {
 	PostEffect::GetInstance()->PreDraw();
 
-	gameObjectManager_->Draw();
+	//gameObjectManager_->Draw();
+	gpuParticle_->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
 }
@@ -109,6 +109,7 @@ void GameScene::Back2dSpriteDraw()
 void GameScene::Object3dDraw()
 {
 	PostEffect::GetInstance()->Draw();
+
 }
 
 void GameScene::Flont2dSpriteDraw()

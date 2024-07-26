@@ -4,11 +4,14 @@
 #include"CreateResource.h"
 #include"WorldTransform.h"
 #include"Graphics/PipelineManager/GraphicsPipelineManager.h"
+#include"Utility/CameraManager/CameraManager.h"
 
 struct ParticleCS
 {
 	Math::Vector::Vector3 translate;
 	Math::Vector::Vector3 scale;
+	Math::Vector::Vector3 rotate;
+	Math::Matrix::Matrix4x4 matWorld;
 	float lifeTime;
 	Math::Vector::Vector3 velocity;
 	float currentTime;
@@ -39,8 +42,11 @@ private:
 	unique_ptr<BufferResource<uint32_t>>indexBuf_ = nullptr;
 	vector<uint32_t>indexParam_;
 
-	unique_ptr<BufferResource<ParticleCS>>particleBuf_ = nullptr;
-	vector<ParticleCS>particleParam_;
+	unique_ptr<BufferResource<ParticleCS>>writeParticleBuf_ = nullptr;
+	vector<ParticleCS>writeParticleParam_;
+
+	unique_ptr<BufferResource<ParticleCS>>readParticleBuf_ = nullptr;
+	vector<ParticleCS>readParticleParam_;
 
 	uint32_t texHandle_ = 0;
 

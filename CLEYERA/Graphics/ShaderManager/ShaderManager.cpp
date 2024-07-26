@@ -364,6 +364,7 @@ void ShaderManager::CompileSkinningCs()
 void ShaderManager::Particles()
 {
 	Particle_Init();
+	ParticleDebugDraw();
 }
 
 void ShaderManager::Particle_Init()
@@ -375,4 +376,20 @@ void ShaderManager::Particle_Init()
 			L"cs_6_0");
 
 	ShaderManager::Getinstance()->particleShader_.particleInit = shaders;
+}
+
+void ShaderManager::ParticleDebugDraw()
+{
+
+	SShaderMode shaders{};
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.VS.hlsl",
+			L"vs_6_0");
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.DebugDraw = shaders;
 }

@@ -79,6 +79,8 @@ public:
     /// </summary>
 	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle);
 
+	void ComputeRootParamerterCommand(UINT rootParamIndex, uint32_t index);
+
 	static void CreateShaderResourceView(ID3D12Resource* resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index);
 
 #pragma endregion

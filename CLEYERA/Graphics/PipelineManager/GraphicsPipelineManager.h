@@ -17,9 +17,11 @@ public:
 	static GraphicsPipelineManager* GetInstance();
 
 	static void Initialize();
-    SPSO GetPso() { return pso; }
 
-#pragma region Set
+    SPSO GetPso() { return pso; }
+	GpuParticlePso  GetParticle() { return gpuParticlePso_; }
+
+#pragma region Get
 
 
 #pragma endregion
