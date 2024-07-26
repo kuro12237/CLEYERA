@@ -30,6 +30,15 @@ public:
 
 	void Draw();
 
+	void CallBarrier();
+
+#pragma region Set
+
+	void SetTexhandle(uint32_t texHandle) { texHandle_ = texHandle; }
+
+#pragma endregion
+
+
 private:
 
 	size_t particleNum_ = 0;
@@ -48,8 +57,7 @@ private:
 	unique_ptr<BufferResource<ParticleCS>>readParticleBuf_ = nullptr;
 	vector<ParticleCS>readParticleParam_;
 
-	uint32_t texHandle_ = 0;
-
+	uint32_t texHandle_ = 1;
 
 };
 

@@ -44,3 +44,5 @@ struct TransformationViewMatrix
     float32_t4x4 InverseProj;
     float32_t3 CameraPosition;
 };
+
+static const uint32_t kParticleMax = 1024;

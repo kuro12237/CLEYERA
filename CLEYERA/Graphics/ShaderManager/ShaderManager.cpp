@@ -364,6 +364,7 @@ void ShaderManager::CompileSkinningCs()
 void ShaderManager::Particles()
 {
 	Particle_Init();
+	Particle_Update();
 	ParticleDebugDraw();
 }
 
@@ -392,4 +393,16 @@ void ShaderManager::ParticleDebugDraw()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->particleShader_.DebugDraw = shaders;
+}
+
+void ShaderManager::Particle_Update()
+{
+
+	SShaderMode shaders{};
+	shaders.csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Update/Particle_Update.CS.hlsl",
+			L"cs_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.particleUpdate = shaders;
 }

@@ -1,6 +1,5 @@
-#include"Particle.hlsli"
+#include"../Particle.hlsli"
 
-static const uint32_t kParticleMax = 1024;
 RWStructuredBuffer<Particle> gParticle : register(u0);
 
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b0);

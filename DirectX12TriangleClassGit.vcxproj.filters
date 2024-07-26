@@ -274,7 +274,8 @@
       <Filter>Shader\primitive</Filter>
     </None>
     <None Include="Resources\Shader\SkyBox.hlsli" />
-    <None Include="Resources\Shader\Particle\Draw\Particle.hlsli" />
+    <None Include="Resources\Shader\Particle\Particle.hlsli" />
+    <None Include="Resources\Shader\Particle\MatrixFanc.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -891,5 +892,6 @@
     <FxCompile Include="Resources\Shader\Particle\Particle_Init.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Update\Particle_Update.CS.hlsl" />
   </ItemGroup>
 </Project>

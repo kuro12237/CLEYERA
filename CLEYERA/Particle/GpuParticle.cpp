@@ -29,24 +29,19 @@ void GpuParticle::Create(const size_t num, string Name)
 		readParticleParam_.resize(particleNum_);
 	}
 	{//頂点の初期化
-		Math::Vector::Vector2 pos = { 0.0f,0.0f };
-		Math::Vector::Vector2 size = { 1.0f,1.0f };
-
-		vertexParam_[0].position = { pos.x,pos.y + size.y,0,1 };
+		vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
 		vertexParam_[0].texcoord = { 0.0f,1.0f };
-		vertexParam_[1].position = { pos.x ,pos.y,0,1 };
+		vertexParam_[1].position = { 1.0f ,1.0f,0,1 };
 		vertexParam_[1].texcoord = { 0.0f,0.0f };
-		vertexParam_[2].position = { pos.x + size.x,pos.y + size.y,0,1 };
+		vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
 		vertexParam_[2].texcoord = { 1.0f,1.0f };
-		vertexParam_[3].position = { pos.x + size.x,pos.y,0,1 };
+		vertexParam_[3].position = { -1.0f,1.0f,0,1 };
 		vertexParam_[3].texcoord = { 1.0f,0.0f };
 	}
-
 	{//インデックスの初期化
 		indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
-		indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
+		indexParam_[3] = 0; indexParam_[4] = 3; indexParam_[5] = 1;
 	}
-	
 	{//頂点マップ
 		vertexBuf_->Map();
 		vertexBuf_->Setbuffer(vertexParam_);
@@ -73,6 +68,22 @@ void GpuParticle::Create(const size_t num, string Name)
 	DirectXCommon::GetInstance()->CommandClosed();
 }
 
+void GpuParticle::Update()
+{
+	{//初期化CS_Dispatch
+		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().particleUpdate;
+		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
+		ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
+		commandList->SetDescriptorHeaps(1, heap);
+
+		commandList->SetComputeRootSignature(pso.rootSignature.Get());
+		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
+
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
+		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
+	}
+}
+
 void GpuParticle::Draw()
 {
 	//換える
@@ -82,13 +93,24 @@ void GpuParticle::Draw()
 	commandList->SetGraphicsRootSignature(pso.rootSignature.Get());
 	commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
-	vertexBuf_->CommandVertexBufferViewCall(0);
-	vertexBuf_->CommandPrimitiveTopologyCall();
+	vertexBuf_->CommandVertexBufferViewCall();
 	indexBuf_->CommandIndexBufferViewCall();
 	DescriptorManager::GetInstance()->rootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
 	DescriptorManager::GetInstance()->rootParamerterCommand(1, writeParticleBuf_->GetSrvIndex());
 	CameraManager::GetInstance()->CommandCall(2);
 	CameraManager::GetInstance()->CommandCall(3);
-	DescriptorManager::GetInstance()->rootParamerterCommand(4, 1);
+	DescriptorManager::GetInstance()->rootParamerterCommand(4, texHandle_);
+
+	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	commandList->DrawIndexedInstanced(6, UINT(particleNum_), 0, 0, 0);
+}
+
+void GpuParticle::CallBarrier()
+{
+	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.UAV.pResource = writeParticleBuf_->GetBuffer();
+	commandList->ResourceBarrier(1, &barrier);
 }
