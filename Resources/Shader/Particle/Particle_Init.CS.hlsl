@@ -13,6 +13,6 @@ void main(uint3 DTid : SV_DispatchThreadID)
         gParticle[particleIndex].scale = float32_t3(1.0f, 1.0f, 1.0f);
         gParticle[particleIndex].matWorld = Mat4x4Identity();
         gParticle[particleIndex].color = float32_t4(1.0f, 1.0f, 1.0f, 1.0f);
-        gParticle[particleIndex].velocity = float32_t3(0.001f, 0.001f, 0.01f);
+        gParticle[particleIndex].velocity = float32_t3(0.0001f, 0.000f, 0.0001f);
     }
 }

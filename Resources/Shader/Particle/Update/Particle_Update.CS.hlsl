@@ -14,8 +14,8 @@ void main(uint3 DTid : SV_DispatchThreadID)
         {
             gParticle[particleIndex].translate += gParticle[particleIndex].velocity;
 
-            gParticle[particleIndex].matWorld = mul(gParticle[particleIndex].matWorld, TranslateMatrix(gParticle[particleIndex].translate));
-         
+            gParticle[particleIndex].matWorld = mul(gParticle[particleIndex].matWorld, AffineMatrix(gParticle[particleIndex].scale, gParticle[particleIndex].rotate,gParticle[particleIndex].translate));
+ 
         }
     }
     

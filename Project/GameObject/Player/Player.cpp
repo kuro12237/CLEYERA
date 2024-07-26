@@ -21,8 +21,8 @@ void Player::Initialize()
 	transform.scale = { kScale,kScale,kScale };
 
 	string filePath = gameObjIns_->GetObj3dData(name_)->GetMOdelFilePath();
-	AnimationManager::GetInstance()->LoadAnimation(filePath);
-	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
+	//AnimationManager::GetInstance()->LoadAnimation(filePath);
+	//walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
 }
 
@@ -47,8 +47,8 @@ void Player::Update()
 
 	string filePath = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetMOdelFilePath();
 
-	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
-	GameObjectManager::GetInstance()->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+	//walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
+	//GameObjectManager::GetInstance()->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
 
 	shootTimerFlame_++;
 	if (state_)

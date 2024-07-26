@@ -34,7 +34,7 @@ void GameScene::Initialize()
 	gravityManager_ = make_unique<GravityManager>();
 
 	gpuParticle_ = make_unique<GpuParticle>();
-	gpuParticle_->Create(1, "landParticle");
+	gpuParticle_->Create(1024, "landParticle");
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -97,7 +97,7 @@ void GameScene::PostProcessDraw()
 {
 	PostEffect::GetInstance()->PreDraw();
 
-	//gameObjectManager_->Draw();
+	gameObjectManager_->Draw();
 	gpuParticle_->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
