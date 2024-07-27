@@ -17,16 +17,7 @@
 #include"Light/DirectionLIght.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
 #include"Utility/CameraManager/CameraManager.h"
-
-#ifdef _DEBUG
- 
-#define BuildMode "Debug"
-
-#else
-
-#define BuildMode "Release"
-
-#endif // _DEBUG
+#include"Utility/RuntimeCounter/RunTimeCounter.h"
 
 
 class Cleyera

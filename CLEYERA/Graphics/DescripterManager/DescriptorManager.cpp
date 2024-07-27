@@ -48,7 +48,11 @@ uint32_t DescriptorManager::CreateSRV(ComPtr<ID3D12Resource>& resource, D3D12_SH
 		GetGPUDescriptorHandle(
 			DescriptorManager::GetInstance()->index
 		);
-	CGHandlePtr();
+	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index].ptr +=
+		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	DescriptorManager::GetInstance()->SrvHandleGPU[DescriptorManager::GetInstance()->index].ptr +=
+		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
 		resource.Get(),
@@ -72,7 +76,11 @@ uint32_t DescriptorManager::CreateUAV(ComPtr<ID3D12Resource>& resource, D3D12_UN
 			index
 		);
 
-	CGHandlePtr();
+	DescriptorManager::GetInstance()->SrvHandleCPU[DescriptorManager::GetInstance()->index].ptr +=
+		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	DescriptorManager::GetInstance()->SrvHandleGPU[DescriptorManager::GetInstance()->index].ptr +=
+		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	DirectXCommon::GetInstance()->GetDevice()->CreateUnorderedAccessView(
 		resource.Get(),
@@ -87,6 +95,9 @@ uint32_t DescriptorManager::CreateUAV(ComPtr<ID3D12Resource>& resource, D3D12_UN
 void DescriptorManager::rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle)
 {
 	Commands command = DirectXCommon::GetInstance()->GetCommands();
+	ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
+	command.m_pList->SetDescriptorHeaps(1, heap);
+
 	command.m_pList->SetGraphicsRootDescriptorTable(
 		rootPatramerterIndex,
 		DescriptorManager::GetInstance()->SrvHandleGPU[texhandle]

@@ -276,6 +276,7 @@
     <None Include="Resources\Shader\SkyBox.hlsli" />
     <None Include="Resources\Shader\Particle\Particle.hlsli" />
     <None Include="Resources\Shader\Particle\MatrixFanc.hlsli" />
+    <None Include="Resources\Shader\Particle\RandomGenerator.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -405,7 +406,7 @@
     <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp">
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp">
+    <ClCompile Include="CLEYERA\Utility\DeltaTimer\DeltaTimer.cpp">
       <Filter>Project\Utility\Deltatimer</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp">
@@ -489,6 +490,7 @@
     <ClCompile Include="Project\GameObject\Player\command\playerDashMoveCommand.cpp" />
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.cpp" />
+    <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -686,7 +688,7 @@
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h">
       <Filter>Project\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h">
+    <ClInclude Include="CLEYERA\Utility\DeltaTimer\DeltaTimer.h">
       <Filter>Project\Utility\Deltatimer</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h">
@@ -806,6 +808,7 @@
     <ClInclude Include="Project\GameObject\Player\command\playerDashMoveCommand.h" />
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.h" />
+    <ClInclude Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -893,5 +896,6 @@
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.VS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Update\Particle_Update.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeShpere.CS.hlsl" />
   </ItemGroup>
 </Project>

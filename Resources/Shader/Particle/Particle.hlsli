@@ -1,3 +1,4 @@
+#include"RandomGenerator.hlsli"
 
 struct VertexShaderInput
 {
@@ -22,6 +23,15 @@ struct PixelShaderOutput
     float32_t4 normalColor : SV_TARGET2;
     float32_t4 posColor : SV_TARGET3;
 };
+struct TransformationViewMatrix
+{
+    float32_t4x4 view;
+    float32_t4x4 projection;
+    float32_t4x4 orthographic;
+    float32_t4x4 InverseVp;
+    float32_t4x4 InverseProj;
+    float32_t3 CameraPosition;
+};
 
 struct Particle
 {
@@ -35,14 +45,10 @@ struct Particle
     float32_t4 color;
 };
 
-struct TransformationViewMatrix
+struct PerFrame
 {
-    float32_t4x4 view;
-    float32_t4x4 projection;
-    float32_t4x4 orthographic;
-    float32_t4x4 InverseVp;
-    float32_t4x4 InverseProj;
-    float32_t3 CameraPosition;
+    float32_t time;
+    float32_t deltaTime;
 };
 
 static const uint32_t kParticleMax = 1024;

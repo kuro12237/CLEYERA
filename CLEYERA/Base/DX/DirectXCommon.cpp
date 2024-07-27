@@ -57,9 +57,8 @@ void DirectXCommon::PreDraw()
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandleTest = DSVDescriptorManager::GetHandle(0);
 	commands.m_pList.Get()->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, &dsvHandle);
 	commands.m_pList.Get()->ClearDepthStencilView(dsvHandle,D3D12_CLEAR_FLAG_DEPTH,1.0f,0,0,nullptr);
-	ScissorViewCommand(WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());	
-	ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
-	commands.m_pList->SetDescriptorHeaps(1, heap);
+	ScissorViewCommand(WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
+	
 }
 
 D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kClientHeight)
