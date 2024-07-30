@@ -30,6 +30,9 @@
     <None Include="CLEYERA\Config\.editorconfig" />
     <None Include="Resources\Shader\LightingObject3d.hlsli" />
     <None Include="Resources\Shader\ParticleObject3d.hlsli" />
+    <None Include="Resources\Shader\Particle\MatrixFanc.hlsli" />
+    <None Include="Resources\Shader\Particle\Particle.hlsli" />
+    <None Include="Resources\Shader\Particle\RandomGenerator.hlsli" />
     <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli" />
     <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli" />
     <None Include="Resources\Shader\PostEffect\PostEffect.hlsli" />
@@ -63,6 +66,7 @@
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\DSVDescriptorManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\DescripterManager\RTVDescripterManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp" />
@@ -86,6 +90,9 @@
     <ClCompile Include="CLEYERA\Model\primitive\Line.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\EmitterSphere.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
+    <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
     <ClCompile Include="CLEYERA\Particle\Particle.cpp" />
     <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
@@ -108,6 +115,7 @@
     <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
+    <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
@@ -139,7 +147,7 @@
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
-    <ClCompile Include="Project\Utility\DeltaTimer\DeltaTimer.cpp" />
+    <ClCompile Include="CLEYERA\Utility\DeltaTimer\DeltaTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />
@@ -164,6 +172,7 @@
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescripterData.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\RTVDescripterManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GraphicsPipelineManager.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\ModelCreatePipline\ModelCreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h" />
@@ -198,6 +207,11 @@
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\EmitterSphere.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\IEmitterState.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />
+    <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
     <ClInclude Include="CLEYERA\Particle\Particle.h" />
     <ClInclude Include="CLEYERA\Particle\SParticle.h" />
     <ClInclude Include="CLEYERA\Particle\state\IParticleState.h" />
@@ -234,6 +248,7 @@
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
     <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
+    <ClInclude Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.h" />
     <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Block\Block.h" />
@@ -271,7 +286,7 @@
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\GameScene.h" />
-    <ClInclude Include="Project\Utility\DeltaTimer\DeltaTimer.h" />
+    <ClInclude Include="CLEYERA\Utility\DeltaTimer\DeltaTimer.h" />
     <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h" />
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +319,79 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeShpere.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Particle_Init.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Update\Particle_Update.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>

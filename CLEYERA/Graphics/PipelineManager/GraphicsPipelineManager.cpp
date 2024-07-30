@@ -26,6 +26,17 @@ void GraphicsPipelineManager::Initialize()
 
 	DefferrdShading(pso);
 	GraphicsPipelineManager::GetInstance()->pso = pso;
+
+	GpuParticlePso gpuPso;
+
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	SShaderMode shader = ShaderManager::Getinstance()->GetParticleShader().particleInit;
+	gpuPso.particleInit = CreateGpuParticle::CreateGpuParticle_Init(device, commands, shader);
+	gpuPso.particleUpdate = CreateGpuParticle::CreateGpuParticle_Update(device, commands, ShaderManager::Getinstance()->GetParticleShader().particleUpdate);
+	gpuPso.debugDraw = CreateGpuParticle::CreateGpuParticle_DebugDraw(device, commands, ShaderManager::Getinstance()->GetParticleShader().DebugDraw);
+	gpuPso.particleEmitterSphere = CreateGpuParticle::CreateGpuparticcle_Emitter_Sphere(device, commands, ShaderManager::Getinstance()->GetParticleShader().particleSphereEmitter);
+	GraphicsPipelineManager::GetInstance()->gpuParticlePso_ = gpuPso;
 }
 
 void GraphicsPipelineManager::CreateRootSignature(ComPtr<ID3D12Device> device, D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature, SPSOProperty& result)
@@ -49,7 +60,7 @@ void GraphicsPipelineManager::CreateRootSignature(ComPtr<ID3D12Device> device, D
 	assert(SUCCEEDED(hr));
 }
 
-void GraphicsPipelineManager::SettingInputElementDesc(D3D12_INPUT_ELEMENT_DESC &inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
+void GraphicsPipelineManager::SettingInputElementDesc(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
 {
 	inputElementDescs.SemanticName = SemanticName;
 	inputElementDescs.SemanticIndex = SemanticIndex;
@@ -132,13 +143,13 @@ void GraphicsPipelineManager::CreateCompute(SPSO& pso)
 	pso.skinningCompute = SkinningCreateComputePipline::CreateSkinningPipline(device, commands, shader.skinningCompute);
 }
 
-void GraphicsPipelineManager::CreatePSO(SPSO &pso)
+void GraphicsPipelineManager::CreatePSO(SPSO& pso)
 {
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
-	
-	pso.shape=CreateShape(device.Get(), commands, shader.shape);
+
+	pso.shape = CreateShape(device.Get(), commands, shader.shape);
 	LogManager::CompliteLog("CreateShapePSO");
 
 	pso.Line = CreateLine(device.Get(), commands, shader.Line);
@@ -162,7 +173,7 @@ void GraphicsPipelineManager::CreatePSO(SPSO &pso)
 	pso.SkyBox = ModelCreatePipline::CreateSkyBoxModel(device.Get(), commands, shader.SkyBoxModel);
 }
 
-void GraphicsPipelineManager::Create2dSpritePSOs(SPSO &pso)
+void GraphicsPipelineManager::Create2dSpritePSOs(SPSO& pso)
 {
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -179,7 +190,7 @@ void GraphicsPipelineManager::Create2dSpritePSOs(SPSO &pso)
 
 	pso.Sprite2d.Multiply = CreateSprite2dMultiply(device.Get(), commands, shader.sprite2d);
 	LogManager::CompliteLog("CreateSprite2dMultiplyPSO");
-	
+
 	pso.Sprite2d.Screen = CreateSprite2dScreen(device.Get(), commands, shader.sprite2d);
 	LogManager::CompliteLog("CreateSprite2dScreenPSO");
 }
@@ -353,7 +364,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 		descriptionRootSignature,
 		result
 	);
-	
+
 	//InputLayout
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[1] = {};
 	SettingInputElementDesc(inputElementDescs[0],
@@ -383,14 +394,14 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 		D3D12_FILL_MODE_SOLID
 	);
 
-    //�[�x�ݒ�
+	//�[�x�ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
 	SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ALL,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
-    );
+	);
 
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -428,7 +439,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)
 {
 	SPSOProperty SpritePSO;
-	
+
 	//RootSignature
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
@@ -503,7 +514,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
-    //RootSignature�쐬
+	//RootSignature�쐬
 	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
@@ -550,8 +561,8 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 		D3D12_DEPTH_WRITE_MASK_ALL,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
 	);
-	
-	
+
+
 	//PSO作成
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
@@ -570,7 +581,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
-	
+
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
@@ -675,13 +686,13 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dNone(ComPtr<ID3D12Device> de
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 	SettingRasterizer(
-		rasterizerDesc, 
+		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID);
 
 	//�[�x�̐ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(despthStencilDesc, 
+	SettingDepth(despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ZERO,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
@@ -711,7 +722,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dNone(ComPtr<ID3D12Device> de
 	//�ǂ̂悤�ɉ�ʂɐF��ł����ނ��̐ݒ�(�C�ɂ��Ȃ��ėǂ�)
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
-	
+
 	HRESULT hr = {};
 	hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&SpritePSO.GraphicsPipelineState));
@@ -782,7 +793,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 	//�V���A���C�Y���ăo�C�i���ɂ���
 	CreateRootSignature(
 		device,
-		descriptionRootSignature, 
+		descriptionRootSignature,
 		SpritePSO);
 
 	//InputLayout�̐ݒ�
@@ -817,7 +828,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 	SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
-	
+
 	//�[�x�ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
 	SettingDepth(
@@ -826,7 +837,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 		D3D12_DEPTH_WRITE_MASK_ZERO,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
 	);
-	
+
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 	graphicsPipelineStateDesc.pRootSignature = SpritePSO.rootSignature.Get(); //RootSignature
@@ -1086,7 +1097,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dMultiply(ComPtr<ID3D12Device
 
 	//�[�x�̐ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(despthStencilDesc,true,D3D12_DEPTH_WRITE_MASK_ZERO,D3D12_COMPARISON_FUNC_LESS_EQUAL);
+	SettingDepth(despthStencilDesc, true, D3D12_DEPTH_WRITE_MASK_ZERO, D3D12_COMPARISON_FUNC_LESS_EQUAL);
 
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -1379,7 +1390,7 @@ SPSOProperty GraphicsPipelineManager::CreatePBR(ComPtr<ID3D12Device> device, Com
 	inputElementDescs[3].SemanticIndex = 0;
 	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-	
+
 	inputElementDescs[4].SemanticName = "WEIGHT";
 	inputElementDescs[4].SemanticIndex = 0;
 	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -1465,7 +1476,7 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	
+
 	D3D12_ROOT_PARAMETER rootParameters[8] = {};
 	//Material
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
@@ -1610,9 +1621,9 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
-	graphicsPipelineStateDesc.pRootSignature = DirectionalLightPSO.rootSignature.Get(); 
+	graphicsPipelineStateDesc.pRootSignature = DirectionalLightPSO.rootSignature.Get();
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; //InputLayout
-	graphicsPipelineStateDesc.VS = {shader.vertexBlob->GetBufferPointer(),
+	graphicsPipelineStateDesc.VS = { shader.vertexBlob->GetBufferPointer(),
 	shader.vertexBlob->GetBufferSize() }; //VertexShader
 	graphicsPipelineStateDesc.PS = { shader.pixelBlob->GetBufferPointer(),
 	shader.pixelBlob->GetBufferSize() }; //PixeShader
@@ -1921,7 +1932,7 @@ SPSOProperty GraphicsPipelineManager::CreateSubsurfaceModel(ComPtr<ID3D12Device>
 	SubDescriptorRange[0].BaseShaderRegister = 3;
 	SubDescriptorRange[0].NumDescriptors = 1;
 	SubDescriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-    SubDescriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	SubDescriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
 	//tex
 	rootParameters[8].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
@@ -2086,7 +2097,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[1].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
 	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing);
-	
+
 	//PixcelDescriptorRanged
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1] = {};
 	descriptorRange[0].BaseShaderRegister = 0;
@@ -2101,7 +2112,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
 	//Sampler�̐ݒ�
-	
+
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -2115,7 +2126,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
-	
+
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
@@ -2204,7 +2215,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 	hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&ParticlePSO.GraphicsPipelineState));
 	assert(SUCCEEDED(hr));
-	
+
 	return ParticlePSO;
 }
 
@@ -2215,7 +2226,6 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 	//RootSignature�쐬
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
-	//descriptionRootSignature = CreateDescriptRootSignature();
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
@@ -2225,7 +2235,6 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
 
-	//
 	//Vertex
 	D3D12_DESCRIPTOR_RANGE descriptorRangeForInstancing[1] = {};
 	descriptorRangeForInstancing[0].BaseShaderRegister = 0;
@@ -2256,7 +2265,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 
 
 	//Sampler�̐ݒ�
-	
+
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
 	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -2270,7 +2279,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
-	
+
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
@@ -2315,7 +2324,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 	SettingRasterizer(
 		rasterizerDesc,
-	    D3D12_CULL_MODE_BACK,
+		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID
 	);
 
@@ -2372,9 +2381,9 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	
+
 	D3D12_ROOT_PARAMETER rootParameters[11] = {};
-	
+
 	//matrix
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
@@ -2382,7 +2391,7 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 
 	//param
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-	rootParameters[1].ShaderVisibility =D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[1].Descriptor.ShaderRegister = 1;
 
 	//tex
@@ -2491,7 +2500,7 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
 	SettingDepth(despthStencilDesc,
 		false,
-	    D3D12_DEPTH_WRITE_MASK_ALL,
+		D3D12_DEPTH_WRITE_MASK_ALL,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
 	);
 
@@ -2700,7 +2709,7 @@ void GraphicsPipelineManager::DefferrdShading(SPSO& pso)
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
 
-	pso.ColorPostProcess = CreatePostProcess::DefferdShading(device,commands,shader.ColorPostProcess);
+	pso.ColorPostProcess = CreatePostProcess::DefferdShading(device, commands, shader.ColorPostProcess);
 	LogManager::Log("ColorPostProcessPiplineComp");
 
 }

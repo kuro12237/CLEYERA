@@ -2,6 +2,11 @@
 
 using namespace Math::Vector;
 
+float Math::Vector::degreesToRadians(float degrees)
+{
+	return degrees * (float(std::numbers::pi) / 180.0f);
+}
+
 float Math::Vector::Length(const Vector2& v)
 {
 	float result{};

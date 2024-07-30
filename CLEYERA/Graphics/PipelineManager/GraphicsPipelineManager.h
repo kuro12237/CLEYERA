@@ -8,6 +8,7 @@
 #include"ModelCreatePipline/ModelCreatePipline.h"
 #include"PostProcess/CreatePostProcess.h"
 #include"SkinningCreateComputePipline/SkinningCreateComputePipline.h"
+#include"GpuParticlePipline/CreateGpuParticlePipline.h"
 
 class GraphicsPipelineManager
 {
@@ -16,9 +17,11 @@ public:
 	static GraphicsPipelineManager* GetInstance();
 
 	static void Initialize();
-    SPSO GetPso() { return pso; }
 
-#pragma region Set
+    SPSO GetPso() { return pso; }
+	GpuParticlePso  GetParticle() { return gpuParticlePso_; }
+
+#pragma region Get
 
 
 #pragma endregion
@@ -113,6 +116,6 @@ private:
 	static void DefferrdShading(SPSO &pso);
 
 	SPSO pso = {};
-
+	GpuParticlePso gpuParticlePso_ = {};
 };
 

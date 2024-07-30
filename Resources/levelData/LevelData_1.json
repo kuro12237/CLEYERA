@@ -36,33 +36,55 @@
                     2.0,
                     4.0
                 ]
-            },
-            "children": [
-                {
-                    "type": "MESH",
-                    "name": "PlayerGun",
-                    "file_name": "PlayerTestGun",
-                    "ModelFileType": "obj",
-                    "DrawType": "Normal",
-                    "transform": {
-                        "translate": [
-                            0.0,
-                            0.0,
-                            -0.3504295349121094
-                        ],
-                        "rotate": [
-                            90.00001525878906,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    }
-                }
-            ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "PlayerGun",
+            "file_name": "PlayerTestGun",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    4.162246227264404,
+                    0.0,
+                    9.5244722366333
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "SkyDome",
+            "file_name": "SkyDome",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    256.0,
+                    256.0,
+                    256.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -479,30 +501,6 @@
                     2.0,
                     2.0,
                     2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "SkyDome",
-            "file_name": "SkyDome",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
                 ]
             }
         },

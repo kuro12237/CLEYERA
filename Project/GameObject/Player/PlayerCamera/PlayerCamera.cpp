@@ -16,11 +16,8 @@ void PlayerCamera::Update()
 
 	if (target_)
 	{
-		cameraWt.transform.rotate.y = target_->transform.rotate.y;
 		interTarget_ = Math::Vector::Lerp(interTarget_, target_->transform.translate, 0.25f);
 	}
-
-	distructionAngleY_ = cameraWt.transform.rotate.y;
 
 	Math::Vector::Vector3 offset = CalcOffset(cameraWt, { 0.0f,0.0f,-64.0f });
 	cameraWt.transform.translate = Math::Vector::Add(interTarget_, offset);

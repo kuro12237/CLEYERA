@@ -29,7 +29,6 @@ public:
 
 	unique_ptr<Game3dObject>& GetGameObject() { return gameObject_; }
 	Game3dObjectDesc GetDesc() { return objectDesc_; }
-	
 #pragma endregion
 
 private:

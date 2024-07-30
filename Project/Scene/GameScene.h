@@ -21,6 +21,8 @@
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
 
+#include"Particle/GpuParticle.h"
+
 class GameScene :public IScene
 {
 public:
@@ -57,6 +59,8 @@ private:
 	unique_ptr<PlayerManager>player_ = nullptr;
 
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
+
+	unique_ptr<Particle::GpuParticle>gpuParticle_ = nullptr;
 
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;

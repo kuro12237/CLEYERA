@@ -11,6 +11,7 @@ void ShaderManager::Initialize()
 	DxcCreate();
 	includeHandlerSetting();
 	ShaderComples();
+	Particles();
 }
 
 IDxcBlob* ShaderManager::CompilerShaderFanc(const std::wstring& filePath, const wchar_t* profile)
@@ -358,4 +359,63 @@ void ShaderManager::CompileSkinningCs()
 			L"cs_6_0");
 
 	ShaderManager::Getinstance()->shaders_.skinningCompute = shaders;
+}
+
+void ShaderManager::Particles()
+{
+	Particle_Init();
+	Particle_Update();
+	ParticleDebugDraw();
+	Particle_EmitterSphere();
+}
+
+void ShaderManager::Particle_Init()
+{
+	SShaderMode shaders{};
+	shaders.csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Particle_Init.CS.hlsl",
+			L"cs_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.particleInit = shaders;
+}
+
+void ShaderManager::ParticleDebugDraw()
+{
+
+	SShaderMode shaders{};
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.VS.hlsl",
+			L"vs_6_0");
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.DebugDraw = shaders;
+}
+
+void ShaderManager::Particle_Update()
+{
+
+	SShaderMode shaders{};
+	shaders.csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Update/Particle_Update.CS.hlsl",
+			L"cs_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.particleUpdate = shaders;
+}
+
+void ShaderManager::Particle_EmitterSphere()
+{
+
+	SShaderMode shaders{};
+	shaders.csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Emitter/Particle_TypeShpere.CS.hlsl",
+			L"cs_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.particleSphereEmitter = shaders;
 }

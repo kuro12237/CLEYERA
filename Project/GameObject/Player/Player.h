@@ -65,7 +65,12 @@ private:
 
 	void ShootCoolTimer();
 
+	void ControlDeadZone(Math::Vector::Vector2 &v);
+
 	unique_ptr<IPlayerState>state_ = nullptr;
+
+	//singleton
+	GameObjectManager* gameObjIns_ = nullptr;
 
 	bool isJamp_ = false;
 	bool isShoot_ = false;
@@ -81,4 +86,6 @@ private:
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
 
+	float walkAnimationFlame_ = 0.0f;
+	SAnimation::Animation walkAnimationData_;
 };

@@ -24,6 +24,7 @@ public:
 
 	static uint32_t CreateSRV(ComPtr<ID3D12Resource>&resource,D3D12_SHADER_RESOURCE_VIEW_DESC SrvDesc);
 
+	uint32_t CreateUAV(ComPtr<ID3D12Resource>& resource, D3D12_UNORDERED_ACCESS_VIEW_DESC desc);
 
 	/// <summary>
     /// CPU��GPU��ptr����炷
@@ -46,7 +47,6 @@ public:
 	static void SetCPUDescripterHandle(D3D12_CPU_DESCRIPTOR_HANDLE CpuDescripterHandle, uint32_t index)
 	{
 		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
 			index),
 		DescriptorManager::GetInstance()->SrvHandleCPU[index] = CpuDescripterHandle;
 	}
@@ -60,9 +60,9 @@ public:
 
 #pragma region get
 
-	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descripterHeap,  uint32_t index);
+	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(uint32_t index);
 
-	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descripterHeap, uint32_t index);
+	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(uint32_t index);
 	
 	static uint32_t GetIndex() { return DescriptorManager::GetInstance()->index; }
 
@@ -78,6 +78,8 @@ public:
 	/// rootParameter�̃R�}���h�ς�
     /// </summary>
 	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle);
+
+	void ComputeRootParamerterCommand(UINT rootParamIndex, uint32_t index);
 
 	static void CreateShaderResourceView(ID3D12Resource* resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index);
 

@@ -58,7 +58,7 @@ void DirectXCommon::PreDraw()
 	commands.m_pList.Get()->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, &dsvHandle);
 	commands.m_pList.Get()->ClearDepthStencilView(dsvHandle,D3D12_CLEAR_FLAG_DEPTH,1.0f,0,0,nullptr);
 	ScissorViewCommand(WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
-
+	
 }
 
 D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kClientHeight)
@@ -175,6 +175,7 @@ ComPtr<ID3D12DescriptorHeap>  DirectXCommon::CreateDescripterHeap(D3D12_DESCRIPT
 	D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc{};
 	descriptorHeapDesc.Type = heapType;
 	descriptorHeapDesc.NumDescriptors = numDescriptors;
+	
 	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
 	m_pDevice_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
@@ -350,6 +351,7 @@ void DirectXCommon::CreateDescritorHeap()
 		m_pDepthResource.Get(),&dsvDesc,
 		m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart()
 	);
+
 }
 
 void DirectXCommon::CreateSwapChainResource()

@@ -300,14 +300,12 @@ uint32_t PostEffect::AddSRVDescripter(ComPtr<ID3D12Resource>& buf)
 	uint32_t index = DescriptorManager::GetIndex();
 	DescriptorManager::SetCPUDescripterHandle(
 		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
 			index),
 		index
 	);
 
 	DescriptorManager::SetGPUDescripterHandle(
 		DescriptorManager::GetGPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
 			index),
 		index
 	);
@@ -454,14 +452,12 @@ void PostEffect::CreateShadowMapSRV()
 	uint32_t srvIndex = DescriptorManager::GetIndex();
 	DescriptorManager::SetCPUDescripterHandle(
 		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
 			srvIndex),
 		srvIndex
 	);
 
 	DescriptorManager::SetGPUDescripterHandle(
 		DescriptorManager::GetGPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvHeap(),
 			srvIndex),
 		srvIndex
 	);

@@ -18,7 +18,7 @@ public:
 	string GetObjectName() { return objectName_; }
 	bool GetIsDraw() { return isDraw_; }
 	AABB GetAABB() { return aabb_; }
-
+	string GetMOdelFilePath() { return modelFilePath_; }
 #pragma endregion
 
 #pragma region Set

@@ -42,6 +42,14 @@ struct SPSO
 	SPSOProperty skinningCompute;
 };
 
+struct GpuParticlePso {
+	SPSOProperty particleInit;
+	SPSOProperty particleUpdate;
+	SPSOProperty particleEmitterSphere;
+	//Draw
+	SPSOProperty debugDraw;
+};
+
 enum  BlendMode
 {
 	BlendNone,

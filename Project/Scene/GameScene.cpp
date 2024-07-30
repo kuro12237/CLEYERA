@@ -16,7 +16,7 @@ void GameScene::Initialize()
 	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
 
-	light_.radious = 256.0f;
+	light_.radious = 512.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
@@ -33,11 +33,12 @@ void GameScene::Initialize()
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 
+	gpuParticle_ = make_unique<Particle::GpuParticle>();
+	gpuParticle_->Create(1024, "landParticle");
 }
 
 void GameScene::Update(GameManager* Scene)
 {
-	
 	Scene;
 #ifdef _USE_IMGUI
 
@@ -88,7 +89,8 @@ void GameScene::Update(GameManager* Scene)
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
-
+	gpuParticle_->CallBarrier();
+	gpuParticle_->Update();
 }
 
 void GameScene::PostProcessDraw()
@@ -96,6 +98,7 @@ void GameScene::PostProcessDraw()
 	PostEffect::GetInstance()->PreDraw();
 
 	gameObjectManager_->Draw();
+	gpuParticle_->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
 }
@@ -107,6 +110,7 @@ void GameScene::Back2dSpriteDraw()
 void GameScene::Object3dDraw()
 {
 	PostEffect::GetInstance()->Draw();
+
 }
 
 void GameScene::Flont2dSpriteDraw()
