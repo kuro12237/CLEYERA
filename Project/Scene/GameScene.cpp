@@ -98,7 +98,7 @@ void GameScene::PostProcessDraw()
 	PostEffect::GetInstance()->PreDraw();
 
 	gameObjectManager_->Draw();
-	gpuParticle_->Draw();
+	//gpuParticle_->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
 }
