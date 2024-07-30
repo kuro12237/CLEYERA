@@ -33,7 +33,7 @@ void GameScene::Initialize()
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 
-	gpuParticle_ = make_unique<GpuParticle>();
+	gpuParticle_ = make_unique<Particle::GpuParticle>();
 	gpuParticle_->Create(1024, "landParticle");
 }
 

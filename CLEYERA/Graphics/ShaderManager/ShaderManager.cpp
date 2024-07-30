@@ -366,6 +366,7 @@ void ShaderManager::Particles()
 	Particle_Init();
 	Particle_Update();
 	ParticleDebugDraw();
+	Particle_EmitterSphere();
 }
 
 void ShaderManager::Particle_Init()
@@ -405,4 +406,16 @@ void ShaderManager::Particle_Update()
 			L"cs_6_0");
 
 	ShaderManager::Getinstance()->particleShader_.particleUpdate = shaders;
+}
+
+void ShaderManager::Particle_EmitterSphere()
+{
+
+	SShaderMode shaders{};
+	shaders.csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Emitter/Particle_TypeShpere.CS.hlsl",
+			L"cs_6_0");
+
+	ShaderManager::Getinstance()->particleShader_.particleSphereEmitter = shaders;
 }

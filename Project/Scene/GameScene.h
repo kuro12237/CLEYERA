@@ -60,7 +60,7 @@ private:
 
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 
-	unique_ptr<GpuParticle>gpuParticle_ = nullptr;
+	unique_ptr<Particle::GpuParticle>gpuParticle_ = nullptr;
 
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;

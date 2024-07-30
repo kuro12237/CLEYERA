@@ -45,6 +45,7 @@ struct SPSO
 struct GpuParticlePso {
 	SPSOProperty particleInit;
 	SPSOProperty particleUpdate;
+	SPSOProperty particleEmitterSphere;
 	//Draw
 	SPSOProperty debugDraw;
 };

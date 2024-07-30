@@ -42,6 +42,7 @@ struct  GpuParticleShader
 {
 	SShaderMode particleInit;
 	SShaderMode particleUpdate;
+	SShaderMode particleSphereEmitter;
 	SShaderMode DebugDraw;
 };
 
@@ -100,6 +101,7 @@ private:
 	static void Particle_Init();
 	static void ParticleDebugDraw();
 	static void Particle_Update();
+	static void Particle_EmitterSphere();
 
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};

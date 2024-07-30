@@ -1,6 +1,6 @@
 #include "GpuParticle.h"
 
-void GpuParticle::Create(const size_t num, string Name)
+void Particle::GpuParticle::Create(const size_t num, string Name)
 {
 	particleNum_ = num;
 	name_ = Name;
@@ -68,7 +68,7 @@ void GpuParticle::Create(const size_t num, string Name)
 	DirectXCommon::GetInstance()->CommandClosed();
 }
 
-void GpuParticle::Update()
+void Particle::GpuParticle::Update()
 {
 	{//‰Šú‰»CS_Dispatch
 		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().particleUpdate;
@@ -84,7 +84,7 @@ void GpuParticle::Update()
 	}
 }
 
-void GpuParticle::Draw()
+void Particle::GpuParticle::Draw()
 {
 	//Š·‚¦‚é
 	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().debugDraw;;
@@ -105,7 +105,7 @@ void GpuParticle::Draw()
 	commandList->DrawIndexedInstanced(6, UINT(particleNum_), 0, 0, 0);
 }
 
-void GpuParticle::CallBarrier()
+void Particle::GpuParticle::CallBarrier()
 {
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	D3D12_RESOURCE_BARRIER barrier{};
