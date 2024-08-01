@@ -1,6 +1,6 @@
 #include"../Particle.hlsli"
 
-RWStructuredBuffer<Particle> gParticle : register(u1);
+RWStructuredBuffer<Particle> gParticle : register(u0);
 Texture2D<float32_t4> gTexture : register(t0);
 SamplerState gSampler : register(s0);
 

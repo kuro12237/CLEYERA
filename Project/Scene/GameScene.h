@@ -21,6 +21,7 @@
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
 
+#include"Utility/SkyBox/SkyBox.h"
 #include"Particle/GpuParticle.h"
 
 class GameScene :public IScene
