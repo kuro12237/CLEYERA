@@ -36,10 +36,18 @@ void GameScene::Initialize()
 
 	gpuParticle_ = make_unique<Particle::GpuParticle>();
 	gpuParticle_->Create(1024, "landParticle");
-	
+
 	uint32_t texHandle = TextureManager::LoadDDSTexture("rostock_laage_airport_4k.dds");
 	SkyBox::GetInstance()->Initialize();
 	SkyBox::GetInstance()->SetTexHandle(texHandle);
+	emitter_ = make_unique<ParticleEmitter>();
+	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
+	auto& testSphere = emitter_->GetSphereParam()[0];
+	testSphere.emit = 1;
+	testSphere.count = 3;
+	testSphere.frequency = 0.5f;
+	testSphere.frequencyTime = 0.0f;
+
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -94,18 +102,18 @@ void GameScene::Update(GameManager* Scene)
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
+	emitter_->Update();
+	emitter_->Emit(gpuParticle_);
 	gpuParticle_->CallBarrier();
 	gpuParticle_->Update();
-	SkyBox::GetInstance()->Update();
 }
 
 void GameScene::PostProcessDraw()
 {
 	PostEffect::GetInstance()->PreDraw();
 
-	gameObjectManager_->Draw();
+	//gameObjectManager_->Draw();
 	gpuParticle_->Draw();
-	SkyBox::GetInstance()->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
 }

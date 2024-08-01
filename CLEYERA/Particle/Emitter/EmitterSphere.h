@@ -12,11 +12,11 @@ public:
 
 	void Update(ParticleEmitter* e)override;
 
-	void Dispatch()override;
+	void Dispatch(unique_ptr<Particle::GpuParticle>& particle)override;
 
 	void Emit()override;
 
 private:
-
+	uint32_t max_ = 0;
 	unique_ptr<BufferResource<SEmitterSphere>>sphereBuf_ = nullptr;
 };

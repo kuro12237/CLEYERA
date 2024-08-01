@@ -23,6 +23,7 @@
 
 #include"Utility/SkyBox/SkyBox.h"
 #include"Particle/GpuParticle.h"
+#include"Particle/Emitter/ParticleEmitter.h"
 
 class GameScene :public IScene
 {
@@ -62,6 +63,9 @@ private:
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 
 	unique_ptr<Particle::GpuParticle>gpuParticle_ = nullptr;
+	unique_ptr<ParticleEmitter>emitter_ = nullptr;
+
+
 
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;

@@ -22,11 +22,11 @@ void Particle::GpuParticle::Create(const size_t num, string Name)
 		writeParticleBuf_->CreateUAVResource(uint32_t(particleNum_), name_+"_Write", sizeof(ParticleCS));
 		writeParticleParam_.resize(particleNum_);
 	}
-	{//readParticleSRVçÏê¨
-		readParticleBuf_ = make_unique<BufferResource<ParticleCS>>();
-		readParticleBuf_->CreateResource(uint32_t(particleNum_));
-		readParticleBuf_->CreateInstancingResource(uint32_t(particleNum_), name_ + "_Read", sizeof(ParticleCS));
-		readParticleParam_.resize(particleNum_);
+	{//freeList
+		freeCounterBuf_ = make_unique<BufferResource<uint32_t>>();
+		freeCounterBuf_->CreateResource(uint32_t(particleNum_));
+		freeCounterBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeCount", sizeof(int32_t));
+		freeCounter_.resize(particleNum_);
 	}
 	{//í∏ì_ÇÃèâä˙âª
 		vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
@@ -63,6 +63,8 @@ void Particle::GpuParticle::Create(const size_t num, string Name)
 		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeCounterBuf_->GetSrvIndex());
+
 		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
 	}
 	DirectXCommon::GetInstance()->CommandClosed();
@@ -113,4 +115,9 @@ void Particle::GpuParticle::CallBarrier()
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier.UAV.pResource = writeParticleBuf_->GetBuffer();
 	commandList->ResourceBarrier(1, &barrier);
+}
+
+void Particle::GpuParticle::CallUavRootparam(uint32_t rootParamIndex)
+{
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(rootParamIndex, writeParticleBuf_->GetSrvIndex());
 }

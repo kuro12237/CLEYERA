@@ -24,6 +24,8 @@ public:
 	void Setbuffer(vector<T>t, uint32_t num);
 
 	void CommandCall(UINT number);
+	void ComputeCommandCall(UINT number);
+
 	void CommandVertexBufferViewCall(uint32_t view = 1);
 	void CommandIndexBufferViewCall();
 	void CommandPrimitiveTopologyCall();
@@ -208,6 +210,13 @@ inline void BufferResource<T>::CommandCall(UINT number)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	commands.m_pList->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}
+
+template<typename T>
+inline void BufferResource<T>::ComputeCommandCall(UINT number)
+{
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	commands.m_pList->SetComputeRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>

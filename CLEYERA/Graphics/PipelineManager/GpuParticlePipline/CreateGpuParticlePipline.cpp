@@ -10,7 +10,7 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_Init(ComPtr<ID3D12Device>devic
 	//rootsignature作成
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	D3D12_ROOT_PARAMETER rootParameters[1] = {};
+	D3D12_ROOT_PARAMETER rootParameters[2] = {};
 
 	//u0 : tパラメーターuav
 	D3D12_DESCRIPTOR_RANGE descriptorRange = {};
@@ -23,6 +23,18 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_Init(ComPtr<ID3D12Device>devic
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 	rootParameters[0].DescriptorTable.pDescriptorRanges = &descriptorRange;
 	rootParameters[0].DescriptorTable.NumDescriptorRanges = 1;
+
+	//u1 : freeCountuav
+	D3D12_DESCRIPTOR_RANGE descriptorRange_freeCount = {};
+	descriptorRange_freeCount.BaseShaderRegister = 1;
+	descriptorRange_freeCount.NumDescriptors = 1;
+	descriptorRange_freeCount.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	descriptorRange_freeCount.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+	rootParameters[1].DescriptorTable.pDescriptorRanges = &descriptorRange_freeCount;
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = 1;
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
@@ -286,7 +298,7 @@ SPSOProperty CreateGpuParticle::CreateGpuparticcle_Emitter_Sphere(ComPtr<ID3D12D
 	//rootsignature作成
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 
 	//u0 : tパラメーターuav
 	D3D12_DESCRIPTOR_RANGE descriptorRange_UAV = {};
@@ -313,11 +325,21 @@ SPSOProperty CreateGpuParticle::CreateGpuparticcle_Emitter_Sphere(ComPtr<ID3D12D
 	rootParameters[1].DescriptorTable.NumDescriptorRanges = 1;
 
 	//b0 : exe起動時間
-
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 	rootParameters[2].Descriptor.ShaderRegister = 0;
 
+	//u1 freeList
+	D3D12_DESCRIPTOR_RANGE descriptorRange_freeListUAV = {};
+	descriptorRange_freeListUAV.BaseShaderRegister = 1;
+	descriptorRange_freeListUAV.NumDescriptors = 1;
+	descriptorRange_freeListUAV.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	descriptorRange_freeListUAV.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+	rootParameters[3].DescriptorTable.pDescriptorRanges = &descriptorRange_freeListUAV;
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = 1;
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);

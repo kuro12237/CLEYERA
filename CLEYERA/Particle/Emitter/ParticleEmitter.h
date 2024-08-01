@@ -15,7 +15,7 @@ public:
 
 	void Update();
 
-	void Dispacth();
+	void Emit(unique_ptr<Particle::GpuParticle>& particle);
 
 #pragma region Get
 

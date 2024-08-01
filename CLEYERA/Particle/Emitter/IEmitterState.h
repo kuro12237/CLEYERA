@@ -1,4 +1,5 @@
 #pragma once
+#include"Particle/GpuParticle.h"
 
 class ParticleEmitter;
 class IEmitterState
@@ -12,7 +13,7 @@ public:
 
 	virtual void Emit() = 0;
 
-	virtual void Dispatch() = 0;
+	virtual void Dispatch(unique_ptr<Particle::GpuParticle>& particle) = 0;
 
 private:
 

@@ -43,6 +43,7 @@ struct Particle
     float32_t3 velocity;
     float32_t currentTime;
     float32_t4 color;
+    bool isDraw;
 };
 
 struct PerFrame
@@ -52,3 +53,9 @@ struct PerFrame
 };
 
 static const uint32_t kParticleMax = 1024;
+
+void InterLockedAdd(int32_t dest, int32_t add, int32_t originalValue)
+{
+    originalValue = dest;
+    dest += add;
+}

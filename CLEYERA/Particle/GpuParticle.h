@@ -5,6 +5,7 @@
 #include"WorldTransform.h"
 #include"Graphics/PipelineManager/GraphicsPipelineManager.h"
 #include"Utility/CameraManager/CameraManager.h"
+#include"Utility/RuntimeCounter/RunTimeCounter.h"
 
 struct ParticleCS
 {
@@ -16,6 +17,7 @@ struct ParticleCS
 	Math::Vector::Vector3 velocity;
 	float currentTime;
 	Math::Vector::Vector4 color = {1.0f,1.0f,1.0f,1.0f};
+	bool isDraw_ = false;
 };
 
 namespace Particle {
@@ -34,6 +36,8 @@ namespace Particle {
 
 		void CallBarrier();
 
+		void CallUavRootparam(uint32_t rootParamIndex);
+
 #pragma region Set
 
 		void SetTexhandle(uint32_t texHandle) { texHandle_ = texHandle; }
@@ -43,6 +47,8 @@ namespace Particle {
 #pragma region Get
 
 		string GetName() { return name_; }
+		uint32_t GetNum() { return uint32_t(particleNum_); }
+		BufferResource<uint32_t>*GetfreeCountBuf() { return freeCounterBuf_.get(); }
 
 #pragma endregion
 
@@ -62,11 +68,11 @@ namespace Particle {
 		unique_ptr<BufferResource<ParticleCS>>writeParticleBuf_ = nullptr;
 		vector<ParticleCS>writeParticleParam_;
 
-		unique_ptr<BufferResource<ParticleCS>>readParticleBuf_ = nullptr;
-		vector<ParticleCS>readParticleParam_;
+		unique_ptr<BufferResource<uint32_t>>freeCounterBuf_ = nullptr;
+		vector<uint32_t>freeCounter_;
+
 
 		uint32_t texHandle_ = 1;
-
 	};
 
 };
