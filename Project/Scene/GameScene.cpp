@@ -2,6 +2,7 @@
 
 void GameScene::Initialize()
 {
+	WinApp::GetInstance()->SetTiTleName(L"GunHead");
 	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚İ‚İ

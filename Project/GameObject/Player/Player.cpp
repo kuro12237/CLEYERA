@@ -2,7 +2,7 @@
 
 void Player::Initialize()
 {
-	gameObjIns_ = GameObjectManager::GetInstance();
+	gameObjectInstance_ = GameObjectManager::GetInstance();
 	name_= "Player";
 	
 	//押し出し
@@ -13,14 +13,14 @@ void Player::Initialize()
 	//id設定
 	id_ = kPlayerId;
 	//当たり判定
-	SetObjectData(gameObjIns_->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
-	aabb_ = gameObjIns_->GetObj3dData(name_)->GetAABB();
+	SetObjectData(gameObjectInstance_ ->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
+	aabb_ = gameObjectInstance_->GetObj3dData(name_)->GetAABB();
 	//スケール値セット
-	auto& transform = gameObjIns_->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	const float kScale = 0.4f;
 	transform.scale = { kScale,kScale,kScale };
 
-	string filePath = gameObjIns_->GetObj3dData(name_)->GetMOdelFilePath();
+	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetMOdelFilePath();
 	AnimationManager::GetInstance()->LoadAnimation(filePath);
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
@@ -67,7 +67,7 @@ void Player::Update()
 	}
 
 	isShoot_ = false;
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 }
 

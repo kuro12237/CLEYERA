@@ -70,7 +70,7 @@ private:
 	unique_ptr<IPlayerState>state_ = nullptr;
 
 	//singleton
-	GameObjectManager* gameObjIns_ = nullptr;
+	GameObjectManager* gameObjectInstance_ = nullptr;
 
 	bool isJamp_ = false;
 	bool isShoot_ = false;
