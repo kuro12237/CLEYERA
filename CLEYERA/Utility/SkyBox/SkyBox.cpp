@@ -13,6 +13,17 @@ void SkyBox::Initialize()
 	CreateMaterial();
 }
 
+void SkyBox::ImGuiUpdate()
+{
+	if (ImGui::TreeNode(name_.c_str()))
+	{
+		ImGui::DragFloat3("s", &worldTransform_.transform.scale.x, 0.1f);
+		ImGui::DragFloat3("r", &worldTransform_.transform.rotate.x, 0.1f);
+		ImGui::DragFloat3("t", &worldTransform_.transform.translate.x, 0.1f);
+		ImGui::TreePop();
+	}
+}
+
 void SkyBox::Update()
 {
 	cMaterial_->Map();
@@ -45,6 +56,12 @@ void SkyBox::Draw()
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
 	command->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	command->DrawIndexedInstanced(36, 1, 0, 0, 0);
+}
+
+void SkyBox::CommandCall(uint32_t rootParamIndex)
+{
+	DescriptorManager::rootParamerterCommand(rootParamIndex, texHandle_);
+
 }
 
 void SkyBox::CreateIndex()

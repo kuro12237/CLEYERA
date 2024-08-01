@@ -110,6 +110,7 @@ void ShaderManager::ShaderComples()
 	SkyBoxModel();
 
 	SkinningPhongModelShader();
+	SkinningPhongSkyBoxModelShader();
 	CompileSkinningCs();
 }
 
@@ -331,6 +332,22 @@ void ShaderManager::SkinningPhongModelShader()
 			L"Resources/Shader/Phong_NormalMap_Model3dObject.PS.hlsl",
 			L"ps_6_0");
 	ShaderManager::Getinstance()->shaders_.skinningPhongModel = shaders;
+}
+
+void ShaderManager::SkinningPhongSkyBoxModelShader()
+{
+
+	SShaderMode shaders{};
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/SkinningObject3d.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Model_SkyBox_Skinning/MOdelSkyboxSkinnind.PS.hlsl",
+			L"ps_6_0");
+	ShaderManager::Getinstance()->shaders_.skinningPhongSkyBoxModel = shaders;
 }
 
 void ShaderManager::SkyBoxModel()

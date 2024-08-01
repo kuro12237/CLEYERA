@@ -8,7 +8,6 @@ struct SPSOProperty
 	ComPtr<ID3D12RootSignature> rootSignature = nullptr;
 	ComPtr<ID3DBlob> signatureBlob = nullptr;
 	ComPtr<ID3DBlob> errorBlob = nullptr;
-
 };
 
 struct  SBlendPSO
@@ -33,11 +32,11 @@ struct SPSO
 	SPSOProperty PhongNormal_Model;
 	SPSOProperty PhongSubsurface_Model;
 	SPSOProperty phongNormalInstancing_Model;
-	SBlendPSO LightingParticle3d;
 	SPSOProperty ColorPostProcess;
 	SPSOProperty PostEffectTest;
 	SPSOProperty shadow;
 	SPSOProperty Phong_SkinningModel;
+	SPSOProperty phongSkinningModel_SkyBox;
 	SPSOProperty SkyBox;
 	SPSOProperty skinningCompute;
 };

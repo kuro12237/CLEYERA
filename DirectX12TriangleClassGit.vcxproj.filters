@@ -493,6 +493,7 @@
     <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\EmitterSphere.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningdSkyBoxPipline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -815,6 +816,7 @@
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\EmitterSphere.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningdSkyBoxPipline.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -903,5 +905,6 @@
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Update\Particle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeShpere.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Model_SkyBox_Skinning\ModelSkyboxSkinnind.PS.hlsl" />
   </ItemGroup>
 </Project>

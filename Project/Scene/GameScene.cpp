@@ -72,6 +72,7 @@ void GameScene::Update(GameManager* Scene)
 
 		ImGui::TreePop();
 	}
+	SkyBox::GetInstance()->ImGuiUpdate();
 
 	player_->ImGuiUpdate();
 

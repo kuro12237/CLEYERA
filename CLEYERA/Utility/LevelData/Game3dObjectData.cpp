@@ -18,7 +18,7 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 	}
 	if (ObjectType_ == "ARMATURE")
 	{
-		gameObject_->Create(make_unique<Phong3dSkinningPipline>());
+		gameObject_->Create(make_unique<Phong3dSkinningSkyBoxPipline>());
 		gameObject_->SetModel(modelHandle_);
 		gameObject_->SetName(objectName_);
 		gameObject_->SetDesc(objectDesc_);

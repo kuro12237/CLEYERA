@@ -59,6 +59,7 @@
     <ClCompile Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningdSkyBoxPipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\PiplineHandler.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningPipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dSkinningdSkyBoxPipline.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\PipelineHandler.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\IPipelineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\DescripterManager\DescriptorManager.h" />
@@ -297,6 +299,17 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Model_SkyBox_Skinning\ModelSkyboxSkinnind.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>

@@ -34,6 +34,7 @@ struct SShaders
 	SShaderMode PosModel;
 	SShaderMode ColorPostProcess;
 	SShaderMode skinningPhongModel;
+	SShaderMode skinningPhongSkyBoxModel;
 	SShaderMode SkyBoxModel;
 	SShaderMode skinningCompute;
 };
@@ -93,6 +94,7 @@ private:
 	static void ShadowMap();
 
 	static void SkinningPhongModelShader();
+	static void SkinningPhongSkyBoxModelShader();
 	static void SkyBoxModel();
 
 	static void CompileSkinningCs();
