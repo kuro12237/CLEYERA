@@ -52,6 +52,9 @@ void DirectXCommon::PreDraw()
 	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
 	commands.m_pList.Get()->ClearRenderTargetView(rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
+	ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
+	commands.m_pList->SetDescriptorHeaps(1, heap);
+
 	//Depth
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle =m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart();
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandleTest = DSVDescriptorManager::GetHandle(0);

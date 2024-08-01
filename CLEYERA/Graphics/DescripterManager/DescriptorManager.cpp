@@ -95,8 +95,6 @@ uint32_t DescriptorManager::CreateUAV(ComPtr<ID3D12Resource>& resource, D3D12_UN
 void DescriptorManager::rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle)
 {
 	Commands command = DirectXCommon::GetInstance()->GetCommands();
-	ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
-	command.m_pList->SetDescriptorHeaps(1, heap);
 
 	command.m_pList->SetGraphicsRootDescriptorTable(
 		rootPatramerterIndex,
