@@ -106,8 +106,11 @@ void DescriptorManager::rootParamerterCommand(UINT rootPatramerterIndex, uint32_
 
 void DescriptorManager::ComputeRootParamerterCommand(UINT rootParamIndex, uint32_t index)
 {
+	ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
+	
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle = SrvHandleGPU[index];
 	Commands command = DirectXCommon::GetInstance()->GetCommands();
+	command.m_pList->SetDescriptorHeaps(1, heap);
 	command.m_pList->SetComputeRootDescriptorTable(
 		rootParamIndex,
 		gpuHandle

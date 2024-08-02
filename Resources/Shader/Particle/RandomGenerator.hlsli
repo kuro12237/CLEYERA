@@ -30,7 +30,6 @@ class RandomGenerator
     float32_t3 Generate1d()
     {
         seed.x = rand3dTo1d(seed.x);
-        seed.yz = float32_t2(0.0f,0.0f);
         return seed;
     }
 

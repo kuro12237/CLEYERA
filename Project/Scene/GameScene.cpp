@@ -44,10 +44,10 @@ void GameScene::Initialize()
 	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
 	auto& testSphere = emitter_->GetSphereParam()[0];
 	testSphere.emit = 1;
-	testSphere.count = 3;
-	testSphere.frequency = 0.5f;
-	testSphere.frequencyTime = 0.0f;
-
+	testSphere.count = 2;
+	testSphere.frequency = 1.0f;
+	testSphere.frequencyTime = 4.0f;
+	
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -102,6 +102,7 @@ void GameScene::Update(GameManager* Scene)
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
+
 	emitter_->Update();
 	emitter_->Emit(gpuParticle_);
 	gpuParticle_->CallBarrier();

@@ -29,7 +29,7 @@ void EmitterSphere::Dispatch(unique_ptr<Particle::GpuParticle>& particle)
 	RunTimeCounter::GetInstance()->ComputeCommandCall(2);
 	
 	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetfreeCountBuf()->GetSrvIndex());
-	list->Dispatch(UINT(max_ + 1023 / 1024), 1, 1);
+	list->Dispatch(1, 1, 1);
 }
 
 void EmitterSphere::Emit()
