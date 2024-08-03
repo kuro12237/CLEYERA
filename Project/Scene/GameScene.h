@@ -63,7 +63,7 @@ private:
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 
 	unique_ptr<Particle::GpuParticle>gpuParticle_ = nullptr;
-	unique_ptr<ParticleEmitter>emitter_ = nullptr;
+	unique_ptr<Particle::ParticleEmitter>emitter_ = nullptr;
 
 
 

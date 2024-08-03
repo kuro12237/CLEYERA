@@ -100,7 +100,8 @@ void DebugSkeleton::SkeletonDraw(WorldTransform w, const SAnimation::Skeleton& s
 		Math::Vector::Vector3 start = { parentJoint.skeletonSpaceMatrix.m[3][0],parentJoint.skeletonSpaceMatrix.m[3][1],parentJoint.skeletonSpaceMatrix.m[3][2] };
 		Math::Vector::Vector3 end = { childJoint.skeletonSpaceMatrix.m[3][0],childJoint.skeletonSpaceMatrix.m[3][1],childJoint.skeletonSpaceMatrix.m[3][2] };
 		lineModels_[childIndex]->SetWorldMat(w.matWorld);
-		lineModels_[childIndex]->Draw(start, end);
+		lineModels_[childIndex]->SetStartEndPos(start, end);
+		lineModels_[childIndex]->Draw();
 		SkeletonDraw(w, skeleton, childIndex);
 	}
 }

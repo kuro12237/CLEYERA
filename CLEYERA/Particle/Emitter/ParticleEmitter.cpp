@@ -1,6 +1,6 @@
 #include "ParticleEmitter.h"
 
-void ParticleEmitter::CreateType(unique_ptr<IEmitterState> state, unique_ptr<Particle::GpuParticle>& particle)
+void Particle::ParticleEmitter::CreateType(unique_ptr<IEmitterState> state, unique_ptr<Particle::GpuParticle>& particle)
 {
 	sphere_.resize(particle->GetNum());
 	type_ = move(state);
@@ -8,7 +8,7 @@ void ParticleEmitter::CreateType(unique_ptr<IEmitterState> state, unique_ptr<Par
 	type_->Create(this);
 }
 
-void ParticleEmitter::Update()
+void Particle::ParticleEmitter::Update()
 {
 	sphere_[0].frequency += DeltaTimer(sphere_[0].flame);
 	if (sphere_[0].frequency >= sphere_[0].frequencyTime)
@@ -24,7 +24,12 @@ void ParticleEmitter::Update()
 	type_->Update(this);
 }
 
-void ParticleEmitter::Emit(unique_ptr<Particle::GpuParticle>& particle)
+void Particle::ParticleEmitter::Emit(unique_ptr<Particle::GpuParticle>& particle)
 {
 	type_->Dispatch(particle);
+}
+
+void Particle::ParticleEmitter::SpownDraw()
+{
+	type_->SpownDraw();
 }

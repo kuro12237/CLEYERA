@@ -14,7 +14,7 @@ void LineModel::Create()
 	mat_ = Math::Matrix::Identity();
 }
 
-void LineModel::Draw(Math::Vector::Vector3 start, Math::Vector::Vector3  end)
+void LineModel::Draw()
 {
 	material_->Map();
 	Material m;

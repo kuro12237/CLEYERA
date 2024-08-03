@@ -20,8 +20,8 @@ float32_t3 RandomInUnitSphere(RandomGenerator generator)
     float32_t3 uvw = generator.Generate3d();
     
     float32_t theta = uvw.x * 2.0f * kPI_f;
-    float32_t phi = acos(2.0f * uvw .y- 1.0f);
-    float32_t r = pow(uvw.z, 1.0f / 3.0f); 
+    float32_t phi = acos(2.0f * uvw.y - 1.0f);
+    float32_t r = pow(uvw.z, 1.0f / 3.0f);
     float32_t sinTheta = sin(theta);
     float32_t cosTheta = cos(theta);
     float32_t sinPhi = sin(phi);
@@ -52,7 +52,7 @@ void main(uint32_t3 DTid : SV_DispatchThreadID)
                 float32_t3 randomPoint = RandomInUnitSphere(generator);
                 gParticle[particleIndex].scale = float32_t3(1.0f, 1.0f, 1.0f);
                 gParticle[particleIndex].rotate = float32_t3(0.0f, 0.0f, 0.0f);
-                gParticle[particleIndex].translate =  float32_t3(randomPoint * gEmitterSphere[0].radious);
+                gParticle[particleIndex].translate = gEmitterSphere[0].translate + float32_t3(randomPoint * gEmitterSphere[0].radious);
                 gParticle[particleIndex].color.rgb = generator.Generate3d();
                 gParticle[particleIndex].color.a = 1.0f;
                 gParticle[particleIndex].velocity = float32_t3(0.01f, 0.0f, 0.0f);

@@ -90,6 +90,8 @@
     <ClCompile Include="CLEYERA\Model\primitive\Line.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\EmitterSphere.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
@@ -207,6 +209,8 @@
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\EmitterSphere.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\IEmitterState.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />

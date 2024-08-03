@@ -40,7 +40,7 @@ void GameScene::Initialize()
 	uint32_t texHandle = TextureManager::LoadDDSTexture("rostock_laage_airport_4k.dds");
 	SkyBox::GetInstance()->Initialize();
 	SkyBox::GetInstance()->SetTexHandle(texHandle);
-	emitter_ = make_unique<ParticleEmitter>();
+	emitter_ = make_unique<Particle::ParticleEmitter>();
 	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
 	auto& testSphere = emitter_->GetSphereParam()[0];
 	testSphere.emit = 1;
@@ -48,6 +48,7 @@ void GameScene::Initialize()
 	testSphere.frequency = 1.0f;
 	testSphere.frequencyTime = 4.0f;
 	testSphere.radious = 2.0f;
+
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -83,7 +84,14 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 
-	
+	auto& testSphere = emitter_->GetSphereParam()[0];
+	if (ImGui::TreeNode("emitter"))
+	{
+		ImGui::DragFloat("r", &testSphere.radious, 0.1f);
+		ImGui::DragFloat3("t", &testSphere.translate.x, 0.1f);
+
+		ImGui::TreePop();
+	}
 
 #endif // _USE_IMGUI
 
@@ -117,7 +125,7 @@ void GameScene::PostProcessDraw()
 
 	gameObjectManager_->Draw();
 	gpuParticle_->Draw();
-
+	emitter_->SpownDraw();
 	PostEffect::GetInstance()->PostDraw();
 }
 
