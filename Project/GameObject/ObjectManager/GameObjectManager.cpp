@@ -154,7 +154,8 @@ void GameObjectManager::Draw()
 	for (auto& data : objInstancing3dData_)
 	{
 		auto& it = data.second->GetGameObject();
-		it->Draw();
+		it;
+		//it->Draw();
 	}
 
 }

@@ -44,10 +44,10 @@ void GameScene::Initialize()
 	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
 	auto& testSphere = emitter_->GetSphereParam()[0];
 	testSphere.emit = 1;
-	testSphere.count = 2;
+	testSphere.count = 8;
 	testSphere.frequency = 1.0f;
 	testSphere.frequencyTime = 4.0f;
-	
+	testSphere.radious = 2.0f;
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -83,6 +83,8 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 
+	
+
 #endif // _USE_IMGUI
 
 	player_->Update();
@@ -113,7 +115,7 @@ void GameScene::PostProcessDraw()
 {
 	PostEffect::GetInstance()->PreDraw();
 
-	//gameObjectManager_->Draw();
+	gameObjectManager_->Draw();
 	gpuParticle_->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
