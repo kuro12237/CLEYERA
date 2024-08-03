@@ -17,9 +17,8 @@ void LineModel::Create()
 void LineModel::Draw()
 {
 	material_->Map();
-	Material m;
-	m.color = { 1, 1, 1, 1 };
-	material_->Setbuffer(m);
+
+	material_->Setbuffer(color_);
 
 	vector<VertexData> v;
 	v.resize(2);

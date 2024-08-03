@@ -13,6 +13,6 @@ void ParticleEmitDraw::Initialize()
 }
 
 void ParticleEmitDraw::SphereDraw(const WorldTransform& w)
-{
+{ 
     sphere_->Draw(w);
 }

@@ -13,12 +13,14 @@ public:
 	void Create();
 	void Draw();
 
+	void SetMaterial(Material material) { color_ = material; }
 	void SetWorldMat(const Math::Matrix::Matrix4x4 mat) { mat_ = mat; }
 	void SetStartEndPos(const Math::Vector::Vector3 s, const Math::Vector::Vector3 e) { start = s, end = e; }
 private:
 
 	unique_ptr<BufferResource<VertexData>>vertex_;
 	unique_ptr<BufferResource<Material>>material_;
+	Material color_ = {};
 	unique_ptr<BufferResource<Math::Matrix::Matrix4x4>>worldMat_;
 	Math::Matrix::Matrix4x4 mat_{};
 	Math::Vector::Vector3 start = {};

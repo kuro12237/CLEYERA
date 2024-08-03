@@ -16,6 +16,7 @@ void IParticleEmitDraw::Draw(const WorldTransform& w)
 {
 	for (auto it = lines_.begin(); it != lines_.end(); ++it) {
 		(*it)->SetWorldMat(w.matWorld);
+		(*it)->SetMaterial({ .color = {0.0f,0.0f,0.0f,1.0f} });
 		(*it)->Draw();
 	}
 }
