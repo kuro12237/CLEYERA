@@ -51,7 +51,7 @@ void main(uint32_t3 DTid : SV_DispatchThreadID)
             {
                 float32_t3 randomPoint = RandomInUnitSphere(generator);
                 gParticle[particleIndex].scale = float32_t3(1.0f, 1.0f, 1.0f);
-                gParticle[particleIndex].rotate = float32_t3(1.0f, 0.0f, 0.0f);
+                gParticle[particleIndex].rotate = float32_t3(0.0f, 0.0f, 0.0f);
                 gParticle[particleIndex].translate =  float32_t3(randomPoint * gEmitterSphere[0].radious);
                 gParticle[particleIndex].color.rgb = generator.Generate3d();
                 gParticle[particleIndex].color.a = 1.0f;
