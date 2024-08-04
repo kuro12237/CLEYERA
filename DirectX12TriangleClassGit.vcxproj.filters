@@ -331,12 +331,6 @@
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp">
       <Filter>CLEYERA\Utility\FileLoader</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Particle\Particle.cpp">
-      <Filter>CLEYERA\Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="CLEYERA\Particle\state\ParticlePlaneState.cpp">
-      <Filter>CLEYERA\Particle\ParticlePlane</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\TextureManager\TexDataResource.cpp">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
     </ClCompile>
@@ -449,7 +443,7 @@
     <ClCompile Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.cpp">
       <Filter>CLEYERA\DebugTools\DebugSkeltonDraw</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Model\primitive\Line.cpp">
+    <ClCompile Include="CLEYERA\Model\primitive\LineModel.cpp">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClCompile>
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
@@ -569,18 +563,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\FileLoader\FileLoader.h">
       <Filter>CLEYERA\Utility\FileLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Particle\Particle.h">
-      <Filter>CLEYERA\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Particle\state\IParticleState.h">
-      <Filter>CLEYERA\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Particle\SParticle.h">
-      <Filter>CLEYERA\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Particle\state\ParticlePlaneState.h">
-      <Filter>CLEYERA\Particle\ParticlePlane</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\TextureManager\TexDataResource.h">
       <Filter>CLEYERA\Graphics\TextureManager</Filter>
@@ -759,7 +741,7 @@
     <ClInclude Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.h">
       <Filter>CLEYERA\DebugTools\DebugSkeltonDraw</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Model\primitive\Line.h">
+    <ClInclude Include="CLEYERA\Model\primitive\LineModel.h">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClInclude>
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h">

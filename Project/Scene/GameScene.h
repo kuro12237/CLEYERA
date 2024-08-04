@@ -9,7 +9,7 @@
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
-#include"Model/primitive/Line.h"
+#include"Model/primitive/LineModel.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"SceneFileLoder/SceneFileLoader.h"
 

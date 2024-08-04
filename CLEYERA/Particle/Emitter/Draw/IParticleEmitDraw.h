@@ -1,6 +1,6 @@
 #pragma once
 #include"ModelManager.h"
-#include"Model/primitive/Line.h"
+#include"Model/primitive/LineModel.h"
 
 enum PrimitiveType
 {
@@ -25,6 +25,6 @@ private:
 	void CreateSphereVertex();
 
 	string name_="";
-	vector<unique_ptr<LineModel>>lines_ = {};
-	unique_ptr<LineModel > line_ = nullptr;
+	vector<unique_ptr<Primitive::LineModel>>lines_ = {};
+	unique_ptr<Primitive::LineModel > line_ = nullptr;
 };

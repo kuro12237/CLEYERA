@@ -4,7 +4,6 @@ void Particle::IEmitterState::SpownDraw()
 {
 	uint32_t index = 0;
 	for (auto it = draws_.begin(); it != draws_.end(); ++it) {
-		// イテレーターを使って LineModel オブジェクトにアクセス
 		(*it)->Draw(wTs_[index]);
 		index++;
 	}

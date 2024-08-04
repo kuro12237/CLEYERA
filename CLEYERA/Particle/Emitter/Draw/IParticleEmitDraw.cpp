@@ -24,7 +24,7 @@ void IParticleEmitDraw::CreateSphereVertex()
 {
 	//ï™äÑêî
 	const uint32_t SUBDIVISION = 8;
-	line_ = make_unique<LineModel>();
+	line_ = make_unique<Primitive::LineModel>();
 	line_->Create(name_,(SUBDIVISION * SUBDIVISION * SUBDIVISION) / 2);
 
 	//lat

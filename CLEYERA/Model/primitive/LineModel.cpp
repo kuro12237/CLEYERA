@@ -1,6 +1,8 @@
-#include "Line.h"
+#include "LineModel.h"
 
-void LineModel::Create(string name,uint32_t vertexNum)
+using namespace Primitive;
+
+void LineModel::Create(string name, uint32_t vertexNum)
 {
 	vertex_ = make_unique<BufferResource<VertexData>>();
 	vertex_->CreateResource(2);
@@ -13,21 +15,21 @@ void LineModel::Create(string name,uint32_t vertexNum)
 	worldMat_->CreateResource();
 	mat_ = Math::Matrix::Identity();
 
-	verticesBuf_ = make_unique < BufferResource < Math::Vector::Vector3 >> ();
+	verticesBuf_ = make_unique < BufferResource < Math::Vector::Vector3 >>();
 	verticesBuf_->CreateResource(vertexNum);
-	verticesBuf_->CreateInstancingResource(vertexNum ,name, sizeof(Math::Vector::Vector3));
+	verticesBuf_->CreateInstancingResource(vertexNum, name, sizeof(Math::Vector::Vector3));
 }
 
 void LineModel::Draw()
 {
 	material_->Map();
-
 	material_->Setbuffer(color_);
+	material_->UnMap();
 
 	vector<VertexData> v;
 	v.resize(2);
-	v[0].position = { start.x,start.y,start.z,1.0f };
-	v[1].position = { end.x,end.y,end.z,1.0f };
+	v[0].position = { 0.0f,0.0f,0.0f,1.0f };
+	v[1].position = { 0.0f,0.0f,0.0f,1.0f };
 
 	vertex_->Map();
 	vertex_->Setbuffer(v);
@@ -35,22 +37,27 @@ void LineModel::Draw()
 
 	worldMat_->Map();
 	worldMat_->Setbuffer(mat_);
+	worldMat_->UnMap();
 
 	verticesBuf_->Map();
 	verticesBuf_->Setbuffer(lines_);
+	verticesBuf_->UnMap();
 
-	//マテリアル
-	ComPtr<ID3D12GraphicsCommandList>list = DirectXCommon::GetInstance()->GetCommands().m_pList;
+	CommandCall();
+}
+
+void LineModel::CommandCall()
+{
+	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Line;
-	list->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	list->SetPipelineState(PSO.GraphicsPipelineState.Get());
+	commandList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+	commandList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 	vertex_->CommandVertexBufferViewCall();
 	material_->CommandCall(0);
 
 	CameraManager::GetInstance()->CommandCall(1);
 	worldMat_->CommandCall(2);
 	DescriptorManager::GetInstance()->rootParamerterCommand(3, verticesBuf_->GetSrvIndex());
-	list->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-	list->DrawInstanced(2, UINT(lines_.size()-1), 0, 0);
-
+	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+	commandList->DrawInstanced(2, UINT(lines_.size() - 1), 0, 0);
 }

@@ -71,7 +71,6 @@ namespace Particle {
 		unique_ptr<BufferResource<uint32_t>>freeCounterBuf_ = nullptr;
 		vector<uint32_t>freeCounter_;
 
-
 		uint32_t texHandle_ = 1;
 	};
 
