@@ -2,6 +2,7 @@
 struct VertexShaderInput
 {
     float32_t4 position : POSITION0;
+    uint vertexId : SV_VertexID;
 };
 struct VertexShaderOutput
 {
@@ -27,4 +28,9 @@ struct TransformationMatrix
 {
     float32_t4x4 WVP;
     float32_t4x4 World;
+};
+struct Line
+{
+    float32_t3 start;
+    float32_t3 end;
 };

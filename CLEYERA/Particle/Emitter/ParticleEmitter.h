@@ -3,32 +3,41 @@
 #include"IEmitterState.h"
 #include"../GpuParticle.h"
 #include"StructGpuParticleEmitter.h"
-#include"EmitterSphere.h"
+#include"EmitterSphereState.h"
 
-class ParticleEmitter
-{
-public:
-	ParticleEmitter() {};
-	~ParticleEmitter() {};
+namespace Particle {
 
-	void CreateType(unique_ptr<IEmitterState>state, unique_ptr<Particle::GpuParticle>& particle);
+	class ParticleEmitter
+	{
+	public:
+		ParticleEmitter() {};
+		~ParticleEmitter() {};
 
-	void Update();
+		void CreateType(unique_ptr<IEmitterState>state, unique_ptr<Particle::GpuParticle>& particle);
 
-	void Dispacth();
+		void ImGuiUpdate();
+		void Update();
+
+		void Emit(unique_ptr<Particle::GpuParticle>& particle);
+
+		void SpownDraw();
 
 #pragma region Get
 
-	vector<SEmitterSphere>& GetSphereParam() { return sphere_; }
-	string GetEmitName() { return emitName_; }
-	const uint32_t GetEmitMax() { return emitMax_; }
+		vector<SEmitterSphere>& GetSphereParam() { return sphere_; }
+		string GetEmitName() { return emitName_; }
+		const uint32_t GetEmitMax() { return emitMax_; }
 #pragma endregion
 
-private:
+	private:
 
-	string emitName_ = "";
-	static const uint32_t emitMax_ = 1024;
-	uint32_t srvHandle_ = 0;
-	unique_ptr<IEmitterState>type_ = nullptr;
-	vector<SEmitterSphere>sphere_ = {};
-};
+		string emitName_ = "";
+		static const uint32_t emitMax_ = 32;
+		uint32_t srvHandle_ = 0;
+
+		unique_ptr<IEmitterState>type_ = nullptr;
+		vector<SEmitterSphere>sphere_ = {};
+
+		WorldTransform worldTransform_ = {};
+	};
+}

@@ -27,6 +27,7 @@ void Cleyera::Initialize()
 	GlobalVariables::GetInstance()->LoadFiles();
 	CameraManager::GetInstance()->Initialize();
 	RunTimeCounter::GetInstance()->Create();
+
 }
 
 void Cleyera::Finalize()

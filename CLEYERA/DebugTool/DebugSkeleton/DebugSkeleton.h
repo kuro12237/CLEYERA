@@ -4,7 +4,7 @@
 #include"CameraData.h"
 #include"ModelManager.h"
 #include"Game3dObject.h"
-#include"Model/primitive/Line.h"
+#include"Model/primitive/LineModel.h"
 
 class DebugSkeleton
 {
@@ -39,7 +39,7 @@ private:
 	unique_ptr<Game3dObject>jointObject_;
 
 	size_t lineSize_ = 0;
-	vector<unique_ptr<LineModel>>lineModels_{};
+	vector<unique_ptr<Primitive::LineModel>>lineModels_{};
 
 	bool lineDrawFlag_ = false;
 	bool jointDrawFlag_ = false;

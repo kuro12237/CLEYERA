@@ -2,6 +2,7 @@
 
 void GameScene::Initialize()
 {
+	WinApp::GetInstance()->SetTiTleName(L"GunHead");
 	PostEffect::GetInstance()->Initialize("p");
 
 	//levelData‚Ì“Ç‚İ‚İ
@@ -35,6 +36,25 @@ void GameScene::Initialize()
 
 	gpuParticle_ = make_unique<Particle::GpuParticle>();
 	gpuParticle_->Create(1024, "landParticle");
+
+	uint32_t texHandle = TextureManager::LoadDDSTexture("rostock_laage_airport_4k.dds");
+	SkyBox::GetInstance()->Initialize();
+	SkyBox::GetInstance()->SetTexHandle(texHandle);
+	emitter_ = make_unique<Particle::ParticleEmitter>();
+	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
+	auto& testSphere = emitter_->GetSphereParam()[0];
+	testSphere.emit = 1;
+	testSphere.count = 8;
+	testSphere.frequency = 1.0f;
+	testSphere.frequencyTime = 4.0f;
+	testSphere.radious = 2.0f;
+	auto& testSphere2 = emitter_->GetSphereParam()[1];
+	testSphere2.emit = 1;
+	testSphere2.count = 8;
+	testSphere2.frequency = 1.0f;
+	testSphere2.translate.y = -3.0f;
+	testSphere2.frequencyTime = 4.0f;
+	testSphere2.radious = 2.0f;
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -70,6 +90,8 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 
+	emitter_->ImGuiUpdate();
+
 #endif // _USE_IMGUI
 
 	player_->Update();
@@ -89,6 +111,9 @@ void GameScene::Update(GameManager* Scene)
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
+
+	emitter_->Update();
+	emitter_->Emit(gpuParticle_);
 	gpuParticle_->CallBarrier();
 	gpuParticle_->Update();
 }
@@ -98,8 +123,8 @@ void GameScene::PostProcessDraw()
 	PostEffect::GetInstance()->PreDraw();
 
 	gameObjectManager_->Draw();
-	//gpuParticle_->Draw();
-
+	gpuParticle_->Draw();
+	emitter_->SpownDraw();
 	PostEffect::GetInstance()->PostDraw();
 }
 

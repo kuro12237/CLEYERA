@@ -78,13 +78,13 @@ void GameObjectManager::ImGuiUpdate()
 		//normal3dData
 		if (ImGui::TreeNode("obj3dData"))
 		{
-			ImGui::BeginChild("obj3dData", ImVec2(250, 100));
+			//ImGui::BeginChild("obj3dData", ImVec2(250, 100));
 			for (auto& data : obj3dData_)
 			{
 				auto& it = data.second;
 				it->ImGuiUpdate(it->GetObjectName());
 			}
-			ImGui::EndChild();
+			//ImGui::EndChild();
 			ImGui::TreePop();
 		}
 		ImGui::Separator();
@@ -110,14 +110,14 @@ void GameObjectManager::ImGuiUpdate()
 		//cameraData
 		if (ImGui::TreeNode("cameraData"))
 		{
-			ImGui::BeginChild("cameraData", ImVec2(250, 100));
+			//ImGui::BeginChild("cameraData", ImVec2(250, 100));
 			for (auto& data : cameraData_)
 			{
 				auto& it = data.second;
 				it->ImGuiUpdate(it->GetObjectName());
 
 			}
-			ImGui::EndChild();
+			//ImGui::EndChild();
 			ImGui::TreePop();
 		}
 		ImGui::Separator();

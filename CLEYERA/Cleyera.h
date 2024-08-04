@@ -18,7 +18,8 @@
 #include"Utility/GlobalVariables/GlobalVariables.h"
 #include"Utility/CameraManager/CameraManager.h"
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
-
+#include"Particle/GpuParticle.h"
+#include"Particle/Emitter/Draw/ParticleEmitDraw.h"
 
 class Cleyera
 {

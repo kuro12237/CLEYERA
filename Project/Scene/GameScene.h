@@ -9,7 +9,7 @@
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
-#include"Model/primitive/Line.h"
+#include"Model/primitive/LineModel.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"SceneFileLoder/SceneFileLoader.h"
 
@@ -21,7 +21,9 @@
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
 
+#include"Utility/SkyBox/SkyBox.h"
 #include"Particle/GpuParticle.h"
+#include"Particle/Emitter/ParticleEmitter.h"
 
 class GameScene :public IScene
 {
@@ -61,6 +63,9 @@ private:
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 
 	unique_ptr<Particle::GpuParticle>gpuParticle_ = nullptr;
+	unique_ptr<Particle::ParticleEmitter>emitter_ = nullptr;
+
+
 
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;

@@ -1,20 +1,32 @@
 #pragma once
+#include"Particle/GpuParticle.h"
+#include"Draw/IParticleEmitDraw.h"
+#include"Draw/ParticleEmitDraw.h"
 
-class ParticleEmitter;
-class IEmitterState
-{
-public:
-	virtual ~IEmitterState() {};
+namespace Particle {
 
-	virtual void Create(ParticleEmitter* e) = 0;;
+	class ParticleEmitter;
+	class IEmitterState
+	{
+	public:
+		virtual ~IEmitterState() {};
 
-	virtual void Update(ParticleEmitter* e) = 0;
+		virtual void Create(Particle::ParticleEmitter* e) = 0;;
 
-	virtual void Emit() = 0;
+		virtual void Update(Particle::ParticleEmitter* e) = 0;
 
-	virtual void Dispatch() = 0;
+		virtual void Dispatch(unique_ptr<Particle::GpuParticle>& particle) = 0;
 
-private:
+		void SpownDraw();
 
-};
+		vector<WorldTransform>& GetWts() { return wTs_; }
+
+	protected:
+
+		void CreateEmitDraw(uint32_t num, string name);
+
+		vector<WorldTransform>wTs_{};
+		vector<unique_ptr<ParticleEmitDraw>>draws_{};
+	};
+}
 

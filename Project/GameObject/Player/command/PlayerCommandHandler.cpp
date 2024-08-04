@@ -2,24 +2,26 @@
 
 void PlayerCommandHandler::Handler()
 {
+	//Aボタン
 	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
 	{
 		commands_.push(make_unique<PlayerJampCommand>());
 	}
+	//左スティック
+	if (IsLJoystickActive())
+	{
+		commands_.push(make_unique<PlayerMoveCommand>());
+	}
+
 	if (Input::PushRShoulder())
 	{
 		commands_.push(make_unique<PlayerShootCommand>());
 	}
 
-	if (IsLJoystickActive())
-	{
-
-		commands_.push(make_unique<PlayerMoveCommand>());
-
-	}
+	
 }
 
-void PlayerCommandHandler::CommandCoreExec(Player& p)
+void PlayerCommandHandler::CommandsExec(Player& p)
 {
 	while (!commands_.empty())
 	{

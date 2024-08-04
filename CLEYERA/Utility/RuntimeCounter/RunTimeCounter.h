@@ -20,6 +20,8 @@ public:
 
 	void CommandCall(uint32_t rootParamIndex);
 
+	void ComputeCommandCall(uint32_t rootParamIndex);
+
 #pragma region Get
 
 	static RunTimeCount GetTimer() { return RunTimeCounter::GetInstance()->time_; }

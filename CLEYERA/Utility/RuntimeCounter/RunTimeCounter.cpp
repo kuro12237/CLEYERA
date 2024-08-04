@@ -25,3 +25,8 @@ void RunTimeCounter::CommandCall(uint32_t rootParamIndex)
 {
     timerBuf_->CommandCall(rootParamIndex);
 }
+
+void RunTimeCounter::ComputeCommandCall(uint32_t rootParamIndex)
+{
+    timerBuf_->ComputeCommandCall(rootParamIndex);
+}

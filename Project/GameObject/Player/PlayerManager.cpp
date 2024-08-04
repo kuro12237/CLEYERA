@@ -47,7 +47,7 @@ void PlayerManager::Update()
 
 
 	commandHandler_->Handler();
-	commandHandler_->CommandCoreExec(*playerCore_);
+	commandHandler_->CommandsExec(*playerCore_);
 	if (playerCore_->GetIsShoot())
 	{
 		PushBullet(playerWorldPos);
