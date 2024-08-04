@@ -48,7 +48,13 @@ void GameScene::Initialize()
 	testSphere.frequency = 1.0f;
 	testSphere.frequencyTime = 4.0f;
 	testSphere.radious = 2.0f;
-
+	auto& testSphere2 = emitter_->GetSphereParam()[1];
+	testSphere2.emit = 1;
+	testSphere2.count = 8;
+	testSphere2.frequency = 1.0f;
+	testSphere2.translate.y = -3.0f;
+	testSphere2.frequencyTime = 4.0f;
+	testSphere2.radious = 2.0f;
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -84,14 +90,7 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 
-	auto& testSphere = emitter_->GetSphereParam()[0];
-	if (ImGui::TreeNode("emitter"))
-	{
-		ImGui::DragFloat("r", &testSphere.radious, 0.1f);
-		ImGui::DragFloat3("t", &testSphere.translate.x, 0.1f);
-
-		ImGui::TreePop();
-	}
+	emitter_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
 

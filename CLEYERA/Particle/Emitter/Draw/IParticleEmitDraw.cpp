@@ -1,7 +1,8 @@
 #include "IParticleEmitDraw.h"
 
-void IParticleEmitDraw::Create(PrimitiveType type)
+void IParticleEmitDraw::Create(PrimitiveType type, string name)
 {
+	name_ = name;
 	if (type == SPHERE)
 	{
 		CreateSphereVertex();
@@ -14,18 +15,18 @@ void IParticleEmitDraw::Update()
 
 void IParticleEmitDraw::Draw(const WorldTransform& w)
 {
-	for (auto it = lines_.begin(); it != lines_.end(); ++it) {
-		(*it)->SetWorldMat(w.matWorld);
-		(*it)->SetMaterial({ .color = {0.0f,0.0f,0.0f,1.0f} });
-		(*it)->Draw();
-	}
+	line_->SetWorldMat(w.matWorld);
+	line_->SetMaterial({ 0.0f,0.0f,0.0f,1.0f });
+	line_->Draw();
 }
 
 void IParticleEmitDraw::CreateSphereVertex()
 {
-	//30.20.30
 	//ï™äÑêî
-	const uint32_t SUBDIVISION = 10;
+	const uint32_t SUBDIVISION = 8;
+	line_ = make_unique<LineModel>();
+	line_->Create(name_,(SUBDIVISION * SUBDIVISION * SUBDIVISION) / 2);
+
 	//lat
 	const float LON_EVERY = 2.0f * static_cast<float>(std::numbers::pi) / float(SUBDIVISION);
 	//lon
@@ -34,6 +35,7 @@ void IParticleEmitDraw::CreateSphereVertex()
 	float phiD = 2.0f * static_cast<float>(std::numbers::pi) / SUBDIVISION;
 	const float radius = 1.0f;
 
+	size_t index = 0;
 	for (uint32_t latIndex = 0; latIndex < SUBDIVISION; ++latIndex) {
 		float lat = -static_cast<float>(std::numbers::pi) / 2.0f + LAT_EVERY * latIndex;
 		for (uint32_t lonIndex = 0; lonIndex < SUBDIVISION; ++lonIndex) {
@@ -56,18 +58,8 @@ void IParticleEmitDraw::CreateSphereVertex()
 				radius * (cosf(lat) * sinf(lon + phiD))
 			};
 
-			unique_ptr<LineModel>lineA = make_unique<LineModel>();
-			lineA->Create();
-			//ab
-			lineA->SetStartEndPos(a, b);
-
-			unique_ptr<LineModel>lineB = make_unique<LineModel>();
-			lineB->Create();
-			//ac
-			lineB->SetStartEndPos(a, c);
-
-			lines_.push_back(move(lineA));
-			lines_.push_back(move(lineB));
+			line_->PushBack(a, b, index);
+			line_->PushBack(a, c, index);
 		}
 	}
 }

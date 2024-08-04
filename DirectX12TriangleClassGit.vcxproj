@@ -92,7 +92,8 @@
     <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\EmitterSphere.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\EmitterSphereState.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\IEmitterState.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
     <ClCompile Include="CLEYERA\Particle\Particle.cpp" />
@@ -205,13 +206,14 @@
     <ClInclude Include="CLEYERA\Model\Model.h" />
     <ClInclude Include="CLEYERA\Model\ModelManager.h" />
     <ClInclude Include="CLEYERA\Model\primitive\Line.h" />
+    <ClInclude Include="CLEYERA\Model\primitive\Primitive.h" />
     <ClInclude Include="CLEYERA\Model\State\IModelState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\EmitterSphere.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\EmitterSphereState.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\IEmitterState.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />

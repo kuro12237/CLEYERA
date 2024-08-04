@@ -18,7 +18,7 @@ void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 	for (size_t i = 0; i < lineSize_; i++)
 	{
 		lineModels_[i] = make_unique<LineModel>();
-		lineModels_[i]->Create();
+		lineModels_[i]->Create("skeleton");
 	}
 
 #endif // _DEBUG

@@ -14,7 +14,7 @@ public:
 	IParticleEmitDraw() = default;
 	virtual~IParticleEmitDraw() {};
 
-	void Create(PrimitiveType type);
+	void Create(PrimitiveType type,string name);
 
 	void Update();
 
@@ -24,5 +24,7 @@ private:
 
 	void CreateSphereVertex();
 
+	string name_="";
 	vector<unique_ptr<LineModel>>lines_ = {};
+	unique_ptr<LineModel > line_ = nullptr;
 };

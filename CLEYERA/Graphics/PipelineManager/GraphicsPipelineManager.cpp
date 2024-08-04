@@ -341,7 +341,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	//Material
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[0].Descriptor.ShaderRegister = 0;
@@ -354,6 +354,19 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[2].Descriptor.ShaderRegister = 2;
+
+	//texDescriptorRanged
+	D3D12_DESCRIPTOR_RANGE descriptorRangeVertices[1] = {};
+	descriptorRangeVertices[0].BaseShaderRegister = 0;
+	descriptorRangeVertices[0].NumDescriptors = 1;
+	descriptorRangeVertices[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeVertices[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	//tex
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRangeVertices;
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeVertices);
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
@@ -495,6 +508,8 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[6].DescriptorTable.pDescriptorRanges = descriptorRange;
 	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
+
+
 
 	//Sampler
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};

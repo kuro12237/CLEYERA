@@ -1,6 +1,6 @@
 #include "Line.h"
 
-void LineModel::Create()
+void LineModel::Create(string name,uint32_t vertexNum)
 {
 	vertex_ = make_unique<BufferResource<VertexData>>();
 	vertex_->CreateResource(2);
@@ -12,6 +12,10 @@ void LineModel::Create()
 	worldMat_ = make_unique<BufferResource<Math::Matrix::Matrix4x4>>();
 	worldMat_->CreateResource();
 	mat_ = Math::Matrix::Identity();
+
+	verticesBuf_ = make_unique < BufferResource < Math::Vector::Vector3 >> ();
+	verticesBuf_->CreateResource(vertexNum);
+	verticesBuf_->CreateInstancingResource(vertexNum ,name, sizeof(Math::Vector::Vector3));
 }
 
 void LineModel::Draw()
@@ -32,6 +36,9 @@ void LineModel::Draw()
 	worldMat_->Map();
 	worldMat_->Setbuffer(mat_);
 
+	verticesBuf_->Map();
+	verticesBuf_->Setbuffer(lines_);
+
 	//マテリアル
 	ComPtr<ID3D12GraphicsCommandList>list = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Line;
@@ -42,8 +49,8 @@ void LineModel::Draw()
 
 	CameraManager::GetInstance()->CommandCall(1);
 	worldMat_->CommandCall(2);
+	DescriptorManager::GetInstance()->rootParamerterCommand(3, verticesBuf_->GetSrvIndex());
 	list->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-	list->DrawInstanced(2, 1, 0, 0);
-
+	list->DrawInstanced(2, UINT(lines_.size()-1), 0, 0);
 
 }

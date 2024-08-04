@@ -41,7 +41,7 @@ public:
 
 	void CreateInstancingResource(const uint32_t& instancingNum, const string& Name, UINT size);
 
-	void CreateUAVResource(const uint32_t& Num, const string& Name,UINT size);
+	void CreateUAVResource(const uint32_t& Num, const string& Name, UINT size);
 
 	/// <summary>
 	/// 画像bufferを更新
@@ -188,6 +188,7 @@ inline void BufferResource<T>::Setbuffer(vector<T> t)
 	{
 		param_[i] = t[i];
 	}
+
 }
 
 template<typename T>
@@ -379,7 +380,7 @@ inline void BufferResource<T>::CreateInstancingResource(const uint32_t& instanci
 }
 
 template<typename T>
-inline void BufferResource<T>::CreateUAVResource(const uint32_t& Num, const string& Name,UINT size)
+inline void BufferResource<T>::CreateUAVResource(const uint32_t& Num, const string& Name, UINT size)
 {
 
 	if (DescriptorManager::CheckData(Name))

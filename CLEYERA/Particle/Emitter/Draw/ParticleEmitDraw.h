@@ -8,12 +8,9 @@ public:
 	ParticleEmitDraw() {};
 	~ParticleEmitDraw() {};
 
-	static ParticleEmitDraw* GetInstance();
+	void Initialize(string name);
 
-	void Initialize();
-
-	
-	void SphereDraw(const WorldTransform &w);
+	void Draw(const WorldTransform &w);
 
 private:
 

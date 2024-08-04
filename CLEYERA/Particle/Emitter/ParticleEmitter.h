@@ -3,7 +3,7 @@
 #include"IEmitterState.h"
 #include"../GpuParticle.h"
 #include"StructGpuParticleEmitter.h"
-#include"EmitterSphere.h"
+#include"EmitterSphereState.h"
 
 namespace Particle {
 
@@ -15,6 +15,7 @@ namespace Particle {
 
 		void CreateType(unique_ptr<IEmitterState>state, unique_ptr<Particle::GpuParticle>& particle);
 
+		void ImGuiUpdate();
 		void Update();
 
 		void Emit(unique_ptr<Particle::GpuParticle>& particle);
@@ -31,13 +32,12 @@ namespace Particle {
 	private:
 
 		string emitName_ = "";
-		static const uint32_t emitMax_ = 1024;
+		static const uint32_t emitMax_ = 32;
 		uint32_t srvHandle_ = 0;
 
 		unique_ptr<IEmitterState>type_ = nullptr;
 		vector<SEmitterSphere>sphere_ = {};
 
 		WorldTransform worldTransform_ = {};
-
 	};
 }

@@ -1,18 +1,12 @@
 #include "ParticleEmitDraw.h"
 
-ParticleEmitDraw* ParticleEmitDraw::GetInstance()
-{
-    static ParticleEmitDraw instance;
-    return &instance;
-}
-
-void ParticleEmitDraw::Initialize()
+void ParticleEmitDraw::Initialize(string name)
 {
     sphere_ = make_unique<IParticleEmitDraw>();
-    sphere_->Create(SPHERE);
+    sphere_->Create(SPHERE,name);
 }
 
-void ParticleEmitDraw::SphereDraw(const WorldTransform& w)
-{ 
+void ParticleEmitDraw::Draw(const WorldTransform& w)
+{
     sphere_->Draw(w);
 }

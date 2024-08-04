@@ -28,7 +28,6 @@ void Cleyera::Initialize()
 	CameraManager::GetInstance()->Initialize();
 	RunTimeCounter::GetInstance()->Create();
 
-	ParticleEmitDraw::GetInstance()->Initialize();
 }
 
 void Cleyera::Finalize()
