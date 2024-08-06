@@ -12,16 +12,12 @@ struct VertexShaderOutput
     float32_t4 position : SV_POSITION;
     float32_t2 texcoord : TEXCOORD0;
     float32_t3 normal : NORMAL0;
-    float32_t3 worldPosition : WORLDPOSITION0;
-    float32_t4 color : COLOR0;
+    uint32_t instanceId : INSTANCEID0;
 };
 
 struct PixelShaderOutput
 {
     float32_t4 color : SV_TARGET0;
-    float32_t4 dfColor : SV_TARGET1;
-    float32_t4 normalColor : SV_TARGET2;
-    float32_t4 posColor : SV_TARGET3;
 };
 struct TransformationViewMatrix
 {
@@ -56,8 +52,3 @@ static const uint32_t kParticleMax = 1024;
 
 static const float kPI_f = 3.14159265358979323846f;
 
-void InterLockedAdd(int32_t dest, int32_t add, int32_t originalValue)
-{
-    originalValue = dest;
-    dest += add;
-}

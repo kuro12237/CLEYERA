@@ -216,6 +216,7 @@
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
+    <ClInclude Include="CLEYERA\Particle\StructGpuParticle.h" />
     <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h" />
     <ClInclude Include="CLEYERA\Sprite\Sprite.h" />

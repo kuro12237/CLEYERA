@@ -1,12 +1,14 @@
 #include "GpuParticle.h"
 
-void Particle::GpuParticle::Create(const size_t num, string Name)
+using namespace Particle;
+
+void GpuParticle::Create(const size_t kNum, string Name)
 {
-	particleNum_ = num;
+	particleNum_ = kNum*particleMin;
 	name_ = Name;
 
 	{//頂点作成
-		vertexBuf_ = make_unique<BufferResource<VertexData>>();
+		vertexBuf_ = make_unique<BufferResource<ParticleVertexData>>();
 		vertexBuf_->CreateResource(vertexNum);
 		vertexBuf_->CreateVertexBufferView();
 		vertexParam_.resize(vertexNum);
@@ -19,14 +21,20 @@ void Particle::GpuParticle::Create(const size_t num, string Name)
 	}
 	{//writeparticleUAV作成
 		writeParticleBuf_ = make_unique<BufferResource<ParticleCS>>();
-		writeParticleBuf_->CreateUAVResource(uint32_t(particleNum_), name_+"_Write", sizeof(ParticleCS));
+		writeParticleBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_Write", sizeof(ParticleCS));
 		writeParticleParam_.resize(particleNum_);
 	}
+	{//freeListIndex
+		freeListIndexBuf_ = make_unique<BufferResource<uint32_t>>();
+		freeListIndexBuf_->CreateResource(uint32_t(particleNum_));
+		freeListIndexBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeListIndex", sizeof(int32_t));
+		freeListIndex_.resize(particleNum_);
+	}
 	{//freeList
-		freeCounterBuf_ = make_unique<BufferResource<uint32_t>>();
-		freeCounterBuf_->CreateResource(uint32_t(particleNum_));
-		freeCounterBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeCount", sizeof(int32_t));
-		freeCounter_.resize(particleNum_);
+		freeListBuf_ = make_unique<BufferResource<uint32_t>>();
+		freeListBuf_->CreateResource(uint32_t(particleNum_));
+		freeListBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeList", sizeof(int32_t));
+		freeList_.resize(particleNum_);
 	}
 	{//頂点の初期化
 		vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
@@ -42,6 +50,19 @@ void Particle::GpuParticle::Create(const size_t num, string Name)
 		indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
 		indexParam_[3] = 0; indexParam_[4] = 3; indexParam_[5] = 1;
 	}
+
+	vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
+	vertexParam_[0].texcoord = { 0.0f,1.0f };
+	vertexParam_[1].position = { -1.0f ,1.0f,0,1 };
+	vertexParam_[1].texcoord = { 0.0f,0.0f };
+	vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
+	vertexParam_[2].texcoord = { 1.0f,1.0f };
+	vertexParam_[3].position = { 1.0f,1.0f,0,1 };
+	vertexParam_[3].texcoord = { 1.0f,0.0f };
+
+
+	indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
+	indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
 	{//頂点マップ
 		vertexBuf_->Map();
 		vertexBuf_->Setbuffer(vertexParam_);
@@ -63,14 +84,15 @@ void Particle::GpuParticle::Create(const size_t num, string Name)
 		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
-		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeCounterBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
 
 		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
 	}
 	DirectXCommon::GetInstance()->CommandClosed();
 }
 
-void Particle::GpuParticle::Update()
+void GpuParticle::Update()
 {
 	{//初期化CS_Dispatch
 		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().particleUpdate;
@@ -82,11 +104,14 @@ void Particle::GpuParticle::Update()
 		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
+
 		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
 	}
 }
 
-void Particle::GpuParticle::Draw()
+void GpuParticle::Draw()
 {
 	//換える
 	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().debugDraw;;
@@ -107,7 +132,7 @@ void Particle::GpuParticle::Draw()
 	commandList->DrawIndexedInstanced(6, UINT(particleNum_), 0, 0, 0);
 }
 
-void Particle::GpuParticle::CallBarrier()
+void GpuParticle::CallBarrier()
 {
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	D3D12_RESOURCE_BARRIER barrier{};
@@ -117,7 +142,7 @@ void Particle::GpuParticle::CallBarrier()
 	commandList->ResourceBarrier(1, &barrier);
 }
 
-void Particle::GpuParticle::CallUavRootparam(uint32_t rootParamIndex)
+void GpuParticle::CallUavRootparam(uint32_t rootParamIndex)
 {
 	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(rootParamIndex, writeParticleBuf_->GetSrvIndex());
 }

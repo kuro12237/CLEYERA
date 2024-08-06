@@ -4,9 +4,9 @@ void EmitterSphere::Create(Particle::ParticleEmitter* e)
 {
 	max_ = e->GetEmitMax();
 
-	sphereBuf_ = make_unique<BufferResource<SEmitterSphere>>();
+	sphereBuf_ = make_unique<BufferResource<Particle::SEmitterSphere>>();
 	sphereBuf_->CreateResource(max_);
-	sphereBuf_->CreateInstancingResource(e->GetEmitMax(), e->GetEmitName(), sizeof(SEmitterSphere));
+	sphereBuf_->CreateInstancingResource(e->GetEmitMax(), e->GetEmitName(), sizeof(Particle::SEmitterSphere));
 	CreateEmitDraw(max_,e->GetEmitName());
 }
 
@@ -27,7 +27,7 @@ void EmitterSphere::Dispatch(unique_ptr<Particle::GpuParticle>& particle)
 	particle->CallUavRootparam(0);
 	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, sphereBuf_->GetSrvIndex());
 	RunTimeCounter::GetInstance()->ComputeCommandCall(2);
-
-	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetfreeCountBuf()->GetSrvIndex());
-	list->Dispatch(1, 1, 1);
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetFreeListIndexBuf()->GetSrvIndex());
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(4, particle->GetFreeListBuf()->GetSrvIndex());
+	list->Dispatch(UINT(particle->GetNum() + 1023 / 1024), 1, 1);
 }

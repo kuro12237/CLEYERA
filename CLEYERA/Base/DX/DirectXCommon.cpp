@@ -49,12 +49,11 @@ void DirectXCommon::PreDraw()
 	
 	//ClearScreen
 	commands.m_pList.Get()->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, nullptr);
-	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
+	float clearColor[] = { 0.0f,0.0f,0.0f,1.0f };
 	commands.m_pList.Get()->ClearRenderTargetView(rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
 	//Depth
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle =m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart();
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandleTest = DSVDescriptorManager::GetHandle(0);
 	commands.m_pList.Get()->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, &dsvHandle);
 	commands.m_pList.Get()->ClearDepthStencilView(dsvHandle,D3D12_CLEAR_FLAG_DEPTH,1.0f,0,0,nullptr);
 	ScissorViewCommand(WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());

@@ -18,6 +18,7 @@ VertexShaderOutput main(VertexShaderInput input, uint32_t instanceId : SV_Instan
     output.position = mul(input.position, wvpMat);
     output.texcoord = input.texcoord;
     output.normal = normalize(mul(input.normal, (float32_t3x3) wvpMat));
-    output.worldPosition = mul(input.position, wvpMat).xyz;
+    output.instanceId = instanceId;
+    
     return output;
 }

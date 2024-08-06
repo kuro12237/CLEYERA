@@ -803,6 +803,7 @@
     <ClInclude Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.h" />
     <ClInclude Include="CLEYERA\Model\primitive\Primitive.h" />
+    <ClInclude Include="CLEYERA\Particle\StructGpuParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

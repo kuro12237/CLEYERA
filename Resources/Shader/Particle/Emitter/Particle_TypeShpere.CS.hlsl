@@ -3,7 +3,7 @@
 
 struct EmitCounter
 {
-    uint32_t count;
+    uint32_t kMax;
 };
 struct EmitterSphere
 {
@@ -13,6 +13,7 @@ struct EmitterSphere
     float32_t frequency;
     float32_t frequencyTime;
     uint32_t emit;
+    float32_t flame;
 };
 
 float32_t3 RandomInUnitSphere(RandomGenerator generator)
@@ -29,37 +30,49 @@ float32_t3 RandomInUnitSphere(RandomGenerator generator)
     float32_t3 pos = float32_t3(r * sinPhi * cosTheta, r * sinPhi * sinTheta, r * cosPhi);
     return pos;
 }
-RWStructuredBuffer<Particle> gParticle : register(u0);
-StructuredBuffer<EmitterSphere> gEmitterSphere : register(t0);
-ConstantBuffer<PerFrame> gPerFlame : register(b0);
-RWStructuredBuffer<int32_t> gFreeList : register(u1);
 
-[numthreads(1, 1, 1)]
-void main(uint32_t3 DTid : SV_DispatchThreadID)
+ConstantBuffer<PerFrame> gPerFlame : register(b0);
+StructuredBuffer<EmitterSphere> gEmitterSphere : register(t0);
+
+RWStructuredBuffer<Particle> gParticle : register(u0);
+RWStructuredBuffer<int32_t> gFreeListIndex : register(u1);
+RWStructuredBuffer<int32_t> gFreeList : register(u2);
+
+[numthreads(2, 1, 1)]
+void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadID)
 {
     RandomGenerator generator;
-    generator.seed = (DTid + gPerFlame.deltaTime) * gPerFlame.deltaTime;
+    generator.seed = (DTid+GTid + gPerFlame.deltaTime) * gPerFlame.deltaTime;
   
-    if (gEmitterSphere[0].emit != 0)
-    {
+    uint32_t index = DTid.x;
 
-        for (uint32_t countIndex = 0; countIndex < gEmitterSphere[0].count; ++countIndex)
+    if (gEmitterSphere[index].emit != 0)
+    {
+        for (uint32_t countIndex = 0; countIndex < gEmitterSphere[index].count; ++countIndex)
         {
-            int32_t particleIndex;
-            InterlockedAdd(gFreeList[0], 1, particleIndex);
-            if (particleIndex < kParticleMax)
+            int32_t freeListIndex;
+            InterlockedAdd(gFreeListIndex[0], -1, freeListIndex);
+
+            if (0 <= freeListIndex && freeListIndex < kParticleMax)
             {
+                uint32_t particleIndex = gFreeList[freeListIndex];
                 float32_t3 randomPoint = RandomInUnitSphere(generator);
                 gParticle[particleIndex].scale = float32_t3(1.0f, 1.0f, 1.0f);
                 gParticle[particleIndex].rotate = float32_t3(0.0f, 0.0f, 0.0f);
-                gParticle[particleIndex].translate = gEmitterSphere[0].translate + float32_t3(randomPoint * gEmitterSphere[0].radious);
+                gParticle[particleIndex].translate = gEmitterSphere[index].translate + float32_t3(randomPoint * gEmitterSphere[index].radious);
                 gParticle[particleIndex].color.rgb = generator.Generate3d();
                 gParticle[particleIndex].color.a = 1.0f;
-                gParticle[particleIndex].velocity = float32_t3(0.01f, 0.0f, 0.0f);
+                gParticle[particleIndex].velocity = (generator.Generate3d() * 2.0f - 1.0f) * 0.1f;
+                gParticle[particleIndex].velocity.y = generator.Generate3d().y * 0.1f;
+                gParticle[particleIndex].velocity.z = 0.0f;
                 gParticle[particleIndex].matWorld = Mat4x4Identity();
                 gParticle[particleIndex].isDraw = true;
             }
+            else
+            {
+                InterlockedAdd(gFreeListIndex[0], 1);
+                break;
+            }
         }
     }
-    
 }
