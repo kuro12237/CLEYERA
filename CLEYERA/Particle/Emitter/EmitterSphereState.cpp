@@ -4,9 +4,9 @@ void EmitterSphere::Create(Particle::ParticleEmitter* e)
 {
 	max_ = e->GetEmitMax();
 
-	sphereBuf_ = make_unique<BufferResource<SEmitterSphere>>();
+	sphereBuf_ = make_unique<BufferResource<Particle::SEmitterSphere>>();
 	sphereBuf_->CreateResource(max_);
-	sphereBuf_->CreateInstancingResource(e->GetEmitMax(), e->GetEmitName(), sizeof(SEmitterSphere));
+	sphereBuf_->CreateInstancingResource(e->GetEmitMax(), e->GetEmitName(), sizeof(Particle::SEmitterSphere));
 	CreateEmitDraw(max_,e->GetEmitName());
 }
 

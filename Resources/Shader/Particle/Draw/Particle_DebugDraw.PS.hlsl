@@ -11,10 +11,10 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t4 textureColor = gTexture.Sample(gSampler, input.texcoord);
 
     output.color.rgb = textureColor.rgb * gParticle[input.instanceId].color.rgb;
-    output.color.a = gParticle[input.instanceId].color.a;
-    
-    output.dfColor = textureColor;
-    output.normalColor = textureColor;
-    output.posColor = input.position;
-    return output;
+    output.color.a = textureColor.a * gParticle[input.instanceId].color.a;
+    if (output.color.a == 0.0f)
+    {
+        discard;
+    }
+        return output;
 }

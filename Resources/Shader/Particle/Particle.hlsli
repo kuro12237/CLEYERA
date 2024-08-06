@@ -18,9 +18,6 @@ struct VertexShaderOutput
 struct PixelShaderOutput
 {
     float32_t4 color : SV_TARGET0;
-    float32_t4 dfColor : SV_TARGET1;
-    float32_t4 normalColor : SV_TARGET2;
-    float32_t4 posColor : SV_TARGET3;
 };
 struct TransformationViewMatrix
 {

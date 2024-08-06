@@ -17,5 +17,5 @@ public:
 
 private:
 	uint32_t max_ = 0;
-	unique_ptr<BufferResource<SEmitterSphere>>sphereBuf_ = nullptr;
+	unique_ptr<BufferResource<Particle::SEmitterSphere>>sphereBuf_ = nullptr;
 };

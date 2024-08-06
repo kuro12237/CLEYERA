@@ -753,7 +753,6 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 	//RootSignature�쐬
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 
-	//descriptionRootSignature = CreateDescriptRootSignature();
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 

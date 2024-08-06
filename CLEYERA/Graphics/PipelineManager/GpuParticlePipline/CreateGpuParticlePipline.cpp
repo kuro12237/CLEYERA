@@ -202,16 +202,23 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_DebugDraw(ComPtr<ID3D12Device>
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 	//Blend設定
-	blendDesc.RenderTarget[0].RenderTargetWriteMask =
-		D3D12_COLOR_WRITE_ENABLE_ALL;
-
+	//���ׂĂ̐F�v�f���������
+	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
+	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
+	blenddesc.BlendEnable = true;
+	blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
+	blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;
+	blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;
+	blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
+	blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+	blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
 	//Rasterrizer設定
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 	//深度設定
 	despthStencilDesc.DepthEnable = true;
-	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 
 	//本体の作成
@@ -228,11 +235,8 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_DebugDraw(ComPtr<ID3D12Device>
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
 
-	graphicsPipelineStateDesc.NumRenderTargets = 4;
+	graphicsPipelineStateDesc.NumRenderTargets = 1;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	graphicsPipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;

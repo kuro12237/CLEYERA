@@ -7,6 +7,8 @@
 #include"Utility/CameraManager/CameraManager.h"
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
 
+#include"StructGpuParticle.h"
+
 struct ParticleCS
 {
 	Math::Vector::Vector3 translate;
@@ -62,8 +64,8 @@ namespace Particle {
 
 		const int vertexNum = 4;
 		const int indexNum = 6;
-		unique_ptr<BufferResource<VertexData>>vertexBuf_ = nullptr;
-		vector<VertexData>vertexParam_;
+		unique_ptr<BufferResource<ParticleVertexData>>vertexBuf_ = nullptr;
+		vector<ParticleVertexData>vertexParam_;
 		unique_ptr<BufferResource<uint32_t>>indexBuf_ = nullptr;
 		vector<uint32_t>indexParam_;
 

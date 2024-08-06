@@ -34,12 +34,11 @@ void GameScene::Initialize()
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 
+	uint32_t texHandle = TextureManager::LoadPngTexture("smoke.png");
 	gpuParticle_ = make_unique<Particle::GpuParticle>();
 	gpuParticle_->Create(1024, "landParticle");
+	gpuParticle_->SetTexhandle(texHandle);
 
-	uint32_t texHandle = TextureManager::LoadDDSTexture("rostock_laage_airport_4k.dds");
-	SkyBox::GetInstance()->Initialize();
-	SkyBox::GetInstance()->SetTexHandle(texHandle);
 	emitter_ = make_unique<Particle::ParticleEmitter>();
 	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
 	auto& testSphere = emitter_->GetSphereParam()[0];
@@ -134,7 +133,7 @@ void GameScene::Back2dSpriteDraw()
 void GameScene::Object3dDraw()
 {
 	PostEffect::GetInstance()->Draw();
-
+	
 }
 
 void GameScene::Flont2dSpriteDraw()
