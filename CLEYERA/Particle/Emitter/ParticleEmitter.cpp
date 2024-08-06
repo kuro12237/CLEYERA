@@ -43,6 +43,17 @@ void Particle::ParticleEmitter::Update()
 		sphere_[0].emit = 0;
 	}
 
+	sphere_[1].frequency += DeltaTimer(sphere_[1].flame);
+	if (sphere_[1].frequency >= sphere_[1].frequencyTime)
+	{
+		sphere_[1].frequency = 0.0f;
+		sphere_[1].emit = 1;
+	}
+	else
+	{
+		sphere_[1].emit = 0;
+	}
+
 	type_->Update(this);
 
 	auto& wTs = type_->GetWts();

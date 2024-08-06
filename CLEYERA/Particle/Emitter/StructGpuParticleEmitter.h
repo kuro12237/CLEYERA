@@ -1,7 +1,6 @@
 #pragma once
 #include"Pch.h"
 
-
 struct SEmitterSphere
 {
 	Math::Vector::Vector3 translate = {};

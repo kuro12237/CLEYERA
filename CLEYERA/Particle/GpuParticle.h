@@ -48,7 +48,9 @@ namespace Particle {
 
 		string GetName() { return name_; }
 		uint32_t GetNum() { return uint32_t(particleNum_); }
-		BufferResource<uint32_t>*GetfreeCountBuf() { return freeCounterBuf_.get(); }
+
+		BufferResource<uint32_t>*GetFreeListIndexBuf() { return freeListIndexBuf_.get(); }
+		BufferResource<uint32_t>* GetFreeListBuf() { return freeListBuf_.get(); }
 
 #pragma endregion
 
@@ -68,8 +70,13 @@ namespace Particle {
 		unique_ptr<BufferResource<ParticleCS>>writeParticleBuf_ = nullptr;
 		vector<ParticleCS>writeParticleParam_;
 
-		unique_ptr<BufferResource<uint32_t>>freeCounterBuf_ = nullptr;
-		vector<uint32_t>freeCounter_;
+		//フリーリストのインデックス
+		unique_ptr<BufferResource<uint32_t>>freeListIndexBuf_ = nullptr;
+		vector<uint32_t>freeListIndex_;
+
+		//List
+		unique_ptr<BufferResource<uint32_t>>freeListBuf_ = nullptr;
+		vector<uint32_t>freeList_;
 
 		uint32_t texHandle_ = 1;
 	};

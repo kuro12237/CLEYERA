@@ -27,7 +27,7 @@ void EmitterSphere::Dispatch(unique_ptr<Particle::GpuParticle>& particle)
 	particle->CallUavRootparam(0);
 	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, sphereBuf_->GetSrvIndex());
 	RunTimeCounter::GetInstance()->ComputeCommandCall(2);
-
-	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetfreeCountBuf()->GetSrvIndex());
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetFreeListIndexBuf()->GetSrvIndex());
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(4, particle->GetFreeListBuf()->GetSrvIndex());
 	list->Dispatch(1, 1, 1);
 }

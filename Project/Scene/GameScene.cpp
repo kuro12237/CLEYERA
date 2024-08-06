@@ -52,7 +52,6 @@ void GameScene::Initialize()
 	testSphere2.emit = 1;
 	testSphere2.count = 8;
 	testSphere2.frequency = 1.0f;
-	testSphere2.translate.y = -3.0f;
 	testSphere2.frequencyTime = 4.0f;
 	testSphere2.radious = 2.0f;
 }

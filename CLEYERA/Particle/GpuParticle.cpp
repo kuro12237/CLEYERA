@@ -22,11 +22,17 @@ void Particle::GpuParticle::Create(const size_t num, string Name)
 		writeParticleBuf_->CreateUAVResource(uint32_t(particleNum_), name_+"_Write", sizeof(ParticleCS));
 		writeParticleParam_.resize(particleNum_);
 	}
+	{//freeListIndex
+		freeListIndexBuf_ = make_unique<BufferResource<uint32_t>>();
+		freeListIndexBuf_->CreateResource(uint32_t(particleNum_));
+		freeListIndexBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeListIndex", sizeof(int32_t));
+		freeListIndex_.resize(particleNum_);
+	}
 	{//freeList
-		freeCounterBuf_ = make_unique<BufferResource<uint32_t>>();
-		freeCounterBuf_->CreateResource(uint32_t(particleNum_));
-		freeCounterBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeCount", sizeof(int32_t));
-		freeCounter_.resize(particleNum_);
+		freeListBuf_ = make_unique<BufferResource<uint32_t>>();
+		freeListBuf_->CreateResource(uint32_t(particleNum_));
+		freeListBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeList", sizeof(int32_t));
+		freeList_.resize(particleNum_);
 	}
 	{//’¸“_‚Ì‰Šú‰»
 		vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
@@ -63,7 +69,8 @@ void Particle::GpuParticle::Create(const size_t num, string Name)
 		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
-		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeCounterBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
 
 		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
 	}
@@ -82,6 +89,9 @@ void Particle::GpuParticle::Update()
 		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
+
 		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
 	}
 }
