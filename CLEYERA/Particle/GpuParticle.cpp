@@ -2,9 +2,9 @@
 
 using namespace Particle;
 
-void GpuParticle::Create(const size_t num, string Name)
+void GpuParticle::Create(const size_t kNum, string Name)
 {
-	particleNum_ = num;
+	particleNum_ = kNum*particleMin;
 	name_ = Name;
 
 	{//í∏ì_çÏê¨

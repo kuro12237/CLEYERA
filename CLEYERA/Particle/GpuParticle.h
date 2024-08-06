@@ -30,7 +30,7 @@ namespace Particle {
 		GpuParticle() {};
 		~GpuParticle() {};
 
-		void Create(const size_t num, string Name);
+		void Create(const size_t kNum, string Name);
 
 		void Update();
 
@@ -59,6 +59,7 @@ namespace Particle {
 
 	private:
 
+		size_t particleMin = 1024;
 		size_t particleNum_ = 0;
 		string name_ = "";
 

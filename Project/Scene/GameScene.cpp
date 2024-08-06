@@ -36,14 +36,14 @@ void GameScene::Initialize()
 
 	uint32_t texHandle = TextureManager::LoadPngTexture("smoke.png");
 	gpuParticle_ = make_unique<Particle::GpuParticle>();
-	gpuParticle_->Create(1024, "landParticle");
+	gpuParticle_->Create(1, "landParticle");
 	gpuParticle_->SetTexhandle(texHandle);
 
 	emitter_ = make_unique<Particle::ParticleEmitter>();
 	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
 	auto& testSphere = emitter_->GetSphereParam()[0];
 	testSphere.emit = 1;
-	testSphere.count = 8;
+	testSphere.count = 36;
 	testSphere.frequency = 1.0f;
 	testSphere.frequencyTime = 4.0f;
 	testSphere.radious = 2.0f;

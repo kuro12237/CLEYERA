@@ -52,8 +52,3 @@ static const uint32_t kParticleMax = 1024;
 
 static const float kPI_f = 3.14159265358979323846f;
 
-void InterLockedAdd(int32_t dest, int32_t add, int32_t originalValue)
-{
-    originalValue = dest;
-    dest += add;
-}

@@ -29,5 +29,5 @@ void EmitterSphere::Dispatch(unique_ptr<Particle::GpuParticle>& particle)
 	RunTimeCounter::GetInstance()->ComputeCommandCall(2);
 	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetFreeListIndexBuf()->GetSrvIndex());
 	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(4, particle->GetFreeListBuf()->GetSrvIndex());
-	list->Dispatch(1, 1, 1);
+	list->Dispatch(UINT(particle->GetNum() + 1023 / 1024), 1, 1);
 }
