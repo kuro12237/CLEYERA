@@ -485,11 +485,8 @@
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.cpp" />
     <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\EmitterSphereState.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\IEmitterState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -796,14 +793,9 @@
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.h" />
     <ClInclude Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\IEmitterState.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\EmitterSphereState.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.h" />
     <ClInclude Include="CLEYERA\Model\primitive\Primitive.h" />
-    <ClInclude Include="CLEYERA\Particle\StructGpuParticle.h" />
+    <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -892,5 +884,6 @@
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle_DebugDraw.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Update\Particle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeShpere.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl" />
   </ItemGroup>
 </Project>

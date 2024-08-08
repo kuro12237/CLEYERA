@@ -5,33 +5,62 @@ struct EmitCounter
 {
     uint32_t kMax;
 };
-struct EmitterSphere
+struct EmitterBox
 {
     float32_t3 translate;
     float32_t3 rotate;
     uint32_t count;
     uint32_t emit;
-    
-    float32_t radious;
+    float32_t3 sizeMin;
+    float32_t3 sizeMax;
 };
 
-float32_t3 RandomInUnitSphere(RandomGenerator generator)
+
+// 回転行列を計算する関数（オイラー角から）
+float32_t3 RotatePoint(float32_t3 local,  float32_t3 rotate)
+{
+    // 回転行列を計算
+    float cosX = cos(rotate.x);
+    float sinX = sin(rotate.x);
+    float cosY = cos(rotate.y);
+    float sinY = sin(rotate.y);
+    float cosZ = cos(rotate.z);
+    float sinZ = sin(rotate.z);
+
+    // 回転を適用
+    float32_t3 rotated;
+    rotated.x = local.
+    x * cosY * cosZ + local.
+    y * (cosX * sinZ + sinX * sinY * cosZ) - local.
+    z * (sinX * sinZ - cosX * sinY * cosZ);
+    rotated.y = -local.
+    x * cosY * sinZ + local.
+    y * (cosX * cosZ - sinX * sinY * sinZ) + local.
+    z * (sinX * cosZ + cosX * sinY * sinZ);
+    rotated.z = local.
+    x * sinY + local.
+    y * (-sinX * cosY) + local.
+    z * (cosX * cosY);
+
+    return rotated;
+}
+
+// OBBの中でランダムな点を生成する関数
+float32_t3 GenerateRandomPointInOBB(EmitterBox box, RandomGenerator generator)
 {
     float32_t3 uvw = generator.Generate3d();
     
-    float32_t theta = uvw.x * 2.0f * kPI_f;
-    float32_t phi = acos(2.0f * uvw.y - 1.0f);
-    float32_t r = pow(uvw.z, 1.0f / 3.0f);
-    float32_t sinTheta = sin(theta);
-    float32_t cosTheta = cos(theta);
-    float32_t sinPhi = sin(phi);
-    float32_t cosPhi = cos(phi);
-    float32_t3 pos = float32_t3(r * sinPhi * cosTheta, r * sinPhi * sinTheta, r * cosPhi);
-    return pos;
-}
+    float32_t3 localPoint;
+    localPoint.x = (box.sizeMin.x + uvw.x * (box.sizeMax.x - box.sizeMin.x));
+    localPoint.y = (box.sizeMin.y + uvw.y * (box.sizeMax.y - box.sizeMin.y));
+    localPoint.z = box.sizeMin.z + uvw.z * (box.sizeMax.z - box.sizeMin.z);
+    
+    float32_t3 rotatedPoint = RotatePoint(localPoint, -box.rotate);
 
+    return rotatedPoint;
+}
 ConstantBuffer<PerFrame> gPerFlame : register(b0);
-StructuredBuffer<EmitterSphere> gEmitterSphere : register(t0);
+StructuredBuffer<EmitterBox> gEmitterSphere : register(t0);
 
 RWStructuredBuffer<Particle> gParticle : register(u0);
 RWStructuredBuffer<int32_t> gFreeListIndex : register(u1);
@@ -41,7 +70,7 @@ RWStructuredBuffer<int32_t> gFreeList : register(u2);
 void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadID)
 {
     RandomGenerator generator;
-    generator.seed = (DTid+GTid + gPerFlame.deltaTime) * gPerFlame.deltaTime;
+    generator.seed = (DTid + GTid + gPerFlame.deltaTime) * gPerFlame.deltaTime;
   
     uint32_t index = DTid.x;
 
@@ -55,10 +84,10 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
             if (0 <= freeListIndex && freeListIndex < kParticleMax)
             {
                 uint32_t particleIndex = gFreeList[freeListIndex];
-                float32_t3 randomPoint = RandomInUnitSphere(generator);
+                float32_t3 randomPoint =  GenerateRandomPointInOBB(gEmitterSphere[index],generator);
                 gParticle[particleIndex].scale = float32_t3(1.0f, 1.0f, 1.0f);
                 gParticle[particleIndex].rotate = float32_t3(0.0f, 0.0f, 0.0f);
-                gParticle[particleIndex].translate = gEmitterSphere[index].translate + float32_t3(randomPoint + gEmitterSphere[index].radious);
+                gParticle[particleIndex].translate = gEmitterSphere[index].translate + float32_t3(randomPoint);
                 gParticle[particleIndex].color.rgb = generator.Generate3d();
                 gParticle[particleIndex].color.a = 1.0f;
                 gParticle[particleIndex].velocity = (generator.Generate3d() * 2.0f - 1.0f) * 0.1f;

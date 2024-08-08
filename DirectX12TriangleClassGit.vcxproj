@@ -90,11 +90,8 @@
     <ClCompile Include="CLEYERA\Model\primitive\LineModel.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelObjState.cpp" />
     <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\EmitterSphereState.cpp" />
-    <ClCompile Include="CLEYERA\Particle\Emitter\IEmitterState.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
+    <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffect.cpp" />
@@ -209,14 +206,9 @@
     <ClInclude Include="CLEYERA\Model\State\ModelObjData.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelObjState.h" />
     <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\Draw\IParticleEmitDraw.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\Draw\ParticleEmitDraw.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\EmitterSphereState.h" />
-    <ClInclude Include="CLEYERA\Particle\Emitter\IEmitterState.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
-    <ClInclude Include="CLEYERA\Particle\StructGpuParticle.h" />
     <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h" />
     <ClInclude Include="CLEYERA\Sprite\Sprite.h" />
@@ -342,6 +334,23 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>

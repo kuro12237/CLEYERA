@@ -39,20 +39,25 @@ void GameScene::Initialize()
 	gpuParticle_->Create(1, "landParticle");
 	gpuParticle_->SetTexhandle(texHandle);
 
-	emitter_ = make_unique<Particle::ParticleEmitter>();
-	emitter_->CreateType(make_unique<EmitterSphere>(), gpuParticle_);
-	auto& testSphere = emitter_->GetSphereParam()[0];
-	testSphere.emit = 1;
+	emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
+	emitter_->CreateType(gpuParticle_);
+	auto& testSphere = emitter_->GetEmitParam()[0];
+	auto& control = emitter_->GetControlParam()[0];
+	testSphere.emit = 0;
 	testSphere.count = 36;
-	testSphere.frequency = 1.0f;
-	testSphere.frequencyTime = 4.0f;
-	testSphere.radious = 2.0f;
-	auto& testSphere2 = emitter_->GetSphereParam()[1];
-	testSphere2.emit = 1;
-	testSphere2.count = 8;
-	testSphere2.frequency = 1.0f;
-	testSphere2.frequencyTime = 4.0f;
-	testSphere2.radious = 2.0f;
+	control.frequency = 1.0f;
+	control.frequencyTime = 4.0f;
+	control.useFlag_ = true;
+	//testSphere.radious = 2.0f;
+
+	auto& testSphereA = emitter_->GetEmitParam()[1];
+	auto& controlA = emitter_->GetControlParam()[1];
+	testSphereA.emit = 1;
+	testSphereA.count = 4;
+	controlA.frequency = 0.0f;
+	controlA.frequencyTime = 0.0f;
+	//testSphereA.radious = 2.0f;
+	controlA.useFlag_ = true;
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -89,7 +94,6 @@ void GameScene::Update(GameManager* Scene)
 	player_->ImGuiUpdate();
 
 	emitter_->ImGuiUpdate();
-
 #endif // _USE_IMGUI
 
 	player_->Update();
@@ -111,6 +115,7 @@ void GameScene::Update(GameManager* Scene)
 	PostEffect::GetInstance()->Update();
 
 	emitter_->Update();
+
 	emitter_->Emit(gpuParticle_);
 	gpuParticle_->CallBarrier();
 	gpuParticle_->Update();
@@ -133,7 +138,7 @@ void GameScene::Back2dSpriteDraw()
 void GameScene::Object3dDraw()
 {
 	PostEffect::GetInstance()->Draw();
-	
+
 }
 
 void GameScene::Flont2dSpriteDraw()

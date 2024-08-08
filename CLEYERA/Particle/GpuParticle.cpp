@@ -8,7 +8,7 @@ void GpuParticle::Create(const size_t kNum, string Name)
 	name_ = Name;
 
 	{//í∏ì_çÏê¨
-		vertexBuf_ = make_unique<BufferResource<ParticleVertexData>>();
+		vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
 		vertexBuf_->CreateResource(vertexNum);
 		vertexBuf_->CreateVertexBufferView();
 		vertexParam_.resize(vertexNum);

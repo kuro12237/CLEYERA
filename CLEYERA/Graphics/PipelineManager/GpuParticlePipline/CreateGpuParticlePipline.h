@@ -13,7 +13,9 @@ public:
 
 	static SPSOProperty CreateGpuParticle_Update(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 
-	static SPSOProperty CreateGpuparticcle_Emitter_Sphere(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
+	static SPSOProperty CreateGpuParticcle_Emitter_Sphere(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
+
+	static SPSOProperty CreateGpuParticcle_Emitter_Box(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader);
 private:
 
 };

@@ -6,8 +6,7 @@
 #include"Graphics/PipelineManager/GraphicsPipelineManager.h"
 #include"Utility/CameraManager/CameraManager.h"
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
-
-#include"StructGpuParticle.h"
+#include"Emitter/StructGpuParticleEmitter.h"
 
 struct ParticleCS
 {
@@ -65,8 +64,8 @@ namespace Particle {
 
 		const int vertexNum = 4;
 		const int indexNum = 6;
-		unique_ptr<BufferResource<ParticleVertexData>>vertexBuf_ = nullptr;
-		vector<ParticleVertexData>vertexParam_;
+		unique_ptr<BufferResource<Particle::System::StructData::ParticleVertexData>>vertexBuf_ = nullptr;
+		vector<Particle::System::StructData::ParticleVertexData>vertexParam_;
 		unique_ptr<BufferResource<uint32_t>>indexBuf_ = nullptr;
 		vector<uint32_t>indexParam_;
 

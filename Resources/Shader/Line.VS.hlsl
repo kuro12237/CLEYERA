@@ -10,6 +10,6 @@ VertexShaderOutput main(VertexShaderInput input, uint32_t instanceId : SV_Instan
     
     float32_t4x4 vp = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.projection);
     float32_t4x4 wvp = mul(gTransformationMatrix.WVP, vp);
-    output.position = mul(float32_t4(gLine[input.vertexId+instanceId].xyz,1.0f), wvp);
+    output.position = mul(float32_t4(gLine[input.vertexId + (instanceId * 2)].xyz, 1.0f), wvp);
 	return output;
 }

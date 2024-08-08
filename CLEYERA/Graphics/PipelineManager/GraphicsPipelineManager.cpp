@@ -34,7 +34,9 @@ void GraphicsPipelineManager::Initialize()
 	SShaderMode shader = ShaderManager::Getinstance()->GetParticleShader().particleInit;
 	gpuPso.particleInit = CreateGpuParticle::CreateGpuParticle_Init(device, commands, shader);
 	gpuPso.particleUpdate = CreateGpuParticle::CreateGpuParticle_Update(device, commands, ShaderManager::Getinstance()->GetParticleShader().particleUpdate);
-	gpuPso.particleEmitterSphere = CreateGpuParticle::CreateGpuparticcle_Emitter_Sphere(device, commands, ShaderManager::Getinstance()->GetParticleShader().particleSphereEmitter);
+	gpuPso.particleEmitterSphere = CreateGpuParticle::CreateGpuParticcle_Emitter_Sphere(device, commands, ShaderManager::Getinstance()->GetParticleShader().particleSphereEmitter);
+	gpuPso.particleEmitterBox = CreateGpuParticle::CreateGpuParticcle_Emitter_Box(device, commands, ShaderManager::Getinstance()->GetParticleShader().particleBoxEmitter);
+
 	gpuPso.debugDraw = CreateGpuParticle::CreateGpuParticle_DebugDraw(device, commands, ShaderManager::Getinstance()->GetParticleShader().DebugDraw);
 	GraphicsPipelineManager::GetInstance()->gpuParticlePso_ = gpuPso;
 }

@@ -25,7 +25,9 @@ namespace Primitive {
 #pragma endregion
 
 		void Clear() { lines_.clear(); }
-		void PushBack(const Math::Vector::Vector3 s, const Math::Vector::Vector3 e, size_t index) { lines_.push_back(s), lines_.push_back(e); index; }
+		void resize(size_t size) { lines_.resize(size); }
+		void PushBack(const Math::Vector::Vector3 s, const Math::Vector::Vector3 e, size_t index=0) { lines_.push_back(s), lines_.push_back(e); index; }
+		void SetVec(const Math::Vector::Vector3 s, const Math::Vector::Vector3 e, size_t index = 0) { lines_[index] = s, lines_[index+1] = e; index; }
 
 	private:
 

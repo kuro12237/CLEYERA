@@ -59,5 +59,5 @@ void LineModel::CommandCall()
 	worldMat_->CommandCall(2);
 	DescriptorManager::GetInstance()->rootParamerterCommand(3, verticesBuf_->GetSrvIndex());
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-	commandList->DrawInstanced(2, UINT(lines_.size() - 1), 0, 0);
+	commandList->DrawInstanced(2, UINT(lines_.size()-1), 0, 0);
 }
