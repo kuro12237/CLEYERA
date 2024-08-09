@@ -13,6 +13,8 @@ struct EmitterBox
     uint32_t emit;
     float32_t3 sizeMin;
     float32_t3 sizeMax;
+    float32_t3 velocityMin;
+    float32_t3 velocityMax;
 };
 
 
@@ -59,6 +61,18 @@ float32_t3 GenerateRandomPointInOBB(EmitterBox box, RandomGenerator generator)
 
     return rotatedPoint;
 }
+
+float32_t3 GenerateRandomVelocity(float32_t3 minVelocity, float32_t3 maxVelocity, RandomGenerator generator)
+{
+    float32_t3 uvw = generator.Generate3d();
+
+    float32_t3 velocity;
+    velocity.x = minVelocity.x + uvw.x * (maxVelocity.x - minVelocity.x);
+    velocity.y = minVelocity.y + uvw.y * (maxVelocity.y - minVelocity.y);
+    velocity.z = minVelocity.z + uvw.z * (maxVelocity.z - minVelocity.z);
+
+    return velocity;
+}
 ConstantBuffer<PerFrame> gPerFlame : register(b0);
 StructuredBuffer<EmitterBox> gEmitterSphere : register(t0);
 
@@ -70,7 +84,7 @@ RWStructuredBuffer<int32_t> gFreeList : register(u2);
 void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadID)
 {
     RandomGenerator generator;
-    generator.seed = (DTid + GTid + gPerFlame.deltaTime) * gPerFlame.deltaTime;
+    generator.seed = ((DTid.xxx + 1) * gPerFlame.deltaTime);
   
     uint32_t index = DTid.x;
 
@@ -90,9 +104,7 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
                 gParticle[particleIndex].translate = gEmitterSphere[index].translate + float32_t3(randomPoint);
                 gParticle[particleIndex].color.rgb = generator.Generate3d();
                 gParticle[particleIndex].color.a = 1.0f;
-                gParticle[particleIndex].velocity = (generator.Generate3d() * 2.0f - 1.0f) * 0.1f;
-                gParticle[particleIndex].velocity.y = generator.Generate3d().y * 0.1f;
-                gParticle[particleIndex].velocity.z = 0.0f;
+                gParticle[particleIndex].velocity = GenerateRandomVelocity(gEmitterSphere[index].velocityMin, gEmitterSphere[index].velocityMax, generator);
                 gParticle[particleIndex].matWorld = Mat4x4Identity();
                 gParticle[particleIndex].isDraw = true;
             }

@@ -31,9 +31,9 @@ public:
 
 private:
 
-
 	unique_ptr<BufferResource<RunTimeCount>>timerBuf_ = nullptr;
 	RunTimeCount time_;
+	uint32_t max_ = 120;
 
 	RunTimeCounter() = default;
 	~RunTimeCounter() = default;

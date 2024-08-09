@@ -112,7 +112,7 @@ namespace Particle {
 			//Šeí\‘¢‘Ì‚Ì‚Éwt‚É‘ã“ü
 			if constexpr (std::is_same<T, Particle::EmitType::SphereParam>::value)
 			{
-				Particle::System::UpdateSphere(lines_[index],emitParam_[index]);
+				Particle::System::UpdateSphere(lines_[index], emitParam_[index]);
 			}
 			else if constexpr (std::is_same<T, Particle::EmitType::BoxParam>::value)
 			{
@@ -202,13 +202,26 @@ namespace Particle {
 			for (size_t index = 0; index < max_; index++)
 			{
 				string paramName = to_string(index);
+				ImGui::Separator();
 				if (ImGui::TreeNode(paramName.c_str()))
 				{
+					if (ImGui::TreeNode("control"))
+					{
+						ImGui::Checkbox("useFlag", &particleControl_[index].useFlag_);
+						ImGui::DragFloat("frequencyTime", &particleControl_[index].frequencyTime);
+
+						ImGui::TreePop();
+					}
+					int count = emitParam_[index].count;
+					ImGui::DragInt("spownCount", &count,1);
+					emitParam_[index].count = count;
 					ImGui::DragFloat3("translate", &emitParam_[index].translate.x, 0.1f);
 					ImGui::DragFloat3("rotate", &emitParam_[index].rotate.x, 0.1f);
 					ImGui::DragFloat3("sizeMin", &emitParam_[index].sizeMin.x, 0.1f);
 					ImGui::DragFloat3("sizeMax", &emitParam_[index].sizeMax.x, 0.1f);
-
+					ImGui::Separator();
+					ImGui::DragFloat3("velocityMin" ,&emitParam_[index].velocityMin.x, 0.1f);
+					ImGui::DragFloat3("velocityMax", &emitParam_[index].velocityMax.x, 0.1f);
 					ImGui::TreePop();
 				}
 			}
@@ -229,6 +242,7 @@ namespace Particle {
 					ImGui::DragFloat3("translate", &emitParam_[index].translate.x, 0.1f);
 					ImGui::DragFloat3("rotate", &emitParam_[index].rotate.x, 0.1f);
 					ImGui::DragFloat("radious", &emitParam_[index].radious, 0.1f);
+					ImGui::Separator();
 					wTs_[index].transform.scale = { emitParam_[index].radious,emitParam_[index].radious ,emitParam_[index].radious };
 					ImGui::TreePop();
 				}
@@ -241,7 +255,7 @@ namespace Particle {
 	{
 		if (particleControl_[index].useFlag_)
 		{
-			particleControl_[index].frequency += DeltaTimer(particleControl_[index].flame);
+			particleControl_[index].frequency += 1.0f / 60.0f;
 			if (particleControl_[index].frequency >= particleControl_[index].frequencyTime)
 			{
 				particleControl_[index].frequency = 0.0f;
