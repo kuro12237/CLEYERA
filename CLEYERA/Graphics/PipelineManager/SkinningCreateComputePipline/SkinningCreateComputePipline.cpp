@@ -81,15 +81,17 @@ void SkinningCreateComputePipline::CreateSkinningRootSignature(SPSOProperty& pso
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 	descriptionRootSignature.pStaticSamplers = nullptr;
 
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(pso.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
-		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	hr = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
 	assert(SUCCEEDED(hr));
 }

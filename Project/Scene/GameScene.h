@@ -62,9 +62,6 @@ private:
 
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 
-	unique_ptr<Particle::GpuParticle>gpuParticle_ = nullptr;
-	unique_ptr < Particle::ParticleEmitter < Particle::EmitType::BoxParam >> emitter_ = nullptr;
-
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;

@@ -38,7 +38,7 @@ void EnemyWalkManager::Update()
 		{
 			enemy->Update();
 			//€‚ñ‚¾‚çÁ‚·
-			if (enemy->GetIsDead())
+			if (enemy->GetIsEnd())
 			{
 				GameObjectManager::GetInstance()->ClearObj3dData(enemy->GetName());
 				enemy.reset();

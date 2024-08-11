@@ -41,101 +41,6 @@ void GraphicsPipelineManager::Initialize()
 	GraphicsPipelineManager::GetInstance()->gpuParticlePso_ = gpuPso;
 }
 
-void GraphicsPipelineManager::CreateRootSignature(ComPtr<ID3D12Device> device, D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature, SPSOProperty& result)
-{
-	//�o�C�i������
-	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &result.signatureBlob, &result.errorBlob);
-	if (FAILED(hr))
-	{
-		LogManager::Log(reinterpret_cast<char*>(result.errorBlob->GetBufferPointer()));
-		assert(false);
-	}
-
-	//�o�C�i������ɐ���
-	hr = device->CreateRootSignature(
-		0,
-		result.signatureBlob->GetBufferPointer(),
-		result.signatureBlob->GetBufferSize(),
-		IID_PPV_ARGS(&result.rootSignature)
-	);
-	assert(SUCCEEDED(hr));
-}
-
-void GraphicsPipelineManager::SettingInputElementDesc(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
-{
-	inputElementDescs.SemanticName = SemanticName;
-	inputElementDescs.SemanticIndex = SemanticIndex;
-	inputElementDescs.Format = Format;
-	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
-}
-
-void GraphicsPipelineManager::SettingBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blenddesc, BlendMode mode)
-{
-	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
-	blenddesc.BlendEnable = true;
-
-	switch (mode)
-	{
-	case BlendNone:
-		blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;
-		blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;
-		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
-		blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
-		break;
-	case BlendAdd:
-		blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;
-		blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;
-		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
-		blenddesc.DestBlend = D3D12_BLEND_ONE;
-		break;
-	case BlendSubtruct:
-		blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;
-		blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;
-		blenddesc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
-		blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
-		blenddesc.DestBlend = D3D12_BLEND_ONE;
-		break;
-	case BlendMultiply:
-		blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;
-		blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;
-		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlend = D3D12_BLEND_ZERO;
-		blenddesc.DestBlend = D3D12_BLEND_SRC_COLOR;
-		break;
-	case BlendScreen:
-		blenddesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlendAlpha = D3D12_BLEND_ONE;
-		blenddesc.DestBlendAlpha = D3D12_BLEND_ZERO;
-		blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
-		blenddesc.SrcBlend = D3D12_BLEND_INV_DEST_COLOR;
-		blenddesc.DestBlend = D3D12_BLEND_ONE;
-		break;
-	default:
-		break;
-	}
-
-}
-
-void GraphicsPipelineManager::SettingRasterizer(D3D12_RASTERIZER_DESC& rasterizerDesc, D3D12_CULL_MODE CullMode, D3D12_FILL_MODE FillMode)
-{
-	rasterizerDesc.CullMode = CullMode;
-	//�O�p�`�̒���h��Ԃ�
-	rasterizerDesc.FillMode = FillMode;
-}
-
-void GraphicsPipelineManager::SettingDepth(D3D12_DEPTH_STENCIL_DESC& despthStencilDesc, bool EnableFlag, D3D12_DEPTH_WRITE_MASK writeMask, D3D12_COMPARISON_FUNC Func)
-{
-	despthStencilDesc.DepthEnable = EnableFlag;
-	despthStencilDesc.DepthWriteMask = writeMask;
-	despthStencilDesc.DepthFunc = Func;
-}
 
 void GraphicsPipelineManager::CreateCompute(SPSO& pso)
 {
@@ -258,7 +163,7 @@ SPSOProperty GraphicsPipelineManager::CreateShape(ComPtr<ID3D12Device> device, C
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature�̍쐬
-	CreateRootSignature(
+	CreateGraphicsPiplineFanc::CreateRootSignature(
 		device,
 		descriptionRootSignature,
 		result
@@ -266,7 +171,7 @@ SPSOProperty GraphicsPipelineManager::CreateShape(ComPtr<ID3D12Device> device, C
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[1] = {};
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[0],
 		"POSITION",
 		0,
@@ -281,18 +186,18 @@ SPSOProperty GraphicsPipelineManager::CreateShape(ComPtr<ID3D12Device> device, C
 	//BlendState�̐ݒ�
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendNone);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
 	//Rasterrizer�ݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_FRONT,
 		D3D12_FILL_MODE_SOLID
 	);
 	//�[�x
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ALL,
@@ -374,7 +279,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature
-	CreateRootSignature(
+	CreateGraphicsPiplineFanc::CreateRootSignature(
 		device,
 		descriptionRootSignature,
 		result
@@ -382,7 +287,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 
 	//InputLayout
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[1] = {};
-	SettingInputElementDesc(inputElementDescs[0],
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(inputElementDescs[0],
 		"POSITION",
 		0,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
@@ -396,14 +301,14 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 	//BlendState�̐ݒ�
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(
+	CreateGraphicsPiplineFanc::SettingBlendState(
 		blenddesc,
 		BlendNone
 	);
 
 	//Rasterrizer�ݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_FRONT,
 		D3D12_FILL_MODE_SOLID
@@ -411,7 +316,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 
 	//�[�x�ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ALL,
@@ -532,12 +437,13 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature�쐬
-	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(
+		device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//Position
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[0],
 		"POSITION",
 		0,
@@ -545,7 +451,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//Texcoord
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[1],
 		"TEXCOORD",
 		0,
@@ -560,11 +466,11 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 	//BlendState
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendNone);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID
@@ -572,7 +478,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ALL,
@@ -670,12 +576,12 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dNone(ComPtr<ID3D12Device> de
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//rootSignature�̍쐬
-	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//position
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[0],
 		"POSITION",
 		0,
@@ -683,7 +589,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dNone(ComPtr<ID3D12Device> de
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//texcoord
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[1],
 		"TEXCOORD",
 		0,
@@ -698,18 +604,18 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dNone(ComPtr<ID3D12Device> de
 	//BlendState�̐ݒ��s��
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendNone);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID);
 
 	//�[�x�̐ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(despthStencilDesc,
+	CreateGraphicsPiplineFanc::SettingDepth(despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ZERO,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
@@ -807,7 +713,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//�V���A���C�Y���ăo�C�i���ɂ���
-	CreateRootSignature(
+	CreateGraphicsPiplineFanc::CreateRootSignature(
 		device,
 		descriptionRootSignature,
 		SpritePSO);
@@ -815,7 +721,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//Position
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[0],
 		"POSITION",
 		0,
@@ -823,7 +729,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//Texcoord
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[1],
 		"TEXCOORD",
 		0,
@@ -839,15 +745,15 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dAdd(ComPtr<ID3D12Device> dev
 	D3D12_BLEND_DESC blendDesc{};
 	//���ׂĂ̐F�v�f���������
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendAdd);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendAdd);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
+	CreateGraphicsPiplineFanc::SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
 
 	//�[�x�ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ZERO,
@@ -946,19 +852,19 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dSubtract(ComPtr<ID3D12Device
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature�̐���
-	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//Position
-	SettingInputElementDesc(inputElementDescs[0],
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(inputElementDescs[0],
 		"POSITION",
 		0,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//TexCoord
-	SettingInputElementDesc(inputElementDescs[1],
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(inputElementDescs[1],
 		"TEXCOORD",
 		0,
 		DXGI_FORMAT_R32G32_FLOAT,
@@ -973,15 +879,15 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dSubtract(ComPtr<ID3D12Device
 	D3D12_BLEND_DESC blendDesc{};
 	//���ׂĂ̐F�v�f���������
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendSubtruct);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendSubtruct);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
+	CreateGraphicsPiplineFanc::SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
 
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ZERO,
@@ -1079,19 +985,19 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dMultiply(ComPtr<ID3D12Device
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature�̍쐬
-	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//Position
-	SettingInputElementDesc(inputElementDescs[0],
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(inputElementDescs[0],
 		"POSITION",
 		0,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//TexCoord
-	SettingInputElementDesc(inputElementDescs[1],
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(inputElementDescs[1],
 		"TEXCOORD",
 		0,
 		DXGI_FORMAT_R32G32_FLOAT,
@@ -1105,15 +1011,15 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dMultiply(ComPtr<ID3D12Device
 	//BlendState�̐ݒ��s��
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendMultiply);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendMultiply);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
+	CreateGraphicsPiplineFanc::SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
 
 	//�[�x�̐ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(despthStencilDesc, true, D3D12_DEPTH_WRITE_MASK_ZERO, D3D12_COMPARISON_FUNC_LESS_EQUAL);
+	CreateGraphicsPiplineFanc::SettingDepth(despthStencilDesc, true, D3D12_DEPTH_WRITE_MASK_ZERO, D3D12_COMPARISON_FUNC_LESS_EQUAL);
 
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -1210,19 +1116,19 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dScreen(ComPtr<ID3D12Device> 
 
 	//�V���A���C�Y���ăo�C�i���ɂ���
 
-	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//Position
-	SettingInputElementDesc(inputElementDescs[0],
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(inputElementDescs[0],
 		"POSITION",
 		0,
 		DXGI_FORMAT_R32G32B32A32_FLOAT,
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//TexCoord
-	SettingInputElementDesc(inputElementDescs[1],
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(inputElementDescs[1],
 		"TEXCOORD",
 		0,
 		DXGI_FORMAT_R32G32_FLOAT,
@@ -1237,11 +1143,11 @@ SPSOProperty GraphicsPipelineManager::CreateSprite2dScreen(ComPtr<ID3D12Device> 
 	D3D12_BLEND_DESC blendDesc{};
 	//���ׂĂ̐F�v�f���������
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendScreen);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendScreen);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
+	CreateGraphicsPiplineFanc::SettingRasterizer(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
 	despthStencilDesc.DepthEnable = true;
@@ -1372,16 +1278,18 @@ SPSOProperty GraphicsPipelineManager::CreatePBR(ComPtr<ID3D12Device> device, Com
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &DirectionalLightPSO.signatureBlob, &DirectionalLightPSO.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(DirectionalLightPSO.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, DirectionalLightPSO.signatureBlob->GetBufferPointer(),
-		DirectionalLightPSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&DirectionalLightPSO.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&DirectionalLightPSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
@@ -1419,16 +1327,11 @@ SPSOProperty GraphicsPipelineManager::CreatePBR(ComPtr<ID3D12Device> device, Com
 	inputElementDescs[5].InputSlot = 1;
 	inputElementDescs[5].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-	//MORMAL�ŋN�����o�OFormat�̌^��ԈႦ�Ă���
-	//Vector3�̏ꍇ=DXGI_FORMAT_R32G32B32_FLOAT
-	//Vector2�̏ꍇ=DXGI_FORMAT_R32G32_FLOAT
-	//RGBA�ł������Ă���
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 
-	//BlendState�̐ݒ��s��
 	D3D12_BLEND_DESC blendDesc{};
 	//���ׂĂ̐F�v�f���������
 	blendDesc.RenderTarget[0].RenderTargetWriteMask =
@@ -1574,18 +1477,19 @@ SPSOProperty GraphicsPipelineManager::CreatePhong(ComPtr<ID3D12Device> device, C
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
-
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &DirectionalLightPSO.signatureBlob, &DirectionalLightPSO.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(DirectionalLightPSO.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, DirectionalLightPSO.signatureBlob->GetBufferPointer(),
-		DirectionalLightPSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&DirectionalLightPSO.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&DirectionalLightPSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
@@ -1756,21 +1660,21 @@ SPSOProperty GraphicsPipelineManager::CreatePhongNormalModel(ComPtr<ID3D12Device
 
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
-
-
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &PSO.signatureBlob, &PSO.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(PSO.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, PSO.signatureBlob->GetBufferPointer(),
-		PSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
@@ -1971,21 +1875,21 @@ SPSOProperty GraphicsPipelineManager::CreateSubsurfaceModel(ComPtr<ID3D12Device>
 
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
-
-
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &PSO.signatureBlob, &PSO.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(PSO.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, PSO.signatureBlob->GetBufferPointer(),
-		PSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
@@ -2147,12 +2051,12 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature�쐬
-	CreateRootSignature(device, descriptionRootSignature, ParticlePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, ParticlePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
 	//Position
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[0],
 		"POSITION",
 		0,
@@ -2160,14 +2064,14 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//Texcoord
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[1],
 		"TEXCOORD",
 		0,
 		DXGI_FORMAT_R32G32_FLOAT,
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[2],
 		"COLOR",
 		0,
@@ -2181,11 +2085,11 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 	//BlendState�̐ݒ�
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendNone);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID
@@ -2193,7 +2097,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dNone(ComPtr<ID3D12Device> 
 
 	//�[�x�ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ZERO,
@@ -2300,12 +2204,12 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature�쐬
-	CreateRootSignature(device, descriptionRootSignature, ParticlePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, ParticlePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
 	//Position
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[0],
 		"POSITION",
 		0,
@@ -2313,14 +2217,14 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//Texcoord
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[1],
 		"TEXCOORD",
 		0,
 		DXGI_FORMAT_R32G32_FLOAT,
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[2],
 		"COLOR",
 		0,
@@ -2334,11 +2238,11 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 	//BlendState�̐ݒ�
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendAdd);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendAdd);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID
@@ -2346,7 +2250,7 @@ SPSOProperty GraphicsPipelineManager::CreateParticle3dAdd(ComPtr<ID3D12Device> d
 
 	//�[�x�ݒ�
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ZERO,
@@ -2486,7 +2390,7 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//rootSignature�̍쐬
-	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
@@ -2502,19 +2406,19 @@ SPSOProperty GraphicsPipelineManager::CreatePostEffectTest(ComPtr<ID3D12Device> 
 	//BlendState�̐ݒ��s��
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendNone);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
 
 	//RasterrizerStat
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID);
 
 	//depth
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(despthStencilDesc,
+	CreateGraphicsPiplineFanc::SettingDepth(despthStencilDesc,
 		false,
 		D3D12_DEPTH_WRITE_MASK_ALL,
 		D3D12_COMPARISON_FUNC_LESS_EQUAL
@@ -2638,12 +2542,12 @@ SPSOProperty GraphicsPipelineManager::CreateShadow(ComPtr<ID3D12Device> device, 
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
 	//RootSignature�쐬
-	CreateRootSignature(device, descriptionRootSignature, SpritePSO);
+	CreateGraphicsPiplineFanc::CreateRootSignature(device, descriptionRootSignature, SpritePSO);
 
 	//InputLayout�̐ݒ�
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
 	//Position
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[0],
 		"POSITION",
 		0,
@@ -2651,7 +2555,7 @@ SPSOProperty GraphicsPipelineManager::CreateShadow(ComPtr<ID3D12Device> device, 
 		D3D12_APPEND_ALIGNED_ELEMENT
 	);
 	//Texcoord
-	SettingInputElementDesc(
+	CreateGraphicsPiplineFanc::SettingInputElementDesc(
 		inputElementDescs[1],
 		"TEXCOORD",
 		0,
@@ -2666,11 +2570,11 @@ SPSOProperty GraphicsPipelineManager::CreateShadow(ComPtr<ID3D12Device> device, 
 	//BlendState
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
-	SettingBlendState(blenddesc, BlendNone);
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
 	//RasterrizerState�ڐݒ�
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SettingRasterizer(
+	CreateGraphicsPiplineFanc::SettingRasterizer(
 		rasterizerDesc,
 		D3D12_CULL_MODE_BACK,
 		D3D12_FILL_MODE_SOLID
@@ -2678,7 +2582,7 @@ SPSOProperty GraphicsPipelineManager::CreateShadow(ComPtr<ID3D12Device> device, 
 
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	SettingDepth(
+	CreateGraphicsPiplineFanc::SettingDepth(
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ALL,

@@ -9,18 +9,20 @@ void CreateGraphicsPiplineFanc::SettingDepth(D3D12_DEPTH_STENCIL_DESC& despthSte
 
 void CreateGraphicsPiplineFanc::CreateRootSignature(ComPtr<ID3D12Device> device, D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature, SPSOProperty& result)
 {
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &result.signatureBlob, &result.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(result.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
 	hr = device->CreateRootSignature(
 		0,
-		result.signatureBlob->GetBufferPointer(),
-		result.signatureBlob->GetBufferSize(),
+		signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(),
 		IID_PPV_ARGS(&result.rootSignature)
 	);
 	assert(SUCCEEDED(hr));

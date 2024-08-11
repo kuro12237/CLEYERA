@@ -8,6 +8,7 @@
 
 #include"state/IEnemyWalkState.h"
 #include"state/EnemyWalkStateMove.h"
+#include"state/EnemyWalkStateDead.h"
 
 class EnemyWalk :public IObjectData, public ICollider
 {
@@ -23,11 +24,15 @@ public:
 
 #pragma region Get
 
-	bool GetIsHit() { return IsHit_; }
+	bool &GetIsHit() { return IsHit_; }
 
-	bool GetIsDead() { return isDead_; }
+	bool &GetIsDead() { return isDead_; }
 
-	float GetSpeed() { return speed_; }
+	bool &GetIsEnd() { return isEnd_; }
+
+	float &GetSpeed() { return speed_; }
+
+	void ChangeState(unique_ptr<IEnemyWalkState>state);
 
 #pragma endregion
 
@@ -35,10 +40,11 @@ private:
 
 	bool IsHit_ = false;
 	bool isDead_ = false;
+	bool isEnd_ = false;
 
 	float speed_ = -0.1f;
 
 	unique_ptr<IEnemyWalkState>state_ = nullptr;
-
+	GameObjectManager* gameObjIncetance_ = nullptr;
 };
 

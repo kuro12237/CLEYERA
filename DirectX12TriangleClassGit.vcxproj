@@ -112,6 +112,7 @@
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
+    <ClCompile Include="CLEYERA\Utility\Noise\NoiseTexture.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
     <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
+    <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
@@ -239,6 +241,7 @@
     <ClInclude Include="CLEYERA\Utility\LevelData\IGameObjectData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
+    <ClInclude Include="CLEYERA\Utility\Noise\NoiseTexture.h" />
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h" />
     <ClInclude Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.h" />
     <ClInclude Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.h" />
@@ -248,6 +251,7 @@
     <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
     <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />

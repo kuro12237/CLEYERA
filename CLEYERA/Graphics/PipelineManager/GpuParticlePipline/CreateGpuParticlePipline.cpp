@@ -50,18 +50,19 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_Init(ComPtr<ID3D12Device>devic
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	//rootsignatureの作成
 	assert(shader.csBlob != nullptr);
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(pso.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
-	hr = device->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
-		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
 	assert(SUCCEEDED(hr));
 
 	//psoの作成
@@ -159,16 +160,17 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_DebugDraw(ComPtr<ID3D12Device>
 
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
-
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(pso.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
-	hr = device->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
-		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
 	assert(SUCCEEDED(hr));
 
 	//InputLayOut作成
@@ -302,16 +304,18 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_Update(ComPtr<ID3D12Device> de
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 	//rootsignatureの作成
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	assert(shader.csBlob != nullptr);
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(pso.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
-	hr = device->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
-		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
 	assert(SUCCEEDED(hr));
 
 	//psoの作成
@@ -395,18 +399,19 @@ SPSOProperty CreateGpuParticle::CreateGpuParticcle_Emitter_Sphere(ComPtr<ID3D12D
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	//rootsignatureの作成
 	assert(shader.csBlob != nullptr);
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(pso.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
-	hr = device->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
-		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
 	assert(SUCCEEDED(hr));
 
 	//psoの作成
@@ -491,17 +496,19 @@ SPSOProperty CreateGpuParticle::CreateGpuParticcle_Emitter_Box(ComPtr<ID3D12Devi
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	//rootsignatureの作成
 	assert(shader.csBlob != nullptr);
 	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(pso.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
-	hr = device->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
-		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
 	assert(SUCCEEDED(hr));
 
 	//psoの作成

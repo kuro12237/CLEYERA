@@ -81,11 +81,11 @@ SPSOProperty SkinningCreatePipline::CreateSkinningPhongModel(ComPtr<ID3D12Device
 	hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&pso.GraphicsPipelineState));
 	assert(SUCCEEDED(hr));
-    
+
 	return pso;
 }
 
-void SkinningCreatePipline::CreateSkinningPhongRootSignature(ComPtr<ID3D12Device> device, SPSOProperty&pso)
+void SkinningCreatePipline::CreateSkinningPhongRootSignature(ComPtr<ID3D12Device> device, SPSOProperty& pso)
 {
 
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -154,7 +154,7 @@ void SkinningCreatePipline::CreateSkinningPhongRootSignature(ComPtr<ID3D12Device
 	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameters[7].DescriptorTable.pDescriptorRanges = NormalDescriptorRange;
 	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(NormalDescriptorRange);
-	
+
 	//skinningPallate
 	D3D12_DESCRIPTOR_RANGE descriptorRangeSkinningPallate[1] = {};
 	descriptorRangeSkinningPallate[0].BaseShaderRegister = 3;
@@ -185,15 +185,17 @@ void SkinningCreatePipline::CreateSkinningPhongRootSignature(ComPtr<ID3D12Device
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
 
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &pso.signatureBlob, &pso.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(pso.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, pso.signatureBlob->GetBufferPointer(),
-		pso.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
 	assert(SUCCEEDED(hr));
 }

@@ -34,30 +34,7 @@ void GameScene::Initialize()
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 
-	uint32_t texHandle = TextureManager::LoadPngTexture("smoke.png");
-	gpuParticle_ = make_unique<Particle::GpuParticle>();
-	gpuParticle_->Create(1, "landParticle");
-	gpuParticle_->SetTexhandle(texHandle);
 
-	emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
-	emitter_->CreateType(gpuParticle_);
-	auto& testSphere = emitter_->GetEmitParam()[0];
-	auto& control = emitter_->GetControlParam()[0];
-	testSphere.emit = 0;
-	testSphere.count = 36;
-	control.frequency = 1.0f;
-	control.frequencyTime = 4.0f;
-	control.useFlag_ = true;
-	//testSphere.radious = 2.0f;
-
-	auto& testSphereA = emitter_->GetEmitParam()[1];
-	auto& controlA = emitter_->GetControlParam()[1];
-	testSphereA.emit = 1;
-	testSphereA.count = 4;
-	controlA.frequency = 0.0f;
-	controlA.frequencyTime = 0.0f;
-	//testSphereA.radious = 2.0f;
-	controlA.useFlag_ = true;
 }
 
 void GameScene::Update(GameManager* Scene)
@@ -93,7 +70,6 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 
-	emitter_->ImGuiUpdate();
 #endif // _USE_IMGUI
 
 	player_->Update();
@@ -114,11 +90,7 @@ void GameScene::Update(GameManager* Scene)
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 
-	emitter_->Update();
 
-	emitter_->Emit(gpuParticle_);
-	gpuParticle_->CallBarrier();
-	gpuParticle_->Update();
 }
 
 void GameScene::PostProcessDraw()
@@ -126,8 +98,7 @@ void GameScene::PostProcessDraw()
 	PostEffect::GetInstance()->PreDraw();
 
 	gameObjectManager_->Draw();
-	gpuParticle_->Draw();
-	emitter_->SpownDraw();
+
 	PostEffect::GetInstance()->PostDraw();
 }
 
@@ -158,7 +129,6 @@ void GameScene::Collision()
 			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
 		}
 	}
-
 
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{

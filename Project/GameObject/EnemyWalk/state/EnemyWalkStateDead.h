@@ -2,11 +2,11 @@
 #include"IEnemyWalkState.h"
 #include"../EnemyWalk.h"
 
-class EnemyWalkStateMove:public IEnemyWalkState
+class EnemyWalkStateDead :public IEnemyWalkState
 {
 public:
-	EnemyWalkStateMove() {};
-	~EnemyWalkStateMove() {};
+	EnemyWalkStateDead() {};
+	~EnemyWalkStateDead() {};
 
 	void Initialize()override;
 
@@ -14,7 +14,6 @@ public:
 
 private:
 
-
+	float flame_ = 0.0f;
+	float flameMax_ = 60.0f;
 };
-
-

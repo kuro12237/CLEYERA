@@ -2,7 +2,8 @@
 
 void EnemyWalk::Initialize()
 {
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	gameObjIncetance_ = GameObjectManager::GetInstance();
+	auto& transform = gameObjIncetance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	SetObjectData(transform);
 	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
 	isExtrusion_ = true;
@@ -35,13 +36,20 @@ void EnemyWalk::OnCollision(ICollider* c)
 	{//ƒvƒŒƒCƒ„[‚Æ‚Ìˆ—
 		if (kPlayerBullet == c->GetId())
 		{
-			isDead_ = true;
+			if (!isDead_)
+			{
+				isDead_ = true;
+				ChangeState(make_unique<EnemyWalkStateDead>());
+			}
 		}
 
 		if (kPlayerId == c->GetId())
 		{
-
-			isDead_ = true;
+			if (!isDead_)
+			{
+				isDead_ = true;
+				ChangeState(make_unique<EnemyWalkStateDead>());
+			}
 		}
 	}
 
@@ -62,8 +70,15 @@ void EnemyWalk::OnCollision(ICollider* c)
 				speed_ *= -1.0f;
 			}
 		}
-		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+		auto& transform = gameObjIncetance_->GetObj3dData(name_)->GetWorldTransform().transform;
 		transform.translate.x += extrusion_.x;
 		transform.translate.y += extrusion_.y;
 	}
+}
+
+void EnemyWalk::ChangeState(unique_ptr<IEnemyWalkState> state)
+{
+	state_.release();
+	state_ = move(state);
+	state_->Initialize();
 }

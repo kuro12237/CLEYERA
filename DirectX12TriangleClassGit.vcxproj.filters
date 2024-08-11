@@ -487,6 +487,8 @@
     <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
+    <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.cpp" />
+    <ClCompile Include="CLEYERA\Utility\Noise\NoiseTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -796,6 +798,8 @@
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Model\primitive\Primitive.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
+    <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.h" />
+    <ClInclude Include="CLEYERA\Utility\Noise\NoiseTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

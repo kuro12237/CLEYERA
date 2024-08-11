@@ -9,7 +9,7 @@ public:
 
 	virtual void Initialize() = 0;
 
-	virtual void Update(EnemyWalk* e) = 0;
+	virtual void Update([[maybe_unused]] EnemyWalk* e) = 0;
 
 private:
 

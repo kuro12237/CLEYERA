@@ -103,17 +103,18 @@ SPSOProperty ModelCreatePipline::CreatePhongInstancingModel(ComPtr<ID3D12Device>
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &PSO.signatureBlob, &PSO.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(PSO.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, PSO.signatureBlob->GetBufferPointer(),
-		PSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
@@ -284,17 +285,18 @@ SPSOProperty ModelCreatePipline::CreateSkyBoxModel(ComPtr<ID3D12Device> device, 
 
 	descriptionRootSignature.pParameters = rootParameters;
 	descriptionRootSignature.NumParameters = _countof(rootParameters);
-
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	HRESULT hr = D3D12SerializeRootSignature(&descriptionRootSignature,
-		D3D_ROOT_SIGNATURE_VERSION_1, &PSO.signatureBlob, &PSO.errorBlob);
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
 	if (FAILED(hr))
 	{
-		LogManager::Log(reinterpret_cast<char*>(PSO.errorBlob->GetBufferPointer()));
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
-	hr = device->CreateRootSignature(0, PSO.signatureBlob->GetBufferPointer(),
-		PSO.signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&PSO.rootSignature));
 	assert(SUCCEEDED(hr));
 
 
