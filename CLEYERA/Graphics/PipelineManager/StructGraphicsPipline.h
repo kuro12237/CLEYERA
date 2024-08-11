@@ -4,7 +4,9 @@
 enum Piplines
 {
 	SHAPE,
-	PHONG
+	PHONG,
+	Particle_EMITTER_SPHARE,
+	Particle_EMITTER_BOX
 };
 
 struct SPSOProperty

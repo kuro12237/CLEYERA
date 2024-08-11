@@ -59,7 +59,7 @@ private:
 
 	static void DefferrdShading(SPSO &pso);
 
-	map<Piplines,map<string,SPSOProperty>> pip;
+	map<Piplines,map<string,SPSOProperty>> piplines_;
 
 	SPSO pso = {};
 	GpuParticlePso gpuParticlePso_ = {};
