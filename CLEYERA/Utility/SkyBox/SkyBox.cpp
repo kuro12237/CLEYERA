@@ -30,9 +30,9 @@ void SkyBox::Draw()
 
 	ComPtr<ID3D12GraphicsCommandList>command = DirectXCommon::GetInstance()->GetCommands().m_pList;
 
-	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPso().SkyBox;
-	command->SetGraphicsRootSignature(pso.rootSignature.Get());
-	command->SetPipelineState(pso.GraphicsPipelineState.Get());
+	//SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPso().SkyBox;
+	//command->SetGraphicsRootSignature(pso.rootSignature.Get());
+	//command->SetPipelineState(pso.GraphicsPipelineState.Get());
 
 	cVertex_->CommandVertexBufferViewCall();
 	cIndex->CommandIndexBufferViewCall();

@@ -51,7 +51,7 @@ void GameInstancing3dObject::Draw()
 {
 
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite3d.none;
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_3d, "None");
 	//if (UseLight_)
 	{
 		if (CommpandPipeline(PSO))
@@ -123,13 +123,13 @@ bool GameInstancing3dObject::CommpandPipeline(SPSOProperty& PSO)
 	{
 
 	case UE4_BRDF:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().PBR_Model;
+		//PSO = GraphicsPipelineManager::GetInstance()->GetPso().PBR_Model;
 		break;
 	case PHONG_NORMAL_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().phongNormalInstancing_Model;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PHONG, "Instancing_None");
 		break;
 	case PHONG_SUBSURFACE_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().PhongSubsurface_Model;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PHONG, "Subsurface");
 		break;
 
 	default:

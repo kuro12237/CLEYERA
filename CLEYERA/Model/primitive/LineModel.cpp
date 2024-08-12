@@ -49,7 +49,7 @@ void LineModel::Draw()
 void LineModel::CommandCall()
 {
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Line;
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::LINE_3d, "None");
 	commandList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commandList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 	vertex_->CommandVertexBufferViewCall();

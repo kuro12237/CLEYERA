@@ -68,7 +68,7 @@ void PostEffect::Draw()
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
 	SPSOProperty PSO = {};
-	PSO = GraphicsPipelineManager::GetInstance()->GetPso().PostEffectTest;
+	PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::POST_EFFECT, "None");
 
 	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());

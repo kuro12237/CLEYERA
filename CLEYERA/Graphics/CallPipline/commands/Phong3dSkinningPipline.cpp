@@ -2,7 +2,7 @@
 
 void Phong3dSkinningPipline::Exec(const SModelData& modelData)
 {
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().Phong_SkinningModel;
+	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PHONG, "Skinning_None");
 	SetPso(PSO);
 	CallCommand();
 

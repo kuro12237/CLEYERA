@@ -277,6 +277,7 @@
     <None Include="Resources\Shader\Particle\Particle.hlsli" />
     <None Include="Resources\Shader\Particle\MatrixFanc.hlsli" />
     <None Include="Resources\Shader\Particle\RandomGenerator.hlsli" />
+    <None Include="Resources\Shader\Phong\LightingObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -421,9 +422,6 @@
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\GameInstancing3dObject.cpp">
       <Filter>CLEYERA\Model\instancing</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.cpp">
-      <Filter>CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp">
       <Filter>CLEYERA\Model\ObjState</Filter>
     </ClCompile>
@@ -451,7 +449,6 @@
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\PipelineManager\SkinningCreateComputePipline\SkinningCreateComputePipline.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\IObjectData.cpp" />
     <ClCompile Include="Project\GameObject\Player\Player.cpp" />
@@ -489,6 +486,8 @@
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
     <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.cpp" />
     <ClCompile Include="CLEYERA\Utility\Noise\NoiseTexture.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\PipelineManager\Phong_CreatePipline\Phong_CreatePipline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -707,9 +706,6 @@
     <ClInclude Include="CLEYERA\Utility\ColorConverter\ColorConverter.h">
       <Filter>CLEYERA\Utility\Color</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\SkinningCreatePipline\SkinningCreatePipline.h">
-      <Filter>CLEYERA\Graphics\GraphicsPipelineManager\CreateSkinningGraphicsPipline</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Model\State\ModelSkinningState.h">
       <Filter>CLEYERA\Model\ObjState</Filter>
     </ClInclude>
@@ -754,7 +750,6 @@
     <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h">
       <Filter>CLEYERA\Utility\LevelData</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\SkinningCreateComputePipline\SkinningCreateComputePipline.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Project\GameObject\Player\Player.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\IObjectData.h" />
@@ -800,6 +795,8 @@
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
     <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.h" />
     <ClInclude Include="CLEYERA\Utility\Noise\NoiseTexture.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\PipelineManager\Phong_CreatePipline\Phong_CreatePipline.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -823,10 +820,10 @@
     <FxCompile Include="Resources\Shader\SpriteObject2d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_Model3dObject.PS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong\Phong_NormalMap_Model3dObject.PS.hlsl">
       <Filter>Shader\Lighting\testShader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_Model3dObject.VS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong\Phong_NormalMap_Model3dObject.VS.hlsl">
       <Filter>Shader\Lighting\testShader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PBR_ModelObject3d.PS.hlsl">
@@ -835,16 +832,10 @@
     <FxCompile Include="Resources\Shader\PBR_ModelObject3d.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_ModelObject3d.PS.hlsl">
-      <Filter>Shader\Lighting</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_ModelObject3d.VS.hlsl">
-      <Filter>Shader\Lighting</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_Subsurface_Model3dObject.PS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong\Phong_Subsurface_Model3dObject.PS.hlsl">
       <Filter>Shader\Lighting\testShader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_Subsurface_Model3dObject.VS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong\Phong_Subsurface_Model3dObject.VS.hlsl">
       <Filter>Shader\Lighting\testShader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\PostEffect.VS.hlsl">
@@ -856,7 +847,7 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.VS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\SkinningObject3d.VS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong\SkinningObject3d.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl">
@@ -868,10 +859,10 @@
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl">
       <Filter>Shader\PostEffect</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong\Phong_NormalMap_ModelInstancing3dObject.PS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
+    <FxCompile Include="Resources\Shader\Phong\Phong_NormalMap_ModelInstancing3dObject.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Line.VS.hlsl">

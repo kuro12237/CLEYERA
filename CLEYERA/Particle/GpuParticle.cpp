@@ -4,7 +4,7 @@ using namespace Particle;
 
 void GpuParticle::Create(const size_t kNum, string Name)
 {
-	particleNum_ = kNum*particleMin;
+	particleNum_ = kNum * particleMin;
 	name_ = Name;
 
 	{//’¸“_ì¬
@@ -75,7 +75,7 @@ void GpuParticle::Create(const size_t kNum, string Name)
 	}
 
 	{//‰Šú‰»CS_Dispatch
-		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().particleInit;
+		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_INIT, "None");;
 		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 		ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
 		commandList->SetDescriptorHeaps(1, heap);
@@ -95,11 +95,9 @@ void GpuParticle::Create(const size_t kNum, string Name)
 void GpuParticle::Update()
 {
 	{//‰Šú‰»CS_Dispatch
-		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().particleUpdate;
 		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
-		ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
-		commandList->SetDescriptorHeaps(1, heap);
 
+		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW,"None");
 		commandList->SetComputeRootSignature(pso.rootSignature.Get());
 		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 
@@ -114,7 +112,7 @@ void GpuParticle::Update()
 void GpuParticle::Draw()
 {
 	//Š·‚¦‚é
-	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetParticle().debugDraw;;
+	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None");
 
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	commandList->SetGraphicsRootSignature(pso.rootSignature.Get());

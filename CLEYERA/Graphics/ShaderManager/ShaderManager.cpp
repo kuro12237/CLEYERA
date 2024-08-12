@@ -176,33 +176,10 @@ void ShaderManager::PBR_ModelShader()
 
 void ShaderManager::PhongModelShader()
 {
-	SShaderMode shaders;
-	shaders.vertexBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_ModelObject3d.VS.hlsl",
-			L"vs_6_0");
-
-	shaders.pixelBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_ModelObject3d.PS.hlsl",
-			L"ps_6_0");
-	ShaderManager::Getinstance()->shaders_.Phong_Model = shaders;
 }
 
 void ShaderManager::ParticleShader()
 {
-
-	SShaderMode shaders;
-	shaders.vertexBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/ParticleObject3d.VS.hlsl",
-			L"vs_6_0");
-
-	shaders.pixelBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/ParticleObject3d.PS.hlsl",
-			L"ps_6_0");
-	ShaderManager::Getinstance()->shaders_.Particle = shaders;
 
 }
 void ShaderManager::PhongNormalModel()
@@ -210,12 +187,12 @@ void ShaderManager::PhongNormalModel()
 	SShaderMode shaders;
 	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_NormalMap_Model3dObject.VS.hlsl",
+			L"Resources/Shader/Phong/Phong_NormalMap_Model3dObject.VS.hlsl",
 			L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_NormalMap_Model3dObject.PS.hlsl",
+			L"Resources/Shader/Phong/Phong_NormalMap_Model3dObject.PS.hlsl",
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.Phong_Normal_Model = shaders;
@@ -226,12 +203,12 @@ void ShaderManager::PhongSubsurfaceModel()
 	SShaderMode shaders;
 	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_Subsurface_Model3dObject.VS.hlsl",
+			L"Resources/Shader/Phong/Phong_Subsurface_Model3dObject.VS.hlsl",
 			L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_Subsurface_Model3dObject.PS.hlsl",
+			L"Resources/Shader/Phong/Phong_Subsurface_Model3dObject.PS.hlsl",
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.Phong_subsurface_Model = shaders;
@@ -242,12 +219,12 @@ void ShaderManager::PhongNormalInstancingModel()
 	SShaderMode shaders;
 	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_NormalMap_ModelInstancing3dObject.VS.hlsl",
+			L"Resources/Shader/Phong/Phong_NormalMap_ModelInstancing3dObject.VS.hlsl",
 			L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_NormalMap_ModelINstancing3dObject.PS.hlsl",
+			L"Resources/Shader/Phong/Phong_NormalMap_ModelINstancing3dObject.PS.hlsl",
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.Phong_Normal_InstancingModel = shaders;
@@ -271,18 +248,6 @@ void ShaderManager::CreateLineShader()
 
 void ShaderManager::ColorPostProcess()
 {
-	SShaderMode shaders;
-	shaders.vertexBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/PostEffect/DeferredShading.VS.hlsl",
-			L"vs_6_0");
-
-	shaders.pixelBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/PostEffect/DeferredShading.PS.hlsl",
-			L"ps_6_0");
-
-	ShaderManager::Getinstance()->shaders_.ColorPostProcess = shaders;
 }
 
 
@@ -299,23 +264,11 @@ void ShaderManager::PostEffectTest()
 			L"Resources/Shader/PostEffect/PostEffect.PS.hlsl",
 			L"ps_6_0");
 
-	ShaderManager::Getinstance()->shaders_.PostEffectTest = shaders;
+	ShaderManager::Getinstance()->shaders_.PostEffect = shaders;
 }
 
 void ShaderManager::ShadowMap()
 {
-	SShaderMode shaders;
-	shaders.vertexBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/PostEffect/shadow.VS.hlsl",
-			L"vs_6_0");
-	shaders.pixelBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/PostEffect/shadow.PS.hlsl",
-			L"ps_6_0");
-
-
-	ShaderManager::Getinstance()->shaders_.shadowMapVS = shaders;
 }
 
 void ShaderManager::SkinningPhongModelShader()
@@ -323,12 +276,12 @@ void ShaderManager::SkinningPhongModelShader()
 	SShaderMode shaders{};
 	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/SkinningObject3d.VS.hlsl",
+			L"Resources/Shader/Phong/SkinningObject3d.VS.hlsl",
 			L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Phong_NormalMap_Model3dObject.PS.hlsl",
+			L"Resources/Shader/Phong/Phong_NormalMap_Model3dObject.PS.hlsl",
 			L"ps_6_0");
 	ShaderManager::Getinstance()->shaders_.skinningPhongModel = shaders;
 }
@@ -352,13 +305,6 @@ void ShaderManager::SkyBoxModel()
 void ShaderManager::CompileSkinningCs()
 {
 
-	SShaderMode shaders{};
-	shaders.csBlob =
-		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/Skinning.CS.hlsl",
-			L"cs_6_0");
-
-	ShaderManager::Getinstance()->shaders_.skinningCompute = shaders;
 }
 
 void ShaderManager::Particles()

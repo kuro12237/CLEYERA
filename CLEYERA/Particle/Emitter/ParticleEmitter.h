@@ -132,11 +132,11 @@ namespace Particle {
 		SPSOProperty pso = {};
 		//型のパイプラインをGet
 		if constexpr (std::is_same<T, Particle::EmitType::SphereParam>::value) {
-			pso = GraphicsPipelineManager::GetInstance()->GetParticle().particleEmitterSphere;
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_EMITTER, "Sphere");
 		}
 		else if constexpr (std::is_same<T, Particle::EmitType::BoxParam>::value) {
 
-			pso = GraphicsPipelineManager::GetInstance()->GetParticle().particleEmitterBox;
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_EMITTER, "Box");
 		}
 
 		ComPtr<ID3D12GraphicsCommandList> list = DirectXCommon::GetInstance()->GetCommands().m_pList;

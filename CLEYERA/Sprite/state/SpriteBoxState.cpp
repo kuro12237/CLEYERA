@@ -54,19 +54,20 @@ SPSOProperty SpriteBoxState::Get2dSpritePipeline(Sprite* state)
 	switch (state->GetBlendMode())
 	{
 	case BlendNone:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite2d.none;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "None");
+		break;;
 		break;
 	case BlendAdd:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite2d.Add;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Add");;
 		break;
 	case BlendSubtruct:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite2d.Subtruct;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Subtruct");
 		break;
 	case BlendMultiply:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite2d.Multiply;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Multiply");
 		break;
 	case BlendScreen:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().Sprite2d.Screen;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Screen");
 		break;
 
 	default:
@@ -82,7 +83,7 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 
 	if (texHandle == 0)
 	{
-		PSO = GraphicsPipelineManager::GetInstance()->GetPso().shape;
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::NONE_2d, "None");;
 	}
 	else if (!texHandle == 0)
 	{

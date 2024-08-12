@@ -1,14 +1,24 @@
 #pragma once
 #include"DirectXCommon.h"
 
-enum Piplines
+namespace Pipline
 {
-	SHAPE,
-	PHONG,
-	Particle_EMITTER_SPHARE,
-	Particle_EMITTER_BOX
-};
-
+	enum Piplines
+	{
+		NONE_2d,
+		NONE_3d,
+		SPRITE_2d,
+		SPRITE_3d,
+		LINE_3d,
+		POST_EFFECT,
+		PHONG,
+		PBR,
+		PARTICLE_EMITTER,
+		PARTICLE_DRAW,
+		PARTICLE_INIT,
+		PARTICLE_UPDATE
+	};
+}
 struct SPSOProperty
 {
 	ComPtr<ID3D12PipelineState> GraphicsPipelineState = nullptr;
@@ -31,16 +41,12 @@ struct SPSO
 	SPSOProperty Line;
 	SBlendPSO Sprite2d;
 	SBlendPSO Sprite3d;
-	SBlendPSO Particle3d;
 	SPSOProperty PBR_Model;
-	SPSOProperty Phong_Model;
 	SPSOProperty PhongNormal_Model;
 	SPSOProperty PhongSubsurface_Model;
 	SPSOProperty phongNormalInstancing_Model;
-	SBlendPSO LightingParticle3d;
 	SPSOProperty ColorPostProcess;
-	SPSOProperty PostEffectTest;
-	SPSOProperty shadow;
+	SPSOProperty PostEffect;
 	SPSOProperty Phong_SkinningModel;
 	SPSOProperty SkyBox;
 	SPSOProperty skinningCompute;

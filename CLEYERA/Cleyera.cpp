@@ -15,7 +15,7 @@ void Cleyera::Initialize()
 	DescriptorManager::Initialize();
 	RTVDescriptorManager::Initialize();
 	ShaderManager::Initialize();
-	GraphicsPipelineManager::Initialize();
+	GraphicsPipelineManager::GetInstance()->Initialize();
 	TextureManager::Initialize();
 	ImGuiManager::Initialize();
 	Input::Initialize();
@@ -51,6 +51,9 @@ void Cleyera::BeginFlame()
 	RTVDescriptorManager::BeginFlame();
 
 	RunTimeCounter::GetInstance()->Update();
+	ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
+	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
+	commandList->SetDescriptorHeaps(1, heap);
 }
 
 void Cleyera::EndFlame()

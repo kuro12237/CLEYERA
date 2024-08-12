@@ -21,21 +21,12 @@ struct SShaders
 	SShaderMode sprite2d;
 	SShaderMode Line;
 	SShaderMode PBR_Model;
-	SShaderMode Phong_Model;
 	SShaderMode Phong_Normal_Model;
 	SShaderMode Phong_Normal_InstancingModel;
 	SShaderMode Phong_subsurface_Model;
-	SShaderMode Particle;
-	SShaderMode LightParticle;
-	SShaderMode PostEffectTest;
-	SShaderMode shadowMapVS;
-	SShaderMode ColorModel;
-	SShaderMode NormalModel;
-	SShaderMode PosModel;
-	SShaderMode ColorPostProcess;
+	SShaderMode PostEffect;
 	SShaderMode skinningPhongModel;
 	SShaderMode SkyBoxModel;
-	SShaderMode skinningCompute;
 };
 
 struct  GpuParticleShader

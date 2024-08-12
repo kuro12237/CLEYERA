@@ -136,10 +136,10 @@ void DefferredShading::Draw()
 {
 	ColorBufferUpdate();
 	ComPtr<ID3D12GraphicsCommandList> m_pList = DirectXCommon::GetInstance()->GetCommands().m_pList;
-	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().ColorPostProcess;
+	//SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPso().ColorPostProcess;
 
-    m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+    //m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+	//m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
 	vertexBuffer_->CommandVertexBufferViewCall();
 	vertexBuffer_->CommandPrimitiveTopologyCall();
