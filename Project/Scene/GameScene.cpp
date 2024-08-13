@@ -8,9 +8,6 @@ void GameScene::Initialize()
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
 
-	debugCamera_ = make_unique<DebugCamera>();
-	debugCamera_->Initialize();
-
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
@@ -34,6 +31,8 @@ void GameScene::Initialize()
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 
+	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
+	characterDeadParticle_->Initialize();
 
 }
 
@@ -70,6 +69,7 @@ void GameScene::Update(GameManager* Scene)
 
 	player_->ImGuiUpdate();
 
+	characterDeadParticle_->ImGuiUpdate();
 #endif // _USE_IMGUI
 
 	player_->Update();
@@ -84,12 +84,11 @@ void GameScene::Update(GameManager* Scene)
 
 	gameObjectManager_->Update();
 
-	debugCamera_->Update();
-
 	GameObjectManager::GetInstance();
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 
+	characterDeadParticle_->Update();
 
 }
 
@@ -98,6 +97,7 @@ void GameScene::PostProcessDraw()
 	PostEffect::GetInstance()->PreDraw();
 
 	gameObjectManager_->Draw();
+	characterDeadParticle_->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
 }
@@ -109,7 +109,6 @@ void GameScene::Back2dSpriteDraw()
 void GameScene::Object3dDraw()
 {
 	PostEffect::GetInstance()->Draw();
-
 }
 
 void GameScene::Flont2dSpriteDraw()

@@ -25,6 +25,8 @@
 #include"Particle/GpuParticle.h"
 #include"Particle/Emitter/ParticleEmitter.h"
 
+#include"GameObject/Particles/CharacterDeadParticle.h"
+
 class GameScene :public IScene
 {
 public:
@@ -51,9 +53,6 @@ private:
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
-
-	unique_ptr<DebugCamera>debugCamera_ = nullptr;
-
 	string inputLevelDataFileName_ = "LevelData_1.json";
 
 	PointLight_param light_{};
@@ -65,4 +64,6 @@ private:
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
+
+	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 };

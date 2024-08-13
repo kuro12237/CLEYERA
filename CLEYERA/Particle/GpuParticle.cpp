@@ -97,7 +97,7 @@ void GpuParticle::Update()
 	{//‰Šú‰»CS_Dispatch
 		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 
-		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW,"None");
+		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_UPDATE , "None");
 		commandList->SetComputeRootSignature(pso.rootSignature.Get());
 		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
 

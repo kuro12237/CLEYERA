@@ -204,7 +204,6 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_DebugDraw(ComPtr<ID3D12Device>
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 	//Blend設定
-	//���ׂĂ̐F�v�f���������
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
 	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
 	blenddesc.BlendEnable = true;
@@ -245,9 +244,6 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_DebugDraw(ComPtr<ID3D12Device>
 
 	hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&pso.GraphicsPipelineState));
-	assert(SUCCEEDED(hr));
-
-
 	assert(SUCCEEDED(hr));
 
 	return pso;

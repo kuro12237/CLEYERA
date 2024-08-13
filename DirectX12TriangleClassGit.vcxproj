@@ -131,6 +131,7 @@
     <ClCompile Include="Project\GameObject\GravityManager\GravityManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Project\GameObject\ObjectManager\IObjectData.cpp" />
+    <ClCompile Include="Project\GameObject\Particles\CharacterDeadParticle.cpp" />
     <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="Project\GameObject\GravityManager\GravityManager.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Project\GameObject\ObjectManager\IObjectData.h" />
+    <ClInclude Include="Project\GameObject\Particles\CharacterDeadParticle.h" />
     <ClInclude Include="Project\GameObject\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Project\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
     <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
