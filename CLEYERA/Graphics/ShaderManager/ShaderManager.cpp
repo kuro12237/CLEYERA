@@ -102,6 +102,7 @@ void ShaderManager::ShaderComples()
 	PhongNormalModel();
 	PhongSubsurfaceModel();
 	PhongNormalInstancingModel();
+	Phong_DissolveShader();
 
 	ColorPostProcess();
 
@@ -176,6 +177,22 @@ void ShaderManager::PBR_ModelShader()
 
 void ShaderManager::PhongModelShader()
 {
+}
+
+void ShaderManager::Phong_DissolveShader()
+{
+	SShaderMode shaders;
+	shaders.vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Phong/Phong_NormalMap_Model3dObject.VS.hlsl",
+			L"vs_6_0");
+
+	shaders.pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Phong/Phong_Dissolve_Model3dObject.PS.hlsl",
+			L"ps_6_0");
+
+	ShaderManager::Getinstance()->shaders_.Phong_Dissolve_Model = shaders;
 }
 
 void ShaderManager::ParticleShader()

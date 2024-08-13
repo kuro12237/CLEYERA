@@ -4,6 +4,7 @@
 #include"Graphics/CallPipline/commands/Default3dPiplineCommand.h"
 #include"commands/Phong3dPiplineCommand.h"
 #include"commands/Phong3dSkinningPipline.h"
+#include"commands/Phong3dDissolvePiplineCommand.h"
 
 class PipelineHandler
 {

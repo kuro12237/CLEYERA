@@ -39,6 +39,7 @@ void EnemyWalk::OnCollision(ICollider* c)
 			if (!isDead_)
 			{
 				isDead_ = true;
+				gameObjIncetance_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), name_);
 				ChangeState(make_unique<EnemyWalkStateDead>());
 			}
 		}
@@ -48,6 +49,7 @@ void EnemyWalk::OnCollision(ICollider* c)
 			if (!isDead_)
 			{
 				isDead_ = true;
+				gameObjIncetance_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), name_);
 				ChangeState(make_unique<EnemyWalkStateDead>());
 			}
 		}

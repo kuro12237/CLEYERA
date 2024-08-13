@@ -36,21 +36,20 @@ struct ColorModelDesc
 	float grayFactor_ = 0.0f;
 };
 
-enum ModelShaderSelect
-{
-	UE4_BRDF = 0,
-	PHONG_NORMAL_MODEL = 1,
-	PHONG_SUBSURFACE_MODEL = 2
+struct EdgeDesc {
+
+	float mask = 0.0f;
+	Math::Vector::Vector2 minmax = {};
+	Math::Vector::Vector4 edgeColor = { 1.0f,1.0f,1.0f,1.0f };
 };
 
 struct Game3dObjectDesc
 {
-
-	ModelShaderSelect select = PHONG_NORMAL_MODEL;
 	PhongModelDesc phongDesc;
 	SSSModelDesc sssDesc;
 	PBRModelDesc pbrDesc;
 	ColorModelDesc colorDesc;
+	EdgeDesc edgeDesc;
 
 	bool useLight = false;
 

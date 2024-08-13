@@ -19,6 +19,7 @@
 #include"Utility/CameraManager/CameraManager.h"
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
 #include"Particle/GpuParticle.h"
+#include"Utility/Noise/NoiseTexture.h"
 
 class Cleyera
 {

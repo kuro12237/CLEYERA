@@ -1,4 +1,4 @@
-#include"LightingObject3d.hlsli"
+#include"PhongObject3d.hlsli"
 
 StructuredBuffer<TransformationMatrix> gTransformationMatrix : register(t0);
 

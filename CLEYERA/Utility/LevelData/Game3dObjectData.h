@@ -23,21 +23,21 @@ public:
 	void SetGameObjeDesc(Game3dObjectDesc desc) { gameObject_->SetDesc( desc); }
 	void SetModelHandle(uint32_t handle) { modelHandle_ = handle; }
 
+	void ChangePipline(unique_ptr<IPipelineCommand> piplineSelect);
+
 #pragma endregion
 
 #pragma region Get
 
 	unique_ptr<Game3dObject>& GetGameObject() { return gameObject_; }
-	Game3dObjectDesc GetDesc() { return objectDesc_; }
+	Game3dObjectDesc &GetDesc() { return gameObject_->GetDesc(); }
 #pragma endregion
 
 private:
 
 	std::string modelFileName_;
-	Game3dObjectDesc objectDesc_;
 	unique_ptr<Game3dObject>gameObject_;
 	uint32_t modelHandle_ = 0;
-
 
 	SAnimation::Skeleton skelton_ = {};
 	SAnimation::Animation animationData_;

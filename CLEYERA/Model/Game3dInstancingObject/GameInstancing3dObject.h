@@ -43,7 +43,6 @@ private:
 
 	bool UseLight_ = false;
 
-	uint32_t ModelShaderSelect_ = PHONG_NORMAL_MODEL;
 
 	vector<shared_ptr<IGameInstancing3dObject>>params_{};
 

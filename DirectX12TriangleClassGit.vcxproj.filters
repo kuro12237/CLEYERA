@@ -277,7 +277,7 @@
     <None Include="Resources\Shader\Particle\Particle.hlsli" />
     <None Include="Resources\Shader\Particle\MatrixFanc.hlsli" />
     <None Include="Resources\Shader\Particle\RandomGenerator.hlsli" />
-    <None Include="Resources\Shader\Phong\LightingObject3d.hlsli" />
+    <None Include="Resources\Shader\Phong\PhongObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -425,7 +425,7 @@
     <ClCompile Include="CLEYERA\Model\State\ModelSkinningState.cpp">
       <Filter>CLEYERA\Model\ObjState</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Graphics\CallPipline\PiplineHandler.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\PipelineHandler.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.cpp">
       <Filter>CLEYERA\Graphics\CallPipline\commands\3d</Filter>
     </ClCompile>
@@ -488,6 +488,7 @@
     <ClCompile Include="CLEYERA\Utility\Noise\NoiseTexture.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\Phong_CreatePipline\Phong_CreatePipline.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dDissolvePiplineCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -797,6 +798,7 @@
     <ClInclude Include="CLEYERA\Utility\Noise\NoiseTexture.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\Phong_CreatePipline\Phong_CreatePipline.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dDissolvePiplineCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -880,5 +882,6 @@
     <FxCompile Include="Resources\Shader\Particle\Update\Particle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeShpere.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Phong\Phong_Dissolve_Model3dObject.PS.hlsl" />
   </ItemGroup>
 </Project>

@@ -208,6 +208,11 @@ void GameObjectManager::CameraReset(string name)
 	}
 }
 
+void GameObjectManager::SetObjectPipline(unique_ptr<IPipelineCommand> piplineSelect, string name)
+{
+	obj3dData_[name]->ChangePipline(move(piplineSelect));
+}
+
 void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData>& data)
 {
 	if (!data->GetChildsName().empty())

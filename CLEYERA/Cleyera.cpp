@@ -27,7 +27,7 @@ void Cleyera::Initialize()
 	GlobalVariables::GetInstance()->LoadFiles();
 	CameraManager::GetInstance()->Initialize();
 	RunTimeCounter::GetInstance()->Create();
-
+	NoiseTexture::GetInstance()->Initialize();
 }
 
 void Cleyera::Finalize()

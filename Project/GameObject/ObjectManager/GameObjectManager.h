@@ -22,9 +22,6 @@ public:
 
 #pragma region Update
 
-	/// <summary>
-	/// éwíËÇµÇ»Ç©Ç¡ÇΩÇ‡ÇÃÇÃçXêV
-	/// </summary>
 	void Update();
 
 	void ImGuiUpdate();
@@ -49,6 +46,9 @@ public:
 
 	shared_ptr<Game3dInstancingObjectData>& GetObjInstancingData(string name);
 
+
+	Game3dObjectDesc& GetObjectDesc(string name) { return obj3dData_[name]->GetDesc(); }
+
 #pragma endregion
 
 #pragma region Set
@@ -56,6 +56,8 @@ public:
 	void SetParent(string parentName, string childName);
 
 	void CameraReset(string name="");
+
+	void SetObjectPipline(unique_ptr<IPipelineCommand> piplineSelect, string name);
 
 #pragma endregion
 

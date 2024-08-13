@@ -17,14 +17,13 @@ public:
 
 	void SetModel(uint32_t index);
 
-	//void SetModel(const string filePath);
+	void ChangePipline(unique_ptr<IPipelineCommand> piplineSelect);
 
 	void Draw(WorldTransform worldTransform);
 
 	void CreateSkinningParameter();
 
 	void SkeletonUpdate(string fileName, float t);
-
 	void SkinningUpdate();
 
 	void SetObjectName(const string& name) { name_ = name; }
@@ -41,6 +40,8 @@ public:
 
 	SAnimation::Skeleton &GetSkeleton() { return skeleton_; }
 	bool GetSkinningFlag() { return skinningFlag_; }
+	Game3dObjectDesc& GetDesc() { return game3dObjectDesc_; }
+
 #pragma endregion
 
 

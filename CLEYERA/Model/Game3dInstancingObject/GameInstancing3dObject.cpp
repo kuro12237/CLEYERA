@@ -72,14 +72,9 @@ void GameInstancing3dObject::Draw()
 	DescriptorManager::rootParamerterCommand(7, normalTexHandle_);
 	if (UseLight_)
 	{
-		if (ModelShaderSelect_ == PHONG_NORMAL_MODEL || ModelShaderSelect_ == UE4_BRDF || ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
+		//if (ModelShaderSelect_ == PHONG_NORMAL_MODEL || ModelShaderSelect_ == UE4_BRDF || ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
 		{
 			DescriptorManager::rootParamerterCommand(7, normalTexHandle_);
-
-			if (ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
-			{
-				DescriptorManager::rootParamerterCommand(8, baseTexHandle_);
-			}
 		}
 	}
 	model_->Draw(uint32_t(params_.size()));
@@ -119,21 +114,7 @@ void GameInstancing3dObject::PushVector(shared_ptr<IGameInstancing3dObject> obj,
 
 bool GameInstancing3dObject::CommpandPipeline(SPSOProperty& PSO)
 {
-	switch (ModelShaderSelect_)
-	{
 
-	case UE4_BRDF:
-		//PSO = GraphicsPipelineManager::GetInstance()->GetPso().PBR_Model;
-		break;
-	case PHONG_NORMAL_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PHONG, "Instancing_None");
-		break;
-	case PHONG_SUBSURFACE_MODEL:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PHONG, "Subsurface");
-		break;
-
-	default:
-		break;
-	}
+	PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PHONG, "Instancing_None");
 	return false;
 }

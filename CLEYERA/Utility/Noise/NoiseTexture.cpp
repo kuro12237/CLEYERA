@@ -8,6 +8,7 @@ NoiseTexture* NoiseTexture::GetInstance()
 
 void NoiseTexture::Initialize()
 {
+	TextureManager::UnUsedFilePath();
 	index_ = TextureManager::LoadPngTexture(name);
 }
 

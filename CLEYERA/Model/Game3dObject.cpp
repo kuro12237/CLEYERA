@@ -27,18 +27,12 @@ void Game3dObject::SetModel(uint32_t index)
 
 	prevModelIndex_ = index;
 }
-//
-//void Game3dObject::SetModel(const string filePath)
-//{
-//	uint32_t index = ModelManager::GetIndex(filePath);
-//	if (prevModelIndex_ != index)
-//	{
-//		model_ = ModelManager::GetModel(index);
-//		model_->SetDesc(game3dObjectDesc_);
-//	}
-//
-//	prevModelIndex_ = index;
-//}
+
+void Game3dObject::ChangePipline(unique_ptr<IPipelineCommand> piplineSelect)
+{
+	piplineHandler_->UsePipeline(piplineSelect);
+}
+
 
 void Game3dObject::Draw(WorldTransform worldTransform)
 {
@@ -49,14 +43,6 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 
 	modelData_ = model_->GetModelData();
 
-	if (skinningFlag_)
-	{
-		//ComPtr<ID3D12GraphicsCommandList>command_list  = DirectXCommon::GetInstance()->GetCommands().m_pList;
-		//command_list->SetComputeRootSignature(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.rootSignature.Get());
-		//command_list->SetPipelineState(GraphicsPipelineManager::GetInstance()->GetPso().skinningCompute.GraphicsPipelineState.Get());
-
-		//command_list->Dispatch(UINT(modelData_.vertices.size() + 1023) / 1024, 1, 1);
-	}
 
 	MaterialBuffer_->Map();
     //Descの情報をMaterialに変換
@@ -155,6 +141,9 @@ Material Game3dObject::MaterialConverter()
 	result.scatterCoefficient = game3dObjectDesc_.sssDesc.scatterCoefficient_;
 	result.scatterDistance = game3dObjectDesc_.sssDesc.scatterDistance_;
 	result.absorptionCoefficient = game3dObjectDesc_.sssDesc.scatterCoefficient_;
+	result.dissolveMask = game3dObjectDesc_.edgeDesc.mask;
+	result.dissolveEdgeMinMax = game3dObjectDesc_.edgeDesc.minmax;
+	result.dissolveEdgeColor = game3dObjectDesc_.edgeDesc.edgeColor;
 
 	return result;
 }

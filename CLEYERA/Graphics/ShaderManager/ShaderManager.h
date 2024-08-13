@@ -23,7 +23,8 @@ struct SShaders
 	SShaderMode PBR_Model;
 	SShaderMode Phong_Normal_Model;
 	SShaderMode Phong_Normal_InstancingModel;
-	SShaderMode Phong_subsurface_Model;
+	SShaderMode Phong_Dissolve_Model;
+ 	SShaderMode Phong_subsurface_Model;
 	SShaderMode PostEffect;
 	SShaderMode skinningPhongModel;
 	SShaderMode SkyBoxModel;
@@ -71,6 +72,7 @@ private:
 	static void Sprite2dShader();
 	static void PBR_ModelShader();
 	static void PhongModelShader();
+	static void Phong_DissolveShader();
 	static void ParticleShader();
 	static void PhongNormalModel();
 	static void PhongSubsurfaceModel();

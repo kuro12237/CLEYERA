@@ -14,6 +14,7 @@ public:
 
 private:
 
+	GameObjectManager* gameObjIncetance_ = nullptr;
 	float flame_ = 0.0f;
-	float flameMax_ = 60.0f;
+	float flameMax_ = 1.0f;
 };

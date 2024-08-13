@@ -2,7 +2,6 @@
 
 void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc desc, uint32_t modelHandle)
 {
-	objectDesc_ = desc;
 	modelHandle_ = modelHandle;
 
 	worldTransform_.Initialize();
@@ -12,7 +11,7 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 	if (ObjectType_ == "MESH")
 	{
 		gameObject_->Create(make_unique<Phong3dPipline>());
-		gameObject_->SetDesc(objectDesc_);
+		gameObject_->SetDesc(desc);
 		gameObject_->SetModel(modelHandle_);
 
 	}
@@ -21,7 +20,7 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 		gameObject_->Create(make_unique<Phong3dSkinningPipline>());
 		gameObject_->SetModel(modelHandle_);
 		gameObject_->SetName(objectName_);
-		gameObject_->SetDesc(objectDesc_);
+		gameObject_->SetDesc(desc);
 
 		AnimationManager::GetInstance()->LoadAnimation(modelFilePath_);
 		animationData_ = AnimationManager::GetInstance()->GetData(modelFilePath_);
@@ -49,6 +48,10 @@ void Game3dObjectData::SetData(Game3dObjectData* data)
 	modelHandle_ = data->modelHandle_;
 	modelFileName_ = data->modelFileName_;
 	gameObject_ = move(data->gameObject_);
-	objectDesc_ = data->objectDesc_;
 	childName_ = data->childName_;
+}
+
+void Game3dObjectData::ChangePipline(unique_ptr<IPipelineCommand> piplineSelect)
+{
+	gameObject_->ChangePipline(move(piplineSelect));
 }

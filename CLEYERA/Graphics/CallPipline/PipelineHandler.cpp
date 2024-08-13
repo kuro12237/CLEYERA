@@ -2,6 +2,11 @@
 
 void PipelineHandler::UsePipeline(unique_ptr<IPipelineCommand> &usePipline)
 {
+
+	if (command_)
+	{
+		command_.release();
+	}
 	command_ = move(usePipline);
 }
 

@@ -1,4 +1,4 @@
-#include"LightingObject3d.hlsli"
+#include"PhongObject3d.hlsli"
 
 ConstantBuffer<Material> gMaterial : register(b0);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
