@@ -28,7 +28,7 @@ public:
 
 	static PostEffect* GetInstance();
 
-	void Initialize(const string& name);
+	void Initialize();
 	void Update();
 	void Draw();
 

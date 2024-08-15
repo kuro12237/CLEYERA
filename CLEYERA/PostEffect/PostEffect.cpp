@@ -6,9 +6,8 @@ PostEffect* PostEffect::GetInstance()
 	return &instatnce;
 }
 
-void PostEffect::Initialize(const string& name)
+void PostEffect::Initialize()
 {
-	name;
 	if (isInitialize_)
 	{
 		return;
