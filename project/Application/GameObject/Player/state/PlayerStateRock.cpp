@@ -1,0 +1,26 @@
+#include "PlayerStateRock.h"
+
+void PlayerStateRock::Initialize(Player* p)
+{
+	p;
+	gameInst = GameObjectManager::GetInstance();
+
+	Game3dObjectDesc desc;
+	desc.colorDesc.grayFactor_ = 1.0f;
+	gameInst->GetObj3dData(p->GetName())->SetGameObjeDesc(desc);
+	p->SetRockState(true);
+}
+
+void PlayerStateRock::Update(Player* p)
+{
+	timer_ += DeltaTimer(flame_);
+	if (timer_ >= MaxTimer_)
+	{
+		Game3dObjectDesc desc;
+		desc.colorDesc.grayFactor_ = 0.0f;
+		gameInst->GetObj3dData(p->GetName())->SetGameObjeDesc(desc);
+
+		p->SetRockState(false);
+		p->ChangeState(make_unique<PlayerStateNone>());
+	}
+}

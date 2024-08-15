@@ -232,9 +232,6 @@
     <Filter Include="Project\GameObject\testObject">
       <UniqueIdentifier>{18387c0a-4ec7-4337-8dc9-642df4dbdffe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Scene\Game\TestLevelData">
-      <UniqueIdentifier>{9ed4d57f-f937-4e16-a649-7102e7aea6cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CLEYERA\Utility\LevelData">
       <UniqueIdentifier>{9547930a-9d27-4a3d-8fdc-098b93a6998e}</UniqueIdentifier>
     </Filter>
@@ -324,10 +321,6 @@
     </ClCompile>
     <ClCompile Include="CLEYERA\Input\Input.cpp">
       <Filter>CLEYERA\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Project\GameManager\GameManager.cpp">
-      <Filter>Project</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp">
       <Filter>CLEYERA\Utility\FileLoader</Filter>
@@ -444,54 +437,56 @@
     <ClCompile Include="CLEYERA\Model\primitive\LineModel.cpp">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClCompile>
-    <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
-    <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\SkyBox\SkyBox.cpp" />
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp" />
-    <ClCompile Include="Project\GameObject\ObjectManager\GameObjectManager.cpp" />
-    <ClCompile Include="Project\GameObject\ObjectManager\IObjectData.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Player.cpp" />
-    <ClCompile Include="Project\GameObject\GameCollider\ICollider.cpp" />
-    <ClCompile Include="Project\GameObject\GameCollider\BoxCollisionManager.cpp" />
-    <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalk.cpp" />
-    <ClCompile Include="Project\GameObject\Block\BlockManager.cpp" />
-    <ClCompile Include="Project\GameObject\Block\Block.cpp" />
-    <ClCompile Include="Project\GameObject\GravityManager\GravityManager.cpp" />
-    <ClCompile Include="Project\GameObject\Player\command\PlayerJampCommand.cpp" />
-    <ClCompile Include="Project\GameObject\Player\command\PlayerCommandHandler.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerManager.cpp" />
-    <ClCompile Include="Project\GameObject\Player\command\PlayerMoveCommand.cpp" />
-    <ClCompile Include="Project\GameObject\Player\state\PlayerStateNone.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Gun\PlayerGun.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
-    <ClCompile Include="Project\GameObject\Player\Bullet\PlayerBullet.cpp" />
-    <ClCompile Include="Project\GameObject\Player\command\PlayerShootCommand.cpp" />
-    <ClCompile Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
-    <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
-    <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
-    <ClCompile Include="Project\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
-    <ClCompile Include="Project\GameObject\Player\command\playerDashMoveCommand.cpp" />
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.cpp" />
     <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
-    <ClCompile Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.cpp" />
     <ClCompile Include="CLEYERA\Utility\Noise\NoiseTexture.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\Phong_CreatePipline\Phong_CreatePipline.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dDissolvePiplineCommand.cpp" />
-    <ClCompile Include="Project\GameObject\Particles\CharacterDeadParticle.cpp" />
-    <ClCompile Include="Project\Scene\TitleScene.cpp" />
-    <ClCompile Include="Project\GameObject\StartCount\StartCount.cpp" />
+    <ClCompile Include="Application\GameManager\GameManager.cpp" />
+    <ClCompile Include="Application\GameObject\Block\Block.cpp" />
+    <ClCompile Include="Application\GameObject\Block\BlockManager.cpp" />
+    <ClCompile Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateDead.cpp" />
+    <ClCompile Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
+    <ClCompile Include="Application\GameObject\EnemyWalk\EnemyWalk.cpp" />
+    <ClCompile Include="Application\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
+    <ClCompile Include="Application\GameObject\GameCollider\BoxCollisionManager.cpp" />
+    <ClCompile Include="Application\GameObject\GameCollider\ICollider.cpp" />
+    <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectManager\GameObjectManager.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectManager\IObjectData.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\CharacterDeadParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Application\GameObject\Player\command\PlayerCommandHandler.cpp" />
+    <ClCompile Include="Application\GameObject\Player\command\playerDashMoveCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Player\command\PlayerJampCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Player\command\PlayerMoveCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Player\command\PlayerShootCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Gun\PlayerGun.cpp" />
+    <ClCompile Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Reticle\PlayerReticle.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateNone.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateRock.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Player.cpp" />
+    <ClCompile Include="Application\GameObject\Player\PlayerManager.cpp" />
+    <ClCompile Include="Application\GameObject\StartCount\StartCount.cpp" />
+    <ClCompile Include="Application\Scene\GameScene.cpp" />
+    <ClCompile Include="Application\Scene\TitleScene.cpp" />
+    <ClCompile Include="Application\SceneFileLoder\SceneFileLoader.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -553,12 +548,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h">
       <Filter>CLEYERA\Sprite\state</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\GameManager\GameManager.h">
-      <Filter>Project</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Scene\IScene.h">
-      <Filter>Project\Scene</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Input\Input.h">
       <Filter>CLEYERA\Input</Filter>
@@ -674,9 +663,6 @@
     <ClInclude Include="CLEYERA\Model\Game3dObjectDesc.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Utility\ObjectId\GameObjectId.h">
-      <Filter>Project\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Utility\DeltaTimer\DeltaTimer.h">
       <Filter>Project\Utility\Deltatimer</Filter>
     </ClInclude>
@@ -743,68 +729,67 @@
     <ClInclude Include="CLEYERA\Model\primitive\LineModel.h">
       <Filter>CLEYERA\Model\Primitive</Filter>
     </ClInclude>
-    <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h">
-      <Filter>Project\SceneFileLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Scene\GameScene.h">
-      <Filter>Project\Scene\Game\TestLevelData</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Utility\SkyBox\SkyBox.h" />
     <ClInclude Include="CLEYERA\Utility\CameraManager\CameraManager.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h">
       <Filter>CLEYERA\Utility\LevelData</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\ObjectManager\GameObjectManager.h" />
-    <ClInclude Include="Project\GameObject\Player\Player.h" />
-    <ClInclude Include="Project\GameObject\ObjectManager\IObjectData.h" />
-    <ClInclude Include="Project\GameObject\GameCollider\ICollider.h" />
-    <ClInclude Include="Project\GameObject\GameCollider\BoxCollisionManager.h" />
-    <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalk.h" />
-    <ClInclude Include="Project\GameObject\Block\BlockManager.h" />
-    <ClInclude Include="Project\GameObject\Block\Block.h" />
-    <ClInclude Include="Project\GameObject\GravityManager\GravityManager.h" />
-    <ClInclude Include="Project\GameObject\Player\command\IPlayerCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\command\PlayerJampCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\command\PlayerCommandHandler.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerManager.h" />
-    <ClInclude Include="Project\GameObject\Player\command\PlayerMoveCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
-    <ClInclude Include="Project\GameObject\Player\state\PlayerStateNone.h" />
-    <ClInclude Include="Project\GameObject\Player\Reticle\PlayerReticle.h" />
-    <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h" />
-    <ClInclude Include="Project\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\Gun\PlayerGun.h" />
-    <ClInclude Include="Project\GameObject\Player\Bullet\PlayerBullet.h" />
-    <ClInclude Include="Project\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
-    <ClInclude Include="Project\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
-    <ClInclude Include="Project\GameObject\Player\command\PlayerShootCommand.h" />
-    <ClInclude Include="Project\GameObject\Player\PlayerCamera\PlayerCamera.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\Game3dObjectData.h" />
-    <ClInclude Include="Project\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
-    <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
-    <ClInclude Include="Project\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\GameCameraData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\IGameObjectData.h" />
-    <ClInclude Include="Project\GameObject\Player\command\PlayerSquatCommand.h" />
-    <ClInclude Include="Project\GameObject\EnemyWalk\EnemyWalkManager.h" />
     <ClInclude Include="CLEYERA\CreateResource\IBufferResource.h" />
-    <ClInclude Include="Project\GameObject\Player\command\playerDashMoveCommand.h" />
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.h" />
     <ClInclude Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h" />
     <ClInclude Include="CLEYERA\Model\primitive\Primitive.h" />
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h" />
-    <ClInclude Include="Project\GameObject\EnemyWalk\state\EnemyWalkStateDead.h" />
     <ClInclude Include="CLEYERA\Utility\Noise\NoiseTexture.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\Phong_CreatePipline\Phong_CreatePipline.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dDissolvePiplineCommand.h" />
-    <ClInclude Include="Project\GameObject\Particles\CharacterDeadParticle.h" />
-    <ClInclude Include="Project\Scene\TitleScene.h" />
-    <ClInclude Include="Project\GameObject\StartCount\StartCount.h" />
+    <ClInclude Include="Application\GameManager\GameManager.h" />
+    <ClInclude Include="Application\GameObject\Block\Block.h" />
+    <ClInclude Include="Application\GameObject\Block\BlockManager.h" />
+    <ClInclude Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateDead.h" />
+    <ClInclude Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
+    <ClInclude Include="Application\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
+    <ClInclude Include="Application\GameObject\EnemyWalk\EnemyWalk.h" />
+    <ClInclude Include="Application\GameObject\EnemyWalk\EnemyWalkManager.h" />
+    <ClInclude Include="Application\GameObject\GameCollider\BoxCollisionManager.h" />
+    <ClInclude Include="Application\GameObject\GameCollider\ICollider.h" />
+    <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />
+    <ClInclude Include="Application\GameObject\ObjectManager\GameObjectManager.h" />
+    <ClInclude Include="Application\GameObject\ObjectManager\IObjectData.h" />
+    <ClInclude Include="Application\GameObject\Particles\CharacterDeadParticle.h" />
+    <ClInclude Include="Application\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
+    <ClInclude Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
+    <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBullet.h" />
+    <ClInclude Include="Application\GameObject\Player\command\IPlayerCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\command\PlayerCommandHandler.h" />
+    <ClInclude Include="Application\GameObject\Player\command\playerDashMoveCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\command\PlayerJampCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\command\PlayerMoveCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\command\PlayerShootCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\command\PlayerSquatCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\Gun\PlayerGun.h" />
+    <ClInclude Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.h" />
+    <ClInclude Include="Application\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h" />
+    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\Reticle\PlayerReticle.h" />
+    <ClInclude Include="Application\GameObject\Player\state\IPlayerState.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateNone.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h" />
+    <ClInclude Include="Application\GameObject\Player\Player.h" />
+    <ClInclude Include="Application\GameObject\Player\PlayerManager.h" />
+    <ClInclude Include="Application\GameObject\StartCount\StartCount.h" />
+    <ClInclude Include="Application\Scene\GameScene.h" />
+    <ClInclude Include="Application\Scene\IScene.h" />
+    <ClInclude Include="Application\Scene\TitleScene.h" />
+    <ClInclude Include="Application\Utility\ObjectId\GameObjectId.h" />
+    <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
