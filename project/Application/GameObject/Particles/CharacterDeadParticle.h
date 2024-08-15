@@ -6,7 +6,7 @@
 class CharacterDeadParticle
 {
 public:
-	
+
 	static CharacterDeadParticle * GetInstance();
 
 	void Initialize();
@@ -16,6 +16,16 @@ public:
 	void Draw();
 
 	void ImGuiUpdate();
+
+	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
+
+#pragma region Get
+
+
+	Particle::ParticleEmitter<Particle::EmitType::BoxParam>*GetEmitter() { return emitter_.get(); };
+
+
+#pragma endregion
 
 private:
 

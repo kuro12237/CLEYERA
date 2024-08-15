@@ -13,7 +13,7 @@ void CharacterDeadParticle::Initialize()
         return;
     }
     InitializeLock_ = true;
-    texHandle_ = TextureManager::LoadPngTexture("smoke.png");
+    texHandle_ = TextureManager::LoadPngTexture("circle.png");
 
     particle_ = make_unique<Particle::GpuParticle>();
     particle_->Create(1,name_);
@@ -21,15 +21,13 @@ void CharacterDeadParticle::Initialize()
 
     emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
     emitter_->CreateType(particle_);
-    auto& emit1 = emitter_->GetControlParam()[0];
-    emit1.useFlag_ = true;
 
 }
 
 void CharacterDeadParticle::Update()
 {
-    emitter_->Emit(particle_);
     emitter_->Update();
+    emitter_->Emit(particle_);
     particle_->CallBarrier();
     particle_->Update();
 }

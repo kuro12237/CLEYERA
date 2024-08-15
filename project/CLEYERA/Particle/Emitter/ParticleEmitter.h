@@ -23,6 +23,7 @@ namespace Particle {
 
 		void SpownDraw();
 
+		void Clear(uint32_t index) { emitParam_[index] = {}; particleControl_[index] = {}; }
 #pragma region Get
 
 		vector<T>& GetEmitParam() { return emitParam_; }

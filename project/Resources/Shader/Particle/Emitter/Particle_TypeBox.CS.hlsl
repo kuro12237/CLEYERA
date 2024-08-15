@@ -19,7 +19,7 @@ struct EmitterBox
 
 
 // 回転行列を計算する関数（オイラー角から）
-float32_t3 RotatePoint(float32_t3 local,  float32_t3 rotate)
+float32_t3 RotatePoint(float32_t3 local, float32_t3 rotate)
 {
     // 回転行列を計算
     float cosX = cos(rotate.x);
@@ -84,7 +84,7 @@ RWStructuredBuffer<int32_t> gFreeList : register(u2);
 void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadID)
 {
     RandomGenerator generator;
-    generator.seed = ((DTid.xxx + 1) * gPerFlame.deltaTime);
+    generator.seed = (((DTid.x + 1) + gPerFlame.deltaTime) * gPerFlame.deltaTime);
   
     uint32_t index = DTid.x;
 
@@ -98,11 +98,11 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
             if (0 <= freeListIndex && freeListIndex < kParticleMax)
             {
                 uint32_t particleIndex = gFreeList[freeListIndex];
-                float32_t3 randomPoint =  GenerateRandomPointInOBB(gEmitterSphere[index],generator);
+                float32_t3 randomPoint = GenerateRandomPointInOBB(gEmitterSphere[index], generator);
                 gParticle[particleIndex].scale = float32_t3(1.0f, 1.0f, 1.0f);
                 gParticle[particleIndex].rotate = float32_t3(0.0f, 0.0f, 0.0f);
                 gParticle[particleIndex].translate = gEmitterSphere[index].translate + float32_t3(randomPoint);
-                gParticle[particleIndex].color.rgb = generator.Generate3d();
+                gParticle[particleIndex].color.rgb = float32_t3(1.0f, 1.0f, 1.0f);
                 gParticle[particleIndex].color.a = 1.0f;
                 gParticle[particleIndex].velocity = GenerateRandomVelocity(gEmitterSphere[index].velocityMin, gEmitterSphere[index].velocityMax, generator);
                 gParticle[particleIndex].matWorld = Mat4x4Identity();

@@ -2,23 +2,31 @@
 
 void EnemyWalkManager::Initialize(GameObjectManager* data)
 {
-	const string name = "EnemyWalk_";
+	const string name = "EnemyWalk";
 
 	for (uint32_t Count_ = 0; Count_ < uint32_t(data->GetObj3dDatas().size()); Count_++)
 	{
 		string count = to_string(enemyCount_);
 
-		if (data->GetObj3dDatas().find(name + count) != data->GetObj3dDatas().end())
+		string enemyName = "";
+		if (count == "0")
 		{
-			auto obj = data->GetObj3dData(name + count);
+			enemyName = name;
+		}else{
+			enemyName = name + "." + string(3 - to_string(enemyCount_).length(), '0') + to_string(enemyCount_);
+		}
+		
+
+		if (data->GetObj3dDatas().find(enemyName) != data->GetObj3dDatas().end())
+		{
+			auto obj = data->GetObj3dData(enemyName);
 
 			shared_ptr<EnemyWalk>enemyWalk = nullptr;
 			enemyWalk = make_shared<EnemyWalk>();
-			enemyWalk->SetName(name+count);
+			enemyWalk->SetName(enemyName);
 			enemyWalk->Initialize();
-			enemyWalk->SetName(name + count);
 			enemyWalk->GetData(GameObjectManager::GetInstance());
-			enemys_.resize(enemyCount_+1);
+			enemys_.resize(enemyCount_ + 1);
 			enemys_[enemyCount_] = (enemyWalk);
 			enemyCount_++;
 		}

@@ -63,6 +63,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		player_->SetStartFlag(true);
 	}
 
+	characterDeadParticle_->Update();
+
 	//ƒQ[ƒ€ŠJŽnŒã
 	player_->Update();
 
@@ -76,7 +78,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	gameObjectManager_->Update();
 
-	characterDeadParticle_->Update();
 	LightingManager::AddList(light_);
 
 	PostEffect::GetInstance()->Update();
