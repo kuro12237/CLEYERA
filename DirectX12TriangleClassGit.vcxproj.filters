@@ -491,6 +491,7 @@
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dDissolvePiplineCommand.cpp" />
     <ClCompile Include="Project\GameObject\Particles\CharacterDeadParticle.cpp" />
     <ClCompile Include="Project\Scene\TitleScene.cpp" />
+    <ClCompile Include="Project\GameObject\StartCount\StartCount.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -803,6 +804,7 @@
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dDissolvePiplineCommand.h" />
     <ClInclude Include="Project\GameObject\Particles\CharacterDeadParticle.h" />
     <ClInclude Include="Project\Scene\TitleScene.h" />
+    <ClInclude Include="Project\GameObject\StartCount\StartCount.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

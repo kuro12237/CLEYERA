@@ -37,11 +37,20 @@ public:
 	vector<shared_ptr<PlayerBullet>>GetBullet() { return bullets_; }
 #pragma endregion
 
+#pragma region Set
+
+	void SetStartFlag(bool f) { gameStartFlag_ = f; }
+
+#pragma endregion
+
+
 	void PushBullet(Math::Vector::Vector3 pos);
 
 private:
 
 	void CheckisDeadBullets();
+
+	bool gameStartFlag_ = false;
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 	unique_ptr<PlayerReticleCommandHandler>reticleCommandHandler_ = nullptr;

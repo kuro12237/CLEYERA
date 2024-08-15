@@ -63,7 +63,7 @@ void GameManager::Run()
 
 		Scene_->Back2dSpriteDraw();
 		Scene_->Object3dDraw();
-		Scene_->Flont2dSpriteDraw();
+		Scene_->Flont2dSpriteDraw(); 
 
 		Cleyera::EndFlame();
 		DirectXCommon::GetInstance()->PostDraw();

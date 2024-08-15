@@ -148,6 +148,7 @@
     <ClCompile Include="Project\GameObject\Player\Reticle\PlayerReticle.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateNone.cpp" />
     <ClCompile Include="Project\GameObject\Player\state\PlayerStateRock.cpp" />
+    <ClCompile Include="Project\GameObject\StartCount\StartCount.cpp" />
     <ClCompile Include="Project\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Project\Scene\GameScene.cpp" />
     <ClCompile Include="CLEYERA\Utility\DeltaTimer\DeltaTimer.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="Project\GameObject\Player\state\IPlayerState.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerStateNone.h" />
     <ClInclude Include="Project\GameObject\Player\state\PlayerStateRock.h" />
+    <ClInclude Include="Project\GameObject\StartCount\StartCount.h" />
     <ClInclude Include="Project\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\GameScene.h" />

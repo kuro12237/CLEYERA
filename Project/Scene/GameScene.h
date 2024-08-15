@@ -26,6 +26,7 @@
 #include"Particle/Emitter/ParticleEmitter.h"
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
+#include"GameObject/StartCount/StartCount.h"
 
 class GameScene :public IScene
 {
@@ -35,7 +36,7 @@ public:
 
 	void Initialize()override;
 
-	void Update(GameManager* Scene)override;
+	void Update([[maybe_unused]] GameManager* Scene)override;
 
 	void PostProcessDraw()override;
 
@@ -47,6 +48,8 @@ public:
 
 private:
 
+	void ImGuiUpdate();
+
 	void Collision();
 
 	void Gravitys();
@@ -56,6 +59,9 @@ private:
 	string inputLevelDataFileName_ = "LevelData_1.json";
 
 	PointLight_param light_{};
+
+	unique_ptr<StartCount>startCount_ = nullptr;
+
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 

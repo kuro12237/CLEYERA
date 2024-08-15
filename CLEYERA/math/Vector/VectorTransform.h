@@ -10,6 +10,9 @@ namespace Math
 		float Length(const Vector2& v);
 		float Length(const Vector3& v);
 
+		template <typename T>
+		T easeOutExpo(T x);
+
 		Vector3 Add(const Vector3& v1, const Vector3& v2);
 
 		Vector3 Subtruct(const Vector3& v1, const Vector3& v2);
@@ -35,6 +38,15 @@ namespace Math
 		Vector3 TransformByMatrix(const Vector3 vector, const Math::Matrix::Matrix4x4 matrix);
 
 		float easeOutBounce(float t);
+
+		template<typename T>
+		T easeOutExpo(const T& a, const T& b, const float t)
+		{
+			T result;
+			float easeT = t == 1.0f ? 1.0f : 1.0f - std::pow(2.0f, -10.0f * t);
+			result = a + easeT * (b - a);
+			return result;
+		}
 	}
 };
 

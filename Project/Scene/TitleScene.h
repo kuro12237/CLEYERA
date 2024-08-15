@@ -35,7 +35,7 @@ public:
 
 	void Initialize()override;
 
-	void Update(GameManager* Scene)override;
+	void Update([[maybe_unused]] GameManager* Scene)override;
 
 	void PostProcessDraw()override;
 

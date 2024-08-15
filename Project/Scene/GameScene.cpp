@@ -33,13 +33,82 @@ void GameScene::Initialize()
 	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
 	characterDeadParticle_->Initialize();
 
+	startCount_ = make_unique<StartCount>();
+	startCount_->Initialize();
+
+
+	gameObjectManager_->Update();
+
+	LightingManager::AddList(light_);
+
+	PostEffect::GetInstance()->Update();
 }
 
-void GameScene::Update(GameManager* Scene)
+void GameScene::Update([[maybe_unused]] GameManager* Scene)
 {
 	Scene;
+
 #ifdef _USE_IMGUI
 
+	ImGuiUpdate();
+
+#endif // _USE_IMGUI
+
+	startCount_->Update();
+	
+	//カウントダウン中の処理
+	if (startCount_->GetStartFlag())
+	{
+		enemyWalkManager_->SetStatFlag(true);
+		player_->SetStartFlag(true);
+	}
+
+	//ゲーム開始後
+	player_->Update();
+
+	enemyWalkManager_->Update();
+
+	blockManager_->Update();
+
+	Gravitys();
+
+	Collision();
+
+	gameObjectManager_->Update();
+
+	characterDeadParticle_->Update();
+	LightingManager::AddList(light_);
+
+	PostEffect::GetInstance()->Update();
+}
+
+void GameScene::PostProcessDraw()
+{
+	PostEffect::GetInstance()->PreDraw();
+
+	gameObjectManager_->Draw();
+	characterDeadParticle_->Draw();
+
+	PostEffect::GetInstance()->PostDraw();
+}
+
+void GameScene::Back2dSpriteDraw()
+{
+}
+
+void GameScene::Object3dDraw()
+{
+	PostEffect::GetInstance()->Draw();
+}
+
+void GameScene::Flont2dSpriteDraw()
+{
+	player_->Draw2d();
+	startCount_->Draw2d();
+}
+
+void GameScene::ImGuiUpdate()
+{
 	gameObjectManager_->ImGuiUpdate();
 	ImGui::Separator();
 	ImGui::Text("SceneReload");
@@ -69,50 +138,7 @@ void GameScene::Update(GameManager* Scene)
 	player_->ImGuiUpdate();
 
 	characterDeadParticle_->ImGuiUpdate();
-#endif // _USE_IMGUI
 
-	player_->Update();
-
-	enemyWalkManager_->Update();
-
-	blockManager_->Update();
-
-	Gravitys();
-
-	Collision();
-
-	gameObjectManager_->Update();
-
-	GameObjectManager::GetInstance();
-	LightingManager::AddList(light_);
-	PostEffect::GetInstance()->Update();
-
-	characterDeadParticle_->Update();
-
-}
-
-void GameScene::PostProcessDraw()
-{
-	PostEffect::GetInstance()->PreDraw();
-
-	gameObjectManager_->Draw();
-	characterDeadParticle_->Draw();
-
-	PostEffect::GetInstance()->PostDraw();
-}
-
-void GameScene::Back2dSpriteDraw()
-{
-}
-
-void GameScene::Object3dDraw()
-{
-	PostEffect::GetInstance()->Draw();
-}
-
-void GameScene::Flont2dSpriteDraw()
-{
-	player_->Draw2d();
 }
 
 void GameScene::Collision()

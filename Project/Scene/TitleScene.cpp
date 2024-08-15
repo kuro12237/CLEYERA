@@ -6,10 +6,18 @@ void TitleScene::Initialize()
 	PostEffect::GetInstance()->Initialize();
 }
 
-void TitleScene::Update(GameManager* Scene)
+void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 {
+#ifdef _USE_IMGUI
 
-	if (Input::PushKeyPressed(DIK_G))
+	ImGui::Begin("TitleScene");
+	ImGui::Text("A:PUSH SelectScene");
+	ImGui::End();
+
+#endif // _USE_IMGUI
+
+
+	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
 	{
 		Scene->ChangeState(new GameScene);
 		return;

@@ -32,6 +32,10 @@ void EnemyWalkManager::Initialize(GameObjectManager* data)
 
 void EnemyWalkManager::Update()
 {
+	if (!gameStartFlag_)
+	{
+		return;
+	}
 	for (auto& enemy : enemys_)
 	{
 		if (enemy)

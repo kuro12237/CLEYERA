@@ -45,9 +45,12 @@ void PlayerManager::Update()
 	reticleWorldPos = instance->GetObj3dData(reticle_->GetName())->GetWorldTransform().GetWorldPosition();
 	playerWorldPos = instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
 
+	if (gameStartFlag_)
+	{
+		commandHandler_->Handler();
+		commandHandler_->CommandsExec(*playerCore_);
+	}
 
-	commandHandler_->Handler();
-	commandHandler_->CommandsExec(*playerCore_);
 	if (playerCore_->GetIsShoot())
 	{
 		PushBullet(playerWorldPos);

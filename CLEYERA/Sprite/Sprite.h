@@ -32,6 +32,7 @@ public:
 	/// </summary>
 	void SetBlendMode(BlendMode blendMode) { blendMode_ = blendMode; }
 	
+	void SetSize(Math::Vector::Vector2 size) { size_ = size; }
 	/// <summary>
 	/// tex切り抜き
 	/// </summary>
@@ -47,9 +48,9 @@ public:
 	Math::Vector::Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 
-	Math::Vector::Vector3 GetuvScale() { return uvScale_; }
-	Math::Vector::Vector3 GetuvRotate() { return uvRotate_; }
-	Math::Vector::Vector3 GetuvTranslate() { return uvTranslate_; }
+	Math::Vector::Vector3 &GetuvScale() { return uvScale_; }
+	Math::Vector::Vector3 &GetuvRotate() { return uvRotate_; }
+	Math::Vector::Vector3 &GetuvTranslate() { return uvTranslate_; }
 	BlendMode GetBlendMode() {return blendMode_; }
 
 	/// <summary>

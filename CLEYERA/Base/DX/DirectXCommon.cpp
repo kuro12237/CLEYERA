@@ -49,7 +49,7 @@ void DirectXCommon::PreDraw()
 	
 	//ClearScreen
 	commands.m_pList.Get()->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, nullptr);
-	float clearColor[] = { 0.0f,0.0f,0.0f,1.0f };
+	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
 	commands.m_pList.Get()->ClearRenderTargetView(rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
 	//Depth
