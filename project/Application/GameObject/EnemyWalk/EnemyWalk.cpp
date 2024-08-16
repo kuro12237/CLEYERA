@@ -10,7 +10,7 @@ void EnemyWalk::Initialize()
 	id_ = kEnemyWalkId;
 
 	state_ = make_unique<EnemyWalkStateMove>();
-	state_->Initialize();
+	state_->Initialize(this);
 }
 
 void EnemyWalk::Update()
@@ -82,5 +82,5 @@ void EnemyWalk::ChangeState(unique_ptr<IEnemyWalkState> state)
 {
 	state_.release();
 	state_ = move(state);
-	state_->Initialize();
+	state_->Initialize(this);
 }

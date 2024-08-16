@@ -246,10 +246,10 @@
     <None Include="Resources\Shader\ParticleObject3d.hlsli">
       <Filter>Shader</Filter>
     </None>
-    <None Include="Resources\Shader\SpriteObject2d.PS.hlsl">
+    <None Include="Resources\Shader\Sprite2d\SpriteObject2d.PS.hlsl">
       <Filter>Shader</Filter>
     </None>
-    <None Include="Resources\Shader\SpriteObject2d.hlsli">
+    <None Include="Resources\Shader\Sprite2d\SpriteObject2d.hlsli">
       <Filter>Shader</Filter>
     </None>
     <None Include="Resources\Shader\LightingObject3d.hlsli">
@@ -810,7 +810,7 @@
     <FxCompile Include="Resources\Shader\ParticleObject3d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\SpriteObject2d.VS.hlsl">
+    <FxCompile Include="Resources\Shader\Sprite2d\SpriteObject2d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Phong\Phong_NormalMap_Model3dObject.PS.hlsl">

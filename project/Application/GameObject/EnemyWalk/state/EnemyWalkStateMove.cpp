@@ -1,6 +1,6 @@
 #include "EnemyWalkStateMove.h"
 
-void EnemyWalkStateMove::Initialize()
+void EnemyWalkStateMove::Initialize([[maybe_unused]] EnemyWalk* e)
 {
 }
 

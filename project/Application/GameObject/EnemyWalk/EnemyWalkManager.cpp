@@ -15,7 +15,6 @@ void EnemyWalkManager::Initialize(GameObjectManager* data)
 		}else{
 			enemyName = name + "." + string(3 - to_string(enemyCount_).length(), '0') + to_string(enemyCount_);
 		}
-		
 
 		if (data->GetObj3dDatas().find(enemyName) != data->GetObj3dDatas().end())
 		{

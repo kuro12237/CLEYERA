@@ -8,7 +8,7 @@ public:
 	EnemyWalkStateMove() {};
 	~EnemyWalkStateMove() {};
 
-	void Initialize()override;
+	void Initialize([[maybe_unused]] EnemyWalk* e)override;
 
 	void Update([[maybe_unused]] EnemyWalk* e)override;
 

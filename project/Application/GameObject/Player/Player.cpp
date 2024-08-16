@@ -73,6 +73,11 @@ void Player::Update()
 
 void Player::OnCollision(ICollider* c)
 {
+	if (kOnlyCollideWithBlocksid)
+	{
+		return;
+	}
+
 	if (!isDamage_)
 	{
 		if (c->GetId() == kEnemyWalkId)

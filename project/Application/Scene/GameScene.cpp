@@ -167,6 +167,7 @@ void GameScene::Collision()
 	{
 		gameCollisionManager_->ListPushback(b.get());
 	}
+
 	gameCollisionManager_->CheckAllCollisoin();
 
 }

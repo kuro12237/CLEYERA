@@ -1,7 +1,10 @@
 #include "EnemyWalkStateDead.h"
 
-void EnemyWalkStateDead::Initialize()
+void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 {
+	//ブロック以外とは当たらないid
+	e->SetId(kOnlyCollideWithBlocksid);
+
 	gameObjIncetance_ = GameObjectManager::GetInstance();
 	auto* emitters = CharacterDeadParticle::GetInstance()->GetEmitter();
 	

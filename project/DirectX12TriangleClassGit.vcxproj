@@ -40,8 +40,8 @@
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli" />
     <None Include="Resources\Shader\primitives.hlsli" />
     <None Include="Resources\Shader\SkyBox.hlsli" />
-    <None Include="Resources\Shader\SpriteObject2d.hlsli" />
-    <None Include="Resources\Shader\SpriteObject2d.PS.hlsl">
+    <None Include="Resources\Shader\Sprite2d\SpriteObject2d.hlsli" />
+    <None Include="Resources\Shader\Sprite2d\SpriteObject2d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
@@ -609,7 +609,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\SpriteObject2d.VS.hlsl">
+    <FxCompile Include="Resources\Shader\Sprite2d\SpriteObject2d.VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

@@ -5,12 +5,13 @@ void PlayerBullet::Initialize(string number)
 	state_ = make_unique<PlayerBulletStateNone>();
 	state_->Initialize(this);
 
-	name_ =  number;
+	name_ = number;
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = spownPos_;
 	SetObjectData(transform);
 
+	//‰ñ“]“K—p
 	float velocityXZ = sqrt(pow(velocity_.x, 2.0f) + pow(velocity_.z, 2.0f));
 	float height = -velocity_.y;
 	Math::Vector::Vector3 rotate = {};
@@ -34,12 +35,15 @@ void PlayerBullet::Update()
 
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
-	
+
 }
 
 void PlayerBullet::OnCollision(ICollider* c)
 {
-
+	if (c->GetId() == kOnlyCollideWithBlocksid)
+	{
+		return;
+	}
 	if (c->GetId() == kPlayerId)
 	{
 		return;

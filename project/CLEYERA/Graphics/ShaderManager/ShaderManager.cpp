@@ -149,12 +149,12 @@ void ShaderManager::Sprite2dShader()
 	SShaderMode shaders;
 	shaders.vertexBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/SpriteObject2d.VS.hlsl",
+			L"Resources/Shader/Sprite2d/SpriteObject2d.VS.hlsl",
 			L"vs_6_0");
 
 	shaders.pixelBlob =
 		ShaderManager::CompilerShaderFanc(
-			L"Resources/Shader/SpriteObject2d.PS.hlsl",
+			L"Resources/Shader/Sprite2d/SpriteObject2d.PS.hlsl",
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->shaders_.sprite2d = shaders;

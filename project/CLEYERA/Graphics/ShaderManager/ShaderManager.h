@@ -30,6 +30,17 @@ struct SShaders
 	SShaderMode SkyBoxModel;
 };
 
+namespace Shader
+{
+	enum  Shaders
+	{
+		SPRITE_2d,
+		SPRITE_3d,
+		PHONG
+
+	};
+};
+
 struct  GpuParticleShader
 {
 	SShaderMode particleInit;
@@ -53,6 +64,8 @@ public:
 
 #pragma endregion
 private:
+
+
 
 	/// <summary>
 	/// �V�F�[�_�[�̃R���p�C���֐�
