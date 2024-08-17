@@ -27,6 +27,8 @@
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
 
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
+
 class TitleScene:public IScene
 {
 public:
@@ -46,6 +48,8 @@ public:
 	void Flont2dSpriteDraw()override;
 
 private:
+
+	CameraData camera_ = {};
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;

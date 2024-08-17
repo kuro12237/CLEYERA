@@ -43,38 +43,13 @@ void SpriteBoxState::Draw(Sprite* state, WorldTransform worldTransform)
 
 	materialData->color = state->GetColor();
 	materialData->uvTransform = Math::Matrix::AffineMatrix(state->GetuvScale(), state->GetuvRotate(), state->GetuvTranslate());
+	materialData->dissolveEdgeColor = state->GetDissolveDdgeColor();
+	materialData->dissolveMask = state->GetDissolveMask();
+	materialData->dissolveEdgeMinMax = state->GetDissolveEdgeMinMax();
 
 	CommandCall(state->GetTexHandle(),state,worldTransform);
 }
 
-SPSOProperty SpriteBoxState::Get2dSpritePipeline(Sprite* state)
-{
-	SPSOProperty PSO = {};
-
-	switch (state->GetBlendMode())
-	{
-	case BlendNone:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "None");
-		break;;
-		break;
-	case BlendAdd:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Add");;
-		break;
-	case BlendSubtruct:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Subtruct");
-		break;
-	case BlendMultiply:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Multiply");
-		break;
-	case BlendScreen:
-		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Screen");
-		break;
-
-	default:
-		break;
-	}
-	return PSO;
-}
 void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransform worldTransform)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
@@ -87,11 +62,9 @@ void SpriteBoxState::CommandCall(uint32_t texHandle,Sprite* state, WorldTransfor
 	}
 	else if (!texHandle == 0)
 	{
-		PSO = Get2dSpritePipeline(state);
+		PSO = state->Get2dSpritePipeline(state);
 	}
 
-	commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
-	commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 
 	commands.m_pList->IASetVertexBuffers(0, 1, &resource_.BufferView);
 	commands.m_pList->IASetIndexBuffer(&resource_.IndexBufferView);

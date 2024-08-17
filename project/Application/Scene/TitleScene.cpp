@@ -4,6 +4,11 @@ void TitleScene::Initialize()
 {
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");
 	PostEffect::GetInstance()->Initialize();
+	ChangeSceneAnimation::GetInstance()->Initialize();
+	camera_.Initialize();
+
+	camera_.UpdateMatrix();
+	CameraManager::GetInstance()->ResetCamera(camera_);
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -16,13 +21,21 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 #endif // _USE_IMGUI
 
+	ChangeSceneAnimation::GetInstance()->Update();
 
 	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
+	{
+		ChangeSceneAnimation::GetInstance()->ChangeStart();
+	}
+
+	camera_.UpdateMatrix();
+	PostEffect::GetInstance()->Update();
+
+	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
 		Scene->ChangeState(new GameScene);
 		return;
 	}
-	PostEffect::GetInstance()->Update();
 }
 
 void TitleScene::PostProcessDraw()
@@ -41,4 +54,6 @@ void TitleScene::Object3dDraw()
 
 void TitleScene::Flont2dSpriteDraw()
 {
+	ChangeSceneAnimation::GetInstance()->Draw();
+
 }

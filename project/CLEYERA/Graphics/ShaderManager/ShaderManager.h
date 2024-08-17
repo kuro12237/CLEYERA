@@ -36,8 +36,11 @@ namespace Shader
 	{
 		SPRITE_2d,
 		SPRITE_3d,
-		PHONG
-
+		PHONG,
+		PARTICLE_INIT,
+		PARTICLE_UPDATE,
+		PARTICLE_EMITTER,
+		PARTICLE_DRAW
 	};
 };
 
@@ -61,6 +64,8 @@ public:
 #pragma region Get
 	SShaders GetShader() { return ShaderManager::Getinstance()->shaders_; }
 	GpuParticleShader GetParticleShader() { return ShaderManager::Getinstance()->particleShader_; }
+
+	SShaderMode GetShaders(Shader::Shaders shader, string mode) { return shaders[shader][mode]; };
 
 #pragma endregion
 private:
@@ -114,5 +119,7 @@ private:
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};
 	GpuParticleShader particleShader_ = {};
+
+	map<Shader::Shaders, map<string, SShaderMode>>shaders;
 };
 

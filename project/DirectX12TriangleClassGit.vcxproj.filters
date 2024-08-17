@@ -487,6 +487,7 @@
     <ClCompile Include="Application\Scene\TitleScene.cpp" />
     <ClCompile Include="Application\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -790,6 +791,7 @@
     <ClInclude Include="Application\Scene\TitleScene.h" />
     <ClInclude Include="Application\Utility\ObjectId\GameObjectId.h" />
     <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h" />
+    <ClInclude Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -874,5 +876,6 @@
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeShpere.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Phong\Phong_Dissolve_Model3dObject.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Sprite2d\SpriteObject2d_Dissolve.PS.hlsl" />
   </ItemGroup>
 </Project>

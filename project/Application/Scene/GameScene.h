@@ -27,6 +27,7 @@
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/StartCount/StartCount.h"
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
 class GameScene :public IScene
 {

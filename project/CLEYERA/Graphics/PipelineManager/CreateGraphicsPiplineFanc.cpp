@@ -36,7 +36,7 @@ void CreateGraphicsPiplineFanc::SettingInputElementDesc(D3D12_INPUT_ELEMENT_DESC
 	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
 }
 
-void CreateGraphicsPiplineFanc::SettingBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blenddesc, BlendMode mode)
+void CreateGraphicsPiplineFanc::SettingBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blenddesc, SpriteMode mode)
 {
 
 	blenddesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;

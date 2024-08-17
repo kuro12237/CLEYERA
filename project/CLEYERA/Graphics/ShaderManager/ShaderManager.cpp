@@ -1,5 +1,6 @@
 #include "ShaderManager.h"
 
+
 ShaderManager* ShaderManager::Getinstance()
 {
 	static ShaderManager instance;
@@ -64,7 +65,7 @@ IDxcBlob* ShaderManager::CompilerShaderFanc(const std::wstring& filePath, const 
 	hr = shaderResult->GetOutput(DXC_OUT_OBJECT, IID_PPV_ARGS(&shaderBlob), nullptr);
 	assert(SUCCEEDED(hr));
 	//�����������O��o��
-	LogManager::Log(LogManager:: ConvertString(std::format(L"Compile Succeeded,path:{},profile:{}\n", filePath, profile)));
+	LogManager::Log(LogManager::ConvertString(std::format(L"Compile Succeeded,path:{},profile:{}\n", filePath, profile)));
 	//����g��Ȃ����\�[�X����
 	shaderSource->Release();
 	shaderResult->Release();
@@ -92,6 +93,27 @@ void ShaderManager::includeHandlerSetting()
 
 void ShaderManager::ShaderComples()
 {
+	auto instance = ShaderManager::Getinstance();
+	instance->shaders[Shader::SPRITE_2d]["None"].vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Sprite2d/SpriteObject2d.VS.hlsl",
+			L"vs_6_0");
+	instance->shaders[Shader::SPRITE_2d]["None"].pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Sprite2d/SpriteObject2d.PS.hlsl",
+			L"ps_6_0");
+
+	//Dissolve
+	instance->shaders[Shader::SPRITE_2d]["Dissolve"].vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Sprite2d/SpriteObject2d.VS.hlsl",
+			L"vs_6_0");
+	instance->shaders[Shader::SPRITE_2d]["Dissolve"].pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Sprite2d/SpriteObject2d_Dissolve.PS.hlsl",
+			L"ps_6_0");
+
+
 	ShapeShader();
 	Sprite3dShader();
 	Sprite2dShader();

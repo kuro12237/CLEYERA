@@ -61,11 +61,12 @@ struct GpuParticlePso {
 	SPSOProperty debugDraw;
 };
 
-enum  BlendMode
+enum  SpriteMode
 {
 	BlendNone,
 	BlendAdd,
 	BlendSubtruct,
 	BlendMultiply,
 	BlendScreen,
+	DissolveNone
 };

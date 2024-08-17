@@ -17,6 +17,8 @@ public:
 	SPSOProperty CreateMultiply(SShaderMode shader);
 	SPSOProperty CreateScreen(SShaderMode shader);
 
+	SPSOProperty CreateDissolveNone(SShaderMode shader);
+
 private:
 	ComPtr<ID3D12Device>device = nullptr;
 	ComPtr<ID3D12GraphicsCommandList>commandList_ = nullptr;

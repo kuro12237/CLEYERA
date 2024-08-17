@@ -39,4 +39,46 @@ void Sprite::SetSrc(Vector2 TL, Vector2 BL,Vector2 TR, Vector2 BR)
 }
 
 
+SPSOProperty Sprite::Get2dSpritePipeline(Sprite* state)
+{
+	SPSOProperty PSO = {};
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
+	switch (state->GetBlendMode())
+	{
+	case BlendNone:
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "None");
+		commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+
+		break;
+	case BlendAdd:
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Add");;
+		commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+		break;
+	case BlendSubtruct:
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Subtruct");
+		commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+		break;
+	case BlendMultiply:
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Multiply");
+		break;
+	case BlendScreen:
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "Screen");
+		commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+		break;
+
+	case DissolveNone:
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "DissolveNone");
+		commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+		DescriptorManager::rootParamerterCommand(4, noiseTexHandle_);
+		break;
+	default:
+		break;
+	}
+	return PSO;
+}

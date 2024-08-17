@@ -14,19 +14,22 @@ void GraphicsPipelineManager::Initialize()
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
 
+	auto shaderInstance = ShaderManager::Getinstance();
+
 	Sprite_2d_CreatePipline::GetInstance()->Initialize();
-	piplines_[SPRITE_2d]["None"] = Sprite_2d_CreatePipline::GetInstance()->CreateNone(shader.sprite2d);
-	piplines_[SPRITE_2d]["Add"] = Sprite_2d_CreatePipline::GetInstance()->CreateAdd(shader.sprite2d);
-	piplines_[SPRITE_2d]["Subtract"] = Sprite_2d_CreatePipline::GetInstance()->CreateSubtract(shader.sprite2d);
-	piplines_[SPRITE_2d]["Multiply"] = Sprite_2d_CreatePipline::GetInstance()->CreateMultiply(shader.sprite2d);
-	piplines_[SPRITE_2d]["Screen"] = Sprite_2d_CreatePipline::GetInstance()->CreateScreen(shader.sprite2d);
+	piplines_[SPRITE_2d]["None"] = Sprite_2d_CreatePipline::GetInstance()->CreateNone(shaderInstance->GetShaders(Shader::SPRITE_2d,"None"));
+	piplines_[SPRITE_2d]["Add"] = Sprite_2d_CreatePipline::GetInstance()->CreateAdd(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
+	piplines_[SPRITE_2d]["Subtract"] = Sprite_2d_CreatePipline::GetInstance()->CreateSubtract(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
+	piplines_[SPRITE_2d]["Multiply"] = Sprite_2d_CreatePipline::GetInstance()->CreateMultiply(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
+	piplines_[SPRITE_2d]["Screen"] = Sprite_2d_CreatePipline::GetInstance()->CreateScreen(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
+	piplines_[SPRITE_2d]["DissolveNone"] = Sprite_2d_CreatePipline::GetInstance()->CreateDissolveNone(shaderInstance->GetShaders(Shader::SPRITE_2d, "Dissolve"));
 	LogManager::CompliteLog("Sprite2dPSO");
 
 	//3d
 	piplines_[NONE_3d]["None"] = CreateShape(device.Get(), commands, shader.shape);
 	piplines_[SPRITE_3d]["None"] = CreateSprite3dNone(device.Get(), commands, shader.sprite3d);
 	piplines_[LINE_3d]["None"] = CreateLine(device.Get(), commands, shader.Line);
-	
+
 	Phong_CreatePipline::GetInstance()->Initialize();
 	piplines_[PHONG]["None"] = Phong_CreatePipline::GetInstance()->CreatePhongNormalModel(shader.Phong_Normal_Model);
 	piplines_[PHONG]["Instancing_None"] = Phong_CreatePipline::GetInstance()->CreateInstancingModel(shader.Phong_Normal_InstancingModel);
@@ -40,7 +43,7 @@ void GraphicsPipelineManager::Initialize()
 	//Particle
 	GpuParticleShader  shaderParticle = ShaderManager::Getinstance()->GetParticleShader();
 	piplines_[PARTICLE_INIT]["None"] = CreateGpuParticle::CreateGpuParticle_Init(device, commands, shaderParticle.particleInit);
-	
+
 	piplines_[PARTICLE_UPDATE]["None"] = CreateGpuParticle::CreateGpuParticle_Update(device, commands, shaderParticle.particleUpdate);
 
 	piplines_[PARTICLE_EMITTER]["Sphere"] = CreateGpuParticle::CreateGpuParticcle_Emitter_Sphere(device, commands, shaderParticle.particleSphereEmitter);

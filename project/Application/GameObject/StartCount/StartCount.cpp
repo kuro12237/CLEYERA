@@ -105,6 +105,18 @@ void StartCount::Initialize()
 		barWts_[i] = move(wt);
 	}
 
+	for (auto& wt : flameWts_)
+	{
+		wt.UpdateMatrix();
+	}
+
+	for (auto& wt : barWts_)
+	{
+		wt.UpdateMatrix();
+	}
+
+	numberWorldTransform_.UpdateMatrix();
+	backFlameWt_.UpdateMatrix();
 }
 
 void StartCount::Update()

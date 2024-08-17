@@ -10,8 +10,6 @@ namespace Math
 		float Length(const Vector2& v);
 		float Length(const Vector3& v);
 
-		template <typename T>
-		T easeOutExpo(T x);
 
 		Vector3 Add(const Vector3& v1, const Vector3& v2);
 
@@ -46,6 +44,14 @@ namespace Math
 			float easeT = t == 1.0f ? 1.0f : 1.0f - std::pow(2.0f, -10.0f * t);
 			result = a + easeT * (b - a);
 			return result;
+		}
+		template<typename T>
+		T EaseOutQuad(const T& start, const T& end, float t) {
+			// EaseOutQuad‚Ì•âŠÔŒvŽZ
+			t = 1 - (1 - t) * (1 - t);
+
+			// start‚Æend‚ÌŠÔ‚Åt‚É‰ž‚¶‚Ä•âŠÔ
+			return start + t * (end - start);
 		}
 	}
 };

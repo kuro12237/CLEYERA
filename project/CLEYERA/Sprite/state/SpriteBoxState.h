@@ -18,8 +18,7 @@ public:
 
 private:
 
-	SPSOProperty Get2dSpritePipeline(Sprite* state);
-
+	
 	void CommandCall(uint32_t texHandle,Sprite* state,WorldTransform worldTransform);
 
 	ResourcePeroperty resource_ = {};

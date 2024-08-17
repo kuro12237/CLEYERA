@@ -3,6 +3,7 @@
 #include"WorldTransform.h"
 #include"Sprite/state/SpriteBoxState.h"
 #include"GraphicsPipelineManager.h"
+#include"Graphics/DescripterManager/DescriptorManager.h"
 
 class Sprite
 {
@@ -22,6 +23,7 @@ public:
 
 #pragma region Set
 	void SetTexHandle(uint32_t texHandle);
+	void SetNoiseTex(uint32_t tex) { noiseTexHandle_ = tex; }
 	void SetUvScale(Math::Vector::Vector3 uvScale) { uvScale_ = uvScale; }
 	void SetUvRotate(Math::Vector::Vector3 uvRotate) { uvRotate_ = uvRotate; }
 	void SetUvTranslate(Math::Vector::Vector3 uvTranslate) { uvTranslate_ = uvTranslate; }
@@ -30,9 +32,10 @@ public:
 	/// <summary>
 	/// ブレンド
 	/// </summary>
-	void SetBlendMode(BlendMode blendMode) { blendMode_ = blendMode; }
+	void SetBlendMode(SpriteMode blendMode) { blendMode_ = blendMode; }
 	
 	void SetSize(Math::Vector::Vector2 size) { size_ = size; }
+
 	/// <summary>
 	/// tex切り抜き
 	/// </summary>
@@ -51,7 +54,7 @@ public:
 	Math::Vector::Vector3 &GetuvScale() { return uvScale_; }
 	Math::Vector::Vector3 &GetuvRotate() { return uvRotate_; }
 	Math::Vector::Vector3 &GetuvTranslate() { return uvTranslate_; }
-	BlendMode GetBlendMode() {return blendMode_; }
+	SpriteMode GetBlendMode() {return blendMode_; }
 
 	/// <summary>
 	/// GetSpritePos
@@ -62,17 +65,21 @@ public:
 	/// </summary>
 	Math::Vector::Vector2 GetSize() { return size_; }
 
-	/// <summary>
-	/// color16からvec4へ
-	/// </summary>
-	static Math::Vector::Vector4 ColorConversion(uint32_t rgbaValue);
-
 	Math::Vector::Vector2 GetSrcTR() { return srcTR; }
 	Math::Vector::Vector2 GetSrcBR() { return srcBR; }
 	Math::Vector::Vector2 GetSrcTL() { return srcTL; }
 	Math::Vector::Vector2 GetSrcBL() { return srcBL; }
 
+	float &GetDissolveMask() { return dissolveMask_; }
+	Math::Vector::Vector2 &GetDissolveEdgeMinMax() { return dissolveEdgeMinMax_; }
+	Math::Vector::Vector4  &GetDissolveDdgeColor() { return dissolveEdgeColor_; }
+
+	ISpriteState* GetState() { return state_; }
+
 #pragma endregion
+
+
+	SPSOProperty Get2dSpritePipeline(Sprite* state);
 
 private:
 	Math::Vector::Vector2 Pos_ = { 0,0 };
@@ -80,6 +87,11 @@ private:
 	Math::Vector::Vector4 color_ = { 1,1,1,1 };
 
 	uint32_t texHandle_ = 0;
+	uint32_t noiseTexHandle_ = 0;
+
+	float dissolveMask_ = 0.0f;
+	Math::Vector::Vector2 dissolveEdgeMinMax_ = {};
+	Math::Vector::Vector4 dissolveEdgeColor_ = { 1.0f,1.0f,1.0f,1.0f };
 
 	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
 	Math::Vector::Vector3 uvRotate_ = { 0,0,0 };
@@ -90,8 +102,9 @@ private:
 	Math::Vector::Vector2 srcTL = { 0.0f,0.0f };
 	Math::Vector::Vector2 srcBL = { 0.0f,1.0f };
 
-	BlendMode blendMode_= BlendNone;
+	SpriteMode blendMode_= BlendNone;
 	ISpriteState* state_ = {};
+
 };
 
 

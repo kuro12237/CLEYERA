@@ -36,7 +36,6 @@ void GameScene::Initialize()
 	startCount_ = make_unique<StartCount>();
 	startCount_->Initialize();
 
-
 	gameObjectManager_->Update();
 
 	LightingManager::AddList(light_);
@@ -48,14 +47,20 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 {
 	Scene;
 
+	
 #ifdef _USE_IMGUI
 
 	ImGuiUpdate();
 
 #endif // _USE_IMGUI
 
-	startCount_->Update();
-	
+	ChangeSceneAnimation::GetInstance()->Update();
+
+	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
+	{
+		startCount_->Update();
+	}
+
 	//カウントダウン中の処理
 	if (startCount_->GetStartFlag())
 	{
@@ -63,9 +68,10 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		player_->SetStartFlag(true);
 	}
 
-	characterDeadParticle_->Update();
-
+	//
 	//ゲーム開始後
+	//
+
 	player_->Update();
 
 	enemyWalkManager_->Update();
@@ -78,9 +84,24 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	gameObjectManager_->Update();
 
+	characterDeadParticle_->Update();
+
 	LightingManager::AddList(light_);
 
+	if (Input::PushKeyPressed(DIK_U))
+	{
+		ChangeSceneAnimation::GetInstance()->ChangeStart();
+	}
+
+	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
+	{
+		Scene->ChangeState(new TitleScene);
+		return;
+	}
+
+	
 	PostEffect::GetInstance()->Update();
+
 }
 
 void GameScene::PostProcessDraw()
@@ -106,6 +127,7 @@ void GameScene::Flont2dSpriteDraw()
 {
 	player_->Draw2d();
 	startCount_->Draw2d();
+	ChangeSceneAnimation::GetInstance()->Draw();
 }
 
 void GameScene::ImGuiUpdate()

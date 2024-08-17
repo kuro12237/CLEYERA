@@ -40,7 +40,7 @@ namespace CreateGraphicsPiplineFanc
 	/// <param name="mode"></param>
 	void SettingBlendState(
 		D3D12_RENDER_TARGET_BLEND_DESC& blenddesc,
-		BlendMode mode);
+		SpriteMode mode);
 
 	/// <summary>
 	/// ラスタライザーの設定
