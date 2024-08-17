@@ -57,12 +57,13 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	ChangeSceneAnimation::GetInstance()->Update();
 
+	//シーン切替が終わったら
 	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
 	{
 		startCount_->Update();
 	}
 
-	//カウントダウン中の処理
+	//カウントダウンが終わったら
 	if (startCount_->GetStartFlag())
 	{
 		enemyWalkManager_->SetStatFlag(true);
@@ -89,11 +90,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	LightingManager::AddList(light_);
 
-	if (Input::PushKeyPressed(DIK_U))
-	{
-		ChangeSceneAnimation::GetInstance()->ChangeStart();
-	}
-
+	//ゴールしたら
 	if (goal_->GetIsGoalFlag())
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
@@ -107,7 +104,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		return;
 	}
 
-	
 	PostEffect::GetInstance()->Update();
 
 }
