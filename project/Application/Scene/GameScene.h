@@ -25,6 +25,8 @@
 #include"Particle/GpuParticle.h"
 #include"Particle/Emitter/ParticleEmitter.h"
 
+#include"GameObject/Goal/Goal.h"
+
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/StartCount/StartCount.h"
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
@@ -72,5 +74,8 @@ private:
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
+	unique_ptr<Goal>goal_ = nullptr;
+
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
+
 };

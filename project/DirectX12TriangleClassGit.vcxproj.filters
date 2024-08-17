@@ -488,6 +488,7 @@
     <ClCompile Include="Application\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -792,6 +793,7 @@
     <ClInclude Include="Application\Utility\ObjectId\GameObjectId.h" />
     <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.h" />
+    <ClInclude Include="Application\GameObject\Goal\Goal.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

@@ -38,6 +38,9 @@ void GameScene::Initialize()
 
 	gameObjectManager_->Update();
 
+	goal_ = make_unique<Goal>();
+	goal_->Initialize();
+
 	LightingManager::AddList(light_);
 
 	PostEffect::GetInstance()->Update();
@@ -45,9 +48,7 @@ void GameScene::Initialize()
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
 {
-	Scene;
 
-	
 #ifdef _USE_IMGUI
 
 	ImGuiUpdate();
@@ -91,6 +92,13 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	if (Input::PushKeyPressed(DIK_U))
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
+	}
+
+	if (goal_->GetIsGoalFlag())
+	{
+		ChangeSceneAnimation::GetInstance()->ChangeStart();
+		enemyWalkManager_->SetStatFlag(false);
+		player_->SetStartFlag(false);
 	}
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
@@ -189,6 +197,9 @@ void GameScene::Collision()
 	{
 		gameCollisionManager_->ListPushback(b.get());
 	}
+
+
+	gameCollisionManager_->ListPushback(goal_.get());
 
 	gameCollisionManager_->CheckAllCollisoin();
 
