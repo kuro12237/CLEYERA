@@ -68,6 +68,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 		enemyWalkManager_->SetStatFlag(true);
 		player_->SetStartFlag(true);
+		startCount_->SetStartFlag(false);
 	}
 
 	//

@@ -48,6 +48,7 @@ void WorldTransform::TransfarMatrix()
 	buffer_->Map();
 	BufferMatrix_.WVP = matWorld;
 	BufferMatrix_.world = matWorld;
+	BufferMatrix_.worldPos = GetWorldPosition();
 	buffer_->Setbuffer(BufferMatrix_);
 	buffer_->UnMap();
 }

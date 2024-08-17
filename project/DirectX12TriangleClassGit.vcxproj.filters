@@ -261,12 +261,6 @@
     <None Include="Resources\Shader\PostEffect\Shadow.hlsli">
       <Filter>Shader\PostEffect</Filter>
     </None>
-    <None Include="Resources\Shader\PostEffect\DeferredShading.hlsli">
-      <Filter>Shader\PostEffect</Filter>
-    </None>
-    <None Include="Resources\Shader\PostEffect\DeferredShadingPhong.hlsli">
-      <Filter>Shader\PostEffect</Filter>
-    </None>
     <None Include="Resources\Shader\primitives.hlsli">
       <Filter>Shader\primitive</Filter>
     </None>
@@ -846,12 +840,6 @@
     </FxCompile>
     <FxCompile Include="Resources\Shader\Phong\SkinningObject3d.VS.hlsl">
       <Filter>Shader\Lighting</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.PS.hlsl">
-      <Filter>Shader\PostEffect</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\PostEffect\DeferredShading.VS.hlsl">
-      <Filter>Shader\PostEffect</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\PostEffect\Shadow.PS.hlsl">
       <Filter>Shader\PostEffect</Filter>

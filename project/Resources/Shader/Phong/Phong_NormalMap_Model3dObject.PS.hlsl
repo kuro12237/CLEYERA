@@ -39,7 +39,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     N = normalize(input.normal);
     //N = normalColor.rgb * 2.0f + N - 1.0f;
-    N = normalize(N);
+    //N = normalize(N);
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {
 		//点光源

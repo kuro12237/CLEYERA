@@ -51,6 +51,7 @@ struct  TransformationViewMatrix
 struct TransformationMatrix {
 	Math::Matrix::Matrix4x4 WVP;
 	Math::Matrix::Matrix4x4 world;
+	Math::Vector::Vector3 worldPos;
 };
 
 struct ParticleData {

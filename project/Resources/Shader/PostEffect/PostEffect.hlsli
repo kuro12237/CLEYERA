@@ -49,6 +49,8 @@ struct TransformationViewMatrix
     float32_t4x4 view;
     float32_t4x4 projection;
     float32_t4x4 orthographic;
+    float32_t4x4 InverseVp;
+    float32_t4x4 InverseProj;
     float32_t3 CameraPosition;
 };
 
@@ -63,3 +65,28 @@ struct PixelShaderOutput
     float32_t4 color : SV_TARGET0;
 };
 
+static const float32_t2 kIndex3x3[3][3] =
+{
+    { { -1.0f, -1.0f }, { 0.0f, -1.0f }, { 1.0f, -1.0f } },
+    { { -1.0f, 0.0f }, { 0.0f, 0.0f }, { 1.0f, 0.0f } },
+    { { -1.0f, 1.0f }, { 0.0f, 1.0f }, { 1.0f, 1.0f } },
+};
+
+static const float32_t kPrewittHorizontalKernel[3][3] =
+{
+    { -1.0f / 6.0f, 0.0f, 1.0f / 6.0f },
+    { -1.0f / 6.0f, 0.0f, 1.0f / 6.0f },
+    { -1.0f / 6.0f, 0.0f, 1.0f / 6.0f },
+};
+static const float32_t kPrewittVerticelKernel[3][3] =
+{
+    { -1.0f / 6.0f, -1.0f / 6.0f, -1.0f / 6.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 1.0f / 6.0f, 1.0f / 6.0f, 1.0f / 6.0f },
+};
+
+float32_t Luminance(float32_t3 v)
+{
+    return dot(v, float32_t3(0.2125f, 0.714f, 0.0721f));
+
+}

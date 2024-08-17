@@ -17,9 +17,29 @@ void PostEffect::Initialize()
 	CreateTexBuffer(colorBuffer_, colorSrvIndex_);
 	CreateRTV(texBuffer_, rtvIndex_);
 	CreateRTV(colorBuffer_, colorRtvIndex_);
-	CreateDSV();
 
-	CreateShadowMap();
+	depthTexBuffer_ = make_unique<BufferResource<uint32_t>>();
+
+	//resourceDesc設定
+	D3D12_RESOURCE_DESC resourceTexDesc = {};
+	resourceTexDesc.Width = WinApp::GetkCilientWidth();
+	resourceTexDesc.Height = WinApp::GetkCilientHeight();
+	resourceTexDesc.MipLevels = 1;
+	resourceTexDesc.DepthOrArraySize = 1;
+	resourceTexDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	resourceTexDesc.SampleDesc.Count = 1;
+	resourceTexDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	resourceTexDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+	//Heap設定
+	D3D12_HEAP_PROPERTIES heapPram{};
+	heapPram.Type = D3D12_HEAP_TYPE_DEFAULT;
+	D3D12_CLEAR_VALUE color = {};
+	color.Format = DXGI_FORMAT_D32_FLOAT;
+	color.DepthStencil.Depth = 1.0f;
+	color.DepthStencil.Stencil = 0;
+	depthTexBuffer_->CreateResource(resourceTexDesc, heapPram, D3D12_RESOURCE_STATE_GENERIC_READ, color);
+	depthTexBuffer_->RegisterSRV(DXGI_FORMAT_R32_FLOAT, "DeferredShadingDepthTex");
+	depthTexBuffer_->RegisterDSV(DXGI_FORMAT_D32_FLOAT, "DeferredShadingDepthTex");
 
 	wvp_ = std::make_unique<BufferResource<TransformationMatrix>>();
 	wvp_->CreateResource(1);
@@ -80,7 +100,7 @@ void PostEffect::Draw()
 	//tex1
 	DescriptorManager::rootParamerterCommand(2, srvIndex_);
 	//影用
-	DescriptorManager::rootParamerterCommand(3, srvShadowIndex_);
+	DescriptorManager::rootParamerterCommand(3, depthTexBuffer_->GetSrvIndex());
 
 	//ブラー用
 	blurParamBuffer_->CommandCall(4);
@@ -104,13 +124,12 @@ void PostEffect::PreDraw()
 	//barriri
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
-
 	// レンダーターゲットをセット
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = RTVDescriptorManager::GetHandle(rtvIndex_);
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(dsvIndex_);
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(depthTexBuffer_->GetDsvIndex());
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle = RTVDescriptorManager::GetHandle(colorRtvIndex_);
 
-	D3D12_RESOURCE_BARRIER barrier[2]{};
+	D3D12_RESOURCE_BARRIER barrier[3]{};
 	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier[0].Transition.pResource = texBuffer_.Get();
@@ -122,7 +141,15 @@ void PostEffect::PreDraw()
 	barrier[1].Transition.pResource = colorBuffer_.Get();
 	barrier[1].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier[1].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	commands.m_pList->ResourceBarrier(2, barrier);
+	//深度
+	barrier[2].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[2].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[2].Transition.Subresource = 0xFFFFFFFF;
+	barrier[2].Transition.pResource = depthTexBuffer_->GetBuffer();
+	barrier[2].Transition.StateBefore = D3D12_RESOURCE_STATE_GENERIC_READ;
+	barrier[2].Transition.StateAfter = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+
+	commands.m_pList->ResourceBarrier(3, barrier);
 
 	//commands.m_pList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[] = { rtvHandle,rtvColorHandle };
@@ -139,7 +166,9 @@ void PostEffect::PreDraw()
 
 void PostEffect::PostDraw()
 {
-	D3D12_RESOURCE_BARRIER barrier[2]{};
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+
+	D3D12_RESOURCE_BARRIER barrier[3]{};
 	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier[0].Transition.Subresource = 0xFFFFFFFF;
@@ -152,7 +181,15 @@ void PostEffect::PostDraw()
 	barrier[1].Transition.pResource = colorBuffer_.Get();
 	barrier[1].Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier[1].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-	DirectXCommon::GetInstance()->GetCommands().m_pList->ResourceBarrier(2, barrier);
+	//深度
+	barrier[2].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier[2].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier[2].Transition.Subresource = 0xFFFFFFFF;
+	barrier[2].Transition.pResource = depthTexBuffer_->GetBuffer();
+	barrier[2].Transition.StateBefore = D3D12_RESOURCE_STATE_DEPTH_WRITE;
+	barrier[2].Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
+
+	commands.m_pList->ResourceBarrier(3, barrier);
 }
 
 void PostEffect::SetSelectPostEffect(SelectPostEffect s, bool flag)
@@ -333,140 +370,6 @@ void PostEffect::CreateRTV(ComPtr<ID3D12Resource>& buf, uint32_t& rtvIndex)
 	RTVDescriptorManager::IndexIncrement("postEffectColor");
 	rtvIndex = RTVDescriptorManager::GetIndex();
 	RTVDescriptorManager::AddPointer(buf, rtvDesc);
-}
-
-void PostEffect::CreateDSV()
-{
-	D3D12_RESOURCE_DESC resourceDesc = {};
-	resourceDesc.Width = WinApp::GetkCilientWidth();
-	resourceDesc.Height = WinApp::GetkCilientHeight();
-	resourceDesc.MipLevels = 1;
-	resourceDesc.DepthOrArraySize = 1;
-
-	resourceDesc.Format = DXGI_FORMAT_D32_FLOAT;
-	resourceDesc.SampleDesc.Count = 1;
-	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-
-	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
-
-	D3D12_CLEAR_VALUE depthClearValue{};
-	depthClearValue.DepthStencil.Depth = 1.0f;
-	depthClearValue.Format = DXGI_FORMAT_D32_FLOAT;
-
-	HRESULT hr = {};
-	//作成
-	hr = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
-		&heapProperties,
-		D3D12_HEAP_FLAG_NONE,
-		&resourceDesc,
-		D3D12_RESOURCE_STATE_DEPTH_WRITE,
-		&depthClearValue,
-		IID_PPV_ARGS(&depthBuffer_)
-	);
-	assert(SUCCEEDED(hr));
-
-	D3D12_DEPTH_STENCIL_VIEW_DESC desc{};
-	desc.Format = DXGI_FORMAT_D32_FLOAT;
-	desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-
-	DSVDescriptorManager::IndexIncrement("posteffect");
-	dsvIndex_ = DSVDescriptorManager::GetIndex();
-	DSVDescriptorManager::AddPointer(depthBuffer_, desc);
-
-}
-
-void PostEffect::CreateShadowMap()
-{
-
-	CreateShadowMapResource();
-	CreateShadowMapDSV();
-	CreateShadowMapSRV();
-
-
-}
-
-void PostEffect::CreateShadowMapResource()
-{
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
-	HRESULT hr;
-
-	//resourceDesc設定
-	D3D12_RESOURCE_DESC resourceDesc = {};
-	resourceDesc.Width = WinApp::GetkCilientWidth();
-	resourceDesc.Height = WinApp::GetkCilientHeight();
-	resourceDesc.MipLevels = 1;
-	resourceDesc.DepthOrArraySize = 1;
-	resourceDesc.Format = DXGI_FORMAT_D32_FLOAT;
-	resourceDesc.SampleDesc.Count = 1;
-	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-	//Heap設定
-	D3D12_HEAP_PROPERTIES heapPram{};
-	heapPram.Type = D3D12_HEAP_TYPE_DEFAULT;
-	//色
-	D3D12_CLEAR_VALUE color = {};
-	color.Format = DXGI_FORMAT_D32_FLOAT;
-	color.DepthStencil.Depth = 1.0f;
-	color.DepthStencil.Stencil = 0;
-
-	//resource作成
-	hr =
-		device->CreateCommittedResource(
-			&heapPram,
-			D3D12_HEAP_FLAG_NONE,
-			&resourceDesc,
-			D3D12_RESOURCE_STATE_GENERIC_READ,
-			&color,
-			IID_PPV_ARGS(&depthNormalBuffer_)
-		);
-}
-
-void PostEffect::CreateShadowMapDSV()
-{
-	D3D12_DEPTH_STENCIL_VIEW_DESC desc{};
-	desc.Format = DXGI_FORMAT_D32_FLOAT;
-	desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	desc.Flags = D3D12_DSV_FLAG_NONE;
-
-	DSVDescriptorManager::IndexIncrement("shadow");
-	dsvShadowIndex_ = DSVDescriptorManager::GetIndex();
-	DSVDescriptorManager::AddPointer(depthNormalBuffer_.Get(), desc);
-}
-
-void PostEffect::CreateShadowMapSRV()
-{
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = { };
-	srvDesc.Format = DXGI_FORMAT_R32_FLOAT;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MostDetailedMip = 0;
-	srvDesc.Texture2D.MipLevels = 1;
-	srvDesc.Texture2D.PlaneSlice = 0;
-	srvDesc.Texture2D.ResourceMinLODClamp = 0.0f;
-
-	//Despcripter
-	DescriptorManager::IndexIncrement("shadow");
-	uint32_t srvIndex = DescriptorManager::GetIndex();
-	DescriptorManager::SetCPUDescripterHandle(
-		DescriptorManager::GetCPUDescriptorHandle(
-			srvIndex),
-		srvIndex
-	);
-
-	DescriptorManager::SetGPUDescripterHandle(
-		DescriptorManager::GetGPUDescriptorHandle(
-			srvIndex),
-		srvIndex
-	);
-
-	DescriptorManager::CGHandlePtr();
-	DescriptorManager::CreateShaderResourceView(
-		depthNormalBuffer_.Get(),
-		srvDesc,
-		srvIndex);
-	srvShadowIndex_ = srvIndex;
 }
 
 void PostEffect::CreateBloom()

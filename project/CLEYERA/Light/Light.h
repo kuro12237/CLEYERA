@@ -20,8 +20,6 @@ struct PointLight_param
 	/// </summary>
 	float decay = 0.1f;
 
-	Math::Vector::Vector3 worldPos_ = {};
 
-	void UpdateMatrix();
 
 };

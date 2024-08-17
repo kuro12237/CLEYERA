@@ -96,11 +96,7 @@ private:
 	uint32_t AddSRVDescripter(ComPtr<ID3D12Resource>&buf);
 
 	void CreateRTV(ComPtr<ID3D12Resource>& buf, uint32_t& rtvIndex);
-	void CreateDSV();
-	void CreateShadowMap();
-	void CreateShadowMapResource();
-	void CreateShadowMapDSV();
-	void CreateShadowMapSRV();
+
 
 	void CreateBloom();
 	void CreateBloomBuffer();
@@ -118,14 +114,13 @@ private:
 	uint32_t colorRtvIndex_ = 0;
 	uint32_t colorSrvIndex_ = 0;
 	uint32_t srvShadowIndex_ = 0;
-	uint32_t dsvShadowIndex_ = 0;
-	uint32_t 	rtvshadowIndex_ = 0;
+	uint32_t dsvShadowIndex_ = 0;\
 	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
 
 	ComPtr<ID3D12Resource> colorBuffer_ = nullptr;
 	ComPtr<ID3D12Resource>texBuffer_ = nullptr;
-	ComPtr<ID3D12Resource>depthBuffer_ = nullptr;
-	ComPtr<ID3D12Resource>depthNormalBuffer_ = nullptr;
+
+	unique_ptr<BufferResource<uint32_t>>depthTexBuffer_ = nullptr;
 	const static uint32_t BloomNum_ = 2;
 
 	std::array<ComPtr<ID3D12Resource>, BloomNum_>BloomBuffer_ = {};

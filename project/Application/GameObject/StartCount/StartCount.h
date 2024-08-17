@@ -18,6 +18,13 @@ public:
 	bool GetStartFlag() { return startFlag; };
 #pragma endregion
 
+#pragma region Set
+
+	void SetStartFlag(bool f) { startFlag = f; }
+
+#pragma endregion
+
+
 private:
 
 	void NumberUpdate();

@@ -26,7 +26,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t3 pTotalRimColor = 0;
  
     //法線を行列で調整
-    N = normalize(normalColor.rgb+input.normal);
+    N = normalize(input.normal);
  
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {
@@ -35,31 +35,24 @@ PixelShaderOutput main(VertexShaderOutput input)
         float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
 
         float32_t3 pLightDir = normalize(input.worldPosition - gPointLight[i].position);
-        float32_t3 pRefrectLight = reflect(pLightDir, normalize(N));
+        float32_t3 pRefrectLight = reflect(pLightDir, normalize(input.normal));
         float32_t3 pHalfVector = normalize(-pLightDir + toEye);
 
-        float pNdotL = dot(normalize(N), -normalize(pLightDir));
+        float pNdotL = dot(normalize(input.normal), -normalize(pLightDir));
         float pCos = pow(pNdotL * 0.5f + 0.5f, 2.0f);
-        float pNdotH = dot(normalize(N), pHalfVector);
+        float pNdotH = dot(normalize(input.normal), pHalfVector);
         float pSpecularPow = pow(saturate(pNdotH), gMaterial.shininess);
-
-        //リムライト
-        float rim = pow(1.0 - clamp(dot(N, toEye), 0.0, 1.0), 5.0);
-        float dotLE = pow(max(dot(normalize(toEye), normalize(pLightDir)), 0.0), 30.0);
-        float32_t3 RimColor = gPointLight[i].color.rgb * 1.0f * rim * dotLE * factor * gPointLight[i].intensity;
 
 		//拡散
         float32_t3 pDiffuse = gMaterial.color.rgb * textureColor.rgb * gPointLight[i].color.rgb * pCos * gPointLight[i].intensity * factor;
 		//鏡面
         float32_t3 pSpecular = gPointLight[i].color.rgb * gPointLight[i].intensity * factor * pSpecularPow * float32_t3(1.0f, 1.0f, 1.0f);
 
-        pTotalRimColor = pTotalRimColor + RimColor;
         pTotalDffuse = pTotalDffuse + pDiffuse;
         pTotalSpecular = pTotalSpecular + pSpecular;
-
     }
 
-    output.color.rgb = pTotalDffuse + pTotalSpecular + pTotalRimColor;
+    output.color.rgb = pTotalDffuse + pTotalSpecular;
     output.color.a = gMaterial.color.a * textureColor.a;
     output.dfColor = float32_t4(textureColor.rgb, 1);
     output.normalColor = float32_t4(N.rgb, 1);
