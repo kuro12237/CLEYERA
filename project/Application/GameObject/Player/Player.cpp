@@ -3,8 +3,8 @@
 void Player::Initialize()
 {
 	gameObjectInstance_ = GameObjectManager::GetInstance();
-	name_= "Player";
-	
+	name_ = "Player";
+
 	//押し出し
 	this->isExtrusion_ = true;
 	//状態異常のステート
@@ -13,7 +13,7 @@ void Player::Initialize()
 	//id設定
 	id_ = kPlayerId;
 	//当たり判定
-	SetObjectData(gameObjectInstance_ ->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
+	SetObjectData(gameObjectInstance_->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
 	aabb_ = gameObjectInstance_->GetObj3dData(name_)->GetAABB();
 	//スケール値セット
 	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
@@ -24,6 +24,28 @@ void Player::Initialize()
 	AnimationManager::GetInstance()->LoadAnimation(filePath);
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
+	auto* emitters = CharacterMoveParticle::GetInstance()->GetEmitter();
+
+	uint32_t index = 0;
+	for (auto& emitter : emitters->GetControlParam())
+	{
+		if (!emitter.useFlag_)
+		{
+			emitter.useFlag_ = true;
+			particleMoveIndex_ = index;
+			auto& param = emitters->GetEmitParam()[particleMoveIndex_];
+			param.count = 4;
+			emitter.frequencyTime = 0.18f;
+			param.velocityMax = { 0.0f,0.01f,0.0f };
+			param.velocityMin = { 0.0f,0.01f,0.0f };
+			param.sizeMax = { 0.1f,0.5f,0.1f };
+			param.sizeMin = { -0.1f,-0.1f,-0.1f };
+			param.colorDecayMax.w = 0.05f;
+			param.colorDecayMin.w = 0.025f;
+			break;
+		}
+		index++;
+	}
 }
 
 void Player::ImGuiUpdate()
@@ -44,11 +66,10 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-
-	string filePath = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetMOdelFilePath();
+	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetMOdelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
-	GameObjectManager::GetInstance()->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+	gameObjectInstance_->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
 
 	shootTimerFlame_++;
 	if (state_)
@@ -69,6 +90,10 @@ void Player::Update()
 	isShoot_ = false;
 	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
+
+	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
+	moveEmitParam.translate = transform.translate;
+	moveEmitParam.translate.y += aabb_.min.y / 2.0f;
 }
 
 void Player::OnCollision(ICollider* c)
@@ -162,9 +187,12 @@ void Player::Move(float speed)
 		rotate.y = radian;
 	}
 
-	{//アニメーション
-		walkAnimationFlame_ += (1.0f / 30.0f) * fabsf(Ljoy.x);
-	}
+	//アニメーション
+	walkAnimationFlame_ += (1.0f / 30.0f) * fabsf(Ljoy.x);
+
+	//パーティクル
+	CharacterMoveParticle::GetInstance()->Emit();
+
 }
 
 void Player::Shoot()

@@ -12,6 +12,9 @@ void Goal::Initialize()
 
 void Goal::Update()
 {
+	auto& transform = gameObjIncetance_->GetObj3dData(name_)->GetWorldTransform().transform;
+
+	transform.rotate.z += float(numbers::pi * 0.1);
 }
 
 void Goal::OnCollision(ICollider* c)

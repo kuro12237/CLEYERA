@@ -17,18 +17,24 @@ namespace Particle
 		{
 			Math::Vector::Vector3 translate = {};
 			Math::Vector::Vector3 rotate = {};
+			Math::Matrix::Matrix4x4 matWorld = Math::Matrix::Identity();
+			Math::Matrix::Matrix4x4 matVPV = Math::Matrix::Identity();
 			uint32_t count = 0;
 			uint32_t emit = 0;
 			Math::Vector::Vector3 sizeMin = { -1.0f,-1.0f,-1.0f };
 			Math::Vector::Vector3 sizeMax = { 1.0f,1.0f,1.0f };
 			Math::Vector::Vector3 velocityMin = { -1.0f,-1.0f,-1.0f };
 			Math::Vector::Vector3 velocityMax = { 1.0f,1.0f,1.0f };
+			Math::Vector::Vector4 colorDecayMin = { 0.0f,0.0f,0.0f,0.01f };
+			Math::Vector::Vector4 colorDecayMax = { 0.0f,0.0f,0.0f,0.01f };
 		};
 
 		struct SphereParam
 		{
 			Math::Vector::Vector3 translate = {};
 			Math::Vector::Vector3 rotate = {};
+			Math::Matrix::Matrix4x4 matWorld = Math::Matrix::Identity();
+			Math::Matrix::Matrix4x4 matVPV = Math::Matrix::Identity();
 			uint32_t count = 0;
 			uint32_t emit = 0;
 			float radious = 1.0f;
@@ -46,7 +52,6 @@ namespace Particle
 				uint32_t instancedId;
 			};
 
-		
 		}
 		void CreateSphere(unique_ptr <Primitive::LineModel>& lines, string name);
 		void CreateBox(unique_ptr <Primitive::LineModel>& lines, string name);

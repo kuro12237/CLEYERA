@@ -24,6 +24,8 @@ namespace Particle {
 		void SpownDraw();
 
 		void Clear(uint32_t index) { emitParam_[index] = {}; particleControl_[index] = {}; }
+		void AllClear();
+
 #pragma region Get
 
 		vector<T>& GetEmitParam() { return emitParam_; }
@@ -32,6 +34,7 @@ namespace Particle {
 
 		string GetEmitName() { return name_; }
 		const uint32_t GetEmitMax() { return max_; }
+
 #pragma endregion
 
 	private:
@@ -170,6 +173,16 @@ namespace Particle {
 	}
 
 	template<typename T>
+	inline void ParticleEmitter<T>::AllClear()
+	{
+		for (size_t i = 0; i < max_; i++)
+		{
+			emitParam_[i] = {};
+			particleControl_[i] = {};
+		}
+	}
+
+	template<typename T>
 	inline void ParticleEmitter<T>::CreateDebugDraw()
 	{
 		lines_.resize(max_);
@@ -224,6 +237,8 @@ namespace Particle {
 					ImGui::DragFloat3("velocityMin" ,&emitParam_[index].velocityMin.x, 0.1f);
 					ImGui::DragFloat3("velocityMax", &emitParam_[index].velocityMax.x, 0.1f);
 					ImGui::TreePop();
+					ImGui::DragFloat4("colorDecayMin", &emitParam_[index].colorDecayMin.x, 0.1f);
+					ImGui::DragFloat4("colorDecayMax", &emitParam_[index].colorDecayMax.x, 0.1f);
 				}
 			}
 			ImGui::TreePop();

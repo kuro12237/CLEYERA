@@ -27,8 +27,6 @@ void CameraData::UpdateMatrix()
 	matProj_ = Math::Matrix::PerspectiveFovMatrix(fov_, aspectRatio_, nearClip_, farClip_);
 	OrthographicMatrix_ = Math::Matrix::OrthographicMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0.0f, 100.0f);
 
-
-
 	TransfarMatrix();
 }
 

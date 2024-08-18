@@ -17,6 +17,8 @@
 
 #include"GameObject/ObjectManager/GameObjectManager.h"
 
+#include"GameObject/Particles/CharacterMoveParticle.h"
+
 class Player :public IObjectData, public ICollider
 {
 public:
@@ -88,4 +90,6 @@ private:
 
 	float walkAnimationFlame_ = 0.0f;
 	SAnimation::Animation walkAnimationData_;
+
+	uint32_t particleMoveIndex_ = 0;
 };

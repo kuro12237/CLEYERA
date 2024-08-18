@@ -9,6 +9,8 @@ struct EmitterSphere
 {
     float32_t3 translate;
     float32_t3 rotate;
+    float32_t4x4 matWorld;
+    float32_t4x4 matVPV;
     uint32_t count;
     uint32_t emit;
     

@@ -16,19 +16,17 @@
 #include"GameObject/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
 
-#include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
-
-#include"Utility/SkyBox/SkyBox.h"
-#include"Particle/GpuParticle.h"
-#include"Particle/Emitter/ParticleEmitter.h"
-
+#include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Goal/Goal.h"
 
-#include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/StartCount/StartCount.h"
+
+#include"GameObject/Particles/CharacterDeadParticle.h"
+#include"GameObject/Particles/CharacterMoveParticle.h"
+
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
 class GameScene :public IScene
@@ -57,6 +55,12 @@ private:
 
 	void Gravitys();
 
+	void ParticlesInitialize();
+	void ParticlesUpdate();
+	void ParticlesDraw();
+
+	void ParticleImGuiUpdate();
+
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "LevelData_1.json";
@@ -77,5 +81,5 @@ private:
 	unique_ptr<Goal>goal_ = nullptr;
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
-
+	CharacterMoveParticle* characterMoveParticle_ = nullptr;
 };

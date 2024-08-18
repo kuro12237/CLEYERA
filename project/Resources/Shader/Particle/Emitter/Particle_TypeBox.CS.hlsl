@@ -9,12 +9,17 @@ struct EmitterBox
 {
     float32_t3 translate;
     float32_t3 rotate;
+    float32_t4x4 matWorld;
+    float32_t4x4 matVPV;
     uint32_t count;
     uint32_t emit;
     float32_t3 sizeMin;
     float32_t3 sizeMax;
     float32_t3 velocityMin;
     float32_t3 velocityMax;
+    
+    float32_t4 colorDecayMin;
+    float32_t4 colorDecayMax;
 };
 
 
@@ -62,6 +67,21 @@ float32_t3 GenerateRandomPointInOBB(EmitterBox box, RandomGenerator generator)
     return rotatedPoint;
 }
 
+// OBBÇÃíÜÇ≈ÉâÉìÉ_ÉÄÇ»ì_Çê∂ê¨Ç∑ÇÈä÷êî
+float32_t4 GenerateRandomColorDecay(EmitterBox box, RandomGenerator generator)
+{
+    float32_t4 rgba;
+    rgba.rgb = generator.Generate3d();
+    rgba.a = generator.Generate3d().r;
+    
+    float32_t4 decay;
+    decay.r = (box.colorDecayMin.r + rgba.r * (box.colorDecayMax.r - box.colorDecayMin.r));
+    decay.g = (box.colorDecayMin.g + rgba.g * (box.colorDecayMax.g - box.colorDecayMin.g));
+    decay.b = (box.colorDecayMin.b + rgba.b * (box.colorDecayMax.b - box.colorDecayMin.b));
+    decay.a = (box.colorDecayMin.a + rgba.a * (box.colorDecayMax.a - box.colorDecayMin.a));
+
+    return decay;
+}
 float32_t3 GenerateRandomVelocity(float32_t3 minVelocity, float32_t3 maxVelocity, RandomGenerator generator)
 {
     float32_t3 uvw = generator.Generate3d();
@@ -106,6 +126,7 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
                 gParticle[particleIndex].color.a = 1.0f;
                 gParticle[particleIndex].velocity = GenerateRandomVelocity(gEmitterSphere[index].velocityMin, gEmitterSphere[index].velocityMax, generator);
                 gParticle[particleIndex].matWorld = Mat4x4Identity();
+                gParticle[particleIndex].colorDecay = GenerateRandomColorDecay(gEmitterSphere[index], generator);
                 gParticle[particleIndex].isDraw = true;
             }
             else

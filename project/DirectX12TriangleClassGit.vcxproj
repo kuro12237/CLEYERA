@@ -29,7 +29,6 @@
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig" />
     <None Include="Resources\Shader\LightingObject3d.hlsli" />
-    <None Include="Resources\Shader\ParticleObject3d.hlsli" />
     <None Include="Resources\Shader\Particle\MatrixFanc.hlsli" />
     <None Include="Resources\Shader\Particle\Particle.hlsli" />
     <None Include="Resources\Shader\Particle\RandomGenerator.hlsli" />
@@ -62,6 +61,7 @@
     <ClCompile Include="Application\GameObject\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectManager\IObjectData.cpp" />
     <ClCompile Include="Application\GameObject\Particles\CharacterDeadParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\CharacterMoveParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp" />
     <ClCompile Include="Application\GameObject\Player\command\PlayerCommandHandler.cpp" />
@@ -171,6 +171,7 @@
     <ClInclude Include="Application\GameObject\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Application\GameObject\ObjectManager\IObjectData.h" />
     <ClInclude Include="Application\GameObject\Particles\CharacterDeadParticle.h" />
+    <ClInclude Include="Application\GameObject\Particles\CharacterMoveParticle.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\state\IPlayerBulletState.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.h" />
@@ -305,28 +306,6 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\ParticleObject3d.PS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Pixel</ShaderType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\ParticleObject3d.VS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Vertex</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>

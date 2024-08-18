@@ -20,7 +20,7 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 			emitter.frequencyTime = 0.3f;
 			param.velocityMax = { 0.01f,0.05f,0.0f };
 			param.velocityMin = { -0.01f,0.1f,0.0f };
-			return;
+			break;
 		}
 		index++;
 	}

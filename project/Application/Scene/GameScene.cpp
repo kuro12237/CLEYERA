@@ -18,6 +18,9 @@ void GameScene::Initialize()
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 
+	//3dObj
+	ParticlesInitialize();
+
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
 
@@ -29,20 +32,19 @@ void GameScene::Initialize()
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
-
-	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
-	characterDeadParticle_->Initialize();
-
-	startCount_ = make_unique<StartCount>();
-	startCount_->Initialize();
-
-	gameObjectManager_->Update();
-
+	
 	goal_ = make_unique<Goal>();
 	goal_->Initialize();
 
-	LightingManager::AddList(light_);
 
+	//2dObj
+	startCount_ = make_unique<StartCount>();
+	startCount_->Initialize();
+
+	//XV
+	gameObjectManager_->Update();
+
+	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 }
 
@@ -81,13 +83,15 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	blockManager_->Update();
 
+	goal_->Update();
+
 	Gravitys();
 
 	Collision();
 
 	gameObjectManager_->Update();
 
-	characterDeadParticle_->Update();
+	ParticlesUpdate();
 
 	LightingManager::AddList(light_);
 
@@ -114,7 +118,8 @@ void GameScene::PostProcessDraw()
 	PostEffect::GetInstance()->PreDraw();
 
 	gameObjectManager_->Draw();
-	characterDeadParticle_->Draw();
+
+	ParticlesDraw();
 
 	PostEffect::GetInstance()->PostDraw();
 }
@@ -165,7 +170,7 @@ void GameScene::ImGuiUpdate()
 
 	player_->ImGuiUpdate();
 
-	characterDeadParticle_->ImGuiUpdate();
+	ParticleImGuiUpdate();
 
 }
 
@@ -215,4 +220,36 @@ void GameScene::Gravitys()
 		}
 	}
 	gravityManager_->CheckGravity();
+}
+
+void GameScene::ParticlesInitialize()
+{
+	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
+	characterDeadParticle_->Initialize();
+
+	characterMoveParticle_ = CharacterMoveParticle::GetInstance();
+	characterMoveParticle_->Initialize();
+}
+
+void GameScene::ParticlesUpdate()
+{
+	characterDeadParticle_->Update();
+	characterMoveParticle_->Update();
+
+}
+
+void GameScene::ParticlesDraw()
+{
+	characterDeadParticle_->Draw();
+	characterMoveParticle_->Draw();
+}
+
+void GameScene::ParticleImGuiUpdate()
+{
+	if(ImGui::TreeNode("Particles"))
+	{
+		characterDeadParticle_->ImGuiUpdate();
+		characterMoveParticle_->ImGuiUpdate();
+		ImGui::TreePop();
+	}
 }

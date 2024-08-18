@@ -243,9 +243,6 @@
     <None Include="Resources\Shader\SpriteObject3d.hlsli">
       <Filter>Shader</Filter>
     </None>
-    <None Include="Resources\Shader\ParticleObject3d.hlsli">
-      <Filter>Shader</Filter>
-    </None>
     <None Include="Resources\Shader\Sprite2d\SpriteObject2d.PS.hlsl">
       <Filter>Shader</Filter>
     </None>
@@ -483,6 +480,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\CharacterMoveParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -788,6 +786,7 @@
     <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.h" />
     <ClInclude Include="Application\GameObject\Goal\Goal.h" />
+    <ClInclude Include="Application\GameObject\Particles\CharacterMoveParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -800,12 +799,6 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\SpriteObject3d.PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\ParticleObject3d.PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shader\ParticleObject3d.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Sprite2d\SpriteObject2d.VS.hlsl">
