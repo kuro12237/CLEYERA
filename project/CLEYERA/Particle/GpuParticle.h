@@ -56,7 +56,6 @@ namespace Particle {
 
 #pragma endregion
 
-
 	private:
 
 		size_t particleMin = 1024;

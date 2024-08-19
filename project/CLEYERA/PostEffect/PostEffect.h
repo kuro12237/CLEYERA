@@ -98,11 +98,6 @@ private:
 	void CreateRTV(ComPtr<ID3D12Resource>& buf, uint32_t& rtvIndex);
 
 
-	void CreateBloom();
-	void CreateBloomBuffer();
-	void CreateBloomRTV();
-	void CreateBloomSRV();
-
 	bool isInitialize_ = false;
 
 	Math::Vector::Vector2 pos_ = {};
@@ -110,20 +105,18 @@ private:
 
 	uint32_t srvIndex_ = 0;
 	uint32_t rtvIndex_ = 0;
-	uint32_t dsvIndex_ = 0;
 	uint32_t colorRtvIndex_ = 0;
 	uint32_t colorSrvIndex_ = 0;
-	uint32_t srvShadowIndex_ = 0;
-	uint32_t dsvShadowIndex_ = 0;\
+	
+
 	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
 
 	ComPtr<ID3D12Resource> colorBuffer_ = nullptr;
-	ComPtr<ID3D12Resource>texBuffer_ = nullptr;
 
+
+	unique_ptr<BufferResource<uint32_t>>albedBuf_ = nullptr;
+	unique_ptr<BufferResource<uint32_t>>texBuf_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>depthTexBuffer_ = nullptr;
-	const static uint32_t BloomNum_ = 2;
-
-	std::array<ComPtr<ID3D12Resource>, BloomNum_>BloomBuffer_ = {};
 
 
 	unique_ptr<BufferResource<TransformationMatrix>>wvp_ = nullptr;

@@ -13,12 +13,27 @@ void PostEffect::Initialize()
 		return;
 	}
 	isInitialize_ = true;
-	CreateTexBuffer(texBuffer_, srvIndex_);
 	CreateTexBuffer(colorBuffer_, colorSrvIndex_);
-	CreateRTV(texBuffer_, rtvIndex_);
 	CreateRTV(colorBuffer_, colorRtvIndex_);
 
 	depthTexBuffer_ = make_unique<BufferResource<uint32_t>>();
+
+	DXGI_FORMAT texBufFormat = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	const UINT pixCount = WinApp::GetkCilientWidth() * WinApp::GetkCilientHeight();
+	const UINT rowPitch = sizeof(UINT) * WinApp::GetkCilientWidth();
+	const UINT depthPitch = rowPitch * WinApp::GetkCilientHeight();
+
+	texBuf_ = make_unique<BufferResource<uint32_t>>();
+	texBuf_->CreateResource(texBufFormat, WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
+	texBuf_->TransfarImage(pixCount,rowPitch,depthPitch);
+	texBuf_->RegisterRTV(texBufFormat , "texBuf");
+	texBuf_->RegisterSRV(texBufFormat , "texBuf");
+
+	albedBuf_ = make_unique<BufferResource<uint32_t>>();
+	albedBuf_->CreateResource(texBufFormat, WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
+	albedBuf_->TransfarImage(pixCount, rowPitch, depthPitch);
+	albedBuf_->RegisterRTV(texBufFormat, "albedBuf");
+	albedBuf_->RegisterSRV(texBufFormat, "albedBuf");
 
 	//resourceDesc設定
 	D3D12_RESOURCE_DESC resourceTexDesc = {};
@@ -98,7 +113,7 @@ void PostEffect::Draw()
 	paramBuffer_->CommandCall(1);
 
 	//tex1
-	DescriptorManager::rootParamerterCommand(2, srvIndex_);
+	DescriptorManager::rootParamerterCommand(2, texBuf_->GetSrvIndex());
 	//影用
 	DescriptorManager::rootParamerterCommand(3, depthTexBuffer_->GetSrvIndex());
 
@@ -114,7 +129,7 @@ void PostEffect::Draw()
 	CameraManager::GetInstance()->CommandCall(8);
 	CameraManager::GetInstance()->CommandCall(9);
 
-	DescriptorManager::rootParamerterCommand(10, colorSrvIndex_);
+	DescriptorManager::rootParamerterCommand(10, albedBuf_->GetSrvIndex());
 
 	commands.m_pList->DrawInstanced(6, 1, 0, 0);
 }
@@ -125,20 +140,20 @@ void PostEffect::PreDraw()
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
 	// レンダーターゲットをセット
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = RTVDescriptorManager::GetHandle(rtvIndex_);
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = RTVDescriptorManager::GetHandle(texBuf_->GetRtvIndex());
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSVDescriptorManager::GetHandle(depthTexBuffer_->GetDsvIndex());
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle = RTVDescriptorManager::GetHandle(colorRtvIndex_);
+	D3D12_CPU_DESCRIPTOR_HANDLE rtvColorHandle = RTVDescriptorManager::GetHandle(albedBuf_->GetRtvIndex());
 
 	D3D12_RESOURCE_BARRIER barrier[3]{};
 	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier[0].Transition.pResource = texBuffer_.Get();
+	barrier[0].Transition.pResource = texBuf_->GetBuffer();
 	barrier[0].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier[0].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 
 	barrier[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[1].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	barrier[1].Transition.pResource = colorBuffer_.Get();
+	barrier[1].Transition.pResource = albedBuf_->GetBuffer();
 	barrier[1].Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier[1].Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	//深度
@@ -172,13 +187,13 @@ void PostEffect::PostDraw()
 	barrier[0].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[0].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier[0].Transition.Subresource = 0xFFFFFFFF;
-	barrier[0].Transition.pResource = texBuffer_.Get();
+	barrier[0].Transition.pResource = texBuf_->GetBuffer();
 	barrier[0].Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier[0].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	barrier[1].Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
 	barrier[1].Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	barrier[1].Transition.Subresource = 0xFFFFFFFF;
-	barrier[1].Transition.pResource = colorBuffer_.Get();
+	barrier[1].Transition.pResource = albedBuf_->GetBuffer();
 	barrier[1].Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier[1].Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	//深度
@@ -370,68 +385,4 @@ void PostEffect::CreateRTV(ComPtr<ID3D12Resource>& buf, uint32_t& rtvIndex)
 	RTVDescriptorManager::IndexIncrement("postEffectColor");
 	rtvIndex = RTVDescriptorManager::GetIndex();
 	RTVDescriptorManager::AddPointer(buf, rtvDesc);
-}
-
-void PostEffect::CreateBloom()
-{
-	CreateBloomBuffer();
-	CreateBloomRTV();
-	CreateBloomSRV();
-}
-
-void PostEffect::CreateBloomBuffer()
-{
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
-
-	for (uint32_t i = 0; i < BloomNum_; i++)
-	{
-		//resourceDesc設定
-		D3D12_RESOURCE_DESC resourceDesc = {};
-		resourceDesc.Width = WinApp::GetkCilientWidth();
-		resourceDesc.Height = WinApp::GetkCilientHeight();
-		resourceDesc.MipLevels = 1;
-		resourceDesc.DepthOrArraySize = 1;
-		resourceDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-		resourceDesc.SampleDesc.Count = 1;
-		resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-		resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
-
-		//Heap設定
-		D3D12_HEAP_PROPERTIES heapPram{};
-		heapPram.Type = D3D12_HEAP_TYPE_CUSTOM;
-		heapPram.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-		heapPram.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
-		//色
-		D3D12_CLEAR_VALUE color = {};
-		//float colorData[] = { 0.0f,0.0f,0.0f,1.0f };
-		color.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-		for (uint32_t i = 0; i < 4; i++)
-		{
-			color.Color[i] = clearColor[i];
-		}
-		//resource作成
-		HRESULT hr = {};
-		hr =
-			device->CreateCommittedResource(
-				&heapPram,
-				D3D12_HEAP_FLAG_NONE,
-				&resourceDesc,
-				D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
-				&color,
-				IID_PPV_ARGS(&BloomBuffer_[i])
-			);
-
-		TransfarImage(BloomBuffer_[i]);
-		AddSRVDescripter(BloomBuffer_[i]);
-	}
-
-}
-
-void PostEffect::CreateBloomRTV()
-{
-}
-
-void PostEffect::CreateBloomSRV()
-{
 }
