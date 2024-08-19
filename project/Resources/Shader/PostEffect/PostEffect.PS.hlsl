@@ -41,8 +41,8 @@ PixelShaderOutput main(VertexShaderOutput input)
             float32_t4 viewSpace = mul(float32_t4(0.0f,0.0f, ndcDepth, 1.0f), gTransformationViewMatrix.InverseProj);
             float32_t view = viewSpace.z * rcp(viewSpace.w);
  
-            difference.y += view * kPrewittHorizontalKernel[x][y];
-            difference.x += view * kPrewittVerticelKernel[x][y];
+            difference.x += view * kPrewittHorizontalKernel[x][y];
+            difference.y += view * kPrewittVerticelKernel[x][y];
         }
     }
     float32_t weight = length(difference * 0.1f);
