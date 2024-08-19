@@ -11,14 +11,14 @@ void ChangeSceneAnimation::Initialize()
 	center_ = { float(WinApp::GetkCilientWidth() / 2), float(WinApp::GetkCilientHeight() / 2) };
 
 	sprite_ = make_unique<Sprite>();
-	sprite_->Initialize(new SpriteBoxState);
+	sprite_->Initialize();
 	tex_ = TextureManager::LoadPngTexture("GameObject/ChangeScene/ChangeScene.png");
 	noiseTex_.resize(1);
 	noiseTex_[0] = TextureManager::LoadPngTexture("GameObject/Noise/Noise.png");
 
 	sprite_->SetTexHandle(tex_);
 	sprite_->SetNoiseTex(noiseTex_[0]);
-	sprite_->SetBlendMode(DissolveNone);
+	sprite_->SetSpriteMode(DissolveNone);
 	//dissolveÝ’è
 	sprite_->GetDissolveMask() = dissolveMax;
 	sprite_->GetDissolveEdgeMinMax() = { 0.0f, 0.06f };

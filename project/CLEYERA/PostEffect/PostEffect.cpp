@@ -25,11 +25,20 @@ void PostEffect::Initialize()
 	texBuf_->RegisterRTV(texBufFormat , "texBuf");
 	texBuf_->RegisterSRV(texBufFormat , "texBuf");
 
+	DXGI_FORMAT albed = DXGI_FORMAT_R8G8B8A8_UNORM;
 	albedBuf_ = make_unique<BufferResource<uint32_t>>();
-	albedBuf_->CreateResource(texBufFormat, WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
+	albedBuf_->CreateResource(albed, WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
 	albedBuf_->TransfarImage(pixCount, rowPitch, depthPitch);
-	albedBuf_->RegisterRTV(texBufFormat, "albedBuf");
-	albedBuf_->RegisterSRV(texBufFormat, "albedBuf");
+	albedBuf_->RegisterRTV(albed, "albedBuf");
+	albedBuf_->RegisterSRV(albed, "albedBuf");
+
+
+	DXGI_FORMAT outline = DXGI_FORMAT_R8G8B8A8_UNORM;
+	outLineColor_ = make_unique<BufferResource<uint32_t>>();
+	outLineColor_->CreateResource(outline, WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
+	outLineColor_->TransfarImage(pixCount, rowPitch, depthPitch);
+	outLineColor_->RegisterRTV(outline, "oullineBuf");
+	outLineColor_->RegisterSRV(outline, "oullineBuf");
 
 	//resourceDesc設定
 	D3D12_RESOURCE_DESC resourceTexDesc = {};
@@ -37,7 +46,7 @@ void PostEffect::Initialize()
 	resourceTexDesc.Height = WinApp::GetkCilientHeight();
 	resourceTexDesc.MipLevels = 1;
 	resourceTexDesc.DepthOrArraySize = 1;
-	resourceTexDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	resourceTexDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	resourceTexDesc.SampleDesc.Count = 1;
 	resourceTexDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
 	resourceTexDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
@@ -45,14 +54,14 @@ void PostEffect::Initialize()
 	D3D12_HEAP_PROPERTIES heapPram{};
 	heapPram.Type = D3D12_HEAP_TYPE_DEFAULT;
 	D3D12_CLEAR_VALUE color = {};
-	color.Format = DXGI_FORMAT_D32_FLOAT;
+	color.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 	color.DepthStencil.Depth = 1.0f;
 	color.DepthStencil.Stencil = 0;
 
 	depthTexBuffer_ = make_unique<BufferResource<uint32_t>>();
 	depthTexBuffer_->CreateResource(resourceTexDesc, heapPram, D3D12_RESOURCE_STATE_GENERIC_READ, color);
-	depthTexBuffer_->RegisterSRV(DXGI_FORMAT_R32_FLOAT, "PostEffectDepthTex");
-	depthTexBuffer_->RegisterDSV(DXGI_FORMAT_D32_FLOAT, "PostEffectDepthTex");
+	depthTexBuffer_->RegisterSRV(DXGI_FORMAT_R24_UNORM_X8_TYPELESS, "PostEffectDepthTex");
+	depthTexBuffer_->RegisterDSV(DXGI_FORMAT_D24_UNORM_S8_UINT, "PostEffectDepthTex");
 
 	wvp_ = std::make_unique<BufferResource<TransformationMatrix>>();
 	wvp_->CreateResource(1);
@@ -166,11 +175,11 @@ void PostEffect::PreDraw()
 
 	//commands.m_pList->OMSetRenderTargets(1, &rtvHandle, false, &dsvHandle);
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[] = { rtvHandle,rtvColorHandle };
-	commands.m_pList->OMSetRenderTargets(2, rtvHandles, false, &dsvHandle);
+	commands.m_pList->OMSetRenderTargets(_countof(rtvHandles), rtvHandles, false, &dsvHandle);
 	CommandCallView(static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight()));
 	CommandCallScissor();
 
-	commands.m_pList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
+	commands.m_pList->ClearRenderTargetView(rtvHandle, clearColor,0, nullptr);
 	commands.m_pList->ClearRenderTargetView(rtvColorHandle, clearColor, 0, nullptr);
 
 	commands.m_pList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);

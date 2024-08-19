@@ -101,7 +101,7 @@ private:
 	unique_ptr<BufferResource<uint32_t>>albedBuf_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>texBuf_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>depthTexBuffer_ = nullptr;
-
+	unique_ptr<BufferResource<uint32_t>>outLineColor_ = nullptr;
 
 	unique_ptr<BufferResource<TransformationMatrix>>wvp_ = nullptr;
 

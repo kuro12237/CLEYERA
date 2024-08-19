@@ -12,7 +12,7 @@ void StartCount::Initialize()
 
 	//init
 	numberSprite_ = make_unique<Sprite>();
-	numberSprite_->Initialize(new SpriteBoxState, { numberTexSize.x * -0.5f,numberTexSize.y * -0.5f });
+	numberSprite_->Initialize({numberTexSize.x * -0.5f,numberTexSize.y * -0.5f });
 	numberSprite_->SetTexHandle(numberTex_);
 	numberSprite_->SetSize(numberTexSize);
 	numberSprite_->SetSrc({ 0.0f,0.0f }, { 0.0f,1.0f }, { 0.25f,0.0f }, { 0.25f,1.0f });
@@ -25,7 +25,7 @@ void StartCount::Initialize()
 	backFlameTex_ = TextureManager::LoadPngTexture("GameObject/BackFlame/BackFlame.png");
 	Math::Vector::Vector2 backFlameTexSize = TextureManager::GetTextureSize(backFlameTex_);
 	backFlameSprite_ = make_unique<Sprite>();
-	backFlameSprite_->Initialize(new SpriteBoxState, { backFlameTexSize.x * -0.5f,backFlameTexSize.y * -0.5f });
+	backFlameSprite_->Initialize({ backFlameTexSize.x * -0.5f,backFlameTexSize.y * -0.5f });
 	backFlameSprite_->SetTexHandle(backFlameTex_);
 
 	backFlameWt_.Initialize();
@@ -67,7 +67,7 @@ void StartCount::Initialize()
 	for (size_t i = 0; i < flameMax; i++)
 	{
 		unique_ptr<Sprite>sprite = make_unique<Sprite>();
-		sprite->Initialize(new SpriteBoxState, { flameTexSize.x * -0.5f, flameTexSize.y * -0.5f });
+		sprite->Initialize({ flameTexSize.x * -0.5f, flameTexSize.y * -0.5f });
 		sprite->SetTexHandle(flameTex_);
 		WorldTransform wt;
 		wt.Initialize();
@@ -89,7 +89,7 @@ void StartCount::Initialize()
 	for (size_t i = 0; i < BarMax; i++)
 	{
 		unique_ptr<Sprite>sprite = make_unique<Sprite>();
-		sprite->Initialize(new SpriteBoxState, { barTexSize.x * -0.5f, barTexSize.y * -0.5f });
+		sprite->Initialize({ barTexSize.x * -0.5f, barTexSize.y * -0.5f });
 		sprite->SetTexHandle(barTex_);
 		WorldTransform wt;
 		wt.Initialize();

@@ -169,18 +169,6 @@ struct  PostEffectBlurParam
 };
 
 
-struct ResourcePeroperty
-{
-	D3D12_VERTEX_BUFFER_VIEW BufferView;
-	D3D12_INDEX_BUFFER_VIEW IndexBufferView;
-	ComPtr<ID3D12Resource> Index;
-	ComPtr<ID3D12Resource> Vertex;
-	ComPtr<ID3D12Resource> Material;
-	ComPtr<ID3D12Resource> wvpResource;
-	ComPtr<ID3D12Resource> Light;
-	ComPtr<ID3D12Resource> instancingResource;
-};
-
 struct  Material
 {
 	Math::Vector::Vector4 color = { 1,1,1,1 };

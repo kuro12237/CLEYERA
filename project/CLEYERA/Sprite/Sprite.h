@@ -1,23 +1,25 @@
 #pragma once
 #include"Pch.h"
 #include"WorldTransform.h"
-#include"Sprite/state/SpriteBoxState.h"
 #include"GraphicsPipelineManager.h"
 #include"Graphics/DescripterManager/DescriptorManager.h"
+#include"ISpriteBuf.h"
 
-class Sprite
+#include"Utility/CameraManager/CameraManager.h"
+#include"Graphics/TextureManager/TextureManager.h"
+
+class Sprite :public System::ISpriteBuf
 {
 public:
 	Sprite() {};
-	~Sprite() { delete state_; };
+	~Sprite() {  };
 
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	/// <param name="表示方法"></param>
 	/// <param name="どこから表示するか"></param>
 	/// <param name="画像サイズ:texを使用する場合使用しない"></param>
-	void Initialize(ISpriteState* state, Math::Vector::Vector2 pos = {}, Math::Vector::Vector2 size = {});
+	void Initialize( Math::Vector::Vector2 pos = {}, Math::Vector::Vector2 size = {});
 
 	void Draw(WorldTransform worldTransform);
 
@@ -28,12 +30,12 @@ public:
 	void SetUvRotate(Math::Vector::Vector3 uvRotate) { uvRotate_ = uvRotate; }
 	void SetUvTranslate(Math::Vector::Vector3 uvTranslate) { uvTranslate_ = uvTranslate; }
 	void SetColor(Math::Vector::Vector4 color) { color_ = color; }
-	
+
 	/// <summary>
 	/// ブレンド
 	/// </summary>
-	void SetBlendMode(SpriteMode blendMode) { blendMode_ = blendMode; }
-	
+	void SetSpriteMode(SpriteMode blendMode) { blendMode_ = blendMode; }
+
 	void SetSize(Math::Vector::Vector2 size) { size_ = size; }
 
 	/// <summary>
@@ -51,18 +53,13 @@ public:
 	Math::Vector::Vector4 GetColor() { return color_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 
-	Math::Vector::Vector3 &GetuvScale() { return uvScale_; }
-	Math::Vector::Vector3 &GetuvRotate() { return uvRotate_; }
-	Math::Vector::Vector3 &GetuvTranslate() { return uvTranslate_; }
-	SpriteMode GetBlendMode() {return blendMode_; }
+	Math::Vector::Vector3& GetuvScale() { return uvScale_; }
+	Math::Vector::Vector3& GetuvRotate() { return uvRotate_; }
+	Math::Vector::Vector3& GetuvTranslate() { return uvTranslate_; }
+	SpriteMode GetSpriteMode() { return blendMode_; }
 
-	/// <summary>
-	/// GetSpritePos
-	/// </summary>
-	Math::Vector::Vector2 GetPos() { return Pos_; }
-	/// <summary>
-	/// GetSpriteSize
-	/// </summary>
+
+	Math::Vector::Vector2 GetPos() { return pos_; }
 	Math::Vector::Vector2 GetSize() { return size_; }
 
 	Math::Vector::Vector2 GetSrcTR() { return srcTR; }
@@ -70,19 +67,19 @@ public:
 	Math::Vector::Vector2 GetSrcTL() { return srcTL; }
 	Math::Vector::Vector2 GetSrcBL() { return srcBL; }
 
-	float &GetDissolveMask() { return dissolveMask_; }
-	Math::Vector::Vector2 &GetDissolveEdgeMinMax() { return dissolveEdgeMinMax_; }
-	Math::Vector::Vector4  &GetDissolveDdgeColor() { return dissolveEdgeColor_; }
-
-	ISpriteState* GetState() { return state_; }
+	float& GetDissolveMask() { return dissolveMask_; }
+	Math::Vector::Vector2& GetDissolveEdgeMinMax() { return dissolveEdgeMinMax_; }
+	Math::Vector::Vector4& GetDissolveDdgeColor() { return dissolveEdgeColor_; }
 
 #pragma endregion
 
+private:
 
 	SPSOProperty Get2dSpritePipeline(Sprite* state);
 
-private:
-	Math::Vector::Vector2 Pos_ = { 0,0 };
+	void CommandCall(const WorldTransform& worldTransform);
+
+	Math::Vector::Vector2 pos_ = { 0,0 };
 	Math::Vector::Vector2 size_ = {};
 	Math::Vector::Vector4 color_ = { 1,1,1,1 };
 
@@ -102,8 +99,7 @@ private:
 	Math::Vector::Vector2 srcTL = { 0.0f,0.0f };
 	Math::Vector::Vector2 srcBL = { 0.0f,1.0f };
 
-	SpriteMode blendMode_= BlendNone;
-	ISpriteState* state_ = {};
+	SpriteMode blendMode_ = BlendNone;
 
 };
 

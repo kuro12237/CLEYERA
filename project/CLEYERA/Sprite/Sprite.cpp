@@ -2,12 +2,9 @@
 
 using namespace Math::Vector;
 
-void Sprite::Initialize(ISpriteState* state, Vector2 pos, Vector2 size)
+void Sprite::Initialize(Vector2 pos, Vector2 size)
 {
-	state_ = state;
-	state_->Initialize(this);
-
-	Pos_ = pos;
+	pos_ = pos;
 	if (size.x == 0 && size.y == 0)
 	{
 		size_ = TextureManager::GetTextureSize(texHandle_);
@@ -17,11 +14,37 @@ void Sprite::Initialize(ISpriteState* state, Vector2 pos, Vector2 size)
 		size_ = size;
 	}
 	blendMode_ = BlendNone;
+	CreateBuf();
+	vertexDatas_.resize(4);
+	indexDatas_.resize(6);
 }
 
 void Sprite::Draw(WorldTransform worldTransform)
 {
-	state_->Draw(this, worldTransform);
+	vertexDatas_[0].position = { pos_.x,pos_.y + size_.y,0,1 };
+	vertexDatas_[0].texcoord = srcBL;
+	vertexDatas_[1].position = { pos_.x ,pos_.y,0,1 };
+	vertexDatas_[1].texcoord = srcTL;
+	vertexDatas_[2].position = { pos_.x + size_.x,pos_.y + size_.y,0,1 };
+	vertexDatas_[2].texcoord = srcBR;
+	vertexDatas_[3].position = { pos_.x + size_.x,pos_.y,0,1 };
+	vertexDatas_[3].texcoord = srcTR;
+
+	indexDatas_[0] = 0; indexDatas_[1] = 1; indexDatas_[2] = 2;
+	indexDatas_[3] = 1; indexDatas_[4] = 3; indexDatas_[5] = 2;
+
+	materialDatas_.color = color_;
+	materialDatas_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate_, uvTranslate_);
+	materialDatas_.dissolveEdgeColor = dissolveEdgeColor_;
+	materialDatas_.dissolveMask = dissolveMask_;
+	materialDatas_.dissolveEdgeMinMax = dissolveEdgeMinMax_;
+	
+	Map();
+	vertexBuf_->Setbuffer(vertexDatas_);
+	indexBuf_->Setbuffer(indexDatas_);
+	materialBuf_->Setbuffer(materialDatas_);
+
+	CommandCall(worldTransform);
 }
 
 void Sprite::SetTexHandle(uint32_t texHandle)
@@ -30,7 +53,7 @@ void Sprite::SetTexHandle(uint32_t texHandle)
 	size_ = TextureManager::GetTextureSize(texHandle);
 }
 
-void Sprite::SetSrc(Vector2 TL, Vector2 BL,Vector2 TR, Vector2 BR)
+void Sprite::SetSrc(Vector2 TL, Vector2 BL, Vector2 TR, Vector2 BR)
 {
 	srcTR = TR;
 	srcBR = BR;
@@ -44,7 +67,7 @@ SPSOProperty Sprite::Get2dSpritePipeline(Sprite* state)
 	SPSOProperty PSO = {};
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
-	switch (state->GetBlendMode())
+	switch (state->GetSpriteMode())
 	{
 	case BlendNone:
 		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "None");
@@ -81,4 +104,41 @@ SPSOProperty Sprite::Get2dSpritePipeline(Sprite* state)
 		break;
 	}
 	return PSO;
+}
+
+
+void Sprite::CommandCall(const WorldTransform &worldTransform)
+{
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+
+	SPSOProperty PSO = {};
+
+	if (texHandle_ == 0)
+	{
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::NONE_2d, "None");;
+	}
+	else if (!texHandle_ == 0)
+	{
+		PSO = Get2dSpritePipeline(this);
+	}
+
+	vertexBuf_->CommandVertexBufferViewCall();
+	indexBuf_->CommandIndexBufferViewCall();
+
+	//表示の仕方を設定
+	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//materialDataをgpuへ
+	materialBuf_->CommandCall(0);
+
+	//worldTransformの行列をgpuへ
+	worldTransform.buffer_->CommandCall(1);
+	//view行列をgpu
+	CameraManager::GetInstance()->CommandCall(2);
+	if (!texHandle_ == 0)
+	{
+		DescriptorManager::rootParamerterCommand(3, texHandle_);
+	}
+
+	commands.m_pList->DrawIndexedInstanced(UINT(indexDatas_.size()), 1, 0, 0, 0);
 }

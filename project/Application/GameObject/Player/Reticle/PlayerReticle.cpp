@@ -18,7 +18,7 @@ void PlayerReticle::Initialize()
 	texPos.x *= -0.5f;
 	texPos.y *= -0.5f;
 	sprite_ = make_unique<Sprite>();
-	sprite_->Initialize(new SpriteBoxState, texPos);
+	sprite_->Initialize(texPos);
 	sprite_->SetTexHandle(texHandle);
 	worldTransform_.Initialize();
 	const float kScale = 0.05f;

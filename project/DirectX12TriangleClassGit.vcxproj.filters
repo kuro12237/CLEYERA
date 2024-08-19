@@ -307,9 +307,6 @@
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp">
       <Filter>CLEYERA\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp">
-      <Filter>CLEYERA\Sprite\state</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Input\Input.cpp">
       <Filter>CLEYERA\Input</Filter>
     </ClCompile>
@@ -481,6 +478,7 @@
     <ClCompile Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
     <ClCompile Include="Application\GameObject\Particles\CharacterMoveParticle.cpp" />
+    <ClCompile Include="CLEYERA\Sprite\ISpriteBuf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -536,12 +534,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Sprite\Sprite.h">
       <Filter>CLEYERA\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h">
-      <Filter>CLEYERA\Sprite\state</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h">
-      <Filter>CLEYERA\Sprite\state</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Input\Input.h">
       <Filter>CLEYERA\Input</Filter>
@@ -787,6 +779,7 @@
     <ClInclude Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.h" />
     <ClInclude Include="Application\GameObject\Goal\Goal.h" />
     <ClInclude Include="Application\GameObject\Particles\CharacterMoveParticle.h" />
+    <ClInclude Include="CLEYERA\Sprite\ISpriteBuf.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

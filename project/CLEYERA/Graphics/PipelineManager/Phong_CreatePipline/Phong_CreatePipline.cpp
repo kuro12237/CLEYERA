@@ -184,12 +184,12 @@ SPSOProperty Phong_CreatePipline::CreatePhongNormalModel(SShaderMode shader)
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	graphicsPipelineStateDesc.NumRenderTargets = 4;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
+	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	graphicsPipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
@@ -385,12 +385,12 @@ SPSOProperty Phong_CreatePipline::CreateDissolveNormalModel(SShaderMode shader)
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	graphicsPipelineStateDesc.NumRenderTargets = 4;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
+	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	graphicsPipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
@@ -600,12 +600,12 @@ SPSOProperty Phong_CreatePipline::CreateSubsurfaceModel(SShaderMode shader)
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	graphicsPipelineStateDesc.NumRenderTargets = 4;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
+	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	graphicsPipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
@@ -805,12 +805,12 @@ SPSOProperty Phong_CreatePipline::CreateInstancingModel(SShaderMode shader)
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+	graphicsPipelineStateDesc.DSVFormat =DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	graphicsPipelineStateDesc.NumRenderTargets = 4;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
+	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	graphicsPipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
@@ -994,12 +994,12 @@ SPSOProperty Phong_CreatePipline::CreateSkinningModel(SShaderMode shader)
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	graphicsPipelineStateDesc.NumRenderTargets = 4;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
+	graphicsPipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	graphicsPipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	//���p����g�|���W(�`��)�̃^�C�v�B�O�p�`
 	graphicsPipelineStateDesc.PrimitiveTopologyType =

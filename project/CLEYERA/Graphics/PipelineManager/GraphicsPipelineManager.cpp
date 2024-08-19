@@ -253,7 +253,7 @@ SPSOProperty GraphicsPipelineManager::CreateLine(ComPtr<ID3D12Device>device, Com
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	//��������RTV�̏��
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
@@ -415,7 +415,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dNone(ComPtr<ID3D12Device> de
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 
 	graphicsPipelineStateDesc.NumRenderTargets = 1;

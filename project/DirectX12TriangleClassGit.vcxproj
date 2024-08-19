@@ -130,8 +130,8 @@
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffect.cpp" />
+    <ClCompile Include="CLEYERA\Sprite\ISpriteBuf.cpp" />
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp" />
-    <ClCompile Include="CLEYERA\Sprite\state\SpriteBoxState.cpp" />
     <ClCompile Include="CLEYERA\Transform\CameraData.cpp" />
     <ClCompile Include="CLEYERA\Transform\WorldTransform.cpp" />
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp" />
@@ -263,9 +263,8 @@
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
     <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h" />
+    <ClInclude Include="CLEYERA\Sprite\ISpriteBuf.h" />
     <ClInclude Include="CLEYERA\Sprite\Sprite.h" />
-    <ClInclude Include="CLEYERA\Sprite\state\ISpriteState.h" />
-    <ClInclude Include="CLEYERA\Sprite\state\SpriteBoxState.h" />
     <ClInclude Include="CLEYERA\Transform\CameraData.h" />
     <ClInclude Include="CLEYERA\Transform\STransformEular.h" />
     <ClInclude Include="CLEYERA\Transform\STransformQua.h" />
