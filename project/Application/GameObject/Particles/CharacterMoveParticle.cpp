@@ -14,7 +14,7 @@ void CharacterMoveParticle::Initialize()
 		return;
 	}
 	InitializeLock_ = true;
-	texHandle_ = TextureManager::LoadPngTexture("circle.png");
+	texHandle_ = TextureManager::LoadPngTexture("GameObject/cloud/cloud.png");
 	particle_ = make_unique<Particle::GpuParticle>();
 	particle_->Create(1, name_);
 	particle_->SetTexhandle(texHandle_);

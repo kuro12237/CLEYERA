@@ -23,10 +23,12 @@ namespace Particle
 			uint32_t emit = 0;
 			Math::Vector::Vector3 sizeMin = { -1.0f,-1.0f,-1.0f };
 			Math::Vector::Vector3 sizeMax = { 1.0f,1.0f,1.0f };
-			Math::Vector::Vector3 velocityMin = { -1.0f,-1.0f,-1.0f };
-			Math::Vector::Vector3 velocityMax = { 1.0f,1.0f,1.0f };
+			Math::Vector::Vector3 velocityMin = { 0.0f,0.0f,0.0f};
+			Math::Vector::Vector3 velocityMax = { 0.0f,0.0f,0.0f };
 			Math::Vector::Vector4 colorDecayMin = { 0.0f,0.0f,0.0f,0.01f };
 			Math::Vector::Vector4 colorDecayMax = { 0.0f,0.0f,0.0f,0.01f };
+			Math::Vector::Vector3 scaleVelocityMin = { 0.0f,0.0f,0.0f };
+			Math::Vector::Vector3 scaleVelocityMax = { 0.0f,0.0f,0.0f };
 		};
 
 		struct SphereParam

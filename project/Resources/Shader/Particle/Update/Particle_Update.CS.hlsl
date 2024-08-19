@@ -13,9 +13,12 @@ void main(uint3 DTid : SV_DispatchThreadID)
     if (particleIndex < kParticleMax)
     {
         gParticle[particleIndex].translate += gParticle[particleIndex].velocity;
-        gParticle[particleIndex].rotate.z += 0.05f;
-        gParticle[particleIndex].matWorld = AffineMatrix(gParticle[particleIndex].scale, gParticle[particleIndex].rotate, gParticle[particleIndex].translate);
+        //gParticle[particleIndex].rotate.z += 0.05f;
         gParticle[particleIndex].color -= gParticle[particleIndex].colorDecay;
+        gParticle[particleIndex].scale += gParticle[particleIndex].scaleVelocity;
+        
+        gParticle[particleIndex].matWorld = AffineMatrix(gParticle[particleIndex].scale, gParticle[particleIndex].rotate, gParticle[particleIndex].translate);
+        
         if (gParticle[particleIndex].color.a <= 0.0f)
         {
             gParticle[particleIndex].scale = float32_t3(0.0f, 0.0f, 0.0f);

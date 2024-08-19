@@ -111,6 +111,8 @@ namespace Particle {
 		{
 			FrequencyUpdate(index);
 
+#ifdef _USE_IMGUI
+
 			wTs_[index].transform.translate = emitParam_[index].translate;
 			wTs_[index].transform.rotate = emitParam_[index].rotate;
 			//ŠeŽí\‘¢‘Ì‚ÌŽž‚Éwt‚É‘ã“ü
@@ -124,8 +126,9 @@ namespace Particle {
 			}
 
 			wTs_[index].UpdateMatrix();
-		}
 
+#endif // _USE_IMGUI
+		}
 		emitBuf_->Map();
 		emitBuf_->Setbuffer(emitParam_);
 	}
@@ -231,14 +234,19 @@ namespace Particle {
 					emitParam_[index].count = count;
 					ImGui::DragFloat3("translate", &emitParam_[index].translate.x, 0.1f);
 					ImGui::DragFloat3("rotate", &emitParam_[index].rotate.x, 0.1f);
+					ImGui::Separator();
 					ImGui::DragFloat3("sizeMin", &emitParam_[index].sizeMin.x, 0.1f);
 					ImGui::DragFloat3("sizeMax", &emitParam_[index].sizeMax.x, 0.1f);
 					ImGui::Separator();
 					ImGui::DragFloat3("velocityMin" ,&emitParam_[index].velocityMin.x, 0.1f);
 					ImGui::DragFloat3("velocityMax", &emitParam_[index].velocityMax.x, 0.1f);
-					ImGui::TreePop();
+					ImGui::Separator();
 					ImGui::DragFloat4("colorDecayMin", &emitParam_[index].colorDecayMin.x, 0.1f);
 					ImGui::DragFloat4("colorDecayMax", &emitParam_[index].colorDecayMax.x, 0.1f);
+					ImGui::Separator();
+					ImGui::DragFloat3("scaleVelocityMin", &emitParam_[index].scaleVelocityMin.x, 0.1f);
+					ImGui::DragFloat3("scaleVelocityMax", &emitParam_[index].scaleVelocityMax.x, 0.1f);
+					ImGui::TreePop();
 				}
 			}
 			ImGui::TreePop();

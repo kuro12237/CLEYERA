@@ -91,9 +91,11 @@ void Player::Update()
 	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 
+	//パーティクルの配置位置
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
 	moveEmitParam.translate = transform.translate;
-	moveEmitParam.translate.y += aabb_.min.y / 2.0f;
+	Math::Vector::Vector3 offset = { 0.0f,aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,0.0f };
+	moveEmitParam.translate.y += offset.y;
 }
 
 void Player::OnCollision(ICollider* c)

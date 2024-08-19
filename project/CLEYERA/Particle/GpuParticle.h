@@ -19,6 +19,7 @@ struct ParticleCS
 	float currentTime;
 	Math::Vector::Vector4 color = {1.0f,1.0f,1.0f,1.0f};
 	Math::Vector::Vector4 colorDecay = { 0.0f,0.0f,0.0f,0.01f };
+	Math::Vector::Vector3 scaleVelocity = {};
 	bool isDraw_ = false;
 };
 

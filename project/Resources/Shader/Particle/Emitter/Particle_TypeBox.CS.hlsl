@@ -17,9 +17,12 @@ struct EmitterBox
     float32_t3 sizeMax;
     float32_t3 velocityMin;
     float32_t3 velocityMax;
-    
+
     float32_t4 colorDecayMin;
     float32_t4 colorDecayMax;
+    
+    float32_t3 scaleVelocityMin;
+    float32_t3 scaleVelocityMax;
 };
 
 
@@ -93,6 +96,19 @@ float32_t3 GenerateRandomVelocity(float32_t3 minVelocity, float32_t3 maxVelocity
 
     return velocity;
 }
+
+float32_t3 GenerateRandomScaleVelocity(float32_t3 minVelocity, float32_t3 maxVelocity, RandomGenerator generator)
+{
+    float32_t3 uvw = generator.Generate3d();
+
+    float32_t3 velocity;
+    velocity.x = minVelocity.x + uvw.x * (maxVelocity.x - minVelocity.x);
+    velocity.y = minVelocity.y + uvw.y * (maxVelocity.y - minVelocity.y);
+    velocity.z = minVelocity.z + uvw.z * (maxVelocity.z - minVelocity.z);
+
+    return velocity;
+}
+
 ConstantBuffer<PerFrame> gPerFlame : register(b0);
 StructuredBuffer<EmitterBox> gEmitterSphere : register(t0);
 
@@ -127,6 +143,8 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
                 gParticle[particleIndex].velocity = GenerateRandomVelocity(gEmitterSphere[index].velocityMin, gEmitterSphere[index].velocityMax, generator);
                 gParticle[particleIndex].matWorld = Mat4x4Identity();
                 gParticle[particleIndex].colorDecay = GenerateRandomColorDecay(gEmitterSphere[index], generator);
+                
+                gParticle[particleIndex].scaleVelocity = GenerateRandomScaleVelocity(gEmitterSphere[index].scaleVelocityMin, gEmitterSphere[index].scaleVelocityMax, generator);
                 gParticle[particleIndex].isDraw = true;
             }
             else

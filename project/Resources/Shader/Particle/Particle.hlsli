@@ -40,6 +40,7 @@ struct Particle
     float32_t currentTime;
     float32_t4 color;
     float32_t4 colorDecay;
+    float32_t3 scaleVelocity;
     bool isDraw;
 };
 
