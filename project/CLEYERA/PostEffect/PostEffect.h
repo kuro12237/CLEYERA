@@ -91,28 +91,12 @@ private:
 	void CommandCallView(const float& width, const float& height);
 	void CommandCallScissor();
 
-	void CreateTexBuffer(ComPtr<ID3D12Resource>&buf,uint32_t &index);
-	void TransfarImage(ComPtr<ID3D12Resource>&buf);
-	uint32_t AddSRVDescripter(ComPtr<ID3D12Resource>&buf);
-
-	void CreateRTV(ComPtr<ID3D12Resource>& buf, uint32_t& rtvIndex);
-
-
 	bool isInitialize_ = false;
 
 	Math::Vector::Vector2 pos_ = {};
 	Math::Vector::Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight())};
 
-	uint32_t srvIndex_ = 0;
-	uint32_t rtvIndex_ = 0;
-	uint32_t colorRtvIndex_ = 0;
-	uint32_t colorSrvIndex_ = 0;
-	
-
 	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
-
-	ComPtr<ID3D12Resource> colorBuffer_ = nullptr;
-
 
 	unique_ptr<BufferResource<uint32_t>>albedBuf_ = nullptr;
 	unique_ptr<BufferResource<uint32_t>>texBuf_ = nullptr;
