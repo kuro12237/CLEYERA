@@ -28,6 +28,8 @@
 #include"GameObject/Particles/CharacterMoveParticle.h"
 
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
+#include"Particle/Field/ParticleField.h"
+
 
 class GameScene :public IScene
 {

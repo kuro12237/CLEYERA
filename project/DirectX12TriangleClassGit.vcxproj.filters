@@ -782,6 +782,8 @@
     <ClInclude Include="Application\GameObject\Particles\CharacterMoveParticle.h" />
     <ClInclude Include="CLEYERA\Sprite\ISpriteBuf.h" />
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
+    <ClInclude Include="CLEYERA\Particle\Field\StructParticleField.h" />
+    <ClInclude Include="CLEYERA\Particle\Field\ParticleField.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -856,5 +858,6 @@
     <FxCompile Include="Resources\Shader\Phong\Phong_Dissolve_Model3dObject.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Sprite2d\SpriteObject2d_Dissolve.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeCircleGoal.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Suction.CS.hlsl" />
   </ItemGroup>
 </Project>

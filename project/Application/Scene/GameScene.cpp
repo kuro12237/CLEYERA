@@ -50,6 +50,8 @@ void GameScene::Initialize()
 
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
+
+
 }
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
@@ -233,9 +235,9 @@ void GameScene::ParticlesInitialize()
 
 void GameScene::ParticlesUpdate()
 {
-
 	characterDeadParticle_->Update();
 	characterMoveParticle_->Update();
+
 }
 
 void GameScene::ParticlesDraw()

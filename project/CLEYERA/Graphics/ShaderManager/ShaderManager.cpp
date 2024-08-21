@@ -367,6 +367,10 @@ void ShaderManager::Particles()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Particle/Emitter/Particle_TypeCircleGoal.CS.hlsl",
 			L"cs_6_0");
+	instance->shaders[Shader::PARTICLE_FIELD]["Suction"].csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Field/Particle_Field_TypeBox_Suction.CS.hlsl",
+			L"cs_6_0");
 }
 
 void ShaderManager::Particle_Init()

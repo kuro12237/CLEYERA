@@ -5,6 +5,27 @@ RWStructuredBuffer<Particle> gParticle : register(u0);
 RWStructuredBuffer<int32_t> gFreeListIndex : register(u1);
 RWStructuredBuffer<int32_t> gFreeList : register(u2);
 
+float32_t4 ColorCalc(float32_t4 color, float32_t4 decay)
+{
+    if (color.r >= 0.0f)
+    {
+        color.r -= decay.r;
+    }
+    if (color.g >= 0.0f)
+    {
+        color.g -= decay.g;
+    }
+    if (color.b >= 0.0f)
+    {
+        color.b -= decay.b;
+    }
+    if (color.a >= 0.0f)
+    {
+        color.a -= decay.a;
+    }
+    return color;
+}
+
 [numthreads(1024, 1, 1)]
 void main(uint3 DTid : SV_DispatchThreadID)
 {
@@ -13,8 +34,9 @@ void main(uint3 DTid : SV_DispatchThreadID)
     if (particleIndex < kParticleMax)
     {
         gParticle[particleIndex].translate += gParticle[particleIndex].velocity;
-        //gParticle[particleIndex].rotate.z += 0.05f;
-        gParticle[particleIndex].color -= gParticle[particleIndex].colorDecay;
+     
+        gParticle[particleIndex].color = ColorCalc(gParticle[particleIndex].color, gParticle[particleIndex].colorDecay);
+        
         gParticle[particleIndex].scale += gParticle[particleIndex].scaleVelocity;
         
         gParticle[particleIndex].matWorld = AffineMatrix(gParticle[particleIndex].scale, gParticle[particleIndex].rotate, gParticle[particleIndex].translate);

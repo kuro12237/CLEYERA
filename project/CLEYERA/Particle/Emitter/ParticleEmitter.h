@@ -173,7 +173,9 @@ namespace Particle {
 		RunTimeCounter::GetInstance()->ComputeCommandCall(2);
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetFreeListIndexBuf()->GetSrvIndex());
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(4, particle->GetFreeListBuf()->GetSrvIndex());
-		list->Dispatch(UINT(particle->GetNum() + 1023 / 1024), 1, 1);
+
+		UINT dispach = UINT(particle->GetNum() / 1024);
+		list->Dispatch(dispach, 1, 1);
 	}
 
 	template<typename T>

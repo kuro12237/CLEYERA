@@ -105,7 +105,9 @@ void GpuParticle::Update()
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
 
-		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
+
+		UINT dispach = UINT(GetNum() / 1024);
+		commandList->Dispatch(dispach, 1, 1);
 	}
 }
 

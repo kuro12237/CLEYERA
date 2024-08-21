@@ -19,6 +19,7 @@ struct EmitterCircle
     float32_t3 velocityMin;
     float32_t3 velocityMax;
 
+    float32_t4 color;
     float32_t4 colorDecayMin;
     float32_t4 colorDecayMax;
     
@@ -107,9 +108,9 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
                 gParticle[particleIndex].translate= gEmitterSphere[index].translate.xyz + translate.xyz;
                 
                
-                gParticle[particleIndex].color.rgb = float32_t3(1.0f, 1.0f, 1.0f);
-                gParticle[particleIndex].color.a = 1.0f;
-                gParticle[particleIndex].colorDecay = float32_t4(0.0f, 0.0f, 0.0f, 0.01f);
+                gParticle[particleIndex].color = gEmitterSphere[index].color;
+                
+                gParticle[particleIndex].colorDecay = GenerateRandomColorDecay(gEmitterSphere[index], generator);
              
                 gParticle[particleIndex].velocity = GenerateRandomMinMax(gEmitterSphere[index].velocityMin, gEmitterSphere[index].velocityMax, generator);
                 gParticle[particleIndex].scaleVelocity = GenerateRandomMinMax(gEmitterSphere[index].scaleVelocityMin, gEmitterSphere[index].scaleVelocityMax, generator);

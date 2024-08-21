@@ -25,6 +25,8 @@ namespace Particle
 			Math::Vector::Vector3 sizeMax = { 1.0f,1.0f,1.0f };
 			Math::Vector::Vector3 velocityMin = { 0.0f,0.0f,0.0f };
 			Math::Vector::Vector3 velocityMax = { 0.0f,0.0f,0.0f };
+
+			Math::Vector::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
 			Math::Vector::Vector4 colorDecayMin = { 0.0f,0.0f,0.0f,0.01f };
 			Math::Vector::Vector4 colorDecayMax = { 0.0f,0.0f,0.0f,0.01f };
 			Math::Vector::Vector3 scaleVelocityMin = { 0.0f,0.0f,0.0f };
@@ -43,8 +45,9 @@ namespace Particle
 			Math::Vector::Vector3 velocityMin = {};
 			Math::Vector::Vector3 velocityMax = {};
 
-			Math::Vector::Vector4 colorDecayMin = {};
-			Math::Vector::Vector4 colorDecayMax = {};
+			Math::Vector::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
+			Math::Vector::Vector4 colorDecayMin = {0.0f,0.0f,0.0f,0.01f};
+			Math::Vector::Vector4 colorDecayMax = {0.0f,0.0f,0.0f,0.01f};
 
 			Math::Vector::Vector3 scaleVelocityMin = {};
 			Math::Vector::Vector3 scaleVelocityMax = {};

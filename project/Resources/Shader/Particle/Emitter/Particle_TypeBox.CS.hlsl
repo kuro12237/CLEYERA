@@ -18,6 +18,7 @@ struct EmitterBox
     float32_t3 velocityMin;
     float32_t3 velocityMax;
 
+    float32_t4 color;
     float32_t4 colorDecayMin;
     float32_t4 colorDecayMax;
     
@@ -138,8 +139,8 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
                 gParticle[particleIndex].scale = float32_t3(1.0f, 1.0f, 1.0f);
                 gParticle[particleIndex].rotate = float32_t3(0.0f, 0.0f, 0.0f);
                 gParticle[particleIndex].translate = gEmitterSphere[index].translate + float32_t3(randomPoint);
-                gParticle[particleIndex].color.rgb = float32_t3(1.0f, 1.0f, 1.0f);
-                gParticle[particleIndex].color.a = 1.0f;
+                gParticle[particleIndex].color = gEmitterSphere[index].color;
+                
                 gParticle[particleIndex].velocity = GenerateRandomVelocity(gEmitterSphere[index].velocityMin, gEmitterSphere[index].velocityMax, generator);
                 gParticle[particleIndex].matWorld = Mat4x4Identity();
                 gParticle[particleIndex].colorDecay = GenerateRandomColorDecay(gEmitterSphere[index], generator);
