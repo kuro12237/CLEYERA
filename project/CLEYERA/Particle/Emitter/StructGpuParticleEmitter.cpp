@@ -85,6 +85,48 @@ void Particle::System::CreateBox(unique_ptr<Primitive::LineModel>& lines, string
 	lines->SetVec(vertices[3], vertices[7], 22);
 }
 
+void Particle::System::CreateCircle(unique_ptr<Primitive::LineModel>& lines, string name)
+{
+	// 分割数
+	const uint32_t SUBDIVISION = 100;
+	lines = std::make_unique<Primitive::LineModel>();
+	lines->Create(name, SUBDIVISION);
+	lines->resize(SUBDIVISION+1);
+
+	const float TWO_PI = 2.0f * static_cast<float>(std::numbers::pi);
+	const float radius = 1.0f;
+
+	size_t index = 0;
+	Math::Vector::Vector3 prevPoint = {};
+	float angleStep = TWO_PI / SUBDIVISION;
+
+	// 円の各点を計算し、線で結ぶ
+	for (uint32_t i = 0; i < SUBDIVISION; ++i) {
+		float angle = i * angleStep;
+		Math::Vector::Vector3 point = {
+			radius * cosf(angle),
+			radius * sinf(angle),
+			0.0f
+		};
+
+		if (i > 0) {
+			// 直前の点と現在の点を線で結ぶ
+			lines->SetVec(prevPoint, point, index++);
+		}
+
+		prevPoint = point;
+	}
+
+	// 最後の点を最初の点と結ぶ
+	Math::Vector::Vector3 firstPoint = {
+		radius * cosf(0.0f),
+		radius * sinf(0.0f),
+		0.0f
+	};
+	lines->SetVec(prevPoint, firstPoint, index);
+
+}
+
 void Particle::System::UpdateBox(unique_ptr<Primitive::LineModel>& lines, EmitType::BoxParam box)
 {
 	Math::Vector::Vector3 min = box.sizeMin;
@@ -161,4 +203,42 @@ void Particle::System::UpdateSphere(unique_ptr<Primitive::LineModel>& lines, Emi
 			index += 2;
 		}
 	}
+}
+
+void Particle::System::UpdateCircle(unique_ptr<Primitive::LineModel>& lines, EmitType::Circle circle)
+{
+	// 分割数
+	const uint32_t SUBDIVISION = 100;
+
+	const float TWO_PI = 2.0f * static_cast<float>(std::numbers::pi);
+	const float radius = circle.radious;
+
+	size_t index = 0;
+	Math::Vector::Vector3 prevPoint = {};
+	float angleStep = TWO_PI / SUBDIVISION;
+
+	// 円の各点を計算し、線で結ぶ
+	for (uint32_t i = 0; i < SUBDIVISION; ++i) {
+		float angle = i * angleStep;
+		Math::Vector::Vector3 point = {
+			radius * cosf(angle),
+			radius * sinf(angle),
+			0.0f
+		};
+
+		if (i > 0) {
+			// 直前の点と現在の点を線で結ぶ
+			lines->SetVec(prevPoint, point, index++);
+		}
+
+		prevPoint = point;
+	}
+
+	// 最後の点を最初の点と結ぶ
+	Math::Vector::Vector3 firstPoint = {
+		radius * cosf(0.0f),
+		radius * sinf(0.0f),
+		0.0f
+	};
+	lines->SetVec(prevPoint, firstPoint, index);
 }

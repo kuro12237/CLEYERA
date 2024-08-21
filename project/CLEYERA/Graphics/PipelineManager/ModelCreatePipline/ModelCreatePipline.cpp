@@ -137,7 +137,6 @@ SPSOProperty ModelCreatePipline::CreateSkyBoxModel(ComPtr<ID3D12Device> device, 
 	despthStencilDesc.DepthEnable = true;
 	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
-
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 

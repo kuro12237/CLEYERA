@@ -40,8 +40,6 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 void TitleScene::PostProcessDraw()
 {
-	PostEffect::GetInstance()->PreDraw();
-	PostEffect::GetInstance()->PostDraw();
 }
 
 void TitleScene::Back2dSpriteDraw()

@@ -119,14 +119,9 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 void GameScene::PostProcessDraw()
 {
-	PostEffect::GetInstance()->PreDraw();
-
 	gameObjectManager_->Draw();
 
 	ParticlesDraw();
-	SkyBox::GetInstance()->Draw();
-
-	PostEffect::GetInstance()->PostDraw();
 }
 
 void GameScene::Back2dSpriteDraw()
@@ -238,12 +233,14 @@ void GameScene::ParticlesInitialize()
 
 void GameScene::ParticlesUpdate()
 {
+
 	characterDeadParticle_->Update();
 	characterMoveParticle_->Update();
 }
 
 void GameScene::ParticlesDraw()
 {
+	GoalParticle::GetInstance()->Draw();
 	characterDeadParticle_->Draw();
 	characterMoveParticle_->Draw();
 }
@@ -252,6 +249,7 @@ void GameScene::ParticleImGuiUpdate()
 {
 	if(ImGui::TreeNode("Particles"))
 	{
+		GoalParticle::GetInstance()->ImGuiUpdate();
 		characterDeadParticle_->ImGuiUpdate();
 		characterMoveParticle_->ImGuiUpdate();
 		ImGui::TreePop();

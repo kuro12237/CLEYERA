@@ -353,6 +353,20 @@ void ShaderManager::Particles()
 	ParticleDebugDraw();
 	Particle_EmitterSphere();
 	Particle_EmitterBox();
+	ShaderManager* instance = ShaderManager::Getinstance();
+	
+	instance->shaders[Shader::PARTICLE_EMITTER]["Box"].csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Emitter/Particle_TypeBox.CS.hlsl",
+			L"cs_6_0");
+	instance->shaders[Shader::PARTICLE_EMITTER]["Sphere"].csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Emitter/Particle_TypeShpere.CS.hlsl",
+			L"cs_6_0");
+	instance->shaders[Shader::PARTICLE_EMITTER]["Goal"].csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Emitter/Particle_TypeCircleGoal.CS.hlsl",
+			L"cs_6_0");
 }
 
 void ShaderManager::Particle_Init()

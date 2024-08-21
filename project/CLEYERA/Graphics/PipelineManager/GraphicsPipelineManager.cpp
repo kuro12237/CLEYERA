@@ -44,13 +44,19 @@ void GraphicsPipelineManager::Initialize()
 
 	//Particle
 	GpuParticleShader  shaderParticle = ShaderManager::Getinstance()->GetParticleShader();
+
 	piplines_[PARTICLE_INIT]["None"] = CreateGpuParticle::CreateGpuParticle_Init(device, commands, shaderParticle.particleInit);
 
 	piplines_[PARTICLE_UPDATE]["None"] = CreateGpuParticle::CreateGpuParticle_Update(device, commands, shaderParticle.particleUpdate);
 
 	piplines_[PARTICLE_EMITTER]["Sphere"] = CreateGpuParticle::CreateGpuParticcle_Emitter_Sphere(device, commands, shaderParticle.particleSphereEmitter);
-	piplines_[PARTICLE_EMITTER]["Box"] = CreateGpuParticle::CreateGpuParticcle_Emitter_Box(device, commands, shaderParticle.particleBoxEmitter);
+	piplines_[PARTICLE_EMITTER]["Box"] = CreateGpuParticle::CreateGpuParticcle_Emitter_Box(device, commands, shaderInstance->GetShaders(Shader::PARTICLE_EMITTER,"Box"));
+	piplines_[PARTICLE_EMITTER]["Goal"] = CreateGpuParticle::CreateGpuParticcle_Emitter_Box(device, commands, shaderInstance->GetShaders(Shader::PARTICLE_EMITTER, "Goal"));
+
+	piplines_[PARTICLE_FIELD]["Suction"];
+
 	piplines_[PARTICLE_DRAW]["None"] = CreateGpuParticle::CreateGpuParticle_DebugDraw(device, commands, shaderParticle.DebugDraw);
+
 
 }
 

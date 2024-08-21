@@ -43,6 +43,8 @@ namespace Particle {
 
 		void BoxImGuiUpdate();
 		void SphereImGuiUpdate();
+		void CircleImGuiUpdate();
+
 
 		void FrequencyUpdate(size_t index);
 		string name_ = "";
@@ -70,6 +72,11 @@ namespace Particle {
 		{
 			name_ = particle->GetName() + "EmitBox";
 		}
+		else if constexpr (std::is_same<T, Particle::EmitType::Circle>::value)
+		{
+			name_ = particle->GetName() + "EmitCircle";
+		}
+
 
 		emitBuf_ = make_unique<BufferResource<T>>();
 		emitBuf_->CreateResource(max_);
@@ -100,6 +107,8 @@ namespace Particle {
 		}
 		else if constexpr (std::is_same<T, Particle::EmitType::BoxParam>::value) {
 			BoxImGuiUpdate();
+		}else if constexpr (std::is_same<T, Particle::EmitType::Circle>::value) {
+			CircleImGuiUpdate();
 		}
 	}
 
@@ -124,6 +133,10 @@ namespace Particle {
 			{
 				Particle::System::UpdateBox(lines_[index], emitParam_[index]);
 			}
+			else if constexpr (std::is_same<T, Particle::EmitType::Circle>::value)
+			{
+				Particle::System::UpdateCircle(lines_[index], emitParam_[index]);
+			}
 
 			wTs_[index].UpdateMatrix();
 
@@ -144,6 +157,10 @@ namespace Particle {
 		else if constexpr (std::is_same<T, Particle::EmitType::BoxParam>::value) {
 
 			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_EMITTER, "Box");
+		}
+		else if constexpr (std::is_same<T, Particle::EmitType::Circle>::value) {
+
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_EMITTER, "Goal");
 		}
 
 		ComPtr<ID3D12GraphicsCommandList> list = DirectXCommon::GetInstance()->GetCommands().m_pList;
@@ -202,6 +219,13 @@ namespace Particle {
 			{
 				string name = name_ + "DebugBox" + to_string(index);
 				Particle::System::CreateBox(lines_[index], name);
+			}
+		}
+		else if constexpr (std::is_same < T, Particle::EmitType::Circle > ::value) {
+			for (size_t index = 0; index < max_; index++)
+			{
+				string name = name_ + "DebugCircle" + to_string(index);
+				Particle::System::CreateCircle(lines_[index], name);
 			}
 		}
 		else {
@@ -268,6 +292,49 @@ namespace Particle {
 					ImGui::DragFloat("radious", &emitParam_[index].radious, 0.1f);
 					ImGui::Separator();
 					wTs_[index].transform.scale = { emitParam_[index].radious,emitParam_[index].radious ,emitParam_[index].radious };
+					ImGui::TreePop();
+				}
+			}
+			ImGui::TreePop();
+		}
+	}
+	template<typename T>
+	inline void ParticleEmitter<T>::CircleImGuiUpdate()
+	{
+		if (ImGui::TreeNode(name_.c_str()))
+		{
+			for (size_t index = 0; index < max_; index++)
+			{
+				string paramName = to_string(index);
+				ImGui::Separator();
+				if (ImGui::TreeNode(paramName.c_str()))
+				{
+					if (ImGui::TreeNode("control"))
+					{
+						ImGui::Checkbox("useFlag", &particleControl_[index].useFlag_);
+						ImGui::DragFloat("frequencyTime", &particleControl_[index].frequencyTime);
+
+						ImGui::TreePop();
+					}
+					int count = emitParam_[index].count;
+					ImGui::DragInt("spownCount", &count, 1);
+					emitParam_[index].count = count;
+					ImGui::DragFloat3("translate", &emitParam_[index].translate.x, 0.1f);
+					ImGui::DragFloat3("rotate", &emitParam_[index].rotate.x, 0.1f);
+					ImGui::Separator();
+					ImGui::DragFloat("radious", &emitParam_[index].radious, 0.1f);
+					ImGui::Separator();
+					ImGui::DragFloat3("velocityMin", &emitParam_[index].velocityMin.x, 0.1f);
+					ImGui::DragFloat3("velocityMax", &emitParam_[index].velocityMax.x, 0.1f);
+					ImGui::Separator();
+					ImGui::DragFloat4("colorDecayMin", &emitParam_[index].colorDecayMin.x, 0.1f);
+					ImGui::DragFloat4("colorDecayMax", &emitParam_[index].colorDecayMax.x, 0.1f);
+					ImGui::Separator();
+					ImGui::DragFloat3("scaleVelocityMin", &emitParam_[index].scaleVelocityMin.x, 0.1f);
+					ImGui::DragFloat3("scaleVelocityMax", &emitParam_[index].scaleVelocityMax.x, 0.1f);
+					ImGui::Separator();
+					ImGui::DragFloat3("scaleSizeMin", &emitParam_[index].scaleSizeMin.x, 0.1f);
+					ImGui::DragFloat3("scaleSizeMax", &emitParam_[index].scaleSizeMax.x, 0.1f);
 					ImGui::TreePop();
 				}
 			}

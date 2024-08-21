@@ -519,3 +519,8 @@ SPSOProperty CreateGpuParticle::CreateGpuParticcle_Emitter_Box(ComPtr<ID3D12Devi
 
 	return pso;
 }
+
+SPSOProperty CreateGpuParticle::CreateGpuParticle_Field_Suction(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)
+{
+	return SPSOProperty();
+}

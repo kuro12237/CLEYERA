@@ -60,7 +60,14 @@ void GameManager::Run()
 		ImGui::PopStyleColor();
 #endif // _USE_IMGUI
 
+		PostEffect::GetInstance()->PreDraw();
+
+		SkyBox::GetInstance()->Draw();
+
 		Scene_->PostProcessDraw();
+
+		PostEffect::GetInstance()->PostDraw();
+
 
 		DirectXCommon::GetInstance()->PreDraw();
 

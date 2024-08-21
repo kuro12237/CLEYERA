@@ -11,8 +11,8 @@ void SkyBox::Initialize()
 	CreateVertex();
 	CreateIndex();
 	CreateMaterial();
-	//TextureManager::UnUsedFilePath();
-	//texHandle_ = TextureManager::LoadDDSTexture(defaultCubeMapName_);
+	TextureManager::UnUsedFilePath();
+	texHandle_ = TextureManager::LoadDDSTexture(defaultCubeMapName_);
 }
 
 void SkyBox::ImGuiUpdate()

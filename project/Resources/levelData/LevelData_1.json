@@ -70,9 +70,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    24.24662208557129,
+                    24.0,
                     0.0,
-                    42.3296012878418
+                    42.0
                 ],
                 "rotate": [
                     0.0,
@@ -97,7 +97,46 @@
                     2.0,
                     2.0
                 ]
-            }
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "GoalP0rtal",
+                    "file_name": "GoalPortal",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "collider": {
+                        "type": "Box",
+                        "center": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "size": [
+                            2.0,
+                            2.0,
+                            2.0
+                        ]
+                    }
+                }
+            ]
         },
         {
             "type": "MESH",

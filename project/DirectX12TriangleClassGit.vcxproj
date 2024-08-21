@@ -57,6 +57,7 @@
     <ClCompile Include="Application\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Application\GameObject\GameCollider\ICollider.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
+    <ClCompile Include="Application\GameObject\Goal\Particle\GoalParticle.cpp" />
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectManager\IObjectData.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Application\GameObject\GameCollider\BoxCollisionManager.h" />
     <ClInclude Include="Application\GameObject\GameCollider\ICollider.h" />
     <ClInclude Include="Application\GameObject\Goal\Goal.h" />
+    <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />
     <ClInclude Include="Application\GameObject\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Application\GameObject\ObjectManager\IObjectData.h" />
@@ -330,6 +332,21 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeCircleGoal.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='ImGui_Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
