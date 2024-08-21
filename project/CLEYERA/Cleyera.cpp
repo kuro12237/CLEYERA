@@ -28,6 +28,7 @@ void Cleyera::Initialize()
 	CameraManager::GetInstance()->Initialize();
 	RunTimeCounter::GetInstance()->Create();
 	NoiseTexture::GetInstance()->Initialize();
+	SkyBox::GetInstance()->Initialize();
 }
 
 void Cleyera::Finalize()
@@ -51,6 +52,8 @@ void Cleyera::BeginFlame()
 	RTVDescriptorManager::BeginFlame();
 
 	RunTimeCounter::GetInstance()->Update();
+	SkyBox::GetInstance()->Update();
+
 	ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	commandList->SetDescriptorHeaps(1, heap);

@@ -14,13 +14,25 @@ public:
 
 	void Initialize();
 
+	void ImGuiUpdate();
+
 	void Update();
 
 	void Draw();
 
+#pragma region Set
+
 	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
 
+	void SetTransform(const TransformEular& transform) { worldTransform_.transform = transform; }
+
+#pragma endregion
+
+#pragma region Get
+
 	uint32_t GetTexHandle() { return texHandle_; }
+#pragma endregion
+
 
 private:
 
@@ -35,6 +47,8 @@ private:
 
 	uint32_t texHandle_ = 0;
 	WorldTransform worldTransform_ = {};
+
+	string defaultCubeMapName_ = "Resources/Default/CubeMap.dds";
 	//Singleton
 	SkyBox() = default;
 	~SkyBox() = default;

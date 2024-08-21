@@ -10,6 +10,8 @@ namespace Pipline
 		SPRITE_2d,
 		SPRITE_3d,
 		LINE_3d,
+		PRIMITIVE,
+		SKYBOX,
 		POST_EFFECT,
 		PHONG,
 		PBR,

@@ -18,6 +18,10 @@ void GameScene::Initialize()
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 
+	//SkyBox
+	const float kSkyBoxScale = 256.0f;
+	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale,kSkyBoxScale,kSkyBoxScale},{},{} });
+
 	//3dObj
 	ParticlesInitialize();
 
@@ -120,6 +124,7 @@ void GameScene::PostProcessDraw()
 	gameObjectManager_->Draw();
 
 	ParticlesDraw();
+	SkyBox::GetInstance()->Draw();
 
 	PostEffect::GetInstance()->PostDraw();
 }
@@ -235,7 +240,6 @@ void GameScene::ParticlesUpdate()
 {
 	characterDeadParticle_->Update();
 	characterMoveParticle_->Update();
-
 }
 
 void GameScene::ParticlesDraw()

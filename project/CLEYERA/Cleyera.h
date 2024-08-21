@@ -20,6 +20,7 @@
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
 #include"Particle/GpuParticle.h"
 #include"Utility/Noise/NoiseTexture.h"
+#include"Utility/SkyBox/SkyBox.h"
 
 class Cleyera
 {

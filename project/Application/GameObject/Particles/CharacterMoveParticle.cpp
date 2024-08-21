@@ -15,6 +15,7 @@ void CharacterMoveParticle::Initialize()
 	}
 	InitializeLock_ = true;
 	texHandle_ = TextureManager::LoadPngTexture("GameObject/cloud/cloud.png");
+	texHandle_ = TextureManager::LoadDDSTexture("GameObject/cloud/cloud.dds");
 	particle_ = make_unique<Particle::GpuParticle>();
 	particle_->Create(1, name_);
 	particle_->SetTexhandle(texHandle_);
@@ -26,7 +27,7 @@ void CharacterMoveParticle::Initialize()
 void CharacterMoveParticle::Update()
 {
 	emitter_->Update();
-	
+
 	particle_->CallBarrier();
 	particle_->Update();
 }

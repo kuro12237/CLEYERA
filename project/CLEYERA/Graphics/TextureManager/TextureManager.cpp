@@ -95,20 +95,26 @@ uint32_t TextureManager::LoadDDSTexture(const string& filePath)
 		texData.resource = CreatepngTexResource(metadata);
 		//MipImageを登録
 		ComPtr<ID3D12Resource>intermediateResource = UpLoadTexData(texData.resource, mipImages);
+
 		DirectXCommon::GetInstance()->CommandClosed();
+
 		//src設定
 		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+
+		srvDesc.Format = metadata.format;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+		srvDesc.TextureCube.MostDetailedMip = 0;
+		srvDesc.TextureCube.MipLevels = UINT_MAX;
+		srvDesc.TextureCube.ResourceMinLODClamp = 0.0f;
+
 		if (metadata.IsCubemap())
 		{
-			srvDesc.Format = metadata.format;
-			srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 			srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
-			srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
-			srvDesc.TextureCube.MostDetailedMip = 0;
-			srvDesc.TextureCube.MipLevels = UINT_MAX;
-			srvDesc.TextureCube.ResourceMinLODClamp = 0.0f;
 		}
-		else { assert(0); }
+		else {
+			srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		}
 
 		//Descripterをずらす
 		AddDescripter(index, srvDesc, texData.resource.Get());
@@ -120,6 +126,7 @@ uint32_t TextureManager::LoadDDSTexture(const string& filePath)
 		//コンテナに保存
 		TextureManager::GetInstance()->texDatas_[FilePath] =
 			make_unique<TexDataResource>(FilePath, texData);
+		mipImages.Release();
 	}
 	return TextureManager::GetInstance()->texDatas_[FilePath]->GetTexHandle();
 }
@@ -192,7 +199,8 @@ DirectX::ScratchImage TextureManager::CreateDDSMipImage(const std::string& fileP
 	}
 	else
 	{
-		assert(0);
+		mipImage = std::move(image);
+		//assert(0);
 	}
 
 	return mipImage;

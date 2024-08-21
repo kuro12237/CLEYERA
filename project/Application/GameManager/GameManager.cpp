@@ -41,6 +41,9 @@ void GameManager::Run()
 			}
 			ImGui::EndMenu();
 		}
+
+		SkyBox::GetInstance()->ImGuiUpdate();
+
 		GlobalVariables::GetInstance()->Update();
 
 #endif //  _USE_IMGUI

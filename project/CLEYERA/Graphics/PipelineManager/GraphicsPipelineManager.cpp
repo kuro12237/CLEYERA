@@ -30,6 +30,8 @@ void GraphicsPipelineManager::Initialize()
 	piplines_[SPRITE_3d]["None"] = CreateSprite3dNone(device.Get(), commands, shader.sprite3d);
 	piplines_[LINE_3d]["None"] = CreateLine(device.Get(), commands, shader.Line);
 
+	piplines_[SKYBOX]["None"] = ModelCreatePipline::CreateSkyBoxModel(device, commands, shader.SkyBoxModel);
+
 	Phong_CreatePipline::GetInstance()->Initialize();
 	piplines_[PHONG]["None"] = Phong_CreatePipline::GetInstance()->CreatePhongNormalModel(shader.Phong_Normal_Model);
 	piplines_[PHONG]["Instancing_None"] = Phong_CreatePipline::GetInstance()->CreateInstancingModel(shader.Phong_Normal_InstancingModel);

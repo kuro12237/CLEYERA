@@ -11,6 +11,19 @@ void SkyBox::Initialize()
 	CreateVertex();
 	CreateIndex();
 	CreateMaterial();
+	//TextureManager::UnUsedFilePath();
+	//texHandle_ = TextureManager::LoadDDSTexture(defaultCubeMapName_);
+}
+
+void SkyBox::ImGuiUpdate()
+{
+	if (ImGui::TreeNode("SkyBox"))
+	{
+		ImGui::DragFloat3("scale", &worldTransform_.transform.scale.x,0.1f);
+		ImGui::DragFloat3("rotate", &worldTransform_.transform.rotate.x, 0.1f);
+		ImGui::DragFloat3("translate", &worldTransform_.transform.translate.x, 0.1f);
+		ImGui::TreePop();
+	}
 }
 
 void SkyBox::Update()
@@ -24,15 +37,14 @@ void SkyBox::Draw()
 {
 	if (texHandle_==0)
 	{
-		LogManager::Log("not TexHandle\n");
-		assert(0);
+		return;
 	}
 
 	ComPtr<ID3D12GraphicsCommandList>command = DirectXCommon::GetInstance()->GetCommands().m_pList;
 
-	//SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPso().SkyBox;
-	//command->SetGraphicsRootSignature(pso.rootSignature.Get());
-	//command->SetPipelineState(pso.GraphicsPipelineState.Get());
+	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SKYBOX,"None");
+	command->SetGraphicsRootSignature(pso.rootSignature.Get());
+	command->SetPipelineState(pso.GraphicsPipelineState.Get());
 
 	cVertex_->CommandVertexBufferViewCall();
 	cIndex->CommandIndexBufferViewCall();

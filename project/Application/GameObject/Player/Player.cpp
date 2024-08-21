@@ -94,8 +94,8 @@ void Player::Update()
 	//パーティクルの配置位置
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
 	moveEmitParam.translate = transform.translate;
-	Math::Vector::Vector3 offset = { 0.0f,aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,0.0f };
-	moveEmitParam.translate.y += offset.y;
+    float particleOffsetY = aabb_.min.y / 2.0f + aabb_.min.y / 4.0f;
+	moveEmitParam.translate.y += particleOffsetY;
 }
 
 void Player::OnCollision(ICollider* c)
@@ -133,7 +133,6 @@ void Player::OnCollision(ICollider* c)
 		transform.x += extrusion_.x;
 		transform.y += extrusion_.y;
 	}
-
 }
 
 void Player::ChangeState(unique_ptr<IPlayerState> newState)
