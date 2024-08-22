@@ -2,13 +2,15 @@
 
 void TitleScene::Initialize()
 {
-	WinApp::GetInstance()->SetTiTleName(L"GunHead");
-	PostEffect::GetInstance()->Initialize();
-	ChangeSceneAnimation::GetInstance()->Initialize();
+
 	camera_.Initialize();
 
 	camera_.UpdateMatrix();
 	CameraManager::GetInstance()->ResetCamera(camera_);
+
+	WinApp::GetInstance()->SetTiTleName(L"GunHead");
+	PostEffect::GetInstance()->Initialize();
+	ChangeSceneAnimation::GetInstance()->Initialize();
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)

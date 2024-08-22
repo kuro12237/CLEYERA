@@ -22,6 +22,7 @@ void GoalParticle::Initialize()
 
 	texHandle_ = TextureManager::LoadPngTexture("circle.png");
 	particle_->SetTexhandle(texHandle_);
+	particle_->SetMode(BlendAdd);
 
 	emitter_->CreateType(particle_);
 	field_->CreateType(name_ + "Suction");

@@ -101,6 +101,30 @@
             "children": [
                 {
                     "type": "MESH",
+                    "name": "GoalBack",
+                    "file_name": "GoalBack",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            2.0,
+                            2.0,
+                            2.0
+                        ]
+                    }
+                },
+                {
+                    "type": "MESH",
                     "name": "GoalP0rtal",
                     "file_name": "GoalPortal",
                     "ModelFileType": "obj",

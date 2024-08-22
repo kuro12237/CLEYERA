@@ -78,7 +78,7 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_Init(ComPtr<ID3D12Device>devic
 	return pso;
 }
 
-SPSOProperty CreateGpuParticle::CreateGpuParticle_DebugDraw(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)
+SPSOProperty CreateGpuParticle::CreateGpuParticle_NoneDraw(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)
 {
 
 	SPSOProperty pso;
@@ -213,6 +213,171 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_DebugDraw(ComPtr<ID3D12Device>
 	blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
 	blenddesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
 	blenddesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+	//Rasterrizer設定
+	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
+	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
+
+	//深度設定
+	despthStencilDesc.DepthEnable = true;
+	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
+	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+
+	//本体の作成
+	graphicsPipelineStateDesc.pRootSignature = pso.rootSignature.Get();
+	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc;
+	graphicsPipelineStateDesc.VS = {
+		.pShaderBytecode = shader.vertexBlob->GetBufferPointer(),
+		.BytecodeLength = shader.vertexBlob->GetBufferSize() };
+	graphicsPipelineStateDesc.PS = {
+		.pShaderBytecode = shader.pixelBlob->GetBufferPointer(),
+		.BytecodeLength = shader.pixelBlob->GetBufferSize() };
+	graphicsPipelineStateDesc.BlendState = blendDesc;
+	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc;
+	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+	graphicsPipelineStateDesc.NumRenderTargets = 1;
+	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	graphicsPipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+	graphicsPipelineStateDesc.SampleDesc.Count = 1;
+	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
+
+	hr = device->CreateGraphicsPipelineState(&graphicsPipelineStateDesc,
+		IID_PPV_ARGS(&pso.GraphicsPipelineState));
+	assert(SUCCEEDED(hr));
+
+	return pso;
+}
+
+SPSOProperty CreateGpuParticle::CreateGpuParticle_AddDraw(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)
+{
+
+	SPSOProperty pso;
+	HRESULT hr = {};
+
+	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
+	D3D12_BLEND_DESC blendDesc{};
+	D3D12_RASTERIZER_DESC rasterizerDesc{};
+	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
+	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
+	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
+
+	//rootsignature作成
+	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+
+	D3D12_ROOT_PARAMETER rootParameters[5] = {};
+	//u0 : VS param uav
+	D3D12_DESCRIPTOR_RANGE descriptorRangeVS_UAV[1] = {};
+	descriptorRangeVS_UAV[0].BaseShaderRegister = 0;
+	descriptorRangeVS_UAV[0].NumDescriptors = 1;
+	descriptorRangeVS_UAV[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	descriptorRangeVS_UAV[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[0].DescriptorTable.pDescriptorRanges = descriptorRangeVS_UAV;
+	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeVS_UAV);
+
+	//u1 : PS param uav
+	D3D12_DESCRIPTOR_RANGE descriptorRangePS_UAV[1] = {};
+	descriptorRangePS_UAV[0].BaseShaderRegister = 0;
+	descriptorRangePS_UAV[0].NumDescriptors = 1;
+	descriptorRangePS_UAV[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	descriptorRangePS_UAV[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[1].DescriptorTable.pDescriptorRanges = descriptorRangePS_UAV;
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangePS_UAV);
+
+	//b0 : VSに送るカメラ
+
+	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[2].Descriptor.ShaderRegister = 0;
+
+	//b0 : PSに送るカメラ
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[3].Descriptor.ShaderRegister = 0;
+
+	//テクスチャ
+	D3D12_DESCRIPTOR_RANGE descriptorRangePS_Tex[1] = {};
+	descriptorRangePS_Tex[0].BaseShaderRegister = 0;
+	descriptorRangePS_Tex[0].NumDescriptors = 1;
+	descriptorRangePS_Tex[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangePS_Tex[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[4].DescriptorTable.pDescriptorRanges = descriptorRangePS_Tex;
+	rootParameters[4].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangePS_Tex);
+
+	D3D12_STATIC_SAMPLER_DESC staticSamplers[1] = {};
+	//Sampler
+	staticSamplers[0].Filter = D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
+	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	staticSamplers[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	staticSamplers[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+
+	staticSamplers[0].ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
+	staticSamplers[0].MaxLOD = D3D12_FLOAT32_MAX;
+	staticSamplers[0].ShaderRegister = 0;
+	staticSamplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+
+
+	descriptionRootSignature.pParameters = rootParameters;
+	descriptionRootSignature.NumParameters = _countof(rootParameters);
+
+	descriptionRootSignature.pStaticSamplers = staticSamplers;
+	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
+	ComPtr<ID3DBlob> signatureBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	hr = D3D12SerializeRootSignature(&descriptionRootSignature,
+		D3D_ROOT_SIGNATURE_VERSION_1, &signatureBlob, &errorBlob);
+	if (FAILED(hr))
+	{
+		LogManager::Log(reinterpret_cast<char*>(errorBlob->GetBufferPointer()));
+		assert(false);
+	}
+	hr = device->CreateRootSignature(0, signatureBlob->GetBufferPointer(),
+		signatureBlob->GetBufferSize(), IID_PPV_ARGS(&pso.rootSignature));
+	assert(SUCCEEDED(hr));
+
+	//InputLayOut作成
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[4] = {};
+	//pos
+	inputElementDescs[0].SemanticName = "POSITION";
+	inputElementDescs[0].SemanticIndex = 0;
+	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputElementDescs[0].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	//texCoord
+	inputElementDescs[1].SemanticName = "TEXCOORD";
+	inputElementDescs[1].SemanticIndex = 0;
+	inputElementDescs[1].Format = DXGI_FORMAT_R32G32_FLOAT;
+	inputElementDescs[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	//normal
+	inputElementDescs[2].SemanticName = "NORMAL";
+	inputElementDescs[2].SemanticIndex = 0;
+	inputElementDescs[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	inputElementDescs[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	//instancedId
+	inputElementDescs[3].SemanticName = "INSTANCEID";
+	inputElementDescs[3].SemanticIndex = 0;
+	inputElementDescs[3].Format = DXGI_FORMAT_R32_UINT;
+	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+
+	inputLayoutDesc.pInputElementDescs = inputElementDescs;
+	inputLayoutDesc.NumElements = _countof(inputElementDescs);
+
+	//Blend設定
+	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendAdd);
+
 	//Rasterrizer設定
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;

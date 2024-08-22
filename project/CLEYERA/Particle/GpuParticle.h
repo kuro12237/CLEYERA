@@ -44,6 +44,7 @@ namespace Particle {
 #pragma region Set
 
 		void SetTexhandle(uint32_t texHandle) { texHandle_ = texHandle; }
+		void SetMode(SpriteMode belnd) { blend_ = belnd; }
 
 #pragma endregion
 
@@ -62,7 +63,7 @@ namespace Particle {
 		size_t particleMin = 1024;
 		size_t particleNum_ = 0;
 		string name_ = "";
-
+		uint32_t mulNum = 1;
 		const int vertexNum = 4;
 		const int indexNum = 6;
 		unique_ptr<BufferResource<Particle::System::StructData::ParticleVertexData>>vertexBuf_ = nullptr;
@@ -82,6 +83,7 @@ namespace Particle {
 		vector<uint32_t>freeList_;
 
 		uint32_t texHandle_ = 1;
+		SpriteMode  blend_ = BlendNone;
 	};
 
 };

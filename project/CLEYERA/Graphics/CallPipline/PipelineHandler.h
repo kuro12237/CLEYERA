@@ -5,6 +5,7 @@
 #include"commands/Phong3dPiplineCommand.h"
 #include"commands/Phong3dSkinningPipline.h"
 #include"commands/Phong3dDissolvePiplineCommand.h"
+#include"commands/Sprite3dAddNoneWritePiplineCommand.h"
 
 class PipelineHandler
 {

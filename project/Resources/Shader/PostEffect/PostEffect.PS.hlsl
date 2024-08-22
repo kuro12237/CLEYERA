@@ -69,7 +69,6 @@ PixelShaderOutput main(VertexShaderOutput input)
     output.color.rgb = resultColor.rgb;
     output.color.a = 1.0f;
   
-     //output.color = float32_t4(resultColor.rgb, 1.0f);
-    
+ 
     return output;
 }

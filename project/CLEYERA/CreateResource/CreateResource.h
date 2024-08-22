@@ -45,7 +45,6 @@ struct  TransformationViewMatrix
 	Math::Matrix::Matrix4x4 InverseViewProjection;
 	Math::Matrix::Matrix4x4 InverseProjection;
 	Math::Vector::Vector3 position;
-	float pad[1];
 };
 
 struct TransformationMatrix {
@@ -173,6 +172,7 @@ struct  Material
 {
 	Math::Vector::Vector4 color = { 1,1,1,1 };
 	Math::Matrix::Matrix4x4 uvTransform;
+
 	float shininess = 70.0f;
 	float specular_ = 1.0f;
 	float metalness_ = 1.0f;
@@ -185,7 +185,6 @@ struct  Material
 	
 	float dissolveMask = 0.0f;
 	Math::Vector::Vector2 dissolveEdgeMinMax = {};
-	float pad;
 	Math::Vector::Vector4 dissolveEdgeColor = { 1.0f,1.0f,1.0f,1.0f };
 };
 

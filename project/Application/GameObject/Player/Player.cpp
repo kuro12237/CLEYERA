@@ -94,7 +94,7 @@ void Player::Update()
 	//パーティクルの配置位置
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
 	moveEmitParam.translate = transform.translate;
-    float particleOffsetY = aabb_.min.y / 2.0f + aabb_.min.y / 4.0f;
+	float particleOffsetY = aabb_.min.y / 2.0f + aabb_.min.y / 4.0f;
 	moveEmitParam.translate.y += particleOffsetY;
 }
 
@@ -102,6 +102,13 @@ void Player::OnCollision(ICollider* c)
 {
 	if (kOnlyCollideWithBlocksid)
 	{
+		return;
+	}
+
+	if (c->GetId() == kGoalId)
+	{
+		isGoal_ = true;
+		ChangeState(make_unique<PlayerStateGoalAnimation>());
 		return;
 	}
 

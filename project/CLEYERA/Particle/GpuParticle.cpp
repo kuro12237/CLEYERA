@@ -4,7 +4,8 @@ using namespace Particle;
 
 void GpuParticle::Create(const size_t kNum, string Name)
 {
-	particleNum_ = kNum * particleMin;
+	mulNum = uint32_t(kNum);
+	particleNum_ = uint32_t(mulNum) * particleMin;
 	name_ = Name;
 
 	{//’¸“_ì¬
@@ -87,7 +88,9 @@ void GpuParticle::Create(const size_t kNum, string Name)
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
 
-		commandList->Dispatch(UINT(particleNum_ + 1023 / 1024), 1, 1);
+
+		UINT dispach = UINT(GetNum() / 1024);
+		commandList->Dispatch(dispach, 1, 1);
 	}
 	DirectXCommon::GetInstance()->CommandClosed();
 }
@@ -115,6 +118,11 @@ void GpuParticle::Draw()
 {
 	//Š·‚¦‚é
 	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None");
+
+	if (blend_==BlendAdd)
+	{
+		pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "Add");
+	}
 
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 	commandList->SetGraphicsRootSignature(pso.rootSignature.Get());

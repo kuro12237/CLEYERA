@@ -480,6 +480,8 @@
     <ClCompile Include="Application\GameObject\Particles\CharacterMoveParticle.cpp" />
     <ClCompile Include="CLEYERA\Sprite\ISpriteBuf.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Particle\GoalParticle.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Sprite3dAddNoneWritePiplineCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -784,6 +786,8 @@
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
     <ClInclude Include="CLEYERA\Particle\Field\StructParticleField.h" />
     <ClInclude Include="CLEYERA\Particle\Field\ParticleField.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Sprite3dAddNoneWritePiplineCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

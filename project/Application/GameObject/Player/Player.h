@@ -14,6 +14,7 @@
 #include"state/IPlayerState.h"
 #include"state/PlayerStateNone.h"
 #include"state/PlayerStateRock.h"
+#include"state/PlayerStateGoalAnimation.h"
 
 #include"GameObject/ObjectManager/GameObjectManager.h"
 
@@ -51,6 +52,10 @@ public:
 
 	bool GetIsShoot() { return isShoot_; }
 
+	bool &GetIsGameEnd() { return isGameEnd_;}
+
+	bool GetIsGoal() { return isGoal_; }
+
 #pragma endregion
 
 #pragma region Set
@@ -78,6 +83,8 @@ private:
 	bool isShoot_ = false;
 	bool isRockState_ = false;
 	bool isDamage_ = false;
+	bool isGameEnd_ = false;
+	bool isGoal_ = false;
 
 	float damegeFlame_ = 0.0f;
 	uint32_t damegeCoolTimer_ = 0;

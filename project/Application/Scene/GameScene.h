@@ -84,4 +84,6 @@ private:
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;
+
+	bool* isGameEnd_ = nullptr;
 };

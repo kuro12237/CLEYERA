@@ -45,6 +45,12 @@ void PlayerManager::Update()
 	reticleWorldPos = instance->GetObj3dData(reticle_->GetName())->GetWorldTransform().GetWorldPosition();
 	playerWorldPos = instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
 
+	//ƒQ[ƒ€‚ªI‚í‚é’Ê’m
+	if (playerCore_->GetIsGameEnd())
+	{
+		gameStartFlag_ = false;
+	}
+
 	if (gameStartFlag_)
 	{
 		commandHandler_->Handler();

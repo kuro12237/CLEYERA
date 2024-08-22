@@ -13,8 +13,5 @@ public:
 	void Update(Player * p)override;
 
 private:
-
-
-
 };
 

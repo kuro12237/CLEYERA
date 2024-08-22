@@ -51,6 +51,10 @@ void GameScene::Initialize()
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 
+	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/navyBlue.dds");
+	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
+
+	//isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
 }
 
@@ -100,6 +104,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	ParticlesUpdate();
 
 	LightingManager::AddList(light_);
+	PostEffect::GetInstance()->Update();
 
 	//ƒS[ƒ‹‚µ‚½‚ç
 	if (goal_->GetIsGoalFlag())
@@ -114,16 +119,20 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		Scene->ChangeState(new TitleScene);
 		return;
 	}
-
-	PostEffect::GetInstance()->Update();
-
 }
 
 void GameScene::PostProcessDraw()
 {
+
+	PostEffect::GetInstance()->PreDraw();
+
+	SkyBox::GetInstance()->Draw();
+
 	gameObjectManager_->Draw();
 
 	ParticlesDraw();
+
+	PostEffect::GetInstance()->PostDraw();
 }
 
 void GameScene::Back2dSpriteDraw()
