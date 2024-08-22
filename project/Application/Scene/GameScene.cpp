@@ -54,7 +54,7 @@ void GameScene::Initialize()
 	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/navyBlue.dds");
 	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 
-	//isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
+	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
 }
 
@@ -67,6 +67,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 #endif // _USE_IMGUI
 
+	
 	ChangeSceneAnimation::GetInstance()->Update();
 
 	//シーン切替が終わったら
@@ -106,8 +107,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 
-	//ゴールしたら
-	if (goal_->GetIsGoalFlag())
+	//playerのアニメーションが終わったら
+	if (*isGameEnd_)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 		enemyWalkManager_->SetStatFlag(false);
@@ -189,8 +190,10 @@ void GameScene::Collision()
 {
 	gameCollisionManager_->ListClear();
 
-	gameCollisionManager_->ListPushback(player_->GetPlayerCore());
-
+	if (!player_->GetPlayerCore()->GetIsGoal())
+	{
+		gameCollisionManager_->ListPushback(player_->GetPlayerCore());
+	}
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)
 	{
 		if (player_->GetBullet()[index]) {
@@ -221,8 +224,11 @@ void GameScene::Collision()
 void GameScene::Gravitys()
 {
 	gravityManager_->ClearList();
-	gravityManager_->PushList(player_->GetPlayerCore());
 
+	if (!player_->GetPlayerCore()->GetIsGoal())
+	{
+		gravityManager_->PushList(player_->GetPlayerCore());
+	}
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
 		if (e)

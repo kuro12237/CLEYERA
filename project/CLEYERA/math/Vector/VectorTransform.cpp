@@ -109,6 +109,13 @@ float Math::Vector::Dot(const Vector3& v1, const Vector3& v2) {
 	return result;
 }
 
+float Math::Vector::Lerp(const float& a, const float& b, const float t)
+{
+	float  P;
+	P = a + t * (b - a);
+	return P;
+}
+
 Vector3 Math::Vector::Lerp(const Vector3& a, const Vector3& b, const float t) {
 
 	Vector3 P;

@@ -15,8 +15,11 @@ public:
 private:
 
 	string GoalName_ = "Goal";
+	string PlayerGunName_ = "PlayerGun";
 
 	Math::Vector::Vector3  startPos_ = {};
 	Math::Vector::Vector3 endPos_ = {};
 	float t = 0.0f;
+
+	float scaleCount_ = 1.0f;
 };

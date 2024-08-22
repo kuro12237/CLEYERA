@@ -107,8 +107,11 @@ void Player::OnCollision(ICollider* c)
 
 	if (c->GetId() == kGoalId)
 	{
-		isGoal_ = true;
-		ChangeState(make_unique<PlayerStateGoalAnimation>());
+		if (!isGoal_)
+		{
+			isGoal_ = true;
+			ChangeState(make_unique<PlayerStateGoalAnimation>());
+		}
 		return;
 	}
 

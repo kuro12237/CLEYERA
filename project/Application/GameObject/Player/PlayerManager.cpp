@@ -51,7 +51,7 @@ void PlayerManager::Update()
 		gameStartFlag_ = false;
 	}
 
-	if (gameStartFlag_)
+	if (gameStartFlag_ && !playerCore_->GetIsGoal())
 	{
 		commandHandler_->Handler();
 		commandHandler_->CommandsExec(*playerCore_);
