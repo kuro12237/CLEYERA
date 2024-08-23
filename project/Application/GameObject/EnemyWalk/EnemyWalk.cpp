@@ -5,7 +5,10 @@ void EnemyWalk::Initialize()
 	gameObjIncetance_ = GameObjectManager::GetInstance();
 	auto& transform = gameObjIncetance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	SetObjectData(transform);
-	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
+	float min, max;
+	min = -1.0f;
+	max = 1.0f;
+	aabb_ = { Math::Vector::Multiply(transform.scale,min), Math::Vector::Multiply(transform.scale,max) };
 	isExtrusion_ = true;
 	id_ = kEnemyWalkId;
 

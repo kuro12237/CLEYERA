@@ -20,6 +20,9 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 			emitter.frequencyTime = 0.3f;
 			param.velocityMax = { 0.01f,0.05f,0.0f };
 			param.velocityMin = { -0.01f,0.1f,0.0f };
+			//“–‚½‚è”»’è‚Ì‘å‚«‚³‚ð‚à‚Æ‚Éemitter‚ðÝ’è
+			param.sizeMax = e->GetAABB().min;
+			param.sizeMax = e->GetAABB().max;
 			break;
 		}
 		index++;

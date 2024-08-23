@@ -32,6 +32,8 @@ public:
 
 	void Update();
 
+	void HpUpdate();
+
 	void OnCollision(ICollider* c)override;
 
 	void ChangeState(unique_ptr<IPlayerState>newState);
@@ -55,6 +57,8 @@ public:
 	bool &GetIsGameEnd() { return isGameEnd_;}
 
 	bool GetIsGoal() { return isGoal_; }
+
+	bool isDamageFlag() { return isDamage_; }
 
 #pragma endregion
 
@@ -83,6 +87,8 @@ private:
 	bool isShoot_ = false;
 	bool isRockState_ = false;
 	bool isDamage_ = false;
+
+	bool isInvincible_ = false;
 	bool isGameEnd_ = false;
 	bool isGoal_ = false;
 

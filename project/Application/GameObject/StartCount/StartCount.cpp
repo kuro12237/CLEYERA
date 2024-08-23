@@ -3,7 +3,7 @@
 void StartCount::Initialize()
 {
 	//tex
-	numberTex_ = TextureManager::LoadPngTexture("GameObject/number/number.png");
+	numberTex_ = TextureManager::LoadDDSTexture("GameObject/number/number.dds");
 	Math::Vector::Vector2 numberTexSize = TextureManager::GetTextureSize(numberTex_);
 	//512‚É•â³
 	numberTexSize.x *= 0.25f;
@@ -22,7 +22,7 @@ void StartCount::Initialize()
 	numberWorldTransform_.transform.translate = { center.x,center.y,0.0f };
 
 	//”wŒiƒtƒŒ[ƒ€‚Ì‰Šú‰»
-	backFlameTex_ = TextureManager::LoadPngTexture("GameObject/BackFlame/BackFlame.png");
+	backFlameTex_ = TextureManager::LoadDDSTexture("GameObject/BackFlame/BackFlame.dds");
 	Math::Vector::Vector2 backFlameTexSize = TextureManager::GetTextureSize(backFlameTex_);
 	backFlameSprite_ = make_unique<Sprite>();
 	backFlameSprite_->Initialize({ backFlameTexSize.x * -0.5f,backFlameTexSize.y * -0.5f });
@@ -35,7 +35,7 @@ void StartCount::Initialize()
 
 	//ƒtƒŒ[ƒ€‚Ì‰Šú‰»
 	size_t flameMax = 4;
-	flameTex_ = TextureManager::LoadPngTexture("GameObject/Flame/Flame.png");
+	flameTex_ = TextureManager::LoadDDSTexture("GameObject/Flame/Flame.dds");
 	Math::Vector::Vector2 flameTexSize = TextureManager::GetTextureSize(flameTex_);
 	flameSprites_.resize(flameMax);
 	flameWts_.resize(flameMax);
@@ -81,7 +81,7 @@ void StartCount::Initialize()
 
 	//j‚Ì‰Šú‰»
 	const float radius = 128.0f;
-	barTex_ = TextureManager::LoadPngTexture("GameObject/Flame/bar.png");
+	barTex_ = TextureManager::LoadDDSTexture("GameObject/Flame/bar.dds");
 	Math::Vector::Vector2 barTexSize = TextureManager::GetTextureSize(barTex_);
 	barSprites_.resize(BarMax);
 	barWts_.resize(BarMax);

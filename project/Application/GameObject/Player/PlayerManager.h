@@ -4,11 +4,14 @@
 #include"Reticle/PlayerReticle.h"
 
 #include"command/PlayerCommandHandler.h"
+
 #include"Reticle/command/PlayerReticleCommandHandler.h"
+
 #include"Gun/PlayerGun.h"
 #include"Bullet/PlayerBullet.h"
-#include"Utility/RandomGenerator/RandomGenerator.h"
 #include"PlayerCamera/PlayerCamera.h"
+#include"Hp/PlayerHp.h"
+#include"Utility/RandomGenerator/RandomGenerator.h"
 
 class PlayerManager
 {
@@ -55,12 +58,14 @@ private:
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 	unique_ptr<PlayerReticleCommandHandler>reticleCommandHandler_ = nullptr;
 
-	Math::Vector::Vector3 Player_Reticle_ = {};
-
 	shared_ptr<Player>playerCore_ = nullptr;
 	unique_ptr<PlayerReticle>reticle_ = nullptr;
 	unique_ptr<PlayerGun>gun_ = nullptr;
 	unique_ptr<PlayerCamera>camera_ = nullptr;
+	unique_ptr<PlayerHp>hp_ = nullptr;
+
+	bool isHpReductionActive_ = false;
+	int32_t kPlayerHp_ = 10;
 
 	vector<shared_ptr<PlayerBullet>>bullets_{};
 	queue<uint32_t>deadBulletIndex_;

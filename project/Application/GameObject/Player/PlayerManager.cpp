@@ -2,22 +2,32 @@
 
 void PlayerManager::GetData(GameObjectManager* data)
 {
+	//commands
+	commandHandler_ = make_unique<PlayerCommandHandler>();
+	reticleCommandHandler_ = make_unique<PlayerReticleCommandHandler>();
+
+	//mainBody
 	playerCore_ = make_shared<Player>();
 	playerCore_->Initialize();
 	playerCore_->GetData(data);
 
-	commandHandler_ = make_unique<PlayerCommandHandler>();
-	reticleCommandHandler_ = make_unique<PlayerReticleCommandHandler>();
-
+	//reticle
 	reticle_ = make_unique<PlayerReticle>();
 	reticle_->Initialize();
 
+	//Gun
 	gun_ = make_unique<PlayerGun>();
 	gun_->Initialize();
 
+	//Camera
 	camera_ = make_unique<PlayerCamera>();
 	camera_->SetTargetName(playerCore_->GetName());
 	camera_->Initialize();
+
+	//Hp
+	hp_ = make_unique<PlayerHp>();
+	hp_->Initialize(kPlayerHp_);
+
 
 	data->CameraReset(camera_->GetName());
 }
@@ -51,27 +61,43 @@ void PlayerManager::Update()
 		gameStartFlag_ = false;
 	}
 
+	//Commands
 	if (gameStartFlag_ && !playerCore_->GetIsGoal())
 	{
 		commandHandler_->Handler();
 		commandHandler_->CommandsExec(*playerCore_);
 	}
 
+	//Bullet
 	if (playerCore_->GetIsShoot())
 	{
 		PushBullet(playerWorldPos);
 	}
 
+
+	//hp
+	if (playerCore_->isDamageFlag())
+	{
+		hp_->GetHp()--;
+	}
+	hp_->Update();
+
+	//Main
 	playerCore_->Update();
 
+	//Gun
 	gun_->SetTarget(reticleWorldPos);
 	gun_->Update();
+
+	//reticle
 	reticleCommandHandler_->Handler();
 	reticleCommandHandler_->Exec(*reticle_);
 	reticle_->Update();
 
+	//Camera
 	camera_->Update();
 
+	//Bullets
 	CheckisDeadBullets();
 
 	for (shared_ptr<PlayerBullet>& b : bullets_)
@@ -81,10 +107,12 @@ void PlayerManager::Update()
 			b->Update();
 		}
 	}
+
 }
 
 void PlayerManager::Draw2d()
 {
+	hp_->Draw2d();
 	reticle_->Draw2d();
 }
 

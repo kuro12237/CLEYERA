@@ -66,6 +66,7 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
+	isDamage_ = false;
 	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetMOdelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
@@ -82,7 +83,7 @@ void Player::Update()
 		isJamp_ = true;
 	}
 
-	if (isDamage_)
+	if (isInvincible_)
 	{
 		DamageUpdate();
 	}
@@ -94,8 +95,13 @@ void Player::Update()
 	//パーティクルの配置位置
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
 	moveEmitParam.translate = transform.translate;
-	float particleOffsetY = aabb_.min.y / 2.0f + aabb_.min.y / 4.0f;
-	moveEmitParam.translate.y += particleOffsetY;
+	Math::Vector::Vector3 particleOffset = { 0.0f, aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,-2.0f };
+	moveEmitParam.translate.y += particleOffset.y;
+	moveEmitParam.translate.z += particleOffset.z;
+}
+
+void Player::HpUpdate()
+{
 }
 
 void Player::OnCollision(ICollider* c)
@@ -115,13 +121,14 @@ void Player::OnCollision(ICollider* c)
 		return;
 	}
 
-	if (!isDamage_)
+	if (!isInvincible_)
 	{
 		if (c->GetId() == kEnemyWalkId)
 		{
 			ChangeState(make_unique<PlayerStateRock>());
 			//Input::VibrateController(65000, 65000, 20.0f);
 			isDamage_ = true;
+			isInvincible_ = true;
 		}
 	}
 
@@ -234,7 +241,7 @@ void Player::DamageUpdate()
 		instance->SetVignetteFactor(0.0f);
 		vinatteFactor_ = 1.0f;
 		damegeCoolTimer_ = 0;
-		isDamage_ = false;
+		isInvincible_ = false;
 	}
 }
 

@@ -71,6 +71,7 @@
     <ClCompile Include="Application\GameObject\Player\command\PlayerMoveCommand.cpp" />
     <ClCompile Include="Application\GameObject\Player\command\PlayerShootCommand.cpp" />
     <ClCompile Include="Application\GameObject\Player\Gun\PlayerGun.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Hp\PlayerHp.cpp" />
     <ClCompile Include="Application\GameObject\Player\Player.cpp" />
     <ClCompile Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
     <ClCompile Include="Application\GameObject\Player\PlayerManager.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Application\GameObject\Player\command\PlayerShootCommand.h" />
     <ClInclude Include="Application\GameObject\Player\command\PlayerSquatCommand.h" />
     <ClInclude Include="Application\GameObject\Player\Gun\PlayerGun.h" />
+    <ClInclude Include="Application\GameObject\Player\Hp\PlayerHp.h" />
     <ClInclude Include="Application\GameObject\Player\Player.h" />
     <ClInclude Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.h" />
     <ClInclude Include="Application\GameObject\Player\PlayerManager.h" />
