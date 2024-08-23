@@ -26,8 +26,7 @@ void PlayerManager::GetData(GameObjectManager* data)
 
 	//Hp
 	hp_ = make_unique<PlayerHp>();
-	hp_->Initialize(kPlayerHp_);
-
+	hp_->Initialize(10);
 
 	data->CameraReset(camera_->GetName());
 }

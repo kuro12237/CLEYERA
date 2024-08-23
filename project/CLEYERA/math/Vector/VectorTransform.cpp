@@ -57,6 +57,14 @@ Vector3 Math::Vector::Multiply(const Vector3& v1, const Vector3& v2)
 	return result;
 }
 
+Vector2 Math::Vector::Multiply(const Vector2& v1, const float v)
+{
+	Vector2 result{};
+	result.x = v1.x * v;
+	result.y = v1.y * v;
+	return result;
+}
+
 Vector3 Math::Vector::TransformNormal(const Vector3& v, const Math::Matrix::Matrix4x4& m)
 {
 	Vector3 result

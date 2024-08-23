@@ -23,4 +23,10 @@ private:
 	vector<WorldTransform>wTs_{};
 	uint32_t texHandle_ = 0;
 
+	unique_ptr<Sprite>flameSprite_ = nullptr;
+	WorldTransform flameWorldTransform_ = {};
+	uint32_t flameTexHandle_ = 0;
+	unique_ptr<Sprite>flameNameSprite_ = nullptr;
+	WorldTransform flameNameWorldTransform_ = {};
+	uint32_t flameNameTexHandle_ = 0;
 };

@@ -201,6 +201,7 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateNone.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="Application\GameObject\StartCount\StartCount.h" />
+    <ClInclude Include="Application\GameObject\UI\GameUI.h" />
     <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Application\Scene\GameScene.h" />
     <ClInclude Include="Application\Scene\IScene.h" />
