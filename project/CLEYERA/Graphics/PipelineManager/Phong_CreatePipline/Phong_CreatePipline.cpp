@@ -144,7 +144,7 @@ SPSOProperty Phong_CreatePipline::CreatePhongNormalModel(SShaderMode shader)
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
 	//BlendState
-	D3D12_BLEND_DESC blendDesc {};
+	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
 	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
@@ -164,12 +164,14 @@ SPSOProperty Phong_CreatePipline::CreatePhongNormalModel(SShaderMode shader)
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
+	graphicsPipelineStateDesc.VS = { shader.vertexBlob->GetBufferPointer(),
+    shader.vertexBlob->GetBufferSize() }; //VS
+	graphicsPipelineStateDesc.PS = { shader.pixelBlob->GetBufferPointer(),
+	shader.pixelBlob->GetBufferSize() }; //PS
+	graphicsPipelineStateDesc.GS = { shader.gsBlob->GetBufferPointer(),
+	shader.gsBlob->GetBufferSize() };//GS
 	graphicsPipelineStateDesc.pRootSignature = PSO.rootSignature.Get(); //RootSignature
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; //InputLayout
-	graphicsPipelineStateDesc.VS = { shader.vertexBlob->GetBufferPointer(),
-	shader.vertexBlob->GetBufferSize() }; //VertexShader
-	graphicsPipelineStateDesc.PS = { shader.pixelBlob->GetBufferPointer(),
-	shader.pixelBlob->GetBufferSize() }; //PixeShader
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
@@ -794,7 +796,7 @@ SPSOProperty Phong_CreatePipline::CreateInstancingModel(SShaderMode shader)
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; //RasterizerState
 	graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat =DXGI_FORMAT_D24_UNORM_S8_UINT;
+	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
 	graphicsPipelineStateDesc.NumRenderTargets = 4;
 	graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;

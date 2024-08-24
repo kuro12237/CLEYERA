@@ -483,6 +483,7 @@
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Sprite3dAddNoneWritePiplineCommand.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\Hp\PlayerHp.cpp" />
+    <ClCompile Include="Application\GameObject\UI\GameUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -866,5 +867,6 @@
     <FxCompile Include="Resources\Shader\Sprite2d\SpriteObject2d_Dissolve.PS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeCircleGoal.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Suction.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Phong\PhongBase.GS.hlsl" />
   </ItemGroup>
 </Project>

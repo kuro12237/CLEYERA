@@ -5,6 +5,7 @@ struct  SShaderMode
 {
 	ComPtr<IDxcBlob> vertexBlob;
 	ComPtr<IDxcBlob> pixelBlob;
+	ComPtr<IDxcBlob>gsBlob;
 	ComPtr<IDxcBlob>csBlob;
 };
 struct SDXCProperty

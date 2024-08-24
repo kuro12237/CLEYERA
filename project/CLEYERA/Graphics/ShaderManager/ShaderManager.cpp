@@ -233,6 +233,10 @@ void ShaderManager::PhongNormalModel()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Phong/Phong_NormalMap_Model3dObject.PS.hlsl",
 			L"ps_6_0");
+	shaders.gsBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Phong/PhongBase.GS.hlsl",
+			L"gs_6_0");
 
 	ShaderManager::Getinstance()->shaders_.Phong_Normal_Model = shaders;
 }

@@ -30,6 +30,7 @@
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"Particle/Field/ParticleField.h"
 
+#include"GameObject/UI/GameUI.h"
 
 class GameScene :public IScene
 {
@@ -84,6 +85,9 @@ private:
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;
+
+	unique_ptr<GameUI>gameUi_ = nullptr;
+
 
 	bool* isGameEnd_ = nullptr;
 };
