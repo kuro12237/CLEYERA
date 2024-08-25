@@ -6,7 +6,7 @@
 #include"Input.h"
 #include"Utility/ObjectId/GameObjectId.h"
 #include"Particle/GoalParticle.h"
-
+#include"Graphics/CallPipline/PipelineHandler.h"
 class Goal :public IObjectData, public ICollider
 {
 public:
@@ -22,6 +22,9 @@ public:
 	bool GetIsGoalFlag() { return isGoalFlag_; }
 
 private:
+
+	string portalName_ = "GoalPortal";
+	string backName_ = "GoalBack";
 
 	bool isGoalFlag_ = false;
 

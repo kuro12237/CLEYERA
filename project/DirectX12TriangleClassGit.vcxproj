@@ -85,6 +85,7 @@
     <ClCompile Include="Application\GameObject\UI\GameUI.cpp" />
     <ClCompile Include="Application\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Application\Scene\GameScene.cpp" />
+    <ClCompile Include="Application\Scene\SelectScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Application\Scene\GameScene.h" />
     <ClInclude Include="Application\Scene\IScene.h" />
+    <ClInclude Include="Application\Scene\SelectScene.h" />
     <ClInclude Include="Application\Scene\TitleScene.h" />
     <ClInclude Include="Application\Utility\ObjectId\GameObjectId.h" />
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />

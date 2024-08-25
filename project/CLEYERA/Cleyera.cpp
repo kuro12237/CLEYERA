@@ -29,6 +29,8 @@ void Cleyera::Initialize()
 	RunTimeCounter::GetInstance()->Create();
 	NoiseTexture::GetInstance()->Initialize();
 	SkyBox::GetInstance()->Initialize();
+	PostEffect::GetInstance()->Initialize();
+
 }
 
 void Cleyera::Finalize()

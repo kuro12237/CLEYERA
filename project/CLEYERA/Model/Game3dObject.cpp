@@ -63,7 +63,6 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	LightingManager::GetInstance()->CallCommand();
 	//テクスチャ
 	DescriptorManager::rootParamerterCommand(6, modelData_.material.handle);
-	DescriptorManager::rootParamerterCommand(7, modelData_.normalTexHandle);
 
 	//subsurface
 	//DescriptorManager::rootParamerterCommand(8, baseTexHandle_);

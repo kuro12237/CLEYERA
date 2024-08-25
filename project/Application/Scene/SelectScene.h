@@ -25,15 +25,14 @@
 #include"Particle/GpuParticle.h"
 #include"Particle/Emitter/ParticleEmitter.h"
 
-#include"GameObject/Particles/CharacterDeadParticle.h"
-
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
+#include"GameObject/Goal/Goal.h"
 
-class TitleScene:public IScene
+class SelectScene :public IScene
 {
 public:
-	TitleScene() {};
-	~TitleScene() {};
+	SelectScene() {};
+	~SelectScene() {};
 
 	void Initialize()override;
 
@@ -49,13 +48,28 @@ public:
 
 private:
 
+	void Collision();
+
+	void Gravitys();
+
 	CameraData camera_ = {};
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
-	string inputLevelDataFileName_ = "TitleData.json";
+	string inputLevelDataFileName_ = "SelectSceneData.json";
 
 	PointLight_param light_{};
-	unique_ptr<Game3dObject>gameObj_ = nullptr;
-	WorldTransform worldTransform_ = {};
+
+	unique_ptr<PlayerManager>player_ = nullptr;
+
+	unique_ptr<Goal>goal_ = nullptr;
+
+
+	shared_ptr<BlockManager>blockManager_ = nullptr;
+	unique_ptr<GravityManager>gravityManager_ = nullptr;
+	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
+	CharacterDeadParticle* characterDeadParticle_ = nullptr;
+	CharacterMoveParticle* characterMoveParticle_ = nullptr;
+
+	bool* isGameEnd_ = nullptr;
 };

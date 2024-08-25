@@ -10,6 +10,8 @@ void Goal::Initialize()
 	id_ = kGoalId;
 
 	GoalParticle::GetInstance()->Initialize();
+
+	gameObjIncetance_->SetObjectPipline(make_unique<Sprite3dAddNoneWritePiplineCommand>(),backName_);
 }
 
 void Goal::Update()

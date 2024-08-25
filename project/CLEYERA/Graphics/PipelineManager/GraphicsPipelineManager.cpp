@@ -567,8 +567,7 @@ SPSOProperty GraphicsPipelineManager::CreateSprite3dAddNoneWriteDepth(ComPtr<ID3
 		despthStencilDesc,
 		true,
 		D3D12_DEPTH_WRITE_MASK_ZERO,
-		D3D12_COMPARISON_FUNC_LESS_EQUAL
-	);
+		D3D12_COMPARISON_FUNC_LESS_EQUAL);
 
 
 	//PSO作成

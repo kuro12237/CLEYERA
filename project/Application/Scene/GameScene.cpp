@@ -2,12 +2,12 @@
 
 void GameScene::Initialize()
 {
-	PostEffect::GetInstance()->Initialize();
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
+	gameObjectManager_->ClearAllData();
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
 	gameObjectManager_->CameraReset();
@@ -36,10 +36,9 @@ void GameScene::Initialize()
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
-	
+
 	goal_ = make_unique<Goal>();
 	goal_->Initialize();
-
 
 	//2dObj
 	startCount_ = make_unique<StartCount>();
@@ -49,7 +48,6 @@ void GameScene::Initialize()
 	gameObjectManager_->Update();
 
 	LightingManager::AddList(light_);
-	PostEffect::GetInstance()->Update();
 
 	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/navyBlue.dds");
 	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
@@ -125,15 +123,10 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 void GameScene::PostProcessDraw()
 {
 
-	PostEffect::GetInstance()->PreDraw();
-
-	SkyBox::GetInstance()->Draw();
-
 	gameObjectManager_->Draw();
 
 	ParticlesDraw();
-
-	PostEffect::GetInstance()->PostDraw();
+	
 }
 
 void GameScene::Back2dSpriteDraw()

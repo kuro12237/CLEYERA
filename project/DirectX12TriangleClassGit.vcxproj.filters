@@ -484,6 +484,7 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\Hp\PlayerHp.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameUI.cpp" />
+    <ClCompile Include="Application\Scene\SelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -792,6 +793,7 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.h" />
     <ClInclude Include="Application\GameObject\Player\Hp\PlayerHp.h" />
     <ClInclude Include="Application\GameObject\UI\GameUI.h" />
+    <ClInclude Include="Application\Scene\SelectScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

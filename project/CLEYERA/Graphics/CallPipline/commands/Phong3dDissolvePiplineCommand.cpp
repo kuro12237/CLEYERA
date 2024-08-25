@@ -8,4 +8,5 @@ void Phong3dDissolvePipline::Exec(const SModelData& modelData)
 	CallCommand();
 	DescriptorManager::rootParamerterCommand(8,NoiseTexture::GetInstance()->GetIndex());
 
+	DescriptorManager::rootParamerterCommand(7, modelData.normalTexHandle);
 }

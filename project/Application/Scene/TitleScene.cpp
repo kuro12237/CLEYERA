@@ -11,6 +11,12 @@ void TitleScene::Initialize()
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");
 	PostEffect::GetInstance()->Initialize();
 	ChangeSceneAnimation::GetInstance()->Initialize();
+	gameObj_ = make_unique<Game3dObject>();
+	gameObj_->Create(make_unique<Phong3dPipline>());
+	gameObj_->SetModel(ModelManager::LoadObjectFile("DfCube"));
+	worldTransform_.Initialize();
+	worldTransform_.transform.translate.z = 16.0f;
+
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -25,17 +31,17 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	ChangeSceneAnimation::GetInstance()->Update();
 
-	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
+	if (Input::PushBottonPressed(XINPUT_GAMEPAD_B))
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 	}
-
+	worldTransform_.UpdateMatrix();
 	camera_.UpdateMatrix();
 	PostEffect::GetInstance()->Update();
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
-		Scene->ChangeState(new GameScene);
+		Scene->ChangeState(new SelectScene);
 		return;
 	}
 }
@@ -50,6 +56,7 @@ void TitleScene::Back2dSpriteDraw()
 
 void TitleScene::Object3dDraw()
 {
+	gameObj_->Draw(worldTransform_);
 }
 
 void TitleScene::Flont2dSpriteDraw()

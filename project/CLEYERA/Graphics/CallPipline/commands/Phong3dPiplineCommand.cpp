@@ -7,4 +7,6 @@ void Phong3dPipline::Exec(const SModelData& modelData)
 	SPSOProperty PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PHONG, "None");
 	list->SetGraphicsRootSignature(PSO.rootSignature.Get());
 	list->SetPipelineState(PSO.GraphicsPipelineState.Get());
+
+	DescriptorManager::rootParamerterCommand(7, modelData.normalTexHandle);
 }
