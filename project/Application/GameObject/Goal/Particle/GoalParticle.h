@@ -19,6 +19,8 @@ public:
 
 	void Draw();
 
+	void Clear() { emitter_->AllClear(), field_->AllClear(); }
+
 	Particle::ParticleEmitter<Particle::EmitType::Circle>* GetEmitters() { return emitter_.get(); }
 	Particle::GpuParticle* GetParticle() {return  particle_.get(); }
 	Particle::ParticleField<Particle::FieldType::FieldSuction>* GetField() { return field_.get(); }

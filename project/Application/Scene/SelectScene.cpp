@@ -16,12 +16,21 @@ void SelectScene::Initialize()
 
 	characterMoveParticle_ = CharacterMoveParticle::GetInstance();
 	characterMoveParticle_->Initialize();
+
+	GoalParticle::GetInstance()->Initialize();
+	GoalParticle::GetInstance()->Clear();
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(gameObjectManager_);
 
+	goals_.resize(portalMax_);
+	for (size_t index = 0; index < portalMax_; index++)
+	{
+		unique_ptr<Goal>goal = make_unique<Goal>();
 
-	goal_ = make_unique<Goal>();
-	goal_->Initialize();
+		goals_[portalCount_] = make_unique<Goal>();
+		goals_[portalCount_]->Initialize(kGoalId,uint32_t(index));
+		portalCount_++;
+	}
 
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->Initialize();
@@ -45,7 +54,15 @@ void SelectScene::Update(GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
+	if (ImGui::TreeNode("light"))
+	{
+		ImGui::DragFloat3("t", &light_.position.x);
+		ImGui::DragFloat("radious", &light_.radious);
+		ImGui::DragFloat("decay", &light_.decay);
+		ImGui::DragFloat("intencity", &light_.intencity);
 
+		ImGui::TreePop();
+	}
 #endif // _USE_IMGUI
 	ChangeSceneAnimation::GetInstance()->Update();
 
@@ -57,7 +74,12 @@ void SelectScene::Update(GameManager* Scene)
 
 	player_->Update();
 
-	goal_->Update();
+	for (size_t i = 0; i < portalMax_; i++)
+	{
+		goals_[i]->Update();
+	}
+
+	GoalParticle::GetInstance()->Update();
 
 	blockManager_->Update();
 
@@ -84,6 +106,8 @@ void SelectScene::Update(GameManager* Scene)
 void SelectScene::PostProcessDraw()
 {
 	gameObjectManager_->Draw();
+
+	GoalParticle::GetInstance()->Draw();
 }
 
 void SelectScene::Back2dSpriteDraw()

@@ -13,7 +13,7 @@ public:
 	Goal() {};
 	~Goal() {};
 
-	void Initialize();
+	void Initialize(uint32_t id, uint32_t index);
 
 	void Update();
 
@@ -21,12 +21,14 @@ public:
 
 	bool GetIsGoalFlag() { return isGoalFlag_; }
 
+
 private:
 
 	string portalName_ = "GoalPortal";
 	string backName_ = "GoalBack";
 
 	bool isGoalFlag_ = false;
+	uint32_t index_ = 0;
 
 	GameObjectManager* gameObjIncetance_ = nullptr;
 };

@@ -62,7 +62,9 @@ private:
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 
-	unique_ptr<Goal>goal_ = nullptr;
+	uint32_t portalMax_ = 5;
+	uint32_t portalCount_ = 0;
+	vector<unique_ptr<Goal>>goals_;
 
 
 	shared_ptr<BlockManager>blockManager_ = nullptr;

@@ -25,6 +25,8 @@ void GameScene::Initialize()
 	//3dObj
 	ParticlesInitialize();
 
+	GoalParticle::GetInstance()->Clear();
+
 	player_ = make_unique<PlayerManager>();
 	player_->GetData(GameObjectManager::GetInstance());
 
@@ -38,7 +40,7 @@ void GameScene::Initialize()
 	gravityManager_ = make_unique<GravityManager>();
 
 	goal_ = make_unique<Goal>();
-	goal_->Initialize();
+	goal_->Initialize(kGoalId,0);
 
 	//2dObj
 	startCount_ = make_unique<StartCount>();
@@ -245,6 +247,7 @@ void GameScene::ParticlesUpdate()
 {
 	characterDeadParticle_->Update();
 	characterMoveParticle_->Update();
+	GoalParticle::GetInstance()->Update();
 
 }
 

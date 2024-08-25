@@ -154,3 +154,25 @@ void GpuParticle::CallUavRootparam(uint32_t rootParamIndex)
 {
 	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(rootParamIndex, writeParticleBuf_->GetSrvIndex());
 }
+
+void Particle::GpuParticle::Clear()
+{
+
+	{//‰Šú‰»CS_Dispatch
+		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_INIT, "None");;
+		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
+		ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
+		commandList->SetDescriptorHeaps(1, heap);
+
+		commandList->SetComputeRootSignature(pso.rootSignature.Get());
+		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
+
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
+		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
+
+		UINT dispach = UINT(GetNum() / 1024);
+		commandList->Dispatch(dispach, 1, 1);
+	}
+	DirectXCommon::GetInstance()->CommandClosed();
+}

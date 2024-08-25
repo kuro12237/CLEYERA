@@ -21,9 +21,11 @@ namespace Particle {
 
 		void FieldDraw();
 
+		void AllClear();
+
 #pragma region Get
 
-		T &GetParam(uint32_t index) { return param_[index]; }
+		T& GetParam(uint32_t index) { return param_[index]; }
 
 #pragma endregion
 
@@ -96,8 +98,8 @@ namespace Particle {
 						ImGui::DragInt("use", &param_[index].use, 1);
 
 						ImGui::DragFloat3("sizeMin", &param_[index].sizeMin.x, 0.1f);
-						ImGui::DragFloat3("sizeMax", & param_[index].sizeMax.x, 0.1f);
-						ImGui::DragFloat("power", & param_[index].suctionPower, 0.1f);
+						ImGui::DragFloat3("sizeMax", &param_[index].sizeMax.x, 0.1f);
+						ImGui::DragFloat("power", &param_[index].suctionPower, 0.1f);
 						ImGui::TreePop();
 					}
 				}
@@ -110,6 +112,15 @@ namespace Particle {
 	template<typename T>
 	inline void ParticleField<T>::FieldDraw()
 	{
+	}
+
+	template<typename T>
+	inline void ParticleField<T>::AllClear()
+	{
+		for (size_t i = 0; i < max_; i++)
+		{
+			param_[i] = {};
+		}
 	}
 
 }

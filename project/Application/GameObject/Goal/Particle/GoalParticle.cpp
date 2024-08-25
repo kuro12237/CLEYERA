@@ -27,34 +27,6 @@ void GoalParticle::Initialize()
 	emitter_->CreateType(particle_);
 	field_->CreateType(name_ + "Suction");
 
-	//emit
-	float kParticleRadious = 2.0f;
-	uint32_t kSpownMax = 4;
-	float kParticleFrequencyTime = 0.1f;
-	float kParticleScale = 0.25f;
-	float kColorDecay = 0.02f;
-	Math::Vector::Vector4 kColor = ColorConverter::ColorConversion(0xffff00ff);
-
-	auto& emitter = GoalParticle::GetInstance()->GetEmitters()->GetEmitParam()[0];
-	auto& control = GoalParticle::GetInstance()->GetEmitters()->GetControlParam()[0];
-	control.useFlag_ = true;
-	control.frequencyTime = kParticleFrequencyTime;
-	emitter.count = kSpownMax;
-	emitter.radious = kParticleRadious;
-	emitter.scaleSizeMin = { kParticleScale, kParticleScale, kParticleScale };
-	emitter.scaleSizeMax = { kParticleScale,kParticleScale,kParticleScale };
-	emitter.colorDecayMax = { 0.0f,0.0f,0.0f,kColorDecay };
-	emitter.colorDecayMin = { 0.0f,0.0f,0.0f,kColorDecay };
-	emitter.color = kColor;
-
-	//fieldParticle
-	const float kSize = 8.0f;
-	float power = 0.05f;
-	auto& fieldParam = field_->GetParam(0);
-	fieldParam.use = 1;
-	fieldParam.sizeMax = { kSize,kSize,kSize };
-	fieldParam.sizeMin = { -kSize,-kSize,-kSize };
-	fieldParam.suctionPower = power;
 }
 
 void GoalParticle::ImGuiUpdate()

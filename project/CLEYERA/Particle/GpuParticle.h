@@ -41,6 +41,8 @@ namespace Particle {
 
 		void CallUavRootparam(uint32_t rootParamIndex);
 
+		void Clear();
+
 #pragma region Set
 
 		void SetTexhandle(uint32_t texHandle) { texHandle_ = texHandle; }
