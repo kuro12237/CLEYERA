@@ -1,8 +1,23 @@
 #include "BoxCollisionManager.h"
 
+void BoxCollisionManager::CollidersAllHitsIdsClear()
+{
+	for (auto* collider : colliders_) {
+		if (collider) {
+			collider->ClearAllHitsIds();
+		}
+	}
+}
+
 void BoxCollisionManager::ListClear()
 {
 	colliders_.clear();
+}
+
+void BoxCollisionManager::End()
+{
+	ListClear();
+	CollidersAllHitsIdsClear();
 }
 
 void BoxCollisionManager::ListPushback(ICollider* c)
@@ -23,13 +38,15 @@ void BoxCollisionManager::CheckAllCollisoin()
 		for (; itrB != colliders_.end(); ++itrB) {
 			ICollider* colliderB = *itrB;
 
-			AABB a = SettingAABBParam(colliderA);
-			AABB b = SettingAABBParam(colliderB);
-
-			if (colliderA->GetId() == colliderB->GetId())
+			// コリジョンフィルタリング
+			if ((colliderA->GetCollosionAttribute() & colliderB->GetCollisionMask()) == 0 ||
+				(colliderA->GetCollisionMask() & colliderB->GetCollosionAttribute()) == 0)
 			{
 				continue;
 			}
+
+			AABB a = SettingAABBParam(colliderA);
+			AABB b = SettingAABBParam(colliderB);
 
 			if (IsCollision(a, b))
 			{
@@ -40,7 +57,11 @@ void BoxCollisionManager::CheckAllCollisoin()
 				CheckExtrusion(colliderA, colliderB);
 
 				colliderA->OnCollision(colliderB);
+				colliderA->PushAllHitsIds(colliderB->GetId());
+
 				colliderB->OnCollision(colliderA);
+				colliderB->PushAllHitsIds(colliderA->GetId());
+
 			}
 		}
 	}

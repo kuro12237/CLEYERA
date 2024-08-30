@@ -5,17 +5,18 @@ class BoxCollisionManager
 {
 public:
 	BoxCollisionManager() {};
-	~BoxCollisionManager() {};
+	~BoxCollisionManager() { End(); }
 
-	void ListClear();
+	void End();
 
 	void ListPushback(ICollider* c);
 
 	void CheckAllCollisoin();
 
-
-
 private:
+
+	void CollidersAllHitsIdsClear();
+	void ListClear();
 
 	float CalculateAngle(float x, float y);
 	float NomalizeDegree(float theta);

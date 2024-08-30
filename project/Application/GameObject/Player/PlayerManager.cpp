@@ -73,12 +73,8 @@ void PlayerManager::Update()
 		PushBullet(playerWorldPos);
 	}
 
+	CheckDamage();
 
-	//hp
-	if (playerCore_->isDamageFlag())
-	{
-		hp_->GetHp()--;
-	}
 	hp_->Update();
 
 	//Main
@@ -188,5 +184,25 @@ void PlayerManager::CheckisDeadBullets()
 			GameObjectManager::GetInstance()->ClearObj3dData(bullets_[index]->GetName());
 			bullets_[index].reset();
 		}
+	}
+}
+
+void PlayerManager::CheckDamage()
+{
+	//hp
+	if (playerCore_->isDamageFlag())
+	{
+		hp_->GetHp()--;
+	}
+	GameObjectManager* gameObjectInstance_ = GameObjectManager::GetInstance();
+	auto& transform = gameObjectInstance_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().transform;
+	if (transform.translate.y <= 0.0f)
+	{
+		playerCore_->isDamageFlag() = true;
+		playerCore_->isInvincible() = true;
+		playerCore_->ResetPos();
+
+		hp_->GetHp()--;
+
 	}
 }

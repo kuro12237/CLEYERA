@@ -52,6 +52,8 @@ private:
 
 	void Gravitys();
 
+	bool CheckLoadScene();
+
 	CameraData camera_ = {};
 
 	shared_ptr<LevelData> levelData_ = nullptr;
@@ -63,8 +65,7 @@ private:
 	unique_ptr<PlayerManager>player_ = nullptr;
 
 	uint32_t portalMax_ = 5;
-	uint32_t portalCount_ = 0;
-	vector<unique_ptr<Goal>>goals_;
+	vector<shared_ptr<Goal>>goals_;
 
 
 	shared_ptr<BlockManager>blockManager_ = nullptr;

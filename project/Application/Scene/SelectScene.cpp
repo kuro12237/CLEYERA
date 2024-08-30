@@ -23,13 +23,14 @@ void SelectScene::Initialize()
 	player_->GetData(gameObjectManager_);
 
 	goals_.resize(portalMax_);
-	for (size_t index = 0; index < portalMax_; index++)
+	
+	for (size_t portalIndex = 0; portalIndex < portalMax_; portalIndex++)
 	{
-		unique_ptr<Goal>goal = make_unique<Goal>();
+		shared_ptr<Goal>goal = make_shared<Goal>();
 
-		goals_[portalCount_] = make_unique<Goal>();
-		goals_[portalCount_]->Initialize(kGoalId,uint32_t(index));
-		portalCount_++;
+		goals_[portalIndex] = make_shared<Goal>();
+		goals_[portalIndex]->Initialize(kPortalIds[portalIndex], uint32_t(portalIndex));
+
 	}
 
 	blockManager_ = make_shared<BlockManager>();
@@ -90,7 +91,8 @@ void SelectScene::Update(GameManager* Scene)
 	Collision();
 
 	gameObjectManager_->Update();
-	if (Input::PushBottonPressed(XINPUT_GAMEPAD_B))
+
+	if (CheckLoadScene())
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 		player_->SetStartFlag(false);
@@ -101,6 +103,9 @@ void SelectScene::Update(GameManager* Scene)
 		Scene->ChangeState(new GameScene);
 		return;
 	}
+
+	gameCollisionManager_->End();
+
 }
 
 void SelectScene::PostProcessDraw()
@@ -127,22 +132,27 @@ void SelectScene::Flont2dSpriteDraw()
 
 void SelectScene::Collision()
 {
-	gameCollisionManager_->ListClear();
-
+    //プレイヤー本体
 	if (!player_->GetPlayerCore()->GetIsGoal())
 	{
 		gameCollisionManager_->ListPushback(player_->GetPlayerCore());
 	}
+	//playerの弾
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)
 	{
 		if (player_->GetBullet()[index]) {
 			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
 		}
 	}
-
+	//ブロック
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
 		gameCollisionManager_->ListPushback(b.get());
+	}
+	//portal
+	for (shared_ptr<Goal>g : goals_)
+	{
+		gameCollisionManager_->ListPushback(g.get());
 	}
 
 	gameCollisionManager_->CheckAllCollisoin();
@@ -159,4 +169,27 @@ void SelectScene::Gravitys()
 	}
 
 	gravityManager_->CheckGravity();
+}
+
+bool SelectScene::CheckLoadScene()
+{
+	bool changeFlag = false;
+
+	//プレイヤーと当たったidがportalIdが一致していた場合
+	queue<uint32_t>allHitIds = player_->GetPlayerCore()->GetAllHitIds();
+	size_t size = allHitIds.size();
+	
+	for (size_t id = 0; id < size; id++)
+	{
+		uint32_t hitId = allHitIds.front();
+		allHitIds.pop();
+		for (size_t portalCount = 0; portalCount < portalMax_; portalCount++)
+		{
+			if (hitId == kPortalIds[portalCount])
+			{
+				changeFlag = true;
+			}
+		}
+	}
+	return changeFlag;
 }

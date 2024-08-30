@@ -794,6 +794,7 @@
     <ClInclude Include="Application\GameObject\Player\Hp\PlayerHp.h" />
     <ClInclude Include="Application\GameObject\UI\GameUI.h" />
     <ClInclude Include="Application\Scene\SelectScene.h" />
+    <ClInclude Include="Application\Utility\CollisionMask\CollisionMask.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

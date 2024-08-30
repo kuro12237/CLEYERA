@@ -11,6 +11,8 @@ void Block::Initialize(string name, uint32_t index)
 
 	SetUvScale({ 0.0f,0.0f,10.0f });
 	id_ = kNormalBlock;
+	attribute_ = CollisionMask::kBlockAttribute;
+	mask_ = CollisionMask::kBlockMask;
 }
 
 void Block::Update()

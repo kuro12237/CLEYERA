@@ -16,10 +16,10 @@ public:
 	void ImGuiUpdate();
 
 	void Update();
-
+	
 	void Draw();
 
-	void Clear() { emitter_->AllClear(), field_->AllClear(); }
+	void Clear() {particle_->Clear(), emitter_->AllClear(), field_->AllClear(); }
 
 	Particle::ParticleEmitter<Particle::EmitType::Circle>* GetEmitters() { return emitter_.get(); }
 	Particle::GpuParticle* GetParticle() {return  particle_.get(); }

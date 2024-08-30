@@ -22,6 +22,8 @@ void PlayerBullet::Initialize(string number)
 	velocity_ = Math::Vector::Multiply(velocity_, { speed_,speed_,speed_ });
 	id_ = kPlayerBullet;
 	aabb_ = { {-0.1f,-0.1f,-0.1f,},{0.1f,0.1f,0.1f} };
+	attribute_ = CollisionMask::kPlayerBulletAttribute;
+	mask_ = CollisionMask::kPlayerBulletMask;
 }
 
 void PlayerBullet::Update()
@@ -29,7 +31,7 @@ void PlayerBullet::Update()
 	state_->Update(this);
 
 	timer_++;
-	if (timer_ >= 360) {
+	if (timer_ >= timerMax_) {
 		isDead_ = true;
 	}
 

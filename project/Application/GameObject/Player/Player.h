@@ -54,12 +54,15 @@ public:
 
 	bool GetIsShoot() { return isShoot_; }
 
-	bool &GetIsGameEnd() { return isGameEnd_;}
+	bool& GetIsGameEnd() { return isGameEnd_; }
 
 	bool GetIsGoal() { return isGoal_; }
 
-	bool isDamageFlag() { return isDamage_; }
-
+	bool& isDamageFlag() { return isDamage_; }
+	bool& isInvincible() { return isInvincible_; }
+	void ResetPos() {
+		gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform.translate = resetPos_;
+	}
 #pragma endregion
 
 #pragma region Set
@@ -76,7 +79,7 @@ private:
 
 	void ShootCoolTimer();
 
-	void ControlDeadZone(Math::Vector::Vector2 &v);
+	void ControlDeadZone(Math::Vector::Vector2& v);
 
 	unique_ptr<IPlayerState>state_ = nullptr;
 
@@ -105,4 +108,5 @@ private:
 	SAnimation::Animation walkAnimationData_;
 
 	uint32_t particleMoveIndex_ = 0;
+	Math::Vector::Vector3 resetPos_ = {};
 };

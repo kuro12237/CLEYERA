@@ -1,6 +1,7 @@
 #pragma once
 #include"GameObject/ObjectManager/IObjectData.h"
 #include"Utility/CollisionManager/CollisionStructures/CollisionStructures.h"
+#include"Utility/CollisionMask/CollisionMask.h"
 
 enum HItDirection {
 	NONE,
@@ -23,6 +24,8 @@ public:
 
 	void ClearHitDirection() { hitDirection_.clear(); }
 
+	void ClearAllHitsIds();
+
 	void PushBackHitDirection(HItDirection h) { hitDirection_.push_back(h); }
     
 #pragma region  Get
@@ -36,6 +39,11 @@ public:
 	bool GetIsExtrusionFlag() { return isExtrusion_; }
 
 	uint32_t GetId() { return id_; }
+	uint32_t GetCollosionAttribute() { return attribute_; }
+	uint32_t GetCollisionMask() { return mask_; }
+
+
+	queue<uint32_t> GetAllHitIds() { return allHitIds; }
 
 #pragma endregion
 
@@ -51,6 +59,8 @@ public:
 		Math::Vector::Vector3 va = Math::Vector::Add({ extrusion_.x, extrusion_.y, 0.0f }, { v.x,v.y,0.0f });
 		extrusion_.x = va.x, extrusion_.y = va.y;
 	}
+
+	void PushAllHitsIds(uint32_t id) { allHitIds.push(id); }
 
 #pragma endregion
 
@@ -70,6 +80,6 @@ protected:
 private:
 
 	const TransformEular* pTransform_;
-
+	queue<uint32_t>allHitIds;
 
 };

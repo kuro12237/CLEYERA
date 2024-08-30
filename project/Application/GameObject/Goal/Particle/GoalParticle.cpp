@@ -18,7 +18,7 @@ void GoalParticle::Initialize()
 	emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::Circle>>();
 	field_ = make_unique<Particle::ParticleField<Particle::FieldType::FieldSuction>>();
 	name_ = "GoalParticle";
-	particle_->Create(1, name_);
+	particle_->Create(3, name_);
 
 	texHandle_ = TextureManager::LoadPngTexture("circle.png");
 	particle_->SetTexhandle(texHandle_);
@@ -40,6 +40,7 @@ void GoalParticle::Update()
 	particle_->CallBarrier();
 	emitter_->Update();
 	emitter_->Emit(particle_);
+	particle_->CallBarrier();
 	field_->Update();
 	field_->Dispach(particle_.get());
 	particle_->CallBarrier();

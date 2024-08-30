@@ -120,6 +120,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		Scene->ChangeState(new TitleScene);
 		return;
 	}
+	gameCollisionManager_->End();
+
 }
 
 void GameScene::PostProcessDraw()
@@ -183,8 +185,6 @@ void GameScene::ImGuiUpdate()
 
 void GameScene::Collision()
 {
-	gameCollisionManager_->ListClear();
-
 	if (!player_->GetPlayerCore()->GetIsGoal())
 	{
 		gameCollisionManager_->ListPushback(player_->GetPlayerCore());

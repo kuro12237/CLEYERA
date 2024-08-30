@@ -209,6 +209,7 @@
     <ClInclude Include="Application\Scene\IScene.h" />
     <ClInclude Include="Application\Scene\SelectScene.h" />
     <ClInclude Include="Application\Scene\TitleScene.h" />
+    <ClInclude Include="Application\Utility\CollisionMask\CollisionMask.h" />
     <ClInclude Include="Application\Utility\ObjectId\GameObjectId.h" />
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />
     <ClInclude Include="CLEYERA\Animation\SAnimation.h" />

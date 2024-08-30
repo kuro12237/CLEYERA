@@ -5,20 +5,25 @@ void Player::Initialize()
 	gameObjectInstance_ = GameObjectManager::GetInstance();
 	name_ = "Player";
 
-	//押し出し
-	this->isExtrusion_ = true;
 	//状態異常のステート
 	state_ = make_unique<PlayerStateNone>();
 	state_->Initialize(this);
 	//id設定
 	id_ = kPlayerId;
 	//当たり判定
+	//押し出し
+	this->isExtrusion_ = true;
 	SetObjectData(gameObjectInstance_->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
 	aabb_ = gameObjectInstance_->GetObj3dData(name_)->GetAABB();
+	attribute_ = CollisionMask::kPlayerAttribute;
+	mask_ = CollisionMask::kPlayerMask;
+
 	//スケール値セット
 	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	const float kScale = 0.4f;
 	transform.scale = { kScale,kScale,kScale };
+	//スタート入りの記録
+	resetPos_ = transform.translate;
 
 	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetMOdelFilePath();
 	AnimationManager::GetInstance()->LoadAnimation(filePath);

@@ -53,6 +53,8 @@ private:
 
 	void CheckisDeadBullets();
 
+	void CheckDamage();
+
 	bool gameStartFlag_ = false;
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
