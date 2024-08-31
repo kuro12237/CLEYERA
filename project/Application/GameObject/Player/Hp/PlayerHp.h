@@ -11,6 +11,8 @@ public:
 
 	void Update();
 
+	void ImGuiUpdate();
+
 	void Draw2d();
 
 	int32_t &GetHp() { return hpCount_; }

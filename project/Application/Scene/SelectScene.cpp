@@ -2,6 +2,10 @@
 
 void SelectScene::Initialize()
 {
+	WinApp::GetInstance()->SetTiTleName(L"GunHead");
+	PostEffect::GetInstance()->Initialize();
+	ChangeSceneAnimation::GetInstance()->Initialize();
+
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
 

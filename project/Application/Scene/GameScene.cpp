@@ -40,7 +40,7 @@ void GameScene::Initialize()
 	gravityManager_ = make_unique<GravityManager>();
 
 	goal_ = make_unique<Goal>();
-	goal_->Initialize(kGoalId,0);
+	goal_->Initialize(kGoalId, 0);
 
 	//2dObj
 	startCount_ = make_unique<StartCount>();
@@ -67,7 +67,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 #endif // _USE_IMGUI
 
-	
+
 	ChangeSceneAnimation::GetInstance()->Update();
 
 	//ƒV[ƒ“Ø‘Ö‚ªI‚í‚Á‚½‚ç
@@ -115,9 +115,17 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		player_->SetStartFlag(false);
 	}
 
+	if (player_->GetHp()->GetHp() <= 0)
+	{
+		ChangeSceneAnimation::GetInstance()->ChangeStart();
+		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
+		enemyWalkManager_->SetStatFlag(false);
+		player_->SetStartFlag(false);
+	}
+
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
-		Scene->ChangeState(new TitleScene);
+		Scene->ChangeState(new SelectScene);
 		return;
 	}
 	gameCollisionManager_->End();
@@ -130,7 +138,7 @@ void GameScene::PostProcessDraw()
 	gameObjectManager_->Draw();
 
 	ParticlesDraw();
-	
+
 }
 
 void GameScene::Back2dSpriteDraw()
@@ -145,6 +153,7 @@ void GameScene::Object3dDraw()
 void GameScene::Flont2dSpriteDraw()
 {
 	player_->Draw2d();
+	player_->DrawHp();
 	startCount_->Draw2d();
 	ChangeSceneAnimation::GetInstance()->Draw();
 }
@@ -260,7 +269,7 @@ void GameScene::ParticlesDraw()
 
 void GameScene::ParticleImGuiUpdate()
 {
-	if(ImGui::TreeNode("Particles"))
+	if (ImGui::TreeNode("Particles"))
 	{
 		GoalParticle::GetInstance()->ImGuiUpdate();
 		characterDeadParticle_->ImGuiUpdate();

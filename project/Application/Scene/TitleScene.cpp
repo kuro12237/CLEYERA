@@ -2,15 +2,14 @@
 
 void TitleScene::Initialize()
 {
-
 	camera_.Initialize();
-
 	camera_.UpdateMatrix();
 	CameraManager::GetInstance()->ResetCamera(camera_);
 
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");
 	PostEffect::GetInstance()->Initialize();
 	ChangeSceneAnimation::GetInstance()->Initialize();
+
 	gameObj_ = make_unique<Game3dObject>();
 	gameObj_->Create(make_unique<Phong3dPipline>());
 	gameObj_->SetModel(ModelManager::LoadObjectFile("DfCube"));

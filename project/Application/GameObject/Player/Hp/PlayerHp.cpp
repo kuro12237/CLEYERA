@@ -56,6 +56,19 @@ void PlayerHp::Update()
 	flameNameWorldTransform_.UpdateMatrix();
 }
 
+void PlayerHp::ImGuiUpdate()
+{
+	if (ImGui::TreeNode("hp"))
+	{
+		if (ImGui::Button("Subtruct"))
+		{
+			this->hpCount_--;
+
+		}
+		ImGui::TreePop();
+	}
+}
+
 void PlayerHp::Draw2d()
 {
 	for (size_t i = 0; i < hpCount_; i++)

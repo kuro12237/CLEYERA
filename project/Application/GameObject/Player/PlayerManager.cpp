@@ -37,6 +37,7 @@ void PlayerManager::ImGuiUpdate()
 	{
 		playerCore_->ImGuiUpdate();
 		reticle_->ImGuiUpdate();
+		hp_->ImGuiUpdate();
 
 		ImGui::Text("PlayerBulletSize::%d", bullets_.size());
 		if (ImGui::Button("bulleSpown"))
@@ -107,8 +108,12 @@ void PlayerManager::Update()
 
 void PlayerManager::Draw2d()
 {
-	hp_->Draw2d();
 	reticle_->Draw2d();
+}
+
+void PlayerManager::DrawHp()
+{
+	hp_->Draw2d();
 }
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)

@@ -26,6 +26,7 @@ public:
 	void Update();
 
 	void Draw2d();
+	void DrawHp();
 
 #pragma region Get
 
@@ -36,6 +37,8 @@ public:
 	PlayerGun* GetGun() { return gun_.get(); }
 
 	PlayerCamera* GetCamera(){ return camera_.get(); }
+
+	PlayerHp* GetHp() { return hp_.get(); }
 
 	vector<shared_ptr<PlayerBullet>>GetBullet() { return bullets_; }
 #pragma endregion
