@@ -6,6 +6,12 @@ void SelectScene::Initialize()
 	PostEffect::GetInstance()->Initialize();
 	ChangeSceneAnimation::GetInstance()->Initialize();
 
+	//SkyBoxÝ’è
+	const float kSkyBoxScale = 256.0f;
+	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale,kSkyBoxScale,kSkyBoxScale},{},{} });
+	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/navyBlue.dds");
+	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
+
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
 
@@ -41,9 +47,7 @@ void SelectScene::Initialize()
 	blockManager_->Initialize();
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
-	//SkyBox
-	const float kSkyBoxScale = 256.0f;
-	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale,kSkyBoxScale,kSkyBoxScale},{},{} });
+	
 	light_.radious = 512.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;

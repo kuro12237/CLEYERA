@@ -18,9 +18,6 @@ void GameScene::Initialize()
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 
-	//SkyBox
-	const float kSkyBoxScale = 256.0f;
-	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale,kSkyBoxScale,kSkyBoxScale},{},{} });
 
 	//3dObj
 	ParticlesInitialize();
@@ -51,8 +48,6 @@ void GameScene::Initialize()
 
 	LightingManager::AddList(light_);
 
-	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/navyBlue.dds");
-	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
