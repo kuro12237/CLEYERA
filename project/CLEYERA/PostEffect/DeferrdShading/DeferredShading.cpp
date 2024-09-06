@@ -153,8 +153,8 @@ void DefferredShading::Draw()
 	DescriptorManager::rootParamerterCommand(5, depthTexBuffer_->GetSrvIndex());
 
 
-	CameraManager::GetInstance()->CommandCall(6);
-	CameraManager::GetInstance()->CommandCall(7);
+	CameraManager::GetInstance()->PsCommandCall(6);
+	CameraManager::GetInstance()->VsCommandCall(7);
 	//DescriptorManager::rootParamerterCommand(8, LightingManager::dsvHandle());
 	//m_pList->SetGraphicsRootConstantBufferView(9, LightingManager::GetBuffer()->GetGPUVirtualAddress());
 	DirectionalLight::CommandCall(10);

@@ -1,8 +1,8 @@
 #include"PhongObject3d.hlsli"
 
 ConstantBuffer<Material> gMaterial : register(b0);
-ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
-ConstantBuffer<NowLightTotal> gNowLightTotal : register(b4);
+ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
+ConstantBuffer<NowLightTotal> gNowLightTotal : register(b2);
 
 StructuredBuffer<PointLight> gPointLight : register(t0);
 Texture2D<float32_t4> gTexture : register(t1);

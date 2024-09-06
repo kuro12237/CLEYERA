@@ -34,16 +34,21 @@ void CameraData::CreateBuffer()
 {
 	buffer_ = make_shared<BufferResource<TransformationViewMatrix>>();
 	buffer_->CreateResource(1);
+
+	psBuffer_ = make_shared<BufferResource<TransformationViewMatrix>>();
+	psBuffer_->CreateResource(1);
 }
 
 void CameraData::Map()
 {
 	buffer_->Map();
+	psBuffer_->Map();
 }
 
 void CameraData::UnMap()
 {
 	buffer_->UnMap();
+	psBuffer_->UnMap();
 }
 
 void CameraData::TransfarMatrix()
@@ -62,5 +67,6 @@ void CameraData::TransfarMatrix()
 	BufferMatrix_.InverseProjection = matProjInverse_;
 
 	buffer_->Setbuffer(BufferMatrix_);
+	psBuffer_->Setbuffer(BufferMatrix_);
 	UnMap();
 }

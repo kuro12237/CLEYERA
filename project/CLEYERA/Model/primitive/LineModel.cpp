@@ -55,7 +55,7 @@ void LineModel::CommandCall()
 	vertex_->CommandVertexBufferViewCall();
 	material_->CommandCall(0);
 
-	CameraManager::GetInstance()->CommandCall(1);
+	CameraManager::GetInstance()->VsCommandCall(1);
 	worldMat_->CommandCall(2);
 	DescriptorManager::GetInstance()->rootParamerterCommand(3, verticesBuf_->GetSrvIndex());
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);

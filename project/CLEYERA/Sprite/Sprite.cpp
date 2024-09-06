@@ -134,7 +134,7 @@ void Sprite::CommandCall(const WorldTransform &worldTransform)
 	//worldTransform‚Ìs—ñ‚ðgpu‚Ö
 	worldTransform.buffer_->CommandCall(1);
 	//views—ñ‚ðgpu
-	CameraManager::GetInstance()->CommandCall(2);
+	CameraManager::GetInstance()->VsCommandCall(2);
 	if (!texHandle_ == 0)
 	{
 		DescriptorManager::rootParamerterCommand(3, texHandle_);

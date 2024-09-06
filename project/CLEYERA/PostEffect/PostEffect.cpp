@@ -133,8 +133,8 @@ void PostEffect::Draw()
 
 	DirectionalLight::CommandCall(7);
 	//view
-	CameraManager::GetInstance()->CommandCall(8);
-	CameraManager::GetInstance()->CommandCall(9);
+	CameraManager::GetInstance()->PsCommandCall(8);
+	CameraManager::GetInstance()->VsCommandCall(9);
 
 	DescriptorManager::rootParamerterCommand(10, albedBuf_->GetSrvIndex());
 

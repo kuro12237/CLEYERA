@@ -10,6 +10,7 @@ struct CameraData {
 	~CameraData() {};
 
 	shared_ptr<BufferResource<TransformationViewMatrix>>buffer_ = nullptr;
+	shared_ptr<BufferResource<TransformationViewMatrix>>psBuffer_ = nullptr;
 
 	/// <summary>
 	/// GPUに送る用

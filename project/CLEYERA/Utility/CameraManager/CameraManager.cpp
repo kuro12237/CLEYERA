@@ -16,7 +16,12 @@ void CameraManager::Update()
 
 }
 
-void CameraManager::CommandCall(uint32_t num)
+void CameraManager::PsCommandCall(const uint32_t& num)
+{
+	cameraData_->psBuffer_->CommandCall(num);
+}
+
+void CameraManager::VsCommandCall(const uint32_t &num)
 {
 	cameraData_->buffer_->CommandCall(num);
 }

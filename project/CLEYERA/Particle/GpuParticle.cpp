@@ -132,8 +132,8 @@ void GpuParticle::Draw()
 	indexBuf_->CommandIndexBufferViewCall();
 	DescriptorManager::GetInstance()->rootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
 	DescriptorManager::GetInstance()->rootParamerterCommand(1, writeParticleBuf_->GetSrvIndex());
-	CameraManager::GetInstance()->CommandCall(2);
-	CameraManager::GetInstance()->CommandCall(3);
+	CameraManager::GetInstance()->PsCommandCall(2);
+	CameraManager::GetInstance()->VsCommandCall(3);
 	DescriptorManager::GetInstance()->rootParamerterCommand(4, texHandle_);
 
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

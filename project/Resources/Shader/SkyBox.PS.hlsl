@@ -1,7 +1,7 @@
 #include"SkyBox.hlsli"
 
 ConstantBuffer<Material> gMaterial : register(b0);
-ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
+ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
 
 TextureCube<float32_t4> gTexture : register(t1);
 SamplerState gSampler : register(s0);

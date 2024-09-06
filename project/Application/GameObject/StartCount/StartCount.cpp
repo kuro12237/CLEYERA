@@ -12,7 +12,7 @@ void StartCount::Initialize()
 
 	//init
 	numberSprite_ = make_unique<Sprite>();
-	numberSprite_->Initialize({numberTexSize.x * -0.5f,numberTexSize.y * -0.5f });
+	numberSprite_->Initialize({ numberTexSize.x * -0.5f,numberTexSize.y * -0.5f });
 	numberSprite_->SetTexHandle(numberTex_);
 	numberSprite_->SetSize(numberTexSize);
 	numberSprite_->SetSrc({ 0.0f,0.0f }, { 0.0f,1.0f }, { 0.25f,0.0f }, { 0.25f,1.0f });
@@ -95,7 +95,7 @@ void StartCount::Initialize()
 		wt.Initialize();
 		const float kScale = 0.25f;
 		wt.transform.scale = { kScale / 2.0f,kScale / 2.0f,1.0f };
-		float angle = float(i) * 2.0f * float(numbers::pi) / float(BarMax);
+		float angle = float(i) * 2.0f * float(numbers::pi) / float(BarMax) - float(numbers::pi) / 2.0f;
 
 		wt.transform.rotate.z = angle + float(numbers::pi) / 2.0f;
 		wt.transform.translate.x = center.x + radius * cos(angle);

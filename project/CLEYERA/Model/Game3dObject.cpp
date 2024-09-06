@@ -57,8 +57,8 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	//行列
 	worldTransform.buffer_->CommandCall(1);
 	//カメラ
-	CameraManager::GetInstance()->CommandCall(2);
-	CameraManager::GetInstance()->CommandCall(3);
+	CameraManager::GetInstance()->PsCommandCall(2);
+	CameraManager::GetInstance()->VsCommandCall(3);
 	//4.5を使用
 	LightingManager::GetInstance()->CallCommand();
 	//テクスチャ

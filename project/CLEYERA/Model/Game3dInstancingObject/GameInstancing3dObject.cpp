@@ -64,8 +64,8 @@ void GameInstancing3dObject::Draw()
 
 	material_->CommandCall(0);
 	DescriptorManager::rootParamerterCommand(1, instancing_->GetSrvIndex());
-	CameraManager::GetInstance()->CommandCall(2);
-	CameraManager::GetInstance()->CommandCall(3);
+	CameraManager::GetInstance()->PsCommandCall(2);
+	CameraManager::GetInstance()->VsCommandCall(3);
 
 	LightingManager::GetInstance()->CallCommand();
 	DescriptorManager::rootParamerterCommand(6, texHandle_);

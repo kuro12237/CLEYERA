@@ -13,7 +13,8 @@ public:
 
 	void Update();
 
-	void CommandCall(uint32_t num);
+	void PsCommandCall(const uint32_t &num);
+	void VsCommandCall(const uint32_t &num);
 
 	void ResetCamera(const CameraData& camera);
 

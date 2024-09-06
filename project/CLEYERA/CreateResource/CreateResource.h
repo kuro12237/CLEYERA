@@ -185,6 +185,7 @@ struct  Material
 	
 	float dissolveMask = 0.0f;
 	Math::Vector::Vector2 dissolveEdgeMinMax = {};
+	float pad1;
 	Math::Vector::Vector4 dissolveEdgeColor = { 1.0f,1.0f,1.0f,1.0f };
 };
 

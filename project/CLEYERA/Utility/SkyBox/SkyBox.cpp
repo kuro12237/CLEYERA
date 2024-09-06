@@ -51,8 +51,8 @@ void SkyBox::Draw()
 
 	cMaterial_->CommandCall(0);
 	worldTransform_.buffer_->CommandCall(1);
-	CameraManager::GetInstance()->CommandCall(2);
-	CameraManager::GetInstance()->CommandCall(3);
+	CameraManager::GetInstance()->PsCommandCall(2);
+	CameraManager::GetInstance()->VsCommandCall(3);
 	LightingManager::GetInstance()->CallCommand();
 	DescriptorManager::rootParamerterCommand(6, texHandle_);
 	command->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

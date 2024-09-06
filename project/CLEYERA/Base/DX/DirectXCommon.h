@@ -4,7 +4,7 @@
 #include"LogManager.h"
 
 #define RTV_DESCRIPTOR_MAX 32
-#define SRV_DESCRIPTOR_MAX 6400
+#define SRV_DESCRIPTOR_MAX 64000
 #define DSV_DESCRIPTOR_MAX 32
 
 struct D3DResourceLeakChecker {
