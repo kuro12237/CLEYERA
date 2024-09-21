@@ -23,6 +23,7 @@ void GraphicsPipelineManager::Initialize()
 	piplines_[SPRITE_2d]["Multiply"] = Sprite_2d_CreatePipline::GetInstance()->CreateMultiply(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
 	piplines_[SPRITE_2d]["Screen"] = Sprite_2d_CreatePipline::GetInstance()->CreateScreen(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
 	piplines_[SPRITE_2d]["DissolveNone"] = Sprite_2d_CreatePipline::GetInstance()->CreateDissolveNone(shaderInstance->GetShaders(Shader::SPRITE_2d, "Dissolve"));
+	piplines_[SPRITE_2d]["PerlinNoise"] = Sprite_2d_CreatePipline::GetInstance()->CreatePerlinNoise(shaderInstance->GetShaders(Shader::SPRITE_2d, "PerlinNoise"));
 	LogManager::CompliteLog("Sprite2dPSO");
 
 	//3d

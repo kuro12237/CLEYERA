@@ -71,5 +71,6 @@ enum  SpriteMode
 	BlendSubtruct,
 	BlendMultiply,
 	BlendScreen,
-	DissolveNone
+	DissolveNone,
+	PerlineNoise
 };

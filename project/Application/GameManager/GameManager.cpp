@@ -4,7 +4,7 @@ GameManager::GameManager()
 {
 	Cleyera::Initialize();
 
-	Scene_ = new  SelectScene();
+	Scene_ = new  TitleScene();
 	Scene_->Initialize();
 }
 

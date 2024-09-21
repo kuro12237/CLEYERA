@@ -259,9 +259,10 @@ SPSOProperty CreateGpuParticle::CreateGpuParticle_AddDraw(ComPtr<ID3D12Device> d
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
+
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
+	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 	//rootsignature作成
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 

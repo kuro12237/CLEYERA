@@ -100,6 +100,11 @@ SPSOProperty Sprite::Get2dSpritePipeline(Sprite* state)
 		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
 		DescriptorManager::rootParamerterCommand(4, noiseTexHandle_);
 		break;
+	case PerlineNoise:
+		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "PerlinNoise");
+		commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
+		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+		break;
 	default:
 		break;
 	}

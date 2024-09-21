@@ -25,7 +25,7 @@ RWStructuredBuffer<Particle> gParticle : register(u0);
 void main(uint3 DTid : SV_DispatchThreadID, uint Gid : SV_GroupID)
 {
     uint32_t index = DTid.x;
-
+ 
    // ŠeFieldSuction‚É‘Î‚µ‚Äˆ—‚ğs‚¤
     for (uint32_t i = 0; i < FildMax; ++i)
     {

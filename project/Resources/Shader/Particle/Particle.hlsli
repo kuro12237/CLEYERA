@@ -1,4 +1,4 @@
-#include"RandomGenerator.hlsli"
+#include"../Random/RandomGenerator.hlsli"
 
 struct VertexShaderInput
 {

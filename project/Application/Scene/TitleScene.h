@@ -58,4 +58,7 @@ private:
 	PointLight_param light_{};
 	unique_ptr<Game3dObject>gameObj_ = nullptr;
 	WorldTransform worldTransform_ = {};
+
+	unique_ptr<Sprite>backTestSprite_ = nullptr;
+	WorldTransform backTestSpriteWt_{};
 };

@@ -264,8 +264,9 @@
     <None Include="Resources\Shader\SkyBox.hlsli" />
     <None Include="Resources\Shader\Particle\Particle.hlsli" />
     <None Include="Resources\Shader\Particle\MatrixFanc.hlsli" />
-    <None Include="Resources\Shader\Particle\RandomGenerator.hlsli" />
+    <None Include="Resources\Shader\Random\RandomGenerator.hlsli" />
     <None Include="Resources\Shader\Phong\PhongObject3d.hlsli" />
+    <None Include="Resources\Shader\PerlinNoise\PerlineNoise.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -871,5 +872,6 @@
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeCircleGoal.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Suction.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Phong\PhongBase.GS.hlsl" />
+    <FxCompile Include="Resources\Shader\Sprite2d\SpriteObject2d_PerlinNoise.PS.hlsl" />
   </ItemGroup>
 </Project>

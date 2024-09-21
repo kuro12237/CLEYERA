@@ -15,7 +15,15 @@ void TitleScene::Initialize()
 	gameObj_->SetModel(ModelManager::LoadObjectFile("DfCube"));
 	worldTransform_.Initialize();
 	worldTransform_.transform.translate.z = 16.0f;
+	
+	backTestSprite_ = make_unique<Sprite>();
+	backTestSprite_->Initialize();
+	backTestSprite_->SetSpriteMode(PerlineNoise);
 
+	backTestSpriteWt_.Initialize();
+	TextureManager::UnUsedFilePath();
+	uint32_t texHandle = TextureManager::LoadPngTexture("Resources/Default/uvChecker.png");
+	backTestSprite_->SetTexHandle(texHandle);
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -34,6 +42,8 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 	}
+
+	backTestSpriteWt_.UpdateMatrix();
 	worldTransform_.UpdateMatrix();
 	camera_.UpdateMatrix();
 	PostEffect::GetInstance()->Update();
@@ -60,6 +70,8 @@ void TitleScene::Object3dDraw()
 
 void TitleScene::Flont2dSpriteDraw()
 {
+	backTestSprite_->Draw(backTestSpriteWt_);
+
 	ChangeSceneAnimation::GetInstance()->Draw();
 
 }

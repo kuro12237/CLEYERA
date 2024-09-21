@@ -18,6 +18,7 @@ public:
 	SPSOProperty CreateScreen(SShaderMode shader);
 
 	SPSOProperty CreateDissolveNone(SShaderMode shader);
+	SPSOProperty CreatePerlinNoise(SShaderMode shader);
 
 private:
 	ComPtr<ID3D12Device>device = nullptr;

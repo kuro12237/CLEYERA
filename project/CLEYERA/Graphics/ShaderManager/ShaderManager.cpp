@@ -112,7 +112,15 @@ void ShaderManager::ShaderComples()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Sprite2d/SpriteObject2d_Dissolve.PS.hlsl",
 			L"ps_6_0");
-
+	//PerlineNoise
+	instance->shaders[Shader::SPRITE_2d]["PerlinNoise"].vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Sprite2d/SpriteObject2d.VS.hlsl",
+			L"vs_6_0");
+	instance->shaders[Shader::SPRITE_2d]["PerlinNoise"].pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Sprite2d/SpriteObject2d_PerlinNoise.PS.hlsl",
+			L"ps_6_0");
 
 	ShapeShader();
 	Sprite3dShader();
