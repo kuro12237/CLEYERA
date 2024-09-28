@@ -172,17 +172,19 @@ struct  Material
 {
 	Math::Vector::Vector4 color = { 1,1,1,1 };
 	Math::Matrix::Matrix4x4 uvTransform;
-
+	float PerlinNoiseScale = 0.0f;
+	float perlinNoiseFactor = 0.0f;
+	Math::Vector::Vector2 perlinNoisePos = {};
 	float shininess = 70.0f;
 	float specular_ = 1.0f;
 	float metalness_ = 1.0f;
 	float roughness_ = 1.0f;
-	
+
 	float scatterCoefficient = 0.5f;
 	float absorptionCoefficient = 0.5f;
 	float scatterDistance = 0.5f;
 	float grayFactor = 0.0f;
-	
+
 	float dissolveMask = 0.0f;
 	Math::Vector::Vector2 dissolveEdgeMinMax = {};
 	float pad1;

@@ -1,5 +1,5 @@
 #include "Sprite.h"
-
+#include"Utility/RuntimeCounter/RunTimeCounter.h"
 using namespace Math::Vector;
 
 void Sprite::Initialize(Vector2 pos, Vector2 size)
@@ -35,6 +35,10 @@ void Sprite::Draw(WorldTransform worldTransform)
 
 	materialDatas_.color = color_;
 	materialDatas_.uvTransform = Math::Matrix::AffineMatrix(uvScale_, uvRotate_, uvTranslate_);
+	materialDatas_.perlinNoiseFactor = perlinNoiseFactor_;
+	materialDatas_.perlinNoisePos = perlinNoisePos_;
+	materialDatas_.PerlinNoiseScale = PerlinNoiseScale_;
+
 	materialDatas_.dissolveEdgeColor = dissolveEdgeColor_;
 	materialDatas_.dissolveMask = dissolveMask_;
 	materialDatas_.dissolveEdgeMinMax = dissolveEdgeMinMax_;
@@ -104,6 +108,8 @@ SPSOProperty Sprite::Get2dSpritePipeline(Sprite* state)
 		PSO = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SPRITE_2d, "PerlinNoise");
 		commands.m_pList->SetGraphicsRootSignature(PSO.rootSignature.Get());
 		commands.m_pList->SetPipelineState(PSO.GraphicsPipelineState.Get());
+		RunTimeCounter::GetInstance()->CommandCall(4);
+
 		break;
 	default:
 		break;

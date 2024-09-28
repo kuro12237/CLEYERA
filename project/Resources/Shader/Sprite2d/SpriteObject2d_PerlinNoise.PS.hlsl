@@ -5,6 +5,7 @@ ConstantBuffer<Material> gMaterial : register(b0);
 
 Texture2D<float32_t4> gTexture : register(t0);
 
+ConstantBuffer<PerFrame> gPerFlame : register(b1);
 SamplerState gSampler : register(s0);
 
 struct PixelShaderOutput
@@ -15,17 +16,24 @@ struct PixelShaderOutput
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
+    //Rand
+    RandomGenerator rg;
+    float32_t3 rgSeed = float32_t3(input.position.x, input.position.y, 0.0f);
+    rg.seed = rgSeed;
+
+    //uv
     float4 transformedUV = mul(float32_t4(input.texcoord, 0.0f, 1.0f), gMaterial.uv);
     float32_t4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
     
-    RandomGenerator rg;
-    rg.seed = float3(input.position.x, input.position.y, 0.0); // 初期化
-
-    float scale = 2.0f;
-    float noise = PerlinNoise2D(transformedUV.xy * scale,rg);
-
-    float32_t4 color = float32_t4(noise, noise, noise, 1.0);
-    output.color.rgb = color.rgb;
+    //perlinNOise
+    float32_t2 noisePos = input.texcoord + gMaterial.perlinNoisePos;
+   
+    float32_t timer = (gPerFlame.deltaTime);
+    // Perlin ノイズのスケールとフレーム数に基づいてノイズを計算
+    float32_t noise = PerlinNoise2D((noisePos.xy) * gMaterial.PerlinNoiseScale, timer*0.1f, rg);
+    noise *= gMaterial.perlinNoiseFactor;
+    
+    output.color.rgb = textureColor.rgb * noise;
     output.color.a = gMaterial.color.a * textureColor.a;
  
     return output;

@@ -21,9 +21,10 @@ void TitleScene::Initialize()
 	backTestSprite_->SetSpriteMode(PerlineNoise);
 
 	backTestSpriteWt_.Initialize();
-	TextureManager::UnUsedFilePath();
-	uint32_t texHandle = TextureManager::LoadPngTexture("Resources/Default/uvChecker.png");
+	uint32_t texHandle = TextureManager::LoadPngTexture("Title/backSprite.png");
 	backTestSprite_->SetTexHandle(texHandle);
+	backTestSprite_->GetPerlinNoiseScale() = 1.0f;
+	backTestSprite_->GetPerlinNoiseFactor() = 1.0f;
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -32,9 +33,13 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	ImGui::Begin("TitleScene");
 	ImGui::Text("A:PUSH SelectScene");
+	ImGui::DragFloat("perlinNOiseS", &backTestSprite_->GetPerlinNoiseScale(), 0.1f);
+	ImGui::DragFloat("perlinNOiseF", &backTestSprite_->GetPerlinNoiseFactor(), 0.1f);
+	ImGui::DragFloat2("perlinNOiseT", &backTestSprite_->GetPerlinNoisePos().x, 0.1f);
 	ImGui::End();
 
 #endif // _USE_IMGUI
+	//backTestSprite_->GetPerlinNoisePos().y += 0.01f;
 
 	ChangeSceneAnimation::GetInstance()->Update();
 

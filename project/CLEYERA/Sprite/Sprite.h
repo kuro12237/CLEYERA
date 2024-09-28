@@ -19,7 +19,7 @@ public:
 	/// </summary>
 	/// <param name="どこから表示するか"></param>
 	/// <param name="画像サイズ:texを使用する場合使用しない"></param>
-	void Initialize( Math::Vector::Vector2 pos = {}, Math::Vector::Vector2 size = {});
+	void Initialize(Math::Vector::Vector2 pos = {}, Math::Vector::Vector2 size = {});
 
 	void Draw(WorldTransform worldTransform);
 
@@ -56,6 +56,11 @@ public:
 	Math::Vector::Vector3& GetuvScale() { return uvScale_; }
 	Math::Vector::Vector3& GetuvRotate() { return uvRotate_; }
 	Math::Vector::Vector3& GetuvTranslate() { return uvTranslate_; }
+
+	float& GetPerlinNoiseScale() { return PerlinNoiseScale_; }
+	float& GetPerlinNoiseFactor() { return perlinNoiseFactor_; }
+	Math::Vector::Vector2& GetPerlinNoisePos() { return perlinNoisePos_; }
+
 	SpriteMode GetSpriteMode() { return blendMode_; }
 
 
@@ -93,6 +98,10 @@ private:
 	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
 	Math::Vector::Vector3 uvRotate_ = { 0,0,0 };
 	Math::Vector::Vector3 uvTranslate_ = { 0,0,0 };
+
+	float PerlinNoiseScale_ = 0;
+	float perlinNoiseFactor_ = 0;
+	Math::Vector::Vector2 perlinNoisePos_ = {};
 
 	Math::Vector::Vector2 srcTR = { 1.0f,0.0f };
 	Math::Vector::Vector2 srcBR = { 1.0f,1.0f };

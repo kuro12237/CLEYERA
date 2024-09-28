@@ -2,13 +2,19 @@ struct VertexShaderOutput {
 	float32_t4 position : SV_POSITION;
 	float32_t2 texcoord : TEXCOORD0;
 };
-
+struct PerFrame
+{
+    float32_t flame;
+    int32_t deltaTime;
+};
 
 struct Material
 {
     float32_t4 color;
     float32_t4x4 uv;
-    
+    float32_t PerlinNoiseScale;
+    float32_t perlinNoiseFactor;
+    float32_t2 perlinNoisePos;
     float32_t shininess;
     
     float32_t supecular;

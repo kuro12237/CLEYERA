@@ -9,7 +9,7 @@ void SelectScene::Initialize()
 	//SkyBoxİ’è
 	const float kSkyBoxScale = 256.0f;
 	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale,kSkyBoxScale,kSkyBoxScale},{},{} });
-	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/navyBlue.dds");
+	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
 	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 
 	//levelData‚Ì“Ç‚İ‚İ

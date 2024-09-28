@@ -48,6 +48,10 @@ struct Material
 {
     float32_t4 color;
     float32_t4x4 uv;
+
+    float32_t PerlinNoiseScale;
+    float32_t perlinNoiseFactor;
+    float32_t2 perlinNoisePos;
     
     float32_t shininess;
     
