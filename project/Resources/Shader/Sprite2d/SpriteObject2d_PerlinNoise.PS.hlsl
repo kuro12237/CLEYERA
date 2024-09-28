@@ -28,7 +28,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     //perlinNOise
     float32_t2 noisePos = input.texcoord + gMaterial.perlinNoisePos;
    
-    float32_t timer = (gPerFlame.deltaTime);
+    float32_t timer = (gPerFlame.deltaTime+gPerFlame.flame);
     // Perlin ノイズのスケールとフレーム数に基づいてノイズを計算
     float32_t noise = PerlinNoise2D((noisePos.xy) * gMaterial.PerlinNoiseScale, timer*0.1f, rg);
     noise *= gMaterial.perlinNoiseFactor;
