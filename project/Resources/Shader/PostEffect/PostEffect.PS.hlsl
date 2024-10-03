@@ -45,9 +45,8 @@ PixelShaderOutput main(VertexShaderOutput input)
             difference.y += view * kPrewittVerticelKernel[x][y];
         }
     }
-    float32_t weight = length(difference * 0.1f);
+    float32_t weight = length(difference*0.1f);
     weight = saturate(weight);
-
     resultColor.rgb = resultColor.rgb * (1.0f - weight);
     
     //グレースケール

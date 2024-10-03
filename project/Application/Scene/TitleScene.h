@@ -53,12 +53,10 @@ private:
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
-	string inputLevelDataFileName_ = "TitleData.json";
+	string levelDataName_ = "TitleScene.json";
 
 	PointLight_param light_{};
-	unique_ptr<Game3dObject>gameObj_ = nullptr;
-	WorldTransform worldTransform_ = {};
 
-	unique_ptr<Sprite>backTestSprite_ = nullptr;
-	WorldTransform backTestSpriteWt_{};
+	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
+
 };

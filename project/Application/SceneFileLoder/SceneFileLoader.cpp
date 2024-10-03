@@ -44,6 +44,10 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 	return levelData;
 }
 
+Math::Vector::Vector3 SceneFileLoader::degreesToRadians(Math::Vector::Vector3 degrees)
+{
+	return Math::Vector::Vector3(degrees.x * static_cast<float>(numbers::pi) / 180.0f, degrees.y * static_cast<float>(numbers::pi) / 180.0f, degrees.z * static_cast<float>(numbers::pi) / 180.0f);
+}
 AABB SceneFileLoader::LoadCollider(nlohmann::json& object)
 {
 	AABB aabb = {};
@@ -149,8 +153,12 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
 
 			AABB aabb = LoadCollider(object["collider"]);
+			//transformGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
+			//回転をラジアンに変換
+			transformEular.rotate = degreesToRadians(transformEular.rotate);
+
 			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
 			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
 
@@ -189,6 +197,9 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			//transformのGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
+			//回転をラジアンに変換
+			transformEular.rotate = degreesToRadians(transformEular.rotate);
+
 			transforms->SetTransformEular(transformEular);
 
 			AABB aabb = LoadCollider(object["collider"]);
@@ -280,10 +291,9 @@ void SceneFileLoader::LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann:
 	TransformEular transformEular = GetTransform(object["transform"]);
     //補正
 	transformEular.rotate.x += 90.0f;
-	//ラジアン二変換
-	transformEular.rotate.x = transformEular.rotate.x * float(std::numbers::pi) / 180.0f;
-	transformEular.rotate.y = transformEular.rotate.y * float(std::numbers::pi) / 180.0f;
-	transformEular.rotate.z = transformEular.rotate.z * float(std::numbers::pi) / 180.0f;
+	//回転をラジアンに変換
+	transformEular.rotate = degreesToRadians(transformEular.rotate);
+
 	//data作成
 	cameraData = make_shared<GameCameraData>();
 	cameraData->SetObjName(name);
@@ -321,10 +331,12 @@ TransformEular SceneFileLoader::GetTransform(nlohmann::json transform)
 	transformEular.translate.x = (float)transform["translate"][0];
 	transformEular.translate.y = (float)transform["translate"][2];
 	transformEular.translate.z = (float)transform["translate"][1];
+
 	//rotate
 	transformEular.rotate.x = -(float)transform["rotate"][0];
 	transformEular.rotate.y = -(float)transform["rotate"][2];
 	transformEular.rotate.z = -(float)transform["rotate"][1];
+
 	//scale
 	transformEular.scale.x = (float)transform["scale"][0];
 	transformEular.scale.y = (float)transform["scale"][2];

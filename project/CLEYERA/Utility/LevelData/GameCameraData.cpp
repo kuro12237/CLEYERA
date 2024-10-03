@@ -19,6 +19,9 @@ void GameCameraData::WtUpdate(TransformEular transform)
 void GameCameraData::Update()
 {
 	worldTransform_.UpdateMatrix();
+	worldTransform_.UpdateMatrix();
+	camera_.translation_ = worldTransform_.transform.translate;
+	camera_.rotation_ = worldTransform_.transform.rotate;
 	camera_.matView_ = Math::Matrix::Inverse(worldTransform_.matWorld);
 	camera_.TransfarMatrix();
 }

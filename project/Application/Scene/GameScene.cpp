@@ -19,7 +19,7 @@ void GameScene::Initialize()
 	light_.decay = 0.1f;
 
 
-	//3dObj
+	//Particle初期化
 	ParticlesInitialize();
 
 	GoalParticle::GetInstance()->Clear();
@@ -48,7 +48,7 @@ void GameScene::Initialize()
 
 	LightingManager::AddList(light_);
 
-
+	//ゲーム終了のFlagをペアレント
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
 }

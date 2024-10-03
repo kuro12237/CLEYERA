@@ -1,0 +1,317 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Terrain",
+            "file_name": "Terrain",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    -13.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    16.0,
+                    16.0,
+                    16.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Bridge",
+            "file_name": "Bridge",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    8.0,
+                    8.0,
+                    8.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "CAMERA",
+            "name": "BackCamera",
+            "file_name": "Box",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    -7.53447151184082,
+                    3.333294630050659
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "CAMERA",
+            "name": "LeftCamera",
+            "file_name": "Box",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -33.723148345947266,
+                    -59.01215362548828,
+                    40.82935333251953
+                ],
+                "rotate": [
+                    70.5650634765625,
+                    0.7581570148468018,
+                    -37.936866760253906
+                ],
+                "scale": [
+                    0.9999999403953552,
+                    1.0,
+                    0.9999999403953552
+                ]
+            }
+        },
+        {
+            "type": "CAMERA",
+            "name": "RightCamera",
+            "file_name": "Box",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    55.46965408325195,
+                    -58.8429069519043,
+                    40.82935333251953
+                ],
+                "rotate": [
+                    70.56507110595703,
+                    0.7581616640090942,
+                    16.02165412902832
+                ],
+                "scale": [
+                    0.9999999403953552,
+                    1.0,
+                    0.9999999403953552
+                ]
+            }
+        },
+        {
+            "type": "CAMERA",
+            "name": "PlayerCamera",
+            "file_name": "Box",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    0.0,
+                    -24.34000015258789,
+                    4.0
+                ],
+                "rotate": [
+                    95.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Fence",
+            "file_name": "Fence",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Fence",
+            "transform": {
+                "translate": [
+                    -1.7999999523162842,
+                    0.0,
+                    2.200000047683716
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Fence.001",
+            "file_name": "Fence",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Fence",
+            "transform": {
+                "translate": [
+                    -1.7999999523162842,
+                    1.0,
+                    2.200000047683716
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Fence.002",
+            "file_name": "Fence",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Fence",
+            "transform": {
+                "translate": [
+                    -1.7999999523162842,
+                    -1.0,
+                    2.200000047683716
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Fence.003",
+            "file_name": "Fence",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Fence",
+            "transform": {
+                "translate": [
+                    -1.7999999523162842,
+                    -2.0,
+                    2.200000047683716
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        }
+    ]
+}

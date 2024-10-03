@@ -14,7 +14,7 @@ public:
 
 	void Handler();
 
-	void CommandsExec(Player&p);
+	void CommandsExec(Player& player);
 
 private:
 
