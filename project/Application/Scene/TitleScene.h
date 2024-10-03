@@ -49,14 +49,14 @@ public:
 
 private:
 
-	CameraData camera_ = {};
-
 	shared_ptr<LevelData> levelData_ = nullptr;
-	GameObjectManager* gameObjectManager_;
+	GameObjectManager* gameObjectManager_ = nullptr;
+	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
+	SkyBox* skyBox_ = nullptr;
+	const float kSkyBoxScale_ = 256.0f;
+
 	string levelDataName_ = "TitleScene.json";
 
 	PointLight_param light_{};
-
-	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
 
 };

@@ -4,7 +4,7 @@ void Game3dInstancingObjectData::Initialize(string objectGropName, uint32_t mode
 {
 	objectType_ = objectGropName;
 	gameInstancingObject_ = make_unique<GameInstancing3dObject>();
-	gameInstancingObject_->Create(128,objectGropName);
+	gameInstancingObject_->Create(instanceMax_,objectGropName);
 	modelHandle_ = modelHandle;
 
 	gameInstancingObject_->SetModel(modelHandle_);

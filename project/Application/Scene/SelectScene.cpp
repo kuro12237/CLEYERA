@@ -2,15 +2,7 @@
 
 void SelectScene::Initialize()
 {
-	WinApp::GetInstance()->SetTiTleName(L"GunHead");
-	PostEffect::GetInstance()->Initialize();
 	ChangeSceneAnimation::GetInstance()->Initialize();
-
-	//SkyBoxÝ’è
-	const float kSkyBoxScale = 256.0f;
-	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale,kSkyBoxScale,kSkyBoxScale},{},{} });
-	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
-	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);

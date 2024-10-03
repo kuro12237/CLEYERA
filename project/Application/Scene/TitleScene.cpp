@@ -5,10 +5,18 @@ void TitleScene::Initialize()
 	//ゲーム名設定
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");
 
+	//instanceをGet
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 	gameObjectManager_ = GameObjectManager::GetInstance();
+	skyBox_ = SkyBox::GetInstance();
 
+	//画面遷移初期化
 	changeSceneAnimation_->Initialize();
+
+	//SkyBox設定
+	skyBox_->SetTransform({ {kSkyBoxScale_,kSkyBoxScale_,kSkyBoxScale_},{},{} });
+	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
+	skyBox_->SetTexHandle(skyBoxTexHandle);
 
 	//配置データ読み込み
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(levelDataName_);
@@ -18,7 +26,6 @@ void TitleScene::Initialize()
 	gameObjectManager_->CopyData(levelData_.get());
 	gameObjectManager_->SetAllParents();
 	gameObjectManager_->CameraReset("BackCamera");
-	gameObjectManager_->Update();
 	
 	light_.radious = 512.0f;
 	light_.position.y = 64.0f;
@@ -29,6 +36,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 {
+
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();

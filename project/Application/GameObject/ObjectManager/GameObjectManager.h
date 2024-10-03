@@ -53,7 +53,8 @@ public:
 
 #pragma region Set
 
-	void SetParent(string parentName, string childName);
+	void SetNormalObjectParent(string parentName, string childName);
+	void SetInstancingObjectParent(string parentName, string childName);
 
 	void CameraReset(string name="");
 

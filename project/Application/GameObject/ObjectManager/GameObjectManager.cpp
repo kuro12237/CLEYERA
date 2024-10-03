@@ -21,15 +21,28 @@ void GameObjectManager::SetAllParents()
 		{
 			for (string name : it->GetChildsName())
 			{
-
 				if (obj3dData_.find(name) != obj3dData_.end())
 				{
-					SetParent(it->GetObjectName(), name);
+					SetNormalObjectParent(it->GetObjectName(), name);
 					checkChildren(obj3dData_[name]);
 				}
-				else
+				else if (cameraData_.find(name) != cameraData_.end())
 				{
 					cameraData_[name]->SetParent(obj3dData_[it->GetObjectName()]->GetWorldTransform());
+				}
+
+				for (auto& datas : objInstancing3dData_)
+				{
+					auto& instancingDatas = datas.second;
+					for (auto& instancingData : instancingDatas->GetTransforms())
+					{
+						if (name == instancingData->GetName())
+						{
+
+							instancingData->SetParent(it->GetWorldTransform().matWorld);
+
+						}
+					}
 				}
 			}
 		}
@@ -78,13 +91,11 @@ void GameObjectManager::ImGuiUpdate()
 		//normal3dData
 		if (ImGui::TreeNode("obj3dData"))
 		{
-			//ImGui::BeginChild("obj3dData", ImVec2(250, 100));
 			for (auto& data : obj3dData_)
 			{
 				auto& it = data.second;
 				it->ImGuiUpdate(it->GetObjectName());
 			}
-			//ImGui::EndChild();
 			ImGui::TreePop();
 		}
 		ImGui::Separator();
@@ -181,9 +192,15 @@ shared_ptr<Game3dInstancingObjectData>& GameObjectManager::GetObjInstancingData(
 	return objInstancing3dData_[name];
 }
 
-void GameObjectManager::SetParent(string parentName, string childName)
+void GameObjectManager::SetNormalObjectParent(string parentName, string childName)
 {
 	obj3dData_[childName]->SetParent(obj3dData_[parentName]->GetWorldTransform());
+}
+
+void GameObjectManager::SetInstancingObjectParent(string parentName, string childName)
+{
+	parentName;
+	objInstancing3dData_[childName];
 }
 
 void GameObjectManager::CameraReset(string name)
@@ -224,7 +241,7 @@ void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData>& data)
 				cameraData_[name]->SetParent(obj3dData_[data->GetObjectName()]->GetWorldTransform());
 				continue;
 			}
-			SetParent(data->GetObjectName(), name);
+			SetNormalObjectParent(data->GetObjectName(), name);
 		}
 	}
 }

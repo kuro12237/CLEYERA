@@ -19,12 +19,14 @@ public:
 	void PushObjectData(uint32_t size);
 
 	void TransfarData() { gameInstancingObject_->Transfar(); }
+
+	void SetParent(string childName, string parentName) { childName, parentName; }
+
 #pragma region Get
 
 	vector<shared_ptr<IGameInstancing3dObject>>&GetTransforms() { return transform_; }
 	unique_ptr<GameInstancing3dObject>&GetGameObject() { return gameInstancingObject_; }
 	string GetObjectType() { return objectType_; }
-
 #pragma endregion
 private:
 	string objectType_;
@@ -32,4 +34,6 @@ private:
 	unique_ptr<GameInstancing3dObject>gameInstancingObject_ = nullptr;
 	vector<shared_ptr<IGameInstancing3dObject>>transform_;
 	uint32_t modelHandle_ = 0;
+	const uint32_t instanceMax_ = 512;
+
 };

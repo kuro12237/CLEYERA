@@ -11,13 +11,14 @@ public:
 
 	void SetTransformEular(TransformEular t) { transform_ = t; }
 	void Update();
-	void SetMatWorld(const Math::Matrix::Matrix4x4& w) { mat_ = &w; }
 
 	void SetBreakFlag(const bool& f) { breakFlag_ = f; }
 
 	void SetAABB(AABB aabb) { aabb_ = aabb; }
 
 	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
+	void SetParent(const Math::Matrix::Matrix4x4& parent) { parent_ = &parent; }
+
 #pragma region Get
 
 	Math::Matrix::Matrix4x4 GetMatrix() { return matrix_; }
@@ -30,15 +31,20 @@ public:
 
 	Math::Vector::Vector3 GetUvScale() { return uvScale_; }
 
+	vector<string>&GetParentNames() { return parentNames_; }
+	string &GetName() { return name_; }
+
 #pragma endregion
 
 private:
 
-	const Math::Matrix::Matrix4x4* mat_ = nullptr;
 	Math::Matrix::Matrix4x4 matrix_ = {};
 	bool breakFlag_ = false;
 	TransformEular transform_ = {};
 	AABB aabb_ = {};
 	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
+	string name_ = "";
+	vector<string> parentNames_;
 
+	const Math::Matrix::Matrix4x4* parent_ = nullptr;
 };
