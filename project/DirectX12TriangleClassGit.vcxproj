@@ -76,6 +76,7 @@
     <ClCompile Include="Application\Scene\GameScene.cpp" />
     <ClCompile Include="Application\Scene\SelectScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene.cpp" />
+    <ClCompile Include="Application\TitleObject\TitleCamera\TitleCamera.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
     <ClCompile Include="CLEYERA\Audio\AudioDataResource.cpp" />
     <ClCompile Include="CLEYERA\Audio\AudioManager.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Application\Scene\IScene.h" />
     <ClInclude Include="Application\Scene\SelectScene.h" />
     <ClInclude Include="Application\Scene\TitleScene.h" />
+    <ClInclude Include="Application\TitleObject\TitleCamera\TitleCamera.h" />
     <ClInclude Include="Application\Utility\CollisionMask\CollisionMask.h" />
     <ClInclude Include="Application\Utility\ObjectId\GameObjectId.h" />
     <ClInclude Include="CLEYERA\Animation\AnimationManager.h" />

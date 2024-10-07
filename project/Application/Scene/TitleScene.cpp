@@ -31,6 +31,14 @@ void TitleScene::Initialize()
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
+	camera_ = make_unique<TitleCamera>();
+	camera_->Initialize();
+
+	worldTransform_.Initialize();
+	sprite_ = make_unique<Sprite>();
+	sprite_->Initialize();
+	sprite_->SetTexHandle(TextureManager::LoadPngTexture("uvChecker.png"));
+	sprite_->SetSpriteMode(PerlineNoise);
 
 }
 
@@ -49,10 +57,12 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 	}
+	camera_->Update();
 
 	gameObjectManager_->Update();
 
 	LightingManager::AddList(light_);
+	worldTransform_.UpdateMatrix();
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
@@ -77,5 +87,6 @@ void TitleScene::Object3dDraw()
 void TitleScene::Flont2dSpriteDraw()
 {
 	PostEffect::GetInstance()->Draw();
+	
 	changeSceneAnimation_->Draw();
 }

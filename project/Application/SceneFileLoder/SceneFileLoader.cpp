@@ -110,6 +110,8 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 			//transform‚ÌGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
+			//‰ñ“]‚ðƒ‰ƒWƒAƒ“‚É•ÏŠ·
+			transformEular.rotate = degreesToRadians(transformEular.rotate);
 
 			if (object.contains("collider"))
 			{
@@ -277,6 +279,7 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 		//transform‚ÌGet
 		nlohmann::json& transform = object["transform"];
 		TransformEular transformEular = GetTransform(transform);
+		transformEular.rotate = degreesToRadians(transformEular.rotate);
 
 
 		if (object.contains("children"))

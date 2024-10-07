@@ -29,6 +29,8 @@
 
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
+#include"TitleObject/TitleCamera/TitleCamera.h"
+
 class TitleScene:public IScene
 {
 public:
@@ -59,4 +61,8 @@ private:
 
 	PointLight_param light_{};
 
+	unique_ptr<TitleCamera>camera_ = nullptr;
+
+	unique_ptr<Sprite>sprite_ = nullptr;
+	WorldTransform worldTransform_;
 };

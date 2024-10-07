@@ -18,7 +18,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     PixelShaderOutput output;
     //Rand
     RandomGenerator rg;
-    float32_t3 rgSeed = float32_t3(input.position.x, input.position.y, 0.0f);
+    float32_t3 rgSeed = float32_t3(input.position.x * gMaterial.perlinNoisePos.x, input.position.y * gMaterial.perlinNoisePos.y, 0.0f);
     rg.seed = rgSeed;
 
     //uv

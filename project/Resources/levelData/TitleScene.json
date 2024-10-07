@@ -4953,7 +4953,7 @@
                 "translate": [
                     0.0,
                     0.0,
-                    0.0
+                    1.3269692659378052
                 ],
                 "rotate": [
                     0.0,
@@ -4961,11 +4961,85 @@
                     0.0
                 ],
                 "scale": [
-                    64.0,
-                    64.0,
-                    64.0
+                    16.0,
+                    16.0,
+                    16.0
                 ]
             }
+        },
+        {
+            "type": "MESH",
+            "name": "Arch",
+            "file_name": "Arch",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -0.04533970355987549,
+                    49.606964111328125,
+                    4.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "LeftArchDoor",
+                    "file_name": "LeftArchDoor",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            0.5926698446273804,
+                            -0.3034820556640625,
+                            0.009999990463256836
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                },
+                {
+                    "type": "MESH",
+                    "name": "RightArchDoor",
+                    "file_name": "RightArchDoor",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            -0.6273301243782043,
+                            -0.3034820556640625,
+                            0.009999990463256836
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                }
+            ]
         },
         {
             "type": "CAMERA",
@@ -4976,7 +5050,7 @@
             "transform": {
                 "translate": [
                     0.0,
-                    -7.53447151184082,
+                    -26.74262809753418,
                     3.333294630050659
                 ],
                 "rotate": [
@@ -5043,7 +5117,7 @@
         },
         {
             "type": "CAMERA",
-            "name": "PlayerCamera",
+            "name": "TitleCamera",
             "file_name": "Box",
             "ModelFileType": "obj",
             "DrawType": "Instancing",
@@ -5051,8 +5125,8 @@
             "transform": {
                 "translate": [
                     0.0,
-                    -24.34000015258789,
-                    4.0
+                    -14.913143157958984,
+                    3.0
                 ],
                 "rotate": [
                     95.00000762939453,
