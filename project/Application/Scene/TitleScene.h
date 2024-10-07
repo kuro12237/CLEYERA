@@ -30,6 +30,11 @@
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
 #include"TitleObject/TitleCamera/TitleCamera.h"
+#include"TitleObject/Arch/Arch.h"
+#include"TitleObject/Bridge/Bridge.h"
+#include"TitleObject/TitleLight/TitleLight.h"
+#include"TitleObject/Lava/Lava.h"
+#include"TitleObject/TitleName/TitleName.h"
 
 class TitleScene:public IScene
 {
@@ -50,6 +55,11 @@ public:
 	void Flont2dSpriteDraw()override;
 
 private:
+	
+	/// <summary>
+	/// .001Œ`Ž®‚Å•Ô‚·
+	/// </summary>
+	std::string FormatNumberWithDots(int num);
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_ = nullptr;
@@ -59,10 +69,20 @@ private:
 
 	string levelDataName_ = "TitleScene.json";
 
-	PointLight_param light_{};
 
 	unique_ptr<TitleCamera>camera_ = nullptr;
+	unique_ptr<Arch>arch_ = nullptr;
+	size_t bridgeSizeMax_ = 2;
+	vector<unique_ptr<Bridge>>bridge_ = {};
+	unique_ptr<TitleLight>titleLight_ = nullptr;
+	unique_ptr<Lava>lava_ = nullptr;
 
-	unique_ptr<Sprite>sprite_ = nullptr;
-	WorldTransform worldTransform_;
+	unique_ptr<TitleName>titleName_ = nullptr;
+
+	bool isChangeSelectScene_ = false;
+
+	bool isAnimationStart_ = false;
+	bool isAnimationEnd_ = false;
+
+	const Math::Vector::Vector3 *p_CameraPos_ = nullptr;
 };

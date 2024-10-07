@@ -59,7 +59,6 @@ void GameObjectManager::Update()
 	}
 
 	// normal
-	//すでにアップデートしていたら更新しない
 	for (auto& data : obj3dData_) {
 		auto& it = data.second->GetWorldTransform();
 		it.UpdateMatrix();
@@ -238,7 +237,7 @@ void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData>& data)
 		{
 			if (obj3dData_.find(name) != obj3dData_.end())
 			{
-				cameraData_[name]->SetParent(obj3dData_[data->GetObjectName()]->GetWorldTransform());
+				obj3dData_[name]->SetParent(obj3dData_[data->GetObjectName()]->GetWorldTransform());
 				continue;
 			}
 			SetNormalObjectParent(data->GetObjectName(), name);

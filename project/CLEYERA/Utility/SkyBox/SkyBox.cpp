@@ -30,6 +30,7 @@ void SkyBox::Update()
 {
 	cMaterial_->Map();
 	cMaterial_->Setbuffer(material_);
+	
 	worldTransform_.UpdateMatrix();
 }
 

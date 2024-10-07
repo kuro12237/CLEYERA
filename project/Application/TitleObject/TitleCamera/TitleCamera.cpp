@@ -11,8 +11,34 @@ void TitleCamera::Initialize()
 
 void TitleCamera::Update()
 {
-	//auto& cameraWt = gameObjectManager_->GetCameraData(name_)->GetWorldTransform();
+	if (isBridgeAnimationStart_)
+	{
+		isBridgeAnimationStart_ = false;
+	}
 
-	//cameraWt.transform.translate.z += speed_;
+	auto& cameraWt = gameObjectManager_->GetCameraData(name_)->GetWorldTransform();
+
+	if (isCameraMove_)
+	{
+		cameraWt.transform.translate.z += speed_;
+	}
+
+	if (cameraWt.transform.translate.z > archStartOffset_)
+	{
+		string number = to_string((archStartOffset_));
+		LogManager::Log(number + "\n");
+		archStartOffset_ += 32.0f;
+		isBridgeAnimationStart_ = true;
+		if (useBridgeNumber_ == 0)
+		{
+			useBridgeNumber_ = 1;
+			return;
+		}
+		if (useBridgeNumber_ == 1)
+		{
+			useBridgeNumber_ = 0;
+			return;
+		}
+	}
 
 }

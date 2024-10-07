@@ -22,6 +22,7 @@
 #include<fstream>
 #include<sstream>
 #include<string>
+#include <iomanip> 
 
 #include<Windows.h>
 #pragma comment(lib,"winmm.lib")

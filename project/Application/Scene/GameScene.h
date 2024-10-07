@@ -31,6 +31,7 @@
 #include"Particle/Field/ParticleField.h"
 
 #include"GameObject/UI/GameUI.h"
+#include"Scene/TitleScene.h"
 
 class GameScene :public IScene
 {

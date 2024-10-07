@@ -25,7 +25,7 @@ void SelectScene::Initialize()
 	player_->GetData(gameObjectManager_);
 
 	goals_.resize(portalMax_);
-	
+
 	for (size_t portalIndex = 0; portalIndex < portalMax_; portalIndex++)
 	{
 		shared_ptr<Goal>goal = make_shared<Goal>();
@@ -39,13 +39,18 @@ void SelectScene::Initialize()
 	blockManager_->Initialize();
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
-	
+
 	light_.radious = 512.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 	gameObjectManager_->Update();
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
+	SkyBox::GetInstance()->Reset();
+	const float kSkyBoxScale_ = 256.0f;
+	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale_,kSkyBoxScale_,kSkyBoxScale_} });
+	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
+	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 }
 
 void SelectScene::Update(GameManager* Scene)
@@ -79,7 +84,7 @@ void SelectScene::Update(GameManager* Scene)
 	{
 		goals_[i]->Update();
 	}
-
+	SkyBox::GetInstance()->Update();
 	GoalParticle::GetInstance()->Update();
 
 	blockManager_->Update();
@@ -110,6 +115,7 @@ void SelectScene::Update(GameManager* Scene)
 
 void SelectScene::PostProcessDraw()
 {
+	SkyBox::GetInstance()->Draw();
 	gameObjectManager_->Draw();
 
 	GoalParticle::GetInstance()->Draw();

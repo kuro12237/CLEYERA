@@ -19,13 +19,14 @@ public:
 	void Update();
 
 	void Draw();
+	void Reset() { worldTransform_.parent = nullptr; worldTransform_.transform = {}; }
 
 #pragma region Set
 
 	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
-
 	void SetTransform(const TransformEular& transform) { worldTransform_.transform = transform; }
-
+	void SetParent(const WorldTransform& transform) { worldTransform_.parent = &transform; }
+	
 #pragma endregion
 
 #pragma region Get
@@ -47,6 +48,7 @@ private:
 
 	uint32_t texHandle_ = 0;
 	WorldTransform worldTransform_ = {};
+
 
 	string defaultCubeMapName_ = "Resources/Default/CubeMap.dds";
 	//Singleton
