@@ -120,7 +120,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
-		Scene->ChangeState(new SelectScene);
+		Scene->ChangeState(new TitleScene);
 		return;
 	}
 	gameCollisionManager_->End();
