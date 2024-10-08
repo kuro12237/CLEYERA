@@ -10,5 +10,6 @@ void TitleLight::Initialize()
 
 void TitleLight::Update()
 {
+	light_.position.y = 16.0f;
 	LightingManager::AddList(light_);
 }

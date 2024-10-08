@@ -5,7 +5,7 @@ void Arch::Initialize()
 	gameObjectManager_ = GameObjectManager::GetInstance();
 
 	name_ = "ArchBridge";
-	gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), name_);
+	//gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), name_);
 
 	auto& desc = gameObjectManager_->GetObjectDesc(name_);
 

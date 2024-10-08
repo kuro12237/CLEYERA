@@ -45,7 +45,7 @@ private:
 	float flameMax_ = 120.0f;
 
 	float dissolveMax = 1.0f;
-	const uint32_t edgeColor_16 = 0xFFFFFFFF;
+	const uint32_t edgeColor_16 = 0xFF0000FF;
 
 	uint32_t tex_ = 0;
 	vector<uint32_t>noiseTex_ = {};
