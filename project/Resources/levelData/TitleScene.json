@@ -4965,7 +4965,33 @@
                     64.0,
                     64.0
                 ]
-            }
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "GunHead",
+                    "file_name": "TitleName",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            0.0,
+                            0.12748508155345917,
+                            0.04805640131235123
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            0.015625,
+                            0.015625,
+                            0.015625
+                        ]
+                    }
+                }
+            ]
         },
         {
             "type": "MESH",

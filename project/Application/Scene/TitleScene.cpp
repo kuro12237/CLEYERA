@@ -134,8 +134,7 @@ void TitleScene::Flont2dSpriteDraw()
 {
 
 	PostEffect::GetInstance()->Draw();
-	titleName_->Draw();
-
+	
 	changeSceneAnimation_->Draw();
 }
 
