@@ -36,6 +36,7 @@
 #include"TitleObject/Lava/Lava.h"
 #include"TitleObject/TitleName/TitleName.h"
 #include"TitleObject/TowerManager/TowerManager.h"
+#include"TitleObject/TitleUI/TitlePushA.h"
 
 class TitleScene:public IScene
 {
@@ -80,6 +81,8 @@ private:
 	unique_ptr<TowerManager>towerManager_ = nullptr;
 
 	unique_ptr<TitleName>titleName_ = nullptr;
+	//UI
+	unique_ptr<TitlePushA>titlePushA_ = nullptr;
 
 	bool isChangeSelectScene_ = false;
 

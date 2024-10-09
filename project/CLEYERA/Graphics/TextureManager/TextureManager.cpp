@@ -131,6 +131,14 @@ uint32_t TextureManager::LoadDDSTexture(const string& filePath)
 	return TextureManager::GetInstance()->texDatas_[FilePath]->GetTexHandle();
 }
 
+Math::Vector::Vector2 TextureManager::CalcAnkerPos(Math::Vector::Vector2 texSize, Math::Vector::Vector2 ankerPos)
+{
+	Math::Vector::Vector2 result = texSize;
+	result.x *= -ankerPos.x;
+	result.y *= -ankerPos.y;
+	return result;
+}
+
 void TextureManager::UnLoadTexture(const string& filePath)
 {
 	TextureManager::GetInstance()->texDatas_[filePath]->texRelease();

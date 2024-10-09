@@ -642,6 +642,7 @@
     <ClCompile Include="Application\TitleObject\Particles\Fire\TitleFireParticle.cpp" />
     <ClCompile Include="Application\TitleObject\TowerManager\Tower.cpp" />
     <ClCompile Include="Application\TitleObject\TowerManager\TowerManager.cpp" />
+    <ClCompile Include="Application\TitleObject\TitleUI\TitlePushA.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1104,6 +1105,7 @@
     <ClInclude Include="Application\TitleObject\Particles\Fire\TitleFireParticle.h" />
     <ClInclude Include="Application\TitleObject\TowerManager\TowerManager.h" />
     <ClInclude Include="Application\TitleObject\TowerManager\Tower.h" />
+    <ClInclude Include="Application\TitleObject\TitleUI\TitlePushA.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

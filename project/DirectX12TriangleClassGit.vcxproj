@@ -83,6 +83,7 @@
     <ClCompile Include="Application\TitleObject\TitleCamera\TitleCamera.cpp" />
     <ClCompile Include="Application\TitleObject\TitleLight\TitleLight.cpp" />
     <ClCompile Include="Application\TitleObject\TitleName\TitleName.cpp" />
+    <ClCompile Include="Application\TitleObject\TitleUI\TitlePushA.cpp" />
     <ClCompile Include="Application\TitleObject\TowerManager\Tower.cpp" />
     <ClCompile Include="Application\TitleObject\TowerManager\TowerManager.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Application\TitleObject\TitleCamera\TitleCamera.h" />
     <ClInclude Include="Application\TitleObject\TitleLight\TitleLight.h" />
     <ClInclude Include="Application\TitleObject\TitleName\TitleName.h" />
+    <ClInclude Include="Application\TitleObject\TitleUI\TitlePushA.h" />
     <ClInclude Include="Application\TitleObject\TowerManager\Tower.h" />
     <ClInclude Include="Application\TitleObject\TowerManager\TowerManager.h" />
     <ClInclude Include="Application\Utility\CollisionMask\CollisionMask.h" />

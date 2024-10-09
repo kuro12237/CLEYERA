@@ -50,6 +50,10 @@ void TitleScene::Initialize()
 	titleName_ = make_unique<TitleName>();
 	titleName_->Initialize();
 
+	//UI
+	titlePushA_ = make_unique<TitlePushA>();
+	titlePushA_->Initiaize();
+
 	bridge_.resize(bridgeSizeMax_);
 	for (size_t i = 0; i < bridgeSizeMax_; i++)
 	{
@@ -105,6 +109,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	titleLight_->Update();
 
 	titleName_->Update();
+	titlePushA_->Update();
 
 	towerManager_->Update();
 
@@ -139,6 +144,7 @@ void TitleScene::Flont2dSpriteDraw()
 {
 	PostEffect::GetInstance()->Draw();
 	changeSceneAnimation_->Draw();
+	titlePushA_->Draw();
 }
 
 std::string TitleScene::FormatNumberWithDots(int num)
