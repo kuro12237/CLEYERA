@@ -10,7 +10,6 @@ void TitleScene::Initialize()
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	skyBox_ = SkyBox::GetInstance();
 
-
 	//‰æ–Ê‘JˆÚ‰Šú‰»
 	changeSceneAnimation_->Initialize();
 
@@ -64,6 +63,9 @@ void TitleScene::Initialize()
 		bridge_[i] = std::move(bridge);
 	}
 
+	towerManager_ = make_unique<TowerManager>();
+	towerManager_->Initialize();
+	towerManager_->SetP_Camera(cameraWt.transform.translate);
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -98,12 +100,15 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 		bridge_[i]->Update();
 	}
 
-	gameObjectManager_->Update();
-
+	
 	titleLight_->SetPos(*p_CameraPos_);
 	titleLight_->Update();
 
 	titleName_->Update();
+
+	towerManager_->Update();
+
+	gameObjectManager_->Update();
 
 	if (isChangeSelectScene_)
 	{
@@ -132,9 +137,7 @@ void TitleScene::Object3dDraw()
 
 void TitleScene::Flont2dSpriteDraw()
 {
-
 	PostEffect::GetInstance()->Draw();
-	
 	changeSceneAnimation_->Draw();
 }
 

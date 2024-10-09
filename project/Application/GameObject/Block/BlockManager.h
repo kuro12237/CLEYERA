@@ -24,9 +24,6 @@ private:
 
 	bool isInitialize = false;
 
-#pragma region Singleton
-
-#pragma endregion
 
 };
 

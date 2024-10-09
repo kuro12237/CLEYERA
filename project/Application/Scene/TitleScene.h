@@ -35,6 +35,7 @@
 #include"TitleObject/TitleLight/TitleLight.h"
 #include"TitleObject/Lava/Lava.h"
 #include"TitleObject/TitleName/TitleName.h"
+#include"TitleObject/TowerManager/TowerManager.h"
 
 class TitleScene:public IScene
 {
@@ -76,6 +77,7 @@ private:
 	vector<unique_ptr<Bridge>>bridge_ = {};
 	unique_ptr<TitleLight>titleLight_ = nullptr;
 	unique_ptr<Lava>lava_ = nullptr;
+	unique_ptr<TowerManager>towerManager_ = nullptr;
 
 	unique_ptr<TitleName>titleName_ = nullptr;
 

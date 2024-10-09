@@ -26,6 +26,7 @@ public:
 	bool GetBreakFlag() { return breakFlag_; }
 
 	TransformEular &GetTransform() { return transform_; }
+	Math::Vector::Vector4 &GetColor() { return color_; }
 
 	AABB GetAABB() { return aabb_; }
 
@@ -42,7 +43,8 @@ private:
 	bool breakFlag_ = false;
 	TransformEular transform_ = {};
 	AABB aabb_ = {};
-	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
+	Math::Vector::Vector3 uvScale_ = { 1.0f,1.0f,1.0f };
+	Math::Vector::Vector4 color_ = { 1.0f,1.0f,1.0f,1.0f };
 	string name_ = "";
 	vector<string> parentNames_;
 

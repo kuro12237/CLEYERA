@@ -70,9 +70,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -124.21174621582031,
+                    -81.85184478759766,
                     0.0,
-                    67.51272583007812
+                    60.839149475097656
                 ],
                 "rotate": [
                     0.0,
@@ -274,7 +274,7 @@
                 "translate": [
                     23.0,
                     0.0,
-                    28.0
+                    20.0
                 ],
                 "rotate": [
                     0.0,
@@ -284,7 +284,7 @@
                 "scale": [
                     3.0,
                     1.0,
-                    28.0
+                    20.0
                 ]
             },
             "collider": {
@@ -426,7 +426,7 @@
                 "translate": [
                     20.0,
                     0.0,
-                    57.0
+                    58.0
                 ],
                 "rotate": [
                     0.0,
@@ -683,16 +683,16 @@
         },
         {
             "type": "MESH",
-            "name": "Block.008",
+            "name": "Block.015",
             "file_name": "Block",
             "ModelFileType": "obj",
             "DrawType": "Instancing",
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    -143.0,
+                    23.068099975585938,
                     0.0,
-                    10.0
+                    79.09341430664062
                 ],
                 "rotate": [
                     0.0,
@@ -700,47 +700,9 @@
                     0.0
                 ],
                 "scale": [
-                    34.0,
+                    3.0,
                     1.0,
-                    50.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Block.010",
-            "file_name": "Block",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
-            "transform": {
-                "translate": [
-                    -161.0,
-                    0.0,
-                    76.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    16.0,
-                    1.0,
-                    16.0
+                    20.0
                 ]
             },
             "collider": {
@@ -833,52 +795,15 @@
         },
         {
             "type": "MESH",
-            "name": "EnemyWalk.003",
-            "file_name": "EnemyWalk",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    -30.0,
-                    0.0,
-                    60.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
             "name": "EnemyWalk.002",
             "file_name": "EnemyWalk",
             "ModelFileType": "obj",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    36.9798583984375,
                     0.0,
-                    65.58562469482422
+                    0.0,
+                    63.594078063964844
                 ],
                 "rotate": [
                     0.0,
@@ -907,15 +832,15 @@
         },
         {
             "type": "MESH",
-            "name": "EnemyWalk.004",
+            "name": "EnemyWalk.003",
             "file_name": "EnemyWalk",
             "ModelFileType": "obj",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    15.601272583007812,
+                    -43.89952087402344,
                     0.0,
-                    40.65502166748047
+                    63.594078063964844
                 ],
                 "rotate": [
                     0.0,
@@ -923,9 +848,9 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             },
             "collider": {
@@ -1039,6 +964,310 @@
                     1.0,
                     1.0,
                     1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    -35.331695556640625,
+                    198.5014190673828,
+                    -12.47998046875
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    15.0,
+                    15.0,
+                    15.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower.001",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    92.69062805175781,
+                    61.663238525390625,
+                    -20.545814514160156
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    7.5,
+                    7.5,
+                    7.5
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower.002",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    11.578819274902344,
+                    139.70068359375,
+                    -20.545814514160156
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.5,
+                    10.5,
+                    10.5
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower.003",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    170.369873046875,
+                    73.75874328613281,
+                    -20.545814514160156
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    7.5,
+                    7.5,
+                    7.5
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower.004",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    56.50749969482422,
+                    141.72634887695312,
+                    -20.545814514160156
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    3.75,
+                    3.75,
+                    3.75
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower.005",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    -125.20140075683594,
+                    147.7939453125,
+                    -12.47998046875
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    12.0,
+                    12.0,
+                    12.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower.006",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    -76.84286499023438,
+                    139.70068359375,
+                    -20.545814514160156
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    7.5,
+                    7.5,
+                    7.5
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Tower.007",
+            "file_name": "Tower",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Tower",
+            "transform": {
+                "translate": [
+                    102.86676025390625,
+                    147.7939453125,
+                    -12.47998046875
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    15.0,
+                    15.0,
+                    15.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             }
         }

@@ -17,8 +17,9 @@ void Block::Initialize(string name, uint32_t index)
 
 void Block::Update()
 {
-	this->ClearExtrusion();
-	this->ClearHitDirection();
+	//hit•{ƒ‰ƒu‚ğƒNƒŠƒA
+	ClearExtrusion();
+	ClearHitDirection();
 }
 
 void Block::OnCollision(ICollider* c)

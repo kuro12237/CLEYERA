@@ -640,6 +640,8 @@
     <ClCompile Include="Application\TitleObject\Lava\Lava.cpp" />
     <ClCompile Include="Application\TitleObject\TitleName\TitleName.cpp" />
     <ClCompile Include="Application\TitleObject\Particles\Fire\TitleFireParticle.cpp" />
+    <ClCompile Include="Application\TitleObject\TowerManager\Tower.cpp" />
+    <ClCompile Include="Application\TitleObject\TowerManager\TowerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1100,6 +1102,8 @@
     <ClInclude Include="Application\TitleObject\Lava\Lava.h" />
     <ClInclude Include="Application\TitleObject\TitleName\TitleName.h" />
     <ClInclude Include="Application\TitleObject\Particles\Fire\TitleFireParticle.h" />
+    <ClInclude Include="Application\TitleObject\TowerManager\TowerManager.h" />
+    <ClInclude Include="Application\TitleObject\TowerManager\Tower.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

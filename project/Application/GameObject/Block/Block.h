@@ -15,8 +15,8 @@ public:
 
 	void OnCollision(ICollider* c)override;
 
-
 private:
 
-	
+	TransformEular initialTransform_{};
+
 };
