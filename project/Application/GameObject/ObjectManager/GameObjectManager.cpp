@@ -181,16 +181,6 @@ void GameObjectManager::ClearAllData()
 	}
 }
 
-shared_ptr<Game3dObjectData>& GameObjectManager::GetObj3dData(string name)
-{
-	return obj3dData_[name];
-}
-
-shared_ptr<Game3dInstancingObjectData>& GameObjectManager::GetObjInstancingData(string name)
-{
-	return objInstancing3dData_[name];
-}
-
 void GameObjectManager::SetNormalObjectParent(string parentName, string childName)
 {
 	obj3dData_[childName]->SetParent(obj3dData_[parentName]->GetWorldTransform());

@@ -8,7 +8,6 @@ SceneFileLoader* SceneFileLoader::GetInstance()
 
 shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 {
-
 	ifstream file = FileLoader::JsonLoadFile("Resources/levelData/" + filePath);
 	file >> deserialized;
 	assert(deserialized.is_object());
@@ -22,7 +21,10 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 	if (!levelData)
 	{
 		levelData = make_unique<LevelData>();
-
+	}
+	else
+	{
+		assert(0);
 	}
 
 	for (nlohmann::json& object : deserialized["objects"])
