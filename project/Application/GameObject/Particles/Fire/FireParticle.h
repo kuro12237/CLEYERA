@@ -3,11 +3,12 @@
 #include"Particle/Emitter/ParticleEmitter.h"
 #include"Graphics/TextureManager/TextureManager.h"
 
-class TitleFireParticle
+class FireParticle
 {
 public:
-	
-	static TitleFireParticle* GetInstance();
+
+	FireParticle() {};
+	~FireParticle() {};
 
 	void Initialize();
 
@@ -39,10 +40,6 @@ private:
 	unique_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>emitter_ = nullptr;
 
 
-	TitleFireParticle() = default;
-	~TitleFireParticle() = default;
-	TitleFireParticle(const TitleFireParticle&) = delete;
-	const TitleFireParticle& operator=(const TitleFireParticle&) = delete;
 
 };
 

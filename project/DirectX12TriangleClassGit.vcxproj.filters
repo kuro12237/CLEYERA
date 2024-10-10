@@ -639,7 +639,7 @@
     <ClCompile Include="Application\GameObject\TitleLight\TitleLight.cpp" />
     <ClCompile Include="Application\GameObject\Lava\Lava.cpp" />
     <ClCompile Include="Application\GameObject\TitleName\TitleName.cpp" />
-    <ClCompile Include="Application\GameObject\Particles\Fire\TitleFireParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\Fire\FireParticle.cpp" />
     <ClCompile Include="Application\GameObject\TowerManager\Tower.cpp" />
     <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp" />
     <ClCompile Include="Application\GameObject\TitleUI\TitlePushA.cpp" />
@@ -1102,7 +1102,7 @@
     <ClInclude Include="Application\GameObject\TitleLight\TitleLight.h" />
     <ClInclude Include="Application\GameObject\Lava\Lava.h" />
     <ClInclude Include="Application\GameObject\TitleName\TitleName.h" />
-    <ClInclude Include="Application\GameObject\Particles\Fire\TitleFireParticle.h" />
+    <ClInclude Include="Application\GameObject\Particles\Fire\FireParticle.h" />
     <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h" />
     <ClInclude Include="Application\GameObject\TowerManager\Tower.h" />
     <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h" />

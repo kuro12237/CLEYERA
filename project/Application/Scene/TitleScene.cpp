@@ -70,6 +70,10 @@ void TitleScene::Initialize()
 	towerManager_ = make_unique<TowerManager>();
 	towerManager_->Initialize();
 	towerManager_->SetP_Camera(cameraWt.transform.translate);
+
+	fireParticle_ = make_unique<FireParticle>();
+	fireParticle_->Initialize();
+
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -78,6 +82,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
+	fireParticle_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
 
@@ -90,7 +95,10 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	arch_->Update();
 	lava_->Update();
-
+	
+	fireParticle_->Emit();
+	fireParticle_->Update();
+	
 	camera_->Update();
 	if (camera_->GetIsBridgeAnimationStart() && !isAnimationStart_)
 	{
@@ -130,6 +138,8 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 void TitleScene::PostProcessDraw()
 {
 	gameObjectManager_->Draw();
+	fireParticle_->Draw();
+
 }
 
 void TitleScene::Back2dSpriteDraw()

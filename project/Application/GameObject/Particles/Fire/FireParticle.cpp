@@ -1,12 +1,6 @@
-#include "TitleFireParticle.h"
+#include "FireParticle.h"
 
-TitleFireParticle* TitleFireParticle::GetInstance()
-{
-    static TitleFireParticle instance;
-    return &instance;
-}
-
-void TitleFireParticle::Initialize()
+void FireParticle::Initialize()
 {
 	if (InitializeLock_)
 	{
@@ -20,7 +14,7 @@ void TitleFireParticle::Initialize()
 	emitter_->CreateType(particle_);
 }
 
-void TitleFireParticle::Update()
+void FireParticle::Update()
 {
 	emitter_->Update();
 
@@ -28,18 +22,18 @@ void TitleFireParticle::Update()
 	particle_->Update();
 }
 
-void TitleFireParticle::Draw()
+void FireParticle::Draw()
 {
 	particle_->Draw();
 	emitter_->SpownDraw();
 }
 
-void TitleFireParticle::ImGuiUpdate()
+void FireParticle::ImGuiUpdate()
 {
 	emitter_->ImGuiUpdate();
 }
 
-void TitleFireParticle::Emit()
+void FireParticle::Emit()
 {
 	emitter_->Emit(particle_);
 }

@@ -37,6 +37,7 @@
 #include"GameObject/TitleName/TitleName.h"
 #include"GameObject/TowerManager/TowerManager.h"
 #include"GameObject/TitleUI/TitlePushA.h"
+#include"GameObject/Particles/Fire/FireParticle.h"
 
 /// <summary>
 /// ƒ^ƒCƒgƒ‹
@@ -87,6 +88,9 @@ private:
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_ = nullptr;
 	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
+
+
+
 	SkyBox* skyBox_ = nullptr;
 	const float kSkyBoxScale_ = 256.0f;
 
@@ -104,6 +108,13 @@ private:
 	unique_ptr<TitleName>titleName_ = nullptr;
 	//UI
 	unique_ptr<TitlePushA>titlePushA_ = nullptr;
+
+#pragma region Particle
+
+	unique_ptr<FireParticle>fireParticle_ = nullptr;
+
+#pragma endregion
+
 
 	bool isChangeSelectScene_ = false;
 

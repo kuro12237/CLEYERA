@@ -79,7 +79,7 @@
     <ClCompile Include="Application\GameObject\Arch\Arch.cpp" />
     <ClCompile Include="Application\GameObject\Bridge\Bridge.cpp" />
     <ClCompile Include="Application\GameObject\Lava\Lava.cpp" />
-    <ClCompile Include="Application\GameObject\Particles\Fire\TitleFireParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\Fire\FireParticle.cpp" />
     <ClCompile Include="Application\GameObject\TitleCamera\TitleCamera.cpp" />
     <ClCompile Include="Application\GameObject\TitleLight\TitleLight.cpp" />
     <ClCompile Include="Application\GameObject\TitleName\TitleName.cpp" />
@@ -212,7 +212,7 @@
     <ClInclude Include="Application\GameObject\Arch\state\IArchState.h" />
     <ClInclude Include="Application\GameObject\Bridge\Bridge.h" />
     <ClInclude Include="Application\GameObject\Lava\Lava.h" />
-    <ClInclude Include="Application\GameObject\Particles\Fire\TitleFireParticle.h" />
+    <ClInclude Include="Application\GameObject\Particles\Fire\FireParticle.h" />
     <ClInclude Include="Application\GameObject\TitleCamera\TitleCamera.h" />
     <ClInclude Include="Application\GameObject\TitleLight\TitleLight.h" />
     <ClInclude Include="Application\GameObject\TitleName\TitleName.h" />
