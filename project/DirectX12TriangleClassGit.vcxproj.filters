@@ -633,16 +633,16 @@
     <ClCompile Include="Application\Scene\TitleScene.cpp">
       <Filter>Project\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Application\TitleObject\TitleCamera\TitleCamera.cpp" />
-    <ClCompile Include="Application\TitleObject\Arch\Arch.cpp" />
-    <ClCompile Include="Application\TitleObject\Bridge\Bridge.cpp" />
-    <ClCompile Include="Application\TitleObject\TitleLight\TitleLight.cpp" />
-    <ClCompile Include="Application\TitleObject\Lava\Lava.cpp" />
-    <ClCompile Include="Application\TitleObject\TitleName\TitleName.cpp" />
-    <ClCompile Include="Application\TitleObject\Particles\Fire\TitleFireParticle.cpp" />
-    <ClCompile Include="Application\TitleObject\TowerManager\Tower.cpp" />
-    <ClCompile Include="Application\TitleObject\TowerManager\TowerManager.cpp" />
-    <ClCompile Include="Application\TitleObject\TitleUI\TitlePushA.cpp" />
+    <ClCompile Include="Application\GameObject\TitleCamera\TitleCamera.cpp" />
+    <ClCompile Include="Application\GameObject\Arch\Arch.cpp" />
+    <ClCompile Include="Application\GameObject\Bridge\Bridge.cpp" />
+    <ClCompile Include="Application\GameObject\TitleLight\TitleLight.cpp" />
+    <ClCompile Include="Application\GameObject\Lava\Lava.cpp" />
+    <ClCompile Include="Application\GameObject\TitleName\TitleName.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\Fire\TitleFireParticle.cpp" />
+    <ClCompile Include="Application\GameObject\TowerManager\Tower.cpp" />
+    <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp" />
+    <ClCompile Include="Application\GameObject\TitleUI\TitlePushA.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1095,17 +1095,17 @@
     <ClInclude Include="Application\Scene\TitleScene.h">
       <Filter>Project\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Application\TitleObject\TitleCamera\TitleCamera.h" />
-    <ClInclude Include="Application\TitleObject\Arch\Arch.h" />
-    <ClInclude Include="Application\TitleObject\Arch\state\IArchState.h" />
-    <ClInclude Include="Application\TitleObject\Bridge\Bridge.h" />
-    <ClInclude Include="Application\TitleObject\TitleLight\TitleLight.h" />
-    <ClInclude Include="Application\TitleObject\Lava\Lava.h" />
-    <ClInclude Include="Application\TitleObject\TitleName\TitleName.h" />
-    <ClInclude Include="Application\TitleObject\Particles\Fire\TitleFireParticle.h" />
-    <ClInclude Include="Application\TitleObject\TowerManager\TowerManager.h" />
-    <ClInclude Include="Application\TitleObject\TowerManager\Tower.h" />
-    <ClInclude Include="Application\TitleObject\TitleUI\TitlePushA.h" />
+    <ClInclude Include="Application\GameObject\TitleCamera\TitleCamera.h" />
+    <ClInclude Include="Application\GameObject\Arch\Arch.h" />
+    <ClInclude Include="Application\GameObject\Arch\state\IArchState.h" />
+    <ClInclude Include="Application\GameObject\Bridge\Bridge.h" />
+    <ClInclude Include="Application\GameObject\TitleLight\TitleLight.h" />
+    <ClInclude Include="Application\GameObject\Lava\Lava.h" />
+    <ClInclude Include="Application\GameObject\TitleName\TitleName.h" />
+    <ClInclude Include="Application\GameObject\Particles\Fire\TitleFireParticle.h" />
+    <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h" />
+    <ClInclude Include="Application\GameObject\TowerManager\Tower.h" />
+    <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

@@ -29,37 +29,58 @@
 
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
-#include"TitleObject/TitleCamera/TitleCamera.h"
-#include"TitleObject/Arch/Arch.h"
-#include"TitleObject/Bridge/Bridge.h"
-#include"TitleObject/TitleLight/TitleLight.h"
-#include"TitleObject/Lava/Lava.h"
-#include"TitleObject/TitleName/TitleName.h"
-#include"TitleObject/TowerManager/TowerManager.h"
-#include"TitleObject/TitleUI/TitlePushA.h"
+#include"GameObject/TitleCamera/TitleCamera.h"
+#include"GameObject/Arch/Arch.h"
+#include"GameObject/Bridge/Bridge.h"
+#include"GameObject/TitleLight/TitleLight.h"
+#include"GameObject/Lava/Lava.h"
+#include"GameObject/TitleName/TitleName.h"
+#include"GameObject/TowerManager/TowerManager.h"
+#include"GameObject/TitleUI/TitlePushA.h"
 
-class TitleScene:public IScene
+/// <summary>
+/// タイトル
+/// </summary>
+class TitleScene :public IScene
 {
 public:
 	TitleScene() {};
 	~TitleScene() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize()override;
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
+	/// <summary>
+	/// ポストエフェクト描画
+	/// </summary>
 	void PostProcessDraw()override;
 
+	/// <summary>
+	/// 背景2d描画
+	/// </summary>
 	void Back2dSpriteDraw()override;
 
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Object3dDraw()override;
 
+	/// <summary>
+	/// 前面2d描画
+	/// </summary>
 	void Flont2dSpriteDraw()override;
 
 private:
-	
+
 	/// <summary>
-	/// .001形式で返す
+	/// .000形式に変換する関数
 	/// </summary>
 	std::string FormatNumberWithDots(int num);
 
@@ -89,5 +110,5 @@ private:
 	bool isAnimationStart_ = false;
 	bool isAnimationEnd_ = false;
 
-	const Math::Vector::Vector3 *p_CameraPos_ = nullptr;
+	const Math::Vector::Vector3* p_CameraPos_ = nullptr;
 };
