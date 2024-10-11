@@ -22,10 +22,6 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 	{
 		levelData = make_unique<LevelData>();
 	}
-	else
-	{
-		assert(0);
-	}
 
 	for (nlohmann::json& object : deserialized["objects"])
 	{
@@ -155,18 +151,19 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 		{
 
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
-
-			AABB aabb = LoadCollider(object["collider"]);
 			//transformGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
 			//‰ñ“]‚ðƒ‰ƒWƒAƒ“‚É•ÏŠ·
 			transformEular.rotate = degreesToRadians(transformEular.rotate);
 
-			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
-			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
-
-			transforms->SetAABB(aabb);
+			if (object.contains("collider"))
+			{
+				AABB aabb = LoadCollider(object["collider"]);
+				aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
+				aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
+				transforms->SetAABB(aabb);
+			}
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
 			transforms->GetName() = objectName;
@@ -208,12 +205,13 @@ void SceneFileLoader::LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::j
 
 			transforms->SetTransformEular(transformEular);
 
-			AABB aabb = LoadCollider(object["collider"]);
-			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
-			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
-
-			transforms->SetAABB(aabb);
-
+			if (object.contains("collider"))
+			{
+				AABB aabb = LoadCollider(object["collider"]);
+				aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
+				aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
+				transforms->SetAABB(aabb);
+			}
 			transforms->Update();
 			transforms->GetName() = objectName;
 
@@ -315,17 +313,21 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 
 			shared_ptr<IGameInstancing3dObject> transforms = make_shared<IGameInstancing3dObject>();
 
-			AABB aabb = LoadCollider(object["collider"]);
 			//transformGet
 			nlohmann::json& transform = object["transform"];
 			TransformEular transformEular = GetTransform(transform);
 			//‰ñ“]‚ðƒ‰ƒWƒAƒ“‚É•ÏŠ·
 			transformEular.rotate = degreesToRadians(transformEular.rotate);
 
-			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
-			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
+			if (object.contains("collider"))
+			{
+				AABB aabb = LoadCollider(object["collider"]);
+				aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
+				aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
 
-			transforms->SetAABB(aabb);
+				transforms->SetAABB(aabb);
+			}
+
 			transforms->SetTransformEular(transformEular);
 			transforms->Update();
 			levelData->objInstancing3dData[objectINstancingGrop]->PushBackTransform(transforms);
@@ -366,11 +368,14 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr
 
 			transforms->SetTransformEular(transformEular);
 
-			AABB aabb = LoadCollider(object["collider"]);
-			aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
-			aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
+			if (object.contains("collider"))
+			{
+				AABB aabb = LoadCollider(object["collider"]);
+				aabb.max = Math::Vector::Multiply(transformEular.scale, aabb.max);
+				aabb.min = Math::Vector::Multiply(transformEular.scale, aabb.min);
 
-			transforms->SetAABB(aabb);
+				transforms->SetAABB(aabb);
+			}
 			transforms->GetName() = objectName;
 
 			transforms->Update();

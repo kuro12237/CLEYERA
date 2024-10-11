@@ -9,6 +9,7 @@
 #include"Game3dObjectData.h"
 #include"GameCameraData.h"
 #include"Particle/GpuParticle.h"
+#include"Particle/Emitter/ParticleEmitter.h"
 
 struct LevelData
 {
@@ -18,5 +19,5 @@ struct LevelData
 	std::map<string, shared_ptr<GameCameraData>>cameraData;
 
 	std::map<string, shared_ptr<Particle::GpuParticle>>particles;
-	std::map<string, shared_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>>particles;
+	std::map<string, shared_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>>particlesEmitter_;
 };

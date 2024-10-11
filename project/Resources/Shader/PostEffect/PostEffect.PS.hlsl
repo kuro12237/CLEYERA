@@ -1,7 +1,7 @@
 #include "PostEffect.hlsli"
 
 Texture2D<float32_t4> gTexture : register(t0);
-Texture2D<float32_t> gShadowTexture : register(t1);
+Texture2D<float32_t> gDepthTexture : register(t1);
 Texture2D<float32_t4> gColorTexture : register(t3);
 
 SamplerState gSamplerLiner : register(s0);
@@ -36,7 +36,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         {
             float32_t2 texcoord = transformedUV.xy + kIndex3x3[x][y] * uvStepSize;
              //view変換
-            float32_t ndcDepth = gShadowTexture.Sample(gSamplerPoint, texcoord);
+            float32_t ndcDepth = gDepthTexture.Sample(gSamplerPoint, texcoord);
 
             float32_t4 viewSpace = mul(float32_t4(0.0f,0.0f, ndcDepth, 1.0f), gTransformationViewMatrix.InverseProj);
             float32_t view = viewSpace.z * rcp(viewSpace.w);
@@ -45,6 +45,7 @@ PixelShaderOutput main(VertexShaderOutput input)
             difference.y += view * kPrewittVerticelKernel[x][y];
         }
     }
+
     float32_t weight = length(difference*0.1f);
     weight = saturate(weight);
     resultColor.rgb = resultColor.rgb * (1.0f - weight);
