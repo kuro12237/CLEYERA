@@ -7,7 +7,6 @@
 
 class Game3dInstancingObjectData
 {
-
 public:
 
 	void Initialize(string objectType, uint32_t modelHandle);

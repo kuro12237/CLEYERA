@@ -9,7 +9,6 @@ using namespace Math::Vector;
 
 GlobalVariables* GlobalVariables::GetInstance() {
 	static GlobalVariables instance;
-
 	return &instance;
 }
 

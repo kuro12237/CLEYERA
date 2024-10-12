@@ -24,7 +24,7 @@ void EnemyWalkManager::Initialize(GameObjectManager* data)
 			enemyWalk = make_shared<EnemyWalk>();
 			enemyWalk->SetName(enemyName);
 			enemyWalk->Initialize();
-			enemyWalk->GetData(GameObjectManager::GetInstance());
+
 			enemys_.resize(enemyCount_ + 1);
 			enemys_[enemyCount_] = (enemyWalk);
 			enemyCount_++;

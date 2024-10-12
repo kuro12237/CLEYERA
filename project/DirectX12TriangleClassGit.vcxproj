@@ -72,7 +72,7 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="Application\GameObject\StartCount\StartCount.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameUI.cpp" />
-    <ClCompile Include="Application\SceneFileLoder\SceneFileLoader.cpp" />
+    <ClCompile Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Application\Scene\GameScene.cpp" />
     <ClCompile Include="Application\Scene\SelectScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene.cpp" />
@@ -203,7 +203,7 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="Application\GameObject\StartCount\StartCount.h" />
     <ClInclude Include="Application\GameObject\UI\GameUI.h" />
-    <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h" />
+    <ClInclude Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Application\Scene\GameScene.h" />
     <ClInclude Include="Application\Scene\IScene.h" />
     <ClInclude Include="Application\Scene\SelectScene.h" />

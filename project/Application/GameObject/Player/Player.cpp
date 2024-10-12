@@ -25,7 +25,7 @@ void Player::Initialize()
 	//スタート入りの記録
 	resetPos_ = transform.translate;
 
-	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetMOdelFilePath();
+	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetModelFilePath();
 	AnimationManager::GetInstance()->LoadAnimation(filePath);
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
@@ -72,7 +72,7 @@ void Player::ImGuiUpdate()
 void Player::Update()
 {
 	isDamage_ = false;
-	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetMOdelFilePath();
+	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetModelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
 	gameObjectInstance_->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);

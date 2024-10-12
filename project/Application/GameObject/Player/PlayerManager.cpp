@@ -9,7 +9,6 @@ void PlayerManager::GetData(GameObjectManager* data)
 	//mainBody
 	playerCore_ = make_shared<Player>();
 	playerCore_->Initialize();
-	playerCore_->GetData(data);
 
 	//reticle
 	reticle_ = make_unique<PlayerReticle>();

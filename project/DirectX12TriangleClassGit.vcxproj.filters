@@ -609,7 +609,7 @@
     <ClCompile Include="CLEYERA\Utility\RuntimeCounter\RunTimeCounter.cpp">
       <Filter>CLEYERA\Utility\RunTimeCounter</Filter>
     </ClCompile>
-    <ClCompile Include="Application\SceneFileLoder\SceneFileLoader.cpp">
+    <ClCompile Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.cpp">
       <Filter>Project\SceneFileLoader</Filter>
     </ClCompile>
     <ClCompile Include="Application\Scene\SelectScene.cpp">
@@ -1068,7 +1068,7 @@
     <ClInclude Include="CLEYERA\Model\primitive\Primitive.h">
       <Filter>CLEYERA\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Application\SceneFileLoder\SceneFileLoader.h">
+    <ClInclude Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.h">
       <Filter>Project\SceneFileLoader</Filter>
     </ClInclude>
     <ClInclude Include="Application\Scene\SelectScene.h">

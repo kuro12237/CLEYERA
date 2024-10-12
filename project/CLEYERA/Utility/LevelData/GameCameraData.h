@@ -13,7 +13,6 @@ public:
 
 	void Create(TransformEular t);
 
-
 	void WtUpdate(TransformEular transform);
 
 	void Update();

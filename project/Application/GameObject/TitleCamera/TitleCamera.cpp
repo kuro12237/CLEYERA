@@ -7,6 +7,7 @@ void TitleCamera::Initialize()
 	this->name_ = "TitleCamera";
 	gameObjectManager_->CameraReset(name_);
 
+	this->CreateJsonData();
 }
 
 void TitleCamera::Update()

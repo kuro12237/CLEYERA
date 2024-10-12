@@ -12,3 +12,5 @@ void IGameObjectData::ImGuiUpdate(string name)
 		ImGui::TreePop();
 	}
 }
+
+

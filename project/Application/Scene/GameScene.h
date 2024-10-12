@@ -11,7 +11,7 @@
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 #include"Model/primitive/LineModel.h"
 #include"PostEffect/DeferrdShading/DeferredShading.h"
-#include"SceneFileLoder/SceneFileLoader.h"
+#include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
 #include"GameObject/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
@@ -31,6 +31,7 @@
 #include"Particle/Field/ParticleField.h"
 
 #include"GameObject/UI/GameUI.h"
+
 #include"Scene/TitleScene.h"
 
 class GameScene :public IScene

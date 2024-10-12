@@ -5605,6 +5605,9 @@
         {
             "type": "CAMERA",
             "name": "TitleCamera",
+            "paramFileNames": {
+                "File 0": "TitleCameraParam"
+            },
             "transform": {
                 "translate": [
                     0.0,

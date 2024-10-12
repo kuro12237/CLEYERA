@@ -5,6 +5,9 @@
 #include"Utility/CollisionManager/CollisionStructures/CollisionStructures.h"
 #include"GameObject/GameCollider/ICollider.h"
 
+/// <summary>
+///  LevelDataを読むクラス
+/// </summary>
 class SceneFileLoader
 {
 public:
@@ -19,6 +22,20 @@ public:
 private:
 
 	/// <summary>
+	/// typeを識別する関数
+	/// </summary>
+	bool isTypeCompare(const string& type, const string& name);
+
+	/// <summary>
+	/// jsonの中に指定した名前の物が入っているかを判断する関数
+	/// </summary>
+	bool CheckJsonObjectContains(nlohmann::json& object, string name);
+
+	uint32_t  LoadModelData(nlohmann::json& object, shared_ptr<Game3dObjectData> data);
+
+	vector<string>GetParamFileNames(nlohmann::json& object);
+
+	/// <summary>
 	/// 度数からラジアンに変換
 	/// </summary>
 	Math::Vector::Vector3 degreesToRadians(Math::Vector::Vector3 degrees);
@@ -29,15 +46,10 @@ private:
 	AABB LoadCollider(nlohmann::json& object);
 
 	/// <summary>
-	/// メッシュの読み込み
-	/// </summary>
-	void LoadMeshData(shared_ptr<LevelData>& levelData, nlohmann::json& object);
-
-	/// <summary>
 	/// Objectの読み込み
 	/// </summary>
-	void LoadObj3dData(shared_ptr<LevelData>& levelData, shared_ptr<Game3dObjectData>& data, nlohmann::json object);
-	
+	void LoadObj3dData(shared_ptr<LevelData>& levelData, nlohmann::json object, shared_ptr<Game3dObjectData> data = nullptr);
+
 	/// <summary>
 	/// カメラ読み込み
 	/// </summary>
@@ -46,8 +58,8 @@ private:
 	/// <summary>
 	/// 子のカメラ読み込み
 	/// </summary>
-	void LoadChildCameraData(shared_ptr<LevelData>& levelData, IGameObjectData* data, nlohmann::json& object);
-	
+	void LoadChildCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object, IGameObjectData* data = nullptr);
+
 	/// <summary>
 	/// jsonからtransformをとる
 	/// </summary>
@@ -67,5 +79,5 @@ private:
 	~SceneFileLoader() = default;
 	SceneFileLoader(const SceneFileLoader&) = delete;
 	const SceneFileLoader& operator=(const SceneFileLoader&) = delete;
-#pragma endregion 
+#pragma endregion
 };
