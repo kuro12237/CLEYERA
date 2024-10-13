@@ -16,7 +16,7 @@ namespace System
 
 		void Map();
 
-		void unMap();
+		void UnMap();
 
 		vector<VertexData>vertexDatas_ = {};
 		vector<uint32_t>indexDatas_ = {};

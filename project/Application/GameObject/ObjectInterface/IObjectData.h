@@ -1,6 +1,7 @@
 #pragma once
 #include"WorldTransform.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
+#include"Utility/GlobalVariables/GlobalVariables.h"
 
 class GameObjectManager;
 class IObjectData
@@ -12,6 +13,12 @@ public:
 	void CalcGravity(float g);
 
 	void CreateJsonData();
+
+	template<typename T>
+	void AddJsonItem(string itemName, T value) { return globalVariables_->AddItem(name_, itemName, value); }
+
+	template<typename T>
+	T GetJsonItem(string itemName) { return globalVariables_->GetValue<T>(name_, itemName); }
 
 #pragma region Set
 	void SetName(string name) { name_ = name; }

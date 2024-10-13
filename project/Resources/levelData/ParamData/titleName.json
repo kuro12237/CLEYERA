@@ -1,0 +1,37 @@
+{
+    "titleName": {
+        "ankerPos": [
+            0.5,
+            0.5
+        ],
+        "dissolveEdgeColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+        ],
+        "dissolveEdgeMinMax": [
+            0.0,
+            0.05999999865889549
+        ],
+        "dissolveMaskMax": 1.0,
+        "fileName": "titleName.png",
+        "transform": {
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.25,
+                "y": 0.25,
+                "z": 1.0
+            },
+            "translate": {
+                "x": 960.0,
+                "y": 640.0,
+                "z": 0.0
+            }
+        }
+    }
+}

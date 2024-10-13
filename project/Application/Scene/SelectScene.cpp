@@ -69,6 +69,10 @@ void SelectScene::Update(GameManager* Scene)
 
 		ImGui::TreePop();
 	}
+
+
+	ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
+
 #endif // _USE_IMGUI
 	ChangeSceneAnimation::GetInstance()->Update();
 

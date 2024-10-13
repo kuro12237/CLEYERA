@@ -2,11 +2,11 @@
 #include"Sprite/Sprite.h"
 #include"GameObject/ObjectInterface/ISpriteData.h"
 
-class TitleName2d :public ISpriteData
+class TitleBack2d :public ISpriteData
 {
 public:
-	TitleName2d() {};
-	~TitleName2d() {};
+	TitleBack2d() {};
+	~TitleBack2d() {};
 
 	void Initialize(uint32_t noiseTex = 0);
 

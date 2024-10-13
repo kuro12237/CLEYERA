@@ -35,7 +35,9 @@
     <None Include="Resources\Shader\SpriteObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.cpp" />
     <ClCompile Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.cpp" />
+    <ClCompile Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.cpp" />
     <ClCompile Include="Application\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Block\Block.cpp" />
     <ClCompile Include="Application\GameObject\Block\BlockManager.cpp" />
@@ -48,6 +50,7 @@
     <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Particle\GoalParticle.cpp" />
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
     <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\IObjectData.cpp" />
     <ClCompile Include="Application\GameObject\Particles\CharacterDeadParticle.cpp" />
@@ -160,6 +163,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.h" />
     <ClInclude Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.h" />
     <ClInclude Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.h" />
     <ClInclude Include="Application\GameManager\GameManager.h" />

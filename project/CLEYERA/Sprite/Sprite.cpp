@@ -42,11 +42,14 @@ void Sprite::Draw(WorldTransform worldTransform)
 	materialDatas_.dissolveEdgeColor = dissolveEdgeColor_;
 	materialDatas_.dissolveMask = dissolveMask_;
 	materialDatas_.dissolveEdgeMinMax = dissolveEdgeMinMax_;
-	
+
+	materialDatas_.noiseUvTransform = Math::Matrix::AffineMatrix(noiseUvScale_, noiseUvRotate_, noiseUvTranslate_);
+
 	Map();
 	vertexBuf_->Setbuffer(vertexDatas_);
 	indexBuf_->Setbuffer(indexDatas_);
 	materialBuf_->Setbuffer(materialDatas_);
+	UnMap();
 
 	CommandCall(worldTransform);
 }

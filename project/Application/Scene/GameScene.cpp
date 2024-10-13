@@ -184,7 +184,7 @@ void GameScene::ImGuiUpdate()
 	player_->ImGuiUpdate();
 
 	ParticleImGuiUpdate();
-
+	ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
 }
 
 void GameScene::Collision()

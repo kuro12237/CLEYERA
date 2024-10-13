@@ -8,36 +8,25 @@ ChangeSceneAnimation* ChangeSceneAnimation::GetInstance()
 
 void ChangeSceneAnimation::Initialize()
 {
-	center_ = { float(WinApp::GetkCilientWidth() / 2), float(WinApp::GetkCilientHeight() / 2) };
-	Math::Vector::Vector4 edgeColor = ColorConverter::ColorConversion(edgeColor_16);
-
-	sprite_ = make_unique<Sprite>();
-	sprite_->Initialize();
-	tex_ = TextureManager::LoadPngTexture("GameObject/ChangeScene/ChangeScene.png");
+	///ノイズのテクスチャを読み込む
 	noiseTex_.resize(1);
 	noiseTex_[0] = TextureManager::LoadPngTexture("GameObject/Noise/Noise.png");
 
-	sprite_->SetTexHandle(tex_);
-	sprite_->SetNoiseTex(noiseTex_[0]);
-	sprite_->SetSpriteMode(DissolveNone);
-	//dissolve設定
-	sprite_->GetDissolveMask() = dissolveMax;
-	sprite_->GetDissolveEdgeMinMax() = { 0.0f, 0.06f };
-	sprite_->GetDissolveDdgeColor() = edgeColor;
 
-	titleNameSprite_ = make_unique<Sprite>();
-	titleNameSprite_->Initialize();
-	uint32_t handle = TextureManager::LoadPngTexture("TitleName.png");
-	titleNameSprite_->SetTexHandle(handle);
-	titleNameSprite_->SetNoiseTex(noiseTex_[0]);
-	titleNameSprite_->SetSpriteMode(DissolveNone);
-	//dissolve設定
-	titleNameSprite_->GetDissolveMask() = dissolveMax;
-	titleNameSprite_->GetDissolveEdgeMinMax() = { 0.0f, 0.06f };
-	titleNameSprite_->GetDissolveDdgeColor() = edgeColor;
+	titleName2d_ = make_unique<TitleName2d>();
+	titleName2d_->Initialize(noiseTex_[0]);
+	titleName2d_->SetP_DissolveMask(dissolveMask_);
 
-	wT_.Initialize();
-	titleNameWt_.Initialize();
+	titleBack2d_ = make_unique<TitleBack2d>();
+	titleBack2d_->Initialize(noiseTex_[0]);
+	titleBack2d_->SetP_DissolveMask(dissolveMask_);
+
+}
+
+void ChangeSceneAnimation::ImGuiUpdate()
+{
+	titleBack2d_->ImGuiUpdate();
+	titleName2d_->ImGuiUpdate();
 }
 
 void ChangeSceneAnimation::Update()
@@ -56,7 +45,7 @@ void ChangeSceneAnimation::Update()
 	//前半
 	if (isStartFlag_)
 	{
-		dissolveMask_ = Math::Vector::EaseOutQuad(dissolveMax, 0.0f, flame_);
+		dissolveMask_ = Math::Vector::EaseOutQuad(dissolveMax_, 0.0f, flame_);
 
 		if (dissolveMask_ <= 0.0f)
 		{
@@ -69,8 +58,8 @@ void ChangeSceneAnimation::Update()
 	//後半
 	if (isEndFlag_)
 	{
-		dissolveMask_ = Math::Vector::EaseOutQuad(0.0f, dissolveMax, flame_);
-		if (dissolveMask_ >= dissolveMax)
+		dissolveMask_ = Math::Vector::EaseOutQuad(0.0f, dissolveMax_, flame_);
+		if (dissolveMask_ >= dissolveMax_)
 		{
 			flame_ = 0.0f;
 			isEndFlag_ = false;
@@ -79,12 +68,8 @@ void ChangeSceneAnimation::Update()
 		}
 	}
 
-
-	sprite_->GetDissolveMask() = dissolveMask_;
-	titleNameSprite_->GetDissolveMask() = dissolveMask_;
-
-	titleNameWt_.UpdateMatrix();
-	wT_.UpdateMatrix();
+	titleName2d_->Update();
+	titleBack2d_->Update();
 }
 
 void ChangeSceneAnimation::Draw()
@@ -93,8 +78,8 @@ void ChangeSceneAnimation::Draw()
 	{
 		return;
 	}
-	sprite_->Draw(wT_);
-	titleNameSprite_->Draw(titleNameWt_);
+	titleBack2d_->Draw2d();
+	titleName2d_->Draw2d();
 }
 
 void ChangeSceneAnimation::ChangeStart()

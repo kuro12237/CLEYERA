@@ -1,6 +1,8 @@
 #pragma once
 #include"Sprite/Sprite.h"
 #include"Utility/ColorConverter/ColorConverter.h"
+#include"TitleName2d/TitleName2d.h"
+#include"BackTitle2d/TitleBack2d.h"
 
 class ChangeSceneAnimation
 {
@@ -9,6 +11,8 @@ public:
 	static ChangeSceneAnimation* GetInstance();
 
 	void Initialize();
+
+	void ImGuiUpdate();
 
 	void Update();
 
@@ -35,24 +39,15 @@ private:
 
 	bool isUpdateFlag_ = false;
 
-	unique_ptr<Sprite>sprite_ = nullptr;
-	WorldTransform wT_ = {};
-
-	unique_ptr<Sprite>titleNameSprite_ = nullptr;
-	WorldTransform titleNameWt_ = {};
-
-	Math::Vector::Vector2 center_ = {};
-
 	float flame_ = 0.0f;
 	float flameMax_ = 120.0f;
 
-	float dissolveMax = 1.0f;
-	const uint32_t edgeColor_16 = 0xFF0000FF;
-
-	uint32_t tex_ = 0;
 	vector<uint32_t>noiseTex_ = {};
+	float dissolveMax_ = 1.0f;
+	float dissolveMask_ = 1.0f;
 
-	float dissolveMask_ = 0.0f;
+	unique_ptr<TitleName2d>titleName2d_ = nullptr;
+	unique_ptr<TitleBack2d>titleBack2d_ = nullptr;
 
 	//Singleton
 	ChangeSceneAnimation() = default;

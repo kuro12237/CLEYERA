@@ -643,6 +643,9 @@
     <ClCompile Include="Application\GameObject\TowerManager\Tower.cpp" />
     <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp" />
     <ClCompile Include="Application\GameObject\TitleUI\TitlePushA.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
+    <ClCompile Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.cpp" />
+    <ClCompile Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1108,6 +1111,7 @@
     <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h" />
     <ClInclude Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ISpriteData.h" />
+    <ClInclude Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

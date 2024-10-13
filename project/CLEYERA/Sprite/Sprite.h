@@ -17,7 +17,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	/// <param name="どこから表示するか"></param>
+	/// <param name="どこを中心にするか"></param>
 	/// <param name="画像サイズ:texを使用する場合使用しない"></param>
 	void Initialize(Math::Vector::Vector2 pos = {}, Math::Vector::Vector2 size = {});
 
@@ -63,8 +63,7 @@ public:
 
 	SpriteMode GetSpriteMode() { return blendMode_; }
 
-
-	Math::Vector::Vector2 GetPos() { return pos_; }
+	Math::Vector::Vector2 &GetPos() { return pos_; }
 	Math::Vector::Vector2 GetSize() { return size_; }
 
 	Math::Vector::Vector2 GetSrcTR() { return srcTR; }
@@ -95,9 +94,16 @@ private:
 	Math::Vector::Vector2 dissolveEdgeMinMax_ = {};
 	Math::Vector::Vector4 dissolveEdgeColor_ = { 1.0f,1.0f,1.0f,1.0f };
 
+
+
 	Math::Vector::Vector3 uvScale_ = { 1,1,1 };
 	Math::Vector::Vector3 uvRotate_ = { 0,0,0 };
 	Math::Vector::Vector3 uvTranslate_ = { 0,0,0 };
+
+	Math::Vector::Vector3 noiseUvScale_ = { 1,1,1 };
+	Math::Vector::Vector3 noiseUvRotate_ = { 0,0,0 };
+	Math::Vector::Vector3 noiseUvTranslate_ = { 0,0,0 };
+
 
 	float PerlinNoiseScale_ = 0;
 	float perlinNoiseFactor_ = 0;

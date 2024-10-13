@@ -86,6 +86,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	gameObjectManager_->ImGuiUpdate();
 	fireParticle_->ImGuiUpdate();
 
+	changeSceneAnimation_->ImGuiUpdate();
 #endif // _USE_IMGUI
 
 	changeSceneAnimation_->Update();
@@ -155,8 +156,9 @@ void TitleScene::Object3dDraw()
 
 void TitleScene::Flont2dSpriteDraw()
 {
-	titlePushA_->Draw();
 	PostEffect::GetInstance()->Draw();
+
+	titlePushA_->Draw();
 	changeSceneAnimation_->Draw();
 }
 

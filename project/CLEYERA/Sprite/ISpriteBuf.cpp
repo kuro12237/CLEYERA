@@ -21,7 +21,7 @@ void System::ISpriteBuf::Map()
 	materialBuf_->Map();
 }
 
-void System::ISpriteBuf::unMap()
+void System::ISpriteBuf::UnMap()
 {
 	vertexBuf_->UnMap();
 	indexBuf_->UnMap();
