@@ -1,5 +1,6 @@
 #pragma once
-#include"GameObject/ObjectManager/GameObjectManager.h"
+#include"Utility/ObjectManager/GameObjectManager.h"
+
 #include"Player.h"
 #include"Reticle/PlayerReticle.h"
 

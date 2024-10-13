@@ -1,5 +1,11 @@
 #include "IObjectData.h"
 
+IObjectData::IObjectData()
+{
+	gameObjectManager_ = GameObjectManager::GetInstance();
+	globalVariables_ = GlobalVariables::GetInstance();
+}
+
 void IObjectData::CalcGravity(float g)
 {
 	velocity_.y += g;
@@ -9,7 +15,8 @@ void IObjectData::CalcGravity(float g)
 
 void IObjectData::CreateJsonData()
 {
-	globalVariables_ = GlobalVariables::GetInstance();
 	globalVariables_->CreateGroup(name_);
 }
+
+
 

@@ -1,5 +1,5 @@
-#pragma once
-#include"GameObject/ObjectManager/IObjectData.h"
+#pragma 
+#include"GameObject/ObjectInterface/IObjectData.h"
 
 class PlayerGun:public IObjectData
 {

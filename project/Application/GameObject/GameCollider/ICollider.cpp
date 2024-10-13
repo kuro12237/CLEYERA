@@ -1,5 +1,4 @@
 #include "ICollider.h"
-#include"GameObject/ObjectManager/IObjectData.h"
 
 void ICollider::ClearAllHitsIds()
 {

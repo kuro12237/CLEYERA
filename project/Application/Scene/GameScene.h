@@ -13,7 +13,8 @@
 #include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
-#include"GameObject/ObjectManager/GameObjectManager.h"
+
+#include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
 
 #include"GameObject/Block/BlockManager.h"

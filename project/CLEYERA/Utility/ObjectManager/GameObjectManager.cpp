@@ -63,6 +63,7 @@ void GameObjectManager::Update()
 		auto& it = data.second->GetWorldTransform();
 		it.UpdateMatrix();
 		auto& object = data.second->GetGameObject();
+		//skinning
 		if (object->GetSkinningFlag())
 		{
 			object->SkinningUpdate();
@@ -73,11 +74,13 @@ void GameObjectManager::Update()
 	for (auto& data : objInstancing3dData_) {
 		auto& it = data.second;
 
+		//object
 		for (uint32_t i = 0; i < it->GetTransforms().size(); i++)
 		{
 			it->GetTransforms()[i]->Update();
 			it->PushObjectData(i);
 		}
+		//“]‘—
 		it->GetGameObject()->Transfar();
 	}
 }
@@ -97,7 +100,9 @@ void GameObjectManager::ImGuiUpdate()
 			}
 			ImGui::TreePop();
 		}
+
 		ImGui::Separator();
+
 		//instancingData
 		if (ImGui::TreeNode("InstancingData"))
 		{
@@ -120,18 +125,18 @@ void GameObjectManager::ImGuiUpdate()
 		//cameraData
 		if (ImGui::TreeNode("cameraData"))
 		{
-			//ImGui::BeginChild("cameraData", ImVec2(250, 100));
 			for (auto& data : cameraData_)
 			{
 				auto& it = data.second;
 				it->ImGuiUpdate(it->GetObjectName());
 
 			}
-			//ImGui::EndChild();
 			ImGui::TreePop();
 		}
+
 		ImGui::Separator();
-		//ƒJƒƒ‰İ’è
+
+		//ƒJƒƒ‰‘I‘ğ
 		static char buffer[256] = "";
 		if (ImGui::InputText("SelectCameraName", buffer, sizeof(buffer)))
 		{

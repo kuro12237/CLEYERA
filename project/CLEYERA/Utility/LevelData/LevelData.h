@@ -5,12 +5,16 @@
 #include"Game3dInstancingObject/GameInstancing3dObject.h"
 #include"Transform/STransformEular.h"
 
-#include"Game3dInstancingObjectData.h"
-#include"Game3dObjectData.h"
-#include"GameCameraData.h"
+#include"Utility/ObjectManager/Game3dInstancingObjectData.h"
+#include"Utility/ObjectManager/GameCameraData.h"
+#include"Utility/ObjectManager/Game3dObjectData.h"
+
 #include"Particle/GpuParticle.h"
 #include"Particle/Emitter/ParticleEmitter.h"
 
+/// <summary>
+/// 読み込んだオブジェクトを格納
+/// </summary>
 struct LevelData
 {
 	uint32_t objectNum = 0;

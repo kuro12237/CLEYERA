@@ -25,7 +25,6 @@ public:
 
 #pragma endregion
 
-
 private:
 
 	bool isEndFlag_ = false;
@@ -39,6 +38,9 @@ private:
 	unique_ptr<Sprite>sprite_ = nullptr;
 	WorldTransform wT_ = {};
 
+	unique_ptr<Sprite>titleNameSprite_ = nullptr;
+	WorldTransform titleNameWt_ = {};
+
 	Math::Vector::Vector2 center_ = {};
 
 	float flame_ = 0.0f;
@@ -49,6 +51,8 @@ private:
 
 	uint32_t tex_ = 0;
 	vector<uint32_t>noiseTex_ = {};
+
+	float dissolveMask_ = 0.0f;
 
 	//Singleton
 	ChangeSceneAnimation() = default;

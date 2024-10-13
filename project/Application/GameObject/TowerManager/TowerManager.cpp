@@ -8,7 +8,6 @@ void TowerManager::Initialize()
 	{
 		shared_ptr<Tower>tower = make_shared<Tower>();
 		tower->Initialize(name_, i);
-		transforms[i]->SetUvScale(tower->GetUvScale());
 		towers_.push_back(tower);
 	}
 }

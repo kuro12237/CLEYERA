@@ -1,6 +1,7 @@
 #pragma once
-#include"GameObject/ObjectManager/IObjectData.h"
 
+#include"Utility/ObjectManager/GameObjectManager.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
 
 class PlayerCamera:public IObjectData
 {

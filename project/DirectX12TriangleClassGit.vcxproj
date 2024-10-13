@@ -48,8 +48,8 @@
     <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Particle\GoalParticle.cpp" />
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
-    <ClCompile Include="Application\GameObject\ObjectManager\GameObjectManager.cpp" />
-    <ClCompile Include="Application\GameObject\ObjectManager\IObjectData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\IObjectData.cpp" />
     <ClCompile Include="Application\GameObject\Particles\CharacterDeadParticle.cpp" />
     <ClCompile Include="Application\GameObject\Particles\CharacterMoveParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBullet.cpp" />
@@ -147,10 +147,10 @@
     <ClCompile Include="CLEYERA\Utility\FileLoader\FileLoader.cpp" />
     <ClCompile Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.cpp" />
     <ClCompile Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.cpp" />
-    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp" />
-    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp" />
-    <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp" />
-    <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\Game3dInstancingObjectData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\Game3dObjectData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\GameCameraData.cpp" />
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\IGameObjectData.cpp" />
     <ClCompile Include="CLEYERA\Utility\LogManager\LogManager.cpp" />
     <ClCompile Include="CLEYERA\Utility\Noise\NoiseTexture.cpp" />
     <ClCompile Include="CLEYERA\Utility\RandomGenerator\RandomGenerator.cpp" />
@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\ChangeSceneAnimation\ChangeSceneAnimation.h" />
+    <ClInclude Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.h" />
     <ClInclude Include="Application\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Block\Block.h" />
     <ClInclude Include="Application\GameObject\Block\BlockManager.h" />
@@ -174,8 +175,8 @@
     <ClInclude Include="Application\GameObject\Goal\Goal.h" />
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />
-    <ClInclude Include="Application\GameObject\ObjectManager\GameObjectManager.h" />
-    <ClInclude Include="Application\GameObject\ObjectManager\IObjectData.h" />
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\IObjectData.h" />
     <ClInclude Include="Application\GameObject\Particles\CharacterDeadParticle.h" />
     <ClInclude Include="Application\GameObject\Particles\CharacterMoveParticle.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBullet.h" />
@@ -309,10 +310,11 @@
     <ClInclude Include="CLEYERA\Utility\GlobalVariables\GlobalVariables.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h" />
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiManager.h" />
-    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.h" />
-    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dObjectData.h" />
-    <ClInclude Include="CLEYERA\Utility\LevelData\GameCameraData.h" />
-    <ClInclude Include="CLEYERA\Utility\LevelData\IGameObjectData.h" />
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\Game3dInstancingObjectData.h" />
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\Game3dObjectData.h" />
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\GameCameraData.h" />
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\IGameObjectData.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\ISpriteData.h" />
     <ClInclude Include="CLEYERA\Utility\LevelData\LevelData.h" />
     <ClInclude Include="CLEYERA\Utility\LogManager\LogManager.h" />
     <ClInclude Include="CLEYERA\Utility\Noise\NoiseTexture.h" />

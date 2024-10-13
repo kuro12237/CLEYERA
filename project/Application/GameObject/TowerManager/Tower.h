@@ -1,7 +1,9 @@
 #pragma once
 #include"GameObject/GameCollider/ICollider.h"
-#include"GameObject/ObjectManager/IObjectData.h"
 #include"Utility/ObjectId/GameObjectId.h"
+
+#include"Utility/ObjectManager/GameObjectManager.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
 
 class Tower :public IObjectData
 {

@@ -2,16 +2,25 @@
 
 void TitleCamera::Initialize()
 {
-	gameObjectManager_ = GameObjectManager::GetInstance();
+	name_ = "TitleCamera";
 
-	this->name_ = "TitleCamera";
+	CreateJsonData();
+
+	///カメラのセット
 	gameObjectManager_->CameraReset(name_);
 
-	this->CreateJsonData();
+
+	globalVariables_->AddItem(name_, "speed", speed_);
+	speed_ = globalVariables_->GetValue<float>(name_, "speed");
+	globalVariables_->AddItem(name_, "archOffsetAdd", archOffsetAdd_);
+	archOffsetAdd_ = globalVariables_->GetValue<float>(name_, "archOffsetAdd");
 }
 
 void TitleCamera::Update()
 {
+	speed_ = globalVariables_->GetValue<float>(name_, "speed");
+	archOffsetAdd_ = globalVariables_->GetValue<float>(name_, "archOffsetAdd");
+
 	if (isBridgeAnimationStart_)
 	{
 		isBridgeAnimationStart_ = false;
@@ -26,10 +35,9 @@ void TitleCamera::Update()
 
 	if (cameraWt.transform.translate.z > archStartOffset_)
 	{
-		string number = to_string((archStartOffset_));
-		LogManager::Log(number + "\n");
-		archStartOffset_ += 32.0f;
+		archStartOffset_ += archOffsetAdd_;
 		isBridgeAnimationStart_ = true;
+
 		if (useBridgeNumber_ == 0)
 		{
 			useBridgeNumber_ = 1;

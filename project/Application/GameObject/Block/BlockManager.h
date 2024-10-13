@@ -1,6 +1,6 @@
 #pragma once
-#include"GameObject/ObjectManager/GameObjectManager.h"
-#include"GameObject/ObjectManager/IObjectData.h"
+#include"Utility/ObjectManager/GameObjectManager.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
 #include"Block.h"
 
 class BlockManager

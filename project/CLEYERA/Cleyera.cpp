@@ -24,13 +24,14 @@ void Cleyera::Initialize()
 	LightingManager::GetInstance()->Initialize();
 	DirectionalLight::Initialize();
 
-	GlobalVariables::GetInstance()->LoadFiles();
 	CameraManager::GetInstance()->Initialize();
 	RunTimeCounter::GetInstance()->Create();
 	NoiseTexture::GetInstance()->Initialize();
-	SkyBox::GetInstance()->Initialize();
+	
 	PostEffect::GetInstance()->Initialize();
 
+	GlobalVariables::GetInstance()->LoadFiles();
+	SkyBox::GetInstance()->Initialize();
 }
 
 void Cleyera::Finalize()

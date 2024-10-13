@@ -4,6 +4,9 @@ void TitleScene::Initialize()
 {
 	//ゲーム名設定
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");
+	//グローバル変数のパラメーターファイルの保存先変更
+	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/");
+	GlobalVariables::GetInstance()->LoadFiles();
 
 	//instanceをGet
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
@@ -26,16 +29,15 @@ void TitleScene::Initialize()
 	camera_ = make_unique<TitleCamera>();
 	camera_->Initialize();
 
-
-	//SkyBox設定
-	skyBox_->SetTransform({ {kSkyBoxScale_,kSkyBoxScale_,kSkyBoxScale_},{},{} });
-	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
-	skyBox_->SetTexHandle(skyBoxTexHandle);
-	//skyBoxとカメラペアレント
 	auto& cameraWt = gameObjectManager_->GetCameraData(camera_->GetName())->GetWorldTransform();
-	skyBox_->SetParent(cameraWt);
 	//カメラのposをポインタでつなぐ
 	p_CameraPos_ = &cameraWt.transform.translate;
+
+	//SkyBox設定
+	skyBox_->Initialize();
+	//skyBoxとカメラペアレント
+	skyBox_->SetParent(cameraWt);
+
 
 	arch_ = make_unique<Arch>();
 	arch_->Initialize();
@@ -95,11 +97,12 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	arch_->Update();
 	lava_->Update();
-	
+
 	fireParticle_->Emit();
 	fireParticle_->Update();
-	
+
 	camera_->Update();
+
 	if (camera_->GetIsBridgeAnimationStart() && !isAnimationStart_)
 	{
 		size_t num = camera_->GetUseBridgeNumber();
@@ -152,9 +155,9 @@ void TitleScene::Object3dDraw()
 
 void TitleScene::Flont2dSpriteDraw()
 {
+	titlePushA_->Draw();
 	PostEffect::GetInstance()->Draw();
 	changeSceneAnimation_->Draw();
-	titlePushA_->Draw();
 }
 
 std::string TitleScene::FormatNumberWithDots(int num)

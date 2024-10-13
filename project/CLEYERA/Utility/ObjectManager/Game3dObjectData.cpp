@@ -31,7 +31,6 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 		gameObject_->CreateSkinningParameter();
 		gameObject_->SkeletonUpdate(modelFilePath_, animationFlame_);
 		gameObject_->SkinningUpdate();
-		DescriptorManager::GetInstance();
 	}
 }
 

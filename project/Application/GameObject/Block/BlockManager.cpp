@@ -8,7 +8,6 @@ void BlockManager::Initialize()
 	{
 		shared_ptr<Block>block = make_shared<Block>();
 		block->Initialize(name_, i);
-		transforms[i]->SetUvScale(block->GetUvScale());
 		blocks_.push_back(block);
 	}
 }

@@ -9,6 +9,7 @@ ChangeSceneAnimation* ChangeSceneAnimation::GetInstance()
 void ChangeSceneAnimation::Initialize()
 {
 	center_ = { float(WinApp::GetkCilientWidth() / 2), float(WinApp::GetkCilientHeight() / 2) };
+	Math::Vector::Vector4 edgeColor = ColorConverter::ColorConversion(edgeColor_16);
 
 	sprite_ = make_unique<Sprite>();
 	sprite_->Initialize();
@@ -22,10 +23,21 @@ void ChangeSceneAnimation::Initialize()
 	//dissolve設定
 	sprite_->GetDissolveMask() = dissolveMax;
 	sprite_->GetDissolveEdgeMinMax() = { 0.0f, 0.06f };
-	Math::Vector::Vector4 edgeColor = ColorConverter::ColorConversion(edgeColor_16);
 	sprite_->GetDissolveDdgeColor() = edgeColor;
 
+	titleNameSprite_ = make_unique<Sprite>();
+	titleNameSprite_->Initialize();
+	uint32_t handle = TextureManager::LoadPngTexture("TitleName.png");
+	titleNameSprite_->SetTexHandle(handle);
+	titleNameSprite_->SetNoiseTex(noiseTex_[0]);
+	titleNameSprite_->SetSpriteMode(DissolveNone);
+	//dissolve設定
+	titleNameSprite_->GetDissolveMask() = dissolveMax;
+	titleNameSprite_->GetDissolveEdgeMinMax() = { 0.0f, 0.06f };
+	titleNameSprite_->GetDissolveDdgeColor() = edgeColor;
+
 	wT_.Initialize();
+	titleNameWt_.Initialize();
 }
 
 void ChangeSceneAnimation::Update()
@@ -36,7 +48,6 @@ void ChangeSceneAnimation::Update()
 	}
 
 	isChangeSceneFlag_ = false;
-	float& dissolveMask = sprite_->GetDissolveMask();
 	//スタート時
 	if (isUpdateFlag_)
 	{
@@ -45,9 +56,9 @@ void ChangeSceneAnimation::Update()
 	//前半
 	if (isStartFlag_)
 	{
-		dissolveMask = Math::Vector::EaseOutQuad(dissolveMax, 0.0f, flame_);
+		dissolveMask_ = Math::Vector::EaseOutQuad(dissolveMax, 0.0f, flame_);
 
-		if (dissolveMask <= 0.0f)
+		if (dissolveMask_ <= 0.0f)
 		{
 			flame_ = 0.0f;
 			isStartFlag_ = false;
@@ -58,8 +69,8 @@ void ChangeSceneAnimation::Update()
 	//後半
 	if (isEndFlag_)
 	{
-		dissolveMask = Math::Vector::EaseOutQuad(0.0f, dissolveMax, flame_);
-		if (dissolveMask >= dissolveMax)
+		dissolveMask_ = Math::Vector::EaseOutQuad(0.0f, dissolveMax, flame_);
+		if (dissolveMask_ >= dissolveMax)
 		{
 			flame_ = 0.0f;
 			isEndFlag_ = false;
@@ -68,12 +79,22 @@ void ChangeSceneAnimation::Update()
 		}
 	}
 
+
+	sprite_->GetDissolveMask() = dissolveMask_;
+	titleNameSprite_->GetDissolveMask() = dissolveMask_;
+
+	titleNameWt_.UpdateMatrix();
 	wT_.UpdateMatrix();
 }
 
 void ChangeSceneAnimation::Draw()
 {
+	if (isCompliteFlag_)
+	{
+		return;
+	}
 	sprite_->Draw(wT_);
+	titleNameSprite_->Draw(titleNameWt_);
 }
 
 void ChangeSceneAnimation::ChangeStart()

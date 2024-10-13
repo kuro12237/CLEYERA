@@ -5,6 +5,7 @@
 #include"WorldTransform.h"
 #include"Utility/CameraManager/CameraManager.h"
 #include"Light/LightingManager.h"
+#include"Utility/GlobalVariables/GlobalVariables.h"
 
 class SkyBox
 {
@@ -30,7 +31,6 @@ public:
 #pragma endregion
 
 #pragma region Get
-
 	uint32_t GetTexHandle() { return texHandle_; }
 #pragma endregion
 
@@ -46,11 +46,17 @@ private:
 	unique_ptr<BufferResource<Material>>cMaterial_ = nullptr;
 	Material material_ = {};
 
+	bool initializeLock_ = false;
 	uint32_t texHandle_ = 0;
 	WorldTransform worldTransform_ = {};
 
+	GlobalVariables* globalVariables_ = nullptr;
+
 
 	string defaultCubeMapName_ = "Resources/Default/CubeMap.dds";
+	string prevDefaultCubeMapName_ = "";
+
+
 	//Singleton
 	SkyBox() = default;
 	~SkyBox() = default;

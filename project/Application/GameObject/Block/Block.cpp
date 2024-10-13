@@ -9,7 +9,6 @@ void Block::Initialize(string name, uint32_t index)
 	SetObjectData(data->GetTransform());
 	SetAABB(data->GetAABB());
 
-	SetUvScale({ 0.0f,0.0f,10.0f });
 	id_ = kNormalBlock;
 	attribute_ = CollisionMask::kBlockAttribute;
 	mask_ = CollisionMask::kBlockMask;

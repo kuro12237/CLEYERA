@@ -1,6 +1,7 @@
 #pragma once
 #include"Lava.h"
-#include"GameObject/ObjectManager/GameObjectManager.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
+#include"Utility/ObjectManager/GameObjectManager.h"
 
 class Lava :public IObjectData
 {

@@ -1,8 +1,6 @@
 #pragma once
 #include"Utility/LevelData/LevelData.h"
-#include"IObjectData.h"
 
-class IObjectData;
 class GameObjectManager
 {
 public:
@@ -50,12 +48,10 @@ public:
 #pragma endregion
 
 #pragma region Set
-
 	void SetNormalObjectParent(string parentName, string childName);
 	void SetInstancingObjectParent(string parentName, string childName);
 	void CameraReset(string name = "");
 	void SetObjectPipline(unique_ptr<IPipelineCommand> piplineSelect, string name);
-
 #pragma endregion
 
 private:

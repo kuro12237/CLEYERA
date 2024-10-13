@@ -1,6 +1,6 @@
 #pragma once
 #include"EnemyWalk.h"
-#include"GameObject/ObjectManager/GameObjectManager.h"
+#include"Utility/ObjectManager/GameObjectManager.h"
 
 class EnemyWalkManager
 {

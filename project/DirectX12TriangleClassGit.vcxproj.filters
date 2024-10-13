@@ -489,13 +489,13 @@
     <ClCompile Include="CLEYERA\Utility\CameraManager\CameraManager.cpp">
       <Filter>CLEYERA\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.cpp">
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\Game3dInstancingObjectData.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Utility\LevelData\Game3dObjectData.cpp">
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\Game3dObjectData.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Utility\LevelData\GameCameraData.cpp">
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\GameCameraData.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
     <ClCompile Include="Application\Scene\GameScene.cpp">
@@ -513,10 +513,10 @@
     <ClCompile Include="CLEYERA\Model\Game3dInstancingObject\IGameInstancing3dObject.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Utility\LevelData\IGameObjectData.cpp">
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\IGameObjectData.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\ObjectManager\IObjectData.cpp">
+    <ClCompile Include="Application\GameObject\ObjectInterface\IObjectData.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp">
@@ -582,7 +582,7 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateRock.cpp">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\ObjectManager\GameObjectManager.cpp">
+    <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp">
       <Filter>Project\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.cpp">
@@ -921,13 +921,13 @@
     <ClInclude Include="CLEYERA\Utility\CameraManager\CameraManager.h">
       <Filter>CLEYERA\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dInstancingObjectData.h">
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\Game3dInstancingObjectData.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Utility\LevelData\Game3dObjectData.h">
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\Game3dObjectData.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Utility\LevelData\GameCameraData.h">
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\GameCameraData.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
     <ClInclude Include="Application\Utility\ObjectId\GameObjectId.h">
@@ -945,10 +945,10 @@
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h">
       <Filter>Project\GameObject\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\Utility\LevelData\IGameObjectData.h">
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\IGameObjectData.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\ObjectManager\IObjectData.h">
+    <ClInclude Include="Application\GameObject\ObjectInterface\IObjectData.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h">
@@ -1026,7 +1026,7 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\ObjectManager\GameObjectManager.h">
+    <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h">
       <Filter>Project\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\GpuParticlePipline\CreateGpuParticlePipline.h">
@@ -1106,6 +1106,8 @@
     <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h" />
     <ClInclude Include="Application\GameObject\TowerManager\Tower.h" />
     <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h" />
+    <ClInclude Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\ISpriteData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

@@ -6,7 +6,9 @@
 
 #include"Utility/DeltaTimer/DeltaTimer.h"
 #include"Utility/ObjectId/GameObjectId.h"
-#include"GameObject/ObjectManager/IObjectData.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
+
+
 #include"GameObject/GameCollider/ICollider.h"
 
 #include"command/PlayerCommandHandler.h"
@@ -15,8 +17,7 @@
 #include"state/PlayerStateNone.h"
 #include"state/PlayerStateRock.h"
 #include"state/PlayerStateGoalAnimation.h"
-
-#include"GameObject/ObjectManager/GameObjectManager.h"
+#include"Utility/ObjectManager/GameObjectManager.h"
 
 #include"GameObject/Particles/CharacterMoveParticle.h"
 

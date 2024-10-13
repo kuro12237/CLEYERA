@@ -1,8 +1,9 @@
 #pragma once
 #include"WorldTransform.h"
-#include"GameObject/ObjectManager/GameObjectManager.h"
+#include"Utility/ObjectManager/GameObjectManager.h"
 #include"Input.h"
 #include"Sprite/Sprite.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
 
 class PlayerReticle :public IObjectData
 {

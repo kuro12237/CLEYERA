@@ -31,8 +31,9 @@ void GlobalVariables::SaveFile(const std::string& groupName)
 	// jsonオブジェクトの登録
 	root[groupName] = nlohmann::json::object();
 	// 各項目について
-	for (std::map<std::string, Item>::iterator itItem = itGroup->second.items.begin();
-		itItem != itGroup->second.items.end(); ++itItem) {
+	auto& goupItem = itGroup->second;
+	for (std::map<std::string, Item>::iterator itItem = goupItem.items.begin(); itItem != goupItem.items.end(); ++itItem)
+	{
 		// 項目名を取得
 		const std::string& itemName = itItem->first;
 		// 項目の参照を取得
@@ -63,22 +64,30 @@ void GlobalVariables::SaveFile(const std::string& groupName)
 			root[groupName][itemName] = nlohmann::json::array({ value.x, value.y, value.z, value.w });
 		}
 		if (std::holds_alternative<TransformQua>(item.value)) {
-			// Vector4の値の登録
+			// TransformQuaternion登録
 			TransformQua value = std::get<TransformQua>(item.value);
-			
-			// convert to json, just by assigning:
+
 			nlohmann::json json = value;
-			// convert to string
 			std::string json_as_string = json.dump();
-			// string to json
 			nlohmann::json back_json = nlohmann::json::parse(json_as_string);
-
-			// json -> instance
 			root[groupName][itemName] = back_json.get<TransformQua>();
+		}
+		if (std::holds_alternative<TransformEular>(item.value)) {
+			// TransformQuaternion登録
+			TransformEular value = std::get<TransformEular>(item.value);
 
-			//root[groupName][itemName] = nlohmann::json::array({ value.scale, value.quaternion,value.translate});
+			nlohmann::json json = value;
+			std::string json_as_string = json.dump();
+			nlohmann::json back_json = nlohmann::json::parse(json_as_string);
+			root[groupName][itemName] = back_json.get<TransformEular>();
+		}
+		if (std::holds_alternative<string>(item.value)) {
+			// string
+			string value = std::get<string>(item.value);
+			root[groupName][itemName] = std::get<string>(item.value);
 		}
 	}
+
 	// ディレクトリがなければ作成する
 	std::filesystem::path dir(kDirectoryPath);
 	if (!std::filesystem::exists(kDirectoryPath)) {
@@ -101,9 +110,7 @@ void GlobalVariables::SaveFile(const std::string& groupName)
 	}
 	// ファイルにjson文字列を書き込む(インデント幅4)
 	ofs << std::setw(4) << root << std::endl;
-	// ファイルを閉じる
 	ofs.close();
-
 }
 
 void GlobalVariables::LoadFile(const std::string& groupName)
@@ -125,9 +132,7 @@ void GlobalVariables::LoadFile(const std::string& groupName)
 
 	nlohmann::json root;
 
-	// json文字列からjsonのデータ構造に展開
 	ifs >> root;
-	// ファイルを閉じる
 	ifs.close();
 
 	// グループを検索
@@ -168,15 +173,21 @@ void GlobalVariables::LoadFile(const std::string& groupName)
 		else if (itItem->is_array() && itItem->size() == 4) {
 			// float型の値を登録
 			Vector4 value = { itItem->at(0), itItem->at(1), itItem->at(2), itItem->at(3) };
-
 			SetValue(groupName, itemName, value);
 		}
 		else if (itItem->is_object() && itItem->size() == 3) {
+			TransformEular value = itItem.value();
+			SetValue(groupName, itemName, value);
+		}
+		else if (itItem->is_object() && itItem->size() == 4) {
 			TransformQua value = itItem.value();
 			SetValue(groupName, itemName, value);
 		}
-
-
+		else if (itItem->is_string())
+		{
+			string value = itItem.value();
+			SetValue(groupName, itemName, value);
+		}
 	}
 }
 
@@ -202,7 +213,6 @@ void GlobalVariables::LoadFiles()
 		// ファイル読み込み
 		LoadFile(filePath.stem().string());
 	}
-
 }
 
 void GlobalVariables::Update()
@@ -244,7 +254,7 @@ void GlobalVariables::Update()
 			else if (std::holds_alternative<float>(item.value)) {
 				float* ptr = std::get_if<float>(&item.value);
 				ImGui::DragFloat(itemName.c_str(), ptr, 0, 100);
-			}
+			}//bool値
 			else if (std::holds_alternative<bool>(item.value)) {
 				bool* ptr = std::get_if<bool>(&item.value);
 				ImGui::Checkbox(itemName.c_str(), ptr);
@@ -267,16 +277,43 @@ void GlobalVariables::Update()
 				if (ImGui::TreeNode(itemName.c_str()))
 				{
 					Name = itemName + "scale";
-						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->scale));
-						Name = itemName + "quaternion";
-						ImGui::DragFloat4(Name.c_str(), reinterpret_cast<float*>(&ptr->quaternion));
-						Name = itemName + "translate";
-						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->translate));
-						ImGui::TreePop();
+					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->scale));
+					Name = itemName + "quaternion";
+					ImGui::DragFloat4(Name.c_str(), reinterpret_cast<float*>(&ptr->quaternion));
+					Name = itemName + "translate";
+					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->translate));
+
+					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->rotate));
+					ImGui::TreePop();
+				}
+			}
+			else if (std::holds_alternative<TransformEular>(item.value)) {
+				TransformEular* ptr = std::get_if<TransformEular>(&item.value);
+				string  Name = itemName;
+				if (ImGui::TreeNode(itemName.c_str()))
+				{
+					Name = itemName + "scale";
+					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->scale));
+					Name = itemName + "rotate";
+					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->rotate));
+					Name = itemName + "translate";
+					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->translate));
+					ImGui::TreePop();
+				}
+			}
+			else if (std::holds_alternative<string>(item.value))
+			{
+				static char buffer[256] = "";
+				ImGui::InputText("text", buffer, sizeof(buffer));
+
+				if (ImGui::Button("Confirm"))
+				{
+					string* ptr = std::get_if<string>(&item.value);
+					*ptr = buffer;
 				}
 			}
 		}
-	
+
 		// 改行
 		ImGui::Text("\n");
 

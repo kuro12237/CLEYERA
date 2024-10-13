@@ -1,21 +1,12 @@
 #pragma once
 #include"Pch.h"
 #include"Transform/STransformQua.h"
+#include"Transform/STransformEular.h"
 
 class GlobalVariables {
 public:
+
 	static GlobalVariables* GetInstance();
-
-	bool GetIsSave() { return isSave_; }
-
-	template<typename T>
-	T GetValue(const std::string& groupName, const std::string& key);
-
-	template<typename T>
-	void SetValue(const std::string& groupName, const std::string& key, T value);
-
-	template<typename T>
-	void AddItem(const std::string& groupName, const std::string& key, T value);
 
 	/// <summary>
 	/// グループの生成
@@ -44,17 +35,34 @@ public:
 	/// </summary>
 	void Update();
 
+#pragma region Get
+	bool GetIsSave() { return isSave_; }
+	template<typename T>
+	T GetValue(const std::string& groupName, const std::string& key);
+#pragma endregion
+
+#pragma region Set
+	template<typename T>
+	void SetValue(const std::string& groupName, const std::string& key, T value);
+	template<typename T>
+	void AddItem(const std::string& groupName, const std::string& key, T value);
+	void SetDirectoryFilePath(string filePath) { kDirectoryPath = filePath; }
+#pragma endregion
+
 private:
+
+#pragma region Singleton
 	GlobalVariables() = default;
 	~GlobalVariables() = default;
 	GlobalVariables(const GlobalVariables& obj) = delete;
 	GlobalVariables& operator=(const GlobalVariables& obj) = delete;
+#pragma endregion
 
 public:
 	// 項目
 	struct Item {
 		// 項目の値
-		std::variant<int32_t, float,bool, Math::Vector::Vector2, Math::Vector::Vector3, Math::Vector::Vector4,TransformQua> value;
+		std::variant<int32_t, float,bool, Math::Vector::Vector2, Math::Vector::Vector3, Math::Vector::Vector4,TransformQua,TransformEular,string> value;
 	};
 	// グループ
 	struct Group {
@@ -64,7 +72,7 @@ public:
 	std::map<std::string, Group> datas_;
 
 	// グローバル変数の保存先ファイルパス
-	const std::string kDirectoryPath = "resources/GlobalVariables/";
+	std::string kDirectoryPath = "Resources/GlobalVariables/";
 
 	bool isSave_;
 };

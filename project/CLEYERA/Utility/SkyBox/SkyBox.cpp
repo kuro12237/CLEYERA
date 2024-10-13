@@ -8,42 +8,63 @@ SkyBox* SkyBox::GetInstance()
 
 void SkyBox::Initialize()
 {
-	CreateVertex();
-	CreateIndex();
-	CreateMaterial();
-	TextureManager::UnUsedFilePath();
-	texHandle_ = TextureManager::LoadDDSTexture(defaultCubeMapName_);
+	if (!initializeLock_)
+	{
+		CreateVertex();
+		CreateIndex();
+		CreateMaterial();
+
+		globalVariables_ = GlobalVariables::GetInstance();
+		TextureManager::UnUsedFilePath();
+		texHandle_ = TextureManager::LoadDDSTexture(defaultCubeMapName_);
+		initializeLock_ = true;
+	}
+
+	prevDefaultCubeMapName_ = defaultCubeMapName_;
+
+	globalVariables_->AddItem<string>("SkyBox", "texFileName", defaultCubeMapName_);
+	defaultCubeMapName_ = globalVariables_->GetValue<string>("SkyBox", "texFileName");
+
+	globalVariables_->AddItem<TransformEular>("SkyBox", "transform", worldTransform_.transform);
+	worldTransform_.transform = globalVariables_->GetValue<TransformEular>("SkyBox", "transform");
+
+	if (defaultCubeMapName_ != prevDefaultCubeMapName_)
+	{
+		texHandle_ = TextureManager::LoadDDSTexture(defaultCubeMapName_);
+	}
+
 }
 
 void SkyBox::ImGuiUpdate()
 {
-	if (ImGui::TreeNode("SkyBox"))
-	{
-		ImGui::DragFloat3("scale", &worldTransform_.transform.scale.x,0.1f);
-		ImGui::DragFloat3("rotate", &worldTransform_.transform.rotate.x, 0.1f);
-		ImGui::DragFloat3("translate", &worldTransform_.transform.translate.x, 0.1f);
-		ImGui::TreePop();
-	}
+
 }
 
 void SkyBox::Update()
 {
+	if (defaultCubeMapName_ != prevDefaultCubeMapName_)
+	{
+		texHandle_ = TextureManager::LoadDDSTexture(defaultCubeMapName_);
+	}
+	defaultCubeMapName_ = globalVariables_->GetValue<string>("SkyBox", "texFileName");
+	worldTransform_.transform = globalVariables_->GetValue<TransformEular>("SkyBox", "transform");
+
 	cMaterial_->Map();
 	cMaterial_->Setbuffer(material_);
-	
+
 	worldTransform_.UpdateMatrix();
 }
 
 void SkyBox::Draw()
 {
-	if (texHandle_==0)
+	if (texHandle_ == 0)
 	{
 		return;
 	}
 
 	ComPtr<ID3D12GraphicsCommandList>command = DirectXCommon::GetInstance()->GetCommands().m_pList;
 
-	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SKYBOX,"None");
+	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::SKYBOX, "None");
 	command->SetGraphicsRootSignature(pso.rootSignature.Get());
 	command->SetPipelineState(pso.GraphicsPipelineState.Get());
 
@@ -62,7 +83,6 @@ void SkyBox::Draw()
 
 void SkyBox::CreateIndex()
 {
-
 	cIndex = make_unique<BufferResource<uint32_t>>();
 	cIndex->CreateResource(36);
 	cIndex->CreateIndexBufferView();
@@ -133,7 +153,6 @@ void SkyBox::CreateVertex()
 
 void SkyBox::CreateMaterial()
 {
-
 	cMaterial_ = make_unique<BufferResource<Material>>();
 	cMaterial_->CreateResource();
 

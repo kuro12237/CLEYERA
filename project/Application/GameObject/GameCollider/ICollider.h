@@ -1,7 +1,8 @@
 #pragma once
-#include"GameObject/ObjectManager/IObjectData.h"
+
 #include"Utility/CollisionManager/CollisionStructures/CollisionStructures.h"
 #include"Utility/CollisionMask/CollisionMask.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
 
 enum HItDirection {
 	NONE,
