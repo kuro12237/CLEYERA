@@ -100,7 +100,7 @@ void ChangeSceneAnimation::Update()
 void ChangeSceneAnimation::Draw()
 {
 
-	titleBack2d_->Draw2d();
+	//titleBack2d_->Draw2d();
 	if (isCompliteFlag_)
 	{
 		return;
