@@ -100,13 +100,13 @@ void ChangeSceneAnimation::Update()
 void ChangeSceneAnimation::Draw()
 {
 
-	//titleBack2d_->Draw2d();
 	if (isCompliteFlag_)
 	{
 		return;
 	}
 
-	fireEmberParticle_->Draw();
+	titleBack2d_->Draw2d();
+	//fireEmberParticle_->Draw();
 	titleName2d_->Draw2d();
 	rodingIcon_->Draw2d();
 }

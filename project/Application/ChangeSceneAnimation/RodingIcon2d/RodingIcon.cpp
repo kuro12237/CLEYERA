@@ -26,6 +26,7 @@ void RodingIcon2d::Initialize(uint32_t noiseTex)
 	sprite_->GetDissolveDdgeColor() = edgeColor_;
 
 	this->CalcAnkerPos();
+	worldTransform_.UpdateMatrix();
 }
 
 void RodingIcon2d::Update()
