@@ -272,6 +272,9 @@ namespace Particle {
 					ImGui::Separator();
 					ImGui::DragFloat3("scaleVelocityMin", &emitParam_[index].scaleVelocityMin.x, 0.1f);
 					ImGui::DragFloat3("scaleVelocityMax", &emitParam_[index].scaleVelocityMax.x, 0.1f);
+					ImGui::Separator();
+					ImGui::DragFloat3("scaleSizeMin", &emitParam_[index].scaleSizeMin.x, 0.1f);
+					ImGui::DragFloat3("scaleSizeMax", &emitParam_[index].scaleSizeMax.x, 0.1f);
 					ImGui::TreePop();
 				}
 			}

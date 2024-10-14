@@ -1,8 +1,10 @@
 #pragma once
 #include"Sprite/Sprite.h"
 #include"Utility/ColorConverter/ColorConverter.h"
+
 #include"TitleName2d/TitleName2d.h"
 #include"BackTitle2d/TitleBack2d.h"
+#include"RodingIcon2d/RodingIcon.h"
 
 class ChangeSceneAnimation
 {
@@ -48,6 +50,7 @@ private:
 
 	unique_ptr<TitleName2d>titleName2d_ = nullptr;
 	unique_ptr<TitleBack2d>titleBack2d_ = nullptr;
+	unique_ptr<RodingIcon2d>rodingIcon_ = nullptr;
 
 	//Singleton
 	ChangeSceneAnimation() = default;

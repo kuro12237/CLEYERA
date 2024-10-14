@@ -76,17 +76,22 @@ void TitleScene::Initialize()
 	fireParticle_ = make_unique<FireParticle>();
 	fireParticle_->Initialize();
 
+	fireEmberParticle_ = make_unique<FireEmber2dParticle>();
+	fireEmberParticle_->Initialize();
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 {
-
+	
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
 	fireParticle_->ImGuiUpdate();
+	fireEmberParticle_->ImGuiUpdate();
 
 	changeSceneAnimation_->ImGuiUpdate();
+
+
 #endif // _USE_IMGUI
 
 	changeSceneAnimation_->Update();
@@ -101,6 +106,8 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	fireParticle_->Emit();
 	fireParticle_->Update();
+
+	fireEmberParticle_->Update();
 
 	camera_->Update();
 
@@ -143,7 +150,6 @@ void TitleScene::PostProcessDraw()
 {
 	gameObjectManager_->Draw();
 	fireParticle_->Draw();
-
 }
 
 void TitleScene::Back2dSpriteDraw()
@@ -159,7 +165,10 @@ void TitleScene::Flont2dSpriteDraw()
 	PostEffect::GetInstance()->Draw();
 
 	titlePushA_->Draw();
+	fireEmberParticle_->Draw();
+
 	changeSceneAnimation_->Draw();
+
 }
 
 std::string TitleScene::FormatNumberWithDots(int num)

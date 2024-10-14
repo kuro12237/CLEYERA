@@ -21,16 +21,23 @@ void ChangeSceneAnimation::Initialize()
 	titleBack2d_->Initialize(noiseTex_[0]);
 	titleBack2d_->SetP_DissolveMask(dissolveMask_);
 
+	rodingIcon_ = make_unique<RodingIcon2d>();
+	rodingIcon_->Initialize(noiseTex_[0]);
+	rodingIcon_->SetP_DissolveMask(dissolveMask_);
+
 }
 
 void ChangeSceneAnimation::ImGuiUpdate()
 {
 	titleBack2d_->ImGuiUpdate();
 	titleName2d_->ImGuiUpdate();
+	rodingIcon_->ImGuiUpdate();
+
 }
 
 void ChangeSceneAnimation::Update()
 {
+	rodingIcon_->Update();
 	if (isCompliteFlag_)
 	{
 		return;
@@ -74,12 +81,14 @@ void ChangeSceneAnimation::Update()
 
 void ChangeSceneAnimation::Draw()
 {
+
+	titleBack2d_->Draw2d();
+	titleName2d_->Draw2d();
+	rodingIcon_->Draw2d();
 	if (isCompliteFlag_)
 	{
 		return;
 	}
-	titleBack2d_->Draw2d();
-	titleName2d_->Draw2d();
 }
 
 void ChangeSceneAnimation::ChangeStart()

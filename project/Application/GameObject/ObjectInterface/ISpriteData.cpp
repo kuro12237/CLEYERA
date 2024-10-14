@@ -48,9 +48,8 @@ void ISpriteData::UpdateData()
 	Math::Vector::Vector2 texSize = TextureManager::GetTextureSize(texHandle_);
 
 	//アンカー計算
-	ankerPos_.x = texSize.x * -ankerPos_.x;
-	ankerPos_.y = texSize.y * -ankerPos_.y;
-	sprite_->GetPos() = ankerPos_;
+	sprite_->GetPos().x = texSize.x * -ankerPos_.x;
+	sprite_->GetPos().y = texSize.y * -ankerPos_.y;
 
 	//ファイル名が前フレームと違ったら再読み込み
 	if (prevFileName_ != fileName_)

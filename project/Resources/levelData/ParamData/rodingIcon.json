@@ -1,0 +1,38 @@
+{
+    "rodingIcon": {
+        "ankerPos": [
+            0.5,
+            0.5
+        ],
+        "dissolveEdgeColor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+        ],
+        "dissolveEdgeMinMax": [
+            0.0,
+            0.05999999865889549
+        ],
+        "dissolveMaskMax": 1.0,
+        "fileName": "rodingIcon.png",
+        "rotateSpeed": 0.04800000041723251,
+        "transform": {
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.125,
+                "y": 0.125,
+                "z": 0.25
+            },
+            "translate": {
+                "x": 1216.0,
+                "y": 640.0,
+                "z": 0.0
+            }
+        }
+    }
+}

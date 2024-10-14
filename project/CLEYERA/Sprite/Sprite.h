@@ -57,9 +57,14 @@ public:
 	Math::Vector::Vector3& GetuvRotate() { return uvRotate_; }
 	Math::Vector::Vector3& GetuvTranslate() { return uvTranslate_; }
 
+	Math::Vector::Vector3 &GetNoiseUvScale() { return noiseUvScale_; }
+	const Math::Vector::Vector3& GetNoiseUvRotate() { return noiseUvRotate_; }
+	Math::Vector::Vector3& GetNoiseUvTranslate() { return noiseUvTranslate_; }
+
 	float& GetPerlinNoiseScale() { return PerlinNoiseScale_; }
 	float& GetPerlinNoiseFactor() { return perlinNoiseFactor_; }
 	Math::Vector::Vector2& GetPerlinNoisePos() { return perlinNoisePos_; }
+	float& GetPerlinNoiseTimer() { return perlinNoiseTimer_; }
 
 	SpriteMode GetSpriteMode() { return blendMode_; }
 
@@ -104,6 +109,7 @@ private:
 	Math::Vector::Vector3 noiseUvRotate_ = { 0,0,0 };
 	Math::Vector::Vector3 noiseUvTranslate_ = { 0,0,0 };
 
+	float perlinNoiseTimer_ = 0.0f;
 
 	float PerlinNoiseScale_ = 0;
 	float perlinNoiseFactor_ = 0;

@@ -194,6 +194,7 @@ struct  Material
 	Math::Vector::Vector4 dissolveEdgeColor = { 1.0f,1.0f,1.0f,1.0f };
 
 	Math::Matrix::Matrix4x4 noiseUvTransform = {};
+	float perlinNoiseTimer = 0.0f;
 };
 
 

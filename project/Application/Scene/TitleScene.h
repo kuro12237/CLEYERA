@@ -38,6 +38,8 @@
 #include"GameObject/TowerManager/TowerManager.h"
 #include"GameObject/TitleUI/TitlePushA.h"
 #include"GameObject/Particles/Fire/FireParticle.h"
+#include"GameObject/Particles/FireEmber2d/FireEmber2Particle.h"
+
 
 /// <summary>
 /// ƒ^ƒCƒgƒ‹
@@ -108,6 +110,8 @@ private:
 	unique_ptr<TitleName>titleName_ = nullptr;
 	//UI
 	unique_ptr<TitlePushA>titlePushA_ = nullptr;
+
+	unique_ptr<FireEmber2dParticle>fireEmberParticle_ = nullptr;
 
 #pragma region Particle
 

@@ -31,5 +31,6 @@ struct Material
     float32_t2 dissolveEdgeMinMax;
     float32_t4 dissolveEdgeColor;
     float32_t4x4 noiseUvTransform;
+    float32_t perlinNoiseTimer;
     
 };

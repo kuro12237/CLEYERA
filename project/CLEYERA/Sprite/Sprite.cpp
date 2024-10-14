@@ -44,6 +44,7 @@ void Sprite::Draw(WorldTransform worldTransform)
 	materialDatas_.dissolveEdgeMinMax = dissolveEdgeMinMax_;
 
 	materialDatas_.noiseUvTransform = Math::Matrix::AffineMatrix(noiseUvScale_, noiseUvRotate_, noiseUvTranslate_);
+	materialDatas_.perlinNoiseTimer = perlinNoiseTimer_;
 
 	Map();
 	vertexBuf_->Setbuffer(vertexDatas_);

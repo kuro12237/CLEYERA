@@ -17,13 +17,19 @@ struct ParticleCS
 	float lifeTime;
 	Math::Vector::Vector3 velocity;
 	float currentTime;
-	Math::Vector::Vector4 color = {1.0f,1.0f,1.0f,1.0f};
+	Math::Vector::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
 	Math::Vector::Vector4 colorDecay = { 0.0f,0.0f,0.0f,0.01f };
 	Math::Vector::Vector3 scaleVelocity = {};
 	bool isDraw_ = false;
 };
 
 namespace Particle {
+
+	enum DrawMode
+	{
+		mode_3d,
+		mode_2d,
+	};
 
 	class GpuParticle
 	{
@@ -47,7 +53,8 @@ namespace Particle {
 
 		void SetTexhandle(uint32_t texHandle) { texHandle_ = texHandle; }
 		void SetMode(SpriteMode belnd) { blend_ = belnd; }
-
+		void SetDrawMode(DrawMode mode) { drawMode_ = mode; }
+		void Set2dSize(const Math::Vector::Vector2& size) { size_ = size; }
 #pragma endregion
 
 #pragma region Get
@@ -55,7 +62,7 @@ namespace Particle {
 		string GetName() { return name_; }
 		uint32_t GetNum() { return uint32_t(particleNum_); }
 
-		BufferResource<uint32_t>*GetFreeListIndexBuf() { return freeListIndexBuf_.get(); }
+		BufferResource<uint32_t>* GetFreeListIndexBuf() { return freeListIndexBuf_.get(); }
 		BufferResource<uint32_t>* GetFreeListBuf() { return freeListBuf_.get(); }
 
 #pragma endregion
@@ -86,6 +93,12 @@ namespace Particle {
 
 		uint32_t texHandle_ = 1;
 		SpriteMode  blend_ = BlendNone;
+		DrawMode drawMode_ = DrawMode::mode_3d;
+
+		//2d
+		Math::Vector::Vector2 pos_ = {};
+		Math::Vector::Vector2 size_ = {};
+
 	};
 
 };

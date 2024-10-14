@@ -128,7 +128,6 @@ void ShaderManager::ShaderComples()
 	CreateLineShader();
 	//PBR_ModelShader();
 	//PhongModelShader();
-	ParticleShader();
 	PhongNormalModel();
 	PhongSubsurfaceModel();
 	PhongNormalInstancingModel();
@@ -366,7 +365,7 @@ void ShaderManager::Particles()
 	Particle_EmitterSphere();
 	Particle_EmitterBox();
 	ShaderManager* instance = ShaderManager::Getinstance();
-	
+
 	instance->shaders[Shader::PARTICLE_EMITTER]["Box"].csBlob =
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Particle/Emitter/Particle_TypeBox.CS.hlsl",
@@ -383,6 +382,26 @@ void ShaderManager::Particles()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Particle/Field/Particle_Field_TypeBox_Suction.CS.hlsl",
 			L"cs_6_0");
+	//Draw
+	instance->shaders[Shader::PARTICLE_DRAW]["None3d"].vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.VS.hlsl",
+			L"vs_6_0");
+
+	instance->shaders[Shader::PARTICLE_DRAW]["None3d"].pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.PS.hlsl",
+			L"ps_6_0");
+
+	instance->shaders[Shader::PARTICLE_DRAW]["None2d"].vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle2d_Draw.VS.hlsl",
+			L"vs_6_0");
+
+	instance->shaders[Shader::PARTICLE_DRAW]["None2d"].pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.PS.hlsl",
+			L"ps_6_0");
 }
 
 void ShaderManager::Particle_Init()

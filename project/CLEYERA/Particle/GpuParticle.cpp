@@ -37,20 +37,6 @@ void GpuParticle::Create(const size_t kNum, string Name)
 		freeListBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_freeList", sizeof(int32_t));
 		freeList_.resize(particleNum_);
 	}
-	{//頂点の初期化
-		vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
-		vertexParam_[0].texcoord = { 0.0f,1.0f };
-		vertexParam_[1].position = { 1.0f ,1.0f,0,1 };
-		vertexParam_[1].texcoord = { 0.0f,0.0f };
-		vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
-		vertexParam_[2].texcoord = { 1.0f,1.0f };
-		vertexParam_[3].position = { -1.0f,1.0f,0,1 };
-		vertexParam_[3].texcoord = { 1.0f,0.0f };
-	}
-	{//インデックスの初期化
-		indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
-		indexParam_[3] = 0; indexParam_[4] = 3; indexParam_[5] = 1;
-	}
 
 	vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
 	vertexParam_[0].texcoord = { 0.0f,1.0f };
@@ -97,31 +83,64 @@ void GpuParticle::Create(const size_t kNum, string Name)
 
 void GpuParticle::Update()
 {
-	{//初期化CS_Dispatch
-		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
-
-		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_UPDATE , "None");
-		commandList->SetComputeRootSignature(pso.rootSignature.Get());
-		commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
-
-		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
-		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
-		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
-
-
-		UINT dispach = UINT(GetNum() / 1024);
-		commandList->Dispatch(dispach, 1, 1);
+	if (drawMode_ == mode_2d)
+	{
+		Math::Vector::Vector2 srcTR = { 1.0f,0.0f };
+		Math::Vector::Vector2 srcBR = { 1.0f,1.0f };
+		Math::Vector::Vector2 srcTL = { 0.0f,0.0f };
+		Math::Vector::Vector2 srcBL = { 0.0f,1.0f };
+		vertexParam_[0].position = { pos_.x,pos_.y + size_.y,0,1 };
+		vertexParam_[0].texcoord = srcBL;
+		vertexParam_[1].position = { pos_.x ,pos_.y,0,1 };
+		vertexParam_[1].texcoord = srcTL;
+		vertexParam_[2].position = { pos_.x + size_.x,pos_.y + size_.y,0,1 };
+		vertexParam_[2].texcoord = srcBR;
+		vertexParam_[3].position = { pos_.x + size_.x,pos_.y,0,1 };
+		vertexParam_[3].texcoord = srcTR;
 	}
+	vertexBuf_->Map();
+	vertexBuf_->Setbuffer(vertexParam_);
+	vertexBuf_->UnMap();
+	//更新CS_Dispatch
+	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
+
+	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_UPDATE, "None");
+	commandList->SetComputeRootSignature(pso.rootSignature.Get());
+	commandList->SetPipelineState(pso.GraphicsPipelineState.Get());
+
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(0, writeParticleBuf_->GetSrvIndex());
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, freeListIndexBuf_->GetSrvIndex());
+	DescriptorManager::GetInstance()->ComputeRootParamerterCommand(2, freeListBuf_->GetSrvIndex());
+
+
+	UINT dispach = UINT(GetNum() / 1024);
+	commandList->Dispatch(dispach, 1, 1);
+
 }
 
 void GpuParticle::Draw()
 {
 	//換える
-	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None");
-
-	if (blend_==BlendAdd)
+	SPSOProperty pso;
+	if (drawMode_ == DrawMode::mode_3d)
 	{
-		pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "Add");
+		pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None3d");
+	}
+	if (drawMode_ == DrawMode::mode_2d)
+	{
+		pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None2d");
+	}
+
+	if (blend_ == BlendAdd)
+	{
+		if (drawMode_ == DrawMode::mode_3d)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "Add3d");
+		}
+		if (drawMode_ == DrawMode::mode_2d)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "Add2d");
+		}
 	}
 
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
