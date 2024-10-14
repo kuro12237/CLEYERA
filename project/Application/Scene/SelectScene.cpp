@@ -2,8 +2,6 @@
 
 void SelectScene::Initialize()
 {
-	ChangeSceneAnimation::GetInstance()->Initialize();
-
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
 

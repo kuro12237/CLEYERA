@@ -61,6 +61,11 @@ void GpuParticle::Create(const size_t kNum, string Name)
 		indexBuf_->UnMap();
 	}
 
+	//Dissolveなどのマテリアルデータを作製
+	effectDataBuf_ = make_unique<BufferResource<Particle::System::StructData::EffectData>>();
+	effectDataBuf_->CreateResource();
+
+
 	{//初期化CS_Dispatch
 		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_INIT, "None");;
 		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
@@ -101,6 +106,11 @@ void GpuParticle::Update()
 	vertexBuf_->Map();
 	vertexBuf_->Setbuffer(vertexParam_);
 	vertexBuf_->UnMap();
+
+	effectDataBuf_->Map();
+	effectDataBuf_->Setbuffer(effectParam_);
+	effectDataBuf_->UnMap();
+
 	//更新CS_Dispatch
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 
@@ -122,15 +132,17 @@ void GpuParticle::Draw()
 {
 	//換える
 	SPSOProperty pso;
-	if (drawMode_ == DrawMode::mode_3d)
+	if (blend_ == BlendNone)
 	{
-		pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None3d");
+		if (drawMode_ == DrawMode::mode_3d)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None3d");
+		}
+		if (drawMode_ == DrawMode::mode_2d)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None2d");
+		}
 	}
-	if (drawMode_ == DrawMode::mode_2d)
-	{
-		pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "None2d");
-	}
-
 	if (blend_ == BlendAdd)
 	{
 		if (drawMode_ == DrawMode::mode_3d)
@@ -140,6 +152,18 @@ void GpuParticle::Draw()
 		if (drawMode_ == DrawMode::mode_2d)
 		{
 			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "Add2d");
+		}
+	}
+
+	if (blend_==DissolveNone)
+	{
+		if (drawMode_ == DrawMode::mode_3d)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "Add3d");
+		}
+		if (drawMode_ == DrawMode::mode_2d)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_DRAW, "DissolveNone2d");
 		}
 	}
 
@@ -155,6 +179,15 @@ void GpuParticle::Draw()
 	CameraManager::GetInstance()->VsCommandCall(3);
 	DescriptorManager::GetInstance()->rootParamerterCommand(4, texHandle_);
 
+	if (blend_ == DissolveNone)
+	{
+	
+		if (drawMode_ == DrawMode::mode_2d)
+		{
+			DescriptorManager::GetInstance()->rootParamerterCommand(5, noiseTexHandle_);
+			effectDataBuf_->CommandCall(6);
+		}
+	}
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	commandList->DrawIndexedInstanced(6, UINT(particleNum_), 0, 0, 0);
 }

@@ -53,6 +53,7 @@ struct  GpuParticleShader
 	SShaderMode particleSphereEmitter;
 	SShaderMode particleBoxEmitter;
 	SShaderMode DebugDraw;
+	SShaderMode DissolveDraw;
 };
 
 class ShaderManager

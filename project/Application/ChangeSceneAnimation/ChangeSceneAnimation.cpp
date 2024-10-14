@@ -8,6 +8,12 @@ ChangeSceneAnimation* ChangeSceneAnimation::GetInstance()
 
 void ChangeSceneAnimation::Initialize()
 {
+	if (initializeLock_)
+	{
+		return;
+	}
+	initializeLock_ = true;
+
 	///ノイズのテクスチャを読み込む
 	noiseTex_.resize(1);
 	noiseTex_[0] = TextureManager::LoadPngTexture("GameObject/Noise/Noise.png");
@@ -25,6 +31,9 @@ void ChangeSceneAnimation::Initialize()
 	rodingIcon_->Initialize(noiseTex_[0]);
 	rodingIcon_->SetP_DissolveMask(dissolveMask_);
 
+	fireEmberParticle_ = make_unique<FireEmber2dParticle>();
+	fireEmberParticle_->Initialize();
+
 }
 
 void ChangeSceneAnimation::ImGuiUpdate()
@@ -32,16 +41,27 @@ void ChangeSceneAnimation::ImGuiUpdate()
 	titleBack2d_->ImGuiUpdate();
 	titleName2d_->ImGuiUpdate();
 	rodingIcon_->ImGuiUpdate();
-
+	fireEmberParticle_->ImGuiUpdate();
 }
 
 void ChangeSceneAnimation::Update()
 {
-	rodingIcon_->Update();
+
+
+	fireEmberParticle_->Emit();
+	fireEmberParticle_->Update();
 	if (isCompliteFlag_)
 	{
+		//fireEmberParticle_->SetUseFlag(false);
+		//fireEmberParticle_->Update();
 		return;
 	}
+	else
+	{
+
+		//fireEmberParticle_->SetUseFlag(true);
+	}
+
 
 	isChangeSceneFlag_ = false;
 	//スタート時
@@ -74,21 +94,26 @@ void ChangeSceneAnimation::Update()
 			isCompliteFlag_ = true;
 		}
 	}
+	//fireEmberParticle_->Emit();
+	//fireEmberParticle_->Update();
 
 	titleName2d_->Update();
 	titleBack2d_->Update();
+	rodingIcon_->Update();
 }
 
 void ChangeSceneAnimation::Draw()
 {
 
-	titleBack2d_->Draw2d();
-	titleName2d_->Draw2d();
-	rodingIcon_->Draw2d();
 	if (isCompliteFlag_)
 	{
 		return;
 	}
+
+	titleBack2d_->Draw2d();
+	fireEmberParticle_->Draw();
+	titleName2d_->Draw2d();
+	rodingIcon_->Draw2d();
 }
 
 void ChangeSceneAnimation::ChangeStart()

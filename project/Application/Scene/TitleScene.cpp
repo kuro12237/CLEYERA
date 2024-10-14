@@ -73,11 +73,9 @@ void TitleScene::Initialize()
 	towerManager_->Initialize();
 	towerManager_->SetP_Camera(cameraWt.transform.translate);
 
-	fireParticle_ = make_unique<FireParticle>();
-	fireParticle_->Initialize();
 
-	fireEmberParticle_ = make_unique<FireEmber2dParticle>();
-	fireEmberParticle_->Initialize();
+	//fireEmberParticle_ = make_unique<FireEmber2dParticle>();
+	//fireEmberParticle_->Initialize();
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -86,8 +84,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
-	fireParticle_->ImGuiUpdate();
-	fireEmberParticle_->ImGuiUpdate();
+	//fireEmberParticle_->ImGuiUpdate();
 
 	changeSceneAnimation_->ImGuiUpdate();
 
@@ -104,10 +101,8 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	arch_->Update();
 	lava_->Update();
 
-	fireParticle_->Emit();
-	fireParticle_->Update();
 
-	fireEmberParticle_->Update();
+	//fireEmberParticle_->Update();
 
 	camera_->Update();
 
@@ -149,7 +144,6 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 void TitleScene::PostProcessDraw()
 {
 	gameObjectManager_->Draw();
-	fireParticle_->Draw();
 }
 
 void TitleScene::Back2dSpriteDraw()
@@ -165,7 +159,7 @@ void TitleScene::Flont2dSpriteDraw()
 	PostEffect::GetInstance()->Draw();
 
 	titlePushA_->Draw();
-	fireEmberParticle_->Draw();
+	//fireEmberParticle_->Draw();
 
 	changeSceneAnimation_->Draw();
 

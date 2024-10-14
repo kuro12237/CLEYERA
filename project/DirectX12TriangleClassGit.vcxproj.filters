@@ -1222,5 +1222,6 @@
     </FxCompile>
     <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle2d_Draw.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Draw\Particle_Dissolve.PS.hlsl" />
   </ItemGroup>
 </Project>

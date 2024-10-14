@@ -55,6 +55,7 @@ namespace Particle {
 		void SetMode(SpriteMode belnd) { blend_ = belnd; }
 		void SetDrawMode(DrawMode mode) { drawMode_ = mode; }
 		void Set2dSize(const Math::Vector::Vector2& size) { size_ = size; }
+		void SetNoiseTexHandle(uint32_t handle) { noiseTexHandle_ = handle; }
 #pragma endregion
 
 #pragma region Get
@@ -80,6 +81,9 @@ namespace Particle {
 		unique_ptr<BufferResource<uint32_t>>indexBuf_ = nullptr;
 		vector<uint32_t>indexParam_;
 
+		unique_ptr<BufferResource<Particle::System::StructData::EffectData>>effectDataBuf_ = nullptr;
+		Particle::System::StructData::EffectData effectParam_ = {};
+
 		unique_ptr<BufferResource<ParticleCS>>writeParticleBuf_ = nullptr;
 		vector<ParticleCS>writeParticleParam_;
 
@@ -92,6 +96,8 @@ namespace Particle {
 		vector<uint32_t>freeList_;
 
 		uint32_t texHandle_ = 1;
+		uint32_t noiseTexHandle_ = 1;
+
 		SpriteMode  blend_ = BlendNone;
 		DrawMode drawMode_ = DrawMode::mode_3d;
 

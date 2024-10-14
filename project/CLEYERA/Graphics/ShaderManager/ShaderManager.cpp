@@ -402,6 +402,15 @@ void ShaderManager::Particles()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.PS.hlsl",
 			L"ps_6_0");
+
+	instance->shaders[Shader::PARTICLE_DRAW]["DissolveNone2d"].vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_DebugDraw.VS.hlsl",
+			L"vs_6_0");
+	instance->shaders[Shader::PARTICLE_DRAW]["DissolveNone2d"].pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Draw/Particle_Dissolve.PS.hlsl",
+			L"ps_6_0");
 }
 
 void ShaderManager::Particle_Init()
@@ -429,6 +438,7 @@ void ShaderManager::ParticleDebugDraw()
 			L"ps_6_0");
 
 	ShaderManager::Getinstance()->particleShader_.DebugDraw = shaders;
+
 }
 
 void ShaderManager::Particle_Update()

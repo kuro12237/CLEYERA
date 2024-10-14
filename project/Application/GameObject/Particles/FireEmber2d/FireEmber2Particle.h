@@ -19,6 +19,15 @@ public:
 
 	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
 
+	void Emit() { emitter_->Emit(particle_); }
+
+#pragma region Set
+
+	void SetUseFlag(const bool& f) { emitter_->GetControlParam()[0].useFlag_ = f; }
+
+#pragma endregion
+
+
 #pragma region Get
 	Particle::ParticleEmitter<Particle::EmitType::BoxParam>* GetEmitter() { return emitter_.get(); };
 #pragma endregion

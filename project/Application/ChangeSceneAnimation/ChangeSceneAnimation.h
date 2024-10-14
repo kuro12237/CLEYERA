@@ -5,6 +5,7 @@
 #include"TitleName2d/TitleName2d.h"
 #include"BackTitle2d/TitleBack2d.h"
 #include"RodingIcon2d/RodingIcon.h"
+#include"GameObject/Particles/FireEmber2d/FireEmber2Particle.h"
 
 class ChangeSceneAnimation
 {
@@ -51,6 +52,9 @@ private:
 	unique_ptr<TitleName2d>titleName2d_ = nullptr;
 	unique_ptr<TitleBack2d>titleBack2d_ = nullptr;
 	unique_ptr<RodingIcon2d>rodingIcon_ = nullptr;
+	unique_ptr<FireEmber2dParticle>fireEmberParticle_ = nullptr;
+
+	bool initializeLock_ = false;
 
 	//Singleton
 	ChangeSceneAnimation() = default;

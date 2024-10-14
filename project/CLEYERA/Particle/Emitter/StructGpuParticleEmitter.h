@@ -12,28 +12,6 @@ namespace Particle
 		float flame = 0.0f;
 	};
 	namespace EmitType {
-		
-		//2d
-		struct SpriteBoxParam
-		{
-			Math::Vector::Vector3 translate = {};
-			Math::Vector::Vector3 rotate = {};
-			Math::Matrix::Matrix4x4 matWorld = Math::Matrix::Identity();
-			Math::Matrix::Matrix4x4 matVPV = Math::Matrix::Identity();
-			uint32_t count = 0;
-			uint32_t emit = 0;
-			Math::Vector::Vector3 sizeMin = { -1.0f,-1.0f,0.0f};
-			Math::Vector::Vector3 sizeMax = { 1.0f,1.0f,0.0f };
-			Math::Vector::Vector3 velocityMin = { 0.0f,0.0f,0.0f };
-			Math::Vector::Vector3 velocityMax = { 0.0f,0.0f,0.0f};
-
-			Math::Vector::Vector4 color = { 1.0f,1.0f,1.0f,1.0f };
-			Math::Vector::Vector4 colorDecayMin = { 0.0f,0.0f,0.0f,0.01f };
-			Math::Vector::Vector4 colorDecayMax = { 0.0f,0.0f,0.0f,0.01f };
-			Math::Vector::Vector2 scaleVelocityMin = { 0.0f,0.0f };
-			Math::Vector::Vector2 scaleVelocityMax = { 0.0f,0.0f};
-
-		};
 		//3d
 		struct BoxParam
 		{
@@ -54,8 +32,8 @@ namespace Particle
 			Math::Vector::Vector3 scaleVelocityMin = { 0.0f,0.0f,0.0f };
 			Math::Vector::Vector3 scaleVelocityMax = { 0.0f,0.0f,0.0f };
 
-			Math::Vector::Vector2 scaleSizeMin = { 1.0f,1.0f };
-			Math::Vector::Vector2 scaleSizeMax = { 1.0f,1.0f };
+			Math::Vector::Vector3 scaleSizeMin = { 1.0f,1.0f };
+			Math::Vector::Vector3 scaleSizeMax = { 1.0f,1.0f };
 		};
 		struct Circle
 		{
@@ -103,6 +81,15 @@ namespace Particle
 				uint32_t instancedId;
 			};
 
+			struct EffectData
+			{
+
+				float dissolveMask = 0.0f;
+				Math::Vector::Vector2 dissolveEdgeMinMax = {};
+				float pad1;
+
+				Math::Vector::Vector4 dissolveEdgeColor = { 1.0f,1.0f,1.0f,1.0f };
+			};
 		}
 		void CreateSphere(unique_ptr <Primitive::LineModel>& lines, string name);
 		void CreateBox(unique_ptr <Primitive::LineModel>& lines, string name);
