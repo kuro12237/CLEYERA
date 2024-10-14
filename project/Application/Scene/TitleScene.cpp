@@ -102,8 +102,6 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	lava_->Update();
 
 
-	//fireEmberParticle_->Update();
-
 	camera_->Update();
 
 	if (camera_->GetIsBridgeAnimationStart() && !isAnimationStart_)

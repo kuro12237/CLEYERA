@@ -46,20 +46,15 @@ void ChangeSceneAnimation::ImGuiUpdate()
 
 void ChangeSceneAnimation::Update()
 {
-
-
-	fireEmberParticle_->Emit();
-	fireEmberParticle_->Update();
 	if (isCompliteFlag_)
 	{
-		//fireEmberParticle_->SetUseFlag(false);
-		//fireEmberParticle_->Update();
+		fireEmberParticle_->SetUseFlag(false);
+		fireEmberParticle_->Update();
 		return;
 	}
 	else
 	{
-
-		//fireEmberParticle_->SetUseFlag(true);
+		fireEmberParticle_->SetUseFlag(true);
 	}
 
 
@@ -94,8 +89,8 @@ void ChangeSceneAnimation::Update()
 			isCompliteFlag_ = true;
 		}
 	}
-	//fireEmberParticle_->Emit();
-	//fireEmberParticle_->Update();
+	fireEmberParticle_->Emit();
+	fireEmberParticle_->Update();
 
 	titleName2d_->Update();
 	titleBack2d_->Update();
@@ -105,12 +100,12 @@ void ChangeSceneAnimation::Update()
 void ChangeSceneAnimation::Draw()
 {
 
+	titleBack2d_->Draw2d();
 	if (isCompliteFlag_)
 	{
 		return;
 	}
 
-	titleBack2d_->Draw2d();
 	fireEmberParticle_->Draw();
 	titleName2d_->Draw2d();
 	rodingIcon_->Draw2d();
