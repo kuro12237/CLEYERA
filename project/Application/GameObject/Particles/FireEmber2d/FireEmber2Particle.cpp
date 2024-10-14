@@ -8,7 +8,7 @@ void FireEmber2dParticle::Initialize()
     particle_->Create(1, name_);
     particle_->SetTexhandle(texHandle_);
     particle_->SetDrawMode(Particle::mode_2d);
-    particle_->SetMode(DissolveNone);
+    //particle_->SetMode(DissolveNone);
     particle_->Set2dSize(TextureManager::GetTextureSize(texHandle_));
     particle_->SetNoiseTexHandle(TextureManager::LoadPngTexture("GameObject/Noise/Noise.png"));
 
