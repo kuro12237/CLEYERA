@@ -49,7 +49,7 @@ void GameManager::Run()
 #endif //  _USE_IMGUI
 
 		LightingManager::ClearList();
-		Scene_->Update(this);
+		scene_->Update(this);
 
 		PostEffect::GetInstance()->Update();
 		DirectionalLight::Update();
@@ -64,29 +64,27 @@ void GameManager::Run()
 		PostEffect::GetInstance()->PreDraw();
 
 		SkyBox::GetInstance()->Draw();
-		Scene_->PostProcessDraw();
+		scene_->PostProcessDraw();
 
 		PostEffect::GetInstance()->PostDraw();
 
 		DirectXCommon::GetInstance()->PreDraw();
 
-		Scene_->Back2dSpriteDraw();
-		Scene_->Object3dDraw();
-		Scene_->Flont2dSpriteDraw(); 
-
+		scene_->Back2dSpriteDraw();
+		scene_->Object3dDraw();
+		scene_->Flont2dSpriteDraw(); 
+		
 		Cleyera::EndFlame();
 		DirectXCommon::GetInstance()->PostDraw();
 	}
 }
 
-void GameManager::ChangeState(IScene* newScene)
+void GameManager::ChangeScene(unique_ptr<IScene> newScene)
 {
-	delete Scene_;
+	scene_ = move(newScene);
 
-	Scene_ = move(newScene);
-
-	Scene_->Initialize();
-	Scene_->Update(this);
+	scene_->Initialize();
+	scene_->Update(this);
 
 	return;
 }

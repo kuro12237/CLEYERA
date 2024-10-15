@@ -1,10 +1,12 @@
 #include "EnemyWalkManager.h"
 
-void EnemyWalkManager::Initialize(GameObjectManager* data)
+void EnemyWalkManager::Initialize()
 {
+	gameObjectManager_ = GameObjectManager::GetInstance();
+
 	const string name = "EnemyWalk";
 
-	for (uint32_t Count_ = 0; Count_ < uint32_t(data->GetObj3dDatas().size()); Count_++)
+	for (uint32_t Count_ = 0; Count_ < uint32_t(gameObjectManager_->GetObj3dDatas().size()); Count_++)
 	{
 		string count = to_string(enemyCount_);
 
@@ -16,9 +18,9 @@ void EnemyWalkManager::Initialize(GameObjectManager* data)
 			enemyName = name + "." + string(3 - to_string(enemyCount_).length(), '0') + to_string(enemyCount_);
 		}
 
-		if (data->GetObj3dDatas().find(enemyName) != data->GetObj3dDatas().end())
+		if (gameObjectManager_->GetObj3dDatas().find(enemyName) != gameObjectManager_->GetObj3dDatas().end())
 		{
-			auto obj = data->GetObj3dData(enemyName);
+			auto obj = gameObjectManager_->GetObj3dData(enemyName);
 
 			shared_ptr<EnemyWalk>enemyWalk = nullptr;
 			enemyWalk = make_shared<EnemyWalk>();

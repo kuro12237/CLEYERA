@@ -11,21 +11,23 @@ public:
 	Bridge() {};
 	~Bridge() {};
 
+	/// <summary>
+	/// ‰Šú‰»
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// XV
+	/// </summary>
 	void Update();
 
 #pragma region Set
-
 	void SetTargetPos(Math::Vector::Vector3 targetPos) { targetPos_ = targetPos; }
 	void SetIsStartAnimation(bool f) { isStartAnimation_ = f; }
-
 #pragma endregion
 
 #pragma region Get
-
 	bool GetIsStartAnimation() { return isStartAnimation_; }
-
 #pragma endregion
 
 private:

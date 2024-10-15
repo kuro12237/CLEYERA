@@ -1019,9 +1019,6 @@
     <ClInclude Include="Application\GameObject\Player\command\PlayerShootCommand.h">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\command\PlayerSquatCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.h">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClInclude>

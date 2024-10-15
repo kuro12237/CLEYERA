@@ -1,6 +1,9 @@
 #pragma once
 
 class PlayerReticle;
+/// <summary>
+/// レティクルのコマンドインターフェース
+/// </summary>
 class IPlayerReticleCommand
 {
 public:

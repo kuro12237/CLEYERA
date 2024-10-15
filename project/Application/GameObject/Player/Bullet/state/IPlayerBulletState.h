@@ -1,6 +1,9 @@
 #pragma once
 
 class PlayerBullet;
+/// <summary>
+/// 弾の状態インターフェース
+/// </summary>
 class IPlayerBulletState
 {
 public:

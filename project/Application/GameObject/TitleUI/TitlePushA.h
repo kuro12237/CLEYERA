@@ -1,16 +1,28 @@
 #pragma once
 #include"Sprite/Sprite.h"
 
+/// <summary>
+/// TitleのPushAボタン
+/// </summary>
 class TitlePushA
 {
 public:
 	TitlePushA() {};
 	~TitlePushA() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initiaize();
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 表示
+	/// </summary>
 	void Draw();
 
 private:

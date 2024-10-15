@@ -80,7 +80,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 {
-	
+
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
@@ -116,7 +116,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 		bridge_[i]->Update();
 	}
 
-	
+
 	titleLight_->SetPos(*p_CameraPos_);
 	titleLight_->Update();
 
@@ -134,7 +134,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
-		Scene->ChangeState(new SelectScene);
+		Scene->ChangeScene(make_unique<SelectScene>());
 		return;
 	}
 }

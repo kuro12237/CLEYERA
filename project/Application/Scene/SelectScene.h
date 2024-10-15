@@ -29,6 +29,9 @@
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"GameObject/Goal/Goal.h"
 
+/// <summary>
+/// MapSelect
+/// </summary>
 class SelectScene :public IScene
 {
 public:

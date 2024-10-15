@@ -2,11 +2,7 @@
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-	GameManager* gameManager_ = new GameManager();
-
+	unique_ptr<GameManager>gameManager_ = make_unique<GameManager>();
 	gameManager_->Run();
-
-	delete gameManager_;
-
 	return 0;
 }

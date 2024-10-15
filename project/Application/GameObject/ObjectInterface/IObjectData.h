@@ -4,6 +4,10 @@
 #include"Utility/GlobalVariables/GlobalVariables.h"
 
 class GameObjectManager;
+
+/// <summary>
+/// オブジェクトの抽象クラス
+/// </summary>
 class IObjectData
 {
 public:

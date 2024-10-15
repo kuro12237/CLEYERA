@@ -2,6 +2,9 @@
 #include"IPlayerBulletState.h"
 #include"GameObject/Player/Bullet/PlayerBullet.h"
 
+/// <summary>
+/// í èÌ
+/// </summary>
 class PlayerBulletStateNone:public IPlayerBulletState
 {
 public:

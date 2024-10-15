@@ -3,6 +3,9 @@
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 
+/// <summary>
+/// タイトルのカメラ
+/// </summary>
 class TitleCamera :public IObjectData
 {
 public:

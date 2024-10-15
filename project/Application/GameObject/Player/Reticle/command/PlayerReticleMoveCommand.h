@@ -2,6 +2,9 @@
 #include"IPlayerReticleCommand.h"
 #include"GameObject/Player/Reticle/PlayerReticle.h"
 
+/// <summary>
+/// ƒŒƒeƒBƒNƒ‹‘€ì
+/// </summary>
 class PlayerReticleMoveCommand: public IPlayerReticleCommand
 {
 public:

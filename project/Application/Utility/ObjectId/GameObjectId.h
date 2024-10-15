@@ -1,5 +1,10 @@
 #pragma once
 #include"Pch.h"
+
+/// <summary>
+/// オブジェクトのid設定
+/// </summary>
+
 const static uint32_t kOnlyCollideWithBlocksid = 0b000000000;
 
 const static uint32_t kNormalBlock = 0b000000001;      // 1

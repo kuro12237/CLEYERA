@@ -11,19 +11,36 @@ public:
 
 	static GoalParticle* GetInstance();
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// ImGui更新
+	/// </summary>
 	void ImGuiUpdate();
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
-	
+
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw();
 
-	void Clear() {particle_->Clear(), emitter_->AllClear(), field_->AllClear(); }
+	/// <summary>
+	/// emitter,field,particlleの値をクリア
+	/// </summary>
+	void Clear() { particle_->Clear(), emitter_->AllClear(), field_->AllClear(); }
 
+#pragma region Get
 	Particle::ParticleEmitter<Particle::EmitType::Circle>* GetEmitters() { return emitter_.get(); }
-	Particle::GpuParticle* GetParticle() {return  particle_.get(); }
+	Particle::GpuParticle* GetParticle() { return  particle_.get(); }
 	Particle::ParticleField<Particle::FieldType::FieldSuction>* GetField() { return field_.get(); }
+#pragma endregion
 
 private:
 
@@ -34,5 +51,5 @@ private:
 	unique_ptr<Particle::ParticleEmitter<Particle::EmitType::Circle>>emitter_ = nullptr;
 	unique_ptr<Particle::ParticleField<Particle::FieldType::FieldSuction>>field_ = nullptr;
 
-	string name_;
+	string name_ = "";
 };

@@ -14,33 +14,48 @@
 #include"Hp/PlayerHp.h"
 #include"Utility/RandomGenerator/RandomGenerator.h"
 
+/// <summary>
+/// プレイヤーのオブジェクトの管理クラス
+/// </summary>
 class PlayerManager
 {
 public:
 	PlayerManager() {};
 	~PlayerManager() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="data"></param>
 	void GetData(GameObjectManager* data);
 
+	/// <summary>
+	/// ImGuiの更新
+	/// </summary>
 	void ImGuiUpdate();
 
+	/// <summary>
+	/// 更新処理
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 2d描画
+	/// </summary>
 	void Draw2d();
+
+	/// <summary>
+	/// Hpの表示
+	/// </summary>
 	void DrawHp();
 
 #pragma region Get
 
 	Player* GetPlayerCore() { return playerCore_.get(); }
-
 	PlayerReticle* GetReticle() { return reticle_.get(); }
-
 	PlayerGun* GetGun() { return gun_.get(); }
-
 	PlayerCamera* GetCamera(){ return camera_.get(); }
-
 	PlayerHp* GetHp() { return hp_.get(); }
-
 	vector<shared_ptr<PlayerBullet>>GetBullet() { return bullets_; }
 #pragma endregion
 
@@ -50,13 +65,22 @@ public:
 
 #pragma endregion
 
-
+	/// <summary>
+	/// BUlletの登録
+	/// </summary>
+	/// <param name="pos"></param>
 	void PushBullet(Math::Vector::Vector3 pos);
 
 private:
 
+	/// <summary>
+	/// 死んだ弾の確認死んでいたら削除
+	/// </summary>
 	void CheckisDeadBullets();
 
+	/// <summary>
+	/// ダメージを受けた時の処理
+	/// </summary>
 	void CheckDamage();
 
 	bool gameStartFlag_ = false;

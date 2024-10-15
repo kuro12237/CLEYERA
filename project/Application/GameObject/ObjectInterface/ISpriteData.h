@@ -3,12 +3,18 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
 
+/// <summary>
+/// 2dのSpriteの抽象クラス
+/// </summary>
 class ISpriteData
 {
 public:
 	ISpriteData();
 	virtual ~ISpriteData() {};
 
+	/// <summary>
+	/// ImGui更新抽象
+	/// </summary>
 	virtual void ImGuiUpdate() = 0;
 
 	/// <summary>

@@ -28,7 +28,7 @@ void GameScene::Initialize()
 	player_->GetData(GameObjectManager::GetInstance());
 
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
-	enemyWalkManager_->Initialize(GameObjectManager::GetInstance());
+	enemyWalkManager_->Initialize();
 
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->Initialize();
@@ -120,7 +120,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
-		Scene->ChangeState(new TitleScene);
+		Scene->ChangeScene(make_unique<TitleScene>());
 		return;
 	}
 	gameCollisionManager_->End();

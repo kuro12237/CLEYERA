@@ -1,21 +1,39 @@
 #pragma once
 #include"Sprite/Sprite.h"
 
+/// <summary>
+/// プレイヤーのHp管理
+/// </summary>
 class PlayerHp
 {
 public:
 	PlayerHp() {};
 	~PlayerHp() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="hpの数値"></param>
 	void Initialize(uint32_t hp);
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// ImGui更新
+	/// </summary>
 	void ImGuiUpdate();
 
+	/// <summary>
+	/// 2d描画
+	/// </summary>
 	void Draw2d();
 
+#pragma region Get
 	int32_t &GetHp() { return hpCount_; }
+#pragma endregion
 
 private:
 

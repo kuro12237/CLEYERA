@@ -1,36 +1,53 @@
 #pragma once
 #include"Cleyera.h"
 
+/// <summary>
+/// ゲームカウントダウン
+/// </summary>
 class StartCount
 {
 public:
 	StartCount() {};
 	~StartCount() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 2d表示
+	/// </summary>
 	void Draw2d();
 
 #pragma region Get
-
-	bool GetStartFlag() { return startFlag; };
+	bool GetStartFlag() { return startFlag_; };
 #pragma endregion
 
 #pragma region Set
-
-	void SetStartFlag(bool f) { startFlag = f; }
-
+	void SetStartFlag(bool f) { startFlag_ = f; }
 #pragma endregion
-
 
 private:
 
+	/// <summary>
+	/// 数字の更新
+	/// </summary>
 	void NumberUpdate();
 
+	/// <summary>
+	/// 針の更新
+	/// </summary>
 	void BarUpdate();
 
+	/// <summary>
+	/// 数字の後ろの背景更新
+	/// </summary>
 	void FlameUpdate();
 
 	unique_ptr<Sprite>numberSprite_ = nullptr;
@@ -42,7 +59,7 @@ private:
 	uint32_t timerCount = 0;
 	uint32_t timerCountMax = 3;
 
-	bool startFlag = false;
+	bool startFlag_ = false;
 	bool countUpdateFlag_ = false;
 	bool countDrawFlag_ = false;
 

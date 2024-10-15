@@ -8,31 +8,40 @@
 
 #include"Utility/ObjectId/GameObjectId.h"
 
+/// <summary>
+/// e‚Ì’e
+/// </summary>
 class PlayerBullet:public IObjectData,public ICollider
 {
 public:
 	PlayerBullet() {};
 	~PlayerBullet() {};
 
+	/// <summary>
+	/// ‰Šú‰»
+	/// </summary>
+	/// <param name="number"></param>
 	void Initialize(string number);
 
+	/// <summary>
+	/// XV
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	///@“–‚½‚Á‚½‚Ì
+	/// </summary>
+	/// <param name="c"></param>
 	void OnCollision(ICollider* c)override;
 
 #pragma region Set
-
 	void SetSpownPos(Math::Vector::Vector3 pos) { spownPos_ = pos; }
-
 	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
-
 	void SetPlayerSpeed(Math::Vector::Vector3 v) { playerSpeed_ = v; }
 #pragma endregion
 
 #pragma region Get
-
 	bool GetIsDeadFlag() { return isDead_; }
-
 #pragma endregion
 
 private:

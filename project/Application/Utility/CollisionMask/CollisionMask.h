@@ -1,6 +1,9 @@
 #pragma once
 #include"Pch.h"
 
+/// <summary>
+/// ƒQ[ƒ€‚Ì“–‚½‚è”»’è‚Ìmaskİ’è
+/// </summary>
 namespace CollisionMask
 {
 	// Block-related definitions

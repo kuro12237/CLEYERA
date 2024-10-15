@@ -11,30 +11,41 @@
 #include"state/EnemyWalkStateMove.h"
 #include"state/EnemyWalkStateDead.h"
 
+/// <summary>
+/// •à‚­“G
+/// </summary>
 class EnemyWalk :public IObjectData, public ICollider
 {
 public:
 	EnemyWalk() {};
 	~EnemyWalk() {};
 
+	/// <summary>
+	/// ‰Šú‰»
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// XV
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// “–‚½‚Á‚½
+	/// </summary>
 	void OnCollision(ICollider* c)override;
 
-#pragma region Get
-
-	bool &GetIsHit() { return IsHit_; }
-
-	bool &GetIsDead() { return isDead_; }
-
-	bool &GetIsEnd() { return isEnd_; }
-
-	float &GetSpeed() { return speed_; }
-
+	/// <summary>
+	/// ó‘Ô‘JˆÚ
+	/// </summary>
+	/// <param name="state"></param>
 	void ChangeState(unique_ptr<IEnemyWalkState>state);
 
+#pragma region Get
+	bool &GetIsHit() { return IsHit_; }
+	bool &GetIsDead() { return isDead_; }
+	bool &GetIsEnd() { return isEnd_; }
+	float &GetSpeed() { return speed_; }
 #pragma endregion
 
 private:

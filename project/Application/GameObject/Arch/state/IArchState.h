@@ -1,6 +1,9 @@
 #pragma once
 #include"../Arch.h"
 
+/// <summary>
+/// ステートインターフェース
+/// </summary>
 class IArchState
 {
 public:

@@ -35,6 +35,9 @@
 
 #include"Scene/TitleScene.h"
 
+/// <summary>
+/// ÉQÅ[ÉÄ
+/// </summary>
 class GameScene :public IScene
 {
 public:

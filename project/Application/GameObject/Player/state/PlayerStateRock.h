@@ -2,6 +2,9 @@
 #include"IPlayerState.h"
 #include"../Player.h"
 
+/// <summary>
+/// ƒvƒŒƒCƒ„[Î‰»ó‘Ô
+/// </summary>
 class PlayerStateRock :public IPlayerState
 {
 public:

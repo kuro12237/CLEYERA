@@ -2,6 +2,9 @@
 #include"GameObject/Player/Player.h"
 #include"GameObject/Player/state/IPlayerState.h"
 
+/// <summary>
+/// ゴールしたときのアニメーション
+/// </summary>
 class PlayerStateGoalAnimation :public IPlayerState
 {
 public:

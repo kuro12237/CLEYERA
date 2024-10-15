@@ -11,16 +11,21 @@ public:
 	Tower() {};
 	~Tower() {};
 
+	/// <summary>
+	/// ‰Šú‰»
+	/// </summary>
+	/// <param name="name"></param>
+	/// <param name="index"></param>
 	void Initialize(string name, uint32_t index);
 
+	/// <summary>
+	/// XV
+	/// </summary>
 	void Update();
 
 #pragma region Set
-
 	void SetPos(const Math::Vector::Vector3& newPos);
-
 #pragma endregion
-
 
 private:
 

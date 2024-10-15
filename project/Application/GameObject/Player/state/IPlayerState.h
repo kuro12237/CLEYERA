@@ -1,6 +1,9 @@
 #pragma once
 
 class Player;
+/// <summary>
+/// Playerのインターフェース
+/// </summary>
 class IPlayerState
 {
 public:

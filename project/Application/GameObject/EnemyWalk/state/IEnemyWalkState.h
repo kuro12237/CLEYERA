@@ -1,6 +1,10 @@
 #pragma once
 
 class EnemyWalk;
+
+/// <summary>
+/// Enemy‚Ìó‘Ô‘JˆÚ
+/// </summary>
 class IEnemyWalkState
 {
 public:

@@ -3,11 +3,9 @@
 void Block::Initialize(string name, uint32_t index)
 {
 	name_ = name + to_string(index);
-
-	GameObjectManager* instance = GameObjectManager::GetInstance();
-	auto& data = instance->GetObjInstancingData(name)->GetTransforms()[index];
-	SetObjectData(data->GetTransform());
-	SetAABB(data->GetAABB());
+	auto& transforms = gameObjectManager_->GetObjInstancingData(name)->GetTransforms()[index];
+	SetObjectData(transforms->GetTransform());
+	SetAABB(transforms->GetAABB());
 
 	id_ = kNormalBlock;
 	attribute_ = CollisionMask::kBlockAttribute;
@@ -16,12 +14,12 @@ void Block::Initialize(string name, uint32_t index)
 
 void Block::Update()
 {
-	//hit府ラブをクリア
+	//hitフラグをクリア
 	ClearExtrusion();
 	ClearHitDirection();
 }
 
-void Block::OnCollision(ICollider* c)
+void Block::OnCollision([[maybe_unused]]ICollider* c)
 {
 	c;
 }

@@ -1,6 +1,9 @@
 #pragma once
 
 class Player;
+/// <summary>
+/// プレイヤーのコマンドインターフェース
+/// </summary>
 class IPlayerCommand
 {
 public:

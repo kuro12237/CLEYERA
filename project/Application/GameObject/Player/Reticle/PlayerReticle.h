@@ -5,18 +5,33 @@
 #include"Sprite/Sprite.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 
+/// <summary>
+/// レティクルクラス
+/// </summary>
 class PlayerReticle :public IObjectData
 {
 public:
 	PlayerReticle() {};
 	~PlayerReticle() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// ImGui更新
+	/// </summary>
 	void ImGuiUpdate();
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 2d描画
+	/// </summary>
 	void Draw2d();
 
 #pragma region command

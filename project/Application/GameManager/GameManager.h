@@ -8,6 +8,9 @@
 #include"TitleScene.h"
 #include"SelectScene.h"
 
+/// <summary>
+/// ゲーム管理クラス
+/// </summary>
 class GameManager
 {
 public:
@@ -15,12 +18,20 @@ public:
 	GameManager();
 	~GameManager();
 
+    /// <summary>
+    /// 実行
+    /// </summary>
     void Run();
-    void ChangeState(IScene *newScene);
+
+    /// <summary>
+    /// シーン切替
+    /// </summary>
+    /// <param name="newScene"></param>
+    void ChangeScene(unique_ptr<IScene>newScene);
 
 private:
 
-	IScene* Scene_ = nullptr;
+    unique_ptr<IScene>scene_ = nullptr;
 
 };
 

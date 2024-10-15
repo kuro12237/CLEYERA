@@ -107,7 +107,7 @@ void SelectScene::Update(GameManager* Scene)
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
-		Scene->ChangeState(new GameScene);
+		Scene->ChangeScene(make_unique<GameScene>());
 		return;
 	}
 
@@ -140,7 +140,7 @@ void SelectScene::Flont2dSpriteDraw()
 
 void SelectScene::Collision()
 {
-    //プレイヤー本体
+	//プレイヤー本体
 	if (!player_->GetPlayerCore()->GetIsGoal())
 	{
 		gameCollisionManager_->ListPushback(player_->GetPlayerCore());
@@ -186,7 +186,7 @@ bool SelectScene::CheckLoadScene()
 	//プレイヤーと当たったidがportalIdが一致していた場合
 	queue<uint32_t>allHitIds = player_->GetPlayerCore()->GetAllHitIds();
 	size_t size = allHitIds.size();
-	
+
 	for (size_t id = 0; id < size; id++)
 	{
 		uint32_t hitId = allHitIds.front();

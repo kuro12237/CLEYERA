@@ -37,7 +37,6 @@ public:
 
 protected:
 
-	
 	string ObjectType_ = "";
 	std::string objectName_ = "";
 	WorldTransform worldTransform_;

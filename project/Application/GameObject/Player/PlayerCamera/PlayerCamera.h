@@ -3,14 +3,23 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 
+/// <summary>
+/// プレイヤーカメラ
+/// </summary>
 class PlayerCamera:public IObjectData
 {
 public:
 	PlayerCamera() {};
 	~PlayerCamera() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
 #pragma region Set

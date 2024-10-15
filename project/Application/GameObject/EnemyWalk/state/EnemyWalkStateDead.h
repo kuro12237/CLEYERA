@@ -3,6 +3,9 @@
 #include"../EnemyWalk.h"
 #include"GameObject/Particles/CharacterDeadParticle.h"
 
+/// <summary>
+/// •à‚­“G‚Ì€‚ñ‚¾‚Æ‚«‚Ìó‘Ô
+/// </summary>
 class EnemyWalkStateDead :public IEnemyWalkState
 {
 public:

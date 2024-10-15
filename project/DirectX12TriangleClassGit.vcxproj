@@ -196,7 +196,6 @@
     <ClInclude Include="Application\GameObject\Player\command\PlayerJampCommand.h" />
     <ClInclude Include="Application\GameObject\Player\command\PlayerMoveCommand.h" />
     <ClInclude Include="Application\GameObject\Player\command\PlayerShootCommand.h" />
-    <ClInclude Include="Application\GameObject\Player\command\PlayerSquatCommand.h" />
     <ClInclude Include="Application\GameObject\Player\Gun\PlayerGun.h" />
     <ClInclude Include="Application\GameObject\Player\Hp\PlayerHp.h" />
     <ClInclude Include="Application\GameObject\Player\Player.h" />

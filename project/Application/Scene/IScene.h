@@ -1,6 +1,9 @@
 #pragma once
 
 class GameManager;
+/// <summary>
+/// シーンインターフェース
+/// </summary>
 class IScene
 {
 public:

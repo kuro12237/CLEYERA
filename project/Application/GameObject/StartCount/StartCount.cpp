@@ -149,7 +149,7 @@ void StartCount::Update()
 	//ŽžŠÔ‚ªãŒÀ‚És‚Á‚½‚Æ‚«
 	if (timerCount >= timerCountMax)
 	{
-		startFlag = true;
+		startFlag_ = true;
 		countUpdateFlag_ = true;
 		countDrawFlag_ = true;
 	}

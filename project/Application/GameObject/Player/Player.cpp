@@ -13,7 +13,7 @@ void Player::Initialize()
 	//当たり判定
 	//押し出し
 	this->isExtrusion_ = true;
-	SetObjectData(gameObjectInstance_->GetObj3dData_ptr(name_)->GetWorldTransform().transform);
+	SetObjectData(gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform);
 	aabb_ = gameObjectInstance_->GetObj3dData(name_)->GetAABB();
 	attribute_ = CollisionMask::kPlayerAttribute;
 	mask_ = CollisionMask::kPlayerMask;
@@ -88,16 +88,18 @@ void Player::Update()
 		isJamp_ = true;
 	}
 
+	///ダメージ処理
 	if (isInvincible_)
 	{
 		DamageUpdate();
 	}
 
 	isShoot_ = false;
-	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
+
+	TransformEular& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 
-	//パーティクルの配置位置
+	//パーティクルの配置位置後で関数化
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
 	moveEmitParam.translate = transform.translate;
 	Math::Vector::Vector3 particleOffset = { 0.0f, aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,-2.0f };
@@ -250,10 +252,6 @@ void Player::DamageUpdate()
 	}
 }
 
-void Player::ShootCoolTimer()
-{
-
-}
 
 void Player::ControlDeadZone(Math::Vector::Vector2& v)
 {
