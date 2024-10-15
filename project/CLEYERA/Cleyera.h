@@ -22,23 +22,34 @@
 #include"Utility/Noise/NoiseTexture.h"
 #include"Utility/SkyBox/SkyBox.h"
 
-class Cleyera
-{
-public:
-	Cleyera() {};
-	~Cleyera() {};
+namespace Engine {
 
-	static Cleyera* GetInstance();
+	class Cleyera
+	{
+	public:
+		static Cleyera* GetInstance();
 
-	static void Initialize();
-	static void Finalize();
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		static void Initialize();
 
-	static void BeginFlame();
-	static void EndFlame();
+		/// <summary>
+		/// 終わり
+		/// </summary>
+		static void Finalize();
 
+		/// <summary>
+		/// フレームの最初
+		/// </summary>
+		static void BeginFlame();
 
-private:
+		/// <summary>
+		/// フレーム終わり
+		/// </summary>
+		static void EndFlame();
 
-	D3DResourceLeakChecker leakCheck;
-};
+	private:
 
+	};
+}

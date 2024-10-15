@@ -2,6 +2,10 @@
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
 using namespace Math::Vector;
 
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
+
+
 void Sprite::Initialize(Vector2 pos, Vector2 size)
 {
 	pos_ = pos;

@@ -1,5 +1,9 @@
 #include "StartCount.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void StartCount::Initialize()
 {
 	//tex

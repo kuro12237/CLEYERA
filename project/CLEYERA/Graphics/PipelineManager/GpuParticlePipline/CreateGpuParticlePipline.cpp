@@ -1,5 +1,7 @@
 ﻿#include "CreateGpuParticlePipline.h"
 
+using namespace Engine::Base::DX;
+
 SPSOProperty CreateGpuParticle::CreateGpuParticle_Init(ComPtr<ID3D12Device>device, Commands commands, SShaderMode shader)
 {
 	SPSOProperty pso = {};

@@ -1,5 +1,8 @@
 #include "WinApp.h"
 #include<wchar.h>
+
+using namespace Engine::Base::Win;
+
 WinApp *WinApp::GetInstance()
 {
 	static WinApp instance;

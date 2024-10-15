@@ -1,5 +1,10 @@
 #include "RTVDescripterManager.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
+
 RTVDescriptorManager* RTVDescriptorManager::GetInstance()
 {
 	static RTVDescriptorManager instance;

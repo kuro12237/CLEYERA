@@ -1,5 +1,9 @@
 #include "Sprite3dAddNoneWritePiplineCommand.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void Sprite3dAddNoneWritePiplineCommand::Exec(const SModelData& modelData)
 {
 	modelData;

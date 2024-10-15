@@ -9,7 +9,7 @@ public:
 	CreatePostProcess() {};
 	~CreatePostProcess() {};
 
-	static SPSOProperty DefferdShading(ComPtr<ID3D12Device>device, Commands, SShaderMode shader);
+	static SPSOProperty DefferdShading(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands, SShaderMode shader);
 
 
 private:

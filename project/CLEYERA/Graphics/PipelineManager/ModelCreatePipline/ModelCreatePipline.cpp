@@ -2,6 +2,9 @@
 
 using namespace CreateGraphicsPiplineFanc;
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
 
 
 SPSOProperty ModelCreatePipline::CreateSkyBoxModel(ComPtr<ID3D12Device> device, Commands commands, SShaderMode shader)

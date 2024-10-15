@@ -3,6 +3,9 @@
 using namespace Math::Matrix;
 using namespace Math::Vector;
 
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
+
 void CameraData::Initialize(Vector3 r, Vector3 t)
 {
 	rotation_ = r;

@@ -1,5 +1,9 @@
 ﻿#include "Phong_CreatePipline.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 Phong_CreatePipline* Phong_CreatePipline::GetInstance()
 {
 	static Phong_CreatePipline instance;

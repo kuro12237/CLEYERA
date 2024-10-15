@@ -1,5 +1,11 @@
 #include "SkyBox.h"
 
+
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
+
 SkyBox* SkyBox::GetInstance()
 {
 	static SkyBox instance;

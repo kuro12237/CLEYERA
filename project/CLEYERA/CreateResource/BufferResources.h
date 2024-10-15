@@ -125,7 +125,7 @@ inline void BufferResource<T>::CreateResource(DXGI_FORMAT format, const int32_t 
 	}
 
 	//後で下を関数化
-	ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
+	ComPtr<ID3D12Device>device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 	device->CreateCommittedResource(
 		&heapPram,
 		D3D12_HEAP_FLAG_NONE,
@@ -144,7 +144,7 @@ inline void BufferResource<T>::CreateResource(D3D12_RESOURCE_DESC resourceDesc, 
 	D3D12_CLEAR_VALUE color = depthClearValue;
 
 	//後で下を関数化
-	ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
+	ComPtr<ID3D12Device>device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 	device->CreateCommittedResource(
 		&heapPram,
 		D3D12_HEAP_FLAG_NONE,
@@ -209,36 +209,36 @@ inline void BufferResource<T>::UnMap()
 template<typename T>
 inline void BufferResource<T>::CommandCall(UINT number)
 {
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	commands.m_pList->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+	ID3D12GraphicsCommandList* list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommandList();
+	list->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>
 inline void BufferResource<T>::ComputeCommandCall(UINT number)
 {
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	commands.m_pList->SetComputeRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+	ID3D12GraphicsCommandList* list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommandList();
+	list-> SetComputeRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>
 inline void BufferResource<T>::CommandVertexBufferViewCall(uint32_t view)
 {
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	commands.m_pList->IASetVertexBuffers(0, view, &vertexBufferView_);
+	ID3D12GraphicsCommandList* list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommandList();
+	list->IASetVertexBuffers(0, view, &vertexBufferView_);
 }
 
 template<typename T>
 inline void BufferResource<T>::CommandIndexBufferViewCall()
 {
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	commands.m_pList->IASetIndexBuffer(&indexBufferView_);
+	ID3D12GraphicsCommandList* list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommandList();
+	list->IASetIndexBuffer(&indexBufferView_);
 }
 
 template<typename T>
 inline void BufferResource<T>::CommandPrimitiveTopologyCall()
 {
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-	commands.m_pList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	ID3D12GraphicsCommandList* list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommandList();
+	list->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 template<typename T>
@@ -335,7 +335,7 @@ template<typename T>
 inline void BufferResource<T>::CreateBufferResource()
 {
 	size_t sizeInbyte = sizeof(T) * bufferNum_;
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	ComPtr<ID3D12Device> device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -388,7 +388,7 @@ inline void BufferResource<T>::CreateUAVResource(const uint32_t& Num, const stri
 		{//buffer作成
 			bufferNum_ = Num;
 			size_t sizeInbyte = sizeof(T) * bufferNum_;
-			ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+			ComPtr<ID3D12Device> device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 			D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 			uploadHeapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
 

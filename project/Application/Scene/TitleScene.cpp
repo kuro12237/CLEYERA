@@ -1,5 +1,9 @@
 #include "TitleScene.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void TitleScene::Initialize()
 {
 	//ÉQÅ[ÉÄñºê›íË

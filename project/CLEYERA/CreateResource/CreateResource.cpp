@@ -1,5 +1,9 @@
 #include "CreateResource.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 ComPtr<ID3D12Resource> CreateResources::CreateBufferResource(size_t sizeInbyte)
 {
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();

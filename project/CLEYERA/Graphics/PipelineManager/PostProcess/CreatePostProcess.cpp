@@ -1,6 +1,7 @@
 #include "CreatePostProcess.h"
 
 using namespace CreateGraphicsPiplineFanc;
+using namespace Engine::Base::DX;
 
 SPSOProperty CreatePostProcess::DefferdShading(ComPtr<ID3D12Device> device, Commands, SShaderMode shader)
 {

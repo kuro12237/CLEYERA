@@ -1,5 +1,9 @@
 #include "LightingManager.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 LightingManager* LightingManager::GetInstance()
 {
 	static LightingManager instance;

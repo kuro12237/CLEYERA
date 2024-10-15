@@ -1,5 +1,9 @@
 #include "Default3dPiplineCommand.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void Default3dPipline::Exec(const SModelData& modelData)
 {
 	modelData;

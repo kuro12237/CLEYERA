@@ -2,6 +2,9 @@
 
 using namespace Math::Vector;
 
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
+
 TextureManager* TextureManager::GetInstance()
 {
 	static TextureManager instance;

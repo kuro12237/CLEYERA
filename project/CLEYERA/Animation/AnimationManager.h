@@ -3,6 +3,9 @@
 #include"Vector/VectorTransform.h"
 #include"math/Quaternion/QuaternionTransform.h"
 
+/// <summary>
+/// アニメーション管理クラス
+/// </summary>
 class AnimationManager
 {
 public:

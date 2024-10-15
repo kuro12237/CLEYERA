@@ -1,5 +1,9 @@
 #include "DSVDescriptorManager.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 DSVDescriptorManager* DSVDescriptorManager::GetInstance()
 {
     static DSVDescriptorManager instance;

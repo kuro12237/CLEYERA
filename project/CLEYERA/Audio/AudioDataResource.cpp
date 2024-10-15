@@ -1,5 +1,7 @@
 #include"AudioDataResource.h"
 
+using namespace SSound;
+
 AudioDataResource::~AudioDataResource()
 {
 	delete[] soundData_.pBuffer;

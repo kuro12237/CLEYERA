@@ -1,5 +1,8 @@
 #include "PlayerReticle.h"
 
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
+
 void PlayerReticle::Initialize()
 {
 	name_ = "PlayerReticle";

@@ -2,6 +2,11 @@
 #include <thread>
 #include"Graphics/DescripterManager/DSVDescriptorManager.h"
 
+using namespace Engine;
+using namespace Base::DX;
+
+using namespace Base::Win;
+
 DirectXCommon* DirectXCommon::GetInstance(){
 	static DirectXCommon instance;
 	return &instance;

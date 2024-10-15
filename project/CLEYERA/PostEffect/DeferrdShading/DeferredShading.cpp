@@ -1,5 +1,9 @@
 #include "DeferredShading.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void DefferredShading::Initialize()
 {
 	vertexBuffer_ = make_unique<BufferResource<VertexData>>();

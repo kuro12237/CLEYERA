@@ -7,107 +7,163 @@
 #define SRV_DESCRIPTOR_MAX 64000
 #define DSV_DESCRIPTOR_MAX 32
 
-struct D3DResourceLeakChecker {
-	//~D3DResourceLeakChecker() {
-	//	ComPtr<IDXGIDebug1>debug;
-	//	if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(&debug))))
-	//	{
-	//		debug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_ALL);
-	//		debug->ReportLiveObjects(DXGI_DEBUG_APP, DXGI_DEBUG_RLO_ALL);
-	//		debug->ReportLiveObjects(DXGI_DEBUG_D3D12, DXGI_DEBUG_RLO_ALL);
-	//	}
-	//}
-};
+namespace Engine::Base::DX {
 
-struct Commands {
-	ComPtr<ID3D12CommandAllocator>m_pAllocator;
-	ComPtr<ID3D12GraphicsCommandList>m_pList;
-	ComPtr<ID3D12CommandQueue>m_pQueue;
-	D3D12_COMMAND_QUEUE_DESC QueueDesc{};
-};
+	/// <summary>
+	/// リークチェック
+	/// </summary>
+	struct D3DResourceLeakChecker {
+		//~D3DResourceLeakChecker() {
+		//	ComPtr<IDXGIDebug1>debug;
+		//	if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(&debug))))
+		//	{
+		//		debug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_ALL);
+		//		debug->ReportLiveObjects(DXGI_DEBUG_APP, DXGI_DEBUG_RLO_ALL);
+		//		debug->ReportLiveObjects(DXGI_DEBUG_D3D12, DXGI_DEBUG_RLO_ALL);
+		//	}
+		//}
+	};
 
-struct SwapChain {
-	ComPtr<IDXGISwapChain4> m_pSwapChain;
-	ComPtr<ID3D12Resource> m_pResource[2];
-	DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
-};
-struct  RTV {
-	ComPtr<ID3D12DescriptorHeap> m_pDescritorHeap;
-	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
-	D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
-};
+	/// <summary>
+	/// Command関連
+	/// </summary>
+	struct Commands {
+		ComPtr<ID3D12CommandAllocator>m_pAllocator;
+		ComPtr<ID3D12GraphicsCommandList>m_pList;
+		ComPtr<ID3D12CommandQueue>m_pQueue;
+		D3D12_COMMAND_QUEUE_DESC QueueDesc{};
+	};
 
-class DirectXCommon {
-public:
+	/// <summary>
+	/// スワップチェーン
+	/// </summary>
+	struct SwapChain {
+		ComPtr<IDXGISwapChain4> m_pSwapChain;
+		ComPtr<ID3D12Resource> m_pResource[2];
+		DXGI_SWAP_CHAIN_DESC1 swapChainDesc{};
+	};
+	/// <summary>
+	/// レンダーターゲット0,1
+	/// </summary>
+	struct  RTV {
+		ComPtr<ID3D12DescriptorHeap> m_pDescritorHeap;
+		D3D12_RENDER_TARGET_VIEW_DESC rtvDesc{};
+		D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle;
+		D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
+	};
 
+	class DirectXCommon {
+	public:
 
-	static DirectXCommon* GetInstance();
+		static DirectXCommon* GetInstance();
 
-	void initialize();
-	void Finalize();
-	void PreDraw();
-	void PostDraw();
-	void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
-	void ImGuiUpdate();
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		void initialize();
+		/// <summary>
+		/// 終わり
+		/// </summary>
+		void Finalize();
+		/// <summary>
+		/// 描画前
+		/// </summary>
+		void PreDraw();
+		/// <summary>
+		/// 描画後
+		/// </summary>
+		void PostDraw();
 
-	void CommandClosed();
+		/// <summary>
+		/// シザーとビューのコマンド積み
+		/// </summary>
+		/// <param name="kClientWidth"></param>
+		/// <param name="kClientHeight"></param>
+		void ScissorViewCommand(const int32_t kClientWidth, const int32_t kClientHeight);
+
+		/// <summary>
+		/// ImGui更新
+		/// </summary>
+		void ImGuiUpdate();
+
+		/// <summary>
+		/// コマンド実行
+		/// </summary>
+		void CommandClosed();
 
 #pragma region get
-	Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
-	ID3D12Device* GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_.Get(); }
-	ID3D12DescriptorHeap* GetSrvHeap() { return DirectXCommon::GetInstance()->m_pSrvDescriptorHeap.Get(); }
-	ID3D12DescriptorHeap* GetDsvHeap() { return DirectXCommon::GetInstance()->m_pDsvDescripterHeap.Get(); }
-	SwapChain GetswapChain() { return DirectXCommon::GetInstance()->swapChain; }
-	RTV GetRtv() { return DirectXCommon::GetInstance()->rtv; }
-	static float GetFps() { return DirectXCommon::GetInstance()->fps; }
+		Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
+		ID3D12GraphicsCommandList* GetCommandList() { return DirectXCommon::GetInstance()->commands.m_pList.Get(); }
+		ID3D12Device* GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_.Get(); }
+		ID3D12DescriptorHeap* GetSrvHeap() { return DirectXCommon::GetInstance()->m_pSrvDescriptorHeap.Get(); }
+		ID3D12DescriptorHeap* GetDsvHeap() { return DirectXCommon::GetInstance()->m_pDsvDescripterHeap.Get(); }
+		SwapChain GetswapChain() { return DirectXCommon::GetInstance()->swapChain; }
+		RTV GetRtv() { return DirectXCommon::GetInstance()->rtv; }
+		static float GetFps() { return DirectXCommon::GetInstance()->fps; }
 #pragma endregion
 
+	private:
+		/// <summary>
+		/// ビューの値を入手
+		/// </summary>
+		D3D12_VIEWPORT viewportSetting(int32_t kClientWidth, int32_t kClientHeight);
 
-private:
-	D3D12_VIEWPORT viewportSetting(int32_t kClientWidth, int32_t kClientHeight);
-	D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
-	ComPtr<ID3D12DescriptorHeap> CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
-	ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
+		/// <summary>
+		/// シザーの値を入手
+		/// </summary>
+		D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
 
-	void CreateDebugLayer();
-	void CreateInforQueue();
-	void CreateFactory();
-	void CreateDevice();
-	void CreateCommands();
-	void CreateSwapChain();
-	void CreateDescritorHeap();
-	void CreateSwapChainResource();
-	void CreateRTV();
-	void CreateFence();
-	void CreateFixFPS();
-	void UpdateFixFPS();
+		/// <summary>
+		/// descripter作製
+		/// </summary>
+		ComPtr<ID3D12DescriptorHeap> CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
 
-	//DXGI+ID3D12�͊�{Comptr�ɕς���
+		/// <summary>
+		///　深度作製
+		/// </summary>
+		/// <returns></returns>
+		ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
 
-	ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
-	ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;
-	ComPtr<ID3D12Device>m_pDevice_ = nullptr;
-	ComPtr<ID3D12Debug1> m_pDebugController = nullptr;
-	ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
+		void CreateDebugLayer();
+		void CreateInforQueue();
+		void CreateFactory();
+		void CreateDevice();
+		void CreateCommands();
+		void CreateSwapChain();
+		void CreateDescritorHeap();
+		void CreateSwapChainResource();
+		void CreateRTV();
+		void CreateFence();
+		void CreateFixFPS();
+		void UpdateFixFPS();
 
-	Commands commands = {};
-	SwapChain swapChain = {};
-	RTV rtv = {};
-	ComPtr<ID3D12DescriptorHeap> m_pSrvDescriptorHeap;
-	ComPtr<ID3D12DescriptorHeap> m_pDsvDescripterHeap;
-	ComPtr<ID3D12Resource> m_pDepthResource = nullptr;
-	ComPtr<ID3D12Fence> m_pFence_ = nullptr;
-	uint64_t fenceValue = {};
-	HANDLE fenceEvent = {};
-	D3D12_RESOURCE_BARRIER barrier{};
+		//DXGI+ID3D12�͊�{Comptr�ɕς���
 
-	chrono::steady_clock::time_point reference_ = {};
+		ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
+		ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;
+		ComPtr<ID3D12Device>m_pDevice_ = nullptr;
+		ComPtr<ID3D12Debug1> m_pDebugController = nullptr;
+		ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
 
-	float fps = 0.0f;
-	//Singleton
-	DirectXCommon() = default;
-	~DirectXCommon() = default;
-	DirectXCommon(const  DirectXCommon&) = delete;
-	const  DirectXCommon& operator=(const DirectXCommon&) = delete;
-};
+		Commands commands = {};
+		SwapChain swapChain = {};
+		RTV rtv = {};
+		ComPtr<ID3D12DescriptorHeap> m_pSrvDescriptorHeap;
+		ComPtr<ID3D12DescriptorHeap> m_pDsvDescripterHeap;
+		ComPtr<ID3D12Resource> m_pDepthResource = nullptr;
+		ComPtr<ID3D12Fence> m_pFence_ = nullptr;
+		uint64_t fenceValue = {};
+		HANDLE fenceEvent = {};
+		D3D12_RESOURCE_BARRIER barrier{};
+
+		chrono::steady_clock::time_point reference_ = {};
+
+		float fps = 0.0f;
+
+		//Singleton
+		DirectXCommon() = default;
+		~DirectXCommon() = default;
+		DirectXCommon(const  DirectXCommon&) = delete;
+		const  DirectXCommon& operator=(const DirectXCommon&) = delete;
+	};
+}

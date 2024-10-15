@@ -1,5 +1,9 @@
 #include "IPipelineCommand.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void IPipelineCommand::CallCommand()
 {
 	

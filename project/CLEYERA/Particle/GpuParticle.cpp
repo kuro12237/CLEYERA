@@ -2,6 +2,10 @@
 
 using namespace Particle;
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void GpuParticle::Create(const size_t kNum, string Name)
 {
 	mulNum = uint32_t(kNum);

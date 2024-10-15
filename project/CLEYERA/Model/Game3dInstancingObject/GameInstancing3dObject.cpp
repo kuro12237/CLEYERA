@@ -1,5 +1,8 @@
 #include "GameInstancing3dObject.h"
 
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
+
 void GameInstancing3dObject::Create(const uint32_t& kNum, const string& name)
 {
 	instancingNum_ = kNum;

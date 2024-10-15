@@ -1,26 +1,37 @@
 #pragma once
 #include"Pch.h"
 
-struct soundData
+/// <summary>
+/// サウンドのデータ
+/// </summary>
+namespace SSound
 {
-	IXAudio2SourceVoice* pSourcevoice = {};
-	WAVEFORMATEX wfex = {};
-	BYTE* pBuffer = {};
-	unsigned int bufferSize;
-	std::vector<BYTE>mediaData;
-	IMFSourceReader* MFSourceReader;
-	IMFMediaType * mediaType;
-	XAUDIO2_BUFFER buffer = {};
-};
+	/// <summary>
+	/// 音データ構造体
+	/// </summary>
+	struct soundData
+	{
+		IXAudio2SourceVoice* pSourcevoice = {};
+		WAVEFORMATEX wfex = {};
+		BYTE* pBuffer = {};
+		unsigned int bufferSize;
+		std::vector<BYTE>mediaData;
+		IMFSourceReader* MFSourceReader;
+		IMFMediaType* mediaType;
+		XAUDIO2_BUFFER buffer = {};
+	};
 
-struct AudioDataResource
-{
-	~AudioDataResource();
+	/// <summary>
+	/// 保存クラス
+	/// </summary>
+	struct AudioDataResource
+	{
+		~AudioDataResource();
 
-	soundData GetSoundData() { return soundData_; }
+		soundData GetSoundData() { return soundData_; }
 
-	string filepath_{};
-	soundData soundData_{};
+		string filepath_{};
+		soundData soundData_{};
 
-};
-
+	};
+}

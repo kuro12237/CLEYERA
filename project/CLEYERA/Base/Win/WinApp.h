@@ -2,48 +2,84 @@
 #include"Pch.h"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+namespace Engine::Base::Win {
 
-class WinApp
-{
-public:
+	/// <summary>
+	/// ウィンドウズクラス
+	/// </summary>
+	class WinApp
+	{
+	public:
 
-	static WinApp *GetInstance();
+		static WinApp* GetInstance();
 
-	void Initialize();
-	bool WinMsg();
-	void Finalize();
-	void SetTiTleName(LPCWSTR  name) { SetWindowText(WinApp::GetInstance()->hwnd_, name); }
-	void ImGuiUpdate();
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		void Initialize();
+		
+		/// <summary>
+		/// winMsgを入手
+		/// </summary>
+		/// <returns></returns>
+		bool WinMsg();
+		
+		/// <summary>
+		/// 終わり
+		/// </summary>
+		void Finalize();
 
-#pragma region get
-	static HWND GetHwnd() { return WinApp::GetInstance()->hwnd_; }
-	static WNDCLASS GetWc() { return WinApp::GetInstance()->wc_; }
+		/// <summary>
+		/// ImGui更新
+		/// </summary>
+		void ImGuiUpdate();
 
-	static int32_t GetkCilientWidth() { return WinApp::GetInstance()->kWindowWidth; }
-	static int32_t GetkCilientHeight() { return WinApp::GetInstance()->kWindowHeight; }
+#pragma region Set
+
+		void SetTiTleName(LPCWSTR  name) { SetWindowText(WinApp::GetInstance()->hwnd_, name); }
 #pragma endregion
 
-private:
+#pragma region get
+		static HWND GetHwnd() { return WinApp::GetInstance()->hwnd_; }
+		static WNDCLASS GetWc() { return WinApp::GetInstance()->wc_; }
 
-	static HWND CreateWIND(const int32_t kWidth, const int32_t kHeight,LPCTSTR title,WNDCLASS wc);
+		static int32_t GetkCilientWidth() { return WinApp::GetInstance()->kWindowWidth; }
+		static int32_t GetkCilientHeight() { return WinApp::GetInstance()->kWindowHeight; }
+#pragma endregion
 
-	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
+	private:
 
-	static const int32_t kWindowWidth = 1280;
-	static const int32_t kWindowHeight = 720;
+		/// <summary>
+		/// ウインドウ作製
+		/// </summary>
+		static HWND CreateWIND(const int32_t kWidth, const int32_t kHeight, LPCTSTR title, WNDCLASS wc);
 
-	static const int32_t kDebugToolWindowWidth = 320;
-	static const int32_t kDebugToolWindowHeight = 130;
+		/// <summary>
+		/// Proc関数
+		/// </summary>
+		/// <param name="hwnd"></param>
+		/// <param name="msg"></param>
+		/// <param name="wparam"></param>
+		/// <param name="lparam"></param>
+		/// <returns></returns>
+		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
-	MSG msg{};
-	WNDCLASS wc_{};
-	HWND hwnd_ = {};
-	HWND DebugHwnd_{};
+		static const int32_t kWindowWidth = 1280;
+		static const int32_t kWindowHeight = 720;
 
-	WinApp() = default;
-	~WinApp() = default;
-	WinApp(const WinApp&) = delete;
-	const WinApp& operator=(const WinApp&) = delete;
-};
+		static const int32_t kDebugToolWindowWidth = 320;
+		static const int32_t kDebugToolWindowHeight = 130;
 
+		MSG msg{};
+		WNDCLASS wc_{};
+		HWND hwnd_ = {};
+		HWND DebugHwnd_{};
+
+		WinApp() = default;
+		~WinApp() = default;
+		WinApp(const WinApp&) = delete;
+		const WinApp& operator=(const WinApp&) = delete;
+	};
+
+}
 

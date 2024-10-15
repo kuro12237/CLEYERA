@@ -1,6 +1,7 @@
 #include "GraphicsPipelineManager.h"
 
 using namespace Pipline;
+using namespace Engine::Base::DX;
 
 GraphicsPipelineManager* GraphicsPipelineManager::GetInstance()
 {

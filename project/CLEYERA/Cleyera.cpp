@@ -1,5 +1,9 @@
 #include "Cleyera.h"
 
+using namespace Engine;
+using namespace Base::DX;
+using namespace Base::Win;
+
 Cleyera* Cleyera::GetInstance()
 {
 	static Cleyera instance;
@@ -12,6 +16,7 @@ void Cleyera::Initialize()
 
 	WinApp::GetInstance()->Initialize();
 	DirectXCommon::GetInstance()->initialize();
+
 	DescriptorManager::Initialize();
 	RTVDescriptorManager::Initialize();
 	ShaderManager::Initialize();

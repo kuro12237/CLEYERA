@@ -1,6 +1,7 @@
 #include"ImGuiManager.h"
 
-
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
 
 ImGuiManager::ImGuiManager()
 {

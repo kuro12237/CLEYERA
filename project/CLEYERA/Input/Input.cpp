@@ -1,6 +1,7 @@
 #include"Input.h"
 
 using namespace Math::Vector;
+using namespace Engine::Base::Win;
 
 Input* Input::GetInstance()
 {

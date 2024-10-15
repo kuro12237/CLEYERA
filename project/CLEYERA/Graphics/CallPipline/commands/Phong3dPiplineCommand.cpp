@@ -1,5 +1,9 @@
 #include "Phong3dPiplineCommand.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 void Phong3dPipline::Exec(const SModelData& modelData)
 {
 	modelData;

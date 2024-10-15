@@ -67,7 +67,7 @@ namespace Particle {
 			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_FIELD, "Suction");
 		}
 
-		ComPtr<ID3D12GraphicsCommandList> list = DirectXCommon::GetInstance()->GetCommands().m_pList;
+		ComPtr<ID3D12GraphicsCommandList> list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommands().m_pList;
 
 		list->SetComputeRootSignature(pso.rootSignature.Get());
 		list->SetPipelineState(pso.GraphicsPipelineState.Get());

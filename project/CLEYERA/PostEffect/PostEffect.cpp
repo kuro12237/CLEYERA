@@ -1,5 +1,9 @@
 #include "PostEffect.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 PostEffect* PostEffect::GetInstance()
 {
 	static PostEffect instatnce;

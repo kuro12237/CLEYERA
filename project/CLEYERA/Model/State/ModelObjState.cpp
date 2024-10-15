@@ -1,5 +1,9 @@
 #include "ModelObjState.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 ModelObjState::~ModelObjState() {}
 
 void ModelObjState::Initialize(Model* state)

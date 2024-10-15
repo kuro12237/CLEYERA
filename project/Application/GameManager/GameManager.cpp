@@ -1,16 +1,18 @@
 #include "GameManager.h"
 
+using namespace Engine;
+using namespace Engine::Base::Win;
+using namespace Engine::Base::DX;
+
 GameManager::GameManager()
 {
 	Cleyera::Initialize();
-
-	Scene_ = new  TitleScene();
-	Scene_->Initialize();
+	scene_ = make_unique<TitleScene>();
+	scene_->Initialize();
 }
 
 GameManager::~GameManager()
 {
-	delete Scene_;
 	Input::GetInstance()->VibrateController(0,0);
 
 	Cleyera::Finalize();

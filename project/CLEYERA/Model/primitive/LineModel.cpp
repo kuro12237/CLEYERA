@@ -1,5 +1,7 @@
 #include "LineModel.h"
 
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
 using namespace Primitive;
 
 void LineModel::Create(string name, uint32_t vertexNum)

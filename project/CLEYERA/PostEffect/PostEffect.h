@@ -94,7 +94,7 @@ private:
 	bool isInitialize_ = false;
 
 	Math::Vector::Vector2 pos_ = {};
-	Math::Vector::Vector2 size_ = { static_cast<float>(WinApp::GetkCilientWidth()), static_cast<float>(WinApp::GetkCilientHeight())};
+	Math::Vector::Vector2 size_ = { static_cast<float>(Engine::Base::Win::WinApp::GetkCilientWidth()), static_cast<float>(Engine::Base::Win::WinApp::GetkCilientHeight())};
 
 	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
 

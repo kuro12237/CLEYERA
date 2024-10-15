@@ -2,6 +2,10 @@
 #include"Pch.h"
 #include"Transform/STransformQua.h"
 
+
+/// <summary>
+/// アニメーション構造体
+/// </summary>
 namespace SAnimation
 {
 

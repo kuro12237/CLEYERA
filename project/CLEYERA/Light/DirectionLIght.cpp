@@ -2,6 +2,10 @@
 
 using namespace Math::Matrix;
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 DirectionalLight* DirectionalLight::GetInstance()
 {
 	static DirectionalLight instance;

@@ -1,5 +1,9 @@
 ﻿#include "Sprite_2d_CreatePipline.h"
 
+using namespace Engine::Base::DX;
+
+using namespace Engine::Base::Win;
+
 Sprite_2d_CreatePipline* Sprite_2d_CreatePipline::GetInstance()
 {
 	static Sprite_2d_CreatePipline instance;
