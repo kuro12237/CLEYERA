@@ -4,6 +4,11 @@ using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
 
+using namespace Engine::Objects;
+
+using namespace Engine::Buffer;
+
+
 ModelObjState::~ModelObjState() {}
 
 void ModelObjState::Initialize(Model* state)
@@ -18,7 +23,7 @@ void ModelObjState::Initialize(Model* state)
 	index_->CreateIndexBufferView();
 }
 
-void ModelObjState::Draw(Model* state,uint32_t instancingNum)
+void ModelObjState::Draw(Model* state, uint32_t instancingNum)
 {
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	vertex_->Map();

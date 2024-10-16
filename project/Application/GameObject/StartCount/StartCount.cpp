@@ -1,7 +1,8 @@
 #include "StartCount.h"
 
-using namespace Engine::Base::DX;
 
+using namespace Engine::Objects;
+using namespace Engine::Transform;
 using namespace Engine::Base::Win;
 
 void StartCount::Initialize()

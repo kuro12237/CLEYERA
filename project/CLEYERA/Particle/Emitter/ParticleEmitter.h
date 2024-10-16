@@ -7,6 +7,8 @@
 
 namespace Particle {
 
+	using namespace Engine::Buffer;
+
 	template<typename T>
 	class ParticleEmitter
 	{
@@ -56,7 +58,7 @@ namespace Particle {
 
 		unique_ptr<BufferResource<T>>emitBuf_ = nullptr;
 
-		vector<WorldTransform>wTs_{};
+		vector<Engine::Transform::WorldTransform>wTs_{};
 		vector<unique_ptr<Primitive::LineModel>>lines_{};
 	};
 
@@ -170,7 +172,7 @@ namespace Particle {
 
 		particle->CallUavRootparam(0);
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(1, emitBuf_->GetSrvIndex());
-		RunTimeCounter::GetInstance()->ComputeCommandCall(2);
+		Engine::Utility::RunTimeCounter::GetInstance()->ComputeCommandCall(2);
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetFreeListIndexBuf()->GetSrvIndex());
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(4, particle->GetFreeListBuf()->GetSrvIndex());
 

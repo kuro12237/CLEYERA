@@ -1,5 +1,8 @@
 #include "RunTimeCounter.h"
 
+using namespace Engine::Utility;
+using namespace Engine::Buffer;
+
 RunTimeCounter* RunTimeCounter::GetInstance()
 {
 	static RunTimeCounter instance;

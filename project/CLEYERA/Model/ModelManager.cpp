@@ -1,5 +1,8 @@
 #include "ModelManager.h"
 
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+
 ModelManager* ModelManager::GetInstance()
 {
 	static ModelManager instance;

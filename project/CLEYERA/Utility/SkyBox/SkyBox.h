@@ -26,7 +26,7 @@ public:
 
 	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
 	void SetTransform(const TransformEular& transform) { worldTransform_.transform = transform; }
-	void SetParent(const WorldTransform& transform) { worldTransform_.parent = &transform; }
+	void SetParent(const Engine::Transform::WorldTransform& transform) { worldTransform_.parent = &transform; }
 	
 #pragma endregion
 
@@ -41,14 +41,14 @@ private:
 	void CreateVertex();
 	void CreateMaterial();
 
-	unique_ptr<BufferResource<VertexData>>cVertex_ = nullptr;
-	unique_ptr<BufferResource<uint32_t>>cIndex = nullptr;
-	unique_ptr<BufferResource<Material>>cMaterial_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<VertexData>>cVertex_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<uint32_t>>cIndex = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<Material>>cMaterial_ = nullptr;
 	Material material_ = {};
 
 	bool initializeLock_ = false;
 	uint32_t texHandle_ = 0;
-	WorldTransform worldTransform_ = {};
+	Engine::Transform::WorldTransform worldTransform_ = {};
 
 	GlobalVariables* globalVariables_ = nullptr;
 

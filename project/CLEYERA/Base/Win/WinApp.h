@@ -5,7 +5,7 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg
 namespace Engine::Base::Win {
 
 	/// <summary>
-	/// ウィンドウズクラス
+	/// ウィンドウズ本体
 	/// </summary>
 	class WinApp
 	{

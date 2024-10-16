@@ -1,5 +1,7 @@
 #include "RodingIcon.h"
 
+using namespace Engine::Transform;
+
 void RodingIcon2d::Initialize(uint32_t noiseTex)
 {
 	name_ = "rodingIcon";

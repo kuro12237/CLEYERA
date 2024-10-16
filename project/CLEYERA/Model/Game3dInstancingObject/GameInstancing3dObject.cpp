@@ -2,6 +2,9 @@
 
 using namespace Engine::Base::DX;
 using namespace Engine::Base::Win;
+using namespace Engine::Buffer;
+using namespace Engine::Manager;
+
 
 void GameInstancing3dObject::Create(const uint32_t& kNum, const string& name)
 {

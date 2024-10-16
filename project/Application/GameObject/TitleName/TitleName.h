@@ -27,8 +27,8 @@ public:
 
 private:
 
-	unique_ptr<Sprite>sprite_ = nullptr;
-	WorldTransform worldTransform_ = {};
+	unique_ptr<Engine::Objects::Sprite>sprite_ = nullptr;
+	Engine::Transform::WorldTransform worldTransform_ = {};
 	uint32_t texHandle_ = 0;
 
 };

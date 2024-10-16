@@ -398,9 +398,6 @@
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp">
       <Filter>CLEYERA\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp">
-      <Filter>CLEYERA\MulitiPass</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
@@ -803,9 +800,6 @@
     <ClInclude Include="CLEYERA\Utility\ImGuiManager\ImGuiJapaneseGlyphArray.h">
       <Filter>CLEYERA\Utility\ImGuiManager</Filter>
     </ClInclude>
-    <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h">
-      <Filter>CLEYERA\MulitiPass</Filter>
-    </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
@@ -1036,9 +1030,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h">
       <Filter>CLEYERA\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\CreateResource\IBufferResource.h">
-      <Filter>CLEYERA\Graphics\BufferResource</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Sprite\ISpriteBuf.h">
       <Filter>CLEYERA\Sprite</Filter>

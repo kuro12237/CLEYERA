@@ -1,5 +1,7 @@
 #include "GameObjectManager.h"
 
+using namespace Engine::Manager;
+
 GameObjectManager* GameObjectManager::GetInstance()
 {
 	static GameObjectManager instance;

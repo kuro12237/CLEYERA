@@ -3,6 +3,7 @@
 using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
+using namespace Engine::Manager;
 
 LightingManager* LightingManager::GetInstance()
 {

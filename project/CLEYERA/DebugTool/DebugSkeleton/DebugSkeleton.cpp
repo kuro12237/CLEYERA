@@ -1,5 +1,7 @@
 #include "DebugSkeleton.h"
 
+using namespace Engine::Transform;
+
 void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 {
 #ifdef _DEBUG

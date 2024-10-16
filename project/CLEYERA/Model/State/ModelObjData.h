@@ -7,7 +7,7 @@ class ModelObjData
 {
 public:
 
-	ModelObjData(SModelData modelData, uint32_t index, unique_ptr<Model> model) {
+	ModelObjData(SModelData modelData, uint32_t index, unique_ptr<Engine::Objects::Model> model) {
 		modelData_ = modelData,
 			index_ = index;
 		model_ = move(model);
@@ -17,7 +17,7 @@ public:
 	~ModelObjData() {};
 
 	SModelData GetData() { return modelData_; }
-	Model* GetModel() { return model_.get(); }
+	Engine::Objects::Model* GetModel() { return model_.get(); }
 	/// <summary>
 	/// ÉÇÉfÉãî‘çÜ
 	/// </summary>
@@ -25,7 +25,7 @@ public:
 
 private:
 
-	unique_ptr<Model>model_;
+	unique_ptr<Engine::Objects::Model>model_;
 	SModelData modelData_;
 	uint32_t index_;
 };

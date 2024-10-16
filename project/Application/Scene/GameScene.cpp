@@ -1,5 +1,7 @@
 #include "GameScene.h"
 
+using namespace Engine::Manager;
+
 void GameScene::Initialize()
 {
 

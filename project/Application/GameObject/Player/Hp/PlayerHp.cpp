@@ -1,5 +1,7 @@
 #include "PlayerHp.h"
 
+using namespace Engine::Objects;
+
 void PlayerHp::Initialize(uint32_t hp)
 {
 	hpCount_ = hp;

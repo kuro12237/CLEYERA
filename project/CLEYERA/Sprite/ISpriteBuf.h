@@ -4,6 +4,8 @@
 
 namespace System
 {
+	using namespace Engine::Buffer;
+
 	class ISpriteBuf
 	{
 	public:

@@ -1,5 +1,8 @@
 #include "PlayerCamera.h"
 
+using namespace Engine::Transform;
+
+
 void PlayerCamera::Initialize()
 {
 	name_ = "PlayerCamera";

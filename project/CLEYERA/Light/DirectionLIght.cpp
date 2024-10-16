@@ -5,6 +5,7 @@ using namespace Math::Matrix;
 using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
+using namespace Engine::Light;
 
 DirectionalLight* DirectionalLight::GetInstance()
 {

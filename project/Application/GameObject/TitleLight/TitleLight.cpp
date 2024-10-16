@@ -1,5 +1,7 @@
 #include "TitleLight.h"
 
+using namespace Engine::Manager;
+
 void TitleLight::Initialize()
 {
 	light_.radious = 512.0f;

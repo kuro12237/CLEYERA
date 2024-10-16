@@ -6,11 +6,9 @@
 #include"PostEffect/PostEffect.h"
 #include"Game3dObject.h"
 #include"DebugTool/DebugCamera/DebugCamera.h"
-#include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"Animation/AnimationManager.h"
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 #include"Model/primitive/LineModel.h"
-#include"PostEffect/DeferrdShading/DeferredShading.h"
 #include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
 
@@ -58,8 +56,7 @@ private:
 
 	bool CheckLoadScene();
 
-	CameraData camera_ = {};
-
+	
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "SelectSceneData.json";

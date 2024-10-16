@@ -5,16 +5,21 @@
 #include"Vector/VectorTransform.h"
 #include"Light/LightingManager.h"
 
-class ModelObjState :public IModelState
-{
-public:
-	ModelObjState() {};
-	~ModelObjState() ;
+namespace Engine::Objects {
 
-	void Initialize(Model* state)override;
-	void Draw(Model* state,uint32_t instancingNum)override;
+	using namespace Engine::Buffer;
 
-private:
-	unique_ptr<BufferResource<uint32_t>>index_ = nullptr;
-	unique_ptr<BufferResource<VertexData>>vertex_ = nullptr;
-};
+	class ModelObjState :public IModelState
+	{
+	public:
+		ModelObjState() {};
+		~ModelObjState();
+
+		void Initialize(Model* state)override;
+		void Draw(Model* state, uint32_t instancingNum)override;
+
+	private:
+		unique_ptr<BufferResource<uint32_t>>index_ = nullptr;
+		unique_ptr<BufferResource<VertexData>>vertex_ = nullptr;
+	};
+}

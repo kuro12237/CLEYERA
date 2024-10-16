@@ -3,6 +3,9 @@
 using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
+using namespace Engine::Objects;
+
+using namespace Engine::Buffer;
 
 
 ModelSkinningState::~ModelSkinningState()

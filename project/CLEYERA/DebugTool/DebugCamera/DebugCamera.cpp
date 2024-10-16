@@ -1,6 +1,10 @@
 #include"DebugCamera.h"
 
 using namespace Math::Matrix;
+using namespace Engine::DebugTools;
+using namespace Engine::Buffer;
+
+using namespace Engine::Camera;
 
 void DebugCamera::Initialize() 
 {

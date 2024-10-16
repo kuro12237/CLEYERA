@@ -22,6 +22,9 @@ enum SelectPostEffect
    VIGNETTE
 };
 
+/// <summary>
+/// ポストエフェクトの
+/// </summary>
 class PostEffect
 {
 public:
@@ -98,16 +101,16 @@ private:
 
 	const float clearColor[4] = { 0.25f,0.5f,0.1f,0.0f };
 
-	unique_ptr<BufferResource<uint32_t>>albedBuf_ = nullptr;
-	unique_ptr<BufferResource<uint32_t>>texBuf_ = nullptr;
-	unique_ptr<BufferResource<uint32_t>>depthTexBuffer_ = nullptr;
-	unique_ptr<BufferResource<uint32_t>>outLineColor_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<uint32_t>>albedBuf_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<uint32_t>>texBuf_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<uint32_t>>depthTexBuffer_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<uint32_t>>outLineColor_ = nullptr;
 
-	unique_ptr<BufferResource<TransformationMatrix>>wvp_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<TransformationMatrix>>wvp_ = nullptr;
 
-	unique_ptr<BufferResource<PostEffectParam>>paramBuffer_ = nullptr;
-	unique_ptr<BufferResource<PostEffectBlurParam>>blurParamBuffer_ = nullptr;
-	unique_ptr<BufferResource<PostEffectAdjustedColorParam>> adjustedColorBuffer_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<PostEffectParam>>paramBuffer_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<PostEffectBlurParam>>blurParamBuffer_ = nullptr;
+	unique_ptr<Engine::Buffer::BufferResource<PostEffectAdjustedColorParam>> adjustedColorBuffer_ = nullptr;
 
 	PostEffectBlurParam blurParam_ = {};
 	PostEffectParam param_ = {};

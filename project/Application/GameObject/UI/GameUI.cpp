@@ -1,5 +1,8 @@
 #include "GameUI.h"
 
+using namespace Engine::Transform;
+using namespace Engine::Objects;
+
 void GameUI::Initialize()
 {
 	bottonATexhandle_ = TextureManager::LoadDDSTexture("GameObject/ControlUI/A_botton_UI.dds");

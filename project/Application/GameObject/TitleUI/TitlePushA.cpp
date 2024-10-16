@@ -1,5 +1,8 @@
 #include "TitlePushA.h"
 
+using namespace Engine::Transform;
+using namespace Engine::Objects;
+
 void TitlePushA::Initiaize()
 {
 	texhandle_ = TextureManager::LoadPngTexture("Title/Push_A.png");

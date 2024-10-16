@@ -1,5 +1,8 @@
 #include "SelectScene.h"
 
+using namespace Engine::Manager;
+
+
 void SelectScene::Initialize()
 {
 	//levelData‚Ì“Ç‚İ‚İ

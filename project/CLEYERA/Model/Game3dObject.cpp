@@ -1,5 +1,9 @@
 #include "Game3dObject.h"
 
+using namespace Engine::Buffer;
+using namespace Engine::Transform;
+using namespace Engine::Manager;
+
 void Game3dObject::Create(unique_ptr<IPipelineCommand> piplineSelect)
 {
 	piplineHandler_ = make_unique<PipelineHandler>();

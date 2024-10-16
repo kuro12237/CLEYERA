@@ -27,8 +27,8 @@ public:
 
 private:
 
-	unique_ptr<Sprite>bottonASprite_ = nullptr;
-	WorldTransform bottonAwT_ = {};
+	unique_ptr<Engine::Objects::Sprite>bottonASprite_ = nullptr;
+	Engine::Transform::WorldTransform bottonAwT_ = {};
 	uint32_t bottonATexhandle_ = 0;
 
 };

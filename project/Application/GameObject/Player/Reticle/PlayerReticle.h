@@ -50,8 +50,8 @@ private:
 
 	Math::Vector::Vector2 pos2d_ = {};
 
-	unique_ptr<Sprite>sprite_ = nullptr;
-	WorldTransform worldTransform_;
+	unique_ptr<Engine::Objects::Sprite>sprite_ = nullptr;
+	Engine::Transform::WorldTransform worldTransform_;
 	Math::Vector::Vector3 interTarget_ = {};
 };
 

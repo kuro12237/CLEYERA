@@ -167,7 +167,6 @@ struct  PostEffectBlurParam
 
 };
 
-
 struct  Material
 {
 	Math::Vector::Vector4 color = { 1,1,1,1 };
@@ -198,37 +197,40 @@ struct  Material
 };
 
 
-
-class CreateResources
+namespace Engine::Buffer
 {
-public:
 
-	/// <summary>
-	/// Resource作成
-	/// </summary>
-	/// <param name="device"></param>
-	/// <param name="sizeInbyte"></param>
-	/// <returns></returns>
-	static ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInbyte);
+	class CreateResources
+	{
+	public:
 
-	static void CreateBufferResource(size_t sizeInbyte, ComPtr<ID3D12Resource>& Resource);
+		/// <summary>
+		/// Resource作成
+		/// </summary>
+		/// <param name="device"></param>
+		/// <param name="sizeInbyte"></param>
+		/// <returns></returns>
+		static ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInbyte);
+
+		static void CreateBufferResource(size_t sizeInbyte, ComPtr<ID3D12Resource>& Resource);
 
 
-	/// <summary>
-	/// BufferView��쐬
-	/// </summary>
-	/// <param name="sizeInbyte"></param>
-	/// <param name="Resource"></param>
-	/// <returns></returns>
-	static D3D12_VERTEX_BUFFER_VIEW VertexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource, int size);
-	/// <summary>
-	/// index��BufferView
-	/// </summary>
-	/// <param name="NumVertex"></param>
-	/// <returns></returns>
-	static D3D12_INDEX_BUFFER_VIEW IndexCreateBufferView(size_t sizeInbyte, ComPtr<ID3D12Resource> Resource);
+		/// <summary>
+		/// BufferView��쐬
+		/// </summary>
+		/// <param name="sizeInbyte"></param>
+		/// <param name="Resource"></param>
+		/// <returns></returns>
+		static D3D12_VERTEX_BUFFER_VIEW VertexCreateBufferView(size_t sizeInbyte, ID3D12Resource* Resource, int size);
+		/// <summary>
+		/// index��BufferView
+		/// </summary>
+		/// <param name="NumVertex"></param>
+		/// <returns></returns>
+		static D3D12_INDEX_BUFFER_VIEW IndexCreateBufferView(size_t sizeInbyte, ComPtr<ID3D12Resource> Resource);
 
-private:
+	private:
 
-	ID3D12Resource* resource_ = nullptr;
-};
+		ID3D12Resource* resource_ = nullptr;
+	};
+}

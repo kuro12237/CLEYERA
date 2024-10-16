@@ -62,8 +62,8 @@ protected:
 	GlobalVariables* globalVariables_ = nullptr;
 	GameObjectManager* gameObjectManager_ = nullptr;
 
-	unique_ptr<Sprite>sprite_ = nullptr;
-	WorldTransform worldTransform_ = {};
+	unique_ptr<Engine::Objects::Sprite>sprite_ = nullptr;
+	Engine::Transform::WorldTransform worldTransform_ = {};
 	string fileName_ = "";
 
 	uint32_t texHandle_ = 0;

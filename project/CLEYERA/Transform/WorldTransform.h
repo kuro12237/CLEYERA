@@ -12,42 +12,47 @@ enum Projection
 	OrthographicMatrix = 1
 };
 
-struct WorldTransform
+namespace Engine::Transform
 {
-	~WorldTransform() {};
+	using namespace Engine::Buffer;
 
-	TransformEular transform = { {1.0f,1.0f,1.0f},{},{} };
-	Math::Qua::Quaternion quaternion = {};
+	struct WorldTransform
+	{
+		~WorldTransform() {};
 
-	Math::Matrix::Matrix4x4 matWorld = {};
-	const WorldTransform* parent = {};
+		TransformEular transform = { {1.0f,1.0f,1.0f},{},{} };
+		Math::Qua::Quaternion quaternion = {};
 
-	shared_ptr<BufferResource<TransformationMatrix>>buffer_ = nullptr;
+		Math::Matrix::Matrix4x4 matWorld = {};
+		const WorldTransform* parent = {};
 
-	/// <summary>
-	/// GPUに送る用
-	/// </summary>
-	TransformationMatrix BufferMatrix_ = {};
+		shared_ptr<Engine::Buffer::BufferResource<TransformationMatrix>>buffer_ = nullptr;
 
-	void Initialize();
-	void SRTSetting(Math::Vector::Vector3 s = { 1,1,1 }, Math::Vector::Vector3 r = { 0,0,0 }, Math::Vector::Vector3 t = { 0,0,0 });
-	void UpdateMatrix();
-	void TransfarMatrix();
+		/// <summary>
+		/// GPUに送る用
+		/// </summary>
+		TransformationMatrix BufferMatrix_ = {};
 
-	void UpdateEularMatrix();
+		void Initialize();
+		void SRTSetting(Math::Vector::Vector3 s = { 1,1,1 }, Math::Vector::Vector3 r = { 0,0,0 }, Math::Vector::Vector3 t = { 0,0,0 });
+		void UpdateMatrix();
+		void TransfarMatrix();
 
-	//void UpdateQuaternionMatrix();
+		void UpdateEularMatrix();
 
-	//void UpdateEularQuaternionMatrix();
+		//void UpdateQuaternionMatrix();
 
-	void SetParent(const WorldTransform& w) { parent = &w; }
-	void DeleateParent();
+		//void UpdateEularQuaternionMatrix();
 
-	Math::Vector::Vector3 GetWorldPosition();
-	Math::Matrix::Matrix4x4 GetMat() { return matWorld; }
-private:
-	void CreateBuffer();
-	void Map();
-	void UnMap();
-};
+		void SetParent(const WorldTransform& w) { parent = &w; }
+		void DeleateParent();
 
+		Math::Vector::Vector3 GetWorldPosition();
+		Math::Matrix::Matrix4x4 GetMat() { return matWorld; }
+	private:
+		void CreateBuffer();
+		void Map();
+		void UnMap();
+	};
+
+}

@@ -3,6 +3,8 @@
 using namespace Engine::Base::DX;
 using namespace Engine::Base::Win;
 using namespace Primitive;
+using namespace Engine::Buffer;
+using namespace Engine::Manager;
 
 void LineModel::Create(string name, uint32_t vertexNum)
 {

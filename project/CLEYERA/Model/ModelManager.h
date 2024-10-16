@@ -41,9 +41,9 @@ public:
 
 	static SModelData GetModelData(const string filePath);
 
-	static Model* GetModel(uint32_t index);
+	static Engine::Objects::Model* GetModel(uint32_t index);
 
-	static Model* GetModel(const string filePath);
+	static Engine::Objects::Model* GetModel(const string filePath);
 
 	static uint32_t GetIndex(const string name) { return ModelManager::GetInstance()->objModelDatas_[name]->GetIndex(); }
 

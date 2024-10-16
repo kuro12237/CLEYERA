@@ -52,6 +52,9 @@ namespace Engine::Base::DX {
 		D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles[2];
 	};
 
+	/// <summary>
+	/// DirectXの本体
+	/// </summary>
 	class DirectXCommon {
 	public:
 

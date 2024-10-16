@@ -2,35 +2,42 @@
 #include"Pch.h"
 #include"CameraData.h"
 
-
-class CameraManager
+namespace Engine::Manager
 {
-public:
+	using namespace Engine::Camera;
 
-	static CameraManager* GetInstance();
+	/// <summary>
+	/// カメラ管理クラスカメラをこのクラスに設定する
+	/// </summary>
+	class CameraManager
+	{
+	public:
 
-	void Initialize();
+		static CameraManager* GetInstance();
 
-	void Update();
+		void Initialize();
 
-	void PsCommandCall(const uint32_t &num);
-	void VsCommandCall(const uint32_t &num);
+		void Update();
 
-	void ResetCamera(const CameraData& camera);
+		void PsCommandCall(const uint32_t& num);
+		void VsCommandCall(const uint32_t& num);
+
+		void ResetCamera(const CameraData& camera);
 
 #pragma region Get
 
-	const CameraData* GetCameraData() { return cameraData_; }
+		const CameraData* GetCameraData() { return cameraData_; }
 
 #pragma endregion
 
 
-private:
+	private:
 
-	const CameraData* cameraData_ = nullptr;
+		const CameraData* cameraData_ = nullptr;
 
-	CameraManager() = default;
-	~CameraManager() = default;
-	CameraManager(const CameraManager&) = delete;
-	const CameraManager& operator=(const 	CameraManager&) = delete;
-};
+		CameraManager() = default;
+		~CameraManager() = default;
+		CameraManager(const CameraManager&) = delete;
+		const CameraManager& operator=(const 	CameraManager&) = delete;
+	};
+}

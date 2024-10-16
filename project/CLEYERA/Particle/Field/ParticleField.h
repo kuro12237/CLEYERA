@@ -4,6 +4,8 @@
 
 namespace Particle {
 
+	using namespace Engine::Buffer;
+
 	template<typename T>
 	class ParticleField
 	{

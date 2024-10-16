@@ -1,5 +1,9 @@
 #include "CameraManager.h"
 
+using namespace Engine::Manager;
+using namespace Engine::Camera;
+
+
 CameraManager* CameraManager::GetInstance()
 {
 	static CameraManager instance;

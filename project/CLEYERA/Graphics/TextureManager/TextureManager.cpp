@@ -4,6 +4,7 @@ using namespace Math::Vector;
 
 using namespace Engine::Base::DX;
 using namespace Engine::Base::Win;
+using namespace Engine::Buffer;
 
 TextureManager* TextureManager::GetInstance()
 {

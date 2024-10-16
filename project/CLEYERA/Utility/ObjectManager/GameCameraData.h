@@ -4,6 +4,7 @@
 #include"WorldTransform.h"
 #include"IGameObjectData.h"
 
+
 class GameCameraData :public IGameObjectData
 {
 public:
@@ -19,12 +20,11 @@ public:
 
 #pragma region Get
 
-	const CameraData &GetCamera()  { return camera_; }
-
+	const Engine::Camera::CameraData &GetCamera()  { return camera_; }
 #pragma endregion
 
 private:
 	string type_;
-	CameraData camera_;
+	Engine::Camera::CameraData camera_;
 	bool isParent_ = false;
 };

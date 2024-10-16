@@ -5,6 +5,7 @@ using namespace Math::Vector;
 
 using namespace Engine::Base::DX;
 using namespace Engine::Base::Win;
+using namespace Engine::Camera;
 
 void CameraData::Initialize(Vector3 r, Vector3 t)
 {

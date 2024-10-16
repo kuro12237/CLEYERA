@@ -5,6 +5,8 @@ using namespace Particle;
 using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
+using namespace Engine::Manager;
+
 
 void GpuParticle::Create(const size_t kNum, string Name)
 {

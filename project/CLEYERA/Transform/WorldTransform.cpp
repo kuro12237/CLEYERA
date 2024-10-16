@@ -1,6 +1,8 @@
 #include "WorldTransform.h"
 
 using namespace Math::Vector;
+using namespace Engine::Transform;
+
 
 void WorldTransform::CreateBuffer()
 {

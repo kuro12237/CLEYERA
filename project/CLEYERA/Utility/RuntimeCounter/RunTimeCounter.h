@@ -8,36 +8,36 @@ struct RunTimeCount
 	uint32_t deltaTime;
 };
 
-class RunTimeCounter
+namespace Engine::Utility
 {
-public:
 
-	static RunTimeCounter* GetInstance();
+	class RunTimeCounter
+	{
+	public:
 
-	void  Create();
+		static RunTimeCounter* GetInstance();
 
-	void Update();
+		void  Create();
 
-	void CommandCall(uint32_t rootParamIndex);
+		void Update();
 
-	void ComputeCommandCall(uint32_t rootParamIndex);
+		void CommandCall(uint32_t rootParamIndex);
+
+		void ComputeCommandCall(uint32_t rootParamIndex);
 
 #pragma region Get
-
-	static RunTimeCount GetTimer() { return RunTimeCounter::GetInstance()->time_; }
-
+		static RunTimeCount GetTimer() { return RunTimeCounter::GetInstance()->time_; }
 #pragma endregion
 
+	private:
 
-private:
+		unique_ptr<Engine::Buffer::BufferResource<RunTimeCount>>timerBuf_ = nullptr;
+		RunTimeCount time_;
+		uint32_t max_ = 120;
 
-	unique_ptr<BufferResource<RunTimeCount>>timerBuf_ = nullptr;
-	RunTimeCount time_;
-	uint32_t max_ = 120;
-
-	RunTimeCounter() = default;
-	~RunTimeCounter() = default;
-	RunTimeCounter(const  RunTimeCounter&) = delete;
-	const  RunTimeCounter& operator=(const RunTimeCounter&) = delete;
-};
-
+		RunTimeCounter() = default;
+		~RunTimeCounter() = default;
+		RunTimeCounter(const  RunTimeCounter&) = delete;
+		const  RunTimeCounter& operator=(const RunTimeCounter&) = delete;
+	};
+}

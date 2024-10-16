@@ -1,5 +1,11 @@
 #include "TitleName.h"
 
+
+using namespace Engine::Base::DX;
+using namespace Engine::Base::Win;
+using namespace Engine::Transform;
+using namespace Engine::Objects;
+
 void TitleName::Initialize()
 {
 	texHandle_ = TextureManager::LoadPngTexture("Title/titleName.png");

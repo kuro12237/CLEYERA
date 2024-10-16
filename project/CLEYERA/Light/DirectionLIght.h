@@ -9,45 +9,50 @@ struct SDirectionLight
 	bool useFlag;
 };
 
-class DirectionalLight
+namespace Engine::Light
 {
-public:
+	using namespace Engine::Buffer;
+
+	class DirectionalLight
+	{
+	public:
 
 
-	static DirectionalLight *GetInstance();
+		static DirectionalLight* GetInstance();
 
-	static void  Initialize();
+		static void  Initialize();
 
-	static void Update();
+		static void Update();
 
-	static SDirectionLight GetLight() { return DirectionalLight::GetInstance()->light; }
+		static SDirectionLight GetLight() { return DirectionalLight::GetInstance()->light; }
 #pragma region Set
 
-	static void UseLIght(const bool& flag) { DirectionalLight::GetInstance()->light.useFlag = flag; }
+		static void UseLIght(const bool& flag) { DirectionalLight::GetInstance()->light.useFlag = flag; }
 
-	static void SetIntensity(const float& i) { DirectionalLight::GetInstance()->light.intensity = i; }
+		static void SetIntensity(const float& i) { DirectionalLight::GetInstance()->light.intensity = i; }
 
-	static void SetPos(Math::Vector::Vector3 p) { DirectionalLight::GetInstance()->light.pos = p; }
+		static void SetPos(Math::Vector::Vector3 p) { DirectionalLight::GetInstance()->light.pos = p; }
 
 #pragma endregion
 
-	/// <summary>
-	/// 使用しない
-	/// </summary>
-	static void CommandCall(UINT n);
+		/// <summary>
+		/// 使用しない
+		/// </summary>
+		static void CommandCall(UINT n);
 
-private:
+	private:
 
-	unique_ptr<BufferResource<SDirectionLight>>buffer_ = nullptr;
+		unique_ptr<BufferResource<SDirectionLight>>buffer_ = nullptr;
 
-	SDirectionLight light = {};
-	Math::Matrix::Matrix4x4 worldMat_ = {};
-	Math::Matrix::Matrix4x4 viewMat_ = {};
+		SDirectionLight light = {};
+		Math::Matrix::Matrix4x4 worldMat_ = {};
+		Math::Matrix::Matrix4x4 viewMat_ = {};
 
-	//Singleton
-    DirectionalLight() = default;
-	~DirectionalLight() = default;
+		//Singleton
+		DirectionalLight() = default;
+		~DirectionalLight() = default;
 
-	DirectionalLight(const DirectionalLight&) = delete;
-	const  DirectionalLight& operator=(const DirectionalLight&) = delete;
-};
+		DirectionalLight(const DirectionalLight&) = delete;
+		const  DirectionalLight& operator=(const DirectionalLight&) = delete;
+	};
+}

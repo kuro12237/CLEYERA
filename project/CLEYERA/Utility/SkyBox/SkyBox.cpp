@@ -5,6 +5,9 @@ using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
 
+using namespace Engine::Transform;
+using namespace::Engine::Manager;
+
 
 SkyBox* SkyBox::GetInstance()
 {

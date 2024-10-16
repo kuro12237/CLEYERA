@@ -1,5 +1,8 @@
 #include "ISpriteData.h"
 
+using namespace Engine::Objects;
+
+
 ISpriteData::ISpriteData()
 {
 	globalVariables_ = GlobalVariables::GetInstance();

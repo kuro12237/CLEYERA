@@ -4,7 +4,11 @@ using namespace Math::Vector;
 
 using namespace Engine::Base::DX;
 using namespace Engine::Base::Win;
-
+using namespace Engine::Objects;
+using namespace::Engine::Transform;
+using namespace Engine::Camera;
+using namespace Engine::Utility;
+using namespace Engine::Manager;
 
 void Sprite::Initialize(Vector2 pos, Vector2 size)
 {

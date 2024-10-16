@@ -4,6 +4,12 @@ using namespace Engine;
 using namespace Base::DX;
 using namespace Base::Win;
 
+using namespace Engine::Transform;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Utility;
+
+
 Cleyera* Cleyera::GetInstance()
 {
 	static Cleyera instance;

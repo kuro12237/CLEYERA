@@ -25,6 +25,8 @@ struct ParticleCS
 
 namespace Particle {
 
+	using namespace Engine::Buffer;
+
 	enum DrawMode
 	{
 		mode_3d,

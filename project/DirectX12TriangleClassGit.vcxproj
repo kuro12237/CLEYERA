@@ -138,7 +138,6 @@
     <ClCompile Include="CLEYERA\Particle\Emitter\ParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp" />
     <ClCompile Include="CLEYERA\Particle\GpuParticle.cpp" />
-    <ClCompile Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.cpp" />
     <ClCompile Include="CLEYERA\PostEffect\PostEffect.cpp" />
     <ClCompile Include="CLEYERA\Sprite\ISpriteBuf.cpp" />
     <ClCompile Include="CLEYERA\Sprite\Sprite.cpp" />
@@ -238,7 +237,6 @@
     <ClInclude Include="CLEYERA\Cleyera.h" />
     <ClInclude Include="CLEYERA\CreateResource\BufferResources.h" />
     <ClInclude Include="CLEYERA\CreateResource\CreateResource.h" />
-    <ClInclude Include="CLEYERA\CreateResource\IBufferResource.h" />
     <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h" />
     <ClInclude Include="CLEYERA\DebugTool\DebugSkeleton\DebugSkeleton.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Default3dPiplineCommand.h" />
@@ -294,7 +292,6 @@
     <ClInclude Include="CLEYERA\Particle\Field\ParticleField.h" />
     <ClInclude Include="CLEYERA\Particle\Field\StructParticleField.h" />
     <ClInclude Include="CLEYERA\Particle\GpuParticle.h" />
-    <ClInclude Include="CLEYERA\PostEffect\DeferrdShading\DeferredShading.h" />
     <ClInclude Include="CLEYERA\PostEffect\PostEffect.h" />
     <ClInclude Include="CLEYERA\Sprite\ISpriteBuf.h" />
     <ClInclude Include="CLEYERA\Sprite\Sprite.h" />

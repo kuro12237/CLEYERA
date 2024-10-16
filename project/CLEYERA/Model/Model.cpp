@@ -1,6 +1,9 @@
 #include "Model.h"
 
 using namespace Math::Vector;
+using namespace Engine::Objects;
+using namespace Engine::Buffer;
+
 
 Model::~Model(){}
 

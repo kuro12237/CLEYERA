@@ -34,11 +34,11 @@ public:
 
 private:
 
-	Math::Vector::Vector3 CalcOffset(const WorldTransform& w ,const Math::Vector::Vector3 v)const;
+	Math::Vector::Vector3 CalcOffset(const Engine::Transform::WorldTransform& w ,const Math::Vector::Vector3 v)const;
 
 	GameObjectManager* gameObjInstance_ = nullptr;
 	string targetName_ = "";
-	const WorldTransform* target_ = nullptr;
+	const Engine::Transform::WorldTransform* target_ = nullptr;
 
 	Math::Vector::Vector3 interTarget_{};
 	float distructionAngleY_ = 0.0f;

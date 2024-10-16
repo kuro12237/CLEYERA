@@ -3,6 +3,8 @@
 using namespace Engine;
 using namespace Engine::Base::Win;
 using namespace Engine::Base::DX;
+using namespace Engine::Manager;
+
 
 GameManager::GameManager()
 {

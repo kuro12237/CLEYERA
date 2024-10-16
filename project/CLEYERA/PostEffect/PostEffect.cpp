@@ -3,6 +3,9 @@
 using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
+using namespace Engine::Buffer;
+using namespace Engine::Manager;
+using namespace Engine::Light;
 
 PostEffect* PostEffect::GetInstance()
 {
