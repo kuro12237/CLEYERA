@@ -10,19 +10,35 @@ struct RunTimeCount
 
 namespace Engine::Utility
 {
-
+	/// <summary>
+	/// フレームと秒数を送る
+	/// </summary>
 	class RunTimeCounter
 	{
 	public:
 
 		static RunTimeCounter* GetInstance();
 
+		/// <summary>
+		/// 作製
+		/// </summary>
 		void  Create();
 
+		/// <summary>
+		/// 更新
+		/// </summary>
 		void Update();
 
+		/// <summary>
+		/// 使用しない
+		/// </summary>
+		/// <param name="rootParamIndex"></param>
 		void CommandCall(uint32_t rootParamIndex);
 
+		/// <summary>
+		/// 使用しない
+		/// </summary>
+		/// <param name="rootParamIndex"></param>
 		void ComputeCommandCall(uint32_t rootParamIndex);
 
 #pragma region Get

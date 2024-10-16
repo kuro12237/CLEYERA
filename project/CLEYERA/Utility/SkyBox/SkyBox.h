@@ -7,19 +7,38 @@
 #include"Light/LightingManager.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
 
+/// <summary>
+/// SkyBoxのクラス
+/// </summary>
 class SkyBox
 {
 public:
 
 	static SkyBox* GetInstance();
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
+	/// <summary>
+	/// Imguiの更新
+	/// </summary>
 	void ImGuiUpdate();
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 描画
+	/// </summary>
 	void Draw();
+
+	/// <summary>
+	/// WorldTransformをリセット
+	/// </summary>
 	void Reset() { worldTransform_.parent = nullptr; worldTransform_.transform = {}; }
 
 #pragma region Set

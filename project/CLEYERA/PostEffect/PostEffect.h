@@ -23,7 +23,7 @@ enum SelectPostEffect
 };
 
 /// <summary>
-/// ポストエフェクトの
+/// ポストエフェクトクラス
 /// </summary>
 class PostEffect
 {
@@ -35,14 +35,19 @@ public:
 	void Update();
 	void Draw();
 
+	/// <summary>
+	/// 使用しない
+	/// </summary>
 	void PreDraw();
+
+	/// <summary>
+	/// 使用しない
+	/// </summary>
 	void PostDraw();
 
 #pragma region Set
-
 	void SetPosition(Math::Vector::Vector2 pos) { pos_ = pos; }
 	void SetSize(Math::Vector::Vector2 size) { size_ = size; }
-
 	void SetParam(const PostEffectParam &param) { param_ = param; }
 	void SetUvScale(const Math::Vector::Vector2 &s) { uvScale_ = { s.x, s.y, 1.0f }; }
 	void SetUvRotate(const Math::Vector::Vector2 &r) { uvRotate_ = { r .x,r.y,1.0f}; }
@@ -50,43 +55,15 @@ public:
 	void SetUvMatrix(const Math::Matrix::Matrix4x4 &m) { param_.uvMatrix = m; }
 
 	void SetSelectPostEffect(SelectPostEffect s, bool flag);
-
-	/// <summary>
-	/// 彩度
-	/// </summary>
 	void SetGrayFactor(float f) { adjustedColorParam_.GrayFactor = f; }
-
-	/// <summary>
-	/// 反転
-	/// </summary>
 	void SetInvertFactor(float f) { adjustedColorParam_.InvertFactor = f; }
-
-	/// <summary>
-	/// 明度
-	/// </summary>
 	void SetBringhtnessFactor(float f) { adjustedColorParam_.BringhtnessFactor = f; }
-
-	/// <summary>
-	/// コントラスト
-	/// </summary>
 	void SetContrastFactor(const float& f) { adjustedColorParam_.ContrastFactor = f; }
-
-	/// <summary>
-	/// 色相
-	/// </summary>
 	void SetHueFactor(const float& f) { adjustedColorParam_.HueFactor = f; }
-	
-	/// <summary>
-	/// 平均ぼかしの強さ
-	/// </summary>
 	void SetBlurintensity(float f) { blurParam_.Intensity = f; }
-
 	void SetVignetteFactor(float f) { adjustedColorParam_.vignetteFactor = f; }
-
 	void SetVignetteColor(Math::Vector::Vector3 color) { adjustedColorParam_.viganetteColor_ = color;}
-
 	void SetVignetteScale(float s) { adjustedColorParam_.vignetteScale = s; }
-
 #pragma endregion
 
 private:

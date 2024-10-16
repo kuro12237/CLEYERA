@@ -10,24 +10,53 @@ struct DescriptorSize
 	uint32_t DSV;
 };
 
+/// <summary>
+/// SRVDescripter管理クラス
+/// </summary>
 class DescriptorManager
 {
 public:
 
 	static DescriptorManager* GetInstance();
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	static void Initialize();
+
+	/// <summary>
+	/// 毎フレームのはじめ
+	/// </summary>
 	static void BeginFlame();
+
+	/// <summary>
+	/// ImGui更新
+	/// </summary>
 	static void ImGuiUpdate();
 
+	/// <summary>
+	/// データを削除
+	/// </summary>
 	static void Clear();
 
+	/// <summary>
+	/// SRV作製
+	/// </summary>
+	/// <param name="resource"></param>
+	/// <param name="SrvDesc"></param>
+	/// <returns></returns>
 	static uint32_t CreateSRV(ComPtr<ID3D12Resource>&resource,D3D12_SHADER_RESOURCE_VIEW_DESC SrvDesc);
 
+	/// <summary>
+	/// UAV作製
+	/// </summary>
+	/// <param name="resource"></param>
+	/// <param name="desc"></param>
+	/// <returns></returns>
 	uint32_t CreateUAV(ComPtr<ID3D12Resource>& resource, D3D12_UNORDERED_ACCESS_VIEW_DESC desc);
 
 	/// <summary>
-    /// CPU��GPU��ptr����炷
+    /// ポインタをブラス
     /// </summary>
 	static void CGHandlePtr();
 
@@ -36,10 +65,25 @@ public:
 	/// </summary>
 	static void IndexIncrement(const string &name);
 
+	/// <summary>
+	/// 名前とバッファを登録
+	/// </summary>
+	/// <param name="name"></param>
+	/// <param name="buf"></param>
 	static void SetBuffer(const string& name, ComPtr<ID3D12Resource>buf);
 
+	/// <summary>
+	/// 登録されているかをチェック
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
 	static bool CheckData(const string& name);
 
+	/// <summary>
+	/// 名前のインデックスを返す
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
 	static uint32_t CheckDatasIndex(const string& name);
 
 #pragma region set
@@ -75,12 +119,23 @@ public:
 #pragma region Command
 
 	/// <summary> 
-	/// rootParameter�̃R�}���h�ς�
+	/// rootParameterを積む
     /// </summary>
 	static void rootParamerterCommand(UINT rootPatramerterIndex, uint32_t texhandle);
 
+	/// <summary>
+	/// CSの時に使う
+	/// </summary>
+	/// <param name="rootParamIndex"></param>
+	/// <param name="index"></param>
 	void ComputeRootParamerterCommand(UINT rootParamIndex, uint32_t index);
 
+	/// <summary>
+	/// SRVトresourceを紐づける
+	/// </summary>
+	/// <param name="resource"></param>
+	/// <param name="srvDesc"></param>
+	/// <param name="index"></param>
 	static void CreateShaderResourceView(ID3D12Resource* resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index);
 
 #pragma endregion

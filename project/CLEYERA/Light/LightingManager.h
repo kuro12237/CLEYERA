@@ -28,29 +28,52 @@ namespace Engine::Manager {
 
 		static LightingManager* GetInstance();
 
+		/// <summary>
+		/// 初期化
+		/// </summary>
 		void Initialize();
 
+		/// <summary>
+		/// 登録したものを削除
+		/// </summary>
 		static void ClearList()
 		{
 			LightingManager::GetInstance()->LightDatas_.clear();
 			LightingManager::GetInstance()->NowTotalLightData_ = 0;
 		}
+		/// <summary>
+		/// Listの登録
+		/// </summary>
+		/// <param name="instance"></param>
 		static void AddList(PointLight_param& instance);
 
+#pragma region Get
 		static list<PointLight_param> GetLightData();
-
 		static ID3D12Resource* GetBuffer() { return LightingManager::GetInstance()->lightCountBuf_->GetBuffer(); }
-
-		void TransfarBuffers();
-
 		static uint32_t GetNowLight() { return  LightingManager::GetInstance()->NowTotalLightData_; }
 
+#pragma endregion
+
+		/// <summary>
+		/// データを転送
+		/// </summary>
+		void TransfarBuffers();
+
+		/// <summary>
+		/// ライトのコマンドを積む
+		/// </summary>
 		void CallCommand();
 
 	private:
 
+		/// <summary>
+		/// Mapする
+		/// </summary>
 		void TransfarBuffer();
 
+		/// <summary>
+		/// structureの物をMap
+		/// </summary>
 		void TransfarStructureBuffer();
 
 		/// <summary>

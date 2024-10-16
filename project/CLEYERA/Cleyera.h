@@ -24,6 +24,9 @@
 
 namespace Engine {
 
+	/// <summary>
+	/// Še‹@”\‚ð‚±‚±‚Å‚Ü‚Æ‚ß‚é
+	/// </summary>
 	class Cleyera
 	{
 	public:

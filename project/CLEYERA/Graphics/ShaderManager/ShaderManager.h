@@ -62,6 +62,9 @@ public:
 
 	static ShaderManager* Getinstance();
 
+	/// <summary>
+	/// 初期化　ここで書くシェーダーを作製
+	/// </summary>
 	static void Initialize();
 
 #pragma region Get
@@ -76,17 +79,29 @@ private:
 
 
 	/// <summary>
-	/// �V�F�[�_�[�̃R���p�C���֐�
+	/// コンパイル関数
 	/// </summary>
 	static IDxcBlob* CompilerShaderFanc(
 		const std::wstring& filePath,
 		const wchar_t* profile
 	);
 
+	/// <summary>
+	/// dxc作製
+	/// </summary>
 	static void DxcCreate();
+
+	/// <summary>
+	/// include設定
+	/// </summary>
 	static void includeHandlerSetting();
 
+	/// <summary>
+	/// コンパイル実装
+	/// </summary>
 	static void ShaderComples();
+
+#pragma region 設定したものをshaderComplesで使用
 
 	static void ShapeShader();
 	static void Sprite3dShader();
@@ -118,6 +133,8 @@ private:
 	static void Particle_Update();
 	static void Particle_EmitterSphere();
 	static void Particle_EmitterBox();
+
+#pragma endregion
 
 	SDXCProperty dxc = {};
 	SShaders shaders_ = {};

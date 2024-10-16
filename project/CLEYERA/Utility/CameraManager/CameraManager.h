@@ -15,21 +15,38 @@ namespace Engine::Manager
 
 		static CameraManager* GetInstance();
 
+		/// <summary>
+		/// 初期化
+		/// </summary>
 		void Initialize();
 
+		/// <summary>
+		/// 更新
+		/// </summary>
 		void Update();
 
-		void PsCommandCall(const uint32_t& num);
-		void VsCommandCall(const uint32_t& num);
-
+	
+		/// <summary>
+		/// カメラをセット
+		/// </summary>
+		/// <param name="camera"></param>
 		void ResetCamera(const CameraData& camera);
 
 #pragma region Get
-
 		const CameraData* GetCameraData() { return cameraData_; }
-
 #pragma endregion
 
+		/// <summary>
+		/// 使用しない
+		/// </summary>
+		/// <param name="num"></param>
+		void PsCommandCall(const uint32_t& num);
+
+		/// <summary>
+		/// 使用しない
+		/// </summary>
+		/// <param name="num"></param>
+		void VsCommandCall(const uint32_t& num);
 
 	private:
 

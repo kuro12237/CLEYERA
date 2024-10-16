@@ -4,6 +4,9 @@
 #include"WinApp.h"
 #include"ImGuiJapaneseGlyphArray.h"
 
+/// <summary>
+/// ImGui‚ğg‚¤‚½‚ß‚Ìİ’èŠÖ”
+/// </summary>
 class ImGuiManager
 {
 public:

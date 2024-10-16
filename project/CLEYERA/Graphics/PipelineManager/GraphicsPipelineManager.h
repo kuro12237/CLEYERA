@@ -10,6 +10,9 @@
 #include"Sprite_2dPipline/Sprite_2d_CreatePipline.h"
 #include"Phong_CreatePipline/Phong_CreatePipline.h"
 
+/// <summary>
+/// ƒpƒCƒvƒ‰ƒCƒ“‚ğ“o˜^ŠÇ—
+/// </summary>
 class GraphicsPipelineManager
 {
 public:
@@ -18,14 +21,13 @@ public:
 
 	void Initialize();
 
-	SPSOProperty GetPiplines(Pipline::Piplines pipline, string mode) { return piplines_[pipline][mode]; };
-
 #pragma region Get
-
-
+	SPSOProperty GetPiplines(Pipline::Piplines pipline, string mode) { return piplines_[pipline][mode]; };
 #pragma endregion
 
 private:
+
+#pragma region “o˜^ŠÖ”
 
 	static SPSOProperty CreateShape(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands command, SShaderMode shader);
 	static SPSOProperty CreateLine(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
@@ -36,6 +38,8 @@ private:
 	static SPSOProperty CreateParticle3dAdd(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
 
 	static SPSOProperty CreatePostEffectTest(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
+
+#pragma endregion
 
 	map<Pipline::Piplines, map<string, SPSOProperty>> piplines_;
 

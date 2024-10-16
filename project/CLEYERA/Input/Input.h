@@ -3,10 +3,12 @@
 #include"WinApp.h"
 #include"LogManager.h"
 
+/// <summary>
+/// コントローラーとキーボードの入力を取得
+/// </summary>
 class Input
 {
 public:
-
 
 	static Input* GetInstance();
 
@@ -14,11 +16,22 @@ public:
 
 	static void BeginFlame();
 
+	/// <summary>
+	/// 押されているか
+	/// </summary>
+	/// <param name="keyNum"></param>
+	/// <returns></returns>
 	static bool PushKey(uint8_t keyNum);
 
+	/// <summary>
+	/// 一瞬　押したか
+	/// </summary>
 	static bool PushKeyPressed(uint32_t keyNum);
 
-
+	/// <summary>
+	/// コントローラーがつながっているか
+	/// </summary>
+	/// <returns></returns>
 	static bool GetJoystickState();
 
 	/// <summary>
@@ -91,6 +104,12 @@ public:
     /// <returns></returns>
 	static bool GetRJoyTHUMB();
 
+	/// <summary>
+	/// コントローラーの倍部
+	/// </summary>
+	/// <param name="leftMotor"></param>
+	/// <param name="rightMotor"></param>
+	/// <param name="max"></param>
 	static void VibrateController(int leftMotor, int rightMotor, float max = 60.0f);
 
 private:

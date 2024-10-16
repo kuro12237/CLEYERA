@@ -25,23 +25,24 @@ void Cleyera::Initialize()
 
 	DescriptorManager::Initialize();
 	RTVDescriptorManager::Initialize();
+
 	ShaderManager::Initialize();
 	GraphicsPipelineManager::GetInstance()->Initialize();
 	TextureManager::Initialize();
 	ImGuiManager::Initialize();
 	Input::Initialize();
-
 	AudioManager::GetInstance()->Initialize();
 	LightingManager::GetInstance()->Initialize();
-	DirectionalLight::Initialize();
 
+	DirectionalLight::Initialize();
 	CameraManager::GetInstance()->Initialize();
+
 	RunTimeCounter::GetInstance()->Create();
 	NoiseTexture::GetInstance()->Initialize();
 	
 	PostEffect::GetInstance()->Initialize();
-
 	GlobalVariables::GetInstance()->LoadFiles();
+
 	SkyBox::GetInstance()->Initialize();
 }
 
