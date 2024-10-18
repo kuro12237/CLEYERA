@@ -55,6 +55,9 @@ namespace Math
 			// start‚Æend‚ÌŠÔ‚Åt‚É‰ž‚¶‚Ä•âŠÔ
 			return start + t * (end - start);
 		}
+
+		Vector3 Catmull_Rom(Vector3& p0, Vector3& p1, Vector3& p2, Vector3& p3, float t);
+
 	}
 };
 

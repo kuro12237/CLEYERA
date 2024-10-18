@@ -27,7 +27,7 @@ public:
 #pragma endregion
 
 #pragma region Set
-	void SetStatFlag(bool f) { gameStartFlag_ = f; }
+	void SetIsStartFlag(bool f) { isGameStartFlag_ = f; }
 #pragma endregion
 
 private:
@@ -37,5 +37,5 @@ private:
 	uint32_t enemyCount_ = 0;
 	vector<shared_ptr<EnemyWalk>>enemys_;
 
-	bool gameStartFlag_ = false;
+	bool isGameStartFlag_ = false;
 };

@@ -217,4 +217,22 @@ float Math::Vector::easeOutBounce(float t)
 	}
 }
 
+Vector3 Math::Vector::Catmull_Rom(Vector3& p0, Vector3& p1, Vector3& p2, Vector3& p3, float t)
+{
+
+	float t2 = t * t;
+	float t3 = t * t * t;
+	return Vector3(
+		//x
+		0.5f * ((-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3 +
+			(2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 + (-p0.x + p2.x) * t + 2 * p1.x),
+		//y
+		0.5f * ((-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3 +
+			(2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 + (-p0.y + p2.y) * t + 2 * p1.y),
+		//z
+		0.5f * ((-p0.z + 3 * p1.z - 3 * p2.z + p3.z) * t3 +
+			(2 * p0.z - 5 * p1.z + 4 * p2.z - p3.z) * t2 + (-p0.z + p2.z) * t + 2 * p1.z)
+	);
+}
+
 

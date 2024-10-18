@@ -27,7 +27,7 @@ void GameScene::Initialize()
 	GoalParticle::GetInstance()->Clear();
 
 	player_ = make_unique<PlayerManager>();
-	player_->GetData(GameObjectManager::GetInstance());
+	player_->Initialize();
 
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize();
@@ -76,7 +76,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	//カウントダウンが終わったら
 	if (startCount_->GetStartFlag())
 	{
-		enemyWalkManager_->SetStatFlag(true);
+		enemyWalkManager_->SetIsStartFlag(true);
 		player_->SetStartFlag(true);
 		startCount_->SetStartFlag(false);
 	}
@@ -108,7 +108,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	if (*isGameEnd_)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
-		enemyWalkManager_->SetStatFlag(false);
+		enemyWalkManager_->SetIsStartFlag(false);
 		player_->SetStartFlag(false);
 	}
 
@@ -116,7 +116,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
-		enemyWalkManager_->SetStatFlag(false);
+		enemyWalkManager_->SetIsStartFlag(false);
 		player_->SetStartFlag(false);
 	}
 

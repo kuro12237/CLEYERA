@@ -11,7 +11,7 @@
 #include"Phong_CreatePipline/Phong_CreatePipline.h"
 
 /// <summary>
-/// ƒpƒCƒvƒ‰ƒCƒ“‚ğ“o˜^ŠÇ—
+/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’ç™»éŒ²ç®¡ç†
 /// </summary>
 class GraphicsPipelineManager
 {
@@ -27,7 +27,7 @@ public:
 
 private:
 
-#pragma region “o˜^ŠÖ”
+#pragma region ç™»éŒ²é–¢æ•°
 
 	static SPSOProperty CreateShape(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands command, SShaderMode shader);
 	static SPSOProperty CreateLine(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);

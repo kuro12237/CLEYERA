@@ -1,6 +1,6 @@
 #include "PlayerManager.h"
 
-void PlayerManager::GetData(GameObjectManager* data)
+void PlayerManager::Initialize()
 {
 	//commands
 	commandHandler_ = make_unique<PlayerCommandHandler>();
@@ -27,7 +27,8 @@ void PlayerManager::GetData(GameObjectManager* data)
 	hp_ = make_unique<PlayerHp>();
 	hp_->Initialize(10);
 
-	data->CameraReset(camera_->GetName());
+	gameObjectManager_ = GameObjectManager::GetInstance();
+	gameObjectManager_->CameraReset(camera_->GetName());
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -41,8 +42,7 @@ void PlayerManager::ImGuiUpdate()
 		ImGui::Text("PlayerBulletSize::%d", bullets_.size());
 		if (ImGui::Button("bulleSpown"))
 		{
-			GameObjectManager* instance = GameObjectManager::GetInstance();
-			PushBullet(instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
+			PushBullet(gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
 		}
 		ImGui::TreePop();
 	}
@@ -50,9 +50,8 @@ void PlayerManager::ImGuiUpdate()
 
 void PlayerManager::Update()
 {
-	GameObjectManager* instance = GameObjectManager::GetInstance();
-	reticleWorldPos = instance->GetObj3dData(reticle_->GetName())->GetWorldTransform().GetWorldPosition();
-	playerWorldPos = instance->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
+	reticleWorldPos = gameObjectManager_->GetObj3dData(reticle_->GetName())->GetWorldTransform().GetWorldPosition();
+	playerWorldPos = gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
 
 	//ƒQ[ƒ€‚ªI‚í‚é’Ê’m
 	if (playerCore_->GetIsGameEnd())

@@ -26,8 +26,7 @@ public:
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	/// <param name="data"></param>
-	void GetData(GameObjectManager* data);
+	void Initialize();
 
 	/// <summary>
 	/// ImGui‚ÌXV
@@ -84,6 +83,8 @@ private:
 	void CheckDamage();
 
 	bool gameStartFlag_ = false;
+
+	GameObjectManager* gameObjectManager_ = nullptr;
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 	unique_ptr<PlayerReticleCommandHandler>reticleCommandHandler_ = nullptr;

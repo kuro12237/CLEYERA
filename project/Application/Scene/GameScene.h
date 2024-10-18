@@ -32,9 +32,11 @@
 #include"GameObject/UI/GameUI.h"
 
 #include"Scene/TitleScene.h"
+#include"GameFileLoader/RailLoader/RailLoader.h"
+
 
 /// <summary>
-/// ゲーム
+/// ゲームプレイ
 /// </summary>
 class GameScene :public IScene
 {
@@ -42,31 +44,61 @@ public:
 	GameScene() {};
 	~GameScene() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize()override;
 
+	/// <summary>
+	/// 更新
+	/// </summary>
+	/// <param name="Scene"></param>
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
+	/// <summary>
+	/// ポストエフェクトをかける
+	/// </summary>
 	void PostProcessDraw()override;
 
+	/// <summary>
+	/// 後背景
+	/// </summary>
 	void Back2dSpriteDraw()override;
 
+	/// <summary>
+	/// objectDraw
+	/// </summary>
 	void Object3dDraw()override;
 
+	/// <summary>
+	/// 前景2d
+	/// </summary>
 	void Flont2dSpriteDraw()override;
 
 private:
 
+	/// <summary>
+	/// Imguiの更新
+	/// </summary>
 	void ImGuiUpdate();
 
+	/// <summary>
+	/// 当たり判定
+	/// </summary>
 	void Collision();
 
+	/// <summary>
+	/// 重力
+	/// </summary>
 	void Gravitys();
 
+#pragma region Particle
 	void ParticlesInitialize();
 	void ParticlesUpdate();
 	void ParticlesDraw();
-
 	void ParticleImGuiUpdate();
+#pragma endregion
+
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;

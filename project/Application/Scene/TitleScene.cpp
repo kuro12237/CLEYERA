@@ -48,6 +48,7 @@ void TitleScene::Initialize()
 
 	titleLight_ = make_unique<TitleLight>();
 	titleLight_->Initialize();
+	titleLight_->SetP_CameraPos(cameraWt.transform.translate);
 
 	lava_ = make_unique<Lava>();
 	lava_->Initialize();
@@ -77,9 +78,6 @@ void TitleScene::Initialize()
 	towerManager_->Initialize();
 	towerManager_->SetP_Camera(cameraWt.transform.translate);
 
-
-	//fireEmberParticle_ = make_unique<FireEmber2dParticle>();
-	//fireEmberParticle_->Initialize();
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -121,7 +119,6 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 
 
-	titleLight_->SetPos(*p_CameraPos_);
 	titleLight_->Update();
 
 	titleName_->Update();

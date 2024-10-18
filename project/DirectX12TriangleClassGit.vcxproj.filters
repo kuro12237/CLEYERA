@@ -645,6 +645,8 @@
     <ClCompile Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.cpp" />
     <ClCompile Include="Application\ChangeSceneAnimation\RodingIcon2d\RodingIcon.cpp" />
     <ClCompile Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.cpp" />
+    <ClCompile Include="Application\GameFileLoader\RailLoader\RailLoader.cpp" />
+    <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1104,6 +1106,8 @@
     <ClInclude Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.h" />
     <ClInclude Include="Application\ChangeSceneAnimation\RodingIcon2d\RodingIcon.h" />
     <ClInclude Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.h" />
+    <ClInclude Include="Application\GameFileLoader\RailLoader\RailLoader.h" />
+    <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -1208,8 +1212,14 @@
     <FxCompile Include="Resources\Shader\SkyBox.VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl" />
-    <FxCompile Include="Resources\Shader\Particle\Draw\Particle2d_Draw.VS.hlsl" />
-    <FxCompile Include="Resources\Shader\Particle\Draw\Particle_Dissolve.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Draw\Particle_Dissolve.PS.hlsl">
+      <Filter>Shader\Particle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Emitter\Particle_TypeBox.CS.hlsl">
+      <Filter>Shader\Particle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Draw\Particle2d_Draw.VS.hlsl">
+      <Filter>Shader\Particle</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

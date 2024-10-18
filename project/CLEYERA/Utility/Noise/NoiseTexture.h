@@ -2,7 +2,7 @@
 #include"Graphics/TextureManager/TextureManager.h"
 
 /// <summary>
-/// ƒmƒCƒY—p‚ÌƒeƒNƒXƒ`ƒƒ
+/// ãƒã‚¤ã‚ºç”¨ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£
 /// </summary>
 class NoiseTexture
 {
@@ -11,7 +11,7 @@ public:
 	static NoiseTexture* GetInstance();
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
@@ -21,7 +21,7 @@ public:
 
 #pragma endregion
 
-@///g—p‚µ‚È‚¢
+    ///ä½¿ç”¨ã—ãªã„
 	void RootParamerter();
 private:
 

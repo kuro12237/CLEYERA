@@ -23,7 +23,7 @@ void SelectScene::Initialize()
 	GoalParticle::GetInstance()->Initialize();
 	GoalParticle::GetInstance()->Clear();
 	player_ = make_unique<PlayerManager>();
-	player_->GetData(gameObjectManager_);
+	player_->Initialize();
 
 	goals_.resize(portalMax_);
 

@@ -21,7 +21,7 @@ public:
 	void Update();
 
 #pragma region Set
-	void SetPos(const Math::Vector::Vector3& pos) { light_.position = pos; }
+	void SetP_CameraPos(const Math::Vector::Vector3& pos) { p_CameraPos_ = &pos; }
 #pragma endregion
 
 #pragma region Get
@@ -33,5 +33,7 @@ public:
 private:
 
 	PointLight_param light_ = {};
+
+	const Math::Vector::Vector3* p_CameraPos_ = nullptr;
 
 };
