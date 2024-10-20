@@ -39,6 +39,9 @@ namespace Math
 
 		float easeOutBounce(float t);
 
+		float CalcXRotation(const Vector3& rotate);
+		float CalcYRotation(const Vector3& rotate);
+
 		template<typename T>
 		T easeOutExpo(const T& a, const T& b, const float t)
 		{
@@ -56,7 +59,7 @@ namespace Math
 			return start + t * (end - start);
 		}
 
-		Vector3 Catmull_Rom(Vector3& p0, Vector3& p1, Vector3& p2, Vector3& p3, float t);
+		Vector3 Catmull_Rom(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t);
 
 	}
 };

@@ -11,9 +11,15 @@ public:
 	~SplineMotion() {};
 
 	/// <summary>
-	/// スプライン曲線補間関数
+	/// スプライン曲線補間関数Translate
 	/// </summary>
 	Math::Vector::Vector3 CatmullRomInterpolation();
+
+
+	/// <summary>
+	/// ターゲットの方向に向くための回転を計算
+	/// </summary>
+	Math::Vector::Vector3  CalculateSplineRotation();
 
 	/// <summary>
 	/// パラメーターの更新
@@ -22,21 +28,26 @@ public:
 	void UpdateParamerter(const float &kFlame);
 
 #pragma region Get
-
-
+	bool GetIsComplete() { return isComplete_; }
+	bool GetIsStartFlag() { return isStartFlag_; }
+	void SetP_Target(const Math::Vector::Vector3& target) { p_Target_ = &target; }
+	void SetP_RailData(RailData& data) { p_RailData_ = &data; }
+	void SetIsStartFlag(const bool& f) { isStartFlag_ = f; }
 #pragma endregion
-
-
 
 private:
 
-	const RailData* p_RailData_ = nullptr;
+    RailData* p_RailData_ = nullptr;
 
-	uint32_t selectIndex_ = 0;
+	const Math::Vector::Vector3* p_Target_ = nullptr;
+
+	uint32_t targetIndex_ = 0;
 
 	float flame_ = 0.0f;
 
 	bool isComplete_ = false;
+	bool isStartFlag_ = false;
 
+	Math::Vector::Vector3 position_ = {};
 };
 

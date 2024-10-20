@@ -54,6 +54,13 @@
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
     <ClCompile Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
+    <ClCompile Include="Application\GameObject\StartAnimation\StartAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
+    <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
+    <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
+    <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp" />
+    <ClCompile Include="Application\Utility\convert\convert.cpp" />
     <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp" />
     <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\IObjectData.cpp" />
@@ -77,7 +84,7 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateNone.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateRock.cpp" />
-    <ClCompile Include="Application\GameObject\StartCount\StartCount.cpp" />
+    <ClCompile Include="Application\GameObject\StartAnimation\StartCount\StartCount.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameUI.cpp" />
     <ClCompile Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Application\Scene\GameScene.cpp" />
@@ -185,6 +192,13 @@
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />
     <ClInclude Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\StartAnimation.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
+    <ClInclude Include="Application\GameObject\Warp\Warp.h" />
+    <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
+    <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
+    <ClInclude Include="Application\Utility\convert\convert.h" />
     <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h" />
     <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IObjectData.h" />
@@ -212,7 +226,7 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateNone.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h" />
-    <ClInclude Include="Application\GameObject\StartCount\StartCount.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\StartCount\StartCount.h" />
     <ClInclude Include="Application\GameObject\UI\GameUI.h" />
     <ClInclude Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Application\Scene\GameScene.h" />

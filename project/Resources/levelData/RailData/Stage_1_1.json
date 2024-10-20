@@ -1,0 +1,89 @@
+{
+    "name": "Rail",
+    "positions": [
+        {
+            "number": 0,
+            "RailGroup": "stage_1_1",
+            "transform": {
+                "translate": [
+                    12.0,
+                    -120.0,
+                    64.0
+                ],
+                "rotate": [
+                    180.0,
+                    -0.0,
+                    -0.0
+                ],
+                "scale": [
+                    -1.0,
+                    -1.0,
+                    -1.0
+                ]
+            }
+        },
+        {
+            "number": 1,
+            "RailGroup": "stage_1_1",
+            "transform": {
+                "translate": [
+                    -12.828132629394531,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "number": 2,
+            "RailGroup": "stage_1_1",
+            "transform": {
+                "translate": [
+                    -14.996810913085938,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "number": 3,
+            "RailGroup": "stage_1_0",
+            "transform": {
+                "translate": [
+                    -11.068229675292969,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ]
+}

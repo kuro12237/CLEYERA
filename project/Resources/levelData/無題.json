@@ -1,0 +1,26 @@
+{
+    "name": "Rail",
+    "positions": [
+        {
+            "number": 0,
+            "RailGroup": "",
+            "transform": {
+                "translate": [
+                    0.0,
+                    -3.802582263946533,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ]
+}

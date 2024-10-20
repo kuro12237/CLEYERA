@@ -128,6 +128,13 @@ void Player::OnCollision(ICollider* c)
 		return;
 	}
 
+	if (c->GetId() == kWarpGateId)
+	{
+		isUseGravityFlag_ = false;
+		warpFilePath_ = gameObjectManager_->GetObj3dData("WarpGate")->GetParamFilePaths()[0];
+		ChangeState(make_unique<PlayerStateWarpMove>());
+	}
+
 	if (!isInvincible_)
 	{
 		if (c->GetId() == kEnemyWalkId)

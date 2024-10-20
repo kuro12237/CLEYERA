@@ -23,7 +23,7 @@ void RodingIcon2d::Initialize(uint32_t noiseTex)
 	sprite_->SetNoiseTex(noiseTex);
 	sprite_->SetSpriteMode(DissolveNone);
 
-	//sprite_->GetDissolveMask() = dissolveMaskMax_;
+	sprite_->GetDissolveMask() = dissolveMaskMax_;
 	sprite_->GetDissolveEdgeMinMax() = edgeMinMax_;
 	sprite_->GetDissolveDdgeColor() = edgeColor_;
 

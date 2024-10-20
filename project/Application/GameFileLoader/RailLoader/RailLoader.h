@@ -4,7 +4,7 @@
 
 struct RailData
 {
-	vector<TransformEular>data;
+	vector<Engine::Transform::WorldTransform>data;
 	size_t size = 0;
 	string fileName = "";
 };

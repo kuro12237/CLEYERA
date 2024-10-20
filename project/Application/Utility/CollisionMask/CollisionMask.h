@@ -25,4 +25,8 @@ namespace CollisionMask
 	// Portal-related definitions
 	const static uint32_t kPortalMask = 0b111101111;       // 0b111101111 (487) (プレイヤーの弾とエネミー以外と当たる)
 	const static uint32_t kPortalAttribute = 0b000010000;  // 0b000010000 (16)
+
+	// Player only (プレイヤーとしか当たらない)
+	const static uint32_t kWarpGateMask = 0b000000010;    // 0b000000010 (2) (プレイヤーとしか当たらない)
+	const static uint32_t kWarpGateAttribute = 0b001000000; // 0b001000000 (64)
 }

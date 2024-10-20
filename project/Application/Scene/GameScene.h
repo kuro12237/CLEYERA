@@ -21,7 +21,6 @@
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Goal/Goal.h"
 
-#include"GameObject/StartCount/StartCount.h"
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
@@ -33,6 +32,9 @@
 
 #include"Scene/TitleScene.h"
 #include"GameFileLoader/RailLoader/RailLoader.h"
+
+#include"GameObject/StartAnimation/StartAnimation.h"
+#include"GameObject/Warp/Warp.h"
 
 
 /// <summary>
@@ -106,8 +108,7 @@ private:
 
 	PointLight_param light_{};
 
-	unique_ptr<StartCount>startCount_ = nullptr;
-
+	unique_ptr<StartAnimation>startAnimation_ = nullptr;
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 
@@ -123,6 +124,8 @@ private:
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;
 
 	unique_ptr<GameUI>gameUi_ = nullptr;
+
+	unique_ptr<Warp>warp_{};
 
 
 	bool* isGameEnd_ = nullptr;

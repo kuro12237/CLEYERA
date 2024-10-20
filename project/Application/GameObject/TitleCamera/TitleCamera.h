@@ -2,6 +2,7 @@
 
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
+#include"Utility/convert/convert.h"
 
 /// <summary>
 /// タイトルのカメラ

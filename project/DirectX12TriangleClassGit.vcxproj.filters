@@ -621,7 +621,7 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\StartCount\StartCount.cpp">
+    <ClCompile Include="Application\GameObject\StartAnimation\StartCount\StartCount.cpp">
       <Filter>Project\GameObject\StartCount</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp">
@@ -647,6 +647,13 @@
     <ClCompile Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.cpp" />
     <ClCompile Include="Application\GameFileLoader\RailLoader\RailLoader.cpp" />
     <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp" />
+    <ClCompile Include="Application\GameObject\StartAnimation\StartAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
+    <ClCompile Include="Application\Utility\convert\convert.cpp" />
+    <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
+    <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
+    <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1078,7 +1085,7 @@
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\StartCount\StartCount.h">
+    <ClInclude Include="Application\GameObject\StartAnimation\StartCount\StartCount.h">
       <Filter>Project\GameObject\StartCount</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h">
@@ -1108,6 +1115,13 @@
     <ClInclude Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.h" />
     <ClInclude Include="Application\GameFileLoader\RailLoader\RailLoader.h" />
     <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\StartAnimation.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
+    <ClInclude Include="Application\Utility\convert\convert.h" />
+    <ClInclude Include="Application\GameObject\Warp\Warp.h" />
+    <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
+    <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

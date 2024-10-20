@@ -217,7 +217,35 @@ float Math::Vector::easeOutBounce(float t)
 	}
 }
 
-Vector3 Math::Vector::Catmull_Rom(Vector3& p0, Vector3& p1, Vector3& p2, Vector3& p3, float t)
+float Math::Vector::CalcXRotation(const Vector3& rotate)
+{
+	float velocityXZ = sqrt(rotate.x * rotate.x + rotate.z * rotate.z);  // XZ平面の長さ
+	float heightY = -rotate.y;
+	float sinTheta = heightY / sqrt(heightY * heightY + velocityXZ * velocityXZ);
+	return asin(sinTheta);  // asinを使って角度を計算
+}
+
+float Math::Vector::CalcYRotation(const Vector3& rotate)
+{
+	Vector3 forward = { 0.0f, 0.0f, 1.0f };  // 基準ベクトル (Z方向)
+	float dotProduct = forward.x * rotate.x + forward.z * rotate.z;
+	float magnitudeForward = sqrt(forward.x * forward.x + forward.z * forward.z);
+	float magnitudeRotate = sqrt(rotate.x * rotate.x + rotate.z * rotate.z);
+
+	// コサインの逆数を使って角度を計算
+	float cosTheta = dotProduct / (magnitudeForward * magnitudeRotate);
+	float yRotation = acos(cosTheta);
+
+	// クロス積を使って回転方向（符号）を決定
+	float crossProduct = forward.x * rotate.z - forward.z * rotate.x;
+	if (crossProduct < 0) {
+		yRotation = -yRotation;
+	}
+
+	return yRotation;
+}
+
+Vector3 Math::Vector::Catmull_Rom(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t)
 {
 
 	float t2 = t * t;

@@ -154,6 +154,16 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, nlohmann::
 		TransformEular transformEular = GetTransform(transform);
 		transformEular.rotate = degreesToRadians(transformEular.rotate);
 
+		if (CheckJsonObjectContains(object, "paramFileNames"))
+		{
+			vector<string>fileNames = GetParamFileNames(object);
+
+			for (const string& fileName : fileNames)
+			{
+				obj3dData->PushBackParamFilePath(fileName + ".json");
+			}
+		}
+
 		if (object.contains("collider"))
 		{
 			AABB aabb = LoadCollider(object["collider"]);
@@ -248,6 +258,8 @@ void SceneFileLoader::LoadObj3dData(shared_ptr<LevelData>& levelData, nlohmann::
 
 				transforms->SetAABB(aabb);
 			}
+
+
 			transforms->GetName() = objectName;
 
 			transforms->Update();

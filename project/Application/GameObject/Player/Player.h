@@ -17,6 +17,8 @@
 #include"state/PlayerStateNone.h"
 #include"state/PlayerStateRock.h"
 #include"state/PlayerStateGoalAnimation.h"
+#include"state/PlayerStateWarpMove.h"
+
 #include"Utility/ObjectManager/GameObjectManager.h"
 
 #include"GameObject/Particles/CharacterMoveParticle.h"
@@ -94,11 +96,14 @@ public:
 
 	bool& isDamageFlag() { return isDamage_; }
 	bool& isInvincible() { return isInvincible_; }
+	string& GetWarpFilePath() { return warpFilePath_; }
+	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 #pragma endregion
 
 #pragma region Set
 	void SetRockState(bool f) { isRockState_ = f; }
 	void SetDamageFlag(bool f) { isDamage_ = f; }
+	void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
 #pragma endregion
 
 private:
@@ -142,4 +147,7 @@ private:
 
 	uint32_t particleMoveIndex_ = 0;
 	Math::Vector::Vector3 resetPos_ = {};
+
+	bool isUseGravityFlag_ = true;
+	string warpFilePath_ = "";
 };

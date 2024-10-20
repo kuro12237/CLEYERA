@@ -42,8 +42,13 @@ void GameScene::Initialize()
 	goal_->Initialize(kGoalId, 0);
 
 	//2dObj
-	startCount_ = make_unique<StartCount>();
-	startCount_->Initialize();
+	startAnimation_ = make_unique<StartAnimation>();
+	startAnimation_->Initialize();
+
+	
+	warp_ = make_unique<Warp>();
+	warp_->Initlaize();
+
 
 	//更新
 	gameObjectManager_->Update();
@@ -62,6 +67,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	ImGuiUpdate();
 
+	warp_->ImGuiUpdate();
+
 #endif // _USE_IMGUI
 
 
@@ -70,17 +77,18 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	//シーン切替が終わったら
 	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
 	{
-		startCount_->Update();
+		startAnimation_->SetIsCountStart(true);
 	}
 
 	//カウントダウンが終わったら
-	if (startCount_->GetStartFlag())
+	if (startAnimation_->GetIsGameStartFlag())
 	{
 		enemyWalkManager_->SetIsStartFlag(true);
 		player_->SetStartFlag(true);
-		startCount_->SetStartFlag(false);
+		//startCount_->SetStartFlag(false);
 	}
 
+	startAnimation_->Update();
 	//
 	//ゲーム開始後
 	//
@@ -92,6 +100,9 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	blockManager_->Update();
 
 	goal_->Update();
+
+	warp_->Update();
+
 
 	Gravitys();
 
@@ -135,6 +146,7 @@ void GameScene::PostProcessDraw()
 	gameObjectManager_->Draw();
 
 	ParticlesDraw();
+	warp_->DebugDrawLine();
 
 }
 
@@ -151,7 +163,7 @@ void GameScene::Flont2dSpriteDraw()
 {
 	player_->Draw2d();
 	player_->DrawHp();
-	startCount_->Draw2d();
+	startAnimation_->Draw2d();
 	ChangeSceneAnimation::GetInstance()->Draw();
 }
 
@@ -218,6 +230,8 @@ void GameScene::Collision()
 
 	gameCollisionManager_->ListPushback(goal_.get());
 
+	gameCollisionManager_->ListPushback(warp_->GetWarpGate());
+
 	gameCollisionManager_->CheckAllCollisoin();
 
 }
@@ -228,7 +242,10 @@ void GameScene::Gravitys()
 
 	if (!player_->GetPlayerCore()->GetIsGoal())
 	{
-		gravityManager_->PushList(player_->GetPlayerCore());
+		if (player_->GetPlayerCore()->GetIsUseGravityFlag())
+		{
+			gravityManager_->PushList(player_->GetPlayerCore());
+		}
 	}
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{

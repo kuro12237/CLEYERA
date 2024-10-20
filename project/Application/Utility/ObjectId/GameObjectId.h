@@ -23,3 +23,5 @@ const static uint32_t kPortalIds[] = {
 };
 
 const static uint32_t kStoneItem = 0b0001000000;       // 512
+
+const static uint32_t kWarpGateId = 0b0000000011;       // 

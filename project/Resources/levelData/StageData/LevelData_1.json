@@ -48,7 +48,7 @@
                 "translate": [
                     4.162246227264404,
                     0.0,
-                    9.5244722366333
+                    11.049551010131836
                 ],
                 "rotate": [
                     90.00000762939453,
@@ -146,6 +146,83 @@
                     16.0,
                     16.0,
                     16.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpGate",
+            "file_name": "WarpGate",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "paramFileNames": {
+                "File 0": "stage_1/WarpGate"
+            },
+            "transform": {
+                "translate": [
+                    14.0,
+                    0.0,
+                    2.5
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpGate.001",
+            "file_name": "WarpGate",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    23.0,
+                    0.0,
+                    43.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
                 ]
             }
         },
@@ -870,10 +947,6 @@
         {
             "type": "CAMERA",
             "name": "BackCamera",
-            "file_name": "Box",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
             "transform": {
                 "translate": [
                     21.031517028808594,
@@ -895,10 +968,6 @@
         {
             "type": "CAMERA",
             "name": "LeftCamera",
-            "file_name": "Box",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
             "transform": {
                 "translate": [
                     -33.723148345947266,
@@ -920,10 +989,6 @@
         {
             "type": "CAMERA",
             "name": "RightCamera",
-            "file_name": "Box",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
             "transform": {
                 "translate": [
                     55.46965408325195,
@@ -945,15 +1010,59 @@
         {
             "type": "CAMERA",
             "name": "PlayerCamera",
-            "file_name": "Box",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
             "transform": {
                 "translate": [
                     5.849818706512451,
                     -32.0,
                     7.017513275146484
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "CAMERA",
+            "name": "StartCamera",
+            "paramFileNames": {
+                "File 0": "Stage_1_0"
+            },
+            "transform": {
+                "translate": [
+                    0.0,
+                    -120.0,
+                    64.0
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "CAMERA",
+            "name": "StartCamera.001",
+            "paramFileNames": {
+                "File 0": "Stage_1_1"
+            },
+            "transform": {
+                "translate": [
+                    12.0,
+                    -120.0,
+                    64.0
                 ],
                 "rotate": [
                     90.00000762939453,

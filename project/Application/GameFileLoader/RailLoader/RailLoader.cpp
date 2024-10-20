@@ -18,13 +18,30 @@ RailData RailLoader::LoadRail(const string& filePath)
 
 	assert(deserialized.contains("positions"));
 
+	int index = 0;
+	size_t size = deserialized["positions"].size();
+	result.data.resize(size);
+
 	for (nlohmann::json& object : deserialized["positions"])
 	{
-		result.data.push_back(GetWorldTransform(object["transform"]));
+		result.data[index].Initialize();
+		result.data[index].transform = GetWorldTransform(object["transform"]);
+		if (index != 0)
+		{
+			result.data[index].SetParent(result.data[index - 1]);
+		}
+
+		index++;
+	}
+
+	for (size_t i = 0; i < result.data.size(); i++)
+	{
+		result.data[i].UpdateMatrix();
+
 	}
 
 	result.fileName = filePath;
-	result.size = result.data.size() - 1;
+	result.size = result.data.size();
 
 	return result;
 }

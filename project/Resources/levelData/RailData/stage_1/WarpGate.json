@@ -1,0 +1,110 @@
+{
+    "name": "Rail",
+    "positions": [
+        {
+            "number": 0,
+            "RailGroup": "WarpGate",
+            "transform": {
+                "translate": [
+                    14.0,
+                    0.0,
+                    2.5
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.5,
+                    0.5,
+                    0.5
+                ]
+            }
+        },
+        {
+            "number": 1,
+            "RailGroup": "WarpGate",
+            "transform": {
+                "translate": [
+                    0.0,
+                    -6.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "number": 2,
+            "RailGroup": "WarpGate",
+            "transform": {
+                "translate": [
+                    -46.547576904296875,
+                    0.0,
+                    48.76899719238281
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "number": 3,
+            "RailGroup": "WarpGate",
+            "transform": {
+                "translate": [
+                    64.54757690429688,
+                    0.0,
+                    32.23100280761719
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "number": 4,
+            "RailGroup": "WarpGate",
+            "transform": {
+                "translate": [
+                    0.0,
+                    6.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ]
+}
