@@ -27,6 +27,7 @@ public:
 
 #pragma region Get
 	bool GetStartFlag() { return startFlag_; };
+	bool GetIsNumberChange() { return isNumberChange_; }
 #pragma endregion
 
 #pragma region Set
@@ -62,6 +63,8 @@ private:
 	bool startFlag_ = false;
 	bool countUpdateFlag_ = false;
 	bool countDrawFlag_ = false;
+
+	bool isNumberChange_ = false;
 
 	vector<unique_ptr<Engine::Objects::Sprite>>flameSprites_ = {};
 	vector<Engine::Transform::WorldTransform>flameWts_;

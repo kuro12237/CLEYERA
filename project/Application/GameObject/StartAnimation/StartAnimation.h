@@ -4,6 +4,7 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"StartCount/StartCount.h"
 #include"Utility/convert/convert.h"
+#include"StartAnimationParticle/StartAnimation2dParticle.h"
 
 class StartAnimation
 {
@@ -37,10 +38,13 @@ public:
 private:
 
 	GameObjectManager* gameObjectManager_ = nullptr;
+	PostEffect* postEffect_ = nullptr;
 
 	vector<unique_ptr<SplineMotion>>splineMotions_;
 	uint32_t splineMotionsMax_ = 2;
 	vector<RailData>railData_;
+
+	unique_ptr<StartAnimation2dParticle>particle_ = nullptr;
 
 	bool isGameStart_ = false;
 	bool isCountStart_ = false;
@@ -51,4 +55,10 @@ private:
 
 	string selectCameraName_ = "StartCamera";
 
+	float vinatteFlame_ = 0.0f;
+	float flameCount_ = 0.0f;
+	bool isFlameCount_ = false;
+	bool isPrevFlameCount_ = false;
+
+	float vinatteScaleMax_ = 640.0f;
 };

@@ -45,6 +45,12 @@ public:
 	/// </summary>
 	void PostDraw();
 
+#pragma region Get
+
+	bool GetIsUseVinatte() { return adjustedColorParam_.vignetteFlag; }
+
+#pragma endregion
+
 #pragma region Set
 	void SetPosition(Math::Vector::Vector2 pos) { pos_ = pos; }
 	void SetSize(Math::Vector::Vector2 size) { size_ = size; }

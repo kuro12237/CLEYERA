@@ -132,6 +132,7 @@ void StartCount::Update()
 	}
 
 	float flameMax = 1.0f;
+	isNumberChange_ = false;
 
 	NumberUpdate();
 
@@ -148,6 +149,7 @@ void StartCount::Update()
 
 		timerCount++;
 
+		isNumberChange_ = true;
 		numberSprite_->GetuvTranslate().x += adduv;
 	}
 
@@ -202,6 +204,9 @@ void StartCount::NumberUpdate()
 
 	numberAnimationFlame_ += addFlame;
 	numberWorldTransform_.transform.rotate.z = Math::Vector::easeOutExpo(0.0f, rotateMax, numberAnimationFlame_);
+	numberWorldTransform_.transform.scale.z = Math::Vector::easeOutExpo(0.0f, 1.0f, numberAnimationFlame_);
+	numberWorldTransform_.transform.scale.y = Math::Vector::easeOutExpo(0.0f, 1.0f, numberAnimationFlame_);
+	numberWorldTransform_.transform.scale.z = Math::Vector::easeOutExpo(0.0f, 1.0f, numberAnimationFlame_);
 
 }
 

@@ -1,6 +1,6 @@
-#include "FireEmber2Particle.h"
+#include "StartAnimation2dParticle.h"
 
-void FireEmber2dParticle::Initialize()
+void StartAnimation2dParticle::Initialize()
 {
     texHandle_ = TextureManager::LoadPngTexture("FireEmber.png");
 
@@ -18,33 +18,34 @@ void FireEmber2dParticle::Initialize()
     auto& emit = emitter_->GetEmitParam()[0];
     auto& control = emitter_->GetControlParam()[0];
 
-    emit.sizeMin = { 0.0f,720.0f,0.0f };
-    emit.sizeMax = { 1280.0f,720.0f,0.0f };
+    emit.translate = { 640.0f,360.0f,0.0f };
+    emit.sizeMin = { -64.0f,-64.0f,0.0f };
+    emit.sizeMax = { 64.0f,64.0f,0.0f };
 
-    emit.scaleSizeMin = { 0.125f,0.125f,0.125f};
+    emit.scaleSizeMin = { 0.125f,0.125f,0.125f };
 
     emit.velocityMin = { -3.0f,-3.0f,0.0f };
     emit.velocityMax = { 3.0f,3.0f,0.0f };
-
-    control.frequencyTime = 0.2f;
-    emit.count = 4;
+    control.frequencyTime = 0.0f;
+    emit.count = 0;
     control.useFlag_ = true;
 }
 
-void FireEmber2dParticle::Update()
+void StartAnimation2dParticle::Update()
 {
     emitter_->Update();
+    emitter_->Emit(particle_);
     particle_->CallBarrier();
     particle_->Update();
 }
 
-void FireEmber2dParticle::Draw()
+void StartAnimation2dParticle::Draw()
 {
+
     particle_->Draw();
 }
 
-void FireEmber2dParticle::ImGuiUpdate()
+void StartAnimation2dParticle::ImGuiUpdate()
 {
-
     emitter_->ImGuiUpdate();
 }

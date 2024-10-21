@@ -56,6 +56,7 @@
     <ClCompile Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
     <ClCompile Include="Application\GameObject\StartAnimation\StartAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\StartAnimation\StartAnimationParticle\StartAnimation2dParticle.cpp" />
     <ClCompile Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
     <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
     <ClInclude Include="Application\GameObject\StartAnimation\StartAnimation.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\StartAnimationParticle\StartAnimation2dParticle.h" />
     <ClInclude Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
     <ClInclude Include="Application\GameObject\Warp\Warp.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />

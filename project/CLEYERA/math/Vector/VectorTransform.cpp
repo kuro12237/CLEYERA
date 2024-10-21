@@ -217,6 +217,16 @@ float Math::Vector::easeOutBounce(float t)
 	}
 }
 
+float Math::Vector::easeOutSine(float t)
+{
+  return  sinf((t * static_cast<float>(numbers::pi)) / 2);
+}
+
+float Math::Vector::easeInSine(float t)
+{
+	return 1 - cosf((t * static_cast<float>(numbers::pi)) / 2);
+}
+
 float Math::Vector::CalcXRotation(const Vector3& rotate)
 {
 	float velocityXZ = sqrt(rotate.x * rotate.x + rotate.z * rotate.z);  // XZïΩñ ÇÃí∑Ç≥
@@ -243,6 +253,38 @@ float Math::Vector::CalcYRotation(const Vector3& rotate)
 	}
 
 	return yRotation;
+}
+
+Vector3 Math::Vector::LerpEaseOutSine(const Vector3& a, const Vector3& b, const float t)
+{
+	float easedT = easeOutSine(t);
+
+	// ï‚ä‘
+	return Lerp(a, b, easedT);
+}
+
+Vector3 Math::Vector::LerpEaseInSine(const Vector3& a, const Vector3& b, const float t)
+{
+	float easedT = easeInSine(t);
+
+	// ï‚ä‘
+	return Lerp(a, b, easedT);
+}
+
+float Math::Vector::LerpEaseOutSine(const float& a, const float& b, const float t)
+{
+	float easedT = easeOutSine(t);
+
+	// ï‚ä‘
+	return Lerp(a, b, easedT);
+}
+
+float Math::Vector::LerpEaseInSine(const float& a, const float& b, const float t)
+{
+	float easedT = easeInSine(t);
+
+	// ï‚ä‘
+	return Lerp(a, b, easedT);
 }
 
 Vector3 Math::Vector::Catmull_Rom(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t)

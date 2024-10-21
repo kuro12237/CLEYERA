@@ -123,7 +123,7 @@ RWStructuredBuffer<int32_t> gFreeList : register(u2);
 void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadID)
 {
     RandomGenerator generator;
-    generator.seed = ((DTid.x +gPerFlame.flame) * gPerFlame.deltaTime);
+    generator.seed = ((DTid.x * gPerFlame.flame) + gPerFlame.flame);
   
     uint32_t index = DTid.x;
 

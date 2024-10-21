@@ -3,12 +3,12 @@
     "positions": [
         {
             "number": 0,
-            "RailGroup": "stage_1_0",
+            "RailGroup": "railCamera_0",
             "transform": {
                 "translate": [
-                    0.0,
-                    -120.0,
-                    64.0
+                    -1.7473678588867188,
+                    -132.307861328125,
+                    34.23328399658203
                 ],
                 "rotate": [
                     0.0,
@@ -24,12 +24,12 @@
         },
         {
             "number": 1,
-            "RailGroup": "stage_1_0",
+            "RailGroup": "railCamera_0",
             "transform": {
                 "translate": [
-                    -12.828133583068848,
-                    0.0,
-                    0.0
+                    -24.51192283630371,
+                    -132.307861328125,
+                    43.094482421875
                 ],
                 "rotate": [
                     0.0,
@@ -45,12 +45,12 @@
         },
         {
             "number": 2,
-            "RailGroup": "stage_1_0",
+            "RailGroup": "railCamera_0",
             "transform": {
                 "translate": [
-                    -14.996809959411621,
-                    0.0,
-                    0.0
+                    -44.172691345214844,
+                    -133.29747009277344,
+                    47.00105285644531
                 ],
                 "rotate": [
                     0.0,
@@ -66,12 +66,12 @@
         },
         {
             "number": 3,
-            "RailGroup": "stage_1_0",
+            "RailGroup": "railCamera_0",
             "transform": {
                 "translate": [
-                    -11.068229675292969,
-                    0.0,
-                    0.0
+                    -74.26428985595703,
+                    -114.6204833984375,
+                    59.36077117919922
                 ],
                 "rotate": [
                     0.0,

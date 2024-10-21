@@ -111,7 +111,7 @@ void PlayerManager::Draw2d()
 
 void PlayerManager::DrawHp()
 {
-	hp_->Draw2d();
+	//hp_->Draw2d();
 }
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)

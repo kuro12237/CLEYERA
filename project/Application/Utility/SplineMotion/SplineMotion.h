@@ -30,6 +30,10 @@ public:
 #pragma region Get
 	bool GetIsComplete() { return isComplete_; }
 	bool GetIsStartFlag() { return isStartFlag_; }
+
+	float GetFlame() { return flame_; }
+	uint32_t GetTargetIndex() { return targetIndex_; }
+
 	void SetP_Target(const Math::Vector::Vector3& target) { p_Target_ = &target; }
 	void SetP_RailData(RailData& data) { p_RailData_ = &data; }
 	void SetIsStartFlag(const bool& f) { isStartFlag_ = f; }

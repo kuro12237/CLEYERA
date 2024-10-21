@@ -5,6 +5,7 @@ using namespace Engine::Transform;
 void StartAnimation::Initialize()
 {
 	gameObjectManager_ = GameObjectManager::GetInstance();
+	postEffect_ = PostEffect::GetInstance();
 
 	startCount_ = make_unique<StartCount>();
 	startCount_->Initialize();
@@ -12,22 +13,21 @@ void StartAnimation::Initialize()
 	railData_.resize(splineMotionsMax_);
 	splineMotions_.resize(splineMotionsMax_);
 
-
-
 	for (uint32_t i = 0; i < splineMotionsMax_; i++)
 	{
-		string paramFiles = gameObjectManager_->GetCameraData(selectCameraName_ + FormatNumberWithDots(int(i)))->GetParamFilePaths()[0];
-
-		RailData railData = RailLoader::LoadRail(paramFiles);
-		railData_[i] = railData;
+		string paramFile = gameObjectManager_->GetCameraData(selectCameraName_ + FormatNumberWithDots(int(i)))->GetParamFilePaths()[0];
+		railData_[i] = RailLoader::LoadRail(paramFile);
 
 		splineMotions_[i] = make_unique<SplineMotion>();
 		splineMotions_[i]->SetP_RailData(railData_[i]);
 	}
 	gameObjectManager_->CameraReset(selectCameraName_);
 	splineMotions_[0]->SetIsStartFlag(true);
+	isCountStart_ = true;
 
-	gameObjectManager_->CameraReset("PlayerCamera");
+
+	postEffect_->SetVignetteFactor(1.0f);
+	postEffect_->SetVignetteColor({ 0.0f,0.0f,0.0f });
 }
 
 void StartAnimation::Update()
@@ -37,7 +37,6 @@ void StartAnimation::Update()
 		return;
 	}
 
-	/*
 	auto& camera = gameObjectManager_->GetCameraData(selectCameraName_)->GetWorldTransform();
 
 	for (size_t i = 0; i < size_t(splineMotionsMax_); i++)
@@ -47,22 +46,14 @@ void StartAnimation::Update()
 			continue;
 		}
 
-		if (splineMotions_[i]->GetIsStartFlag())
-		{
-			splineMotions_[i]->UpdateParamerter(480.0f);
-			camera.transform.translate = splineMotions_[i]->CatmullRomInterpolation();
-		}
-
 		if (splineMotions_[i]->GetIsComplete())
 		{
 			splineMotions_[i].release();
 
-			if (i == 1)
+			if (i == splineMotionsMax_ - 1)
 			{
 				isStartCount_ = true;
-				startCount_->SetStartFlag(true);
 				gameObjectManager_->CameraReset("PlayerCamera");
-
 				break;
 			}
 			else
@@ -71,15 +62,61 @@ void StartAnimation::Update()
 				splineMotions_[i + 1]->SetIsStartFlag(true);
 				gameObjectManager_->CameraReset(selectCameraName_);
 			}
+			continue;
 		}
-	}*/
-	
 
-	isStartCount_ = true;
+		if (splineMotions_[i]->GetIsStartFlag())
+		{
+			splineMotions_[i]->UpdateParamerter(180.0f);
+			camera.transform.translate = splineMotions_[i]->CatmullRomInterpolation();
+
+			//I‚í‚è
+			if (splineMotions_[i]->GetTargetIndex() == railData_[i].size - 2)
+			{
+				vinatteFlame_ = Math::Vector::LerpEaseOutSine(vinatteScaleMax_, 0.0f, splineMotions_[i]->GetFlame());
+				postEffect_->SetSelectPostEffect(VIGNETTE, true);
+				postEffect_->SetVignetteScale(vinatteFlame_);
+				if (vinatteFlame_ > vinatteScaleMax_ - 1.0f)
+				{
+
+					postEffect_->SetVignetteScale(vinatteScaleMax_);
+				}
+			}
+			//Žn‚Ü‚è
+			if (splineMotions_[i]->GetTargetIndex() == 0)
+			{
+				if (postEffect_->GetIsUseVinatte())
+				{
+					vinatteFlame_ = Math::Vector::LerpEaseInSine(0.0f, vinatteScaleMax_, splineMotions_[i]->GetFlame());
+					postEffect_->SetVignetteScale(vinatteFlame_);
+					if (vinatteFlame_ > vinatteScaleMax_ - 1.0f)
+					{
+						postEffect_->SetSelectPostEffect(VIGNETTE, false);
+					}
+				}
+			}
+
+		}
+	}
+
+
 	if (!isStartCount_)
 	{
 		return;
 	}
+
+
+	if (postEffect_->GetIsUseVinatte())
+	{
+		flameCount_ += 1.0f / 180.0f;
+		vinatteFlame_ = Math::Vector::LerpEaseInSine(0.0f, vinatteScaleMax_, flameCount_);
+		postEffect_->SetVignetteScale(vinatteFlame_);
+		if (vinatteFlame_ >= vinatteScaleMax_ - 1.0f)
+		{
+			postEffect_->SetSelectPostEffect(VIGNETTE, false);
+		}
+	}
+
 
 	startCount_->Update();
 
@@ -88,6 +125,7 @@ void StartAnimation::Update()
 	{
 		isGameStart_ = true;
 	}
+
 }
 
 void StartAnimation::DebugLine()
@@ -96,5 +134,10 @@ void StartAnimation::DebugLine()
 
 void StartAnimation::Draw2d()
 {
+	if (!isStartCount_)
+	{
+		return;
+	}
 	startCount_->Draw2d();
+
 }

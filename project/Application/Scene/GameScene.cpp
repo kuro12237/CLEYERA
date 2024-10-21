@@ -45,17 +45,15 @@ void GameScene::Initialize()
 	startAnimation_ = make_unique<StartAnimation>();
 	startAnimation_->Initialize();
 
-	
 	warp_ = make_unique<Warp>();
 	warp_->Initlaize();
-
 
 	//更新
 	gameObjectManager_->Update();
 
 	LightingManager::AddList(light_);
 
-	//ゲーム終了のFlagをペアレント
+	//ゲーム終了のつなぐ
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
 }
@@ -71,7 +69,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 #endif // _USE_IMGUI
 
-
 	ChangeSceneAnimation::GetInstance()->Update();
 
 	//シーン切替が終わったら
@@ -85,10 +82,10 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 		enemyWalkManager_->SetIsStartFlag(true);
 		player_->SetStartFlag(true);
-		//startCount_->SetStartFlag(false);
 	}
 
 	startAnimation_->Update();
+
 	//
 	//ゲーム開始後
 	//
@@ -102,7 +99,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	goal_->Update();
 
 	warp_->Update();
-
 
 	Gravitys();
 
@@ -136,6 +132,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		Scene->ChangeScene(make_unique<TitleScene>());
 		return;
 	}
+
 	gameCollisionManager_->End();
 
 }

@@ -38,9 +38,17 @@ namespace Math
 		Vector3 TransformByMatrix(const Vector3 vector, const Math::Matrix::Matrix4x4 matrix);
 
 		float easeOutBounce(float t);
+		float easeOutSine(float t);
+		float easeInSine(float t);
 
 		float CalcXRotation(const Vector3& rotate);
 		float CalcYRotation(const Vector3& rotate);
+
+		Vector3 LerpEaseOutSine(const Vector3& a, const Vector3& b, const float t);
+		Vector3 LerpEaseInSine(const Vector3& a, const Vector3& b, const float t);
+
+		float LerpEaseOutSine(const float& a, const float& b, const float t);
+	    float LerpEaseInSine(const float& a, const float& b, const float t);
 
 		template<typename T>
 		T easeOutExpo(const T& a, const T& b, const float t)
