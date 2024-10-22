@@ -13,7 +13,7 @@ void PlayerGun::Update()
 	Math::Vector::Vector3 targetPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().transform.translate;
 	targetPos.y += 1.5f;
 	Math::Vector::Vector3 worldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().GetWorldPosition();
-	Math::Vector::Vector3 lerp = Math::Vector::Normalize(Math::Vector::Subtruct(targetPos_, worldPos));
+	Math::Vector::Vector3 lerp = Math::Vector::Normalize(Math::Vector::Subtruct(*targetPos_, worldPos));
 
 	Math::Vector::Vector3 Nlerp = Math::Vector::Normalize(lerp);
 	Math::Vector::Vector3 rotate = {};

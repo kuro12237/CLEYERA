@@ -90,8 +90,9 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	changeSceneAnimation_->ImGuiUpdate();
 
-
+	
 #endif // _USE_IMGUI
+
 
 	changeSceneAnimation_->Update();
 

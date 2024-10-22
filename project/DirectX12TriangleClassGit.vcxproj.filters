@@ -654,7 +654,6 @@
     <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
-    <ClCompile Include="Application\GameObject\StartAnimation\StartAnimationParticle\StartAnimation2dParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1123,7 +1122,7 @@
     <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
-    <ClInclude Include="Application\GameObject\StartAnimation\StartAnimationParticle\StartAnimation2dParticle.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\IStartAnimationState.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

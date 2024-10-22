@@ -26,7 +26,8 @@ void StartAnimation::Initialize()
 	isCountStart_ = true;
 
 
-	postEffect_->SetVignetteFactor(1.0f);
+	postEffect_->SetVignetteScale(10.0f);
+	postEffect_->SetSelectPostEffect(VIGNETTE, true);
 	postEffect_->SetVignetteColor({ 0.0f,0.0f,0.0f });
 }
 
@@ -73,31 +74,18 @@ void StartAnimation::Update()
 			//I‚í‚è
 			if (splineMotions_[i]->GetTargetIndex() == railData_[i].size - 2)
 			{
-				vinatteFlame_ = Math::Vector::LerpEaseOutSine(vinatteScaleMax_, 0.0f, splineMotions_[i]->GetFlame());
 				postEffect_->SetSelectPostEffect(VIGNETTE, true);
-				postEffect_->SetVignetteScale(vinatteFlame_);
-				if (vinatteFlame_ > vinatteScaleMax_ - 1.0f)
-				{
+				isFlameCount_ = true;
+				vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 10.0f, splineMotions_[i]->GetFlame());
 
-					postEffect_->SetVignetteScale(vinatteScaleMax_);
+				if (vinatteFlame_ >=10.0f)
+				{
+					isFlameCount_ = false;
 				}
 			}
-			//Žn‚Ü‚è
-			if (splineMotions_[i]->GetTargetIndex() == 0)
-			{
-				if (postEffect_->GetIsUseVinatte())
-				{
-					vinatteFlame_ = Math::Vector::LerpEaseInSine(0.0f, vinatteScaleMax_, splineMotions_[i]->GetFlame());
-					postEffect_->SetVignetteScale(vinatteFlame_);
-					if (vinatteFlame_ > vinatteScaleMax_ - 1.0f)
-					{
-						postEffect_->SetSelectPostEffect(VIGNETTE, false);
-					}
-				}
-			}
-
 		}
 	}
+	postEffect_->SetVignetteFactor(vinatteFlame_);
 
 
 	if (!isStartCount_)
@@ -108,15 +96,17 @@ void StartAnimation::Update()
 
 	if (postEffect_->GetIsUseVinatte())
 	{
-		flameCount_ += 1.0f / 180.0f;
-		vinatteFlame_ = Math::Vector::LerpEaseInSine(0.0f, vinatteScaleMax_, flameCount_);
-		postEffect_->SetVignetteScale(vinatteFlame_);
-		if (vinatteFlame_ >= vinatteScaleMax_ - 1.0f)
+		isFlameCount_ = true;
+		vinatteFlame_ = Math::Vector::LerpEaseOutSine(10.0f,0.0f, flameCount_);
+		if (flameCount_ >= 1.0f)
 		{
 			postEffect_->SetSelectPostEffect(VIGNETTE, false);
+			isFlameCount_ = false;
+			flameCount_ = 0.0f;
 		}
 	}
 
+	FlameUpdate();
 
 	startCount_->Update();
 
@@ -139,5 +129,12 @@ void StartAnimation::Draw2d()
 		return;
 	}
 	startCount_->Draw2d();
+}
 
+void StartAnimation::FlameUpdate()
+{
+	if ( isFlameCount_)
+	{
+		flameCount_ += 1.0f / 120.0f;
+	}
 }

@@ -28,7 +28,7 @@ RailData RailLoader::LoadRail(const string& filePath)
 		result.data[index].transform = GetWorldTransform(object["transform"]);
 		if (index != 0)
 		{
-			//result.data[index].SetParent(result.data[index - 1]);
+			result.data[index].SetParent(result.data[index - 1]);
 		}
 
 		index++;

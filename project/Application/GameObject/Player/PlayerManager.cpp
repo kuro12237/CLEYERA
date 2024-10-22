@@ -29,6 +29,11 @@ void PlayerManager::Initialize()
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CameraReset(camera_->GetName());
+
+	p_ReticleWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(reticle_->GetName())->GetWorldTransform().transform.translate;
+	
+	gun_->SetTarget(*p_ReticleWorldPos_);
+
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -50,7 +55,6 @@ void PlayerManager::ImGuiUpdate()
 
 void PlayerManager::Update()
 {
-	reticleWorldPos = gameObjectManager_->GetObj3dData(reticle_->GetName())->GetWorldTransform().GetWorldPosition();
 	playerWorldPos = gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
 
 	//ゲームが終わる通知
@@ -62,8 +66,12 @@ void PlayerManager::Update()
 	//Commands
 	if (gameStartFlag_ && !playerCore_->GetIsGoal())
 	{
+		//プレイヤーの操作キャラ
 		commandHandler_->Handler();
 		commandHandler_->CommandsExec(*playerCore_);
+		//レティクル
+		reticleCommandHandler_->Handler();
+		reticleCommandHandler_->Exec(*reticle_);
 	}
 
 	//Bullet
@@ -80,12 +88,9 @@ void PlayerManager::Update()
 	playerCore_->Update();
 
 	//Gun
-	gun_->SetTarget(reticleWorldPos);
 	gun_->Update();
 
 	//reticle
-	reticleCommandHandler_->Handler();
-	reticleCommandHandler_->Exec(*reticle_);
 	reticle_->Update();
 
 	//Camera
@@ -140,7 +145,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	};
 
 	//velocityの計算
-	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(reticleWorldPos, playerWorldPos);
+	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(*p_ReticleWorldPos_, playerWorldPos);
 	velocity.x += spreadRange.x;
 	velocity.y += spreadRange.y;
 	velocity = Math::Vector::Normalize(velocity);
@@ -197,8 +202,7 @@ void PlayerManager::CheckDamage()
 	{
 		hp_->GetHp()--;
 	}
-	GameObjectManager* gameObjectInstance_ = GameObjectManager::GetInstance();
-	auto& transform = gameObjectInstance_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().transform;
+	auto& transform = gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().transform;
 	if (transform.translate.y <= 0.0f)
 	{
 		playerCore_->isDamageFlag() = true;
@@ -206,6 +210,5 @@ void PlayerManager::CheckDamage()
 		playerCore_->ResetPos();
 
 		hp_->GetHp()--;
-
 	}
 }

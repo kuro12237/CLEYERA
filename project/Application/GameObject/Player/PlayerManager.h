@@ -53,7 +53,7 @@ public:
 	Player* GetPlayerCore() { return playerCore_.get(); }
 	PlayerReticle* GetReticle() { return reticle_.get(); }
 	PlayerGun* GetGun() { return gun_.get(); }
-	PlayerCamera* GetCamera(){ return camera_.get(); }
+	PlayerCamera* GetCamera() { return camera_.get(); }
 	PlayerHp* GetHp() { return hp_.get(); }
 	vector<shared_ptr<PlayerBullet>>GetBullet() { return bullets_; }
 #pragma endregion
@@ -102,5 +102,5 @@ private:
 	queue<uint32_t>deadBulletIndex_;
 
 	Math::Vector::Vector3 playerWorldPos = {};
-	Math::Vector::Vector3 reticleWorldPos = {};
+	const Math::Vector::Vector3* p_ReticleWorldPos_ = nullptr;
 };

@@ -22,13 +22,13 @@ public:
 
 #pragma region Set
 
-	void SetTarget(Math::Vector::Vector3 t) { targetPos_ = t; }
+	void SetTarget(const Math::Vector::Vector3 &t) { targetPos_ = &t; }
 
 #pragma endregion
 
 
 private:
 
-	Math::Vector::Vector3 targetPos_ = {};
+	const Math::Vector::Vector3 *targetPos_ = {};
 
 };

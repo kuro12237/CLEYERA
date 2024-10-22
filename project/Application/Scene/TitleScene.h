@@ -117,6 +117,7 @@ private:
 
 #pragma endregion
 
+	float flame_ = 0.0f;
 
 	bool isChangeSelectScene_ = false;
 
