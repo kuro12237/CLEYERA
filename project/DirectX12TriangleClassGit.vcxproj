@@ -193,7 +193,7 @@
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />
     <ClInclude Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
-    <ClInclude Include="Application\GameObject\StartAnimation\IStartAnimationState.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\state\IStartAnimationState.h" />
     <ClInclude Include="Application\GameObject\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
     <ClInclude Include="Application\GameObject\Warp\Warp.h" />

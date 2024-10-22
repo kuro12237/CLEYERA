@@ -1122,7 +1122,7 @@
     <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
-    <ClInclude Include="Application\GameObject\StartAnimation\IStartAnimationState.h" />
+    <ClInclude Include="Application\GameObject\StartAnimation\state\IStartAnimationState.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
