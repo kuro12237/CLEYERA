@@ -3,6 +3,9 @@
 #include"CreateGraphicsPiplineFanc.h"
 #include"ShaderManager.h"
 
+/// <summary>
+/// 2dのパイプライン作製関数
+/// </summary>
 class Sprite_2d_CreatePipline
 {
 public:

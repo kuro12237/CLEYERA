@@ -3,6 +3,9 @@
 #include"CreateGraphicsPiplineFanc.h"
 #include"ShaderManager.h"
 
+/// <summary>
+/// Phongパイプライン作製関数
+/// </summary>
 class Phong_CreatePipline
 {
 public:

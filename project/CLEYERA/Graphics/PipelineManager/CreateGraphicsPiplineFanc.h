@@ -2,6 +2,9 @@
 #include"DirectXCommon.h"
 #include"StructGraphicsPipline.h"
 
+/// <summary>
+/// パイプライン作製用関数
+/// </summary>
 namespace CreateGraphicsPiplineFanc
 {
 	void SettingDepth(

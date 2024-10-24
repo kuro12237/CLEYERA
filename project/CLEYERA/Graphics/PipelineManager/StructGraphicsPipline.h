@@ -1,6 +1,9 @@
 #pragma once
 #include"DirectXCommon.h"
 
+/// <summary>
+/// パイプラインデータ
+/// </summary>
 namespace Pipline
 {
 	enum Piplines

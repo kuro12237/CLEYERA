@@ -3,6 +3,9 @@
 #include"CreateGraphicsPiplineFanc.h"
 #include"ShaderManager.h"
 
+/// <summary>
+/// GPUパイプライン作製関数
+/// </summary>
 class CreateGpuParticle
 {
 public:

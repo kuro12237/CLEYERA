@@ -5,13 +5,16 @@
 #include"TitleName2d/TitleName2d.h"
 #include"BackTitle2d/TitleBack2d.h"
 #include"RodingIcon2d/RodingIcon.h"
-#include"GameObject/Particles/FireEmber2d/FireEmber2Particle.h"
 
+/// <summary>
+/// ‰æ–Ê‘JˆÚƒNƒ‰ƒX
+/// </summary>
 class ChangeSceneAnimation
 {
 public:
 
 	static ChangeSceneAnimation* GetInstance();
+
 
 	void Initialize();
 
@@ -21,6 +24,9 @@ public:
 
 	void Draw();
 
+	/// <summary>
+	/// ‰æ–ÊØ‘Ö
+	/// </summary>
 	void ChangeStart();
 	 
 #pragma region Get

@@ -3,6 +3,10 @@
 #include"CreateGraphicsPiplineFanc.h"
 #include"ShaderManager.h"
 
+
+/// <summary>
+/// スカイボックスパイプライン作製関数
+/// </summary>
 class ModelCreatePipline
 {
 public:

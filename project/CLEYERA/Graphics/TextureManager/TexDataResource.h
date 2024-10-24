@@ -1,5 +1,6 @@
 #include"Graphics/DescripterManager/DescriptorManager.h"
 
+
 struct  TexData
 {
 	uint32_t index;
@@ -7,6 +8,9 @@ struct  TexData
 	Math::Vector::Vector2 size;
 };
 
+/// <summary>
+/// テクスチャ保存クラス
+/// </summary>
 class TexDataResource
 {
 public:

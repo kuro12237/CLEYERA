@@ -4,6 +4,9 @@
 #include"Graphics/DescripterManager/DescriptorManager.h"
 #include"Utility/Noise/NoiseTexture.h"
 
+/// <summary>
+/// PhongDissolveŒÄ‚Ño‚µƒNƒ‰ƒX
+/// </summary>
 class Phong3dDissolvePipline :public IPipelineCommand
 {
 public:

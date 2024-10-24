@@ -422,9 +422,6 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
-    <ClCompile Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.cpp">
-      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
-    </ClCompile>
     <ClCompile Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.cpp">
       <Filter>CLEYERA\DebugTools\DebugCamera</Filter>
     </ClCompile>
@@ -876,9 +873,6 @@
       <Filter>CLEYERA\Utility\ImGuiManager</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\CreateGraphicsPiplineFanc.h">
-      <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CLEYERA\Graphics\PipelineManager\PostProcess\CreatePostProcess.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\DebugTool\DebugCamera\DebugCamera.h">
