@@ -8,6 +8,9 @@
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
 #include"Emitter/StructGpuParticleEmitter.h"
 
+/// <summary>
+/// パーティクル構造体
+/// </summary>
 struct ParticleCS
 {
 	Math::Vector::Vector3 translate;
@@ -27,32 +30,58 @@ namespace Particle {
 
 	using namespace Engine::Buffer;
 
+	/// <summary>
+	/// Mode　2dor3d
+	/// </summary>
 	enum DrawMode
 	{
 		mode_3d,
 		mode_2d,
 	};
 
+	/// <summary>
+	/// パーティクル本体
+	/// </summary>
 	class GpuParticle
 	{
 	public:
 		GpuParticle() {};
 		~GpuParticle() {};
 
+		/// <summary>
+		/// 作成
+		/// </summary>
+		/// <param name="合計数"></param>
+		/// <param name="名前"></param>
 		void Create(const size_t kNum, string Name);
 
+		/// <summary>
+		/// 更新
+		/// </summary>
 		void Update();
 
+		/// <summary>
+		/// 表示
+		/// </summary>
 		void Draw();
 
+		/// <summary>
+		/// 更新処理前後関係のバリア
+		/// </summary>
 		void CallBarrier();
 
+		/// <summary>
+		/// 使わない　command積む
+		/// </summary>
+		/// <param name="rootParamIndex"></param>
 		void CallUavRootparam(uint32_t rootParamIndex);
 
+		/// <summary>
+		/// パラメーターを初期化
+		/// </summary>
 		void Clear();
 
 #pragma region Set
-
 		void SetTexhandle(uint32_t texHandle) { texHandle_ = texHandle; }
 		void SetMode(SpriteMode belnd) { blend_ = belnd; }
 		void SetDrawMode(DrawMode mode) { drawMode_ = mode; }
@@ -61,13 +90,11 @@ namespace Particle {
 #pragma endregion
 
 #pragma region Get
-
 		string GetName() { return name_; }
 		uint32_t GetNum() { return uint32_t(particleNum_); }
 
 		BufferResource<uint32_t>* GetFreeListIndexBuf() { return freeListIndexBuf_.get(); }
 		BufferResource<uint32_t>* GetFreeListBuf() { return freeListBuf_.get(); }
-
 #pragma endregion
 
 	private:

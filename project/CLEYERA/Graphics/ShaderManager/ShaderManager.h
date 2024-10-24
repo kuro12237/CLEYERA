@@ -70,13 +70,9 @@ public:
 #pragma region Get
 	SShaders GetShader() { return ShaderManager::Getinstance()->shaders_; }
 	GpuParticleShader GetParticleShader() { return ShaderManager::Getinstance()->particleShader_; }
-
 	SShaderMode GetShaders(Shader::Shaders shader, string mode) { return shaders[shader][mode]; };
-
 #pragma endregion
 private:
-
-
 
 	/// <summary>
 	/// コンパイル関数
@@ -126,6 +122,7 @@ private:
 	static void SkyBoxModel();
 
 	static void CompileSkinningCs();
+
 
 	static void Particles();
 	static void Particle_Init();

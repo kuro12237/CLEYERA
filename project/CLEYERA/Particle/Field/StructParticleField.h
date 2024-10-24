@@ -5,7 +5,9 @@ namespace Particle
 {
     namespace FieldType
     {
-
+        /// <summary>
+        /// ãzÇ¢çûÇ›
+        /// </summary>
         struct FieldSuction
         {
             Math::Vector::Vector3 translate;

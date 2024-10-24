@@ -12,8 +12,14 @@ public:
 
 	static Input* GetInstance();
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	static void Initialize();
 
+	/// <summary>
+	/// 毎フレームの始まり
+	/// </summary>
 	static void BeginFlame();
 
 	/// <summary>
@@ -114,6 +120,9 @@ public:
 
 private:
 
+	/// <summary>
+	/// keybordの読み込みデバイス作成
+	/// </summary>
 	static void CreateKeybordDevice();
 
 	ComPtr<IDirectInput8> directInput = nullptr;

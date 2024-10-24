@@ -41,6 +41,7 @@ namespace Engine::Manager {
 			LightingManager::GetInstance()->LightDatas_.clear();
 			LightingManager::GetInstance()->NowTotalLightData_ = 0;
 		}
+
 		/// <summary>
 		/// Listの登録
 		/// </summary>

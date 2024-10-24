@@ -1,6 +1,10 @@
 #pragma once
 #include"Pch.h"
 
+
+/// <summary>
+/// transform,élå≥êîä‹Çﬁ
+/// </summary>
 struct TransformQua
 {
 	Math::Vector::Vector3 scale;

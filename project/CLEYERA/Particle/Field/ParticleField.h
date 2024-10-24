@@ -6,6 +6,10 @@ namespace Particle {
 
 	using namespace Engine::Buffer;
 
+	/// <summary>
+	/// フィールドクラス
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	template<typename T>
 	class ParticleField
 	{
@@ -13,25 +17,41 @@ namespace Particle {
 		ParticleField() {};
 		~ParticleField() {};
 
+		/// <summary>
+		/// フィールドの名前入れてBuffer作成
+		/// </summary>
+		/// <param name="name"></param>
 		void CreateType(string name);
 
+		/// <summary>
+		/// 更新
+		/// </summary>
 		void Update();
 
+		/// <summary>
+		/// 実行処理
+		/// </summary>
+		/// <param name="処理をかけるパーティクル"></param>
 		void Dispach(Particle::GpuParticle* particle);
 
+		/// <summary>
+		/// imgui更新
+		/// </summary>
 		void ImGuiUpdate();
 
+		/// <summary>
+		/// フィールドデバッグ表示
+		/// </summary>
 		void FieldDraw();
 
+		/// <summary>
+		/// パラメーターを初期化
+		/// </summary>
 		void AllClear();
 
 #pragma region Get
-
 		T& GetParam(uint32_t index) { return param_[index]; }
-
 #pragma endregion
-
-
 
 	private:
 

@@ -15,7 +15,14 @@ namespace Engine::Objects {
 		ModelObjState() {};
 		~ModelObjState();
 
+		/// <summary>
+		/// ‰Šú‰»
+		/// </summary>
 		void Initialize(Model* state)override;
+
+		/// <summary>
+		/// •\¦
+		/// </summary>
 		void Draw(Model* state, uint32_t instancingNum)override;
 
 	private:

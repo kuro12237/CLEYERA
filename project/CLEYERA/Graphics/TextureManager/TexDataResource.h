@@ -17,9 +17,15 @@ public:
 	TexDataResource(string filePath, TexData texData);
 	~TexDataResource();
 
-	uint32_t GetTexHandle() { return texData_.index; }
+	/// <summary>
+	/// ‰ð•ú
+	/// </summary>
 	void texRelease() { texData_.resource.Reset(); }
+
+#pragma region Get
+	uint32_t GetTexHandle() { return texData_.index; }
 	Math::Vector::Vector2 GetSize() { return texData_.size; }
+#pragma endregion
 
 private:
 

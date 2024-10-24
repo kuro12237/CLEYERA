@@ -16,12 +16,16 @@ public:
 
 	~ModelObjData() {};
 
+#pragma region Get
+
 	SModelData GetData() { return modelData_; }
 	Engine::Objects::Model* GetModel() { return model_.get(); }
+	
 	/// <summary>
 	/// ƒ‚ƒfƒ‹”Ô†
 	/// </summary>
 	uint32_t GetIndex() { return index_; }
+#pragma endregion
 
 private:
 

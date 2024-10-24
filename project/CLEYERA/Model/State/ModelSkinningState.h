@@ -14,7 +14,16 @@ namespace Engine::Objects
 		ModelSkinningState() {};
 		~ModelSkinningState();
 
+		/// <summary>
+		/// ‰Šú‰»
+		/// </summary>
 		void Initialize(Model* state)override;
+
+		/// <summary>
+		/// •\¦
+		/// </summary>
+		/// <param name="state"></param>
+		/// <param name="instancingNum"></param>
 		void Draw(Model* state, uint32_t instancingNum)override;
 
 	private:

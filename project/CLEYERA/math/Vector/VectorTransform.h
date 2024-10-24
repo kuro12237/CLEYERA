@@ -7,9 +7,9 @@ namespace Math
 	{
 
 		float degreesToRadians(float degrees);
+		
 		float Length(const Vector2& v);
 		float Length(const Vector3& v);
-
 
 		Vector3 Add(const Vector3& v1, const Vector3& v2);
 

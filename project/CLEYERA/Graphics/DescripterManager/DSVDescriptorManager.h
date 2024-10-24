@@ -8,8 +8,17 @@ public:
 
 	static DSVDescriptorManager* GetInstance();
 
+	/// <summary>
+	/// ‰Šú‰»
+	/// </summary>
 	static void Initialize();
+
+	/// <summary>
+	/// –ˆƒtƒŒ[ƒ€‚Ìn‚Ü‚è
+	/// </summary>
 	static void BeginFlame();
+
+
 	static void ImGuiUpdate();
 
 	static void IndexIncrement(const string &name);

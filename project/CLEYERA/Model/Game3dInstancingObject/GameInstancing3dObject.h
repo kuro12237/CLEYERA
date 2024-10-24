@@ -21,7 +21,7 @@ public:
 	void Create(const uint32_t& kNum, const string& name);
 
 	/// <summary>
-	/// GPU“ñ“]‘—
+	/// GPU‚É“]‘—
 	/// </summary>
 	void Transfar();
 

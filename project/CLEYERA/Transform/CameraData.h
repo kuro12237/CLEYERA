@@ -10,7 +10,9 @@ namespace Engine::Camera {
 
 	using namespace Engine::Buffer;
 
-
+	/// <summary>
+	/// カメラのデータ
+	/// </summary>
 	struct CameraData {
 
 		~CameraData() {};
@@ -37,17 +39,44 @@ namespace Engine::Camera {
 		float nearClip_ = 0.1f;
 		float farClip_ = 1000.0f;
 
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		/// <param name="r"></param>
+		/// <param name="t"></param>
 		void Initialize(Math::Vector::Vector3 r = { 0.0f,0.0f,0.0f }, Math::Vector::Vector3 t = { 0.0f,0.0f,-5.0f });
 
+		/// <summary>
+		/// 更新
+		/// </summary>
 		void UpdateMatrix();
 
-		void CreateBuffer();
+		/// <summary>
+		/// GPU転送
+		/// </summary>
+		void TransfarMatrix();
 
+#pragma region Get
 		Math::Matrix::Matrix4x4 GetViewMat() { return matView_; }
 		Math::Matrix::Matrix4x4 GetProjMat() { return matProj_; }
+#pragma endregion
 
+
+	private:
+
+		/// <summary>
+		/// Buffer作成
+		/// </summary>
+		void CreateBuffer();
+
+		/// <summary>
+		/// BufferMap
+		/// </summary>
 		void Map();
+
+		/// <summary>
+		/// BufferUnMap
+		/// </summary>
 		void UnMap();
-		void TransfarMatrix();
 	};
 }

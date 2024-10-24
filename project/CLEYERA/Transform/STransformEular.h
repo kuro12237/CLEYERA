@@ -3,6 +3,10 @@
 #include"Quaternion/Quaternion.h"
 #include<json.hpp>
 
+
+/// <summary>
+/// transform
+/// </summary>
 struct TransformEular
 {
 	Math::Vector::Vector3 scale;

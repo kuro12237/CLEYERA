@@ -31,27 +31,33 @@ namespace Engine::Objects {
 		/// <param name="state"></param>
 		void CreateModel(unique_ptr<IModelState> state);
 
+		/// <summary>
+		/// 表示
+		/// </summary>
+		/// <param name="instancingNum"></param>
 		void Draw(uint32_t instancingNum);
 
+		/// <summary>
+		/// パラメータ構造体設定
+		/// </summary>
+		/// <param name="desc"></param>
 		void SetDesc(const Game3dObjectDesc& desc) { desc_ = &desc; }
 
+#pragma region Set
 		void SetStateType(SModelData modelData, ModelFormatType type);
-
 		void SetSkinClusterSrvIndex(const uint32_t& index) { skinClusterSrvIndex_ = index; };
+#pragma endregion
 
 #pragma region Get
-
 		uint32_t GetTexHandle() { return texHandle_; }
 		uint32_t GetModelHandle() { return modelHandle_; }
 
 		SModelData GetModelData() { return modelData_; }
-
 		Game3dObjectDesc GetDesc() { return *desc_; }
 		BufferResource<VertexInfluence>* GetInfluence() { return influence_.get(); }
 		BufferResource<uint32_t>* GetVertexNum() { return vertexNum_.get(); }
 
 		uint32_t GetSkinClusterIndex() { return skinClusterSrvIndex_; }
-
 #pragma endregion
 
 	private:

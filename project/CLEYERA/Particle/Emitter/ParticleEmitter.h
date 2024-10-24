@@ -9,6 +9,10 @@ namespace Particle {
 
 	using namespace Engine::Buffer;
 
+	/// <summary>
+	/// パーティクルエミッター
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	template<typename T>
 	class ParticleEmitter
 	{
@@ -16,16 +20,42 @@ namespace Particle {
 		ParticleEmitter() {};
 		~ParticleEmitter() {};
 
+		/// <summary>
+		/// particleをもとに作成
+		/// </summary>
+		/// <param name="particle"></param>
 		void CreateType(unique_ptr<Particle::GpuParticle>& particle);
 
+		/// <summary>
+		/// imgui更新
+		/// </summary>
 		void ImGuiUpdate();
+
+		/// <summary>
+		/// 更新
+		/// </summary>
 		void Update();
 
+		/// <summary>
+		/// 沸かせる
+		/// </summary>
+		/// <param name="particle"></param>
 		void Emit(unique_ptr<Particle::GpuParticle>& particle);
 
+		/// <summary>
+		/// 範囲デバック表示
+		/// </summary>
 		void SpownDraw();
 
+		/// <summary>
+		/// 指定のパラメータを初期化
+		/// </summary>
+		/// <param name="index"></param>
 		void Clear(uint32_t index) { emitParam_[index] = {}; particleControl_[index] = {}; }
+		
+		/// <summary>
+		/// すべてのパラメーターの初期化
+		/// </summary>
 		void AllClear();
 
 #pragma region Get
@@ -41,14 +71,23 @@ namespace Particle {
 
 	private:
 
+		/// <summary>
+		/// デバック用のdrawのクラスを作成
+		/// </summary>
 		void CreateDebugDraw();
 
+#pragma region imguiUpdate
 		void BoxImGuiUpdate();
 		void SphereImGuiUpdate();
 		void CircleImGuiUpdate();
+#pragma endregion
 
-
+		/// <summary>
+		/// 沸く間隔の更新
+		/// </summary>
+		/// <param name="index"></param>
 		void FrequencyUpdate(size_t index);
+
 		string name_ = "";
 		static const uint32_t max_ = 32;
 		uint32_t srvHandle_ = 0;

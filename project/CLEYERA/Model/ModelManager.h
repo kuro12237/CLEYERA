@@ -47,11 +47,15 @@ public:
 	/// <returns></returns>
 	static uint32_t LoadObjectFile(string directoryPath);
 
+	/// <summary>
+	/// gltfの読み込み
+	/// </summary>
+	/// <param name="ファイルパス"></param>
+	/// <param name="skinningFlagするか"></param>
+	/// <returns></returns>
 	static uint32_t LoadGltfFile(string directoryPath,bool skinningFlag = false);
 
 #pragma region Get
-
-
 	static SModelData GetObjData(uint32_t index);
 
 	static SModelData GetModelData(const string filePath);
