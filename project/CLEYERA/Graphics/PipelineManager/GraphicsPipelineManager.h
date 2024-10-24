@@ -28,15 +28,40 @@ private:
 
 #pragma region 登録関数
 
-	static SPSOProperty CreateShape(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands command, SShaderMode shader);
-	static SPSOProperty CreateLine(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
-	static SPSOProperty CreateSprite3dNone(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
-	static SPSOProperty CreateSprite3dAddNoneWriteDepth(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
+	/// <summary>
+/// シェイプ用のパイプラインステートオブジェクトを作成する関数
+/// </summary>
+	static SPSOProperty CreateShape(ComPtr<ID3D12Device> device, Engine::Base::DX::Commands command, SShaderMode shader);
 
-	static SPSOProperty CreateParticle3dNone(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
-	static SPSOProperty CreateParticle3dAdd(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
+	/// <summary>
+	/// ライン描画用のパイプラインステートオブジェクトを作成する関数
+	/// </summary>
+	static SPSOProperty CreateLine(ComPtr<ID3D12Device> device, Engine::Base::DX::Commands commands, SShaderMode shader);
 
-	static SPSOProperty CreatePostEffectTest(ComPtr<ID3D12Device>device, Engine::Base::DX::Commands commands, SShaderMode shader);
+	/// <summary>
+	/// 3Dスプライト（通常描画）用のパイプラインステートオブジェクトを作成する関数
+	/// </summary>
+	static SPSOProperty CreateSprite3dNone(ComPtr<ID3D12Device> device, Engine::Base::DX::Commands commands, SShaderMode shader);
+
+	/// <summary>
+	/// 3Dスプライト（加算合成+デプス書き込みあり）用のパイプラインステートオブジェクトを作成する関数
+	/// </summary>
+	static SPSOProperty CreateSprite3dAddNoneWriteDepth(ComPtr<ID3D12Device> device, Engine::Base::DX::Commands commands, SShaderMode shader);
+
+	/// <summary>
+	/// 3Dパーティクル（通常描画）用のパイプラインステートオブジェクトを作成する関数
+	/// </summary>
+	static SPSOProperty CreateParticle3dNone(ComPtr<ID3D12Device> device, Engine::Base::DX::Commands commands, SShaderMode shader);
+
+	/// <summary>
+	/// 3Dパーティクル（加算合成）用のパイプラインステートオブジェクトを作成する関数
+	/// </summary>
+	static SPSOProperty CreateParticle3dAdd(ComPtr<ID3D12Device> device, Engine::Base::DX::Commands commands, SShaderMode shader);
+
+	/// <summary>
+	/// ポストエフェクトテスト用のパイプラインステートオブジェクトを作成する関数
+	/// </summary>
+	static SPSOProperty CreatePostEffectTest(ComPtr<ID3D12Device> device, Engine::Base::DX::Commands commands, SShaderMode shader);
 
 #pragma endregion
 

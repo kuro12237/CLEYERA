@@ -6,6 +6,9 @@ namespace System
 {
 	using namespace Engine::Buffer;
 
+	/// <summary>
+	/// スプライト抽象クラス
+	/// </summary>
 	class ISpriteBuf
 	{
 	public:
@@ -14,8 +17,14 @@ namespace System
 
 	protected:
 
+		/// <summary>
+		/// バッファ作成
+		/// </summary>
 		void CreateBuf();
 
+		/// <summary>
+		/// マップ
+		/// </summary>
 		void Map();
 
 		void UnMap();

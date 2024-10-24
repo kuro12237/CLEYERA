@@ -74,7 +74,16 @@ public:
 
 private:
 
+	/// <summary>
+	/// viewのコマンドを積む
+	/// </summary>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
 	void CommandCallView(const float& width, const float& height);
+
+	/// <summary>
+	/// シザーのコマンドを積む
+	/// </summary>
 	void CommandCallScissor();
 
 	bool isInitialize_ = false;

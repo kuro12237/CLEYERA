@@ -13,13 +13,31 @@ public:
 	static Phong_CreatePipline* GetInstance();
 
 	void Initialize();
-
+	/// <summary>
+    /// Phongライティングの法線マッピングモデル用パイプラインステートオブジェクトを作成する関数
+    /// </summary>
 	SPSOProperty CreatePhongNormalModel(SShaderMode shader);
+
+	/// <summary>
+	/// ディゾルブエフェクト付き法線マッピングモデル用パイプラインステートオブジェクトを作成する関数
+	/// </summary>
 	SPSOProperty CreateDissolveNormalModel(SShaderMode shader);
+
+	/// <summary>
+	/// サブサーフェス・スキャタリングモデル用パイプラインステートオブジェクトを作成する関数
+	/// </summary>
 	SPSOProperty CreateSubsurfaceModel(SShaderMode shader);
 
+	/// <summary>
+	/// インスタンシングモデル用パイプラインステートオブジェクトを作成する関数
+	/// </summary>
 	SPSOProperty CreateInstancingModel(SShaderMode shader);
+
+	/// <summary>
+	/// スキニングモデル用パイプラインステートオブジェクトを作成する関数
+	/// </summary>
 	SPSOProperty CreateSkinningModel(SShaderMode shader);
+
 
 private:
 	ComPtr<ID3D12Device>device = nullptr;

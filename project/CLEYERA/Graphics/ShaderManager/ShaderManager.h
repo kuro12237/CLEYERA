@@ -99,37 +99,121 @@ private:
 
 #pragma region 設定したものをshaderComplesで使用
 
+	/// <summary>
+/// シェイプ用のシェーダーをコンパイルする関数
+/// </summary>
 	static void ShapeShader();
+
+	/// <summary>
+	/// 3Dスプライト用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void Sprite3dShader();
+
+	/// <summary>
+	/// 2Dスプライト用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void Sprite2dShader();
+
+	/// <summary>
+	/// PBR（物理ベースレンダリング）モデル用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void PBR_ModelShader();
+
+	/// <summary>
+	/// フォンモデル用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void PhongModelShader();
+
+	/// <summary>
+	/// フォンモデル用のディゾルブシェーダーをコンパイルする関数
+	/// </summary>
 	static void Phong_DissolveShader();
+
+	/// <summary>
+	/// パーティクル用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void ParticleShader();
+
+	/// <summary>
+	/// フォンモデルの法線マップを使用したシェーダーをコンパイルする関数
+	/// </summary>
 	static void PhongNormalModel();
+
+	/// <summary>
+	/// サブサーフェススキャッタリングを使用したフォンモデル用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void PhongSubsurfaceModel();
 
+	/// <summary>
+	/// インスタンシングを使用したフォンモデルの法線シェーダーをコンパイルする関数
+	/// </summary>
 	static void PhongNormalInstancingModel();
 
+	/// <summary>
+	/// ライン描画用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void CreateLineShader();
 
+	/// <summary>
+	/// カラーポストプロセス用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void ColorPostProcess();
 
+	/// <summary>
+	/// ポストエフェクトテスト用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void PostEffectTest();
+
+	/// <summary>
+	/// シャドウマップ用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void ShadowMap();
 
+	/// <summary>
+	/// スキニングを使用したフォンモデル用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void SkinningPhongModelShader();
+
+	/// <summary>
+	/// スカイボックス描画用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void SkyBoxModel();
 
+	/// <summary>
+	/// スキニングのコンピュートシェーダーをコンパイルする関数
+	/// </summary>
 	static void CompileSkinningCs();
 
-
+	/// <summary>
+	/// パーティクルシェーダーをコンパイルする関数
+	/// </summary>
 	static void Particles();
+
+	/// <summary>
+	/// パーティクルの初期化用シェーダーをコンパイルする関数
+	/// </summary>
 	static void Particle_Init();
+
+	/// <summary>
+	/// パーティクルデバッグ描画用のシェーダーをコンパイルする関数
+	/// </summary>
 	static void ParticleDebugDraw();
+
+	/// <summary>
+	/// パーティクルの更新用シェーダーをコンパイルする関数
+	/// </summary>
 	static void Particle_Update();
+
+	/// <summary>
+	/// 球形エミッタ用のパーティクルシェーダーをコンパイルする関数
+	/// </summary>
 	static void Particle_EmitterSphere();
+
+	/// <summary>
+	/// ボックス形エミッタ用のパーティクルシェーダーをコンパイルする関数
+	/// </summary>
 	static void Particle_EmitterBox();
+
 
 #pragma endregion
 

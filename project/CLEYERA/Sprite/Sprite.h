@@ -22,6 +22,10 @@ namespace Engine::Objects
 		/// <param name="画像サイズ:texを使用する場合使用しない"></param>
 		void Initialize(Math::Vector::Vector2 pos = {}, Math::Vector::Vector2 size = {});
 
+		/// <summary>
+		/// 表示
+		/// </summary>
+		/// <param name="worldTransform"></param>
 		void Draw(Engine::Transform::WorldTransform worldTransform);
 
 #pragma region Set
