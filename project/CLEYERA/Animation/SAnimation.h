@@ -25,6 +25,9 @@ namespace SAnimation
 		std::vector<KeyFrame<tValue>>keyframes;
 	};
 
+	/// <summary>
+	/// NodeAnimation構造体
+	/// </summary>
 	struct NodeAnimation
 	{
 		AnimationCurve<Math::Vector::Vector3>translate;
@@ -32,6 +35,9 @@ namespace SAnimation
 		AnimationCurve<Math::Vector::Vector3>scale;
 	};
 
+	/// <summary>
+	/// 体のデータ
+	/// </summary>
 	struct Animation
 	{
 		uint32_t indexNumber = 0;
@@ -39,6 +45,9 @@ namespace SAnimation
 		std::map<std::string, NodeAnimation>NodeAnimation;
 	};
 
+	/// <summary>
+	/// ジョイント構造体
+	/// </summary>
 	struct Joint {
 		TransformQua transform;
 		Math::Matrix::Matrix4x4 localMatrix;
@@ -48,6 +57,10 @@ namespace SAnimation
 		int32_t index;
 		std::optional<int32_t>parent;
 	};
+	
+	/// <summary>
+	/// スケルトン構造体
+	/// </summary>
 	struct Skeleton
 	{
 		int32_t root;

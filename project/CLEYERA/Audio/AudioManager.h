@@ -3,18 +3,27 @@
 #include"LogManager.h"
 #include"Audio/AudioDataResource.h"
 
+/// <summary>
+/// wavChank
+/// </summary>
 struct ChunkHeader
 {
 	char id[4];
 	int32_t size;
 };
 
+/// <summary>
+/// wavRiff
+/// </summary>
 struct RiffHeader
 {
 	ChunkHeader chunk;
 	char Type[4];
 };
 
+/// <summary>
+/// wavFormat
+/// </summary>
 struct FormatChunk
 {
 	ChunkHeader chunk;

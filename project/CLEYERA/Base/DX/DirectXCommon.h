@@ -127,17 +127,55 @@ namespace Engine::Base::DX {
 		/// <returns></returns>
 		ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
 
+		/// <summary>
+		/// でバックレイヤー作成
+		/// </summary>
 		void CreateDebugLayer();
+		/// <summary>
+		/// infoQueue作製
+		/// </summary>
 		void CreateInforQueue();
+		/// <summary>
+		/// factory作製
+		/// </summary>
 		void CreateFactory();
+		/// <summary>
+		/// デバイス作成
+		/// </summary>
 		void CreateDevice();
+		/// <summary>
+		/// コマンド作成
+		/// </summary>
 		void CreateCommands();
+
+		/// <summary>
+		/// スワップチェーン作成
+		/// </summary>
 		void CreateSwapChain();
+		/// <summary>
+		/// でスクリプター作成
+		/// </summary>
 		void CreateDescritorHeap();
+		/// <summary>
+		/// スワップチェーンリソース作成
+		/// </summary>
 		void CreateSwapChainResource();
+		/// <summary>
+		/// RTV作成
+		/// </summary>
 		void CreateRTV();
+		/// <summary>
+		/// フェンス作成
+		/// </summary>
 		void CreateFence();
+
+		/// <summary>
+		/// fps固定作成
+		/// </summary>
 		void CreateFixFPS();
+		/// <summary>
+		/// fps更新
+		/// </summary>
 		void UpdateFixFPS();
 
 		//DXGI+ID3D12�͊�{Comptr�ɕς���

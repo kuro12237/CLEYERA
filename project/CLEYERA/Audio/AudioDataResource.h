@@ -22,7 +22,7 @@ namespace SSound
 	};
 
 	/// <summary>
-	/// •Û‘¶ƒNƒ‰ƒX
+	/// •Û‘¶\‘¢‘Ì
 	/// </summary>
 	struct AudioDataResource
 	{
