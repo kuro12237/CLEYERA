@@ -15,13 +15,26 @@ public:
 
 	static ChangeSceneAnimation* GetInstance();
 
-
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
+
+	/// <summary>
+	/// imgui更新
+	/// </summary>
 	void ImGuiUpdate();
 
+
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 表示
+	/// </summary>
 	void Draw();
 
 	/// <summary>
@@ -30,12 +43,9 @@ public:
 	void ChangeStart();
 	 
 #pragma region Get
-
 	bool GetEnd() { return isEndFlag_; }
-
 	bool GetIsComplite() { return isCompliteFlag_; }
 	bool GetIsChangeSceneFlag() { return isChangeSceneFlag_; }
-
 #pragma endregion
 
 private:

@@ -11,10 +11,20 @@ public:
 	TitleBack2d() {};
 	~TitleBack2d() {};
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="ノイズテクスチャ番号"></param>
 	void Initialize(uint32_t noiseTex = 0);
 
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// imgui更新
+	/// </summary>
 	void ImGuiUpdate()override;
 
 #pragma region Set

@@ -10,8 +10,14 @@ public:
 	IArchState() {};
 	~IArchState() {};
 
+	/// <summary>
+	/// ‰Šú‰»
+	/// </summary>
 	virtual void Initialize()=0;
 
+	/// <summary>
+	/// XV
+	/// </summary>
 	virtual void Update() = 0;
 
 private:

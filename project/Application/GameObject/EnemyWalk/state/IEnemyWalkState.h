@@ -11,9 +11,18 @@ public:
 	IEnemyWalkState() {};
 	virtual ~IEnemyWalkState() {};
 
-	virtual void Initialize([[maybe_unused]] EnemyWalk* e) = 0;
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="本体"></param>
+	virtual void Initialize(EnemyWalk* e) = 0;
 
-	virtual void Update([[maybe_unused]] EnemyWalk* e) = 0;
+
+	/// <summary>
+	/// 更新
+	/// </summary>
+	/// <param name="本体"></param>
+	virtual void Update(EnemyWalk* e) = 0;
 
 private:
 
