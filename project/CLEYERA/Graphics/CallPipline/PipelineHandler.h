@@ -7,6 +7,9 @@
 #include"commands/Phong3dDissolvePiplineCommand.h"
 #include"commands/Sprite3dAddNoneWritePiplineCommand.h"
 
+/// <summary>
+/// パイプライン切替クラス
+/// </summary>
 class PipelineHandler
 {
 public:

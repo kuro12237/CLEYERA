@@ -2,6 +2,9 @@
 #include"GraphicsPipelineManager.h"
 #include"CreateResource.h"
 
+/// <summary>
+/// コマンドインターフェース
+/// </summary>
 class IPipelineCommand
 {
 public:
