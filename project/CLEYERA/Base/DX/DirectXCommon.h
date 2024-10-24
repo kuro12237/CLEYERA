@@ -178,7 +178,6 @@ namespace Engine::Base::DX {
 		/// </summary>
 		void UpdateFixFPS();
 
-		//DXGI+ID3D12�͊�{Comptr�ɕς���
 
 		ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 		ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;

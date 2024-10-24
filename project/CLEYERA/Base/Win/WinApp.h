@@ -35,7 +35,6 @@ namespace Engine::Base::Win {
 		void ImGuiUpdate();
 
 #pragma region Set
-
 		void SetTiTleName(LPCWSTR  name) { SetWindowText(WinApp::GetInstance()->hwnd_, name); }
 #pragma endregion
 
@@ -66,9 +65,6 @@ namespace Engine::Base::Win {
 
 		static const int32_t kWindowWidth = 1280;
 		static const int32_t kWindowHeight = 720;
-
-		static const int32_t kDebugToolWindowWidth = 320;
-		static const int32_t kDebugToolWindowHeight = 130;
 
 		MSG msg{};
 		WNDCLASS wc_{};
