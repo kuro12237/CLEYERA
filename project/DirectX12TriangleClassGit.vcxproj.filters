@@ -130,9 +130,6 @@
     <Filter Include="Project\Utility\GameCollider">
       <UniqueIdentifier>{4effafe8-ec4e-4616-acdc-dca0fe45207a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Utility\Gravity">
-      <UniqueIdentifier>{7c7a48a0-a292-4e0a-a8e0-244f69efe3cb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\Utility\Deltatimer">
       <UniqueIdentifier>{f105f24d-7bbc-444d-9549-68c082336067}</UniqueIdentifier>
     </Filter>
@@ -249,6 +246,30 @@
     </Filter>
     <Filter Include="Project\GameObject\StartCount">
       <UniqueIdentifier>{eded2341-c2b3-489f-8191-df30e3076a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Arch">
+      <UniqueIdentifier>{c89ddf49-61a3-4698-9712-ca167312ad62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Bridge">
+      <UniqueIdentifier>{ad5fa2c8-ef99-4727-90e4-811f5cf0614a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Tower">
+      <UniqueIdentifier>{c1947989-5c52-42bb-997c-0d3d3c0d84b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\ObjectInterface">
+      <UniqueIdentifier>{7f4dc075-072e-4d1c-9898-b67704f364ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Lava">
+      <UniqueIdentifier>{9f3d1695-2d03-48fe-b657-38bb363ce143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\StartAnimation">
+      <UniqueIdentifier>{2eeca8a2-4499-4358-81ae-fdad95ac3284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Warp">
+      <UniqueIdentifier>{ad6edd8e-1d04-4c45-aac9-6313b2b23d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Title">
+      <UniqueIdentifier>{bad870cf-3c48-44d7-99fe-87f627747646}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -630,30 +651,75 @@
     <ClCompile Include="Application\Scene\TitleScene.cpp">
       <Filter>Project\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\TitleCamera\TitleCamera.cpp" />
-    <ClCompile Include="Application\GameObject\Arch\Arch.cpp" />
-    <ClCompile Include="Application\GameObject\Bridge\Bridge.cpp" />
-    <ClCompile Include="Application\GameObject\TitleLight\TitleLight.cpp" />
-    <ClCompile Include="Application\GameObject\Lava\Lava.cpp" />
-    <ClCompile Include="Application\GameObject\TitleName\TitleName.cpp" />
-    <ClCompile Include="Application\GameObject\Particles\Fire\FireParticle.cpp" />
-    <ClCompile Include="Application\GameObject\TowerManager\Tower.cpp" />
-    <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp" />
-    <ClCompile Include="Application\GameObject\TitleUI\TitlePushA.cpp" />
-    <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
-    <ClCompile Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.cpp" />
-    <ClCompile Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.cpp" />
-    <ClCompile Include="Application\ChangeSceneAnimation\RodingIcon2d\RodingIcon.cpp" />
-    <ClCompile Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.cpp" />
-    <ClCompile Include="Application\GameFileLoader\RailLoader\RailLoader.cpp" />
-    <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp" />
-    <ClCompile Include="Application\GameObject\StartAnimation\StartAnimation.cpp" />
-    <ClCompile Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
-    <ClCompile Include="Application\Utility\convert\convert.cpp" />
-    <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
-    <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
-    <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp" />
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
+    <ClCompile Include="Application\GameObject\Arch\Arch.cpp">
+      <Filter>Project\GameObject\Arch</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Bridge\Bridge.cpp">
+      <Filter>Project\GameObject\Bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Utility\convert\convert.cpp">
+      <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp">
+      <Filter>Project\GameObject\ObjectInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Particles\Fire\FireParticle.cpp">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Lava\Lava.cpp">
+      <Filter>Project\GameObject\Lava</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Warp\Warp.cpp">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp">
+      <Filter>Project\GameObject\character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameFileLoader\RailLoader\RailLoader.cpp">
+      <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\ChangeSceneAnimation\RodingIcon2d\RodingIcon.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp">
+      <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\StartAnimation\StartAnimation.cpp">
+      <Filter>Project\GameObject\StartAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.cpp">
+      <Filter>Project\GameObject\StartAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.cpp">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\TitleCamera\TitleCamera.cpp">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\TitleLight\TitleLight.cpp">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\TitleName\TitleName.cpp">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.cpp">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\TitleUI\TitlePushA.cpp">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\TowerManager\Tower.cpp">
+      <Filter>Project\GameObject\Tower</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp">
+      <Filter>Project\GameObject\Tower</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1097,32 +1163,81 @@
     <ClInclude Include="Application\Scene\TitleScene.h">
       <Filter>Project\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\TitleCamera\TitleCamera.h" />
-    <ClInclude Include="Application\GameObject\Arch\Arch.h" />
-    <ClInclude Include="Application\GameObject\Arch\state\IArchState.h" />
-    <ClInclude Include="Application\GameObject\Bridge\Bridge.h" />
-    <ClInclude Include="Application\GameObject\TitleLight\TitleLight.h" />
-    <ClInclude Include="Application\GameObject\Lava\Lava.h" />
-    <ClInclude Include="Application\GameObject\TitleName\TitleName.h" />
-    <ClInclude Include="Application\GameObject\Particles\Fire\FireParticle.h" />
-    <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h" />
-    <ClInclude Include="Application\GameObject\TowerManager\Tower.h" />
-    <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h" />
-    <ClInclude Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\ISpriteData.h" />
-    <ClInclude Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.h" />
-    <ClInclude Include="Application\ChangeSceneAnimation\RodingIcon2d\RodingIcon.h" />
-    <ClInclude Include="Application\GameObject\Particles\FireEmber2d\FireEmber2Particle.h" />
-    <ClInclude Include="Application\GameFileLoader\RailLoader\RailLoader.h" />
-    <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h" />
-    <ClInclude Include="Application\GameObject\StartAnimation\StartAnimation.h" />
-    <ClInclude Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
-    <ClInclude Include="Application\Utility\convert\convert.h" />
-    <ClInclude Include="Application\GameObject\Warp\Warp.h" />
-    <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
-    <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
-    <ClInclude Include="Application\GameObject\StartAnimation\state\IStartAnimationState.h" />
+    <ClInclude Include="Application\GameObject\Arch\Arch.h">
+      <Filter>Project\GameObject\Arch</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Bridge\Bridge.h">
+      <Filter>Project\GameObject\Bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Utility\convert\convert.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\ObjectInterface\ISpriteData.h">
+      <Filter>Project\GameObject\ObjectInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Particles\Fire\FireParticle.h">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Lava\Lava.h">
+      <Filter>Project\GameObject\Lava</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\StartAnimation\state\IStartAnimationState.h">
+      <Filter>Project\GameObject\StartAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Warp\Warp.h">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h">
+      <Filter>Project\GameObject\character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Arch\state\IArchState.h">
+      <Filter>Project\GameObject\Arch</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameFileLoader\RailLoader\RailLoader.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\ChangeSceneAnimation\RodingIcon2d\RodingIcon.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\StartAnimation\StartAnimation.h">
+      <Filter>Project\GameObject\StartAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.h">
+      <Filter>Project\GameObject\StartAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.h">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\TitleCamera\TitleCamera.h">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\TitleLight\TitleLight.h">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\TitleName\TitleName.h">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.h">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h">
+      <Filter>Project\GameObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\TowerManager\Tower.h">
+      <Filter>Project\GameObject\Tower</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h">
+      <Filter>Project\GameObject\Tower</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

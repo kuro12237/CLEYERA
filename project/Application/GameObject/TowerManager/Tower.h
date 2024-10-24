@@ -5,6 +5,9 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 
+/// <summary>
+/// “ƒ‚ÌƒNƒ‰ƒX
+/// </summary>
 class Tower :public IObjectData
 {
 public:

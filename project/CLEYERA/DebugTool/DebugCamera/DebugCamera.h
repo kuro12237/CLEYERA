@@ -5,7 +5,9 @@
 
 namespace Engine::DebugTools
 {
-
+	/// <summary>
+	/// デバッグカメラ
+	/// </summary>
 	class DebugCamera
 	{
 	public:

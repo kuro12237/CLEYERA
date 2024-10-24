@@ -5,6 +5,9 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/convert/convert.h"
 
+/// <summary>
+/// スタートのカメラの動き
+/// </summary>
 class StartCameraMotion :public IObjectData
 {
 public:

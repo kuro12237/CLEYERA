@@ -5,6 +5,9 @@
 #include"StartCount/StartCount.h"
 #include"Utility/convert/convert.h"
 
+/// <summary>
+/// スタート演出のモーション
+/// </summary>
 class StartAnimation
 {
 public:

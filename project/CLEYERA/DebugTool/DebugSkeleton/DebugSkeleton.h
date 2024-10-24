@@ -6,6 +6,9 @@
 #include"Game3dObject.h"
 #include"Model/primitive/LineModel.h"
 
+/// <summary>
+/// skinningのデバッグ用の表示
+/// </summary>
 class DebugSkeleton
 {
 public:

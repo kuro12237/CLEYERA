@@ -199,7 +199,9 @@ struct  Material
 
 namespace Engine::Buffer
 {
-
+	/// <summary>
+	/// バッファ作製クラス
+	/// </summary>
 	class CreateResources
 	{
 	public:
