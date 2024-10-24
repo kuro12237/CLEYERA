@@ -1,7 +1,7 @@
 #pragma once
 #include"WorldTransform.h"
-#include"Utility/CollisionManager/CollisionStructures/CollisionStructures.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
+#include"GameObject/GameCollider/ColliderData.h"
 
 class IGameObjectData
 {

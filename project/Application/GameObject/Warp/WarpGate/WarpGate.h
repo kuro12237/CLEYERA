@@ -7,6 +7,9 @@
 #include"Utility/ObjectId/GameObjectId.h"
 
 
+/// <summary>
+/// ワープゲートクラス
+/// </summary>
 class WarpGate :public IObjectData,public ICollider
 {
 public:

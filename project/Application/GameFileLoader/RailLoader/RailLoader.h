@@ -9,13 +9,23 @@ struct RailData
 	string fileName = "";
 };
 
+/// <summary>
+/// レールデータを読み込みクラス
+/// </summary>
 class RailLoader
 {
 public:
 
+	/// <summary>
+	/// 読み込みクラス
+	/// </summary>
 	static RailData LoadRail(const string& filePath);
 
 private:
+
+	/// <summary>
+	/// S,R,Tの読み込み関数
+	/// </summary>
 	static TransformEular GetWorldTransform(nlohmann::json transform);
 };
 

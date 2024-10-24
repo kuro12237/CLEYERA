@@ -4,6 +4,9 @@
 #include"WarpGate/WarpGate.h"
 #include"WarpRuate/WarpRuate.h"
 
+/// <summary>
+/// ワープクラス
+/// </summary>
 class Warp
 {
 public:
@@ -16,6 +19,9 @@ public:
 
 	void Update();
 
+	/// <summary>
+	/// デバック用の線表示
+	/// </summary>
 	void DebugDrawLine();
 
 #pragma region Get

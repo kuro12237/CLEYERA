@@ -2,6 +2,9 @@
 #include"GameFileLoader/RailLoader/RailLoader.h"
 #include"Utility/SplineMotion/SplineMotion.h"
 
+/// <summary>
+/// RailDataのルートのモデル表示
+/// </summary>
 class WarpRuate
 {
 public:

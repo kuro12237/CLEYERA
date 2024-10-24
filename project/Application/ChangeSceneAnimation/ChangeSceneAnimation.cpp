@@ -31,8 +31,7 @@ void ChangeSceneAnimation::Initialize()
 	rodingIcon_->Initialize(noiseTex_[0]);
 	rodingIcon_->SetP_DissolveMask(dissolveMask_);
 
-	fireEmberParticle_ = make_unique<FireEmber2dParticle>();
-	fireEmberParticle_->Initialize();
+
 
 }
 
@@ -41,22 +40,10 @@ void ChangeSceneAnimation::ImGuiUpdate()
 	titleBack2d_->ImGuiUpdate();
 	titleName2d_->ImGuiUpdate();
 	rodingIcon_->ImGuiUpdate();
-	fireEmberParticle_->ImGuiUpdate();
 }
 
 void ChangeSceneAnimation::Update()
 {
-	if (isCompliteFlag_)
-	{
-		fireEmberParticle_->SetUseFlag(false);
-		fireEmberParticle_->Update();
-		return;
-	}
-	else
-	{
-		fireEmberParticle_->SetUseFlag(true);
-	}
-
 
 	isChangeSceneFlag_ = false;
 	//スタート時
@@ -89,8 +76,6 @@ void ChangeSceneAnimation::Update()
 			isCompliteFlag_ = true;
 		}
 	}
-	fireEmberParticle_->Emit();
-	fireEmberParticle_->Update();
 
 	titleName2d_->Update();
 	titleBack2d_->Update();

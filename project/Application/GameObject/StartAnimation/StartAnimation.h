@@ -29,18 +29,26 @@ public:
 	/// </summary>
 	void DebugLine();
 
+	/// <summary>
+	/// 2dスプライト表示
+	/// </summary>
 	void Draw2d();
 
+#pragma region Set
 	void SetIsCountStart(const bool& flag) { isCountStart_ = flag; }
+#pragma endregion
 
-
+#pragma region Get
 	bool GetIsGameStartFlag() { return isGameStart_; }
 	bool GetIsStartFlag() { return isCountStart_; }
+#pragma endregion
 
 private:
 
+	/// <summary>
+	/// フレームを更新
+	/// </summary>
 	void FlameUpdate();
-
 
 
 	GameObjectManager* gameObjectManager_ = nullptr;

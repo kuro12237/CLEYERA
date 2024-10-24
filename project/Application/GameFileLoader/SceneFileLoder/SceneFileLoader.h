@@ -2,8 +2,8 @@
 #include"Pch.h"
 #include"FileLoader.h"
 #include"Utility/LevelData/LevelData.h"
-#include"Utility/CollisionManager/CollisionStructures/CollisionStructures.h"
 #include"GameObject/GameCollider/ICollider.h"
+#include"GameObject/GameCollider/ColliderData.h"
 
 /// <summary>
 ///  LevelDataを読むクラス
@@ -31,8 +31,19 @@ private:
 	/// </summary>
 	bool CheckJsonObjectContains(nlohmann::json& object, string name);
 
+	/// <summary>
+	/// モデル読み込み関数
+	/// </summary>
+	/// <param name="json"></param>
+	/// <param name="ObjectData"></param>
+	/// <returns></returns>
 	uint32_t  LoadModelData(nlohmann::json& object, shared_ptr<Game3dObjectData> data);
 
+	/// <summary>
+	/// オブジェクトのパラメーター読み込み関数
+	/// </summary>
+	/// <param name="object"></param>
+	/// <returns></returns>
 	vector<string>GetParamFileNames(nlohmann::json& object);
 
 	/// <summary>

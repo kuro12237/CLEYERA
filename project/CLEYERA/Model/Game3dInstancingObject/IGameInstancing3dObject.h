@@ -1,7 +1,7 @@
 #pragma once
 #include"WorldTransform.h"
 #include"Transform/STransformEular.h"
-#include"Utility/CollisionManager/CollisionStructures/CollisionStructures.h"
+#include"GameObject/GameCollider/ColliderData.h"
 
 class IGameInstancing3dObject
 {

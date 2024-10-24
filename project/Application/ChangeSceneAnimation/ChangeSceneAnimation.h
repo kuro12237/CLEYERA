@@ -25,7 +25,7 @@ public:
 	void Draw();
 
 	/// <summary>
-	/// 画面切替
+	/// 画面切替スタート
 	/// </summary>
 	void ChangeStart();
 	 
