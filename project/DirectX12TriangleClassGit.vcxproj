@@ -182,6 +182,7 @@
     <ClInclude Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateMove.h" />
     <ClInclude Include="Application\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
     <ClInclude Include="Application\GameObject\GameCollider\BoxCollisionManager.h" />
+    <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
     <ClInclude Include="Application\GameObject\GameCollider\ICollider.h" />
     <ClInclude Include="Application\GameObject\Goal\Goal.h" />
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />

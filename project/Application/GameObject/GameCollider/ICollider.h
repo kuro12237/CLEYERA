@@ -1,8 +1,8 @@
 #pragma once
 
-#include"Utility/CollisionManager/CollisionStructures/CollisionStructures.h"
 #include"Utility/CollisionMask/CollisionMask.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
+#include"ColliderData.h"
 
 /// <summary>
 /// •ûŒü

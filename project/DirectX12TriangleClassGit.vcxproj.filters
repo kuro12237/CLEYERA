@@ -1196,6 +1196,7 @@
     <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h">
       <Filter>Project\GameObject\Tower</Filter>
     </ClInclude>
+    <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
