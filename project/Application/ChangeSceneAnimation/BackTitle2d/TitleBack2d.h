@@ -2,6 +2,9 @@
 #include"Sprite/Sprite.h"
 #include"GameObject/ObjectInterface/ISpriteData.h"
 
+/// <summary>
+/// ƒ^ƒCƒgƒ‹‚Ì”wŒi
+/// </summary>
 class TitleBack2d :public ISpriteData
 {
 public:

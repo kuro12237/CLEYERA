@@ -2,6 +2,9 @@
 #include"Sprite/Sprite.h"
 #include"GameObject/ObjectInterface/ISpriteData.h"
 
+/// <summary>
+/// 回るアイコンクラス
+/// </summary>
 class RodingIcon2d :public ISpriteData
 {
 public:

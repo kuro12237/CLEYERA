@@ -2,6 +2,9 @@
 #include"Sprite/Sprite.h"
 #include"GameObject/ObjectInterface/ISpriteData.h"
 
+/// <summary>
+/// タイトルの名前2d
+/// </summary>
 class TitleName2d :public ISpriteData
 {
 public:
