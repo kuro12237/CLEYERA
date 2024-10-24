@@ -117,12 +117,12 @@ namespace Engine::Base::DX {
 		D3D12_RECT scissorRectSetting(int32_t kClientWidth, int32_t kClientHeight);
 
 		/// <summary>
-		/// descripter作製
+		/// descripter作成
 		/// </summary>
 		ComPtr<ID3D12DescriptorHeap> CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
 
 		/// <summary>
-		///　深度作製
+		///　深度リソース作成
 		/// </summary>
 		/// <returns></returns>
 		ComPtr<ID3D12Resource> CreateDepthStencilTextureResource();
@@ -131,18 +131,22 @@ namespace Engine::Base::DX {
 		/// でバックレイヤー作成
 		/// </summary>
 		void CreateDebugLayer();
+
 		/// <summary>
 		/// infoQueue作製
 		/// </summary>
 		void CreateInforQueue();
+
 		/// <summary>
 		/// factory作製
 		/// </summary>
 		void CreateFactory();
+
 		/// <summary>
 		/// デバイス作成
 		/// </summary>
 		void CreateDevice();
+
 		/// <summary>
 		/// コマンド作成
 		/// </summary>
@@ -152,18 +156,22 @@ namespace Engine::Base::DX {
 		/// スワップチェーン作成
 		/// </summary>
 		void CreateSwapChain();
+
 		/// <summary>
 		/// でスクリプター作成
 		/// </summary>
 		void CreateDescritorHeap();
+
 		/// <summary>
 		/// スワップチェーンリソース作成
 		/// </summary>
 		void CreateSwapChainResource();
+
 		/// <summary>
 		/// RTV作成
 		/// </summary>
 		void CreateRTV();
+
 		/// <summary>
 		/// フェンス作成
 		/// </summary>
@@ -173,11 +181,11 @@ namespace Engine::Base::DX {
 		/// fps固定作成
 		/// </summary>
 		void CreateFixFPS();
+
 		/// <summary>
 		/// fps更新
 		/// </summary>
 		void UpdateFixFPS();
-
 
 		ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 		ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;
