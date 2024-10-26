@@ -4,10 +4,9 @@
 
 using namespace Engine;
 using namespace Base::DX;
-
 using namespace Base::Win;
 
-DirectXCommon* DirectXCommon::GetInstance(){
+DirectXCommon* DirectXCommon::GetInstance() {
 	static DirectXCommon instance;
 	return &instance;
 }
@@ -19,6 +18,8 @@ void DirectXCommon::initialize()
 #endif
 	CreateFactory();
 	CreateDevice();
+	CheckRaytracingSuppport();
+
 #ifdef _DEBUG
 	CreateInforQueue();
 #endif _DEBUG
@@ -26,7 +27,7 @@ void DirectXCommon::initialize()
 	CreateSwapChain();
 	CreateDescritorHeap();
 	CreateSwapChainResource();
-    CreateRTV();
+	CreateRTV();
 	CreateFence();
 	CreateFixFPS();
 }
@@ -41,7 +42,7 @@ void DirectXCommon::Finalize()
 
 void DirectXCommon::PreDraw()
 {
-	
+
 	UINT backBufferIndex = swapChain.m_pSwapChain->GetCurrentBackBufferIndex();
 
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
@@ -51,18 +52,18 @@ void DirectXCommon::PreDraw()
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 
 	commands.m_pList.Get()->ResourceBarrier(1, &barrier);
-	
+
 	//ClearScreen
 	commands.m_pList.Get()->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, nullptr);
 	float clearColor[] = { 0.1f,0.25f,0.5f,1.0f };
 	commands.m_pList.Get()->ClearRenderTargetView(rtv.rtvHandles[backBufferIndex], clearColor, 0, nullptr);
 
 	//Depth
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle =m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart();
 	commands.m_pList.Get()->OMSetRenderTargets(1, &rtv.rtvHandles[backBufferIndex], false, &dsvHandle);
-	commands.m_pList.Get()->ClearDepthStencilView(dsvHandle,D3D12_CLEAR_FLAG_DEPTH,1.0f,0,0,nullptr);
+	commands.m_pList.Get()->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 	ScissorViewCommand(WinApp::GetkCilientWidth(), WinApp::GetkCilientHeight());
-	
+
 }
 
 D3D12_VIEWPORT DirectXCommon::viewportSetting(int32_t kClientWidth, int32_t kClientHeight)
@@ -152,7 +153,7 @@ void DirectXCommon::PostDraw()
 	commands.m_pQueue->ExecuteCommandLists(1, commandLists);
 
 	swapChain.m_pSwapChain->Present(1, 0);
-    fenceValue++;
+	fenceValue++;
 	//Event
 	commands.m_pQueue->Signal(m_pFence_.Get(), fenceValue);
 	if (m_pFence_->GetCompletedValue() < fenceValue) {
@@ -179,7 +180,7 @@ ComPtr<ID3D12DescriptorHeap>  DirectXCommon::CreateDescripterHeap(D3D12_DESCRIPT
 	D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc{};
 	descriptorHeapDesc.Type = heapType;
 	descriptorHeapDesc.NumDescriptors = numDescriptors;
-	
+
 	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 
 	m_pDevice_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptHeap));
@@ -263,7 +264,7 @@ void DirectXCommon::CreateFactory()
 
 		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE))
 		{
-		   LogManager::Log(LogManager::ConvertString(std::format(L"Use Adapater:{}\n", adapterDesc.Description)));
+			LogManager::Log(LogManager::ConvertString(std::format(L"Use Adapater:{}\n", adapterDesc.Description)));
 			break;
 		}
 		m_pUseAdapter_ = nullptr;
@@ -296,6 +297,18 @@ void DirectXCommon::CreateDevice()
 	}
 
 	assert(m_pDevice_ != nullptr);
+}
+
+void Engine::Base::DX::DirectXCommon::CheckRaytracingSuppport()
+{
+	D3D12_FEATURE_DATA_D3D12_OPTIONS5 options{};
+	HRESULT hr = this->m_pDevice_->CheckFeatureSupport(
+		D3D12_FEATURE_D3D12_OPTIONS5, &options, sizeof(options));
+
+	if (FAILED(hr) || options.RaytracingTier == D3D12_RAYTRACING_TIER_NOT_SUPPORTED)
+	{
+		throw std::runtime_error("DirectX Raytracing not support");
+	}
 }
 
 void DirectXCommon::CreateCommands()
@@ -331,7 +344,7 @@ void DirectXCommon::CreateSwapChain()
 
 	m_pDxgiFactory_.Get()->
 		CreateSwapChainForHwnd(commands.m_pQueue.Get(), hwnd_, &swapChain.swapChainDesc,
-		nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&swapChain));
+			nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(&swapChain));
 
 }
 
@@ -344,7 +357,7 @@ void DirectXCommon::CreateDescritorHeap()
 	m_pDsvDescripterHeap =
 		CreateDescripterHeap(D3D12_DESCRIPTOR_HEAP_TYPE_DSV, DSV_DESCRIPTOR_MAX, false);
 
-   m_pDepthResource =
+	m_pDepthResource =
 		CreateDepthStencilTextureResource();
 
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
@@ -352,7 +365,7 @@ void DirectXCommon::CreateDescritorHeap()
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 
 	m_pDevice_->CreateDepthStencilView(
-		m_pDepthResource.Get(),&dsvDesc,
+		m_pDepthResource.Get(), &dsvDesc,
 		m_pDsvDescripterHeap->GetCPUDescriptorHandleForHeapStart()
 	);
 
@@ -374,7 +387,7 @@ void DirectXCommon::CreateRTV()
 	rtv.rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 	rtv.rtvStartHandle = rtv.m_pDescritorHeap->GetCPUDescriptorHandleForHeapStart();
 	rtv.rtvHandles[0] = rtv.rtvStartHandle;
-	m_pDevice_->CreateRenderTargetView(swapChain.m_pResource[0].Get(), &rtv.rtvDesc,rtv.rtvHandles[0]);
+	m_pDevice_->CreateRenderTargetView(swapChain.m_pResource[0].Get(), &rtv.rtvDesc, rtv.rtvHandles[0]);
 	rtv.rtvHandles[1].ptr = rtv.rtvHandles[0].ptr + m_pDevice_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	m_pDevice_->CreateRenderTargetView(swapChain.m_pResource[1].Get(), &rtv.rtvDesc, rtv.rtvHandles[1]);
@@ -383,7 +396,7 @@ void DirectXCommon::CreateRTV()
 
 void DirectXCommon::CreateFence()
 {
-    m_pDevice_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_pFence_));
+	m_pDevice_->CreateFence(fenceValue, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_pFence_));
 	fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	assert(fenceEvent != nullptr);
 }

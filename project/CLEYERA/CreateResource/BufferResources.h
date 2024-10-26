@@ -131,7 +131,7 @@ namespace Engine::Buffer
 		}
 
 		//後で下を関数化
-		ComPtr<ID3D12Device>device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
+		ComPtr<ID3D12Device5>device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 		device->CreateCommittedResource(
 			&heapPram,
 			D3D12_HEAP_FLAG_NONE,
@@ -150,7 +150,7 @@ namespace Engine::Buffer
 		D3D12_CLEAR_VALUE color = depthClearValue;
 
 		//後で下を関数化
-		ComPtr<ID3D12Device>device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
+		ComPtr<ID3D12Device5>device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 		device->CreateCommittedResource(
 			&heapPram,
 			D3D12_HEAP_FLAG_NONE,
@@ -341,7 +341,7 @@ namespace Engine::Buffer
 	inline void BufferResource<T>::CreateBufferResource()
 	{
 		size_t sizeInbyte = sizeof(T) * bufferNum_;
-		ComPtr<ID3D12Device> device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
+		ComPtr<ID3D12Device5> device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 		D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 		uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -394,7 +394,7 @@ namespace Engine::Buffer
 			{//buffer作成
 				bufferNum_ = Num;
 				size_t sizeInbyte = sizeof(T) * bufferNum_;
-				ComPtr<ID3D12Device> device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
+				ComPtr<ID3D12Device5> device = Engine::Base::DX::DirectXCommon::GetInstance()->GetDevice();
 				D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 				uploadHeapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
 

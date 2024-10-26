@@ -97,7 +97,7 @@ namespace Engine::Base::DX {
 #pragma region get
 		Commands GetCommands() { return DirectXCommon::GetInstance()->commands; }
 		ID3D12GraphicsCommandList* GetCommandList() { return DirectXCommon::GetInstance()->commands.m_pList.Get(); }
-		ID3D12Device* GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_.Get(); }
+		ID3D12Device5* GetDevice() { return DirectXCommon::GetInstance()->m_pDevice_.Get(); }
 		ID3D12DescriptorHeap* GetSrvHeap() { return DirectXCommon::GetInstance()->m_pSrvDescriptorHeap.Get(); }
 		ID3D12DescriptorHeap* GetDsvHeap() { return DirectXCommon::GetInstance()->m_pDsvDescripterHeap.Get(); }
 		SwapChain GetswapChain() { return DirectXCommon::GetInstance()->swapChain; }
@@ -148,6 +148,11 @@ namespace Engine::Base::DX {
 		void CreateDevice();
 
 		/// <summary>
+		/// レイトレーシングをサポートしているか
+		/// </summary>
+		void CheckRaytracingSuppport();
+
+		/// <summary>
 		/// コマンド作成
 		/// </summary>
 		void CreateCommands();
@@ -189,7 +194,7 @@ namespace Engine::Base::DX {
 
 		ComPtr<IDXGIFactory7> m_pDxgiFactory_ = nullptr;
 		ComPtr<IDXGIAdapter4> m_pUseAdapter_ = nullptr;
-		ComPtr<ID3D12Device>m_pDevice_ = nullptr;
+		ComPtr<ID3D12Device5>m_pDevice_ = nullptr;
 		ComPtr<ID3D12Debug1> m_pDebugController = nullptr;
 		ComPtr<ID3D12InfoQueue> infoQueue = nullptr;
 

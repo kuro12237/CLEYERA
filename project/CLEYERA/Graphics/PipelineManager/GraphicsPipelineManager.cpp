@@ -11,7 +11,7 @@ GraphicsPipelineManager* GraphicsPipelineManager::GetInstance()
 
 void GraphicsPipelineManager::Initialize()
 {
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	ComPtr<ID3D12Device5> device = DirectXCommon::GetInstance()->GetDevice();
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 	SShaders shader = ShaderManager::Getinstance()->GetShader();
 

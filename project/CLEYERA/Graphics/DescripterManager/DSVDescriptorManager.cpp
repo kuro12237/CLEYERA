@@ -12,7 +12,7 @@ DSVDescriptorManager* DSVDescriptorManager::GetInstance()
 
 void DSVDescriptorManager::Initialize()
 {
-    ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
+    ComPtr<ID3D12Device5>device = DirectXCommon::GetInstance()->GetDevice();
     DSVDescriptorManager::GetInstance()->pointerSize_ = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 }
 
@@ -38,7 +38,7 @@ void DSVDescriptorManager::IndexIncrement(const string& name)
 
 void DSVDescriptorManager::AddPointer(ComPtr<ID3D12Resource> resource, D3D12_DEPTH_STENCIL_VIEW_DESC desc)
 {
-    ComPtr<ID3D12Device>device = DirectXCommon::GetInstance()->GetDevice();
+    ComPtr<ID3D12Device5>device = DirectXCommon::GetInstance()->GetDevice();
     DSVDescriptorManager::GetInstance()->pointerSize_ = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
     uint32_t index = DSVDescriptorManager::GetInstance()->index;
 
