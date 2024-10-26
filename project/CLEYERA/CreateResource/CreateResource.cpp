@@ -6,7 +6,7 @@ using namespace Engine::Buffer;
 
 ComPtr<ID3D12Resource> CreateResources::CreateBufferResource(size_t sizeInbyte)
 {
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	ComPtr<ID3D12Device5> device = DirectXCommon::GetInstance()->GetDevice();
     ComPtr<ID3D12Resource> result;
 
 
@@ -33,7 +33,7 @@ ComPtr<ID3D12Resource> CreateResources::CreateBufferResource(size_t sizeInbyte)
 
 void CreateResources::CreateBufferResource(size_t sizeInbyte, ComPtr<ID3D12Resource>& Resource)
 {
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	ComPtr<ID3D12Device5> device = DirectXCommon::GetInstance()->GetDevice();
 
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;

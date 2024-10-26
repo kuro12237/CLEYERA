@@ -12,7 +12,7 @@ DescriptorManager* DescriptorManager::GetInstance()
 
 void DescriptorManager::Initialize()
 {
-	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	ComPtr<ID3D12Device5> device = DirectXCommon::GetInstance()->GetDevice();
 	DescriptorManager::GetInstance()->descripterSize_.SRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	DescriptorManager::GetInstance()->descripterSize_.RTV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	DescriptorManager::GetInstance()->descripterSize_.DSV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
