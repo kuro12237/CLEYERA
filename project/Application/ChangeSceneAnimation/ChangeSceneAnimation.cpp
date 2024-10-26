@@ -15,24 +15,19 @@ void ChangeSceneAnimation::Initialize()
 	initializeLock_ = true;
 
 	///ノイズのテクスチャを読み込む
-	noiseTex_.resize(1);
-	noiseTex_[0] = TextureManager::LoadPngTexture("GameObject/Noise/Noise.png");
-
+	uint32_t noiseTexHandle= TextureManager::LoadPngTexture("GameObject/Noise/Noise.png");
 
 	titleName2d_ = make_unique<TitleName2d>();
-	titleName2d_->Initialize(noiseTex_[0]);
+	titleName2d_->Initialize(noiseTexHandle);
 	titleName2d_->SetP_DissolveMask(dissolveMask_);
 
 	titleBack2d_ = make_unique<TitleBack2d>();
-	titleBack2d_->Initialize(noiseTex_[0]);
+	titleBack2d_->Initialize(noiseTexHandle);
 	titleBack2d_->SetP_DissolveMask(dissolveMask_);
 
 	rodingIcon_ = make_unique<RodingIcon2d>();
-	rodingIcon_->Initialize(noiseTex_[0]);
+	rodingIcon_->Initialize(noiseTexHandle);
 	rodingIcon_->SetP_DissolveMask(dissolveMask_);
-
-
-
 }
 
 void ChangeSceneAnimation::ImGuiUpdate()
@@ -54,6 +49,7 @@ void ChangeSceneAnimation::Update()
 	//前半
 	if (isStartFlag_)
 	{
+		//補間
 		dissolveMask_ = Math::Vector::EaseOutQuad(dissolveMax_, 0.0f, flame_);
 
 		if (dissolveMask_ <= 0.0f)
@@ -91,7 +87,6 @@ void ChangeSceneAnimation::Draw()
 	}
 
 	titleBack2d_->Draw2d();
-	//fireEmberParticle_->Draw();
 	titleName2d_->Draw2d();
 	rodingIcon_->Draw2d();
 }

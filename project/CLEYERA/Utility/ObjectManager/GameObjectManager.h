@@ -27,12 +27,27 @@ public:
 
 #pragma endregion
 
+	/// <summary>
+	/// 表示
+	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// オブジェクトを登録
+	/// </summary>
+	/// <param name="data"></param>
+	/// <param name="name"></param>
 	void PushObj3dData(shared_ptr<Game3dObjectData>& data, string name) { obj3dData_[name] = move(data); };
 
+	/// <summary>
+	/// オブジェクト削除
+	/// </summary>
+	/// <param name="name"></param>
 	void ClearObj3dData(string name) { obj3dData_.erase(name); }
 
+	/// <summary>
+	/// すべてを削除
+	/// </summary>
 	void ClearAllData();
 
 #pragma region Get
