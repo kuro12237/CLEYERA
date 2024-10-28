@@ -714,6 +714,7 @@
     <ClCompile Include="Application\GameObject\GameOverUI\GameOverUIManager.cpp" />
     <ClCompile Include="Application\GameObject\GameOverUI\UI\GameOverUI.cpp" />
     <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1209,6 +1210,7 @@
     <ClInclude Include="Application\GameObject\GameOverUI\GameOverUIManager.h" />
     <ClInclude Include="Application\GameObject\GameOverUI\UI\GameOverUI.h" />
     <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

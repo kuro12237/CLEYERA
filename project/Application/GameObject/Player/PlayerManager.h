@@ -97,6 +97,8 @@ private:
 	bool isHpReductionActive_ = false;
 	int32_t kPlayerHp_ = 1;
 
+	bool* isChangeGameOverAnimation_ = nullptr;
+
 	vector<shared_ptr<PlayerBullet>>bullets_{};
 	queue<uint32_t>deadBulletIndex_;
 

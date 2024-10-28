@@ -17,9 +17,10 @@
 #include"state/PlayerStateRock.h"
 #include"state/PlayerStateGoalAnimation.h"
 #include"state/PlayerStateWarpMove.h"
+#include"state/PlayerStateDeadAnimation.h"
+
 
 #include"Utility/ObjectManager/GameObjectManager.h"
-
 #include"GameObject/Particles/CharacterMoveParticle.h"
 
 /// <summary>
@@ -93,10 +94,12 @@ public:
 	bool& GetIsGameEnd() { return isGameEnd_; }
 	bool GetIsGoal() { return isGoal_; }
 
-	bool& isDamageFlag() { return isDamage_; }
-	bool& isInvincible() { return isInvincible_; }
+	bool& GetIsDamageFlag() { return isDamage_; }
+	bool& GetIsInvincible() { return isInvincible_; }
 	string& GetWarpFilePath() { return warpFilePath_; }
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
+	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
+	bool &GetIsChangeDeadAnimation() { return isChangeDeadAnimation_; }
 #pragma endregion
 
 #pragma region Set
@@ -104,6 +107,9 @@ public:
 	void SetDamageFlag(bool f) { isDamage_ = f; }
 	void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
 	void SetIsGameEnd(bool f) { isGameEnd_ = f; }
+	void SetHp(const uint32_t& hp) { hp_ = &hp; }
+	void SetIsDeadComplite(bool f) { isDeadAnimationComplite_ = f; }
+
 #pragma endregion
 
 private:
@@ -133,6 +139,11 @@ private:
 	bool isGameEnd_ = false;
 	bool isGoal_ = false;
 
+	bool isDeadAnimationComplite_ = false;
+
+	bool isChangeDeadAnimation_ = false;
+
+
 	float damegeFlame_ = 0.0f;
 	uint32_t damegeCoolTimer_ = 0;
 	uint32_t damageCoolTimerMax_ = 2;
@@ -150,4 +161,6 @@ private:
 
 	bool isUseGravityFlag_ = true;
 	string warpFilePath_ = "";
+
+	const uint32_t* hp_ = nullptr;
 };

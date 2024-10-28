@@ -40,9 +40,9 @@ private:
 	bool isControl = false;
 	bool isSelect_ = false;
 
-	uint32_t selectIndex_ = 0;
-	uint32_t selectIndexMin_ = 0;
-	uint32_t selectIndexMax_ = 2;
+	int32_t selectIndex_ = 0;
+	int32_t selectIndexMin_ = 0;
+	int32_t selectIndexMax_ = 2;
 
 	static const int32_t uiMax_ = 3;
 	array<unique_ptr<GameOverUI>, uiMax_>gameOverUIs_;

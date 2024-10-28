@@ -41,9 +41,10 @@ void GameOverScene::Update([[maybe_unused]] GameManager* Scene)
 	changeSceneAnimation_->Update();
 
 
+	gameOverText_->Update();
+
 	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
 	{
-		gameOverText_->Update();
 		gameOverUiManager_->Update();
 	}
 

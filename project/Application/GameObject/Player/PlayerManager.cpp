@@ -27,12 +27,16 @@ void PlayerManager::Initialize()
 	hp_ = make_unique<PlayerHp>();
 	hp_->Initialize(kPlayerHp_);
 
+	playerCore_->SetHp(hp_->GetHp());
+
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CameraReset(camera_->GetName());
 
 	p_ReticleWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(reticle_->GetName())->GetWorldTransform().transform.translate;
-	
+
 	gun_->SetTarget(*p_ReticleWorldPos_);
+
+	isChangeGameOverAnimation_ = &playerCore_->GetIsChangeDeadAnimation();
 
 }
 
@@ -64,7 +68,8 @@ void PlayerManager::Update()
 	}
 
 	//Commands
-	if (gameStartFlag_ && !playerCore_->GetIsGoal())
+
+	if (gameStartFlag_ && !playerCore_->GetIsGoal() && !*isChangeGameOverAnimation_)
 	{
 		//プレイヤーの操作キャラ
 		commandHandler_->Handler();
@@ -86,6 +91,11 @@ void PlayerManager::Update()
 
 	//Main
 	playerCore_->Update();
+
+	if (*isChangeGameOverAnimation_)
+	{
+		gun_->SetIsDraw(false);
+	}
 
 	//Gun
 	gun_->Update();
@@ -198,15 +208,15 @@ void PlayerManager::CheckisDeadBullets()
 void PlayerManager::CheckDamage()
 {
 	//hp
-	if (playerCore_->isDamageFlag())
+	if (playerCore_->GetIsDamageFlag())
 	{
 		hp_->GetHp()--;
 	}
 	auto& transform = gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().transform;
 	if (transform.translate.y <= 0.0f)
 	{
-		playerCore_->isDamageFlag() = true;
-		playerCore_->isInvincible() = true;
+		playerCore_->GetIsDamageFlag() = true;
+		playerCore_->GetIsInvincible() = true;
 		playerCore_->ResetPos();
 
 		hp_->GetHp()--;

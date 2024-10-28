@@ -105,14 +105,19 @@ void Player::Update()
 	Math::Vector::Vector3 particleOffset = { 0.0f, aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,-2.0f };
 	moveEmitParam.translate.y += particleOffset.y;
 	moveEmitParam.translate.z += particleOffset.z;
+
+	if (*hp_ <= 0 && !isChangeDeadAnimation_)
+	{
+		ChangeState(make_unique<PlayerStateDeadAnimation>());
+		isChangeDeadAnimation_ = true;
+		return;
+	}
 }
 
-void Player::HpUpdate()
-{
-}
 
 void Player::OnCollision(ICollider* c)
 {
+
 	if (kOnlyCollideWithBlocksid)
 	{
 		return;
@@ -139,7 +144,6 @@ void Player::OnCollision(ICollider* c)
 	{
 		if (c->GetId() == kEnemyWalkId)
 		{
-			ChangeState(make_unique<PlayerStateRock>());
 			//Input::VibrateController(65000, 65000, 20.0f);
 			isDamage_ = true;
 			isInvincible_ = true;

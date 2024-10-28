@@ -138,7 +138,9 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
             {
                 uint32_t particleIndex = gFreeList[freeListIndex];
                 float32_t3 randomPoint = GenerateRandomPointInOBB(gEmitterSphere[index], generator);
-                gParticle[particleIndex].scale = gEmitterSphere[index].scaleSizeMin;
+                float32_t scale = GenerateRandomVelocity(gEmitterSphere[index].scaleSizeMin, gEmitterSphere[index].scaleSizeMax, generator).x;
+                gParticle[particleIndex].scale = float32_t3(scale, scale, scale);
+                
                 gParticle[particleIndex].rotate = float32_t3(0.0f, 0.0f, 0.0f);
                 gParticle[particleIndex].translate = gEmitterSphere[index].translate + float32_t3(randomPoint);
                 gParticle[particleIndex].color = gEmitterSphere[index].color;

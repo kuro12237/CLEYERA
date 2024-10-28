@@ -123,7 +123,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 
 	///プレイヤーが死んだとき
-	if (player_->GetHp()->GetHp() <= 0)
+	if (player_->GetPlayerCore()->GetIsDeadAnimationComplite())
 	{
 		//シーン切り替え開始
 		ChangeSceneAnimation::GetInstance()->ChangeStart();

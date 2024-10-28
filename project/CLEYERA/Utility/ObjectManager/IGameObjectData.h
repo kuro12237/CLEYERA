@@ -33,6 +33,8 @@ public:
 	void SetObjectType(string type) { ObjectType_ = type; }
 	void SetParent(const Engine::Transform::WorldTransform& wt) { worldTransform_.SetParent(wt); }
 	void SetModelFilePath(string filePath) { modelFilePath_ = filePath; }
+	void SetIsDraw(const bool& f) { isDraw_ = f; }
+
 #pragma endregion
 
 protected:

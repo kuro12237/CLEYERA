@@ -11,7 +11,6 @@ public:
 	GameOverUI() {};
 	~GameOverUI() {};
 
-
 	void Initialize();
 
 	void ImGuiUpdate()override;
@@ -22,6 +21,7 @@ public:
 	void SetSelectIndex(const uint32_t& index) { selectIndex_ = index; }
 	void SetTranslate(const Math::Vector::Vector3& translate) { worldTransform_.transform.translate = translate; }
 	void SetScale(const Math::Vector::Vector3& scale) { worldTransform_.transform.scale = scale; }
+	void SetIsSelect(const bool &flag) { isSelect_ = flag; }
 #pragma endregion
 
 #pragma region Get
@@ -31,8 +31,14 @@ public:
 
 private:
 
+	bool isSelect_ = false;
+
+	float flame_ = 0.0f;
+	float flameMax_ = 1.0f;
+
 	uint32_t selectIndex_ = 0;
 
-	Math::Vector::Vector3 scale_ = { 0.25f,0.25f,0.25f };
+	float scaleMax_ = 0.3f;
+	float scaleMin_ = 0.25f;
 	Math::Vector::Vector2 texSize_ = { 0.0f,0.0f };
 };

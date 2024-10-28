@@ -24,6 +24,7 @@ public:
 
 	void SetTarget(const Math::Vector::Vector3 &t) { targetPos_ = &t; }
 
+	void SetIsDraw(bool flag) { gameObjectManager_->GetObj3dData(name_)->SetIsDraw(flag); }
 #pragma endregion
 
 

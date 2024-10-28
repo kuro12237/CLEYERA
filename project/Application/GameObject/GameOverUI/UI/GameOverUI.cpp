@@ -2,11 +2,11 @@
 
 void GameOverUI::Initialize()
 {
-	fileName_ = "GameOverSelectUI/uiText_0"+to_string(selectIndex_)+".png";
+	fileName_ = "GameOverSelectUI/uiText_0" + to_string(selectIndex_) + ".png";
 	texHandle_ = TextureManager::LoadPngTexture(fileName_);
 
 	this->CreateObject();
-	worldTransform_.transform.scale = scale_;
+	worldTransform_.transform.scale = { scaleMin_,scaleMin_,scaleMin_ };
 	ankerPos_ = { 0.5f,0.5f };
 
 	this->CalcAnkerPos();
@@ -24,5 +24,17 @@ void GameOverUI::ImGuiUpdate()
 
 void GameOverUI::Update()
 {
+	if (!isSelect_)
+	{
+		flame_ = 0.0f;
+	}
+	if (flame_ <= flameMax_ && isSelect_)
+	{
+		flame_ += 1.0f / 10.0f;
+	}
+
+	float scale = Math::Vector::LerpEaseOutSine(scaleMin_, scaleMax_, flame_);
+	worldTransform_.transform.scale = { scale,scale,scale };
+
 	worldTransform_.UpdateMatrix();
 }

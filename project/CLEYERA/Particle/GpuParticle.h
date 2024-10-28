@@ -87,6 +87,8 @@ namespace Particle {
 		void SetDrawMode(DrawMode mode) { drawMode_ = mode; }
 		void Set2dSize(const Math::Vector::Vector2& size) { size_ = size; }
 		void SetNoiseTexHandle(uint32_t handle) { noiseTexHandle_ = handle; }
+		void SetPos(const Math::Vector::Vector2& pos){ pos_ = pos; }
+
 #pragma endregion
 
 #pragma region Get

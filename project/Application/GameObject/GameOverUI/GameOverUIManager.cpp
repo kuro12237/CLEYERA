@@ -38,6 +38,7 @@ void GameOverUIManager::Initialize()
 	gameOverActiveparticle_->Initialize();
 
 
+
 }
 
 void GameOverUIManager::Update()
@@ -62,6 +63,15 @@ void GameOverUIManager::Update()
 		}
 	}
 
+	if (selectIndex_ < selectIndexMin_)
+	{
+		selectIndex_ = selectIndexMax_;
+	}
+	if (selectIndex_ > selectIndexMax_)
+	{
+		selectIndex_ = selectIndexMin_;
+	}
+	
 	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
 	{
 		isSelect_ = true;
@@ -71,12 +81,12 @@ void GameOverUIManager::Update()
 	{
 		if (selectIndex_ == i)
 		{
-			gameOverUIs_[i]->SetScale(selectScale_);
-			//gameOverActiveparticle_->SetEmitParam(gameOverUIs_[i]->GetWorldTransform().transform.translate);
+			gameOverUIs_[i]->SetIsSelect(true);
+			gameOverActiveparticle_->SetEmitParam(gameOverUIs_[i]->GetWorldTransform().transform.translate);
 		}
 		else
 		{
-			gameOverUIs_[i]->SetScale(defaultScale_);
+			gameOverUIs_[i]->SetIsSelect(false);
 		}
 
 		gameOverUIs_[i]->Update();

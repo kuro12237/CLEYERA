@@ -75,7 +75,6 @@ void PlayerHp::Draw2d()
 {
 	for (size_t i = 0; i < hpCount_; i++)
 	{
-		i;
 		sprite_->Draw(wTs_[i]);
 	}
 	flameNameSprite_->Draw(flameNameWorldTransform_);
