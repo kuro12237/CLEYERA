@@ -49,6 +49,13 @@ public:
 	/// </summary>
 	void CalcAnkerPos();
 
+#pragma region Get
+
+	Engine::Transform::WorldTransform& GetWorldTransform() { return worldTransform_; }
+
+#pragma endregion
+
+
 private:
 
 	string prevFileName_ = "";

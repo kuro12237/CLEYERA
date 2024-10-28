@@ -25,7 +25,7 @@ void PlayerManager::Initialize()
 
 	//Hp
 	hp_ = make_unique<PlayerHp>();
-	hp_->Initialize(10);
+	hp_->Initialize(kPlayerHp_);
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CameraReset(camera_->GetName());
@@ -116,7 +116,7 @@ void PlayerManager::Draw2d()
 
 void PlayerManager::DrawHp()
 {
-	//hp_->Draw2d();
+	hp_->Draw2d();
 }
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)

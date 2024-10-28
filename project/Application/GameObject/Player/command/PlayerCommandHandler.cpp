@@ -32,6 +32,7 @@ void PlayerCommandHandler::CommandsExec(Player& player)
 
 bool PlayerCommandHandler::IsLJoystickActive()
 {
+
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
 	if (std::abs(Ljoy.x) > joystickThreshold_ || std::abs(Ljoy.y) > joystickThreshold_) {
 

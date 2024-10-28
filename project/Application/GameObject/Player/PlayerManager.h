@@ -61,7 +61,6 @@ public:
 #pragma region Set
 
 	void SetStartFlag(bool f) { gameStartFlag_ = f; }
-
 #pragma endregion
 
 	/// <summary>
@@ -96,7 +95,7 @@ private:
 	unique_ptr<PlayerHp>hp_ = nullptr;
 
 	bool isHpReductionActive_ = false;
-	int32_t kPlayerHp_ = 10;
+	int32_t kPlayerHp_ = 1;
 
 	vector<shared_ptr<PlayerBullet>>bullets_{};
 	queue<uint32_t>deadBulletIndex_;

@@ -103,6 +103,7 @@ public:
 	void SetRockState(bool f) { isRockState_ = f; }
 	void SetDamageFlag(bool f) { isDamage_ = f; }
 	void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
+	void SetIsGameEnd(bool f) { isGameEnd_ = f; }
 #pragma endregion
 
 private:

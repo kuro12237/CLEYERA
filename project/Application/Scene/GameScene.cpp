@@ -63,11 +63,9 @@ void GameScene::Initialize()
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
 {
-
 #ifdef _USE_IMGUI
 
 	ImGuiUpdate();
-
 	warp_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
@@ -127,13 +125,16 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	///プレイヤーが死んだとき
 	if (player_->GetHp()->GetHp() <= 0)
 	{
+		//シーン切り替え開始
+		ChangeSceneAnimation::GetInstance()->ChangeStart();
 		//ビネットが出ていたら消す
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
 
 		endAnimation_->SetIsCountStart(true);
-
+		//object設定
 		enemyWalkManager_->SetIsStartFlag(false);
 		player_->SetStartFlag(false);
+		player_->GetPlayerCore()->SetIsGameEnd(true);
 	}
 
 	//終わりのアニメーションが終わったら
@@ -142,6 +143,11 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 	}
 
+	if (player_->GetHp()->GetHp() <= 0 && ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
+	{
+		Scene->ChangeScene(make_unique<GameOverScene>());
+		return;
+	}
 	//切替
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{

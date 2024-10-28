@@ -50,6 +50,10 @@
     <ClCompile Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Application\GameObject\GameCollider\BoxCollisionManager.cpp" />
     <ClCompile Include="Application\GameObject\GameCollider\ICollider.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverUI\GameOverUIManager.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverUI\UI\GameOverUI.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Particle\GoalParticle.cpp" />
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
@@ -187,6 +191,10 @@
     <ClInclude Include="Application\GameObject\GameCollider\BoxCollisionManager.h" />
     <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
     <ClInclude Include="Application\GameObject\GameCollider\ICollider.h" />
+    <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h" />
+    <ClInclude Include="Application\GameObject\GameOverUI\GameOverUIManager.h" />
+    <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h" />
+    <ClInclude Include="Application\GameObject\GameOverUI\UI\GameOverUI.h" />
     <ClInclude Include="Application\GameObject\Goal\Goal.h" />
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />

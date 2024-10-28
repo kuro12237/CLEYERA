@@ -710,6 +710,10 @@
     </ClCompile>
     <ClCompile Include="Application\GameObject\EndAnimation\EndAnimation.cpp" />
     <ClCompile Include="Application\Scene\GameOverScene.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverUI\GameOverUIManager.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverUI\UI\GameOverUI.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1201,6 +1205,10 @@
     <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
     <ClInclude Include="Application\GameObject\EndAnimation\EndAnimation.h" />
     <ClInclude Include="Application\Scene\GameOverScene.h" />
+    <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h" />
+    <ClInclude Include="Application\GameObject\GameOverUI\GameOverUIManager.h" />
+    <ClInclude Include="Application\GameObject\GameOverUI\UI\GameOverUI.h" />
+    <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

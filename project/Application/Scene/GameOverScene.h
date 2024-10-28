@@ -42,6 +42,9 @@
 #include"GameScene.h"
 #include"SelectScene.h"
 
+#include"GameObject/GameOverText/GameOverText.h"
+#include"GameObject/GameOverUI/GameOverUIManager.h"
+
 /// <summary>
 /// ゲームオーバー
 /// </summary>
@@ -82,8 +85,6 @@ public:
 	/// </summary>
 	void Flont2dSpriteDraw()override;
 
-private:
-
 
 private:
 
@@ -94,5 +95,7 @@ private:
 
 	PointLight_param light_{};
 
-	
+	unique_ptr<GameOverText>gameOverText_ = nullptr;
+	unique_ptr<GameOverUIManager>gameOverUiManager_ = nullptr;
+	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
 };

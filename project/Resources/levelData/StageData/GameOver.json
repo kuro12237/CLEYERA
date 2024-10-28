@@ -3,15 +3,15 @@
     "objects": [
         {
             "type": "MESH",
-            "name": "Terrain",
-            "file_name": "Terrain",
+            "name": "LavaPlane",
+            "file_name": "LavaPlane",
             "ModelFileType": "obj",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
                     0.0,
                     0.0,
-                    -16.0
+                    -8.0
                 ],
                 "rotate": [
                     0.0,
@@ -19,9 +19,9 @@
                     0.0
                 ],
                 "scale": [
-                    16.0,
-                    16.0,
-                    16.0
+                    128.0,
+                    128.0,
+                    128.0
                 ]
             }
         },
@@ -64,6 +64,144 @@
             }
         },
         {
+            "type": "MESH",
+            "name": "Block.001",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -32.0,
+                    0.0,
+                    16.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    16.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.002",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    32.0,
+                    0.0,
+                    16.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    16.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.003",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    33.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    33.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "GameOverText",
+            "file_name": "GameOverText",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    8.571761131286621
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    4.0,
+                    4.0,
+                    4.0
+                ]
+            }
+        },
+        {
             "type": "CAMERA",
             "name": "Camera",
             "paramFileNames": {
@@ -73,7 +211,7 @@
                 "translate": [
                     0.0,
                     -32.0,
-                    4.0
+                    5.800000190734863
                 ],
                 "rotate": [
                     90.00000762939453,
