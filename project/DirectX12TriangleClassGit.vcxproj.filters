@@ -708,6 +708,8 @@
     <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp">
       <Filter>Project\GameObject\Tower</Filter>
     </ClCompile>
+    <ClCompile Include="Application\GameObject\EndAnimation\EndAnimation.cpp" />
+    <ClCompile Include="Application\Scene\GameOverScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1197,6 +1199,8 @@
       <Filter>Project\GameObject\Tower</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
+    <ClInclude Include="Application\GameObject\EndAnimation\EndAnimation.h" />
+    <ClInclude Include="Application\Scene\GameOverScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

@@ -7,6 +7,7 @@
 #include"GameScene.h"
 #include"TitleScene.h"
 #include"SelectScene.h"
+#include"GameOverScene.h"
 
 /// <summary>
 /// ƒQ[ƒ€ŠÇ—ƒNƒ‰ƒX

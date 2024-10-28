@@ -5,7 +5,6 @@
 #include"Input.h"
 #include"PostEffect/PostEffect.h"
 #include"Game3dObject.h"
-#include"DebugTool/DebugCamera/DebugCamera.h"
 #include"Animation/AnimationManager.h"
 #include"DebugTool/DebugSkeleton/DebugSkeleton.h"
 #include"Model/primitive/LineModel.h"
@@ -37,14 +36,20 @@
 #include"GameObject/Warp/Warp.h"
 #include"GameObject/EndAnimation/EndAnimation.h"
 
+#include"Light/LightingManager.h"
+
+#include"TitleScene.h"
+#include"GameScene.h"
+#include"SelectScene.h"
+
 /// <summary>
-/// ゲームプレイ
+/// ゲームオーバー
 /// </summary>
-class GameScene :public IScene
+class GameOverScene :public IScene
 {
 public:
-	GameScene() {};
-	~GameScene() {};
+	GameOverScene() {};
+	~GameOverScene() {};
 
 	/// <summary>
 	/// 初期化
@@ -79,55 +84,15 @@ public:
 
 private:
 
-	/// <summary>
-	/// Imguiの更新
-	/// </summary>
-	void ImGuiUpdate();
 
-	/// <summary>
-	/// 当たり判定
-	/// </summary>
-	void Collision();
-
-	/// <summary>
-	/// 重力
-	/// </summary>
-	void Gravitys();
-
-#pragma region Particle
-	void ParticlesInitialize();
-	void ParticlesUpdate();
-	void ParticlesDraw();
-	void ParticleImGuiUpdate();
-#pragma endregion
-
+private:
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
-	string inputLevelDataFileName_ = "LevelData_1.json";
+
+	string inputLevelDataFileName_ = "GameOver.json";
 
 	PointLight_param light_{};
 
-	unique_ptr<StartAnimation>startAnimation_ = nullptr;
-
-	unique_ptr<PlayerManager>player_ = nullptr;
-
-	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
-
-	shared_ptr<BlockManager>blockManager_ = nullptr;
-	unique_ptr<GravityManager>gravityManager_ = nullptr;
-	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
-
-	unique_ptr<Goal>goal_ = nullptr;
-
-	CharacterDeadParticle* characterDeadParticle_ = nullptr;
-	CharacterMoveParticle* characterMoveParticle_ = nullptr;
-
-	unique_ptr<GameUI>gameUi_ = nullptr;
-
-	unique_ptr<Warp>warp_{};
-
-	unique_ptr<EndAnimation>endAnimation_ = nullptr;
-
-	bool* isGameEnd_ = nullptr;
+	
 };

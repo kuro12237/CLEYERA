@@ -9,7 +9,7 @@ using namespace Engine::Manager;
 GameManager::GameManager()
 {
 	Cleyera::Initialize();
-	scene_ = make_unique<TitleScene>();
+	scene_ = make_unique<GameOverScene>();
 	scene_->Initialize();
 }
 

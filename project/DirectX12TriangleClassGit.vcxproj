@@ -43,6 +43,7 @@
     <ClCompile Include="Application\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Block\Block.cpp" />
     <ClCompile Include="Application\GameObject\Block\BlockManager.cpp" />
+    <ClCompile Include="Application\GameObject\EndAnimation\EndAnimation.cpp" />
     <ClCompile Include="Application\GameObject\EnemyWalk\EnemyWalk.cpp" />
     <ClCompile Include="Application\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
     <ClCompile Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateDead.cpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp" />
+    <ClCompile Include="Application\Scene\GameOverScene.cpp" />
     <ClCompile Include="Application\Utility\convert\convert.cpp" />
     <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp" />
     <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp" />
@@ -176,6 +178,7 @@
     <ClInclude Include="Application\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Block\Block.h" />
     <ClInclude Include="Application\GameObject\Block\BlockManager.h" />
+    <ClInclude Include="Application\GameObject\EndAnimation\EndAnimation.h" />
     <ClInclude Include="Application\GameObject\EnemyWalk\EnemyWalk.h" />
     <ClInclude Include="Application\GameObject\EnemyWalk\EnemyWalkManager.h" />
     <ClInclude Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateDead.h" />
@@ -194,6 +197,7 @@
     <ClInclude Include="Application\GameObject\Warp\Warp.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
+    <ClInclude Include="Application\Scene\GameOverScene.h" />
     <ClInclude Include="Application\Utility\convert\convert.h" />
     <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h" />
     <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h" />

@@ -45,6 +45,9 @@ void GameScene::Initialize()
 	startAnimation_ = make_unique<StartAnimation>();
 	startAnimation_->Initialize();
 
+	endAnimation_ = make_unique<EndAnimation>();
+	endAnimation_->Initialize();
+
 	warp_ = make_unique<Warp>();
 	warp_->Initlaize();
 
@@ -85,6 +88,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 
 	startAnimation_->Update();
+	endAnimation_->Update();
 
 	//
 	//ゲーム開始後
@@ -111,7 +115,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 
-	//playerのアニメーションが終わったら
+	//ゴールしたときplayerのアニメーションが終わったら
 	if (*isGameEnd_)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
@@ -119,14 +123,26 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		player_->SetStartFlag(false);
 	}
 
+
+	///プレイヤーが死んだとき
 	if (player_->GetHp()->GetHp() <= 0)
 	{
-		ChangeSceneAnimation::GetInstance()->ChangeStart();
+		//ビネットが出ていたら消す
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
+
+		endAnimation_->SetIsCountStart(true);
+
 		enemyWalkManager_->SetIsStartFlag(false);
 		player_->SetStartFlag(false);
 	}
 
+	//終わりのアニメーションが終わったら
+	if (endAnimation_->GetCompleteFlag())
+	{
+		ChangeSceneAnimation::GetInstance()->ChangeStart();
+	}
+
+	//切替
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
 		Scene->ChangeScene(make_unique<TitleScene>());
