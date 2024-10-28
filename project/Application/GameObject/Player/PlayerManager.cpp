@@ -129,6 +129,11 @@ void PlayerManager::DrawHp()
 	hp_->Draw2d();
 }
 
+void PlayerManager::DrawParticle()
+{
+	playerCore_->DrawParticle();
+}
+
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
 

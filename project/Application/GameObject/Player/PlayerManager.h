@@ -48,6 +48,8 @@ public:
 	/// </summary>
 	void DrawHp();
 
+	void DrawParticle();
+
 #pragma region Get
 
 	Player* GetPlayerCore() { return playerCore_.get(); }

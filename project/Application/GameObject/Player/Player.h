@@ -23,6 +23,8 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
 
+#include"Particle/PlayerDeadParticle.h"
+
 /// <summary>
 /// 操作するCoreクラス
 /// </summary>
@@ -47,10 +49,6 @@ public:
 	/// </summary>
 	void Update();
 
-	/// <summary>
-	/// HPの更新
-	/// </summary>
-	void HpUpdate();
 
 	/// <summary>
 	/// 当たった時の処理
@@ -63,6 +61,12 @@ public:
 	/// </summary>
 	/// <param name="newState"></param>
 	void ChangeState(unique_ptr<IPlayerState>newState);
+
+
+	/// <summary>
+	/// パーティクル表示
+	/// </summary>
+	void DrawParticle();
 
 #pragma region Command
 
@@ -100,6 +104,8 @@ public:
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
 	bool &GetIsChangeDeadAnimation() { return isChangeDeadAnimation_; }
+	PlayerDeadParticle* GetDeadParticle() { return deadParticle_.get(); }
+
 #pragma endregion
 
 #pragma region Set
@@ -163,4 +169,7 @@ private:
 	string warpFilePath_ = "";
 
 	const uint32_t* hp_ = nullptr;
+
+
+	unique_ptr<PlayerDeadParticle>deadParticle_ = nullptr;
 };

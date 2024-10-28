@@ -51,6 +51,8 @@ void Player::Initialize()
 		}
 		index++;
 	}
+	deadParticle_ = make_unique<PlayerDeadParticle>();
+	deadParticle_->Initialize();
 }
 
 void Player::ImGuiUpdate()
@@ -71,6 +73,9 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
+
+	deadParticle_->Update();
+
 	isDamage_ = false;
 	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetModelFilePath();
 
@@ -106,8 +111,23 @@ void Player::Update()
 	moveEmitParam.translate.y += particleOffset.y;
 	moveEmitParam.translate.z += particleOffset.z;
 
+
 	if (*hp_ <= 0 && !isChangeDeadAnimation_)
 	{
+		auto& emit = deadParticle_->GetEmitter()->GetEmitParam()[0];
+		auto& control = deadParticle_->GetEmitter()->GetControlParam()[0];
+
+		control.useFlag_ = true;
+		control.frequencyTime = 0.25f;
+		emit.count = 3;
+
+		emit.scaleSizeMin = { -0.05f,-0.05f,-0.05f };
+
+		emit.scaleSizeMax = { 0.05f,0.05f,0.05f };
+		emit.velocityMax = { 0.1f,0.1f,0.1f };
+		emit.velocityMin = { -0.1f,-0.1f,-0.1f };
+		emit.translate = transform.translate;
+
 		ChangeState(make_unique<PlayerStateDeadAnimation>());
 		isChangeDeadAnimation_ = true;
 		return;
@@ -175,6 +195,11 @@ void Player::ChangeState(unique_ptr<IPlayerState> newState)
 	state_.release();
 	state_ = move(newState);
 	state_->Initialize(this);
+}
+
+void Player::DrawParticle()
+{
+	deadParticle_->Draw();
 }
 
 void Player::Jamp()

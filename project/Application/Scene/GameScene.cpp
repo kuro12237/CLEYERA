@@ -298,6 +298,7 @@ void GameScene::ParticlesDraw()
 	GoalParticle::GetInstance()->Draw();
 	characterDeadParticle_->Draw();
 	characterMoveParticle_->Draw();
+	player_->DrawParticle();
 }
 
 void GameScene::ParticleImGuiUpdate()

@@ -4,14 +4,14 @@
 #include"Graphics/TextureManager/TextureManager.h"
 
 /// <summary>
-/// キャラクターが死んだときのパーティクル
+/// プレイヤーが死んだときのパーティクル
 /// </summary>
-class CharacterDeadParticle
+class PlayerDeadParticle
 {
 public:
 
-	static CharacterDeadParticle * GetInstance();
-
+	PlayerDeadParticle() {};
+	~PlayerDeadParticle() {  };
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -38,23 +38,17 @@ public:
 	/// <param name="index"></param>
 	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
 
-	void Emit(){emitter_->Emit(particle_);}
-
 #pragma region Get
-	Particle::ParticleEmitter<Particle::EmitType::BoxParam>*GetEmitter() { return emitter_.get(); };
+	Particle::ParticleEmitter<Particle::EmitType::BoxParam>* GetEmitter() { return emitter_.get(); };
 #pragma endregion
 
 private:
-	bool initializeLock_ = false;
-	string name_ = "CharacterDeadParticle";
+
+	string name_ = "PlayerDeadParticle";
 	uint32_t texHandle_ = 0;
 
 	unique_ptr<Particle::GpuParticle>particle_ = nullptr;
 	unique_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>emitter_ = nullptr;
 
-	CharacterDeadParticle() = default;
-	~CharacterDeadParticle() = default;
-	CharacterDeadParticle(const CharacterDeadParticle&) = delete;
-	const CharacterDeadParticle& operator=(const CharacterDeadParticle&) = delete;
 };
 
