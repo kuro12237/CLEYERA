@@ -35,8 +35,7 @@ void GameOverActiveUIParticle::Initialize()
 
 void GameOverActiveUIParticle::Update()
 {
-	emitter_->ImGuiUpdate();
-
+	
 	emitter_->Emit(particle_);
 	emitter_->Update();
 

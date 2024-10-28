@@ -118,12 +118,9 @@ void Player::Update()
 		auto& control = deadParticle_->GetEmitter()->GetControlParam()[0];
 
 		control.useFlag_ = true;
-		control.frequencyTime = 0.25f;
+		control.frequencyTime = 0.5f;
 		emit.count = 3;
 
-		emit.scaleSizeMin = { -0.05f,-0.05f,-0.05f };
-
-		emit.scaleSizeMax = { 0.05f,0.05f,0.05f };
 		emit.velocityMax = { 0.1f,0.1f,0.1f };
 		emit.velocityMin = { -0.1f,-0.1f,-0.1f };
 		emit.translate = transform.translate;

@@ -2,7 +2,7 @@
 
 void PlayerDeadParticle::Initialize()
 {
-    texHandle_ = TextureManager::LoadPngTexture("circle.png");
+    texHandle_ = TextureManager::LoadPngTexture("deadEffect.png");
 
     particle_ = make_unique<Particle::GpuParticle>();
     particle_->Create(1, name_);

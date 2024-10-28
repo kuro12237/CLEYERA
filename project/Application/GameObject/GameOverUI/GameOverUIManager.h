@@ -40,7 +40,7 @@ private:
 	bool isControl = false;
 	bool isSelect_ = false;
 
-	int32_t selectIndex_ = 0;
+	int32_t selectIndex_ = 1;
 	int32_t selectIndexMin_ = 0;
 	int32_t selectIndexMax_ = 2;
 

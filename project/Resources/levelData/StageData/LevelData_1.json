@@ -1406,43 +1406,6 @@
         },
         {
             "type": "MESH",
-            "name": "EnemyWalk",
-            "file_name": "EnemyWalk",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    26.416460037231445
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
             "name": "EnemyWalk.001",
             "file_name": "EnemyWalk",
             "ModelFileType": "obj",
@@ -1480,44 +1443,7 @@
         },
         {
             "type": "MESH",
-            "name": "EnemyWalk.002",
-            "file_name": "EnemyWalk",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    63.594078063964844
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    3.0,
-                    3.0,
-                    3.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "EnemyWalk.003",
+            "name": "EnemyWalk",
             "file_name": "EnemyWalk",
             "ModelFileType": "obj",
             "DrawType": "Normal",
