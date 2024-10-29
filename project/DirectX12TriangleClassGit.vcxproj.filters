@@ -630,7 +630,7 @@
     <ClCompile Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\StartAnimation\StartCount\StartCount.cpp">
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCount\StartCount.cpp">
       <Filter>Project\GameObject\StartCount</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp">
@@ -678,10 +678,10 @@
     <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp">
       <Filter>Project\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\StartAnimation\StartAnimation.cpp">
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp">
       <Filter>Project\GameObject\StartAnimation</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.cpp">
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp">
       <Filter>Project\GameObject\StartAnimation</Filter>
     </ClCompile>
     <ClCompile Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.cpp">
@@ -708,7 +708,7 @@
     <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp">
       <Filter>Project\GameObject\Tower</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\EndAnimation\EndAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.cpp" />
     <ClCompile Include="Application\Scene\GameOverScene.cpp" />
     <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp" />
     <ClCompile Include="Application\GameObject\GameOverUI\GameOverUIManager.cpp" />
@@ -716,6 +716,8 @@
     <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp" />
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1117,7 +1119,7 @@
     <ClInclude Include="CLEYERA\Graphics\PipelineManager\Sprite_2dPipline\Sprite_2d_CreatePipline.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\StartAnimation\StartCount\StartCount.h">
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCount\StartCount.h">
       <Filter>Project\GameObject\StartCount</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h">
@@ -1147,7 +1149,7 @@
     <ClInclude Include="Application\GameObject\Lava\Lava.h">
       <Filter>Project\GameObject\Lava</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\StartAnimation\state\IStartAnimationState.h">
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h">
       <Filter>Project\GameObject\StartAnimation</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Warp\Warp.h">
@@ -1174,10 +1176,10 @@
     <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h">
       <Filter>Project\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\StartAnimation\StartAnimation.h">
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h">
       <Filter>Project\GameObject\StartAnimation</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\StartAnimation\StartCameraMotion\StartCameraMotion.h">
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h">
       <Filter>Project\GameObject\StartAnimation</Filter>
     </ClInclude>
     <ClInclude Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.h">
@@ -1205,7 +1207,7 @@
       <Filter>Project\GameObject\Tower</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
-    <ClInclude Include="Application\GameObject\EndAnimation\EndAnimation.h" />
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.h" />
     <ClInclude Include="Application\Scene\GameOverScene.h" />
     <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h" />
     <ClInclude Include="Application\GameObject\GameOverUI\GameOverUIManager.h" />
@@ -1213,6 +1215,8 @@
     <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.h" />
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

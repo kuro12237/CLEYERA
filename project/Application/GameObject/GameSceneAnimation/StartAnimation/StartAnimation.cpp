@@ -13,15 +13,16 @@ void StartAnimation::Initialize()
 	railData_.resize(splineMotionsMax_);
 	splineMotions_.resize(splineMotionsMax_);
 
-	for (uint32_t i = 0; i < splineMotionsMax_; i++)
-	{
-		string paramFile = gameObjectManager_->GetCameraData(selectCameraName_ + FormatNumberWithDots(int(i)))->GetParamFilePaths()[0];
-		railData_[i] = RailLoader::LoadRail(paramFile);
+	this->cameraName_ = "StartCamera";
+	this->splineMotionsMax_ = 1;
+	splineSelectIndex_ = 0;
 
-		splineMotions_[i] = make_unique<SplineMotion>();
-		splineMotions_[i]->SetP_RailData(railData_[i]);
-	}
-	gameObjectManager_->CameraReset(selectCameraName_);
+	this->LoadRailData();
+	this->SettingSplineMotionData();
+
+
+
+	gameObjectManager_->CameraReset(cameraName_);
 	splineMotions_[0]->SetIsStartFlag(true);
 	isCountStart_ = true;
 
@@ -29,6 +30,10 @@ void StartAnimation::Initialize()
 	postEffect_->SetVignetteScale(10.0f);
 	postEffect_->SetSelectPostEffect(VIGNETTE, true);
 	postEffect_->SetVignetteColor({ 0.0f,0.0f,0.0f });
+
+	state_ = make_unique<StartAnimationStateCamera>();
+	state_->Initialize();
+
 }
 
 void StartAnimation::Update()
@@ -38,7 +43,12 @@ void StartAnimation::Update()
 		return;
 	}
 
-	auto& camera = gameObjectManager_->GetCameraData(selectCameraName_)->GetWorldTransform();
+	if (state_)
+	{
+		state_->Update(*this);
+	}
+
+	auto& camera = gameObjectManager_->GetCameraData(cameraName_)->GetWorldTransform();
 
 	for (size_t i = 0; i < size_t(splineMotionsMax_); i++)
 	{
@@ -49,6 +59,7 @@ void StartAnimation::Update()
 
 		if (splineMotions_[i]->GetIsComplete())
 		{
+			splineSelectIndex_++;
 			splineMotions_[i].release();
 
 			if (i == splineMotionsMax_ - 1)
@@ -59,30 +70,20 @@ void StartAnimation::Update()
 			}
 			else
 			{
-				selectCameraName_ = selectCameraName_ + FormatNumberWithDots(int(i + 1));
+				cameraName_ = cameraName_ + FormatNumberWithDots(int(i + 1));
 				splineMotions_[i + 1]->SetIsStartFlag(true);
-				gameObjectManager_->CameraReset(selectCameraName_);
+				gameObjectManager_->CameraReset(cameraName_);
 			}
+
 			continue;
 		}
 
 		if (splineMotions_[i]->GetIsStartFlag())
 		{
-			splineMotions_[i]->UpdateParamerter(180.0f);
-			camera.transform.translate = splineMotions_[i]->CatmullRomInterpolation();
-
-			//終わり
-			if (splineMotions_[i]->GetTargetIndex() == railData_[i].size - 2)
-			{
-				postEffect_->SetSelectPostEffect(VIGNETTE, true);
-				isFlameCount_ = true;
-				vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 10.0f, splineMotions_[i]->GetFlame());
-
-				if (vinatteFlame_ >=10.0f)
-				{
-					isFlameCount_ = false;
-				}
-			}
+			//レールを計算
+			camera.transform.translate = CalcRailData(i, 180.0f);
+			//ビネットの呼び出し
+			EndUpdate([this]() {EndVinatteAnimation(); });
 		}
 	}
 	postEffect_->SetVignetteFactor(vinatteFlame_);
@@ -136,5 +137,21 @@ void StartAnimation::FlameUpdate()
 	if ( isFlameCount_)
 	{
 		flameCount_ += 1.0f / 120.0f;
+	}
+}
+
+void StartAnimation::EndVinatteAnimation()
+{
+	//終わり
+	if (splineMotions_[splineSelectIndex_]->GetTargetIndex() == railData_[splineSelectIndex_].size - 2)
+	{
+		postEffect_->SetSelectPostEffect(VIGNETTE, true);
+		isFlameCount_ = true;
+		vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 10.0f, splineMotions_[splineSelectIndex_]->GetFlame());
+
+		if (vinatteFlame_ >= 10.0f)
+		{
+			isFlameCount_ = false;
+		}
 	}
 }

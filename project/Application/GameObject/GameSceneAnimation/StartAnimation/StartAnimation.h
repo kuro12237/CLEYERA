@@ -4,11 +4,15 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"StartCount/StartCount.h"
 #include"Utility/convert/convert.h"
+#include"../IGameSceneAnimation.h"
+
+#include"state/IStartAnimationState.h"
+#include"state/StartAnimationStateCamera.h"
 
 /// <summary>
 /// スタート演出のモーション
 /// </summary>
-class StartAnimation
+class StartAnimation:public IGameSceneAnimation
 {
 public:
 	StartAnimation() {};
@@ -50,13 +54,8 @@ private:
 	/// </summary>
 	void FlameUpdate();
 
+	void EndVinatteAnimation();
 
-	GameObjectManager* gameObjectManager_ = nullptr;
-	PostEffect* postEffect_ = nullptr;
-
-	vector<unique_ptr<SplineMotion>>splineMotions_;
-	uint32_t splineMotionsMax_ = 1;
-	vector<RailData>railData_;
 
 	bool isGameStart_ = false;
 	bool isCountStart_ = false;
@@ -64,8 +63,6 @@ private:
 	bool isCameraMotion_ = false;
 
 	unique_ptr<StartCount>startCount_ = nullptr;
-
-	string selectCameraName_ = "StartCamera";
 
 	float vinatteFlame_ = 0.0f;
 	float flameCount_ = 0.0f;
@@ -75,4 +72,8 @@ private:
 
 
 	float vinatteScaleMax_ = 1.0f;
+
+	unique_ptr<IStartAnimation>state_ = nullptr;
+
+	friend class StartAnimationStateCamera;
 };

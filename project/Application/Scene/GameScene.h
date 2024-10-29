@@ -33,9 +33,9 @@
 #include"Scene/TitleScene.h"
 #include"GameFileLoader/RailLoader/RailLoader.h"
 
-#include"GameObject/StartAnimation/StartAnimation.h"
+#include"GameObject/GameSceneAnimation/StartAnimation/StartAnimation.h"
 #include"GameObject/Warp/Warp.h"
-#include"GameObject/EndAnimation/EndAnimation.h"
+#include"GameObject/GameSceneAnimation/GameOverAnimation/EndAnimation.h"
 
 /// <summary>
 /// ÉQÅ[ÉÄÉvÉåÉC

@@ -6,6 +6,8 @@
 #include"Utility/convert/convert.h"
 #include"PostEffect/PostEffect.h"
 
+#include"../IGameSceneAnimation.h"
+
 /// <summary>
 /// ゲーム終了時のアニメーション
 /// </summary>
