@@ -3,7 +3,6 @@
 IObjectData::IObjectData()
 {
 	gameObjectManager_ = GameObjectManager::GetInstance();
-	globalVariables_ = GlobalVariables::GetInstance();
 }
 
 void IObjectData::CalcGravity(float g)
@@ -13,10 +12,6 @@ void IObjectData::CalcGravity(float g)
 	transform.translate.y += velocity_.y;
 }
 
-void IObjectData::CreateJsonData()
-{
-	globalVariables_->CreateGroup(name_);
-}
 
 
 

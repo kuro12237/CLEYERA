@@ -296,6 +296,9 @@ void GameScene::ParticlesUpdate()
 
 void GameScene::ParticlesDraw()
 {
+	warpManager_->DebugDraw();
+
+
 	GoalParticle::GetInstance()->Draw();
 	characterDeadParticle_->Draw();
 	characterMoveParticle_->Draw();

@@ -1,10 +1,10 @@
 #include "Warp.h"
 
-void Warp::Initlaize()
+void Warp::Initlaize(uint32_t index)
 {
 	///ƒQ[ƒg‚Ì‰Šú‰»///”Ô†‚ğ“ü‚ê‚é
 	warpGate_ = make_shared<WarpGate>();
-	warpGate_->Initialize(0);
+	warpGate_->Initialize(index);
 
 	string railFileName = warpGate_->GetRailDataFilePath();
 

@@ -15,8 +15,8 @@ void Goal::Initialize(uint32_t id, uint32_t index)
 		GoalCountName = "." + string(3 - to_string(index).length(), '0') + to_string(index);
 	}
 
-	name_ = "Goal" + GoalCountName;
-	auto& transform = gameObjIncetance_->GetObj3dData(name_)->GetWorldTransform().transform;
+	INameable::name_ = "Goal" + GoalCountName;
+	auto& transform = gameObjIncetance_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	SetObjectData(transform);
 	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
 	id_ = id;
@@ -58,7 +58,7 @@ void Goal::Initialize(uint32_t id, uint32_t index)
 
 void Goal::Update()
 {
-	auto& transform = gameObjIncetance_->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = gameObjIncetance_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	transform.rotate.z += float(numbers::pi * 0.01f);
 
 	//particle

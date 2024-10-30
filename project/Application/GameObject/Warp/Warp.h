@@ -13,7 +13,7 @@ public:
 	Warp() {};
 	~Warp() {};
 
-	void Initlaize();
+	void Initlaize(uint32_t index);
 
 	void ImGuiUpdate();
 

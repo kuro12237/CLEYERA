@@ -2,7 +2,7 @@
 
 void Player::Initialize()
 {
-	name_ = "Player";
+	INameable::name_ = "Player";
 
 	//状態異常のステート
 	state_ = make_unique<PlayerStateNone>();
@@ -12,19 +12,19 @@ void Player::Initialize()
 	//当たり判定
 	//押し出し
 	this->isExtrusion_ = true;
-	SetObjectData(gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform);
-	aabb_ = gameObjectManager_->GetObj3dData(name_)->GetAABB();
+	SetObjectData(gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform);
+	aabb_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB();
 	attribute_ = CollisionMask::kPlayerAttribute;
 	mask_ = CollisionMask::kPlayerMask;
 
 	//スケール値セット
-	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	const float kScale = 0.4f;
 	transform.scale = { kScale,kScale,kScale };
 	//スタート入りの記録
 	resetPos_ = transform.translate;
 
-	string filePath = gameObjectManager_->GetObj3dData(name_)->GetModelFilePath();
+	string filePath = gameObjectManager_->GetObj3dData(INameable::name_)->GetModelFilePath();
 	AnimationManager::GetInstance()->LoadAnimation(filePath);
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
@@ -56,7 +56,7 @@ void Player::Initialize()
 
 void Player::ImGuiUpdate()
 {
-	string imguiTreeName = name_ + "core";
+	string imguiTreeName = INameable::name_ + "core";
 	if (ImGui::TreeNode(imguiTreeName.c_str()))
 	{
 		if (ImGui::Button("Reset"))
@@ -76,10 +76,10 @@ void Player::Update()
 	deadParticle_->Update();
 
 	isDamage_ = false;
-	string filePath = gameObjectManager_->GetObj3dData(name_)->GetModelFilePath();
+	string filePath = gameObjectManager_->GetObj3dData(INameable::name_)->GetModelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
-	gameObjectManager_->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
 
 	shootTimerFlame_++;
 
@@ -100,7 +100,7 @@ void Player::Update()
 
 	isShoot_ = false;
 
-	TransformEular& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
+	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 
 
@@ -154,7 +154,7 @@ void Player::OnCollision(ICollider* c)
 	{
 		if (dynamic_cast<PlayerStateNone*>(state_.get()))
 		{
-			warpFilePath_ = gameObjectManager_->GetObj3dData("WarpGate")->GetParamFilePaths()[0];
+			//warpFilePath_ = gameObjectManager_->GetObj3dData(c->GetObjectName())->GetParamFilePaths()[0];
 			ChangeState(make_unique<PlayerStateWarpMove>());
 		}
 	}
@@ -182,7 +182,7 @@ void Player::OnCollision(ICollider* c)
 				velocity_ = {};
 			}
 		}
-		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.translate;
+		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform.translate;
 		transform.x += extrusion_.x;
 		transform.y += extrusion_.y;
 	}
@@ -223,7 +223,7 @@ void Player::Move(float speed)
 	}
 
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
-	auto& rotate = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.rotate;
+	auto& rotate = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform.rotate;
 
 	{//移動処理
 		ControlDeadZone(Ljoy);

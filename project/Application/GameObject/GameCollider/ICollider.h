@@ -3,6 +3,7 @@
 #include"Utility/CollisionMask/CollisionMask.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"ColliderData.h"
+#include"GameObject/ObjectInterface/INameable.h"
 
 /// <summary>
 /// 方向
@@ -18,7 +19,7 @@ enum HItDirection {
 /// <summary>
 /// コライダーインターフェース
 /// </summary>
-class ICollider
+class ICollider :public INameable
 {
 public:
 	ICollider() {};
@@ -33,7 +34,7 @@ public:
 	/// <summary>
 	/// めり込み数値0に
 	/// </summary>
-	void ClearExtrusion() { extrusion_={}; }
+	void ClearExtrusion() { extrusion_ = {}; }
 
 	/// <summary>
 	/// 当たった方向のqueueをクリア
@@ -50,7 +51,7 @@ public:
 	/// </summary>
 	/// <param name="h"></param>
 	void PushBackHitDirection(HItDirection h) { hitDirection_.push_back(h); }
-    
+
 #pragma region  Get
 	vector<HItDirection>GetHItDirection() { return hitDirection_; }
 	TransformEular GetpTransform() { return *pTransform_; }
@@ -60,10 +61,11 @@ public:
 	uint32_t GetCollosionAttribute() { return attribute_; }
 	uint32_t GetCollisionMask() { return mask_; }
 	queue<uint32_t> GetAllHitIds() { return allHitIds; }
+
 #pragma endregion
 
 #pragma region Set
-	void SetObjectData(const TransformEular &t) { pTransform_ = &t; }
+	void SetObjectData(const TransformEular& t) { pTransform_ = &t; }
 	void SetId(uint32_t id) { id_ = id; };
 	void SetAABB(AABB aabb) { aabb_ = aabb; }
 	void SetExtrusion(Math::Vector::Vector2 v) {

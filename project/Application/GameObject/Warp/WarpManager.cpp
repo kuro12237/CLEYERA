@@ -23,15 +23,16 @@ void WarpManager::Initialize()
 		if (gameObjectManager_->GetObj3dDatas().find(warpName) != gameObjectManager_->GetObj3dDatas().end())
 		{
 			//ãÙêîÇÃéûÇ…çÏê¨
-			if (index %= 2)
+			if (warpCount_ % 2 == 1)
 			{
+
+				warpCount_++;
 				continue;
 			}
 			auto obj = gameObjectManager_->GetObj3dData(warpName);
 			//çÏê¨
 			shared_ptr<Warp>warp = make_shared<Warp>();
-			warp->Initlaize();
-			warp->GetWarpGate()->SetWarpObjectIndex(index);
+			warp->Initlaize(warpCount_);
 			warps_.push_back(move(warp));
 
 			warpCount_++;
@@ -54,4 +55,8 @@ void WarpManager::Update()
 
 void WarpManager::DebugDraw()
 {
+	for (shared_ptr<Warp>& warp : warps_)
+	{
+		warp->DebugDrawLine();
+	}
 }

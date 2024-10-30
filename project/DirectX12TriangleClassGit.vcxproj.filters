@@ -1221,6 +1221,9 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.h" />
     <ClInclude Include="Application\Utility\LerpMotion\LerpMotion.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpManager.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\IJsonHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

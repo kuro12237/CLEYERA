@@ -33,8 +33,8 @@ void EnemyWalkStateDead::Update([[maybe_unused]] EnemyWalk* e)
 {
 	auto* emitters = CharacterDeadParticle::GetInstance()->GetEmitter();
 	auto& emitterParam = emitters->GetEmitParam()[particleIndex_];
-	auto& objData = gameObjIncetance_->GetObj3dDatas()[e->GetName()];
-	auto& desc = gameObjIncetance_->GetObjectDesc(e->GetName());
+	auto& objData = gameObjIncetance_->GetObj3dDatas()[e->INameable::GetName()];
+	auto& desc = gameObjIncetance_->GetObjectDesc(e->INameable::GetName());
 
 	//edgeİ’è
 	desc.edgeDesc.minmax = { -0.1f,0.2f };

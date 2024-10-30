@@ -836,6 +836,46 @@
         },
         {
             "type": "MESH",
+            "name": "WarpGate.002",
+            "file_name": "WarpGate",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "paramFileNames": {
+                "File 0": "stage_1/WarpGate_2"
+            },
+            "transform": {
+                "translate": [
+                    45.0,
+                    0.0,
+                    32.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
             "name": "Block",
             "file_name": "Block",
             "ModelFileType": "obj",

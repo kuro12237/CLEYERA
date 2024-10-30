@@ -27,6 +27,6 @@ void PlayerStateDeadAnimation::Update([[maybe_unused]]Player* p)
 		p->SetIsDeadComplite(true);
 	}
 
-	gameObjectInstance_->GetObj3dData(p->GetName())->GetGameObject()->SkeletonUpdate(filePath_, walkAnimationFlame_);
+	gameObjectInstance_->GetObj3dData(p->INameable::GetName())->GetGameObject()->SkeletonUpdate(filePath_, walkAnimationFlame_);
 
 }

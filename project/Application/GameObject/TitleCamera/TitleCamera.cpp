@@ -8,18 +8,17 @@ void TitleCamera::Initialize()
 
 	///カメラのセット
 	gameObjectManager_->CameraReset(name_);
-
-
-	globalVariables_->AddItem(name_, "speed", speed_);
-	speed_ = globalVariables_->GetValue<float>(name_, "speed");
-	globalVariables_->AddItem(name_, "archOffsetAdd", archOffsetAdd_);
-	archOffsetAdd_ = globalVariables_->GetValue<float>(name_, "archOffsetAdd");
+	this->jsonGropName_ = name_;
+	this->AddJsonItem("speed", speed_);
+	speed_ = this->GetJsonItem<float>("speed");
+	this->AddJsonItem("archOffsetAdd", archOffsetAdd_);
+	archOffsetAdd_ = this->GetJsonItem<float>("archOffsetAdd");
 }
 
 void TitleCamera::Update()
 {
-	speed_ = globalVariables_->GetValue<float>(name_, "speed");
-	archOffsetAdd_ = globalVariables_->GetValue<float>(name_, "archOffsetAdd");
+	archOffsetAdd_ = this->GetJsonItem<float>("archOffsetAdd");
+	speed_ = this->GetJsonItem<float>("speed");
 
 	if (isBridgeAnimationStart_)
 	{

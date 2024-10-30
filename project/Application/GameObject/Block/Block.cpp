@@ -2,7 +2,7 @@
 
 void Block::Initialize(string name, uint32_t index)
 {
-	name_ = name + to_string(index);
+	INameable::name_ = name + to_string(index);
 	auto& transforms = gameObjectManager_->GetObjInstancingData(name)->GetTransforms()[index];
 	SetObjectData(transforms->GetTransform());
 	SetAABB(transforms->GetAABB());

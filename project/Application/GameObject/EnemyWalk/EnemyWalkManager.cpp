@@ -24,7 +24,7 @@ void EnemyWalkManager::Initialize()
 
 			shared_ptr<EnemyWalk>enemyWalk = nullptr;
 			enemyWalk = make_shared<EnemyWalk>();
-			enemyWalk->SetName(enemyName);
+			enemyWalk->INameable::SetName(enemyName);
 			enemyWalk->Initialize();
 
 			enemys_.resize(enemyCount_ + 1);
@@ -53,7 +53,7 @@ void EnemyWalkManager::Update()
 			//Ž€‚ñ‚¾‚çÁ‚·
 			if (enemy->GetIsEnd())
 			{
-				GameObjectManager::GetInstance()->ClearObj3dData(enemy->GetName());
+				GameObjectManager::GetInstance()->ClearObj3dData(enemy->INameable::GetName());
 				enemy.reset();
 			}
 		}

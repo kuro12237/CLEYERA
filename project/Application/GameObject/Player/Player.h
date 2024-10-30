@@ -90,7 +90,7 @@ public:
 	/// <summary>
 	/// ˆÊ’u‚ğ‰Šú‰»
 	/// </summary>
-	void ResetPos() { gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform.translate = resetPos_; }
+	void ResetPos() { gameObjectManager_->GetObj3dData(this->INameable::name_)->GetWorldTransform().transform.translate = resetPos_; }
 #pragma endregion
 
 #pragma region Get

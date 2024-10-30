@@ -20,7 +20,7 @@ void PlayerManager::Initialize()
 
 	//Camera
 	camera_ = make_unique<PlayerCamera>();
-	camera_->SetTargetName(playerCore_->GetName());
+	camera_->SetTargetName(playerCore_->INameable::GetName());
 	camera_->Initialize();
 
 	//Hp
@@ -42,7 +42,7 @@ void PlayerManager::Initialize()
 
 void PlayerManager::ImGuiUpdate()
 {
-	if (ImGui::TreeNode(playerCore_->GetName().c_str()))
+	if (ImGui::TreeNode(playerCore_->INameable::GetName().c_str()))
 	{
 		playerCore_->ImGuiUpdate();
 		reticle_->ImGuiUpdate();
@@ -51,7 +51,7 @@ void PlayerManager::ImGuiUpdate()
 		ImGui::Text("PlayerBulletSize::%d", bullets_.size());
 		if (ImGui::Button("bulleSpown"))
 		{
-			PushBullet(gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition());
+			PushBullet(gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().GetWorldPosition());
 		}
 		ImGui::TreePop();
 	}
@@ -59,7 +59,7 @@ void PlayerManager::ImGuiUpdate()
 
 void PlayerManager::Update()
 {
-	playerWorldPos = gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().GetWorldPosition();
+	playerWorldPos = gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().GetWorldPosition();
 
 	//ƒQ[ƒ€‚ªI‚í‚é’Ê’m
 	if (playerCore_->GetIsGameEnd())
@@ -203,9 +203,9 @@ void PlayerManager::CheckisDeadBullets()
 		}
 		if (bullets_[index]->GetIsDeadFlag())
 		{
-			bullets_[index]->GetName();
+			bullets_[index]->INameable::GetName();
 			deadBulletIndex_.push(uint32_t(index));
-			GameObjectManager::GetInstance()->ClearObj3dData(bullets_[index]->GetName());
+			GameObjectManager::GetInstance()->ClearObj3dData(bullets_[index]->INameable::GetName());
 			bullets_[index].reset();
 		}
 	}
@@ -218,7 +218,7 @@ void PlayerManager::CheckDamage()
 	{
 		hp_->GetHp()--;
 	}
-	auto& transform = gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().transform;
+	auto& transform = gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().transform;
 	if (transform.translate.y <= -5.0f)
 	{
 		playerCore_->GetIsDamageFlag() = true;

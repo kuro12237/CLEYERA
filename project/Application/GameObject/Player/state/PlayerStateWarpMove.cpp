@@ -14,7 +14,7 @@ void PlayerStateWarpMove::Initialize(Player* p)
 
 void PlayerStateWarpMove::Update(Player* p)
 {
-	auto& wt = GameObjectManager::GetInstance()->GetObj3dData(p->GetName())->GetWorldTransform();
+	auto& wt = GameObjectManager::GetInstance()->GetObj3dData(p->INameable::GetName())->GetWorldTransform();
 
 	lerpMotion_->UpdateParamerter(kFlame_);
 	wt.transform.translate = lerpMotion_->LinearInterpolation();

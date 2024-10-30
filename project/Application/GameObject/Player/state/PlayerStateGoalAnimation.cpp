@@ -3,7 +3,7 @@
 void PlayerStateGoalAnimation::Initialize(Player* p)
 {
 	auto& goalTransform = GameObjectManager::GetInstance()->GetObj3dData(GoalName_)->GetWorldTransform();
-	auto& playerTransform = GameObjectManager::GetInstance()->GetObj3dData(p->GetName())->GetWorldTransform();
+	auto& playerTransform = GameObjectManager::GetInstance()->GetObj3dData(p->INameable::GetName())->GetWorldTransform();
 
 	endPos_ = goalTransform.GetWorldPosition();
 	startPos_ = playerTransform.GetWorldPosition();
@@ -11,7 +11,7 @@ void PlayerStateGoalAnimation::Initialize(Player* p)
 
 void PlayerStateGoalAnimation::Update(Player* p)
 {
-	auto& playerTransform = GameObjectManager::GetInstance()->GetObj3dData(p->GetName())->GetWorldTransform();
+	auto& playerTransform = GameObjectManager::GetInstance()->GetObj3dData(p->INameable::GetName())->GetWorldTransform();
 	auto& playerGunTransform = GameObjectManager::GetInstance()->GetObj3dData(PlayerGunName_)->GetWorldTransform();
 
 	if (playerTransform.transform.scale.x <= 0.0f)

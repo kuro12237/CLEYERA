@@ -5,8 +5,8 @@ void PlayerBullet::Initialize(string number)
 	state_ = make_unique<PlayerBulletStateNone>();
 	state_->Initialize(this);
 
-	name_ = number;
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	INameable::name_ = number;
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = spownPos_;
 	SetObjectData(transform);
@@ -35,7 +35,7 @@ void PlayerBullet::Update()
 		isDead_ = true;
 	}
 
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 
 }
