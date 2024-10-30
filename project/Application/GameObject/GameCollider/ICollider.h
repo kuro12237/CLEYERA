@@ -29,7 +29,7 @@ public:
 	/// “–‚½‚Á‚½
 	/// </summary>
 	/// <param name="c"></param>
-	virtual void OnCollision(ICollider* c) = 0;
+	virtual void OnCollision(ICollider* c,IObjectData*objData) = 0;
 
 	/// <summary>
 	/// ‚ß‚è‚İ”’l0‚É

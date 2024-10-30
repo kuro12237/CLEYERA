@@ -20,7 +20,7 @@ public:
 
 	void Update();
 
-	void OnCollision(ICollider* c)override;
+	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 #pragma region Get
 

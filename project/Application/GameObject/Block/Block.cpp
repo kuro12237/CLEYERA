@@ -19,7 +19,7 @@ void Block::Update()
 	ClearHitDirection();
 }
 
-void Block::OnCollision([[maybe_unused]]ICollider* c)
+void Block::OnCollision([[maybe_unused]]ICollider* c, [[maybe_unused]]IObjectData* objData)
 {
 	c;
 }

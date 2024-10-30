@@ -30,7 +30,7 @@ public:
 	/// “–‚½‚Á‚½Žž
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c)override;
+	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 #pragma region Get
 	bool GetIsGoalFlag() { return isGoalFlag_; }

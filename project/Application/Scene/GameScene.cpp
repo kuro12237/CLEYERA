@@ -222,12 +222,12 @@ void GameScene::Collision()
 {
 	if (!player_->GetPlayerCore()->GetIsGoal())
 	{
-		gameCollisionManager_->ListPushback(player_->GetPlayerCore());
+		gameCollisionManager_->ListPushback(player_->GetPlayerCore(), player_->GetPlayerCore());
 	}
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)
 	{
 		if (player_->GetBullet()[index]) {
-			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
+			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get(), player_->GetBullet()[index].get());
 		}
 	}
 
@@ -235,21 +235,21 @@ void GameScene::Collision()
 	{
 		if (e)
 		{
-			gameCollisionManager_->ListPushback(e.get());
+			gameCollisionManager_->ListPushback(e.get(), e.get());
 		}
 	}
 
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
-		gameCollisionManager_->ListPushback(b.get());
+		gameCollisionManager_->ListPushback(b.get(), b.get());
 	}
 
 
-	gameCollisionManager_->ListPushback(goal_.get());
+	gameCollisionManager_->ListPushback(goal_.get(), goal_.get());
 
 	for (auto& warp : warpManager_->GetWarps())
 	{
-		gameCollisionManager_->ListPushback(warp->GetWarpGate());
+		gameCollisionManager_->ListPushback(warp->GetWarpGate(), warp->GetWarpGate());
 	}
 
 	gameCollisionManager_->CheckAllCollisoin();

@@ -133,7 +133,7 @@ void Player::Update()
 }
 
 
-void Player::OnCollision(ICollider* c)
+void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 {
 	if (kOnlyCollideWithBlocksid)
 	{
@@ -154,7 +154,7 @@ void Player::OnCollision(ICollider* c)
 	{
 		if (dynamic_cast<PlayerStateNone*>(state_.get()))
 		{
-			//warpFilePath_ = gameObjectManager_->GetObj3dData(c->GetObjectName())->GetParamFilePaths()[0];
+			warpFilePath_ = gameObjectManager_->GetObj3dData(objData->GetName())->GetParamFilePaths()[0];
 			ChangeState(make_unique<PlayerStateWarpMove>());
 		}
 	}

@@ -55,7 +55,7 @@ public:
 	/// “–‚½‚Á‚½‚Ìˆ—
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c)override;
+	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 	/// <summary>
 	/// ó‘Ô‘JˆÚ

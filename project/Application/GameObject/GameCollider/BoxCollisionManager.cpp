@@ -2,16 +2,16 @@
 
 void BoxCollisionManager::CollidersAllHitsIdsClear()
 {
-	for (auto* collider : colliders_) {
-		if (collider) {
-			collider->ClearAllHitsIds();
+	for (auto& collider : datas_) {
+		if (collider.collider) {
+			collider.collider->ClearAllHitsIds();
 		}
 	}
 }
 
 void BoxCollisionManager::ListClear()
 {
-	colliders_.clear();
+	datas_.clear();
 }
 
 void BoxCollisionManager::End()
@@ -20,50 +20,52 @@ void BoxCollisionManager::End()
 	CollidersAllHitsIdsClear();
 }
 
-void BoxCollisionManager::ListPushback(ICollider* c)
+void BoxCollisionManager::ListPushback(ICollider* c, IObjectData* data)
 {
-	colliders_.push_back(c);
+	datas_.push_back({ c, data });
 }
 
 void BoxCollisionManager::CheckAllCollisoin()
 {
-	list<ICollider*>::iterator itrA = colliders_.begin();
+	vector<CollisionData>::iterator itrA = datas_.begin();
+	int32_t indexA = 0;
 
-	for (; itrA != colliders_.end(); ++itrA) {
-
-		ICollider* colliderA = *itrA;
-		list<ICollider*>::iterator itrB = itrA;
+	for (; itrA != datas_.end(); ++itrA) {
+		int32_t indexB = 0;
+		CollisionData colliderA = *itrA;
+		vector<CollisionData>::iterator itrB = itrA;
 		itrB++;
 
-		for (; itrB != colliders_.end(); ++itrB) {
-			ICollider* colliderB = *itrB;
+		for (; itrB != datas_.end(); ++itrB) {
+			CollisionData colliderB = *itrB;
 
 			// コリジョンフィルタリング
-			if ((colliderA->GetCollosionAttribute() & colliderB->GetCollisionMask()) == 0 ||
-				(colliderA->GetCollisionMask() & colliderB->GetCollosionAttribute()) == 0)
+			if ((colliderA.collider->GetCollosionAttribute() & colliderB.collider->GetCollisionMask()) == 0 ||
+				(colliderA.collider->GetCollisionMask() & colliderB.collider->GetCollosionAttribute()) == 0)
 			{
 				continue;
 			}
 
-			AABB a = SettingAABBParam(colliderA);
-			AABB b = SettingAABBParam(colliderB);
+			AABB a = SettingAABBParam(colliderA.collider);
+			AABB b = SettingAABBParam(colliderB.collider);
 
 			if (IsCollision(a, b))
 			{
 				//めり込み計算
-				colliderA->ClearExtrusion();
-				colliderA->ClearHitDirection();
+				colliderA.collider->ClearExtrusion();
+				colliderA.collider->ClearHitDirection();
 
-				CheckExtrusion(colliderA, colliderB);
+				CheckExtrusion(colliderA.collider, colliderB.collider);
 
-				colliderA->OnCollision(colliderB);
-				colliderA->PushAllHitsIds(colliderB->GetId());
+				colliderA.collider->OnCollision(colliderB.collider,colliderB.objData);
+				colliderA.collider->PushAllHitsIds(colliderB.collider->GetId());
 
-				colliderB->OnCollision(colliderA);
-				colliderB->PushAllHitsIds(colliderA->GetId());
-
+				colliderB.collider->OnCollision(colliderA.collider,colliderA.objData);
+				colliderB.collider->PushAllHitsIds(colliderA.collider->GetId());
+				indexB++;
 			}
 		}
+		indexA++;
 	}
 
 }

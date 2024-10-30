@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// “–‚½‚Á‚½
 	/// </summary>
-	void OnCollision(ICollider* c)override;
+	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 	/// <summary>
 	/// ó‘Ô‘JˆÚ

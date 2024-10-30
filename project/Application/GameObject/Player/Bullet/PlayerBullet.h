@@ -32,7 +32,7 @@ public:
 	///Å@ìñÇΩÇ¡ÇΩéûÇÃ
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c)override;
+	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 #pragma region Set
 	void SetSpownPos(Math::Vector::Vector3 pos) { spownPos_ = pos; }

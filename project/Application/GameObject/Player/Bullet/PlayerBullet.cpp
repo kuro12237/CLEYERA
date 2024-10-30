@@ -40,7 +40,7 @@ void PlayerBullet::Update()
 
 }
 
-void PlayerBullet::OnCollision(ICollider* c)
+void PlayerBullet::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 {
 	if (c->GetId() == kOnlyCollideWithBlocksid)
 	{

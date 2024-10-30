@@ -146,24 +146,24 @@ void SelectScene::Collision()
 	//プレイヤー本体
 	if (!player_->GetPlayerCore()->GetIsGoal())
 	{
-		gameCollisionManager_->ListPushback(player_->GetPlayerCore());
+		gameCollisionManager_->ListPushback(player_->GetPlayerCore(), player_->GetPlayerCore());
 	}
 	//playerの弾
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)
 	{
 		if (player_->GetBullet()[index]) {
-			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
+			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get(), player_->GetBullet()[index].get());
 		}
 	}
 	//ブロック
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
-		gameCollisionManager_->ListPushback(b.get());
+		gameCollisionManager_->ListPushback(b.get(), b.get());
 	}
 	//portal
 	for (shared_ptr<Goal>g : goals_)
 	{
-		gameCollisionManager_->ListPushback(g.get());
+		gameCollisionManager_->ListPushback(g.get(), g.get());
 	}
 
 	gameCollisionManager_->CheckAllCollisoin();

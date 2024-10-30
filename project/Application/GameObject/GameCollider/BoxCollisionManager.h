@@ -1,6 +1,13 @@
 #pragma once
 #include"ICollider.h"
 
+
+struct CollisionData
+{
+	ICollider* collider;
+	IObjectData* objData;
+};
+
 /// <summary>
 /// ” ‚Ì“–‚½‚è”»’è
 /// </summary>
@@ -19,7 +26,7 @@ public:
 	/// ƒŠƒXƒg‚É“o˜^
 	/// </summary>
 	/// <param name="c"></param>
-	void ListPushback(ICollider* c);
+	void ListPushback(ICollider* c,IObjectData*data);
 
 	/// <summary>
 	/// “o˜^‚µ‚½‚à‚Ì‚ğ’T¸
@@ -107,6 +114,7 @@ private:
 	/// </summary>
 	void CheckExtrusion(ICollider* a, ICollider* b);
 
-	list<ICollider*>colliders_;
+	vector<CollisionData>datas_;
+
 };
 

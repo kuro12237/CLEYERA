@@ -26,7 +26,7 @@ void EnemyWalk::Update()
 	IsHit_ = false;
 }
 
-void EnemyWalk::OnCollision(ICollider* c)
+void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 {
 	IsHit_ = true;
 

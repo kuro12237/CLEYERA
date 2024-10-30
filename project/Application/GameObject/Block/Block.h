@@ -29,7 +29,7 @@ public:
 	/// “–‚½‚Á‚½ˆ—
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c)override;
+	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 private:
 
