@@ -42,6 +42,7 @@ void Warp::Update()
 
 void Warp::DebugDrawLine()
 {
+	warpRute_->Draw();
 	line_->Draw();
 	for (size_t i = 0; i < p_RailData_.size; i++)
 	{
