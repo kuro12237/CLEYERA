@@ -73,8 +73,12 @@ void PlayerHp::ImGuiUpdate()
 
 void PlayerHp::Draw2d()
 {
-	for (size_t i = 0; i < hpCount_; i++)
+	for (int32_t i = 0; i < hpCount_; i++)
 	{
+		if (i < 0)
+		{
+			break;
+		}
 		sprite_->Draw(wTs_[i]);
 	}
 	flameNameSprite_->Draw(flameNameWorldTransform_);

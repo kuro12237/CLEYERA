@@ -28,10 +28,16 @@ public:
 
 #pragma endregion
 
+#pragma region Set
+
+	void SetWarpObjectIndex(const uint32_t index) { warpObjectIndex_ = index; }
+#pragma endregion
+
 
 private:
 
 	string railDataFileName_ = "";
+	uint32_t warpObjectIndex_ = 0;
 
 
 };

@@ -24,6 +24,7 @@
 #include"GameObject/Particles/CharacterMoveParticle.h"
 
 #include"Particle/PlayerDeadParticle.h"
+#include"Hp/PlayerHp.h"
 
 /// <summary>
 /// ëÄçÏÇ∑ÇÈCoreÉNÉâÉX
@@ -89,7 +90,7 @@ public:
 	/// <summary>
 	/// à íuÇèâä˙âª
 	/// </summary>
-	void ResetPos() { gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform.translate = resetPos_; }
+	void ResetPos() { gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform.translate = resetPos_; }
 #pragma endregion
 
 #pragma region Get
@@ -103,7 +104,7 @@ public:
 	string& GetWarpFilePath() { return warpFilePath_; }
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
-	bool &GetIsChangeDeadAnimation() { return isChangeDeadAnimation_; }
+	bool& GetIsChangeDeadAnimation() { return isChangeDeadAnimation_; }
 	PlayerDeadParticle* GetDeadParticle() { return deadParticle_.get(); }
 
 #pragma endregion
@@ -113,8 +114,8 @@ public:
 	void SetDamageFlag(bool f) { isDamage_ = f; }
 	void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
 	void SetIsGameEnd(bool f) { isGameEnd_ = f; }
-	void SetHp(const uint32_t& hp) { hp_ = &hp; }
 	void SetIsDeadComplite(bool f) { isDeadAnimationComplite_ = f; }
+	void SetPlayerHP(shared_ptr<PlayerHp> hp) { hp_ = hp; }
 
 #pragma endregion
 
@@ -133,8 +134,6 @@ private:
 
 	unique_ptr<IPlayerState>state_ = nullptr;
 
-	//singleton
-	GameObjectManager* gameObjectInstance_ = nullptr;
 
 	bool isJamp_ = false;
 	bool isShoot_ = false;
@@ -168,8 +167,7 @@ private:
 	bool isUseGravityFlag_ = true;
 	string warpFilePath_ = "";
 
-	const uint32_t* hp_ = nullptr;
-
-
 	unique_ptr<PlayerDeadParticle>deadParticle_ = nullptr;
+
+	weak_ptr<PlayerHp> hp_;
 };

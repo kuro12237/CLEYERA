@@ -718,6 +718,8 @@
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.cpp" />
+    <ClCompile Include="Application\Utility\LerpMotion\LerpMotion.cpp" />
+    <ClCompile Include="Application\GameObject\Warp\WarpManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1217,6 +1219,8 @@
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.h" />
+    <ClInclude Include="Application\Utility\LerpMotion\LerpMotion.h" />
+    <ClInclude Include="Application\GameObject\Warp\WarpManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

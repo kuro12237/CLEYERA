@@ -4,7 +4,6 @@ using namespace Engine::Manager;
 
 void GameScene::Initialize()
 {
-
 	//levelData‚Ì“Ç‚Ýž‚Ý
 	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
 
@@ -48,8 +47,9 @@ void GameScene::Initialize()
 	endAnimation_ = make_unique<EndAnimation>();
 	endAnimation_->Initialize();
 
-	warp_ = make_unique<Warp>();
-	warp_->Initlaize();
+
+	warpManager_ = make_unique<WarpManager>();
+	warpManager_->Initialize();
 
 	//XV
 	gameObjectManager_->Update();
@@ -66,7 +66,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	ImGuiUpdate();
-	warp_->ImGuiUpdate();
 
 #endif // _USE_IMGUI
 
@@ -100,7 +99,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	goal_->Update();
 
-	warp_->Update();
+	warpManager_->Update();
 
 	Gravitys();
 
@@ -165,7 +164,6 @@ void GameScene::PostProcessDraw()
 	gameObjectManager_->Draw();
 
 	ParticlesDraw();
-	warp_->DebugDrawLine();
 
 }
 
@@ -249,7 +247,10 @@ void GameScene::Collision()
 
 	gameCollisionManager_->ListPushback(goal_.get());
 
-	gameCollisionManager_->ListPushback(warp_->GetWarpGate());
+	for (auto& warp : warpManager_->GetWarps())
+	{
+		gameCollisionManager_->ListPushback(warp->GetWarpGate());
+	}
 
 	gameCollisionManager_->CheckAllCollisoin();
 

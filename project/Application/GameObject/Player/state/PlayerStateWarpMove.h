@@ -4,6 +4,7 @@
 
 #include"GameFileLoader/RailLoader/RailLoader.h"
 #include"Utility/SplineMotion/SplineMotion.h"
+#include"Utility/LerpMotion/LerpMotion.h"
 
 /// <summary>
 /// プレイヤーワープ中
@@ -23,6 +24,6 @@ private:
 	float kFlame_ = 60.0f;
 	RailData railData_ = {};
 
-	unique_ptr<SplineMotion>splineMotion_ = nullptr;
-
+	unique_ptr<LerpMotion>lerpMotion_ = nullptr;
+	Math::Vector::Vector3 prevPos_ = {};
 };

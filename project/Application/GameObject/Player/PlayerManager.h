@@ -94,10 +94,10 @@ private:
 	unique_ptr<PlayerReticle>reticle_ = nullptr;
 	unique_ptr<PlayerGun>gun_ = nullptr;
 	unique_ptr<PlayerCamera>camera_ = nullptr;
-	unique_ptr<PlayerHp>hp_ = nullptr;
+	shared_ptr<PlayerHp>hp_ = nullptr;
 
 	bool isHpReductionActive_ = false;
-	int32_t kPlayerHp_ = 1;
+	int32_t kPlayerHp_ = 5;
 
 	bool* isChangeGameOverAnimation_ = nullptr;
 

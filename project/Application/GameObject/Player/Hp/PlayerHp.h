@@ -32,12 +32,12 @@ public:
 	void Draw2d();
 
 #pragma region Get
-	uint32_t &GetHp() { return hpCount_; }
+	int32_t &GetHp() { return hpCount_; }
 #pragma endregion
 
 private:
 
-	uint32_t hpCount_ = 0;
+	int32_t hpCount_ = 0;
 
 	unique_ptr<Engine::Objects::Sprite>sprite_ = nullptr;
 	vector<Engine::Transform::WorldTransform>wTs_{};

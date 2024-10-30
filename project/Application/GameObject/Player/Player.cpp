@@ -2,7 +2,6 @@
 
 void Player::Initialize()
 {
-	gameObjectInstance_ = GameObjectManager::GetInstance();
 	name_ = "Player";
 
 	//状態異常のステート
@@ -13,19 +12,19 @@ void Player::Initialize()
 	//当たり判定
 	//押し出し
 	this->isExtrusion_ = true;
-	SetObjectData(gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform);
-	aabb_ = gameObjectInstance_->GetObj3dData(name_)->GetAABB();
+	SetObjectData(gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform);
+	aabb_ = gameObjectManager_->GetObj3dData(name_)->GetAABB();
 	attribute_ = CollisionMask::kPlayerAttribute;
 	mask_ = CollisionMask::kPlayerMask;
 
 	//スケール値セット
-	auto& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
 	const float kScale = 0.4f;
 	transform.scale = { kScale,kScale,kScale };
 	//スタート入りの記録
 	resetPos_ = transform.translate;
 
-	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetModelFilePath();
+	string filePath = gameObjectManager_->GetObj3dData(name_)->GetModelFilePath();
 	AnimationManager::GetInstance()->LoadAnimation(filePath);
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
@@ -77,17 +76,17 @@ void Player::Update()
 	deadParticle_->Update();
 
 	isDamage_ = false;
-	string filePath = gameObjectInstance_->GetObj3dData(name_)->GetModelFilePath();
+	string filePath = gameObjectManager_->GetObj3dData(name_)->GetModelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
-	gameObjectInstance_->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+	gameObjectManager_->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
 
 	shootTimerFlame_++;
+
 	if (state_)
 	{
 		state_->Update(this);
 	}
-
 	if (velocity_.y <= 0.0f)
 	{
 		isJamp_ = true;
@@ -101,8 +100,9 @@ void Player::Update()
 
 	isShoot_ = false;
 
-	TransformEular& transform = gameObjectInstance_->GetObj3dData(name_)->GetWorldTransform().transform;
+	TransformEular& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
+
 
 	//パーティクルの配置位置後で関数化
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
@@ -111,8 +111,9 @@ void Player::Update()
 	moveEmitParam.translate.y += particleOffset.y;
 	moveEmitParam.translate.z += particleOffset.z;
 
+	auto hp = hp_.lock();
 
-	if (*hp_ <= 0 && !isChangeDeadAnimation_)
+	if (hp->GetHp() <= 0 && !isChangeDeadAnimation_)
 	{
 		auto& emit = deadParticle_->GetEmitter()->GetEmitParam()[0];
 		auto& control = deadParticle_->GetEmitter()->GetControlParam()[0];
@@ -134,7 +135,6 @@ void Player::Update()
 
 void Player::OnCollision(ICollider* c)
 {
-
 	if (kOnlyCollideWithBlocksid)
 	{
 		return;
@@ -152,16 +152,17 @@ void Player::OnCollision(ICollider* c)
 
 	if (c->GetId() == kWarpGateId)
 	{
-		isUseGravityFlag_ = false;
-		warpFilePath_ = gameObjectManager_->GetObj3dData("WarpGate")->GetParamFilePaths()[0];
-		ChangeState(make_unique<PlayerStateWarpMove>());
+		if (dynamic_cast<PlayerStateNone*>(state_.get()))
+		{
+			warpFilePath_ = gameObjectManager_->GetObj3dData("WarpGate")->GetParamFilePaths()[0];
+			ChangeState(make_unique<PlayerStateWarpMove>());
+		}
 	}
 
 	if (!isInvincible_)
 	{
 		if (c->GetId() == kEnemyWalkId)
 		{
-			//Input::VibrateController(65000, 65000, 20.0f);
 			isDamage_ = true;
 			isInvincible_ = true;
 		}

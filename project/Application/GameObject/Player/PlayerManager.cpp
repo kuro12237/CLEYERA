@@ -24,10 +24,10 @@ void PlayerManager::Initialize()
 	camera_->Initialize();
 
 	//Hp
-	hp_ = make_unique<PlayerHp>();
+	hp_ = make_shared<PlayerHp>();
 	hp_->Initialize(kPlayerHp_);
 
-	playerCore_->SetHp(hp_->GetHp());
+	playerCore_->SetPlayerHP(hp_);
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CameraReset(camera_->GetName());
@@ -84,6 +84,7 @@ void PlayerManager::Update()
 	{
 		PushBullet(playerWorldPos);
 	}
+
 
 	CheckDamage();
 
@@ -218,7 +219,7 @@ void PlayerManager::CheckDamage()
 		hp_->GetHp()--;
 	}
 	auto& transform = gameObjectManager_->GetObj3dData(playerCore_->GetName())->GetWorldTransform().transform;
-	if (transform.translate.y <= 0.0f)
+	if (transform.translate.y <= -5.0f)
 	{
 		playerCore_->GetIsDamageFlag() = true;
 		playerCore_->GetIsInvincible() = true;

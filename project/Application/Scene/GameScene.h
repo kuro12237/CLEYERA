@@ -33,8 +33,9 @@
 #include"Scene/TitleScene.h"
 #include"GameFileLoader/RailLoader/RailLoader.h"
 
+#include"GameObject/Warp/WarpManager.h"
+
 #include"GameObject/GameSceneAnimation/StartAnimation/StartAnimation.h"
-#include"GameObject/Warp/Warp.h"
 #include"GameObject/GameSceneAnimation/GameOverAnimation/EndAnimation.h"
 
 /// <summary>
@@ -125,7 +126,8 @@ private:
 
 	unique_ptr<GameUI>gameUi_ = nullptr;
 
-	unique_ptr<Warp>warp_{};
+	unique_ptr<WarpManager>warpManager_ = nullptr;
+
 
 	unique_ptr<EndAnimation>endAnimation_ = nullptr;
 
