@@ -5,6 +5,7 @@
 # 開発環境
   DirectX12 
   WindowsSDK:10.0.22621.0
+  Blender:4.1
 
 # 外部ツール
   ImGui
