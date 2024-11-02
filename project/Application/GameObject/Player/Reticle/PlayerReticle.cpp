@@ -45,14 +45,15 @@ void PlayerReticle::Update()
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	Math::Vector::Vector3 playerPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().GetWorldPosition();
 
-	interTarget_ = Math::Vector::Lerp(interTarget_, Math::Vector::Vector3(reticlePos_.x, reticlePos_.y, 0.0f), 0.5f);
+	interTarget_ = Math::Vector::Lerp(interTarget_, Math::Vector::Vector3(reticlePos_.x, reticlePos_.y, reticlePos_.y), 0.5f);
 	reticleWorldPos = Math::Vector::Add(reticleWorldPos, interTarget_);
 	transform.translate.x = playerPos.x;
 	transform.translate.y = playerPos.y;
+	transform.translate.z = playerPos.z;
 
 	transform.translate.x += reticlePos_.x;
 	transform.translate.y += reticlePos_.y;
-	transform.translate.z = 0.0f;
+
 	transform.rotate = { 0.0f,0.0f,0.0f };
 	//çsóÒïœä∑
 	Math::Matrix::Matrix4x4 matViewport = Math::Matrix::ViewportMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0, 1);
