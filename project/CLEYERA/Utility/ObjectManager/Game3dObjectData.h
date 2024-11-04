@@ -31,6 +31,7 @@ public:
 
 	unique_ptr<Game3dObject>& GetGameObject() { return gameObject_; }
 	Game3dObjectDesc &GetDesc() { return gameObject_->GetDesc(); }
+	uint32_t GetModelHandle() { return modelHandle_; }
 #pragma endregion
 
 private:

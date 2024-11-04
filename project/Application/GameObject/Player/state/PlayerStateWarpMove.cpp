@@ -10,6 +10,16 @@ void PlayerStateWarpMove::Initialize(Player* p)
 
 	p->SetIsUseGravityFlag(false);
 
+	auto& objectData = GameObjectManager::GetInstance()->GetObj3dData(p->INameable::GetName());
+
+	prevModelHandle_ = objectData->GetModelHandle();
+	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerWarp");
+	objectData->GetGameObject()->SetModel(modelHandle);
+	objectData->GetGameObject()->SetSkinningFlag(false);
+	objectData->GetGameObject()->ChangePipline(make_unique<Phong3dPipline>());
+
+	auto& gunObjectData = GameObjectManager::GetInstance()->GetObj3dData("PlayerGun");
+	gunObjectData->SetIsDraw(false);
 }
 
 void PlayerStateWarpMove::Update(Player* p)
@@ -24,6 +34,15 @@ void PlayerStateWarpMove::Update(Player* p)
 		wt.transform.translate = prevPos_;
 		p->SetIsUseGravityFlag(true);
 		p->ChangeState(make_unique<PlayerStateNone>());
+		auto& objectData = GameObjectManager::GetInstance()->GetObj3dData(p->INameable::GetName());
+		objectData->GetGameObject()->SetModel(prevModelHandle_);
+
+		objectData->GetGameObject()->ChangePipline(make_unique<Phong3dSkinningPipline>());
+		objectData->GetGameObject()->SetSkinningFlag(true);
+
+
+		auto& gunObjectData = GameObjectManager::GetInstance()->GetObj3dData("PlayerGun");
+		gunObjectData->SetIsDraw(true);
 		return;
 	}
 	prevPos_ = wt.transform.translate;

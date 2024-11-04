@@ -26,4 +26,5 @@ private:
 
 	unique_ptr<LerpMotion>lerpMotion_ = nullptr;
 	Math::Vector::Vector3 prevPos_ = {};
+	uint32_t prevModelHandle_ = 0;
 };

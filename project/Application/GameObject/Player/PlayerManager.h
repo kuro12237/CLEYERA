@@ -97,7 +97,7 @@ private:
 	shared_ptr<PlayerHp>hp_ = nullptr;
 
 	bool isHpReductionActive_ = false;
-	int32_t kPlayerHp_ = 5;
+	int32_t kPlayerHp_ = 1;
 
 	bool* isChangeGameOverAnimation_ = nullptr;
 

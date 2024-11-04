@@ -27,8 +27,8 @@
             "RailGroup": "warpRoot_1",
             "transform": {
                 "translate": [
+                    24.0,
                     0.0,
-                    -25.0,
                     0.0
                 ],
                 "rotate": [
@@ -69,9 +69,9 @@
             "RailGroup": "warpRoot_1",
             "transform": {
                 "translate": [
-                    0.0,
-                    25.0,
-                    0.0
+                    -24.843170166015625,
+                    0.42262840270996094,
+                    0.200714111328125
                 ],
                 "rotate": [
                     0.0,
