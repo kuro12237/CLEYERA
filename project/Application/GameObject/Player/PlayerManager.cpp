@@ -146,6 +146,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	TransformEular transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = pos;
+	transform.translate.y = pos.y + 1.0f;
 	data->SetObjectType("MESH");
 	data->Initialize(transform, {}, modelHandle);
 
