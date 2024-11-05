@@ -43,5 +43,4 @@ void TitleBack2d::ImGuiUpdate()
 		edgeColor_ = this->GetJsonItem<Math::Vector::Vector4>("dissolveEdgeColor");
 		edgeMinMax_ = this->GetJsonItem<Math::Vector::Vector2>("dissolveEdgeMinMax");
 	}
-
 }

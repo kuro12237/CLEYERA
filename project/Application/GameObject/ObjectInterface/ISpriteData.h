@@ -23,7 +23,7 @@ public:
 	void CreateJsonData();
 
 	/// <summary>
-	/// ‚Ù‚Úƒ“€–Ú‚ğ“o˜^
+	/// €–Ú‚ğ“o˜^
 	/// </summary>
 	template<typename T>
 	void AddJsonItem(string itemName, T value) { return globalVariables_->AddItem(name_, itemName, value); }

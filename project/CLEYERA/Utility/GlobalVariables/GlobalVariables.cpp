@@ -226,8 +226,7 @@ void GlobalVariables::Update()
 		return;
 	}
 
-	if (!ImGui::BeginMenuBar())
-		return;
+
 
 	for (std::map<std::string, Group>::iterator itGroup = datas_.begin(); itGroup != datas_.end();
 		++itGroup) {
@@ -236,99 +235,105 @@ void GlobalVariables::Update()
 		// グループの参照を取得
 		Group& group = itGroup->second;
 
-		if (!ImGui::BeginMenu(groupName.c_str()))
+		if (groupName=="")
+		{
 			continue;
-
-		// 各項目について
-		for (std::map<std::string, Item>::iterator itItem = group.items.begin();
-			itItem != group.items.end(); ++itItem) {
-			// 各項目を取得
-			const std::string& itemName = itItem->first;
-			// 項目の参照を取得
-			Item& item = itItem->second;
-			// int32_tの値を保持している場合
-			if (std::holds_alternative<int32_t>(item.value)) {
-				int32_t* ptr = std::get_if<int32_t>(&item.value);
-				ImGui::DragInt(itemName.c_str(), ptr, 0, 100);
-			} // floatの値を保持している場合
-			else if (std::holds_alternative<float>(item.value)) {
-				float* ptr = std::get_if<float>(&item.value);
-				ImGui::DragFloat(itemName.c_str(), ptr, 0, 100);
-			}//bool値
-			else if (std::holds_alternative<bool>(item.value)) {
-				bool* ptr = std::get_if<bool>(&item.value);
-				ImGui::Checkbox(itemName.c_str(), ptr);
-			}// Vector2の値を保持している場合
-			else if (std::holds_alternative<Vector2>(item.value)) {
-				Vector2* ptr = std::get_if<Vector2>(&item.value);
-				ImGui::DragFloat2(itemName.c_str(), reinterpret_cast<float*>(ptr), -10.0f, 10.0f);
-			}// Vector3の値を保持している場合
-			else if (std::holds_alternative<Vector3>(item.value)) {
-				Vector3* ptr = std::get_if<Vector3>(&item.value);
-				ImGui::DragFloat3(itemName.c_str(), reinterpret_cast<float*>(ptr), -10.0f, 10.0f);
-			}// Vector4の値を保持している場合
-			else if (std::holds_alternative<Vector4>(item.value)) {
-				Vector4* ptr = std::get_if<Vector4>(&item.value);
-				ImGui::ColorEdit4(itemName.c_str(), reinterpret_cast<float*>(ptr));
-			}
-			else if (std::holds_alternative<TransformQua>(item.value)) {
-				TransformQua* ptr = std::get_if<TransformQua>(&item.value);
-				string  Name = itemName;
-				if (ImGui::TreeNode(itemName.c_str()))
-				{
-					Name = itemName + "scale";
-					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->scale));
-					Name = itemName + "quaternion";
-					ImGui::DragFloat4(Name.c_str(), reinterpret_cast<float*>(&ptr->quaternion));
-					Name = itemName + "translate";
-					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->translate));
-
-					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->rotate));
-					ImGui::TreePop();
-				}
-			}
-			else if (std::holds_alternative<TransformEular>(item.value)) {
-				TransformEular* ptr = std::get_if<TransformEular>(&item.value);
-				string  Name = itemName;
-				if (ImGui::TreeNode(itemName.c_str()))
-				{
-					Name = itemName + "scale";
-					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->scale));
-					Name = itemName + "rotate";
-					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->rotate));
-					Name = itemName + "translate";
-					ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->translate));
-					ImGui::TreePop();
-				}
-			}
-			else if (std::holds_alternative<string>(item.value))
-			{
-				static char buffer[256] = "";
-				ImGui::InputText("text", buffer, sizeof(buffer));
-
-				if (ImGui::Button("Confirm"))
-				{
-					string* ptr = std::get_if<string>(&item.value);
-					*ptr = buffer;
-				}
-			}
 		}
 
-		// 改行
-		ImGui::Text("\n");
+		if (ImGui::TreeNode(groupName.c_str()))
+		{
 
-		if (ImGui::Button("Save")) {
-			SaveFile(groupName);
-			std::string message = std::format("{}.json saved.", groupName);
-			MessageBoxA(nullptr, message.c_str(), "GlobalVariables", 0);
-			isSave_ = true;
+			// 各項目について
+			for (std::map<std::string, Item>::iterator itItem = group.items.begin();
+				itItem != group.items.end(); ++itItem) {
+				// 各項目を取得
+				const std::string& itemName = itItem->first;
+				// 項目の参照を取得
+				Item& item = itItem->second;
+				// int32_tの値を保持している場合
+				if (std::holds_alternative<int32_t>(item.value)) {
+					int32_t* ptr = std::get_if<int32_t>(&item.value);
+					ImGui::DragInt(itemName.c_str(), ptr, 0, 100);
+				} // floatの値を保持している場合
+				else if (std::holds_alternative<float>(item.value)) {
+					float* ptr = std::get_if<float>(&item.value);
+					ImGui::DragFloat(itemName.c_str(), ptr, 0, 100);
+				}//bool値
+				else if (std::holds_alternative<bool>(item.value)) {
+					bool* ptr = std::get_if<bool>(&item.value);
+					ImGui::Checkbox(itemName.c_str(), ptr);
+				}// Vector2の値を保持している場合
+				else if (std::holds_alternative<Vector2>(item.value)) {
+					Vector2* ptr = std::get_if<Vector2>(&item.value);
+					ImGui::DragFloat2(itemName.c_str(), reinterpret_cast<float*>(ptr), -10.0f, 10.0f);
+				}// Vector3の値を保持している場合
+				else if (std::holds_alternative<Vector3>(item.value)) {
+					Vector3* ptr = std::get_if<Vector3>(&item.value);
+					ImGui::DragFloat3(itemName.c_str(), reinterpret_cast<float*>(ptr), -10.0f, 10.0f);
+				}// Vector4の値を保持している場合
+				else if (std::holds_alternative<Vector4>(item.value)) {
+					Vector4* ptr = std::get_if<Vector4>(&item.value);
+					ImGui::ColorEdit4(itemName.c_str(), reinterpret_cast<float*>(ptr));
+				}
+				else if (std::holds_alternative<TransformQua>(item.value)) {
+					TransformQua* ptr = std::get_if<TransformQua>(&item.value);
+					string  Name = itemName;
+					if (ImGui::TreeNode(itemName.c_str()))
+					{
+						Name = itemName + "scale";
+						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->scale));
+						Name = itemName + "quaternion";
+						ImGui::DragFloat4(Name.c_str(), reinterpret_cast<float*>(&ptr->quaternion));
+						Name = itemName + "translate";
+						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->translate));
+
+						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->rotate));
+						ImGui::TreePop();
+					}
+				}
+				else if (std::holds_alternative<TransformEular>(item.value)) {
+					TransformEular* ptr = std::get_if<TransformEular>(&item.value);
+					string  Name = itemName;
+					if (ImGui::TreeNode(itemName.c_str()))
+					{
+						Name = itemName + "scale";
+						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->scale));
+						Name = itemName + "rotate";
+						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->rotate));
+						Name = itemName + "translate";
+						ImGui::DragFloat3(Name.c_str(), reinterpret_cast<float*>(&ptr->translate));
+						ImGui::TreePop();
+					}
+				}
+				else if (std::holds_alternative<string>(item.value))
+				{
+					static char buffer[256] = "";
+					ImGui::InputText("text", buffer, sizeof(buffer));
+
+					if (ImGui::Button("Confirm"))
+					{
+						string* ptr = std::get_if<string>(&item.value);
+						*ptr = buffer;
+					}
+				}
+			}
+
+			// 改行
+			ImGui::Text("\n");
+
+			if (ImGui::Button("Save")) {
+				SaveFile(groupName);
+				std::string message = std::format("{}.json saved.", groupName);
+				MessageBoxA(nullptr, message.c_str(), "GlobalVariables", 0);
+				isSave_ = true;
+			}
+			if (isSave_) {
+				isSave_ = false;
+			}
+			ImGui::TreePop();
 		}
-		if (isSave_) {
-			isSave_ = false;
-		}
-		ImGui::EndMenu();
+
 	}
-	ImGui::EndMenuBar();
 
 	ImGui::End();
 	ImGui::PopStyleColor();

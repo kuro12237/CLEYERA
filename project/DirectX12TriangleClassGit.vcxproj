@@ -65,6 +65,8 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
+    <ClCompile Include="Application\GameObject\UI\JoyUI\JoyStickBackUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\JoyUI\JoyStickUI.cpp" />
     <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpManager.cpp" />
@@ -96,7 +98,7 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateNone.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateRock.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCount\StartCount.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\GameSceneUI.cpp" />
     <ClCompile Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.cpp" />
     <ClCompile Include="Application\Scene\GameScene.cpp" />
     <ClCompile Include="Application\Scene\SelectScene.cpp" />
@@ -215,6 +217,9 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
+    <ClInclude Include="Application\GameObject\UI\ISceneUI.h" />
+    <ClInclude Include="Application\GameObject\UI\JoyUI\JoyStickBackUI.h" />
+    <ClInclude Include="Application\GameObject\UI\JoyUI\JoyStickUI.h" />
     <ClInclude Include="Application\GameObject\Warp\Warp.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpManager.h" />
@@ -250,7 +255,7 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateNone.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCount\StartCount.h" />
-    <ClInclude Include="Application\GameObject\UI\GameUI.h" />
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI.h" />
     <ClInclude Include="Application\GameFileLoader\SceneFileLoder\SceneFileLoader.h" />
     <ClInclude Include="Application\Scene\GameScene.h" />
     <ClInclude Include="Application\Scene\IScene.h" />

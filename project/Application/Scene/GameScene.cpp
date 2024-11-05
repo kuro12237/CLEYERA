@@ -59,6 +59,9 @@ void GameScene::Initialize()
 	//ゲーム終了のつなぐ
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
+	gameUi_ = make_unique<GameSceneUI>();
+	gameUi_->Initialize();
+
 }
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
@@ -90,6 +93,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	//
 	//ゲーム開始後
 	//
+
+	gameUi_->Update();
 
 	player_->Update();
 
@@ -180,6 +185,9 @@ void GameScene::Flont2dSpriteDraw()
 {
 	player_->Draw2d();
 	player_->DrawHp();
+
+	gameUi_->Draw2d();
+
 	startAnimation_->Draw2d();
 	ChangeSceneAnimation::GetInstance()->Draw();
 }

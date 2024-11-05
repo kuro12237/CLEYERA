@@ -82,4 +82,7 @@ private:
 	vector<unique_ptr<Engine::Objects::Sprite>>barSprites_ = {};
 	vector<Engine::Transform::WorldTransform>barWts_;
 	uint32_t barCount_ = 0;
+
+	TransformEular easeOutExpoMin_;
+	TransformEular easeOutExpoMax_;
 };

@@ -122,6 +122,12 @@ void StartCount::Initialize()
 
 	numberWorldTransform_.UpdateMatrix();
 	backFlameWt_.UpdateMatrix();
+
+	easeOutExpoMax_.rotate.z = float(numbers::pi) * 2.0f;
+	easeOutExpoMax_.scale.x = 1.0f;
+	easeOutExpoMax_.scale.y = 1.0f;
+	easeOutExpoMax_.scale.z = 1.0f;
+
 }
 
 void StartCount::Update()
@@ -199,14 +205,15 @@ void StartCount::Draw2d()
 
 void StartCount::NumberUpdate()
 {
-	float rotateMax = float(numbers::pi) * 2.0f;
 	float addFlame = 1.0f / 60.0f;
 
+
 	numberAnimationFlame_ += addFlame;
-	numberWorldTransform_.transform.rotate.z = Math::Vector::easeOutExpo(0.0f, rotateMax, numberAnimationFlame_);
-	numberWorldTransform_.transform.scale.z = Math::Vector::easeOutExpo(0.0f, 1.0f, numberAnimationFlame_);
-	numberWorldTransform_.transform.scale.y = Math::Vector::easeOutExpo(0.0f, 1.0f, numberAnimationFlame_);
-	numberWorldTransform_.transform.scale.z = Math::Vector::easeOutExpo(0.0f, 1.0f, numberAnimationFlame_);
+	numberWorldTransform_.transform.rotate.z = Math::Vector::easeOutExpo(easeOutExpoMin_.scale.x, easeOutExpoMax_.rotate.z, numberAnimationFlame_);
+
+	numberWorldTransform_.transform.scale.x = Math::Vector::easeOutExpo(easeOutExpoMin_.scale.x, easeOutExpoMax_.scale.x, numberAnimationFlame_);
+	numberWorldTransform_.transform.scale.y = Math::Vector::easeOutExpo(easeOutExpoMin_.scale.y, easeOutExpoMax_.scale.y, numberAnimationFlame_);
+	numberWorldTransform_.transform.scale.z = Math::Vector::easeOutExpo(easeOutExpoMin_.scale.z, easeOutExpoMax_.scale.z, numberAnimationFlame_);
 
 }
 

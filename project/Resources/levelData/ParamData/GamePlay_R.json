@@ -1,0 +1,28 @@
+{
+    "GamePlay_R": {
+        "ankerPos": [
+            0.5,
+            0.5
+        ],
+        "fileName": "GameUI/GameLJoyStickUI.png",
+        "lerpFactor": 0.25,
+        "stickRad": 30.0,
+        "transform": {
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.05999999865889549,
+                "y": 0.05999999865889549,
+                "z": 0.05999999865889549
+            },
+            "translate": {
+                "x": 128.0,
+                "y": 583.0,
+                "z": 0.0
+            }
+        }
+    }
+}

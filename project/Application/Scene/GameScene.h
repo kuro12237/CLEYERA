@@ -28,7 +28,7 @@
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"Particle/Field/ParticleField.h"
 
-#include"GameObject/UI/GameUI.h"
+#include"GameObject/UI/GameSceneUI.h"
 
 #include"Scene/TitleScene.h"
 #include"GameFileLoader/RailLoader/RailLoader.h"
@@ -124,7 +124,7 @@ private:
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;
 
-	unique_ptr<GameUI>gameUi_ = nullptr;
+	unique_ptr<GameSceneUI>gameUi_ = nullptr;
 
 	unique_ptr<WarpManager>warpManager_ = nullptr;
 
