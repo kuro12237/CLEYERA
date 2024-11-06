@@ -6,7 +6,6 @@ using namespace Engine::Objects;
 void GameSceneUI::Initialize()
 {
 	//joyStickÇÃèâä˙âª
-
 	joyStickUis_.resize(joyStickMax_);
 
 	for (size_t i = 0; i < size_t(joyStickMax_); i++)
@@ -18,11 +17,12 @@ void GameSceneUI::Initialize()
 		sprites_.push_back(joyStickUis_[i].stickUi);
 	}
 
-	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_L)].stickUi->Initilaize("L");
-	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_L)].backUi->Initilaize("L");
+	string joyStickGropName = "GameSceneJoyStickUI_";
+	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_L)].groupName = joyStickGropName;
+	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_L)].Initialize(JoyStickLeftRight::Left);
 
-	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_R)].stickUi->Initilaize("R");
-	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_R)].backUi->Initilaize("R");
+	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_R)].groupName = joyStickGropName;
+	joyStickUis_[static_cast<int>(GameSceneUIEnum::JoyStick_R)].Initialize(JoyStickLeftRight::Right);
 
 }
 
@@ -42,4 +42,10 @@ void GameSceneUI::Draw2d()
 		auto it = sprite.lock();
 		it->Draw2d();
 	}
+}
+
+void JoyStickUIData::Initialize(const JoyStickLeftRight& direction)
+{
+	stickUi->Initilaize(groupName, direction);
+	backUi->Initilaize(groupName, direction);
 }

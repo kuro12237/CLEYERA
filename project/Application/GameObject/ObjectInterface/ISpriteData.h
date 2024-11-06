@@ -61,7 +61,15 @@ private:
 	string prevFileName_ = "";
 
 protected:
+
+	/// <summary>
+	/// 本体の作成
+	/// </summary>
 	void CreateObject();
+
+	/// <summary>
+	/// パラメーターの更新
+	/// </summary>
 	void UpdateData();
 
 	string name_ = "";

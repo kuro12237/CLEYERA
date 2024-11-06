@@ -1229,6 +1229,7 @@
     <ClInclude Include="Application\GameObject\UI\ISceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\JoyUI\JoyStickUI.h" />
     <ClInclude Include="Application\GameObject\UI\JoyUI\JoyStickBackUI.h" />
+    <ClInclude Include="Application\GameObject\UI\GameSceneUIData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

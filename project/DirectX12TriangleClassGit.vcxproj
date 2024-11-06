@@ -217,6 +217,7 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
+    <ClInclude Include="Application\GameObject\UI\GameSceneUIData.h" />
     <ClInclude Include="Application\GameObject\UI\ISceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\JoyUI\JoyStickBackUI.h" />
     <ClInclude Include="Application\GameObject\UI\JoyUI\JoyStickUI.h" />

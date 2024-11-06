@@ -5,16 +5,18 @@
 #include"JoyUI/JoyStickUI.h"
 #include"JoyUI/JoyStickBackUI.h"
 
-enum class GameSceneUIEnum
-{
-	JoyStick_L,
-	JoyStick_R,
-};
 
 struct JoyStickUIData
 {
+	string groupName = "";
 	shared_ptr<JoyStickUI>stickUi = nullptr;
 	shared_ptr<JoyStickBackUI>backUi = nullptr;
+	
+	/// <summary>
+	/// èâä˙âª
+	/// </summary>
+	/// <param name="direction"></param>
+	void Initialize(const JoyStickLeftRight& direction);
 };
 
 

@@ -1,6 +1,8 @@
 #pragma once
 #include"GameObject/ObjectInterface/ISpriteData.h"
 #include"Input.h"
+#include"GameObject/UI/GameSceneUIData.h"
+
 
 /// <summary>
 /// ジョイスティック背景2d表示クラス
@@ -14,7 +16,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initilaize(const string &joy);
+	void Initilaize(const string& groupName, const JoyStickLeftRight& direction);
 
 	/// <summary>
 	/// 更新

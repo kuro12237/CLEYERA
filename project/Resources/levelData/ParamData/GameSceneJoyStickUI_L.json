@@ -1,10 +1,12 @@
 {
-    "GameJoyStick_Back_L": {
+    "GameSceneJoyStickUI_L": {
         "ankerPos": [
             0.5,
             0.5
         ],
-        "fileName": "GameUI/GameJoyStickUIBack.png",
+        "fileName": "GameUI/GameLJoyStickUI.png",
+        "lerpFactor": 0.25,
+        "stickRad": 24.0,
         "transform": {
             "rotate": {
                 "x": 0.0,

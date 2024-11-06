@@ -1,8 +1,9 @@
 #include "JoyStickBackUI.h"
 
-void JoyStickBackUI::Initilaize(const string& joy)
+void JoyStickBackUI::Initilaize(const string& groupName, const JoyStickLeftRight& direction)
 {
-	name_ = "GameJoyStick_Back_" + joy;
+	name_ = groupName+"Back_" + CheckJoyStickUILeftRight(direction);
+
 	this->CreateJsonData();
 	this->CreateObject();
 	this->CreateJsonSpriteData();

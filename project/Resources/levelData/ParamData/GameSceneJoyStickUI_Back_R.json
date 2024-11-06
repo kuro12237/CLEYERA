@@ -1,12 +1,10 @@
 {
-    "GamePlay_L": {
+    "GameSceneJoyStickUI_Back_R": {
         "ankerPos": [
             0.5,
             0.5
         ],
-        "fileName": "GameUI/GameLJoyStickUI.png",
-        "lerpFactor": 0.25,
-        "stickRad": 24.0,
+        "fileName": "GameUI/GameJoyStickUIBack.png",
         "transform": {
             "rotate": {
                 "x": 0.0,
@@ -20,7 +18,7 @@
             },
             "translate": {
                 "x": 128.0,
-                "y": 660.0,
+                "y": 583.0,
                 "z": 0.0
             }
         }
