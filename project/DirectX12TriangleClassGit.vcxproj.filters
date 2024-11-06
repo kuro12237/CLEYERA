@@ -726,6 +726,7 @@
     <ClCompile Include="Application\GameObject\UI\GameSceneBottonsAction.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUIControl.cpp" />
     <ClCompile Include="Application\GameObject\UI\BottonsActions\GameSceneBottonA.cpp" />
+    <ClCompile Include="Application\GameObject\UI\BottonsActions\GameSceneBottonRT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1238,6 +1239,7 @@
     <ClInclude Include="Application\GameObject\UI\GameSceneBottonsAction.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUIControl.h" />
     <ClInclude Include="Application\GameObject\UI\BottonsActions\GameSceneBottonA.h" />
+    <ClInclude Include="Application\GameObject\UI\BottonsActions\GameSceneBottonRT.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

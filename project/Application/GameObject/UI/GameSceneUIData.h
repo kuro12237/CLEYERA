@@ -9,6 +9,7 @@ enum class SceneUIEnum
 	JoyStick_R,
 	Botton_A,
 	Botton_RT,
+	JoyStick_None,
 };
 
 enum class JoyStickLeftRight
@@ -36,7 +37,10 @@ inline std::string CheckSceneUIEnumtoString(const SceneUIEnum& ui)
 	{
 		return "A";
 	}
-
+	if (ui == SceneUIEnum::Botton_RT)
+	{
+		return "RT";
+	}
 	return "";
 }
 

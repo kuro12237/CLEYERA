@@ -48,6 +48,9 @@ public:
 	/// </summary>
 	void Draw2d()override;
 
+	void ImGuiUpdate();
+
+
 private:
 
 	uint32_t joyStickMax_ = 2;
@@ -56,5 +59,12 @@ private:
 
 	unique_ptr<GameSceneUIBottonsAction>bottonAction_ = nullptr;
 	unique_ptr<GameSceneUIBottonsControl>bottonControl_ = nullptr;
+
+#ifdef _USE_IMGUI
+
+	string newSpriteName_ = "";
+
+#endif // _USE_IMGUI
+
 
 };

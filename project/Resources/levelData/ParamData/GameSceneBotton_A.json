@@ -1,10 +1,10 @@
 {
-    "GameSceneJoyStickUI_Back_R": {
+    "GameSceneBotton_A": {
         "ankerPos": [
             0.5,
             0.5
         ],
-        "fileName": "GameUI/GameJoyStickUIBack.png",
+        "fileName": "GameUI/GameBottonUIA.png",
         "transform": {
             "rotate": {
                 "x": 0.0,
@@ -18,7 +18,7 @@
             },
             "translate": {
                 "x": 48.0,
-                "y": 583.0,
+                "y": 510.0,
                 "z": 0.0
             }
         }

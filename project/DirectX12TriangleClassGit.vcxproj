@@ -66,6 +66,7 @@
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
     <ClCompile Include="Application\GameObject\UI\BottonsActions\GameSceneBottonA.cpp" />
+    <ClCompile Include="Application\GameObject\UI\BottonsActions\GameSceneBottonRT.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneBottonsAction.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneBottonUI\BaseBottonUI.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUIControl.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
     <ClInclude Include="Application\GameObject\UI\BottonsActions\GameSceneBottonA.h" />
+    <ClInclude Include="Application\GameObject\UI\BottonsActions\GameSceneBottonRT.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneBottonsAction.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneBottonUI\BaseBottonUI.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUIControl.h" />

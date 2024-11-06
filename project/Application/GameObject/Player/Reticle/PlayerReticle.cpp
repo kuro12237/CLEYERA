@@ -43,14 +43,12 @@ void PlayerReticle::Update()
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
 	Math::Vector::Vector3& reticleWorldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.translate;
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
-	Math::Vector::Vector3 playerPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().GetWorldPosition();
+	Math::Vector::Vector3 playerGunPos = GameObjectManager::GetInstance()->GetObj3dData("PlayerGun")->GetWorldTransform().GetWorldPosition();
 
-	interTarget_ = Math::Vector::Lerp(interTarget_, Math::Vector::Vector3(reticlePos_.x, reticlePos_.y,0.0f), 0.5f);
+	interTarget_ = Math::Vector::Lerp(interTarget_, transform.translate, 0.5f);
 	reticleWorldPos = Math::Vector::Add(reticleWorldPos, interTarget_);
 
-	transform.translate.x = playerPos.x;
-	transform.translate.y = playerPos.y;
-	transform.translate.z = playerPos.z;
+	transform.translate = playerGunPos;
 
 	transform.translate.x += reticlePos_.x;
 	transform.translate.y += reticlePos_.y;

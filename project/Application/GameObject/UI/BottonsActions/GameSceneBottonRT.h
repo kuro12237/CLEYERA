@@ -2,13 +2,13 @@
 #include"GameObject/UI/GameSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>
-/// BottonA操作クラス
+/// BottonRT操作クラス
 /// </summary>
-class GameSceneUIBottonA
+class GameSceneUIBottonRT
 {
 public:
-	GameSceneUIBottonA() {};
-	~GameSceneUIBottonA() {};
+	GameSceneUIBottonRT() {};
+	~GameSceneUIBottonRT() {};
 
 	void Active(BaseBottonUI& ui);
 

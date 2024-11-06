@@ -6,7 +6,7 @@
         ],
         "fileName": "GameUI/GameRJoyStickUI.png",
         "lerpFactor": 0.25,
-        "stickRad": 30.0,
+        "stickRad": 8.0,
         "transform": {
             "rotate": {
                 "x": 0.0,
@@ -19,7 +19,7 @@
                 "z": 0.05999999865889549
             },
             "translate": {
-                "x": 128.0,
+                "x": 48.0,
                 "y": 583.0,
                 "z": 0.0
             }

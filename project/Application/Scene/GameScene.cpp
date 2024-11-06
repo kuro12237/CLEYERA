@@ -224,6 +224,10 @@ void GameScene::ImGuiUpdate()
 
 	ParticleImGuiUpdate();
 	ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
+
+	this->gameUi_->ImGuiUpdate();
+
+
 }
 
 void GameScene::Collision()

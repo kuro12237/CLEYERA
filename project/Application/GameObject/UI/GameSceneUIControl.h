@@ -9,6 +9,7 @@ public:
 
 	bool ControlA();
 
+	bool ControlRT();
 
 private:
 

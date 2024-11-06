@@ -8,3 +8,12 @@ bool GameSceneUIBottonsControl::ControlA()
 	}
     return false;
 }
+
+bool GameSceneUIBottonsControl::ControlRT()
+{
+	if (Input::PushRShoulder())
+	{
+		return true;
+	}
+	return false;
+}

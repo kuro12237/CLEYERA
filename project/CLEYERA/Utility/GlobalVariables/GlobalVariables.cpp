@@ -340,3 +340,13 @@ void GlobalVariables::Update()
 	ImGui::PopStyleColor();
 
 }
+
+vector<string> GlobalVariables::GetAllDataKey()
+{
+	std::vector<std::string> keys;
+	// data_の各キーを走査して追加
+	for (const auto& [key, _] : datas_) {
+		keys.push_back(key);
+	}
+	return keys;
+}

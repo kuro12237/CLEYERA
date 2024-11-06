@@ -8,7 +8,7 @@
 class ISceneUI
 {
 public:
-	ISceneUI() {};
+	ISceneUI() {globalVariables_ = GlobalVariables::GetInstance();};
 	virtual ~ISceneUI() {};
 
 	/// <summary>
@@ -29,6 +29,8 @@ public:
 private:
 
 protected:
+
+	GlobalVariables* globalVariables_ = nullptr;
 
 	vector<weak_ptr<ISpriteData>>sprites_;
 

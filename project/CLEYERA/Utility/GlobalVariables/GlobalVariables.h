@@ -35,10 +35,24 @@ public:
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 入力した文字列の中にprefixの文字列があるか
+	/// </summary>
+	/// <param name="input"></param>
+	/// <param name="prefix"></param>
+	/// <returns></returns>
+	bool StartsWith(const std::string& input, const std::string& prefix) {
+		return input.find(prefix) == 0;
+	}
+
 #pragma region Get
 	bool GetIsSave() { return isSave_; }
 	template<typename T>
 	T GetValue(const std::string& groupName, const std::string& key);
+
+	vector<string>GetAllDataKey();
+
+
 #pragma endregion
 
 #pragma region Set
