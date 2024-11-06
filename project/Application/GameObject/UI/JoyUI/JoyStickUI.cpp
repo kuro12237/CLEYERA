@@ -26,7 +26,7 @@ void JoyStickUI::Update()
 
 	Math::Vector::Vector3 reticlePos_{};
 
-	if (direction_==JoyStickLeftRight::Left)
+	if (direction_ == JoyStickLeftRight::Left)
 	{
 		reticlePos_.x = Input::GetJoyLStickPos().x;
 		reticlePos_.y = Input::GetJoyLStickPos().y;
