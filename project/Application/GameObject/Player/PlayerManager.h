@@ -106,4 +106,6 @@ private:
 
 	Math::Vector::Vector3 playerWorldPos = {};
 	const Math::Vector::Vector3* p_ReticleWorldPos_ = nullptr;
+
+	const Math::Vector::Vector3* p_GunWorldPos_ = nullptr;
 };

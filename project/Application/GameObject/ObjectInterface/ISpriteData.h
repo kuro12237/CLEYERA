@@ -52,6 +52,12 @@ public:
 #pragma region Get
 
 	Engine::Transform::WorldTransform& GetWorldTransform() { return worldTransform_; }
+	uint32_t GetTexHandle() { return texHandle_; }
+#pragma endregion
+
+#pragma region Set
+
+	void SetTexHandle(const uint32_t texHandle);
 
 #pragma endregion
 

@@ -51,6 +51,8 @@ public:
 	/// </summary>
 	static Math::Vector::Vector2 GetTextureSize(uint32_t texHandle);
 
+	static string GetTexFilePath(const uint32_t& texHandle);
+
 	/// <summary>
 	/// ファイルパスを一から書くときに使うやつ
 	/// </summary>

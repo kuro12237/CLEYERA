@@ -5,6 +5,10 @@
 #include"JoyUI/JoyStickUI.h"
 #include"JoyUI/JoyStickBackUI.h"
 
+#include"GameSceneBottonUI/BaseBottonUI.h"
+
+#include"GameSceneBottonsAction.h"
+#include"GameSceneUIControl.h"
 
 struct JoyStickUIData
 {
@@ -48,4 +52,9 @@ private:
 
 	uint32_t joyStickMax_ = 2;
 	vector<JoyStickUIData>joyStickUis_;
+	vector<shared_ptr<BaseBottonUI>>bottonUis_;
+
+	unique_ptr<GameSceneUIBottonsAction>bottonAction_ = nullptr;
+	unique_ptr<GameSceneUIBottonsControl>bottonControl_ = nullptr;
+
 };

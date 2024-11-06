@@ -78,3 +78,10 @@ void ISpriteData::CalcAnkerPos()
 	sprite_->GetPos().x = texSize.x * -ankerPos_.x;
 	sprite_->GetPos().y = texSize.y * -ankerPos_.y;
 }
+
+void ISpriteData::SetTexHandle(const uint32_t texHandle)
+{
+	texHandle_ = texHandle;
+	fileName_ = TextureManager::GetTexFilePath(texHandle_);
+	sprite_->SetTexHandle(texHandle_);
+}

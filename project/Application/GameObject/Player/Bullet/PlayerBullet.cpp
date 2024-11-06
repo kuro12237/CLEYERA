@@ -9,7 +9,7 @@ void PlayerBullet::Initialize(string number)
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = spownPos_;
-	transform.translate.y += 1.0f;
+
 	SetObjectData(transform);
 
 	//‰ñ“]“K—p

@@ -170,6 +170,18 @@ Math::Vector::Vector2 TextureManager::GetTextureSize(uint32_t texHandle)
 	return result;
 }
 
+string TextureManager::GetTexFilePath(const uint32_t& texHandle)
+{
+	for (auto& data : TextureManager::GetInstance()->texDatas_)
+	{
+		if (data.second->GetTexHandle() == texHandle)
+		{
+			return data.first;
+		}
+	}
+	return "";
+}
+
 
 bool TextureManager::CheckTexDatas(string filePath)
 {

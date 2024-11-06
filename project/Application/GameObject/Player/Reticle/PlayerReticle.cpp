@@ -10,11 +10,11 @@ void PlayerReticle::Initialize()
 {
 	name_ = "PlayerReticle";
 	uint32_t modelHandle = ModelManager::LoadObjectFile("DfCube");
-	shared_ptr<Game3dObjectData> data;
-	data = make_shared<Game3dObjectData>();
+	shared_ptr<Game3dObjectData> data=make_shared<Game3dObjectData>();
+	data->SetObjectType("MESH");
 	data->SetObjName(name_);
 	data->SetModelHandle(modelHandle);
-	data->Initialize({}, {}, 0);
+	data->Initialize({ {1.0f,1.0f,1.0f},{ } , {} }, { }, modelHandle);
 
 	GameObjectManager::GetInstance()->PushObj3dData(data, name_);
 	//GameObjectManager::GetInstance()->SetParent("Player", name_);
@@ -41,7 +41,7 @@ void PlayerReticle::Update()
 	//Get
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
-	Math::Vector::Vector3 reticleWorldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().GetWorldPosition();
+	Math::Vector::Vector3& reticleWorldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.translate;
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	Math::Vector::Vector3 playerPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().GetWorldPosition();
 

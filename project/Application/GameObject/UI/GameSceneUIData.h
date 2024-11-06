@@ -3,10 +3,12 @@
 /// <summary>
 /// ゲームシーンで使うUI列挙
 /// </summary>
-enum class GameSceneUIEnum
+enum class SceneUIEnum
 {
 	JoyStick_L,
 	JoyStick_R,
+	Botton_A,
+	Botton_RT,
 };
 
 enum class JoyStickLeftRight
@@ -20,9 +22,32 @@ enum class JoyStickLeftRight
 /// </summary>
 /// <param name="direction"></param>
 /// <returns></returns>
+inline std::string CheckSceneUIEnumtoString(const SceneUIEnum& ui)
+{
+	if( ui == SceneUIEnum::JoyStick_L)
+	{
+		return  "L";
+	}
+	if (ui == SceneUIEnum::JoyStick_R)
+	{
+		return  "R";
+	}
+	if (ui==SceneUIEnum::Botton_A)
+	{
+		return "A";
+	}
+
+	return "";
+}
+
+/// <summary>
+/// UIの列挙をstringに変換
+/// </summary>
+/// <param name="direction"></param>
+/// <returns></returns>
 inline std::string CheckJoyStickUILeftRight(const JoyStickLeftRight& direction)
 {
-	if( direction == JoyStickLeftRight::Left)
+	if (direction == JoyStickLeftRight::Left)
 	{
 		return  "L";
 	}

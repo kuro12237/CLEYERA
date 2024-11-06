@@ -33,6 +33,7 @@ void PlayerManager::Initialize()
 	gameObjectManager_->CameraReset(camera_->GetName());
 
 	p_ReticleWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(reticle_->GetName())->GetWorldTransform().transform.translate;
+	p_GunWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(gun_->GetName())->GetWorldTransform().transform.translate;
 
 	gun_->SetTarget(*p_ReticleWorldPos_);
 
@@ -82,7 +83,7 @@ void PlayerManager::Update()
 	//Bullet
 	if (playerCore_->GetIsShoot())
 	{
-		PushBullet(playerWorldPos);
+		PushBullet(*p_GunWorldPos_);
 	}
 
 
@@ -141,12 +142,11 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	ModelManager::ModelLoadNormalMap();
 	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");
 	//オブジェクトの作成
-	shared_ptr<Game3dObjectData> data;
-	data = make_shared<Game3dObjectData>();
+	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();
+
 	TransformEular transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
-	transform.translate = pos;
-	transform.translate.y = pos.y + 1.0f;
+	transform.translate = *p_GunWorldPos_;
 	data->SetObjectType("MESH");
 	data->Initialize(transform, {}, modelHandle);
 
@@ -162,7 +162,7 @@ void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 	};
 
 	//velocityの計算
-	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(*p_ReticleWorldPos_, playerWorldPos);
+	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(*p_ReticleWorldPos_, *p_GunWorldPos_);
 	velocity.x += spreadRange.x;
 	velocity.y += spreadRange.y;
 	velocity = Math::Vector::Normalize(velocity);
