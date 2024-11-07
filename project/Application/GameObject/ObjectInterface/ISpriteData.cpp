@@ -46,6 +46,10 @@ void ISpriteData::CreateObject()
 void ISpriteData::UpdateData()
 {
 	worldTransform_.transform = GetJsonItem<TransformEular>("transform");
+}
+
+void ISpriteData::UpdateTextureData()
+{
 	fileName_ = GetJsonItem<string>("fileName");
 	ankerPos_ = GetJsonItem<Math::Vector::Vector2>("ankerPos");
 	Math::Vector::Vector2 texSize = TextureManager::GetTextureSize(texHandle_);

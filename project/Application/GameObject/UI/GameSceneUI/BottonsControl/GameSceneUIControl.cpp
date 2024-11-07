@@ -17,3 +17,4 @@ bool GameSceneUIBottonsControl::ControlRT()
 	}
 	return false;
 }
+

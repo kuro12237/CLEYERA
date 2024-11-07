@@ -50,15 +50,13 @@ public:
 	void CalcAnkerPos();
 
 #pragma region Get
-
 	Engine::Transform::WorldTransform& GetWorldTransform() { return worldTransform_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 #pragma endregion
 
 #pragma region Set
-
 	void SetTexHandle(const uint32_t texHandle);
-
+	void SetTransform(const TransformEular& transform) { worldTransform_.transform = transform; }
 #pragma endregion
 
 
@@ -77,6 +75,8 @@ protected:
 	/// パラメーターの更新
 	/// </summary>
 	void UpdateData();
+
+	void UpdateTextureData();
 
 	string name_ = "";
 

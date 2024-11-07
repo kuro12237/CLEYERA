@@ -12,12 +12,6 @@ enum class SceneUIEnum
 	JoyStick_None,
 };
 
-enum class JoyStickLeftRight
-{
-	Left,
-	Right,
-};
-
 /// <summary>
 /// joyStick‚Ì•ûŒü‚ğ“üè‚·‚éŠÖ”
 /// </summary>
@@ -40,24 +34,6 @@ inline std::string CheckSceneUIEnumtoString(const SceneUIEnum& ui)
 	if (ui == SceneUIEnum::Botton_RT)
 	{
 		return "RT";
-	}
-	return "";
-}
-
-/// <summary>
-/// UI‚Ì—ñ‹“‚ğstring‚É•ÏŠ·
-/// </summary>
-/// <param name="direction"></param>
-/// <returns></returns>
-inline std::string CheckJoyStickUILeftRight(const JoyStickLeftRight& direction)
-{
-	if (direction == JoyStickLeftRight::Left)
-	{
-		return  "L";
-	}
-	if (direction == JoyStickLeftRight::Right)
-	{
-		return  "R";
 	}
 	return "";
 }

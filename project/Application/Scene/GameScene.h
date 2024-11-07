@@ -28,7 +28,7 @@
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"Particle/Field/ParticleField.h"
 
-#include"GameObject/UI/GameSceneUI.h"
+#include"GameObject/UI/GameSceneUI/GameSceneUI.h"
 
 #include"Scene/TitleScene.h"
 #include"GameFileLoader/RailLoader/RailLoader.h"

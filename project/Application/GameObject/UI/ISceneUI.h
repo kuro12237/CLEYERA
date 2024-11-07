@@ -1,6 +1,7 @@
 #pragma once
 #include"Pch.h"
 #include"GameObject/ObjectInterface/ISpriteData.h"
+#include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>
 /// UIの抽象クラス
@@ -24,14 +25,33 @@ public:
 	/// <summary>
 	/// 2d表示
 	/// </summary>
-	virtual void Draw2d() = 0;
+	void Draw2d();
+
+	void ImGuiUpdate();
 
 private:
 
 protected:
 
+	/// <summary>
+	/// uiのデータをspriteに移動
+	/// </summary>
+	void PushSpriteData();
+
+	/// <summary>
+	/// SceneEnumUINoneで作製
+	/// </summary>
+	/// <param name="gruopKey"></param>
+	void KeyCreateEnumNoneUI(const string & gruopKey);
+
 	GlobalVariables* globalVariables_ = nullptr;
 
+	vector<shared_ptr<BaseBottonUI>>bottonUis_;
 	vector<weak_ptr<ISpriteData>>sprites_;
 
+#ifdef _USE_IMGUI
+
+	string newSpriteName_ = "";
+
+#endif // _USE_IMGUI
 };

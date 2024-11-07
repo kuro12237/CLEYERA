@@ -1,6 +1,10 @@
 #pragma once
-#include"GameSceneBottonUI/BaseBottonUI.h"
 
+#include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
+
+/// <summary>
+/// uiÇÃêßå‰
+/// </summary>
 class GameSceneUIBottonsControl
 {
 public:
@@ -10,6 +14,8 @@ public:
 	bool ControlA();
 
 	bool ControlRT();
+
+	bool ControlJoStick();
 
 private:
 

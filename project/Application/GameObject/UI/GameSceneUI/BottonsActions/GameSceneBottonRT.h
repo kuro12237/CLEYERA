@@ -1,5 +1,5 @@
 #pragma once
-#include"GameObject/UI/GameSceneBottonUI/BaseBottonUI.h"
+#include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>
 /// BottonRT‘€ìƒNƒ‰ƒX
