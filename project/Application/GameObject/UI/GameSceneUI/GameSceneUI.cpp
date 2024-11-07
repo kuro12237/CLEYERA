@@ -11,6 +11,7 @@ void GameSceneUI::Initialize()
 
 	bottonAction_->Initialize();
 
+	//”wŒi“Ç‚Ýž‚Ý
 	string joyStickBackKey = "GameSceneJoyStickUI_Back_";
 	this->KeyCreateEnumNoneUI(joyStickBackKey);
 

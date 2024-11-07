@@ -41,24 +41,20 @@ void PlayerReticle::Update()
 	//Get
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
-	Math::Vector::Vector3& reticleWorldPos = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform.translate;
+
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
 	Math::Vector::Vector3 playerGunPos = GameObjectManager::GetInstance()->GetObj3dData("PlayerGun")->GetWorldTransform().GetWorldPosition();
 
-	interTarget_ = Math::Vector::Lerp(interTarget_, transform.translate, 0.5f);
-	reticleWorldPos = Math::Vector::Add(reticleWorldPos, interTarget_);
 
-	transform.translate = playerGunPos;
+	Math::Vector::Vector3 pos = { playerGunPos.x + reticlePos_.x,playerGunPos.y + reticlePos_.y,playerGunPos.z };
+	interTarget_ = Math::Vector::Lerp(interTarget_, pos, 0.5f);
+	transform.translate = interTarget_;
 
-	transform.translate.x += reticlePos_.x;
-	transform.translate.y += reticlePos_.y;
-
-	transform.rotate = { 0.0f,0.0f,0.0f };
 	//çsóÒïœä∑
 	Math::Matrix::Matrix4x4 matViewport = Math::Matrix::ViewportMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0, 1);
 	Math::Matrix::Matrix4x4 matViewProjViewPort = Math::Matrix::Multiply(viewMat, Math::Matrix::Multiply(ProjMat, matViewport));
 
-	worldTransform_.transform.translate =Math::Vector::TransformByMatrix(reticleWorldPos, matViewProjViewPort);
+	worldTransform_.transform.translate =Math::Vector::TransformByMatrix(transform.translate, matViewProjViewPort);
 	worldTransform_.UpdateMatrix();
 }
 
