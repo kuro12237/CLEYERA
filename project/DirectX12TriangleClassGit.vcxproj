@@ -62,7 +62,9 @@
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateInvincible.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateJamp.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWalk.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp" />
@@ -220,7 +222,9 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateFall.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateInvincible.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateJamp.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWalk.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h" />

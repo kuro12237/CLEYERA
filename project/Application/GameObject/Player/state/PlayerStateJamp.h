@@ -3,13 +3,13 @@
 #include"../Player.h"
 
 /// <summary>
-/// プレイヤー歩き状態
+/// プレイヤージャンプ状態
 /// </summary>
-class PlayerStateWalk :public IPlayerState
+class PlayerStateJamp :public IPlayerState
 {
 public:
-	PlayerStateWalk() {};
-	~PlayerStateWalk() {};
+	PlayerStateJamp() {};
+	~PlayerStateJamp() {};
 
 	void Initialize(Player* p)override;
 

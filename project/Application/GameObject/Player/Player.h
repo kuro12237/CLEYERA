@@ -20,6 +20,8 @@
 #include"state/PlayerStateDeadAnimation.h"
 #include"state/PlayerStateInvincible.h"
 #include"state/PlayerStateWalk.h"
+#include"state/PlayerStateJamp.h"
+#include"state/PlayerStateFall.h"
 
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
@@ -119,7 +121,6 @@ public:
 	void WalkanimationAddFlame(const float& flame) { walkAnimationFlame_ += flame; }
 
 #pragma region Get
-	bool GetIsJamp() { return isJamp_; }
 	bool GetIsShoot() { return isShoot_; }
 	bool& GetIsGameEnd() { return isGameEnd_; }
 	string& GetWarpFilePath() { return warpFilePath_; }
@@ -134,29 +135,23 @@ public:
 	void SetIsGameEnd(bool f) { isGameEnd_ = f; }
 	void SetIsDeadComplite(bool f) { isDeadAnimationComplite_ = f; }
 	void SetPlayerHP(shared_ptr<PlayerHp> hp) { hp_ = hp; }
+
 	void SetReduceHpFunc(std::function<void()>f) { reduceHpFunc_ = f; }
+	void SetDamageUpdateFunc(std::function<void()>f) { damegeUpdateFunc_ = f; }
+	void SetDamageUpdateEndFunc(std::function<void()>f) { damegeUpdateEndFunc_ = f; }
 #pragma endregion
 
 private:
 	function<void()>reduceHpFunc_ = nullptr;
+	function<void()>damegeUpdateFunc_ = nullptr;
+	function<void()>damegeUpdateEndFunc_ = nullptr;
 
-	/// <summary>
-	/// ダメージ更新
-	/// </summary>
-	void DamageUpdate();
-
-	/// <summary>
-	/// コントローラーのデッドゾーン
-	/// </summary>
-	/// <param name="v"></param>
-	bool ControlDeadZone(Math::Vector::Vector2& v);
 
 
 	std::unordered_map<std::type_index, std::unique_ptr<IPlayerState>> states_;
 	std::queue<std::type_index> statesToRemoveQueue_;
 
 
-	bool isJamp_ = false;
 	bool isShoot_ = false;
 	bool isGameEnd_ = false;
 

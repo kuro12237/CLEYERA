@@ -81,6 +81,7 @@ void Player::Update()
 	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
 
 	shootTimerFlame_++;
+	
 
 
 	for (auto& state : states_) {
@@ -97,17 +98,36 @@ void Player::Update()
 		states_.erase(typeIdx);
 		statesToRemoveQueue_.pop();
 	}
-
-
-	if (velocity_.y <= 0.0f)
+	//落下
+	if (velocity_.y <= -0.1f)
 	{
-		isJamp_ = true;
+		if (!IsInState<PlayerStateFall>())
+		{
+			AddState<PlayerStateFall>();
+		}
 	}
 
 	///ダメージ処理
 	if (IsInState<PlayerStateInvincible>())
 	{
-		DamageUpdate();
+		damegeCoolTimer_ += DeltaTimer(damegeFlame_);
+
+		if (damegeUpdateFunc_)
+		{
+			damegeUpdateFunc_();
+		}
+
+		//上限値になったら
+		if (damegeCoolTimer_ >= damageCoolTimerMax_)
+		{
+			damegeCoolTimer_ = 0;
+			//ダメージ演出の終わり処理
+			if (damegeUpdateEndFunc_)
+			{
+				damegeUpdateEndFunc_();
+			}
+			this->MarkStateForRemoval<PlayerStateInvincible>();
+		}
 	}
 
 	isShoot_ = false;
@@ -123,7 +143,7 @@ void Player::Update()
 	moveEmitParam.translate.y += particleOffset.y;
 	moveEmitParam.translate.z += particleOffset.z;
 
-	auto hp = hp_.lock();
+	//落ちたら
 	if (transform.translate.y <= -5.0f)
 	{
 		AddState<PlayerStateInvincible>();
@@ -135,7 +155,7 @@ void Player::Update()
 		}
 	}
 
-
+	//死んだアニメーションを再生してるとき
 	if (IsInState<PlayerStateDeadAnimation>())
 	{
 		auto& emit = deadParticle_->GetEmitter()->GetEmitParam()[0];
@@ -151,7 +171,6 @@ void Player::Update()
 		return;
 	}
 }
-
 
 void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 {
@@ -171,8 +190,8 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 
 	if (c->GetId() == kWarpGateId)
 	{
-			warpFilePath_ = gameObjectManager_->GetObj3dData(objData->GetName())->GetParamFilePaths()[0];
-			AddState<PlayerStateWarpMove>();
+		warpFilePath_ = gameObjectManager_->GetObj3dData(objData->GetName())->GetParamFilePaths()[0];
+		AddState<PlayerStateWarpMove>();
 	}
 
 	if (!IsInState<PlayerStateInvincible>())
@@ -195,9 +214,12 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 			{
 				velocity_ = {};
 			}
-			if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
+			if (hitDirection == BOTTOM && velocity_.y <= -0.0f)
 			{
-				isJamp_ = false;
+				if (IsInState<PlayerStateJamp>())
+				{
+					this->MarkStateForRemoval<PlayerStateJamp>();
+				}
 				velocity_ = {};
 			}
 		}
@@ -218,11 +240,10 @@ void Player::Jamp()
 	{
 		return;
 	}
-	if (!isJamp_)
+
+	if (!IsInState<PlayerStateJamp>())
 	{
-		isJamp_ = true;
-		const float jampMax = 0.35f;
-		velocity_.y = jampMax;
+		AddState<PlayerStateJamp>();
 	}
 }
 
@@ -233,7 +254,7 @@ void Player::Move()
 	{
 		return;
 	}
-
+	//死んだラ通さない
 	if (IsInState<PlayerStateDeadAnimation>())
 	{
 		return;
@@ -242,10 +263,6 @@ void Player::Move()
 	if (!IsInState<PlayerStateWalk>())
 	{
 		AddState<PlayerStateWalk>();
-	}
-	else
-	{
-		MarkStateForRemoval<PlayerStateWalk>();
 	}
 
 	//パーティクル
@@ -261,28 +278,3 @@ void Player::Shoot()
 		shootTimerFlame_ = 0;
 	}
 }
-
-void Player::DamageUpdate()
-{
-	//ビネットをかける
-	PostEffect* instance = PostEffect::GetInstance();
-	instance->SetSelectPostEffect(VIGNETTE, true);
-	const float vinatteScale = 64.0f;
-	instance->SetVignetteScale(vinatteScale);
-	instance->SetVignetteFactor(vinatteFactor_);
-
-	const float vinateFactorSpeed = 0.007f;
-	damegeCoolTimer_ += DeltaTimer(damegeFlame_);
-	vinatteFactor_ -= vinateFactorSpeed;
-
-	if (damegeCoolTimer_ >= damageCoolTimerMax_)
-	{
-		instance->SetSelectPostEffect(VIGNETTE, false);
-		instance->SetVignetteFactor(0.0f);
-		vinatteFactor_ = 1.0f;
-		damegeCoolTimer_ = 0;
-
-		this->MarkStateForRemoval<PlayerStateInvincible>();
-	}
-}
-

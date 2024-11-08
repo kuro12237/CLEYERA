@@ -78,14 +78,16 @@ private:
 	/// </summary>
 	void CheckisDeadBullets();
 
-	/// <summary>
-	/// ƒ_ƒ[ƒW‚ğó‚¯‚½‚Ìˆ—
-	/// </summary>
-	void CheckDamage();
+
+	void DamegeUpdate();
+	void DamegeUpdateEnd();
+
+	float vinatteFactor_ = 1.0f;
 
 	bool gameStartFlag_ = false;
 
 	GameObjectManager* gameObjectManager_ = nullptr;
+	PostEffect* postEffect_ = nullptr;
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 	unique_ptr<PlayerReticleCommandHandler>reticleCommandHandler_ = nullptr;

@@ -727,6 +727,8 @@
     <ClCompile Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateInvincible.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWalk.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateJamp.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1239,6 +1241,8 @@
     <ClInclude Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateInvincible.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWalk.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateJamp.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateFall.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

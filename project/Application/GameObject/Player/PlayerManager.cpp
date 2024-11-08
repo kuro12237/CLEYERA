@@ -40,6 +40,11 @@ void PlayerManager::Initialize()
 
 	isChangeGameOverAnimation_ = &playerCore_->GetIsChangeDeadAnimation();
 
+	postEffect_ = PostEffect::GetInstance();
+
+	//ダメージの演出関数をセット
+	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
+	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdate, this));
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -216,6 +221,25 @@ void PlayerManager::CheckisDeadBullets()
 			bullets_[index].reset();
 		}
 	}
+}
+
+void PlayerManager::DamegeUpdate()
+{
+	const float vinatteScale = 64.0f;
+	const float vinateFactorSpeed = 0.007f;
+	//ビネットをかける
+	postEffect_->SetSelectPostEffect(VIGNETTE, true);
+	postEffect_->SetVignetteScale(vinatteScale);
+	postEffect_->SetVignetteFactor(vinatteFactor_);
+
+	vinatteFactor_ -= vinateFactorSpeed;
+}
+
+void PlayerManager::DamegeUpdateEnd()
+{
+	postEffect_->SetSelectPostEffect(VIGNETTE, false);
+	postEffect_->SetVignetteFactor(0.0f);
+	vinatteFactor_ = 1.0f;
 }
 
 
