@@ -83,7 +83,7 @@ void Player::Update()
 	shootTimerFlame_++;
 	
 
-
+	//ó‘ÔXV
 	for (auto& state : states_) {
 		auto& it = state.second;
 		if (it)
@@ -98,6 +98,7 @@ void Player::Update()
 		states_.erase(typeIdx);
 		statesToRemoveQueue_.pop();
 	}
+
 	//—‰º
 	if (velocity_.y <= -0.1f)
 	{
