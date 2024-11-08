@@ -18,7 +18,8 @@
 #include"state/PlayerStateGoalAnimation.h"
 #include"state/PlayerStateWarpMove.h"
 #include"state/PlayerStateDeadAnimation.h"
-
+#include"state/PlayerStateInvincible.h"
+#include"state/PlayerStateWalk.h"
 
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
@@ -52,22 +53,44 @@ public:
 
 
 	/// <summary>
+	/// パーティクル表示
+	/// </summary>
+	void DrawParticle();
+
+	/// <summary>
 	/// 当たった時の処理
 	/// </summary>
 	/// <param name="c"></param>
 	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 	/// <summary>
-	/// 状態遷移
+	/// 状態を追加
 	/// </summary>
-	/// <param name="newState"></param>
-	void ChangeState(unique_ptr<IPlayerState>newState);
-
+	/// <typeparam name="T"></typeparam>
+	template <typename T>
+	void AddState() {
+		std::type_index typeIdx(typeid(T));
+		if (states_.find(typeIdx) == states_.end()) {
+			states_[typeIdx] = std::make_unique<T>();
+			states_[typeIdx]->Initialize(this);
+		}
+	}
 
 	/// <summary>
-	/// パーティクル表示
+	/// 状態を削除
 	/// </summary>
-	void DrawParticle();
+	/// <typeparam name="T"></typeparam>
+	template <typename T>
+	void MarkStateForRemoval() {
+		std::type_index typeIdx(typeid(T));
+		statesToRemoveQueue_.push(typeIdx);
+	}
+
+	template <typename T>
+	bool IsInState() const {
+		std::type_index typeIdx(typeid(T));
+		return states_.find(typeIdx) != states_.end();
+	}
 
 #pragma region Command
 
@@ -80,7 +103,7 @@ public:
 	///　MoveCommand
 	/// </summary>
 	/// <param name="speed"></param>
-	void Move(float speed);
+	void Move();
 
 	/// <summary>
 	/// 射撃コマンド
@@ -93,30 +116,25 @@ public:
 	void ResetPos() { gameObjectManager_->GetObj3dData(this->INameable::name_)->GetWorldTransform().transform.translate = resetPos_; }
 #pragma endregion
 
+	void WalkanimationAddFlame(const float& flame) { walkAnimationFlame_ += flame; }
+
 #pragma region Get
 	bool GetIsJamp() { return isJamp_; }
 	bool GetIsShoot() { return isShoot_; }
 	bool& GetIsGameEnd() { return isGameEnd_; }
-	bool GetIsGoal() { return isGoal_; }
-
-	bool& GetIsInvincible() { return isInvincible_; }
 	string& GetWarpFilePath() { return warpFilePath_; }
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
 	bool& GetIsChangeDeadAnimation() { return isChangeDeadAnimation_; }
 	PlayerDeadParticle* GetDeadParticle() { return deadParticle_.get(); }
-
 #pragma endregion
 
 #pragma region Set
-	void SetRockState(bool f) { isRockState_ = f; }
-
 	void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
 	void SetIsGameEnd(bool f) { isGameEnd_ = f; }
 	void SetIsDeadComplite(bool f) { isDeadAnimationComplite_ = f; }
 	void SetPlayerHP(shared_ptr<PlayerHp> hp) { hp_ = hp; }
 	void SetReduceHpFunc(std::function<void()>f) { reduceHpFunc_ = f; }
-
 #pragma endregion
 
 private:
@@ -131,17 +149,16 @@ private:
 	/// コントローラーのデッドゾーン
 	/// </summary>
 	/// <param name="v"></param>
-	void ControlDeadZone(Math::Vector::Vector2& v);
+	bool ControlDeadZone(Math::Vector::Vector2& v);
 
-	unique_ptr<IPlayerState>state_ = nullptr;
+
+	std::unordered_map<std::type_index, std::unique_ptr<IPlayerState>> states_;
+	std::queue<std::type_index> statesToRemoveQueue_;
 
 
 	bool isJamp_ = false;
 	bool isShoot_ = false;
-	bool isRockState_ = false;
-	bool isInvincible_ = false;
 	bool isGameEnd_ = false;
-	bool isGoal_ = false;
 
 	bool isDeadAnimationComplite_ = false;
 

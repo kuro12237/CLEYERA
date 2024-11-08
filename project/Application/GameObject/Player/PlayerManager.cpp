@@ -70,8 +70,7 @@ void PlayerManager::Update()
 	}
 
 	//Commands
-
-	if (gameStartFlag_ && !playerCore_->GetIsGoal() && !*isChangeGameOverAnimation_)
+	if (gameStartFlag_ && !playerCore_->IsInState<PlayerStateGoalAnimation>() && !*isChangeGameOverAnimation_)
 	{
 		//プレイヤーの操作キャラ
 		commandHandler_->Handler();
@@ -79,6 +78,12 @@ void PlayerManager::Update()
 		//レティクル
 		reticleCommandHandler_->Handler();
 		reticleCommandHandler_->Exec(*reticle_);
+	}
+
+	//hpがなくなったら
+	if (hp_->GetHp() <= 0 && !playerCore_->IsInState<PlayerStateDeadAnimation>())
+	{
+		playerCore_->AddState<PlayerStateDeadAnimation>();
 	}
 
 	//Bullet

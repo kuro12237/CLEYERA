@@ -5,8 +5,6 @@ void Player::Initialize()
 	INameable::name_ = "Player";
 
 	//状態異常のステート
-	state_ = make_unique<PlayerStateNone>();
-	state_->Initialize(this);
 	//id設定
 	id_ = kPlayerId;
 	//当たり判定
@@ -66,6 +64,9 @@ void Player::ImGuiUpdate()
 
 		ImGui::DragFloat3("min", &aabb_.min.x, 0.1f);
 		ImGui::DragFloat3("max", &aabb_.max.x, 0.1f);
+
+		ImGui::Text("%d", static_cast<int>(states_.size()));
+
 		ImGui::TreePop();
 	}
 }
@@ -81,17 +82,30 @@ void Player::Update()
 
 	shootTimerFlame_++;
 
-	if (state_)
-	{
-		state_->Update(this);
+
+	for (auto& state : states_) {
+		auto& it = state.second;
+		if (it)
+		{
+			it->Update(this);
+		}
 	}
+
+	// 更新後にキューから状態を削除
+	while (!statesToRemoveQueue_.empty()) {
+		std::type_index typeIdx = statesToRemoveQueue_.front();
+		states_.erase(typeIdx);
+		statesToRemoveQueue_.pop();
+	}
+
+
 	if (velocity_.y <= 0.0f)
 	{
 		isJamp_ = true;
 	}
 
 	///ダメージ処理
-	if (isInvincible_)
+	if (IsInState<PlayerStateInvincible>())
 	{
 		DamageUpdate();
 	}
@@ -112,7 +126,7 @@ void Player::Update()
 	auto hp = hp_.lock();
 	if (transform.translate.y <= -5.0f)
 	{
-		isInvincible_ = true;
+		AddState<PlayerStateInvincible>();
 		ResetPos();
 
 		if (reduceHpFunc_)
@@ -122,7 +136,7 @@ void Player::Update()
 	}
 
 
-	if (hp->GetHp() <= 0 && !isChangeDeadAnimation_)
+	if (IsInState<PlayerStateDeadAnimation>())
 	{
 		auto& emit = deadParticle_->GetEmitter()->GetEmitParam()[0];
 		auto& control = deadParticle_->GetEmitter()->GetControlParam()[0];
@@ -134,9 +148,6 @@ void Player::Update()
 		emit.velocityMax = { 0.1f,0.1f,0.1f };
 		emit.velocityMin = { -0.1f,-0.1f,-0.1f };
 		emit.translate = transform.translate;
-
-		ChangeState(make_unique<PlayerStateDeadAnimation>());
-		isChangeDeadAnimation_ = true;
 		return;
 	}
 }
@@ -151,24 +162,20 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 
 	if (c->GetId() == kGoalId)
 	{
-		if (!isGoal_)
+		if (!IsInState<PlayerStateGoalAnimation>())
 		{
-			isGoal_ = true;
-			ChangeState(make_unique<PlayerStateGoalAnimation>());
+			AddState<PlayerStateGoalAnimation>();
 		}
 		return;
 	}
 
 	if (c->GetId() == kWarpGateId)
 	{
-		if (dynamic_cast<PlayerStateNone*>(state_.get()))
-		{
 			warpFilePath_ = gameObjectManager_->GetObj3dData(objData->GetName())->GetParamFilePaths()[0];
-			ChangeState(make_unique<PlayerStateWarpMove>());
-		}
+			AddState<PlayerStateWarpMove>();
 	}
 
-	if (!isInvincible_)
+	if (!IsInState<PlayerStateInvincible>())
 	{
 		if (c->GetId() == kEnemyWalkId)
 		{
@@ -176,7 +183,7 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 			{
 				reduceHpFunc_();
 			}
-			isInvincible_ = true;
+			AddState<PlayerStateInvincible>();
 		}
 	}
 
@@ -200,13 +207,6 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 	}
 }
 
-void Player::ChangeState(unique_ptr<IPlayerState> newState)
-{
-	state_.release();
-	state_ = move(newState);
-	state_->Initialize(this);
-}
-
 void Player::DrawParticle()
 {
 	deadParticle_->Draw();
@@ -214,7 +214,7 @@ void Player::DrawParticle()
 
 void Player::Jamp()
 {
-	if (isRockState_)
+	if (IsInState<PlayerStateRock>())
 	{
 		return;
 	}
@@ -226,40 +226,27 @@ void Player::Jamp()
 	}
 }
 
-void Player::Move(float speed)
+void Player::Move()
 {
 	//石化のときは通さない
-	if (isRockState_)
+	if (IsInState<PlayerStateRock>())
 	{
 		return;
 	}
 
-	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
-	auto& rotate = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform.rotate;
-
-	{//移動処理
-		ControlDeadZone(Ljoy);
-		velocity_.x = Ljoy.x * speed;
+	if (IsInState<PlayerStateDeadAnimation>())
+	{
+		return;
 	}
 
-	{//回転制御
-		//右
-		const float degrees = 90.0f;
-		float radian = 0.0f;
-		if (velocity_.x > 0.0f)
-		{
-			radian = Math::Vector::degreesToRadians(degrees);
-		}
-		//左
-		if (velocity_.x < 0.0f)
-		{
-			radian = Math::Vector::degreesToRadians(-degrees);
-		}
-		rotate.y = radian;
+	if (!IsInState<PlayerStateWalk>())
+	{
+		AddState<PlayerStateWalk>();
 	}
-
-	//アニメーション
-	walkAnimationFlame_ += (1.0f / 30.0f) * fabsf(Ljoy.x);
+	else
+	{
+		MarkStateForRemoval<PlayerStateWalk>();
+	}
 
 	//パーティクル
 	CharacterMoveParticle::GetInstance()->Emit();
@@ -294,20 +281,8 @@ void Player::DamageUpdate()
 		instance->SetVignetteFactor(0.0f);
 		vinatteFactor_ = 1.0f;
 		damegeCoolTimer_ = 0;
-		isInvincible_ = false;
+
+		this->MarkStateForRemoval<PlayerStateInvincible>();
 	}
 }
 
-
-void Player::ControlDeadZone(Math::Vector::Vector2& v)
-{
-	const float deadNum = 0.1f;
-	if (v.x >= -deadNum && v.x <= deadNum)
-	{
-		v.x = {};
-	}
-	if (v.y >= -deadNum && v.y <= deadNum)
-	{
-		v.y = {};
-	}
-}

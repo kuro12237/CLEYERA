@@ -232,7 +232,7 @@ void GameScene::ImGuiUpdate()
 
 void GameScene::Collision()
 {
-	if (!player_->GetPlayerCore()->GetIsGoal())
+	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
 		gameCollisionManager_->ListPushback(player_->GetPlayerCore(), player_->GetPlayerCore());
 	}
@@ -272,7 +272,7 @@ void GameScene::Gravitys()
 {
 	gravityManager_->ClearList();
 
-	if (!player_->GetPlayerCore()->GetIsGoal())
+	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
 		if (player_->GetPlayerCore()->GetIsUseGravityFlag())
 		{

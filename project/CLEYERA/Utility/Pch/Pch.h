@@ -16,13 +16,17 @@
 #include<queue>
 #include<list>
 #include<vector>
-
+#include <unordered_map>
+#include <typeindex>
+#include <typeinfo>
 #include <variant>
 
 #include<fstream>
 #include<sstream>
 #include<string>
 #include <iomanip> 
+
+
 
 #include<Windows.h>
 #pragma comment(lib,"winmm.lib")

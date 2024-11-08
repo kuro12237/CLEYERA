@@ -33,7 +33,7 @@ void PlayerStateWarpMove::Update(Player* p)
 	{
 		wt.transform.translate = prevPos_;
 		p->SetIsUseGravityFlag(true);
-		p->ChangeState(make_unique<PlayerStateNone>());
+
 		auto& objectData = GameObjectManager::GetInstance()->GetObj3dData(p->INameable::GetName());
 		objectData->GetGameObject()->SetModel(prevModelHandle_);
 
@@ -43,6 +43,7 @@ void PlayerStateWarpMove::Update(Player* p)
 
 		auto& gunObjectData = GameObjectManager::GetInstance()->GetObj3dData("PlayerGun");
 		gunObjectData->SetIsDraw(true);
+		p->MarkStateForRemoval<PlayerStateWarpMove>();
 		return;
 	}
 	prevPos_ = wt.transform.translate;

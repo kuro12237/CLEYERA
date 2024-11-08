@@ -144,7 +144,7 @@ void SelectScene::Flont2dSpriteDraw()
 void SelectScene::Collision()
 {
 	//プレイヤー本体
-	if (!player_->GetPlayerCore()->GetIsGoal())
+	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
 		gameCollisionManager_->ListPushback(player_->GetPlayerCore(), player_->GetPlayerCore());
 	}
@@ -174,7 +174,7 @@ void SelectScene::Gravitys()
 {
 	gravityManager_->ClearList();
 
-	if (!player_->GetPlayerCore()->GetIsGoal())
+	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
 		gravityManager_->PushList(player_->GetPlayerCore());
 	}
