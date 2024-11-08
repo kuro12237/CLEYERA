@@ -72,10 +72,8 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-
 	deadParticle_->Update();
 
-	isDamage_ = false;
 	string filePath = gameObjectManager_->GetObj3dData(INameable::name_)->GetModelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
@@ -112,6 +110,17 @@ void Player::Update()
 	moveEmitParam.translate.z += particleOffset.z;
 
 	auto hp = hp_.lock();
+	if (transform.translate.y <= -5.0f)
+	{
+		isInvincible_ = true;
+		ResetPos();
+
+		if (reduceHpFunc_)
+		{
+			reduceHpFunc_();
+		}
+	}
+
 
 	if (hp->GetHp() <= 0 && !isChangeDeadAnimation_)
 	{
@@ -163,7 +172,10 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 	{
 		if (c->GetId() == kEnemyWalkId)
 		{
-			isDamage_ = true;
+			if (reduceHpFunc_)
+			{
+				reduceHpFunc_();
+			}
 			isInvincible_ = true;
 		}
 	}

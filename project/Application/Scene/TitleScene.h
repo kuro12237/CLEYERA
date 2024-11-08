@@ -34,8 +34,10 @@
 #include"GameObject/Lava/Lava.h"
 #include"GameObject/TitleName/TitleName.h"
 #include"GameObject/TowerManager/TowerManager.h"
-#include"GameObject/TitleUI/TitlePushA.h"
 #include"GameObject/Particles/Fire/FireParticle.h"
+
+
+#include"GameObject/UI/TitleSceneUI/TitleSceneUI.h"
 
 /// <summary>
 /// ƒ^ƒCƒgƒ‹
@@ -104,9 +106,8 @@ private:
 	unique_ptr<TowerManager>towerManager_ = nullptr;
 
 	unique_ptr<TitleName>titleName_ = nullptr;
-	//UI
-	unique_ptr<TitlePushA>titlePushA_ = nullptr;
 
+	unique_ptr<ISceneUI>ui_ = nullptr;
 
 #pragma region Particle
 

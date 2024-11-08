@@ -61,7 +61,7 @@ void GameScene::Initialize()
 
 	gameUi_ = make_unique<GameSceneUI>();
 	gameUi_->Initialize();
-
+	
 }
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)

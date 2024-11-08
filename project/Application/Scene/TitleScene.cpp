@@ -57,10 +57,6 @@ void TitleScene::Initialize()
 	titleName_ = make_unique<TitleName>();
 	titleName_->Initialize();
 
-	//UI
-	titlePushA_ = make_unique<TitlePushA>();
-	titlePushA_->Initiaize();
-
 	bridge_.resize(bridgeSizeMax_);
 	for (size_t i = 0; i < bridgeSizeMax_; i++)
 	{
@@ -77,7 +73,9 @@ void TitleScene::Initialize()
 	towerManager_ = make_unique<TowerManager>();
 	towerManager_->Initialize();
 	towerManager_->SetP_Camera(cameraWt.transform.translate);
-
+	
+	ui_ = make_unique<TitleSceneUI>();
+	ui_->Initialize();
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -89,7 +87,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	//fireEmberParticle_->ImGuiUpdate();
 
 	changeSceneAnimation_->ImGuiUpdate();
-
+	ui_->ImGuiUpdate();
 	
 #endif // _USE_IMGUI
 
@@ -123,11 +121,13 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	titleLight_->Update();
 
 	titleName_->Update();
-	titlePushA_->Update();
 
 	towerManager_->Update();
 
 	gameObjectManager_->Update();
+
+	ui_->Update();
+
 
 	if (isChangeSelectScene_)
 	{
@@ -158,8 +158,8 @@ void TitleScene::Flont2dSpriteDraw()
 {
 	PostEffect::GetInstance()->Draw();
 
-	titlePushA_->Draw();
 	//fireEmberParticle_->Draw();
+	ui_->Draw2d();
 
 	changeSceneAnimation_->Draw();
 

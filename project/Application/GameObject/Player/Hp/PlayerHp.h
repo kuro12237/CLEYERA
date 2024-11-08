@@ -31,12 +31,19 @@ public:
 	/// </summary>
 	void Draw2d();
 
+	void ReduceHp();
+
 #pragma region Get
 	int32_t &GetHp() { return hpCount_; }
 #pragma endregion
 
+#pragma region Set
+
+#pragma endregion
+
 private:
 
+	
 	int32_t hpCount_ = 0;
 
 	unique_ptr<Engine::Objects::Sprite>sprite_ = nullptr;

@@ -99,7 +99,6 @@ public:
 	bool& GetIsGameEnd() { return isGameEnd_; }
 	bool GetIsGoal() { return isGoal_; }
 
-	bool& GetIsDamageFlag() { return isDamage_; }
 	bool& GetIsInvincible() { return isInvincible_; }
 	string& GetWarpFilePath() { return warpFilePath_; }
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
@@ -111,15 +110,17 @@ public:
 
 #pragma region Set
 	void SetRockState(bool f) { isRockState_ = f; }
-	void SetDamageFlag(bool f) { isDamage_ = f; }
+
 	void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
 	void SetIsGameEnd(bool f) { isGameEnd_ = f; }
 	void SetIsDeadComplite(bool f) { isDeadAnimationComplite_ = f; }
 	void SetPlayerHP(shared_ptr<PlayerHp> hp) { hp_ = hp; }
+	void SetReduceHpFunc(std::function<void()>f) { reduceHpFunc_ = f; }
 
 #pragma endregion
 
 private:
+	function<void()>reduceHpFunc_ = nullptr;
 
 	/// <summary>
 	/// ダメージ更新
@@ -138,8 +139,6 @@ private:
 	bool isJamp_ = false;
 	bool isShoot_ = false;
 	bool isRockState_ = false;
-	bool isDamage_ = false;
-
 	bool isInvincible_ = false;
 	bool isGameEnd_ = false;
 	bool isGoal_ = false;

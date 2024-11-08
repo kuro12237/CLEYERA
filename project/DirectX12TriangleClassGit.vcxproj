@@ -72,6 +72,7 @@
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.cpp" />
     <ClCompile Include="Application\GameObject\UI\ISceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpManager.cpp" />
@@ -115,7 +116,6 @@
     <ClCompile Include="Application\GameObject\TitleCamera\TitleCamera.cpp" />
     <ClCompile Include="Application\GameObject\TitleLight\TitleLight.cpp" />
     <ClCompile Include="Application\GameObject\TitleName\TitleName.cpp" />
-    <ClCompile Include="Application\GameObject\TitleUI\TitlePushA.cpp" />
     <ClCompile Include="Application\GameObject\TowerManager\Tower.cpp" />
     <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp" />
     <ClCompile Include="CLEYERA\Animation\AnimationManager.cpp" />
@@ -218,6 +218,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateInvincible.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\GameSceneUIData.h" />
     <ClInclude Include="Application\GameObject\UI\ISceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.h" />
+    <ClInclude Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.h" />
     <ClInclude Include="Application\GameObject\Warp\Warp.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpManager.h" />
@@ -279,7 +281,6 @@
     <ClInclude Include="Application\GameObject\TitleCamera\TitleCamera.h" />
     <ClInclude Include="Application\GameObject\TitleLight\TitleLight.h" />
     <ClInclude Include="Application\GameObject\TitleName\TitleName.h" />
-    <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h" />
     <ClInclude Include="Application\GameObject\TowerManager\Tower.h" />
     <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h" />
     <ClInclude Include="Application\Utility\CollisionMask\CollisionMask.h" />

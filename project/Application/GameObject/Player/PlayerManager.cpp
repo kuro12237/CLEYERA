@@ -28,6 +28,7 @@ void PlayerManager::Initialize()
 	hp_->Initialize(kPlayerHp_);
 
 	playerCore_->SetPlayerHP(hp_);
+	playerCore_->SetReduceHpFunc(std::bind(&PlayerHp::ReduceHp, hp_.get()));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->CameraReset(camera_->GetName());
@@ -87,7 +88,7 @@ void PlayerManager::Update()
 	}
 
 
-	CheckDamage();
+	//CheckDamage();
 
 	hp_->Update();
 
@@ -212,20 +213,4 @@ void PlayerManager::CheckisDeadBullets()
 	}
 }
 
-void PlayerManager::CheckDamage()
-{
-	//hp
-	if (playerCore_->GetIsDamageFlag())
-	{
-		hp_->GetHp()--;
-	}
-	auto& transform = gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().transform;
-	if (transform.translate.y <= -5.0f)
-	{
-		playerCore_->GetIsDamageFlag() = true;
-		playerCore_->GetIsInvincible() = true;
-		playerCore_->ResetPos();
 
-		hp_->GetHp()--;
-	}
-}

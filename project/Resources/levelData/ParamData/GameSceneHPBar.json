@@ -1,0 +1,26 @@
+{
+    "GameSceneHPBar": {
+        "ankerPos": [
+            0.0,
+            0.0
+        ],
+        "fileName": "Hp/HpBar.png",
+        "transform": {
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.125,
+                "y": 0.125,
+                "z": 1.0
+            },
+            "translate": {
+                "x": 128.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+}

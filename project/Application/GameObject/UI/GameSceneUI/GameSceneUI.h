@@ -33,8 +33,4 @@ private:
 
 	unique_ptr<GameSceneUIBottonsAction>bottonAction_ = nullptr;
 	unique_ptr<GameSceneUIBottonsControl>bottonControl_ = nullptr;
-
-
-
-
 };

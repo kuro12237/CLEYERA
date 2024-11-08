@@ -699,9 +699,6 @@
     <ClCompile Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.cpp">
       <Filter>Project\GameObject\Title</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\TitleUI\TitlePushA.cpp">
-      <Filter>Project\GameObject\Title</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\TowerManager\Tower.cpp">
       <Filter>Project\GameObject\Tower</Filter>
     </ClCompile>
@@ -727,6 +724,7 @@
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.cpp" />
     <ClCompile Include="Application\GameObject\UI\ISceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1206,9 +1204,6 @@
     <ClInclude Include="Application\ChangeSceneAnimation\TitleName2d\TitleName2d.h">
       <Filter>Project\GameObject\Title</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\TitleUI\TitlePushA.h">
-      <Filter>Project\GameObject\Title</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\TowerManager\Tower.h">
       <Filter>Project\GameObject\Tower</Filter>
     </ClInclude>
@@ -1239,6 +1234,8 @@
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.h" />
+    <ClInclude Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateInvincible.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

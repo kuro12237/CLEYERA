@@ -85,3 +85,8 @@ void PlayerHp::Draw2d()
 
 	flameSprite_->Draw(flameWorldTransform_);
 }
+
+void PlayerHp::ReduceHp()
+{
+	hpCount_--;
+}
