@@ -60,6 +60,7 @@
     <ClCompile Include="Application\GameObject\Goal\Particle\GoalParticle.cpp" />
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBulletManager.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\IJsonHandler.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
+    <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBulletManager.h" />
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateFall.h" />

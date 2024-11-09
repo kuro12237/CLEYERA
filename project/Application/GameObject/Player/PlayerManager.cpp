@@ -45,6 +45,13 @@ void PlayerManager::Initialize()
 	//ダメージの演出関数をセット
 	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
 	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdate, this));
+
+
+	ModelManager::ModelLoadNormalMap();
+	bulletModelHandle_ = ModelManager::LoadObjectFile("PlayerNormalBullet");
+
+	bulletManager_ = make_unique<PlayerBulletManager>();
+	bulletManager_->Initialize();
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -54,6 +61,8 @@ void PlayerManager::ImGuiUpdate()
 		playerCore_->ImGuiUpdate();
 		reticle_->ImGuiUpdate();
 		hp_->ImGuiUpdate();
+
+		bulletManager_->ImGuiUpdate();
 
 		ImGui::Text("PlayerBulletSize::%d", bullets_.size());
 		if (ImGui::Button("bulleSpown"))
@@ -91,10 +100,16 @@ void PlayerManager::Update()
 		playerCore_->AddState<PlayerStateDeadAnimation>();
 	}
 
+	bulletManager_->Update();
+
 	//Bullet
 	if (playerCore_->GetIsShoot())
 	{
-		PushBullet(*p_GunWorldPos_);
+		if (bulletManager_->GetBulletCount() < 5)
+		{
+			bulletManager_->BulletCountAdd();
+			PushBullet(*p_GunWorldPos_);
+		}
 	}
 
 
@@ -104,6 +119,7 @@ void PlayerManager::Update()
 
 	//Main
 	playerCore_->Update();
+
 
 	if (*isChangeGameOverAnimation_)
 	{
@@ -140,6 +156,8 @@ void PlayerManager::Draw2d()
 void PlayerManager::DrawHp()
 {
 	hp_->Draw2d();
+	bulletManager_->Draw2d();
+
 }
 
 void PlayerManager::DrawParticle()
@@ -149,36 +167,23 @@ void PlayerManager::DrawParticle()
 
 void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
 {
-
-	ModelManager::ModelLoadNormalMap();
-	uint32_t modelHandle = ModelManager::LoadObjectFile("PlayerNormalBullet");
 	//オブジェクトの作成
 	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();
-
-	TransformEular transform;
-	transform.scale = { 1.0f,1.0f,1.0f };
-	transform.translate = *p_GunWorldPos_;
 	data->SetObjectType("MESH");
-	data->Initialize(transform, {}, modelHandle);
-
-	shared_ptr<PlayerBullet> b = make_shared<PlayerBullet>();
-	string name = "PlayerBullet";
+	data->Initialize({}, {}, bulletModelHandle_);
 
 	//弾の拡散範囲計算
 	//xMin/yMax
 	const Math::Vector::Vector2 spreadRangeMax = { -0.5f,0.5f };
-	Math::Vector::Vector2 spreadRange = {
-		RandomGenerator::GetFloat(spreadRangeMax.x,spreadRangeMax.y),
-		RandomGenerator::GetFloat(spreadRangeMax.x,spreadRangeMax.y)
-	};
 
 	//velocityの計算
 	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(*p_ReticleWorldPos_, *p_GunWorldPos_);
-	velocity.x += spreadRange.x;
-	velocity.y += spreadRange.y;
+	velocity.x += RandomGenerator::GetFloat(spreadRangeMax.x, spreadRangeMax.y);
+	velocity.y += RandomGenerator::GetFloat(spreadRangeMax.x, spreadRangeMax.y);
 	velocity = Math::Vector::Normalize(velocity);
 
-	b->SetPlayerSpeed(playerCore_->GetVelocity());
+	shared_ptr<PlayerBullet> b = make_shared<PlayerBullet>();
+	string name = "PlayerBullet";
 	b->SetVelocity(velocity);
 	b->SetSpownPos(pos);
 

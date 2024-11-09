@@ -13,6 +13,7 @@
 #include"PlayerCamera/PlayerCamera.h"
 #include"Hp/PlayerHp.h"
 #include"Utility/RandomGenerator/RandomGenerator.h"
+#include"Bullet/PlayerBulletManager.h"
 
 /// <summary>
 /// プレイヤーのオブジェクトの管理クラス
@@ -103,8 +104,11 @@ private:
 
 	bool* isChangeGameOverAnimation_ = nullptr;
 
+	unique_ptr<PlayerBulletManager>bulletManager_ = nullptr;
 	vector<shared_ptr<PlayerBullet>>bullets_{};
 	queue<uint32_t>deadBulletIndex_;
+
+	uint32_t bulletModelHandle_ = 0;
 
 	Math::Vector::Vector3 playerWorldPos = {};
 	const Math::Vector::Vector3* p_ReticleWorldPos_ = nullptr;
