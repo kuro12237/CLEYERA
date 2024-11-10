@@ -26,6 +26,7 @@
 
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"GameObject/Goal/Goal.h"
+#include"GameObject/StageManager/StageManager.h"
 
 /// <summary>
 /// MapSelect
@@ -60,6 +61,7 @@ private:
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "SelectSceneData.json";
+	StageManager* stageManager_ = nullptr;
 
 	PointLight_param light_{};
 

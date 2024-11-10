@@ -47,6 +47,9 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 		p->WalkanimationAddFlame((1.0f / 30.0f) * fabsf(Ljoy.x));
 
 		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, p->GetWalkAnimationFlame());
+
+		//パーティクル
+		CharacterMoveParticle::GetInstance()->Emit();
 	}
 }
 

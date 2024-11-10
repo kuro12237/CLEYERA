@@ -76,6 +76,10 @@ void TitleScene::Initialize()
 	
 	ui_ = make_unique<TitleSceneUI>();
 	ui_->Initialize();
+
+	stageManager_ = StageManager::GetInstance();
+
+	stageManager_->Initilaize();
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)

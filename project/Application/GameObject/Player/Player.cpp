@@ -86,8 +86,6 @@ void Player::Update()
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
 
-
-
 	shootTimerFlame_++;
 
 
@@ -160,6 +158,11 @@ void Player::Update()
 	Math::Vector::Vector3 particleOffset = { 0.0f, aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,-2.0f };
 	moveEmitParam.translate.y += particleOffset.y;
 	moveEmitParam.translate.z += particleOffset.z;
+	moveEmitParam.scaleSizeMin = { 0.1f,0.1f,0.1f };
+	moveEmitParam.scaleSizeMax = { 0.1f,0.1f,0.1f };
+	moveEmitParam.scaleVelocityMax = { 0.05f,0.05f,0.05f };
+	moveEmitParam.scaleVelocityMin = { 0.05f,0.05f,0.05f };
+
 
 	//落ちたら
 	if (transform.translate.y <= -5.0f)
@@ -274,13 +277,10 @@ void Player::Move()
 		return;
 	}
 
-	if (!IsInState<PlayerStateWalk>() )
+	if (!IsInState<PlayerStateWalk>())
 	{
 		AddState<PlayerStateWalk>();
 	}
-
-	//パーティクル
-	CharacterMoveParticle::GetInstance()->Emit();
 
 }
 
