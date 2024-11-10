@@ -103,8 +103,7 @@ void Game3dObject::CreateSkinningParameter()
 
 void Game3dObject::SkeletonUpdate(string fileName, float t)
 {
-	SAnimation::Animation animationData_ = AnimationManager::GetInstance()->GetData(fileName);
-	AnimationManager::ApplyAnimation(skeleton_, animationData_, t);
+	fileName, t;
 	ModelManager::SkeletonUpdate(skeleton_);
 }
 

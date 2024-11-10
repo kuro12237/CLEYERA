@@ -128,6 +128,8 @@ public:
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
 	bool& GetIsChangeDeadAnimation() { return isChangeDeadAnimation_; }
 	PlayerDeadParticle* GetDeadParticle() { return deadParticle_.get(); }
+
+	float GetWalkAnimationFlame()const  { return walkAnimationFlame_; }
 #pragma endregion
 
 #pragma region Set
@@ -169,8 +171,15 @@ private:
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
 
+	SAnimation::Animation animationData_;
+
 	float walkAnimationFlame_ = 0.0f;
 	SAnimation::Animation walkAnimationData_;
+
+	float jampAnimationFlame_ = 0.0f;
+	SAnimation::Animation jampAnimationData_;
+
+	float resultDataFlame_ = 0.0f;
 
 	uint32_t particleMoveIndex_ = 0;
 	Math::Vector::Vector3 resetPos_ = {};
@@ -181,4 +190,6 @@ private:
 	unique_ptr<PlayerDeadParticle>deadParticle_ = nullptr;
 
 	weak_ptr<PlayerHp> hp_;
+
+	string walkAnimationFilePath = "";
 };

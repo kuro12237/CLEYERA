@@ -50,6 +50,13 @@ void Player::Initialize()
 	}
 	deadParticle_ = make_unique<PlayerDeadParticle>();
 	deadParticle_->Initialize();
+
+	uint32_t animationHandle = AnimationManager::GetInstance()->LoadAnimation("Human");
+	walkAnimationData_ = AnimationManager::GetInstance()->GetData(animationHandle);
+
+	AnimationManager::GetInstance()->LoadAnimation("FallDown");
+	animationHandle = AnimationManager::GetInstance()->LoadAnimation("JampHuman");
+	jampAnimationData_ = AnimationManager::GetInstance()->GetData("JampHuman");
 }
 
 void Player::ImGuiUpdate()
@@ -78,10 +85,11 @@ void Player::Update()
 	string filePath = gameObjectManager_->GetObj3dData(INameable::name_)->GetModelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
-	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+
+
 
 	shootTimerFlame_++;
-	
+
 
 	//状態更新
 	for (auto& state : states_) {
@@ -91,6 +99,8 @@ void Player::Update()
 			it->Update(this);
 		}
 	}
+	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+
 
 	// 更新後にキューから状態を削除
 	while (!statesToRemoveQueue_.empty()) {
@@ -99,6 +109,11 @@ void Player::Update()
 		statesToRemoveQueue_.pop();
 	}
 
+	if (IsInState<PlayerStateJamp>() && velocity_.y <= 0.0f)
+	{
+		this->MarkStateForRemoval<PlayerStateJamp>();
+		AddState<PlayerStateFall>();
+	}
 	//落下
 	if (velocity_.y <= -0.1f)
 	{
@@ -107,6 +122,8 @@ void Player::Update()
 			AddState<PlayerStateFall>();
 		}
 	}
+
+
 
 	///ダメージ処理
 	if (IsInState<PlayerStateInvincible>())
@@ -217,10 +234,6 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 			}
 			if (hitDirection == BOTTOM && velocity_.y <= -0.0f)
 			{
-				if (IsInState<PlayerStateJamp>())
-				{
-					this->MarkStateForRemoval<PlayerStateJamp>();
-				}
 				velocity_ = {};
 			}
 		}
@@ -242,7 +255,7 @@ void Player::Jamp()
 		return;
 	}
 
-	if (!IsInState<PlayerStateJamp>())
+	if (!IsInState<PlayerStateJamp>() && velocity_.y == 0.0f)
 	{
 		AddState<PlayerStateJamp>();
 	}
@@ -261,7 +274,7 @@ void Player::Move()
 		return;
 	}
 
-	if (!IsInState<PlayerStateWalk>())
+	if (!IsInState<PlayerStateWalk>() )
 	{
 		AddState<PlayerStateWalk>();
 	}

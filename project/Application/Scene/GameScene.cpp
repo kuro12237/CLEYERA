@@ -61,7 +61,7 @@ void GameScene::Initialize()
 
 	gameUi_ = make_unique<GameSceneUI>();
 	gameUi_->Initialize();
-	
+
 }
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
@@ -183,11 +183,13 @@ void GameScene::Object3dDraw()
 
 void GameScene::Flont2dSpriteDraw()
 {
-	player_->Draw2d();
-	player_->DrawHp();
 
-	gameUi_->Draw2d();
-
+	if (startAnimation_->GetIsGameStartFlag())
+	{
+		player_->Draw2d();
+		player_->DrawHp();
+		gameUi_->Draw2d();
+	}
 	startAnimation_->Draw2d();
 	ChangeSceneAnimation::GetInstance()->Draw();
 }

@@ -25,8 +25,20 @@ public:
 	/// <returns></returns>
 	static void ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation::Animation& animation, float time);
 
+	/// <summary>
+	/// ƒuƒŒƒ“ƒh
+	/// </summary>
+	/// <param name="skeleton"></param>
+	/// <param name="animA"></param>
+	/// <param name="animB"></param>
+	/// <param name="blendFactor"></param>
+	/// <param name="outFrame"></param>
+	void BlendAnimations(SAnimation::Skeleton& skeleton, const std::vector<SAnimation::Animation>& animationResults, const std::vector<float>& blendFactors, SAnimation::Animation& outResult);
+
 #pragma region Get
 	SAnimation::Animation GetData(const string& fileName);
+
+	SAnimation::Animation GetData(const uint32_t& handle);
 #pragma endregion
 
 	static Math::Vector::Vector3 CalculateValue(const std::vector<SAnimation::KeyframeVector3>& keyflames, float time);
@@ -42,7 +54,7 @@ private:
 #pragma region 
 	//Singleton
 	AnimationManager() = default;
-	~AnimationManager()  = default;
+	~AnimationManager() = default;
 	AnimationManager(const AnimationManager&) = delete;
 	const AnimationManager& operator=(const AnimationManager&) = delete;
 #pragma endregion 

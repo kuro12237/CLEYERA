@@ -37,6 +37,8 @@ void PlayerManager::Initialize()
 	p_GunWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(gun_->GetName())->GetWorldTransform().transform.translate;
 
 	gun_->SetTarget(*p_ReticleWorldPos_);
+	gun_->SetPlayerPos(gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
+	gun_->SetPlayerVelo(playerCore_->GetVelocity());
 
 	isChangeGameOverAnimation_ = &playerCore_->GetIsChangeDeadAnimation();
 
@@ -117,10 +119,13 @@ void PlayerManager::Update()
 
 	hp_->Update();
 
+
+
+
+
 	//Main
 	playerCore_->Update();
-
-
+	
 	if (*isChangeGameOverAnimation_)
 	{
 		gun_->SetIsDraw(false);
@@ -128,6 +133,7 @@ void PlayerManager::Update()
 
 	//Gun
 	gun_->Update();
+
 
 	//reticle
 	reticle_->Update();

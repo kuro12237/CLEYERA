@@ -2,17 +2,16 @@
 
 void PlayerCommandHandler::Handler()
 {
-	//Aボタン
-	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
-	{
-		commands_.push(make_unique<PlayerJampCommand>());
-	}
 	//左スティックが有効か
 	if (IsLJoystickActive())
 	{
 		commands_.push(make_unique<PlayerMoveCommand>());
 	}
-
+	//Aボタン
+	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
+	{
+		commands_.push(make_unique<PlayerJampCommand>());
+	}
 	if (Input::PushRShoulder())
 	{
 		commands_.push(make_unique<PlayerShootCommand>());

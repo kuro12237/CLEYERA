@@ -17,8 +17,6 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 		p->MarkStateForRemoval<PlayerStateWalk>();
 	}
 
-	p->WalkanimationAddFlame((1.0f / 30.0f) * fabsf(Ljoy.x));
-
 	Math::Vector::Vector3 velo = p->GetVelocity();
 	velo.x = Ljoy.x * 0.2f;
 	p->SetVelocity(velo);
@@ -38,6 +36,17 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 
 	rotate.y = radian;
 
+	if (!p->IsInState<PlayerStateJamp>() && !p->IsInState<PlayerStateFall>())
+	{
+		GameObjectManager* gameObjectManager_ = GameObjectManager::GetInstance();
+		SAnimation::Skeleton& skeleton = gameObjectManager_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
 
+		uint32_t animationHandle = AnimationManager::GetInstance()->LoadAnimation("Human");
+		SAnimation::Animation walkAnimationData_ = AnimationManager::GetInstance()->GetData(animationHandle);
+
+		p->WalkanimationAddFlame((1.0f / 30.0f) * fabsf(Ljoy.x));
+
+		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, p->GetWalkAnimationFlame());
+	}
 }
 

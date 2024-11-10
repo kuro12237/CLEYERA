@@ -11,7 +11,7 @@ void PlayerStateDeadAnimation::Initialize([[maybe_unused]] Player* p)
 }
 
 
-void PlayerStateDeadAnimation::Update([[maybe_unused]]Player* p)
+void PlayerStateDeadAnimation::Update([[maybe_unused]] Player* p)
 {
 	if (walkAnimationFlame_ <= 1.0f) {
 		walkAnimationFlame_ += (1.0f / 30.0f);
@@ -26,7 +26,7 @@ void PlayerStateDeadAnimation::Update([[maybe_unused]]Player* p)
 	{
 		p->SetIsDeadComplite(true);
 	}
+	SAnimation::Skeleton& skeleton = gameObjectInstance_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
 
-	gameObjectInstance_->GetObj3dData(p->INameable::GetName())->GetGameObject()->SkeletonUpdate(filePath_, walkAnimationFlame_);
-
+	AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, walkAnimationFlame_);
 }
