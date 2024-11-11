@@ -731,6 +731,8 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBulletManager.cpp" />
     <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp" />
+    <ClCompile Include="Application\Scene\GameClearScene.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1248,6 +1250,7 @@
     <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBulletManager.h" />
     <ClInclude Include="Application\Scene\GameClearScene.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

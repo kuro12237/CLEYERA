@@ -35,7 +35,10 @@ void CharacterMoveParticle::Update()
 void CharacterMoveParticle::Draw()
 {
 	particle_->Draw();
+
 	emitter_->SpownDraw();
+
+
 }
 
 void CharacterMoveParticle::ImGuiUpdate()

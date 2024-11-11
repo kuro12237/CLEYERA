@@ -147,7 +147,7 @@ void StartAnimation::EndVinatteAnimation()
 	{
 		postEffect_->SetSelectPostEffect(VIGNETTE, true);
 		isFlameCount_ = true;
-		vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 10.0f, splineMotions_[splineSelectIndex_]->GetFlame());
+		vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 20.0f, splineMotions_[splineSelectIndex_]->GetFlame());
 
 		if (vinatteFlame_ >= 10.0f)
 		{

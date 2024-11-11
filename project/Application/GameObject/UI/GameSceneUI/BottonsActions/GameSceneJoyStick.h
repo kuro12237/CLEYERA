@@ -28,6 +28,7 @@ private:
 	float lerpFactor_ = 0.0f;
 
 	Math::Vector::Vector3 interTarget_ = {};
+	bool IsLJoystickActive();
 
 };
 

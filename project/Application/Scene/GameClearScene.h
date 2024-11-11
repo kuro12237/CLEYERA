@@ -37,17 +37,16 @@
 #include"GameScene.h"
 #include"SelectScene.h"
 
-#include"GameObject/GameOverText/GameOverText.h"
-#include"GameObject/GameOverUI/GameOverUIManager.h"
+#include"GameObject/UI/ClearSceneUI/ClearSceneUI.h"
 
 /// <summary>
 /// ゲームオーバー
 /// </summary>
-class GameOverScene :public IScene
+class GameClearScene :public IScene
 {
 public:
-	GameOverScene() {};
-	~GameOverScene() {};
+	GameClearScene() {};
+	~GameClearScene() {};
 
 	/// <summary>
 	/// 初期化
@@ -90,7 +89,8 @@ private:
 
 	PointLight_param light_{};
 
-	unique_ptr<GameOverText>gameOverText_ = nullptr;
-	unique_ptr<GameOverUIManager>gameOverUiManager_ = nullptr;
+	//unique_ptr<GameOverText>gameOverText_ = nullptr;
+	unique_ptr<ClearSceneUI>ui_ = nullptr;
+
 	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
 };

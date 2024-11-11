@@ -49,3 +49,8 @@ void GameSceneJoyStick::Update(BaseBottonUI& ui)
    ui.SetTransform(transform);
 
 }
+
+bool GameSceneJoyStick::IsLJoystickActive()
+{
+	return false;
+}

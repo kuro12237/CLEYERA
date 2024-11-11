@@ -149,7 +149,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	if (player_->GetHp()->GetHp() <= 0 && ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
-		Scene->ChangeScene(make_unique<GameOverScene>());
+		//Scene->ChangeScene(make_unique<GameOverScene>());
+		Scene->ChangeScene(make_unique<GameClearScene>());
 		return;
 	}
 	//Ø‘Ö
