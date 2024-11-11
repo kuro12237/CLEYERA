@@ -5,7 +5,11 @@ void ISceneUI::Draw2d()
 	for (auto& sprite : sprites_)
 	{
 		auto it = sprite.lock();
-		it->Draw2d();
+
+		if (it)
+		{
+			it->Draw2d();
+		}
 	}
 
 }

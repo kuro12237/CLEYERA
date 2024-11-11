@@ -733,6 +733,9 @@
     <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp" />
     <ClCompile Include="Application\Scene\GameClearScene.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1251,6 +1254,9 @@
     <ClInclude Include="Application\Scene\GameClearScene.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

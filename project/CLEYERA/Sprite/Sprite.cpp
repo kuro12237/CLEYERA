@@ -59,8 +59,10 @@ void Sprite::Draw(WorldTransform worldTransform)
 	indexBuf_->Setbuffer(indexDatas_);
 	materialBuf_->Setbuffer(materialDatas_);
 	UnMap();
-
-	CommandCall(worldTransform);
+	if (worldTransform.buffer_)
+	{
+		CommandCall(worldTransform);
+	}
 }
 
 void Sprite::SetTexHandle(uint32_t texHandle)

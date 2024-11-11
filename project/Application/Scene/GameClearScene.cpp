@@ -27,7 +27,7 @@ void GameClearScene::Initialize()
 	ui_->Initialize();
 }
 
-void GameClearScene::Update([[maybe_unused]]GameManager* Scene)
+void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 {
 
 #ifdef _USE_IMGUI
@@ -60,26 +60,28 @@ void GameClearScene::Update([[maybe_unused]]GameManager* Scene)
 	PostEffect::GetInstance()->Update();
 
 	//if (!gameOverUiManager_->GetIsSelect())
+	if (ui_->GetIsSelect())
+	{
+		changeSceneAnimation_->ChangeStart();
+	}
 
 	if (!ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
 		return;
 	}
-	////if (gameOverUiManager_->GetSelectIndex() == TITLE)
-	//{
-	//	Scene->ChangeScene(make_unique<TitleScene>());
-	//	return;
-	//}
-	////if (gameOverUiManager_->GetSelectIndex() == GAME)
-	//{
-	//	Scene->ChangeScene(make_unique<GameScene>());
-	//	return;
-	//}	
-	////if (gameOverUiManager_->GetSelectIndex() == SELECT)
-	//{
-	//	Scene->ChangeScene(make_unique<SelectScene>());
-	//	return;
-	//}
+
+
+	if (ui_->GetNextStage() == ClearSceneChangeScene::Title)
+	{
+		Scene->ChangeScene(make_unique<TitleScene>());
+		return;
+	}
+	if (ui_->GetNextStage() == ClearSceneChangeScene::Select)
+	{
+		Scene->ChangeScene(make_unique<SelectScene>());
+		return;
+	}
+
 }
 
 void GameClearScene::PostProcessDraw()

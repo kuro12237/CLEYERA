@@ -71,6 +71,9 @@
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
     <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.cpp" />
@@ -236,6 +239,9 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.h" />

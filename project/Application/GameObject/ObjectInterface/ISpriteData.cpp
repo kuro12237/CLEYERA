@@ -71,7 +71,10 @@ void ISpriteData::UpdateTextureData()
 
 void ISpriteData::Draw2d()
 {
-	sprite_->Draw(worldTransform_);
+	if (sprite_)
+	{
+		sprite_->Draw(worldTransform_);
+	}
 }
 
 void ISpriteData::CalcAnkerPos()

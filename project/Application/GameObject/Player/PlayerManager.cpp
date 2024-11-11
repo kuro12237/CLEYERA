@@ -35,6 +35,7 @@ void PlayerManager::Initialize()
 
 	p_ReticleWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(reticle_->GetName())->GetWorldTransform().transform.translate;
 	p_GunWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(gun_->GetName())->GetWorldTransform().transform.translate;
+	gameObjectManager_->GetObj3dData(reticle_->GetName())->SetIsDraw(false);
 
 	gun_->SetTarget(*p_ReticleWorldPos_);
 	gun_->SetPlayerPos(gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
