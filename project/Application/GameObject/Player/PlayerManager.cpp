@@ -47,7 +47,7 @@ void PlayerManager::Initialize()
 
 	//ダメージの演出関数をセット
 	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
-	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdate, this));
+	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdateEnd, this));
 
 
 	ModelManager::ModelLoadNormalMap();
@@ -126,7 +126,7 @@ void PlayerManager::Update()
 
 	//Main
 	playerCore_->Update();
-	
+
 	if (*isChangeGameOverAnimation_)
 	{
 		gun_->SetIsDraw(false);
@@ -238,13 +238,15 @@ void PlayerManager::CheckisDeadBullets()
 void PlayerManager::DamegeUpdate()
 {
 	const float vinatteScale = 64.0f;
-	const float vinateFactorSpeed = 0.007f;
+	const float vinateFactorSpeed = 1.0f / 120.0f;
 	//ビネットをかける
 	postEffect_->SetSelectPostEffect(VIGNETTE, true);
 	postEffect_->SetVignetteScale(vinatteScale);
 	postEffect_->SetVignetteFactor(vinatteFactor_);
+	postEffect_->SetVignetteColor({ 1.0f,0.0f,0.0f });
 
 	vinatteFactor_ -= vinateFactorSpeed;
+
 }
 
 void PlayerManager::DamegeUpdateEnd()

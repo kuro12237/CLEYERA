@@ -16,6 +16,8 @@ void ISceneUI::Draw2d()
 
 void ISceneUI::ImGuiUpdate()
 {
+#ifdef _USE_IMGUI
+
 		ImGui::Begin("AddNoneUi");
 		static char buffer[256] = "";
 		if (ImGui::InputText("SelectLevelDataFilePath", buffer, sizeof(buffer)))
@@ -32,6 +34,8 @@ void ISceneUI::ImGuiUpdate()
 		}
 
 		ImGui::End();
+#endif // _USE_IMGUI
+
 }
 
 void ISceneUI::PushSpriteData()

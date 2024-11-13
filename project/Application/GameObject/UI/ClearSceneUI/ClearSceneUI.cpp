@@ -73,7 +73,6 @@ void ClearSceneUI::Update()
 	{
 		counter_ = 0;
 	}
-	ImGui::Text("%d", int(counter_));
 
 	nextScene_ = static_cast<ClearSceneChangeScene>(counter_);
 
@@ -82,4 +81,5 @@ void ClearSceneUI::Update()
 	{
 		isSelect_ = true;
 	}
+
 }

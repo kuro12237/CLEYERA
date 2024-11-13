@@ -30,7 +30,8 @@ void PlayerHp::Initialize(uint32_t hp)
 	{
 		wTs_[i].Initialize();
 		wTs_[i].transform.scale = { hpScale,hpScale,hpScale };
-		wTs_[i].transform.translate.x = (texSize.x * i) + flameOffset;;
+		wTs_[i].transform.translate.x = (texSize.x * i)*1.2f + flameOffset ;
+		wTs_[i].transform.translate.y = 10.0f;
 	}
 	//hpFlame
 
@@ -81,9 +82,9 @@ void PlayerHp::Draw2d()
 		}
 		sprite_->Draw(wTs_[i]);
 	}
-	flameNameSprite_->Draw(flameNameWorldTransform_);
+	//flameNameSprite_->Draw(flameNameWorldTransform_);
 
-	flameSprite_->Draw(flameWorldTransform_);
+	//flameSprite_->Draw(flameWorldTransform_);
 }
 
 void PlayerHp::ReduceHp()
