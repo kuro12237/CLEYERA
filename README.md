@@ -1,4 +1,5 @@
 [![DebugBuild](https://github.com/kuro12237/CLEYERA/actions/workflows/DebugBuild.yml/badge.svg)](https://github.com/kuro12237/CLEYERA/actions/workflows/DebugBuild.yml)
+[![DebugBuild](https://github.com/kuro12237/CLEYERA/actions/workflows/DebugBuild.yml/badge.svg)](https://github.com/kuro12237/CLEYERA/actions/workflows/DebugBuild.yml)
 
 # 動作確認
   開発環境が入っていないPCでの動作確認済み
