@@ -29,7 +29,7 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 		animationFlame_ = std::fmod(animationFlame_, animationData_.duration);
 
 		gameObject_->CreateSkinningParameter();
-		gameObject_->SkeletonUpdate(modelFilePath_, animationFlame_);
+		gameObject_->SkeletonUpdate();
 		gameObject_->SkinningUpdate();
 	}
 }
