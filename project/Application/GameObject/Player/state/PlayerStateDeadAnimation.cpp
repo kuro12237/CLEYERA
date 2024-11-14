@@ -7,7 +7,6 @@ void PlayerStateDeadAnimation::Initialize([[maybe_unused]] Player* p)
 	filePath_ = "FallDown";
 	AnimationManager::GetInstance()->LoadAnimation(filePath_);
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath_);
-	
 }
 
 
@@ -26,6 +25,7 @@ void PlayerStateDeadAnimation::Update([[maybe_unused]] Player* p)
 	{
 		p->SetIsDeadComplite(true);
 	}
+
 	SAnimation::Skeleton& skeleton = gameObjectInstance_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
 
 	AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, walkAnimationFlame_);

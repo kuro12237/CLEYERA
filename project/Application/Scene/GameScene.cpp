@@ -40,6 +40,9 @@ void GameScene::Initialize()
 	goal_ = make_unique<Goal>();
 	goal_->Initialize(kGoalId, 0);
 
+	warpManager_ = make_unique<WarpManager>();
+	warpManager_->Initialize();
+
 	//2dObj
 	startAnimation_ = make_unique<StartAnimation>();
 	startAnimation_->Initialize();
@@ -47,20 +50,15 @@ void GameScene::Initialize()
 	endAnimation_ = make_unique<EndAnimation>();
 	endAnimation_->Initialize();
 
-
-	warpManager_ = make_unique<WarpManager>();
-	warpManager_->Initialize();
+	gameUi_ = make_unique<GameSceneUI>();
+	gameUi_->Initialize();
 
 	//更新
 	gameObjectManager_->Update();
-
 	LightingManager::AddList(light_);
 
 	//ゲーム終了のつなぐ
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
-
-	gameUi_ = make_unique<GameSceneUI>();
-	gameUi_->Initialize();
 
 }
 

@@ -244,9 +244,6 @@
     <Filter Include="CLEYERA\Utility\SkyBox">
       <UniqueIdentifier>{0afbe2cf-b213-4c1b-83fc-624167aa276c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\GameObject\StartCount">
-      <UniqueIdentifier>{eded2341-c2b3-489f-8191-df30e3076a18}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\GameObject\Arch">
       <UniqueIdentifier>{c89ddf49-61a3-4698-9712-ca167312ad62}</UniqueIdentifier>
     </Filter>
@@ -270,6 +267,36 @@
     </Filter>
     <Filter Include="Project\GameObject\Title">
       <UniqueIdentifier>{bad870cf-3c48-44d7-99fe-87f627747646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Interface">
+      <UniqueIdentifier>{544ce00a-d535-4e1b-8cf8-47961097d825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\character\Player\Bullet">
+      <UniqueIdentifier>{ae489afb-ca94-4359-9413-5a91e7f172a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\character\Player\Command">
+      <UniqueIdentifier>{5e490108-f234-4de0-8602-473cff6ee0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\character\Player\Particle">
+      <UniqueIdentifier>{43351ac3-f881-4970-a7fb-7bd2c5632e7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\character\Player\State">
+      <UniqueIdentifier>{686d8fec-747a-4246-9bea-4fc2084e4711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\StartAnimation\StartCount">
+      <UniqueIdentifier>{eded2341-c2b3-489f-8191-df30e3076a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\StartAnimation\StartCamera">
+      <UniqueIdentifier>{a09cd3bb-5a24-4aa0-a505-50358ab7b08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\EndAnimation">
+      <UniqueIdentifier>{c954124d-8a9a-4f43-bebc-f2ba6b99d38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\StartAnimation\Interface">
+      <UniqueIdentifier>{6f4d554a-0e0b-4b0c-8819-71a44fe34a02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\StageManager">
+      <UniqueIdentifier>{a3ed7b8e-6419-405a-9763-885fc8c55e08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -537,55 +564,7 @@
     <ClCompile Include="Application\GameObject\Player\Player.cpp">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBullet.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\command\PlayerCommandHandler.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\command\playerDashMoveCommand.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Gun\PlayerGun.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Hp\PlayerHp.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\command\PlayerJampCommand.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Player\PlayerManager.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\command\PlayerMoveCommand.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Reticle\PlayerReticle.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\command\PlayerShootCommand.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateNone.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateRock.cpp">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp">
@@ -631,7 +610,7 @@
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCount\StartCount.cpp">
-      <Filter>Project\GameObject\StartCount</Filter>
+      <Filter>Project\GameObject\StartAnimation\StartCount</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.cpp">
       <Filter>CLEYERA\Particle</Filter>
@@ -666,9 +645,6 @@
     <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp">
       <Filter>Project\GameObject\Warp</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameFileLoader\RailLoader\RailLoader.cpp">
       <Filter>Project\Utility</Filter>
     </ClCompile>
@@ -679,9 +655,6 @@
       <Filter>Project\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp">
-      <Filter>Project\GameObject\StartAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp">
       <Filter>Project\GameObject\StartAnimation</Filter>
     </ClCompile>
     <ClCompile Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.cpp">
@@ -705,37 +678,153 @@
     <ClCompile Include="Application\GameObject\TowerManager\TowerManager.cpp">
       <Filter>Project\GameObject\Tower</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.cpp" />
-    <ClCompile Include="Application\Scene\GameOverScene.cpp" />
-    <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp" />
-    <ClCompile Include="Application\GameObject\GameOverUI\GameOverUIManager.cpp" />
-    <ClCompile Include="Application\GameObject\GameOverUI\UI\GameOverUI.cpp" />
-    <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp" />
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp" />
-    <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp" />
-    <ClCompile Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.cpp" />
-    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.cpp" />
-    <ClCompile Include="Application\Utility\LerpMotion\LerpMotion.cpp" />
-    <ClCompile Include="Application\GameObject\Warp\WarpManager.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.cpp" />
-    <ClCompile Include="Application\GameObject\UI\BaseSceneBottonUI\BaseBottonUI.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.cpp" />
-    <ClCompile Include="Application\GameObject\UI\ISceneUI.cpp" />
-    <ClCompile Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.cpp" />
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateInvincible.cpp" />
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWalk.cpp" />
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateJamp.cpp" />
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp" />
-    <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBulletManager.cpp" />
-    <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp" />
-    <ClCompile Include="Application\Scene\GameClearScene.cpp" />
-    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.cpp" />
-    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.cpp" />
-    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.cpp" />
-    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.cpp" />
+    <ClCompile Include="Application\GameObject\GameOverUI\UI\GameOverUI.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GameOverUI\GameOverUIManager.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\BaseSceneBottonUI\BaseBottonUI.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Scene\GameOverScene.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Scene\GameClearScene.cpp">
+      <Filter>Project\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\ISceneUI.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.cpp">
+      <Filter>Project\GameObject\character\Player\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBulletManager.cpp">
+      <Filter>Project\GameObject\character\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.cpp">
+      <Filter>Project\GameObject\character\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Gun\PlayerGun.cpp">
+      <Filter>Project\GameObject\character\Player\PlayerGun</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Hp\PlayerHp.cpp">
+      <Filter>Project\GameObject\character\Player\PlayerHp</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\command\PlayerCommandHandler.cpp">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\command\playerDashMoveCommand.cpp">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp">
+      <Filter>Project\GameObject\character\Player\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\command\PlayerJampCommand.cpp">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBullet.cpp">
+      <Filter>Project\GameObject\character\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Reticle\PlayerReticle.cpp">
+      <Filter>Project\GameObject\character\Player\Reticle</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\command\PlayerMoveCommand.cpp">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\command\PlayerShootCommand.cpp">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateInvincible.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateJamp.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateNone.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateRock.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWalk.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp">
+      <Filter>Project\GameObject\StartAnimation\StartCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.cpp">
+      <Filter>Project\GameObject\EndAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Utility\LerpMotion\LerpMotion.cpp">
+      <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.cpp">
+      <Filter>Project\GameObject\StartAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.cpp">
+      <Filter>Project\GameObject\StartAnimation\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Warp\WarpManager.cpp">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp">
+      <Filter>Project\GameObject\StageManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1032,55 +1121,7 @@
     <ClInclude Include="Application\GameObject\Player\Player.h">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBullet.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\command\PlayerCommandHandler.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\command\playerDashMoveCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Gun\PlayerGun.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Hp\PlayerHp.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\command\PlayerJampCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Player\PlayerManager.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\command\PlayerMoveCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Reticle\PlayerReticle.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\command\PlayerShootCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateNone.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h">
       <Filter>Project\GameObject\character\Player</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h">
@@ -1094,15 +1135,6 @@
     </ClInclude>
     <ClInclude Include="CLEYERA\Sprite\ISpriteBuf.h">
       <Filter>CLEYERA\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\IPlayerReticleCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Bullet\state\IPlayerBulletState.h">
-      <Filter>Project\GameObject\character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\command\IPlayerCommand.h">
-      <Filter>Project\GameObject\character\Player</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Particle\Emitter\ParticleEmitter.h">
       <Filter>CLEYERA\Particle</Filter>
@@ -1138,7 +1170,7 @@
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCount\StartCount.h">
-      <Filter>Project\GameObject\StartCount</Filter>
+      <Filter>Project\GameObject\StartAnimation\StartCount</Filter>
     </ClInclude>
     <ClInclude Include="CLEYERA\Particle\Emitter\StructGpuParticleEmitter.h">
       <Filter>CLEYERA\Particle</Filter>
@@ -1167,9 +1199,6 @@
     <ClInclude Include="Application\GameObject\Lava\Lava.h">
       <Filter>Project\GameObject\Lava</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h">
-      <Filter>Project\GameObject\StartAnimation</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Warp\Warp.h">
       <Filter>Project\GameObject\Warp</Filter>
     </ClInclude>
@@ -1178,9 +1207,6 @@
     </ClInclude>
     <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h">
       <Filter>Project\GameObject\Warp</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h">
-      <Filter>Project\GameObject\character\Player</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Arch\state\IArchState.h">
       <Filter>Project\GameObject\Arch</Filter>
@@ -1195,9 +1221,6 @@
       <Filter>Project\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h">
-      <Filter>Project\GameObject\StartAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h">
       <Filter>Project\GameObject\StartAnimation</Filter>
     </ClInclude>
     <ClInclude Include="Application\ChangeSceneAnimation\BackTitle2d\TitleBack2d.h">
@@ -1221,42 +1244,180 @@
     <ClInclude Include="Application\GameObject\TowerManager\TowerManager.h">
       <Filter>Project\GameObject\Tower</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
-    <ClInclude Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.h" />
-    <ClInclude Include="Application\Scene\GameOverScene.h" />
-    <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h" />
-    <ClInclude Include="Application\GameObject\GameOverUI\GameOverUIManager.h" />
-    <ClInclude Include="Application\GameObject\GameOverUI\UI\GameOverUI.h" />
-    <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h" />
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
-    <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
-    <ClInclude Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.h" />
-    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.h" />
-    <ClInclude Include="Application\Utility\LerpMotion\LerpMotion.h" />
-    <ClInclude Include="Application\GameObject\Warp\WarpManager.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\IJsonHandler.h" />
-    <ClInclude Include="Application\GameObject\UI\ISceneUI.h" />
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.h" />
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\GameSceneUIData.h" />
-    <ClInclude Include="Application\GameObject\UI\BaseSceneBottonUI\BaseBottonUI.h" />
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.h" />
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.h" />
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.h" />
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.h" />
-    <ClInclude Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.h" />
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateInvincible.h" />
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWalk.h" />
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateJamp.h" />
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateFall.h" />
-    <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBulletManager.h" />
-    <ClInclude Include="Application\Scene\GameClearScene.h" />
-    <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
-    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.h" />
-    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.h" />
-    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.h" />
-    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h" />
+    <ClInclude Include="Application\GameObject\GameOverUI\UI\GameOverUI.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameOverUI\GameOverUIManager.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\BaseSceneBottonUI\BaseBottonUI.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Scene\GameOverScene.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI\GameSceneUIData.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h">
+      <Filter>Project\GameObject\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Scene\GameClearScene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\ObjectInterface\IJsonHandler.h">
+      <Filter>Project\GameObject\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h">
+      <Filter>Project\GameObject\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\ISceneUI.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.h">
+      <Filter>Project\GameObject\character\Player\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Bullet\state\IPlayerBulletState.h">
+      <Filter>Project\GameObject\character\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBulletManager.h">
+      <Filter>Project\GameObject\character\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Bullet\state\PlayerBulletStateNone.h">
+      <Filter>Project\GameObject\character\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Gun\PlayerGun.h">
+      <Filter>Project\GameObject\character\Player\PlayerGun</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Hp\PlayerHp.h">
+      <Filter>Project\GameObject\character\Player\PlayerHp</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\command\IPlayerCommand.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Reticle\command\IPlayerReticleCommand.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\command\PlayerCommandHandler.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\command\playerDashMoveCommand.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h">
+      <Filter>Project\GameObject\character\Player\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\command\PlayerJampCommand.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBullet.h">
+      <Filter>Project\GameObject\character\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Reticle\PlayerReticle.h">
+      <Filter>Project\GameObject\character\Player\Reticle</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\command\PlayerMoveCommand.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\command\PlayerShootCommand.h">
+      <Filter>Project\GameObject\character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateFall.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateInvincible.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateJamp.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateNone.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateRock.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWalk.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateWarpMove.h">
+      <Filter>Project\GameObject\character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h">
+      <Filter>Project\GameObject\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h">
+      <Filter>Project\GameObject\StartAnimation\StartCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.h">
+      <Filter>Project\GameObject\EndAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Utility\LerpMotion\LerpMotion.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\StartAnimationStateCamera.h">
+      <Filter>Project\GameObject\StartAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.h">
+      <Filter>Project\GameObject\StartAnimation\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h">
+      <Filter>Project\GameObject\StartAnimation\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Warp\WarpManager.h">
+      <Filter>Project\GameObject\Warp</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\StageManager\StageManager.h">
+      <Filter>Project\GameObject\StageManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
