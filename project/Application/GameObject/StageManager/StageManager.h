@@ -11,6 +11,9 @@ enum class  StageEnum
 	Stage_Max
 };
 
+/// <summary>
+/// ステージ数管理クラス
+/// </summary>
 class StageManager
 {
 public:
