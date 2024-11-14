@@ -14,15 +14,13 @@ on:
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: ./CLEYERA.sln
-  CONFIGURATION: Debug
-
 
 permissions:
   contents: read
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-latest
     strategy:
       matrix:
         configuration: [Debug, Release]
@@ -36,11 +34,12 @@ jobs:
         Install-WindowsFeature Server-Media-Foundation
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2
-      with: 
-        msbuild-architecture: x64
+      uses: microsoft/setup-msbuild@v1.3.1
 
     - name: Vcpkg
       run: |
-        msbuild ${{env.SOLUTION_FILE_PATH}} /p:Platform=x64,Configuration=${{env.CONFIGURATION}}
+        vcpkg install tesseract:${{matrix.arch}}-windows-static
+        vcpkg integrate install
     
+    - run: |
+        msbuild -version
