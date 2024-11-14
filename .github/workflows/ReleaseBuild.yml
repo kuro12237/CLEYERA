@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: MSBuild
+name: DebugBuild
 
 on:
   push:
@@ -13,20 +13,19 @@ on:
 
 env:
   # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: ./CLEYERA.sln
+  SOLUTION_FILE_PATH: project/CLEYERA.sln
+  CONFIGURATION: Release
 
 permissions:
   contents: read
 
 jobs:
   build:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        configuration: [Debug, Release]
+    runs-on: windows-2022
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
     - name: Install Server-Media-Foundation
       shell: powershell
@@ -34,12 +33,10 @@ jobs:
         Install-WindowsFeature Server-Media-Foundation
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.3.1
+      uses: microsoft/setup-msbuild@v2
+      with:
+        msbuild-architexture: x64
 
-    - name: Vcpkg
+    - name: Build
       run: |
-        vcpkg install tesseract:${{matrix.arch}}-windows-static
-        vcpkg integrate install
-    
-    - run: |
-        msbuild -version
+        msbuild ${{env.SOLUTION_FILE_PATH}} /p:Platform=x64,Configuration=${{env.CONFIGURATION}}
