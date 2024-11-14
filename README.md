@@ -1,3 +1,4 @@
+[![MSBuild](https://github.com/kuro12237/CLEYERA/actions/workflows/msbuild.yml/badge.svg)](https://github.com/kuro12237/CLEYERA/actions/workflows/msbuild.yml)
 
 # 動作確認
   開発環境が入っていないPCでの動作確認済み
