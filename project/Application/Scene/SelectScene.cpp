@@ -52,6 +52,8 @@ void SelectScene::Initialize()
 	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale_,kSkyBoxScale_,kSkyBoxScale_} });
 	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
 	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
+	player_->Update();
+
 }
 
 void SelectScene::Update(GameManager* Scene)

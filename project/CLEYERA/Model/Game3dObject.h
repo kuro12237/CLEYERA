@@ -50,7 +50,7 @@ public:
 	/// </summary>
 	/// <param name="fileName"></param>
 	/// <param name="t"></param>
-	void SkeletonUpdate(string fileName, float t);
+	void SkeletonUpdate();
 
 	/// <summary>
 	/// 好き人ぐ更新

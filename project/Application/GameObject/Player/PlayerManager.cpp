@@ -115,14 +115,7 @@ void PlayerManager::Update()
 		}
 	}
 
-
-	//CheckDamage();
-
 	hp_->Update();
-
-
-
-
 
 	//Main
 	playerCore_->Update();

@@ -27,7 +27,7 @@ void GameScene::Initialize()
 
 	player_ = make_unique<PlayerManager>();
 	player_->Initialize();
-
+	
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize();
 

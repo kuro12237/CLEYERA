@@ -82,7 +82,6 @@ void Player::Update()
 {
 	deadParticle_->Update();
 
-	string filePath = gameObjectManager_->GetObj3dData(INameable::name_)->GetModelFilePath();
 
 	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
 
@@ -97,7 +96,7 @@ void Player::Update()
 			it->Update(this);
 		}
 	}
-	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate(filePath, walkAnimationFlame_);
+	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate();
 
 
 	// 更新後にキューから状態を削除

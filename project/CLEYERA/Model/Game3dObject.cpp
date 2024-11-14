@@ -101,9 +101,8 @@ void Game3dObject::CreateSkinningParameter()
 	skinningFlag_ = true;
 }
 
-void Game3dObject::SkeletonUpdate(string fileName, float t)
+void Game3dObject::SkeletonUpdate()
 {
-	fileName, t;
 	ModelManager::SkeletonUpdate(skeleton_);
 }
 
