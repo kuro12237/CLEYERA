@@ -108,28 +108,27 @@ private:
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "LevelData_1.json";
 
-	PointLight_param light_{};
+	CharacterDeadParticle* characterDeadParticle_ = nullptr;
+	CharacterMoveParticle* characterMoveParticle_ = nullptr;
 
-	unique_ptr<StartAnimation>startAnimation_ = nullptr;
+
+	PointLight_param light_{};
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 
-	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 
+	unique_ptr<Goal>goal_ = nullptr;
+
+	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
+	unique_ptr<WarpManager>warpManager_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
-	unique_ptr<Goal>goal_ = nullptr;
-
-	CharacterDeadParticle* characterDeadParticle_ = nullptr;
-	CharacterMoveParticle* characterMoveParticle_ = nullptr;
 
 	unique_ptr<GameSceneUI>gameUi_ = nullptr;
 
-	unique_ptr<WarpManager>warpManager_ = nullptr;
-
-
+	unique_ptr<StartAnimation>startAnimation_ = nullptr;
 	unique_ptr<EndAnimation>endAnimation_ = nullptr;
 
 	bool* isGameEnd_ = nullptr;

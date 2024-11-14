@@ -25,10 +25,17 @@ public:
 	/// </summary>
 	void Initilaize();
 
+#pragma region Get
+
 	StageEnum GetStage() { return stageNumber_; }
 	string GetStringStageFilePath() { return mapName_[stageNumber_]; };
-	
+
+#pragma endregion
+
+
+#pragma region Set
 	void SetStage(const StageEnum& stage) { stageNumber_ = stage; }
+#pragma endregion
 
 private:
 

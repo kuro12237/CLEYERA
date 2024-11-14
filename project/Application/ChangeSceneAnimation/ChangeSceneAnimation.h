@@ -71,6 +71,9 @@ private:
 	
 	bool initializeLock_ = false;
 
+
+private:
+
 	//Singleton
 	ChangeSceneAnimation() = default;
 	~ChangeSceneAnimation() = default;
