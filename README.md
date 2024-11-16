@@ -6,6 +6,7 @@
 
 # 開発環境
   DirectX12 
+  
   WindowsSDK:10.0.22621.0
   Blender:4.1
 
@@ -14,3 +15,8 @@
   assimp
   nlohmann
   DirectXTex
+  
+#詳細
+  使用ゲームエンジン:自作エンジン(CLEYERA)
+  ジャンル:3d2軸アクションゲーム
+  制作期間:2024年4月-
