@@ -6,8 +6,8 @@
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
-#include"GameObject/GameCollider/BoxCollisionManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
+#include"GameObject/GameCollider/BoxCollisionManager.h"
 
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Block/BlockManager.h"
