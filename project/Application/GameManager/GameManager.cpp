@@ -53,6 +53,7 @@ void GameManager::Run()
 #endif //  _USE_IMGUI
 
 		LightingManager::ClearList();
+
 		scene_->Update(this);
 
 		PostEffect::GetInstance()->Update();
