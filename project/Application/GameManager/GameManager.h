@@ -32,6 +32,10 @@ public:
 
 private:
 
+    void ImGuiDebugPanelBegin();
+
+    void ImGuiDebugPanelEnd();
+
     unique_ptr<IScene>scene_ = nullptr;
 
 };

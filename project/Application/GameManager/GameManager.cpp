@@ -27,29 +27,7 @@ void GameManager::Run()
 		Cleyera::BeginFlame();
 
 #ifdef  _USE_IMGUI
-
-		ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.08f, 0.08f, 0.08f, 1.0f));
-		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.02f, 0.02f, 0.02f, 1.0f));
-		ImGui::Begin("Debug");
-	
-		if (ImGui::BeginMenu("System"))
-		{
-			WinApp::GetInstance()->ImGuiUpdate();
-			DirectXCommon::GetInstance()->ImGuiUpdate();
-			if (ImGui::TreeNode("Descriptor"))
-			{
-				DSVDescriptorManager::ImGuiUpdate();
-				RTVDescriptorManager::ImGuiUpdate();
-				DescriptorManager::ImGuiUpdate();
-				ImGui::TreePop();
-			}
-			ImGui::EndMenu();
-		}
-
-		SkyBox::GetInstance()->ImGuiUpdate();
-
-		GlobalVariables::GetInstance()->Update();
-
+		ImGuiDebugPanelBegin();
 #endif //  _USE_IMGUI
 
 		LightingManager::ClearList();
@@ -61,9 +39,7 @@ void GameManager::Run()
 		LightingManager::GetInstance()->TransfarBuffers();
 
 #ifdef  _USE_IMGUI
-		ImGui::End();
-		ImGui::PopStyleColor();
-		ImGui::PopStyleColor();
+		ImGuiDebugPanelEnd();
 #endif // _USE_IMGUI
 
 		//sceneŠÖ”‚Édraw‚ª“ü‚Á‚Ä‚¢‚½Žž
@@ -82,6 +58,7 @@ void GameManager::Run()
 		scene_->Back2dSpriteFuncDraw();
 		scene_->Object3dFuncDraw();
 
+		//ŠÖ”‚ª“ü‚Á‚Ä‚¢‚é‚Æ‚«
 		if (scene_->GetIsPostEffectDrawFunc())
 		{
 			PostEffect::GetInstance()->Draw();
@@ -105,4 +82,37 @@ void GameManager::ChangeScene(unique_ptr<IScene> newScene)
 	scene_->Update(this);
 
 	return;
+}
+
+void GameManager::ImGuiDebugPanelBegin()
+{
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.08f, 0.08f, 0.08f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.02f, 0.02f, 0.02f, 1.0f));
+	ImGui::Begin("Debug");
+
+	if (ImGui::BeginMenu("System"))
+	{
+		WinApp::GetInstance()->ImGuiUpdate();
+		DirectXCommon::GetInstance()->ImGuiUpdate();
+		if (ImGui::TreeNode("Descriptor"))
+		{
+			DSVDescriptorManager::ImGuiUpdate();
+			RTVDescriptorManager::ImGuiUpdate();
+			DescriptorManager::ImGuiUpdate();
+			ImGui::TreePop();
+		}
+		ImGui::EndMenu();
+	}
+
+	SkyBox::GetInstance()->ImGuiUpdate();
+
+	GlobalVariables::GetInstance()->Update();
+
+}
+
+void GameManager::ImGuiDebugPanelEnd()
+{
+	ImGui::End();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 }

@@ -49,6 +49,8 @@ public:
 	/// <param name="Scene"></param>
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
+private:
+
 	/// <summary>
 	/// ポストエフェクトをかける
 	/// </summary>
@@ -59,7 +61,6 @@ public:
 	/// </summary>
 	void Flont2dSpriteDraw();
 
-private:
 
 	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;

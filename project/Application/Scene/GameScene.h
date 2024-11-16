@@ -47,6 +47,7 @@ public:
 	/// <param name="Scene"></param>
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
+private:
 	/// <summary>
 	/// ポストエフェクトをかける
 	/// </summary>
@@ -57,8 +58,6 @@ public:
 	/// 前景2d
 	/// </summary>
 	void Flont2dSpriteDraw();
-
-private:
 
 	/// <summary>
 	/// Imguiの更新

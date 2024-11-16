@@ -33,11 +33,11 @@ public:
 
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
+
+private:
 	void PostProcessDraw();
 
 	void Flont2dSpriteDraw();
-
-private:
 
 	void Collision();
 
