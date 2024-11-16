@@ -64,6 +64,10 @@ void GameScene::Initialize()
 	//ƒQ[ƒ€I—¹‚Ì‚Â‚È‚®
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
+
+	this->SetFlont2dSpriteDrawFunc(std::bind(&GameScene::Flont2dSpriteDraw, this));
+	this->SetPostEffectDrawFunc(std::bind(&GameScene::PostProcessDraw, this));
+
 }
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
@@ -174,18 +178,9 @@ void GameScene::PostProcessDraw()
 
 }
 
-void GameScene::Back2dSpriteDraw()
-{
-}
-
-void GameScene::Object3dDraw()
-{
-	PostEffect::GetInstance()->Draw();
-}
-
 void GameScene::Flont2dSpriteDraw()
 {
-
+	
 	if (startAnimation_->GetIsGameStartFlag())
 	{
 		player_->Draw2d();

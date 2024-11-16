@@ -50,22 +50,13 @@ public:
 	/// <summary>
 	/// ポストエフェクトをかける
 	/// </summary>
-	void PostProcessDraw()override;
+	void PostProcessDraw();
 
-	/// <summary>
-	/// 後背景
-	/// </summary>
-	void Back2dSpriteDraw()override;
-
-	/// <summary>
-	/// objectDraw
-	/// </summary>
-	void Object3dDraw()override;
 
 	/// <summary>
 	/// 前景2d
 	/// </summary>
-	void Flont2dSpriteDraw()override;
+	void Flont2dSpriteDraw();
 
 
 private:

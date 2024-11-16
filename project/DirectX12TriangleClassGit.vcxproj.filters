@@ -825,6 +825,7 @@
     <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp">
       <Filter>Project\GameObject\StageManager</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Scene\IScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">

@@ -33,6 +33,9 @@ void GameOverScene::Initialize()
 
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 
+	this->SetFlont2dSpriteDrawFunc(std::bind(&GameOverScene::Flont2dSpriteDraw, this));
+	this->SetPostEffectDrawFunc(std::bind(&GameOverScene::PostProcessDraw, this));
+
 }
 
 void GameOverScene::Update([[maybe_unused]] GameManager* Scene)
@@ -60,8 +63,7 @@ void GameOverScene::Update([[maybe_unused]] GameManager* Scene)
 	gameObjectManager_->Update();
 
 	LightingManager::AddList(light_);
-	PostEffect::GetInstance()->Update();
-
+	
 	if (!gameOverUiManager_->GetIsSelect())
 	{
 		return;
@@ -95,14 +97,6 @@ void GameOverScene::PostProcessDraw()
 	gameObjectManager_->Draw();
 }
 
-void GameOverScene::Back2dSpriteDraw()
-{
-}
-
-void GameOverScene::Object3dDraw()
-{
-	PostEffect::GetInstance()->Draw();
-}
 
 void GameOverScene::Flont2dSpriteDraw()
 {

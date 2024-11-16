@@ -85,6 +85,11 @@ void TitleScene::Initialize()
 	stageManager_ = StageManager::GetInstance();
 
 	stageManager_->Initilaize();
+
+	this->SetFlont2dSpriteDrawFunc(std::bind(&TitleScene::Flont2dSpriteDraw, this));
+	this->SetPostEffectDrawFunc(std::bind(&TitleScene::PostProcessDraw, this));
+
+
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -155,18 +160,8 @@ void TitleScene::PostProcessDraw()
 	gameObjectManager_->Draw();
 }
 
-void TitleScene::Back2dSpriteDraw()
-{
-}
-
-void TitleScene::Object3dDraw()
-{
-}
-
 void TitleScene::Flont2dSpriteDraw()
 {
-	PostEffect::GetInstance()->Draw();
-
 	//fireEmberParticle_->Draw();
 	ui_->Draw2d();
 

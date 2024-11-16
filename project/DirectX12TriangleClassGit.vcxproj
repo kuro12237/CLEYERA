@@ -89,6 +89,7 @@
     <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp" />
     <ClCompile Include="Application\Scene\GameClearScene.cpp" />
     <ClCompile Include="Application\Scene\GameOverScene.cpp" />
+    <ClCompile Include="Application\Scene\IScene.cpp" />
     <ClCompile Include="Application\Utility\convert\convert.cpp" />
     <ClCompile Include="Application\Utility\LerpMotion\LerpMotion.cpp" />
     <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp" />

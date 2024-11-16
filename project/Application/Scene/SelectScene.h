@@ -33,13 +33,9 @@ public:
 
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
-	void PostProcessDraw()override;
+	void PostProcessDraw();
 
-	void Back2dSpriteDraw()override;
-
-	void Object3dDraw()override;
-
-	void Flont2dSpriteDraw()override;
+	void Flont2dSpriteDraw();
 
 private:
 

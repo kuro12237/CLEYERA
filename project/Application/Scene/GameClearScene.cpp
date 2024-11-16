@@ -26,6 +26,12 @@ void GameClearScene::Initialize()
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 	ui_ = make_unique<ClearSceneUI>();
 	ui_->Initialize();
+
+
+	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
+	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
+
+
 }
 
 void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
@@ -51,7 +57,6 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	gameObjectManager_->Update();
 
 	LightingManager::AddList(light_);
-	PostEffect::GetInstance()->Update();
 
 	if (ui_->GetIsSelect())
 	{
@@ -81,17 +86,9 @@ void GameClearScene::PostProcessDraw()
 	gameObjectManager_->Draw();
 }
 
-void GameClearScene::Back2dSpriteDraw()
-{
-}
-
-void GameClearScene::Object3dDraw()
-{
-	PostEffect::GetInstance()->Draw();
-}
-
 void GameClearScene::Flont2dSpriteDraw()
 {
+
 	ui_->Draw2d();
 	changeSceneAnimation_->Draw();
 }

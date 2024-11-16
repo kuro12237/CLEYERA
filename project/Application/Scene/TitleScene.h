@@ -47,27 +47,17 @@ public:
 	/// </summary>
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
-	/// <summary>
-	/// ポストエフェクト描画
-	/// </summary>
-	void PostProcessDraw()override;
+private:
 
 	/// <summary>
-	/// 背景2d描画
-	/// </summary>
-	void Back2dSpriteDraw()override;
-
-	/// <summary>
-	/// 描画
-	/// </summary>
-	void Object3dDraw()override;
+   /// ポストエフェクト描画
+   /// </summary>
+	void PostProcessDraw();
 
 	/// <summary>
 	/// 前面2d描画
 	/// </summary>
-	void Flont2dSpriteDraw()override;
-
-private:
+	void Flont2dSpriteDraw();
 
 	/// <summary>
 	/// .000形式に変換する関数

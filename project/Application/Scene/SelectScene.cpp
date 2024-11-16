@@ -59,6 +59,10 @@ void SelectScene::Initialize()
 	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 	player_->Update();
 
+
+	this->SetFlont2dSpriteDrawFunc(std::bind(&SelectScene::Flont2dSpriteDraw, this));
+	this->SetPostEffectDrawFunc(std::bind(&SelectScene::PostProcessDraw, this));
+
 }
 
 void SelectScene::Update(GameManager* Scene)
@@ -133,17 +137,10 @@ void SelectScene::PostProcessDraw()
 	GoalParticle::GetInstance()->Draw();
 }
 
-void SelectScene::Back2dSpriteDraw()
-{
-}
-
-void SelectScene::Object3dDraw()
-{
-	PostEffect::GetInstance()->Draw();
-}
 
 void SelectScene::Flont2dSpriteDraw()
 {
+
 	player_->Draw2d();
 	ChangeSceneAnimation::GetInstance()->Draw();
 }

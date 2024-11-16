@@ -65,19 +65,29 @@ void GameManager::Run()
 		ImGui::PopStyleColor();
 #endif // _USE_IMGUI
 
-		PostEffect::GetInstance()->PreDraw();
+		//sceneŠÖ”‚Édraw‚ª“ü‚Á‚Ä‚¢‚½Žž
+		if (scene_->GetIsPostEffectDrawFunc())
+		{
+			PostEffect::GetInstance()->PreDraw();
 
-		SkyBox::GetInstance()->Draw();
-		scene_->PostProcessDraw();
+			SkyBox::GetInstance()->Draw();
+			scene_->PostProcessFuncDraw();
 
-		PostEffect::GetInstance()->PostDraw();
+			PostEffect::GetInstance()->PostDraw();
+		}
 
 		DirectXCommon::GetInstance()->PreDraw();
 
-		scene_->Back2dSpriteDraw();
-		scene_->Object3dDraw();
-		scene_->Flont2dSpriteDraw(); 
-		
+		scene_->Back2dSpriteFuncDraw();
+		scene_->Object3dFuncDraw();
+
+		if (scene_->GetIsPostEffectDrawFunc())
+		{
+			PostEffect::GetInstance()->Draw();
+		}
+
+		scene_->Flont2dSpriteFuncDraw();
+
 		Cleyera::EndFlame();
 		DirectXCommon::GetInstance()->PostDraw();
 	}
