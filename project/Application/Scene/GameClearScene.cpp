@@ -3,6 +3,8 @@ using namespace Engine::Manager;
 
 void GameClearScene::Initialize()
 {
+	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameClearScene/");
+	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameClearScene/");
 	//levelData‚Ì“Ç‚İ‚İ
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 

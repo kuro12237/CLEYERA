@@ -4,6 +4,8 @@ using namespace Engine::Manager;
 
 void GameOverScene::Initialize()
 {
+	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameOverScene/");
+	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameOverScene/");
 	//levelData‚Ì“Ç‚İ‚İ
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
