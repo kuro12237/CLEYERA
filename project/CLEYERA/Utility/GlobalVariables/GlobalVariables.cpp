@@ -12,9 +12,18 @@ GlobalVariables* GlobalVariables::GetInstance() {
 	return &instance;
 }
 
-void GlobalVariables::CreateGroup(const std::string& groupName)
+void GlobalVariables::CreateGroup(const std::string& groupName, const string& DirectoryPath)
 {
 	datas_[groupName];
+	if (DirectoryPath == "")
+	{
+		datas_[groupName].DirectryPath = kDirectoryPath;
+	}
+	else
+	{
+		const string filePath = "Resources/LevelData/ParamData/";
+		datas_[groupName].DirectryPath = filePath + DirectoryPath;
+	}
 }
 
 void GlobalVariables::SaveFile(const std::string& groupName)
@@ -88,14 +97,19 @@ void GlobalVariables::SaveFile(const std::string& groupName)
 		}
 	}
 
+	string directoryPath = datas_[groupName].DirectryPath;
+
 	// ディレクトリがなければ作成する
-	std::filesystem::path dir(kDirectoryPath);
-	if (!std::filesystem::exists(kDirectoryPath)) {
-		std::filesystem::create_directory(kDirectoryPath);
+	std::filesystem::path dir(directoryPath);
+	if (!std::filesystem::exists(directoryPath)) {
+		std::filesystem::create_directory(directoryPath);
 	}
 
 	// 書き込むJSONファイルのフルパスを合成する
-	std::string filePath = kDirectoryPath + groupName + ".json";
+	std::string filePath = directoryPath + groupName + ".json";
+
+
+
 	// 書き込み用ファイルストリーム
 	std::ofstream ofs{};
 	// ファイルを書き込みように開く
@@ -113,10 +127,10 @@ void GlobalVariables::SaveFile(const std::string& groupName)
 	ofs.close();
 }
 
-void GlobalVariables::LoadFile(const std::string& groupName)
+void GlobalVariables::LoadFile(const string& DirectoryPath, const std::string& groupName)
 {
 	// 読み込むJSONファイルのフルパスを合成する
-	std::string filePath = kDirectoryPath + groupName + ".json";
+	std::string filePath = DirectoryPath + groupName + ".json";
 	// 読み込み用ファイルストリーム
 	std::ifstream ifs;
 	// ファイルを読み込み用に開く
@@ -144,6 +158,8 @@ void GlobalVariables::LoadFile(const std::string& groupName)
 	for (nlohmann::json::iterator itItem = itGroup->begin(); itItem != itGroup->end(); ++itItem) {
 		// アイテム名を取得
 		const std::string& itemName = itItem.key();
+		Group& group = datas_[groupName];
+		group.DirectryPath = DirectoryPath;
 
 		// int32_tの値を保持している場合
 		if (itItem->is_number_integer()) {
@@ -191,15 +207,15 @@ void GlobalVariables::LoadFile(const std::string& groupName)
 	}
 }
 
-void GlobalVariables::LoadFiles()
+void GlobalVariables::LoadFiles(const string& DirectoryPath)
 {
 	// ディレクトリがなければスキップする
-	std::filesystem::path dir(kDirectoryPath);
-	if (!std::filesystem::exists(kDirectoryPath)) {
+	std::filesystem::path dir(DirectoryPath);
+	if (!std::filesystem::exists(DirectoryPath)) {
 		return;
 	}
 
-	std::filesystem::directory_iterator dir_it(kDirectoryPath);
+	std::filesystem::directory_iterator dir_it(DirectoryPath);
 	for (const std::filesystem::directory_entry& entry : dir_it) {
 		// ファイルパスを取得
 		const std::filesystem::path& filePath = entry.path();
@@ -211,7 +227,7 @@ void GlobalVariables::LoadFiles()
 			continue;
 		}
 		// ファイル読み込み
-		LoadFile(filePath.stem().string());
+		LoadFile(DirectoryPath, filePath.stem().string());
 	}
 }
 
@@ -226,22 +242,44 @@ void GlobalVariables::Update()
 		return;
 	}
 
+	static char gropNameBuf[256] = "";
+	static char directoryNameBuf[256] = "";
+	ImGui::InputText("group", gropNameBuf, sizeof(gropNameBuf));
+	ImGui::InputText("directory", directoryNameBuf, sizeof(directoryNameBuf));
+	string groupName = gropNameBuf;
+	string directoryName = directoryNameBuf;
 
+	string bottonName = "groupName::" + groupName + "  " + "directory::" + directoryNameBuf;
 
-	for (std::map<std::string, Group>::iterator itGroup = datas_.begin(); itGroup != datas_.end();
-		++itGroup) {
+	if (ImGui::Button(bottonName.c_str()))
+	{
+		this->CreateGroup(groupName, directoryName);
+	}
+
+	ImGui::Separator();
+
+	//string prevFilePath = "";
+	for (std::map<std::string, Group>::iterator itGroup = datas_.begin(); itGroup != datas_.end(); ++itGroup) {
 		// グループ名を取得
 		const std::string& groupName = itGroup->first;
 		// グループの参照を取得
 		Group& group = itGroup->second;
 
-		if (groupName=="")
+		if (groupName == "")
 		{
 			continue;
 		}
 
+
 		if (ImGui::TreeNode(groupName.c_str()))
 		{
+			char buffer[256] = { 0 };
+			std::memcpy(buffer, group.DirectryPath.c_str(), std::min(group.DirectryPath.size(), sizeof(buffer) - 1));
+
+			if (ImGui::InputText("DirectryPath", buffer, sizeof(buffer)))
+			{
+				group.DirectryPath = std::string(buffer);
+			}
 
 			// 各項目について
 			for (std::map<std::string, Item>::iterator itItem = group.items.begin();
@@ -341,6 +379,14 @@ void GlobalVariables::Update()
 
 }
 
+void GlobalVariables::ChangeSceneLoadFiles()
+{
+	for (const string& path : changeSceneLoadFilePaths_)
+	{
+		LoadFiles(path);
+	}
+}
+
 vector<string> GlobalVariables::GetAllDataKey()
 {
 	std::vector<std::string> keys;
@@ -349,4 +395,14 @@ vector<string> GlobalVariables::GetAllDataKey()
 		keys.push_back(key);
 	}
 	return keys;
+}
+
+void GlobalVariables::SetChangeSceneLoadFilesName(const string& filePath)
+{
+	// すでに存在するか確認
+	if (std::find(this->changeSceneLoadFilePaths_.begin(), this->changeSceneLoadFilePaths_.end(), filePath) == this->changeSceneLoadFilePaths_.end())
+	{
+		// 存在しなければ追加
+		this->changeSceneLoadFilePaths_.push_back(filePath);
+	}
 }

@@ -87,6 +87,9 @@ void GameManager::ChangeScene(unique_ptr<IScene> newScene)
 {
 	scene_ = move(newScene);
 
+	GlobalVariables::GetInstance()->Clear();
+	GlobalVariables::GetInstance()->ChangeSceneLoadFiles();
+
 	scene_->Initialize();
 	scene_->Update(this);
 

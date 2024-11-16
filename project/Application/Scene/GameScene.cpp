@@ -4,6 +4,11 @@ using namespace Engine::Manager;
 
 void GameScene::Initialize()
 {
+
+	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
+	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameScene/");
+	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/Utility/");
+
 	//levelData‚Ì“Ç‚İ‚İ
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 

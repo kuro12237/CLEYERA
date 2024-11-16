@@ -5,7 +5,7 @@ using namespace Engine::Transform;
 void RodingIcon2d::Initialize(uint32_t noiseTex)
 {
 	name_ = "rodingIcon";
-	this->CreateJsonData();
+	this->CreateJsonData("Utility/");
 	this->CreateObject();
 	this->CreateJsonSpriteData();
 

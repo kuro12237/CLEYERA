@@ -4,7 +4,7 @@
 void TitleBack2d::Initialize(uint32_t noiseTex)
 {
 	name_ = "titleBack";
-	this->CreateJsonData();
+	this->CreateJsonData("Utility/");
 	this->CreateObject();
 	this->CreateJsonSpriteData();
 

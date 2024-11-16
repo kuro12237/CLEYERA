@@ -1,5 +1,8 @@
 #pragma once
 
+///コンパイルファイル
+
+
 #include<cassert>
 #include<thread>
 
@@ -25,7 +28,7 @@
 #include<sstream>
 #include<string>
 #include <iomanip> 
-
+#include <cstring>
 
 
 #include<Windows.h>

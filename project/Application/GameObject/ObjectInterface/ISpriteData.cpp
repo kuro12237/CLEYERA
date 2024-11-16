@@ -8,9 +8,9 @@ ISpriteData::ISpriteData()
 	globalVariables_ = GlobalVariables::GetInstance();
 }
 
-void ISpriteData::CreateJsonData()
+void ISpriteData::CreateJsonData(const string& directoryPath)
 {
-	globalVariables_->CreateGroup(name_);
+	globalVariables_->CreateGroup(name_,directoryPath);
 }
 
 void ISpriteData::CreateJsonSpriteData()

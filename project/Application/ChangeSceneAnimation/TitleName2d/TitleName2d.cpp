@@ -3,7 +3,7 @@
 void TitleName2d::Initialize(uint32_t noiseTex)
 {
 	name_ = "titleName";
-	this->CreateJsonData();
+	this->CreateJsonData("Utility/");
 	this->CreateObject();
 	this->CreateJsonSpriteData();
 

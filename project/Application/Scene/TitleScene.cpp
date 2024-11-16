@@ -8,9 +8,12 @@ void TitleScene::Initialize()
 {
 	//ゲーム名設定
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");
+
 	//グローバル変数のパラメーターファイルの保存先変更
-	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/");
-	GlobalVariables::GetInstance()->LoadFiles();
+	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/TitleScene/");
+	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/TitleScene/");
+	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/Utility/");
+	GlobalVariables::GetInstance()->SetChangeSceneLoadFilesName("Resources/LevelData/ParamData/Utility/");
 
 	//instanceをGet
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();

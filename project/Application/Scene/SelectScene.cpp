@@ -5,6 +5,9 @@ using namespace Engine::Manager;
 
 void SelectScene::Initialize()
 {
+	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/SelectScene/");
+	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/SelectScene/");
+
 	//levelData‚Ì“Ç‚İ‚İ
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 

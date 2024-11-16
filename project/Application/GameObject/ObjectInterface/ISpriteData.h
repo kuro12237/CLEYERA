@@ -20,7 +20,7 @@ public:
 	/// <summary>
 	/// Json˜g‚ğì¬
 	/// </summary>
-	void CreateJsonData();
+	void CreateJsonData(const string& directoryPath = "");
 
 	/// <summary>
 	/// €–Ú‚ğ“o˜^

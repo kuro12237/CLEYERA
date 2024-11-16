@@ -41,7 +41,6 @@ void Cleyera::Initialize()
 	NoiseTexture::GetInstance()->Initialize();
 	
 	PostEffect::GetInstance()->Initialize();
-	GlobalVariables::GetInstance()->LoadFiles();
 
 	SkyBox::GetInstance()->Initialize();
 }
