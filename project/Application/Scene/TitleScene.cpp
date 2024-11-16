@@ -21,14 +21,16 @@ void TitleScene::Initialize()
 	changeSceneAnimation_->Initialize();
 
 	//配置データ読み込み
-	levelData_ = SceneFileLoader::GetInstance()->ReLoad(levelDataName_);
+	//levelDataの読み込み
+	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(levelDataName_));
 
-	//オブジェクト管理クラスの設定
+	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->ClearAllData();
-	gameObjectManager_->CopyData(levelData_.get());
+	gameObjectManager_->MoveData(levelData.get());
 	gameObjectManager_->SetAllParents();
-	gameObjectManager_->CameraReset("BackCamera");
+	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
+
 
 	camera_ = make_unique<TitleCamera>();
 	camera_->Initialize();

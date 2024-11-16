@@ -9,10 +9,10 @@ public:
 	static GameObjectManager* GetInstance();
 
 	/// <summary>
-	/// levelDataの中身をコピー
+	/// levelDataの中身を移動
 	/// </summary>
 	/// <param name="data"></param>
-	void CopyData(LevelData* data);
+	void MoveData(LevelData* data);
 
 	/// <summary>
 	/// 作ったすべてのものに親子関係があるチェックあったら親子関係をつける

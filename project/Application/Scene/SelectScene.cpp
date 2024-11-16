@@ -6,13 +6,15 @@ using namespace Engine::Manager;
 void SelectScene::Initialize()
 {
 	//levelData‚Ì“Ç‚Ýž‚Ý
-	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
+	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->ClearAllData();
-	gameObjectManager_->CopyData(levelData_.get());
+	gameObjectManager_->MoveData(levelData.get());
 	gameObjectManager_->SetAllParents();
 	gameObjectManager_->CameraReset();
+	gameObjectManager_->Update();
+
 
 	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
 	characterDeadParticle_->Initialize();

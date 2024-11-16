@@ -4,12 +4,14 @@ using namespace Engine::Manager;
 void GameClearScene::Initialize()
 {
 	//levelData‚Ì“Ç‚Ýž‚Ý
-	levelData_ = SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_);
+	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->ClearAllData();
-	gameObjectManager_->CopyData(levelData_.get());
+	gameObjectManager_->MoveData(levelData.get());
 	gameObjectManager_->SetAllParents();
+
+
 	gameObjectManager_->CameraReset("Camera");
 	gameObjectManager_->Update();
 
@@ -18,9 +20,6 @@ void GameClearScene::Initialize()
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
-
-	//gameOverText_ = make_unique<GameOverText>();
-	//gameOverText_->Initialize();
 
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 	ui_ = make_unique<ClearSceneUI>();
@@ -40,26 +39,18 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	changeSceneAnimation_->Update();
 
 
-	//gameOverText_->Update();
-
 	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
 	{
-		//gameOverUiManager_->Update();
 	}
 
 	ui_->Update();
 
-	//if (gameOverUiManager_->GetIsSelect())
-	{
-		//changeSceneAnimation_->ChangeStart();
-	}
 
 	gameObjectManager_->Update();
 
 	LightingManager::AddList(light_);
 	PostEffect::GetInstance()->Update();
 
-	//if (!gameOverUiManager_->GetIsSelect())
 	if (ui_->GetIsSelect())
 	{
 		changeSceneAnimation_->ChangeStart();
@@ -69,7 +60,6 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 		return;
 	}
-
 
 	if (ui_->GetNextStage() == ClearSceneChangeScene::Title)
 	{

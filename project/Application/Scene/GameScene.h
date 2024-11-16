@@ -97,7 +97,6 @@ private:
 #pragma endregion
 
 
-	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "LevelData_1.json";
 

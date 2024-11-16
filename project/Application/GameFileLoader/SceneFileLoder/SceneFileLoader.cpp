@@ -18,9 +18,9 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 	string name = deserialized["name"].get<string>();
 	assert(name.compare("scene") == 0);
 
-	if (!levelData)
+	if (!levelData_)
 	{
-		levelData = make_unique<LevelData>();
+		levelData_ = make_shared<LevelData>();
 	}
 
 	for (nlohmann::json& object : deserialized["objects"])
@@ -31,15 +31,15 @@ shared_ptr<LevelData> SceneFileLoader::ReLoad(const string& filePath)
 
 		if (isTypeCompare(type, "MESH"))
 		{
-			LoadObj3dData(levelData, object);
+			LoadObj3dData(levelData_, object);
 		}
 
 		if (isTypeCompare(type, "CAMERA"))
 		{
-			LoadChildCameraData(levelData, object);
+			LoadChildCameraData(levelData_, object);
 		}
 	}
-	return levelData;
+	return levelData_;
 }
 
 bool SceneFileLoader::isTypeCompare(const string& type, const string& name)

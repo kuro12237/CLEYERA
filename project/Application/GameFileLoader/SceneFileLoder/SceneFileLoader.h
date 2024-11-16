@@ -77,7 +77,7 @@ private:
 	TransformEular GetTransform(nlohmann::json transform);
 
 	nlohmann::json deserialized = nullptr;
-	shared_ptr<LevelData> levelData = nullptr;
+	shared_ptr<LevelData> levelData_ = nullptr;
 
 	/// <summary>
 	/// ブレンダーから読み込んだカメラの補正

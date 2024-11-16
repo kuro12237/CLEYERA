@@ -8,7 +8,7 @@ GameObjectManager* GameObjectManager::GetInstance()
 	return &instance;
 }
 
-void GameObjectManager::CopyData(LevelData* data)
+void GameObjectManager::MoveData(LevelData* data)
 {
 	obj3dData_ = move(data->obj3dData);
 	objInstancing3dData_ = move(data->objInstancing3dData);
