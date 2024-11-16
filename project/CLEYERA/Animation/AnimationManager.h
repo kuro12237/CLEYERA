@@ -33,7 +33,7 @@ public:
 	/// <param name="animB"></param>
 	/// <param name="blendFactor"></param>
 	/// <param name="outFrame"></param>
-	void BlendAnimations(SAnimation::Skeleton& skeleton, const std::vector<SAnimation::Animation>& animationResults, const std::vector<float>& blendFactors, SAnimation::Animation& outResult);
+	static void BlendAnimations(SAnimation::Skeleton& skeleton, const SAnimation::Animation& animationA, const SAnimation::Animation& animationB, const float &blendFactors, SAnimation::Animation& outResult);
 
 #pragma region Get
 	SAnimation::Animation GetData(const string& fileName);
@@ -45,6 +45,8 @@ public:
 	static Math::Qua::Quaternion CalculateValue(const std::vector<SAnimation::KeyframeQuaternion>& keyflames, float time);
 
 private:
+	
+
 
 	SAnimation::Animation LoadFile(const string& filename);
 

@@ -44,60 +44,49 @@ void AnimationManager::ApplyAnimation(SAnimation::Skeleton& skeleton, SAnimation
 	}
 }
 
-void AnimationManager::BlendAnimations(SAnimation::Skeleton& skeleton, const std::vector<SAnimation::Animation>& animationResults, const std::vector<float>& blendFactors, SAnimation::Animation& outResult) {
-	// アニメーションの数とブレンドファクターの数が一致するか確認
-	if (animationResults.size() != blendFactors.size()) {
-		// エラーハンドリング
-		return;
-	}
 
-	// 各ジョイントごとにブレンド
-	for (auto& joint : skeleton.joints) {
-		Math::Vector::Vector3 blendedTranslation = {};
-		Math::Qua::Quaternion blendedRotation = Math::Qua::IdentityQuaternion();
-		Math::Vector::Vector3 blendedScale = { 1.0f,1.0f,1.0f };
 
-		// ブレンドファクターの合計（後で正規化に使用）
-		float totalBlendFactor = 0.0f;
+void AnimationManager::BlendAnimations(SAnimation::Skeleton& skeleton, const SAnimation::Animation& animationA, const SAnimation::Animation& animationB, const float& blendFactors, SAnimation::Animation& outResult)
+{
+	
+	const size_t animSize = 2;
+	outResult;
 
-		// 各アニメーション結果に対して
-		for (size_t i = 0; i < animationResults.size(); ++i) {
-			const auto& animation = animationResults[i];
-			float blendFactor = blendFactors[i];
-			if (auto it = animation.NodeAnimation.find(joint.name); it != animation.NodeAnimation.end())
+	//結果
+	
+	for (auto& joint : skeleton.joints)
+	{
+		for (size_t index = 0; index < animSize; index++)
+		{
+			TransformQua blendedTransform{};
+
+			// アニメーションAのジョイントデータを取得
+			auto itA = animationA.NodeAnimation.find(joint.name);
+			// アニメーションBのジョイントデータを取得
+			auto itB = animationB.NodeAnimation.find(joint.name);
+
+			if (itA != animationA.NodeAnimation.end() && itB != animationB.NodeAnimation.end())
 			{
-				const SAnimation::NodeAnimation& nodeAnimation = it->second;
+				// 両方のアニメーションにジョイントが存在する場合
+				const SAnimation::NodeAnimation& nodeA = itA->second;
+				const SAnimation::NodeAnimation& nodeB = itB->second;
 
-				// ブレンドの適用
-				blendedTranslation.x += nodeAnimation.translate.keyframes[0].value.x * blendFactor;
-				blendedTranslation.y += nodeAnimation.translate.keyframes[0].value.y * blendFactor;
-				blendedTranslation.z += nodeAnimation.translate.keyframes[0].value.z * blendFactor;
+				TransformQua transformA{}, transformB{}, result{};
+				transformA.translate = (*nodeA.translate.keyframes.rbegin()).value;
+				transformB.translate= (*nodeB.translate.keyframes.rbegin()).value;
+				transformA.scale = (*nodeA.scale.keyframes.rbegin()).value;
+				transformB.scale = (*nodeB.scale.keyframes.rbegin()).value;
+				transformA.quaternion = (*nodeA.rotate.keyframes.rbegin()).value;
+				transformB.quaternion = (*nodeB.rotate.keyframes.rbegin()).value;
 
+				result.scale = Math::Vector::Lerp(transformA.scale, transformB.scale,blendFactors);
+				result.quaternion = Math::Qua::Slerp(transformA.quaternion, transformB.quaternion, blendFactors);
+				result.translate = Math::Vector::Lerp(transformA.translate, transformB.translate, blendFactors);
 
-				blendedRotation = Math::Qua::Slerp(blendedRotation, nodeAnimation.rotate.keyframes[0].value, blendFactor);
-				blendedScale.x += nodeAnimation.scale.keyframes[0].value.x * blendFactor;
-				blendedScale.y += nodeAnimation.scale.keyframes[0].value.y * blendFactor;
-				blendedScale.z += nodeAnimation.scale.keyframes[0].value.z * blendFactor;
+				joint.transform.scale = result.scale;
+				joint.transform.rotate = result.rotate;
+				joint.transform.translate = result.translate;
 
-				totalBlendFactor += blendFactor;
-
-
-				// 正規化して最終的な結果をoutResultに格納
-				if (totalBlendFactor > 0.0f) {
-					blendedTranslation.x /= totalBlendFactor;
-
-					blendedTranslation.y /= totalBlendFactor;
-					blendedTranslation.z /= totalBlendFactor;
-
-					blendedScale.x /= totalBlendFactor;
-					blendedScale.y /= totalBlendFactor;
-					blendedScale.z /= totalBlendFactor;
-				}
-
-				// 出力用のアニメーション結果にブレンド後の値を設定
-				outResult.NodeAnimation[joint.name].translate.keyframes.push_back({ 0.0f, blendedTranslation });
-				outResult.NodeAnimation[joint.name].rotate.keyframes.push_back({ 0.0f, blendedRotation });
-				outResult.NodeAnimation[joint.name].scale.keyframes.push_back({ 0.0f, blendedScale });
 			}
 		}
 	}

@@ -96,6 +96,11 @@ private:
 	/// </summary>
 	void Gravitys();
 
+	/// <summary>
+	/// オブジェクトの更新
+	/// </summary>
+	void PlayUpdate();
+
 #pragma region Particle
 	void ParticlesInitialize();
 	void ParticlesUpdate();

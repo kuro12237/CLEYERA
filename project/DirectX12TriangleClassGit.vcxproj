@@ -238,6 +238,7 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
+    <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h" />
@@ -260,6 +261,7 @@
     <ClInclude Include="Application\Scene\GameOverScene.h" />
     <ClInclude Include="Application\Utility\convert\convert.h" />
     <ClInclude Include="Application\Utility\LerpMotion\LerpMotion.h" />
+    <ClInclude Include="Application\Utility\ObjectNumberPool\ObjectPool.h" />
     <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h" />
     <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IObjectData.h" />

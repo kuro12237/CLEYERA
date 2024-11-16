@@ -1418,6 +1418,8 @@
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h">
       <Filter>Project\GameObject\StageManager</Filter>
     </ClInclude>
+    <ClInclude Include="Application\Utility\ObjectNumberPool\ObjectPool.h" />
+    <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

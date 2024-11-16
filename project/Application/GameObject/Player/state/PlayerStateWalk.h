@@ -17,4 +17,5 @@ public:
 
 private:
 
+	float flame_ = 0.0f;
 };

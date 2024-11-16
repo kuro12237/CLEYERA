@@ -289,6 +289,10 @@ void GameScene::Gravitys()
 	gravityManager_->CheckGravity();
 }
 
+void GameScene::PlayUpdate()
+{
+}
+
 void GameScene::ParticlesInitialize()
 {
 	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
