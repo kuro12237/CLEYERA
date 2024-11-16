@@ -1,43 +1,31 @@
 #pragma once
 
-#include"IScene.h"
+#include"Cleyera.h"
 #include"GameManager.h"
-#include"Input.h"
-#include"PostEffect/PostEffect.h"
-#include"Game3dObject.h"
-#include"DebugTool/DebugCamera/DebugCamera.h"
-#include"Animation/AnimationManager.h"
-#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
-#include"Model/primitive/LineModel.h"
-#include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
-
-#include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
+#include"GameObject/GravityManager/GravityManager.h"
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
 #include"GameObject/Block/BlockManager.h"
-#include"GameObject/GravityManager/GravityManager.h"
-#include"GameObject/Player/PlayerManager.h"
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Goal/Goal.h"
+#include"GameObject/Warp/WarpManager.h"
 
+#include"GameObject/Player/PlayerManager.h"
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
 
-#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
-#include"Particle/Field/ParticleField.h"
 
 #include"GameObject/UI/GameSceneUI/GameSceneUI.h"
 
-#include"Scene/TitleScene.h"
 #include"GameFileLoader/RailLoader/RailLoader.h"
-
-#include"GameObject/Warp/WarpManager.h"
-
 #include"GameObject/GameSceneAnimation/StartAnimation/StartAnimation.h"
 #include"GameObject/GameSceneAnimation/GameOverAnimation/EndAnimation.h"
+
 #include"Scene/GameClearScene.h"
+#include"Scene/TitleScene.h"
 
 /// <summary>
 /// ÉQÅ[ÉÄÉvÉåÉC

@@ -22,6 +22,20 @@
 #include"Utility/Noise/NoiseTexture.h"
 #include"Utility/SkyBox/SkyBox.h"
 
+
+#include"IScene.h"
+#include"Game3dObject.h"
+#include"DebugTool/DebugCamera/DebugCamera.h"
+#include"Animation/AnimationManager.h"
+#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
+#include"Model/primitive/LineModel.h"
+
+#include"Particle/Field/ParticleField.h"
+#include"Particle/GpuParticle.h"
+#include"Particle/Emitter/ParticleEmitter.h"
+
+#include"Utility/ObjectManager/GameObjectManager.h"
+
 namespace Engine {
 
 	/// <summary>

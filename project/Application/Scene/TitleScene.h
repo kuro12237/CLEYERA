@@ -1,31 +1,20 @@
 #pragma once
 
-#include"IScene.h"
+#include"Cleyera.h"
 #include"GameManager.h"
-#include"Input.h"
-#include"PostEffect/PostEffect.h"
-#include"Game3dObject.h"
-#include"DebugTool/DebugCamera/DebugCamera.h"
-#include"Animation/AnimationManager.h"
-#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
-#include"Model/primitive/LineModel.h"
+
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
-#include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
+#include"GameObject/GravityManager/GravityManager.h"
 
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Block/BlockManager.h"
-#include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
-
-#include"Utility/SkyBox/SkyBox.h"
-#include"Particle/GpuParticle.h"
-#include"Particle/Emitter/ParticleEmitter.h"
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
 
-#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
 #include"GameObject/TitleCamera/TitleCamera.h"
 #include"GameObject/Arch/Arch.h"
@@ -36,9 +25,7 @@
 #include"GameObject/TowerManager/TowerManager.h"
 #include"GameObject/Particles/Fire/FireParticle.h"
 
-
 #include"GameObject/UI/TitleSceneUI/TitleSceneUI.h"
-
 #include"GameObject/StageManager/StageManager.h"
 
 /// <summary>

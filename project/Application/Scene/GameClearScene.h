@@ -1,21 +1,17 @@
 #pragma once
 
-#include"IScene.h"
+#include"Cleyera.h"
 #include"GameManager.h"
-#include"Input.h"
-#include"PostEffect/PostEffect.h"
-#include"Game3dObject.h"
-#include"Animation/AnimationManager.h"
-#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
-#include"Model/primitive/LineModel.h"
+
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
+
+#include"GameFileLoader/RailLoader/RailLoader.h"
 #include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
-
-#include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
+#include"GameObject/GravityManager/GravityManager.h"
 
 #include"GameObject/Block/BlockManager.h"
-#include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Goal/Goal.h"
@@ -24,14 +20,6 @@
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
 
-#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
-#include"Particle/Field/ParticleField.h"
-
-#include"Scene/TitleScene.h"
-#include"GameFileLoader/RailLoader/RailLoader.h"
-
-
-#include"Light/LightingManager.h"
 
 #include"TitleScene.h"
 #include"GameScene.h"

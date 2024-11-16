@@ -1,15 +1,11 @@
 #pragma once
 
-#include"IScene.h"
+#include"Cleyera.h"
 #include"GameManager.h"
-#include"Input.h"
-#include"PostEffect/PostEffect.h"
-#include"Game3dObject.h"
-#include"Animation/AnimationManager.h"
-#include"DebugTool/DebugSkeleton/DebugSkeleton.h"
-#include"Model/primitive/LineModel.h"
-#include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
+#include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
+#include"GameFileLoader/RailLoader/RailLoader.h"
 
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/GameCollider/BoxCollisionManager.h"
@@ -24,21 +20,14 @@
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
 
-#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
-#include"Particle/Field/ParticleField.h"
 
-#include"Scene/TitleScene.h"
-#include"GameFileLoader/RailLoader/RailLoader.h"
-
-
-#include"Light/LightingManager.h"
+#include"GameObject/GameOverText/GameOverText.h"
+#include"GameObject/GameOverUI/GameOverUIManager.h"
 
 #include"TitleScene.h"
 #include"GameScene.h"
 #include"SelectScene.h"
 
-#include"GameObject/GameOverText/GameOverText.h"
-#include"GameObject/GameOverUI/GameOverUIManager.h"
 
 /// <summary>
 /// ゲームオーバー
