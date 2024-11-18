@@ -70,6 +70,8 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
+    <ClCompile Include="Application\GameObject\StageCoin\StageCoin.cpp" />
+    <ClCompile Include="Application\GameObject\StageCoin\StageCoinManager.cpp" />
     <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.cpp" />
@@ -240,6 +242,7 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
+    <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h" />

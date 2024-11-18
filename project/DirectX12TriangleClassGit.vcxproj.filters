@@ -826,6 +826,8 @@
       <Filter>Project\GameObject\StageManager</Filter>
     </ClCompile>
     <ClCompile Include="Application\Scene\IScene.cpp" />
+    <ClCompile Include="Application\GameObject\StageCoin\StageCoin.cpp" />
+    <ClCompile Include="Application\GameObject\StageCoin\StageCoinManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1421,6 +1423,7 @@
     </ClInclude>
     <ClInclude Include="Application\Utility\ObjectNumberPool\ObjectPool.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
+    <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

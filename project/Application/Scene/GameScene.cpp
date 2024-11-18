@@ -47,6 +47,9 @@ void GameScene::Initialize()
 	warpManager_ = make_unique<WarpManager>();
 	warpManager_->Initialize();
 
+	stageCoinManager_ = make_unique<StageCoinManager>();
+	stageCoinManager_->Initialize();
+
 	//2dObj
 	startAnimation_ = make_unique<StartAnimation>();
 	startAnimation_->Initialize();
@@ -108,6 +111,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	blockManager_->Update();
 
+	stageCoinManager_->Update();
+
 	goal_->Update();
 
 	warpManager_->Update();
@@ -121,7 +126,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	ParticlesUpdate();
 
 	LightingManager::AddList(light_);
-	PostEffect::GetInstance()->Update();
 
 	//ゴールしたときplayerのアニメーションが終わったら
 	if (*isGameEnd_)

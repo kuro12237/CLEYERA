@@ -23,6 +23,7 @@
 #include"GameFileLoader/RailLoader/RailLoader.h"
 #include"GameObject/GameSceneAnimation/StartAnimation/StartAnimation.h"
 #include"GameObject/GameSceneAnimation/GameOverAnimation/EndAnimation.h"
+#include"GameObject/StageCoin/StageCoinManager.h"
 
 #include"Scene/GameClearScene.h"
 #include"Scene/TitleScene.h"
@@ -104,6 +105,8 @@ private:
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 	unique_ptr<WarpManager>warpManager_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
+	unique_ptr<StageCoinManager>stageCoinManager_ = nullptr;
+
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 

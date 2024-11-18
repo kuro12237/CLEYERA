@@ -394,7 +394,7 @@
                 "translate": [
                     23.0,
                     0.0,
-                    17.5
+                    16.0
                 ],
                 "rotate": [
                     0.0,
@@ -404,7 +404,7 @@
                 "scale": [
                     3.0,
                     1.0,
-                    17.5
+                    17.0
                 ]
             },
             "collider": {
@@ -506,7 +506,7 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    10.0,
+                    16.0,
                     0.0,
                     34.0
                 ],
@@ -584,7 +584,7 @@
                 "translate": [
                     41.0,
                     0.0,
-                    1.0
+                    3.0656542778015137
                 ],
                 "rotate": [
                     0.0,
@@ -594,7 +594,7 @@
                 "scale": [
                     15.0,
                     1.0,
-                    20.0
+                    25.0
                 ]
             },
             "collider": {
@@ -1035,8 +1035,8 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -92.91786193847656,
-                    -60.0,
+                    -6.65296745300293,
+                    0.0,
                     63.594078063964844
                 ],
                 "rotate": [
@@ -1141,69 +1141,6 @@
         },
         {
             "type": "CAMERA",
-            "name": "BackCamera",
-            "transform": {
-                "translate": [
-                    21.031517028808594,
-                    -53.21332550048828,
-                    28.12958526611328
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "CAMERA",
-            "name": "LeftCamera",
-            "transform": {
-                "translate": [
-                    -33.723148345947266,
-                    -59.01215362548828,
-                    40.82935333251953
-                ],
-                "rotate": [
-                    70.5650634765625,
-                    0.7581570148468018,
-                    -37.936866760253906
-                ],
-                "scale": [
-                    0.9999999403953552,
-                    1.0,
-                    0.9999999403953552
-                ]
-            }
-        },
-        {
-            "type": "CAMERA",
-            "name": "RightCamera",
-            "transform": {
-                "translate": [
-                    55.46965408325195,
-                    -58.8429069519043,
-                    40.82935333251953
-                ],
-                "rotate": [
-                    70.56507110595703,
-                    0.7581616640090942,
-                    16.02165412902832
-                ],
-                "scale": [
-                    0.9999999403953552,
-                    1.0,
-                    0.9999999403953552
-                ]
-            }
-        },
-        {
-            "type": "CAMERA",
             "name": "PlayerCamera",
             "transform": {
                 "translate": [
@@ -1232,30 +1169,6 @@
             "transform": {
                 "translate": [
                     0.0,
-                    -120.0,
-                    64.0
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "CAMERA",
-            "name": "StartCamera.001",
-            "paramFileNames": {
-                "File 0": "Stage_1_1"
-            },
-            "transform": {
-                "translate": [
-                    12.0,
                     -120.0,
                     64.0
                 ],
@@ -3525,6 +3438,78 @@
                     0.0,
                     -0.0,
                     -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "StageCoin.001",
+            "file_name": "StageCoin",
+            "ModelFileType": "gltf",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -35.025733947753906,
+                    0.0,
+                    64.286865234375
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "StageCoin",
+            "file_name": "StageCoin",
+            "ModelFileType": "gltf",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -78.66403198242188,
+                    0.0,
+                    45.930885314941406
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "StageCoin.002",
+            "file_name": "StageCoin",
+            "ModelFileType": "gltf",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    34.594200134277344,
+                    0.0,
+                    64.286865234375
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
                 ],
                 "scale": [
                     1.0,
