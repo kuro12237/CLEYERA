@@ -17,6 +17,8 @@ public:
 	template<typename T>
 	T GetJsonItem(string itemName) { return globalVariables_->GetValue<T>(jsonGropName_, itemName); }
 
+	void SaveFile() { globalVariables_->SaveFile(jsonGropName_); }
+
 protected:
 
 	string jsonGropName_ = "";

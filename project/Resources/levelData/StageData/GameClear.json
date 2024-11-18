@@ -30,8 +30,7 @@
             "name": "GameClear",
             "file_name": "GameClearText",
             "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
+            "DrawType": "Normal",
             "transform": {
                 "translate": [
                     0.0,

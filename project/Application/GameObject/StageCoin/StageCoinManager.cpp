@@ -35,11 +35,11 @@ void StageCoinManager::Update()
 	{
 		if (stageCoins_[i])
 		{
-			auto& skeleton = gameObjectManager_->GetObj3dData(stageCoins_[i]->GetName())->GetGameObject()->GetSkeleton();
+			auto& skeleton = gameObjectManager_->GetObj3dData(stageCoins_[i]->INameable::GetName())->GetGameObject()->GetSkeleton();
 
 			AnimationManager::ApplyAnimation(skeleton, animationData_, animationFlame_);
 
-			gameObjectManager_->GetObj3dData(stageCoins_[i]->GetName())->GetGameObject()->SkeletonUpdate();
+			gameObjectManager_->GetObj3dData(stageCoins_[i]->INameable::GetName())->GetGameObject()->SkeletonUpdate();
 
 			stageCoins_[i]->Update();
 		}

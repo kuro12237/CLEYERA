@@ -1,11 +1,12 @@
 #pragma once
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Utility/convert/convert.h"
+#include"GameObject/GameCollider/ICollider.h"
 
 /// <summary>
 /// コインオブジェクト
 /// /// </summary>
-class StageCoin:public IObjectData
+class StageCoin:public IObjectData,public ICollider
 {
 public:
 	StageCoin() {};
@@ -15,9 +16,10 @@ public:
 
 	void Update();
 
-#pragma region Get
+	void OnCollision(ICollider* c, IObjectData* objData)override;
 
-	 
+#pragma region Get
+	bool GetIsDead() const { return &isDead_; }
 #pragma endregion
 
 #pragma region Set
@@ -28,6 +30,7 @@ public:
 private:
 
 	int32_t coinNumber_ = 0;
+	bool isDead_ = false;
 
 	float animationFlame_ = 0.0f;
 	SAnimation::Animation animationData_{};

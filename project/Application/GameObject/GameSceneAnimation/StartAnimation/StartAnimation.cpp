@@ -68,12 +68,6 @@ void StartAnimation::Update()
 				gameObjectManager_->CameraReset("PlayerCamera");
 				break;
 			}
-			else
-			{
-				cameraName_ = cameraName_ + FormatNumberWithDots(int(i + 1));
-				splineMotions_[i + 1]->SetIsStartFlag(true);
-				gameObjectManager_->CameraReset(cameraName_);
-			}
 
 			continue;
 		}
@@ -82,8 +76,19 @@ void StartAnimation::Update()
 		{
 			//レールを計算
 			camera.transform.translate = CalcRailData(i, 180.0f);
-			//ビネットの呼び出し
-			EndUpdate([this]() {EndVinatteAnimation(); });
+
+			if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
+			{
+				isSkip_ = true;
+			}
+
+			SkipAnimation();
+
+			if (!isSkip_)
+			{
+				//ビネットの呼び出し
+				EndUpdate([this]() {EndVinatteAnimation(); });
+			}
 		}
 	}
 	postEffect_->SetVignetteFactor(vinatteFlame_);
@@ -153,5 +158,22 @@ void StartAnimation::EndVinatteAnimation()
 		{
 			isFlameCount_ = false;
 		}
+	}
+}
+
+void StartAnimation::SkipAnimation()
+{
+	if (!isSkip_)
+	{
+		return;
+	}
+	splineMotions_[splineSelectIndex_]->SetIsComplete(true);
+	postEffect_->SetSelectPostEffect(VIGNETTE, true);
+	isFlameCount_ = true;
+	vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 20.0f, splineMotions_[splineSelectIndex_]->GetFlame());
+
+	if (vinatteFlame_ >= 10.0f)
+	{
+		isFlameCount_ = false;
 	}
 }

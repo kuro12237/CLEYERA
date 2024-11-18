@@ -21,6 +21,7 @@ private:
 	vector<shared_ptr<StageCoin>>stageCoins_ = {};
 
 	int32_t countMax_ = 0;
+	int32_t breakCoinsCount = 0;
 
 	float animationFlame_ = 0.0f;
 	SAnimation::Animation animationData_{};

@@ -25,7 +25,7 @@ public:
 	/// パラメーターの更新
 	/// </summary>
 	/// <param name="フレームMax値"></param>
-	void UpdateParamerter(const float &kFlame);
+	void UpdateParamerter(const float& kFlame);
 
 #pragma region Get
 	bool GetIsComplete() { return isComplete_; }
@@ -39,9 +39,13 @@ public:
 	void SetIsStartFlag(const bool& f) { isStartFlag_ = f; }
 #pragma endregion
 
+	void SetIsComplete(const bool& f) {
+		isComplete_
+			= f;
+	}
 private:
 
-    RailData* p_RailData_ = nullptr;
+	RailData* p_RailData_ = nullptr;
 
 	const Math::Vector::Vector3* p_Target_ = nullptr;
 

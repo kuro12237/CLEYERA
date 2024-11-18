@@ -56,7 +56,9 @@ private:
 
 	void EndVinatteAnimation();
 
+	void SkipAnimation();
 
+	bool isSkip_ = false;
 	bool isGameStart_ = false;
 	bool isCountStart_ = false;
 	bool isStartCount_ = false;

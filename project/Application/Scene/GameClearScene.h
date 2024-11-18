@@ -27,6 +27,8 @@
 
 #include"GameObject/UI/ClearSceneUI/ClearSceneUI.h"
 
+#include"GameObject/GameClear/GameClearText.h"
+
 /// <summary>
 /// ゲームオーバー
 /// </summary>
@@ -71,4 +73,6 @@ private:
 	unique_ptr<ClearSceneUI>ui_ = nullptr;
 
 	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
+
+	unique_ptr<GameClearText>gaameClearText_ = nullptr;
 };

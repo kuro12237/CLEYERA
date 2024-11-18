@@ -2,12 +2,17 @@
 
 void StageCoin::Initilaize()
 {
-	name_ = "StageCoin"+FormatNumberWithDots(coinNumber_);
-
-
+	INameable::name_ = "StageCoin"+FormatNumberWithDots(coinNumber_);
 }
 
 void StageCoin::Update()
 {
 
+}
+
+void StageCoin::OnCollision(ICollider* c, IObjectData* objData)
+{
+	c;
+	objData;
+	isDead_ = true;
 }

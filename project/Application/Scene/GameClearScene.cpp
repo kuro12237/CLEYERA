@@ -31,6 +31,8 @@ void GameClearScene::Initialize()
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
 
+	gaameClearText_ = make_unique<GameClearText>();
+	gaameClearText_->Initialize();
 
 }
 
@@ -52,7 +54,7 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 
 	ui_->Update();
-
+	gaameClearText_->Update();
 
 	gameObjectManager_->Update();
 

@@ -23,5 +23,6 @@ public:
 private:
 
 	bool isSelect_ = false;
+	float flame_ = 0.0f;
 };
 
