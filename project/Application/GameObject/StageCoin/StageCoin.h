@@ -3,6 +3,7 @@
 #include"Utility/convert/convert.h"
 #include"GameObject/GameCollider/ICollider.h"
 
+#include"Utility/ObjectId/GameObjectId.h"
 /// <summary>
 /// コインオブジェクト
 /// /// </summary>
@@ -19,7 +20,7 @@ public:
 	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 #pragma region Get
-	bool GetIsDead() const { return &isDead_; }
+	bool GetIsDead() { return isDead_; }
 #pragma endregion
 
 #pragma region Set

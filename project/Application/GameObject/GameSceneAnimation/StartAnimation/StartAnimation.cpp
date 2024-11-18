@@ -48,6 +48,8 @@ void StartAnimation::Update()
 		state_->Update(*this);
 	}
 
+	FlameUpdate();
+
 	auto& camera = gameObjectManager_->GetCameraData(cameraName_)->GetWorldTransform();
 
 	for (size_t i = 0; i < size_t(splineMotionsMax_); i++)
@@ -112,7 +114,6 @@ void StartAnimation::Update()
 		}
 	}
 
-	FlameUpdate();
 
 	startCount_->Update();
 
@@ -152,10 +153,12 @@ void StartAnimation::EndVinatteAnimation()
 	{
 		postEffect_->SetSelectPostEffect(VIGNETTE, true);
 		isFlameCount_ = true;
-		vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 20.0f, splineMotions_[splineSelectIndex_]->GetFlame());
+		vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 20.0f, flameCount_);
 
 		if (vinatteFlame_ >= 10.0f)
 		{
+
+			flameCount_ = 0.0f;
 			isFlameCount_ = false;
 		}
 	}
@@ -167,13 +170,15 @@ void StartAnimation::SkipAnimation()
 	{
 		return;
 	}
-	splineMotions_[splineSelectIndex_]->SetIsComplete(true);
 	postEffect_->SetSelectPostEffect(VIGNETTE, true);
 	isFlameCount_ = true;
-	vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 20.0f, splineMotions_[splineSelectIndex_]->GetFlame());
+	vinatteFlame_ = Math::Vector::LerpEaseOutSine(0.0f, 20.0f, flameCount_);
 
 	if (vinatteFlame_ >= 10.0f)
 	{
+
+		splineMotions_[splineSelectIndex_]->SetIsComplete(true);
+		flameCount_ = 0.0f;
 		isFlameCount_ = false;
 	}
 }

@@ -35,6 +35,15 @@ void StageCoinManager::Update()
 	{
 		if (stageCoins_[i])
 		{
+		
+			if (stageCoins_[i]->GetIsDead())
+			{
+				GameObjectManager::GetInstance()->ClearObj3dData(stageCoins_[i]->INameable::GetName());
+				stageCoins_[i].reset();
+				continue;
+			}
+
+
 			auto& skeleton = gameObjectManager_->GetObj3dData(stageCoins_[i]->INameable::GetName())->GetGameObject()->GetSkeleton();
 
 			AnimationManager::ApplyAnimation(skeleton, animationData_, animationFlame_);

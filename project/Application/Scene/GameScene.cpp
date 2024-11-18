@@ -246,6 +246,15 @@ void GameScene::Collision()
 		}
 	}
 
+	for (shared_ptr<StageCoin>& coin : stageCoinManager_->GetCoins())
+	{
+		if (coin)
+		{
+			gameCollisionManager_->ListPushback(coin.get(), coin.get());
+		}
+
+	}
+
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
 		if (e)

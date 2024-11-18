@@ -14,7 +14,7 @@ void ClearSceneTitleText::Update(BaseBottonUI& ui)
 	{
 		if (flame_ <= 1.0f)
 		{
-			flame_ += 1.0f / 60.0f;
+			flame_ += 1.0f / 30.0f;
 		}
 		float scale = Math::Vector::LerpEaseOutSine(prevScale, afterScale, flame_);
 		transform.scale = {scale,scale,scale };

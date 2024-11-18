@@ -14,6 +14,12 @@ public:
 
 	void Update();
 
+#pragma region Get
+
+	vector<shared_ptr<StageCoin>>GetCoins() { return stageCoins_; }
+#pragma endregion
+
+
 private:
 
 	GameObjectManager* gameObjectManager_ = nullptr;
