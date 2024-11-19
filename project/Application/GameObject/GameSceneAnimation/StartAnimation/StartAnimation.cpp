@@ -157,7 +157,7 @@ void StartAnimation::EndVinatteAnimation()
 
 		if (vinatteFlame_ >= 10.0f)
 		{
-
+			splineMotions_[splineSelectIndex_]->SetIsComplete(true);
 			flameCount_ = 0.0f;
 			isFlameCount_ = false;
 		}
