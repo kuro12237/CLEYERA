@@ -3,7 +3,7 @@
 using namespace Engine::Manager;
 
 
-void SelectScene::Initialize()
+void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/SelectScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/SelectScene/");

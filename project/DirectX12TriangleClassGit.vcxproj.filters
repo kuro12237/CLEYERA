@@ -1426,6 +1426,9 @@
     <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h" />
     <ClInclude Include="Application\GameObject\GameClear\GameClearText.h" />
+    <ClInclude Include="Application\GameObject\GameClearSaveData\GameClearSaveData.h" />
+    <ClInclude Include="Application\Scene\ISceneContext.h" />
+    <ClInclude Include="Application\GameObject\SceneContextData\SceneContextData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

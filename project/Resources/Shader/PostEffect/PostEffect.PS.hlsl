@@ -48,7 +48,7 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     float32_t weight = length(difference*0.1f);
     weight = saturate(weight);
-    resultColor.rgb = resultColor.rgb * (1.0f - weight);
+    //resultColor.rgb = resultColor.rgb * (1.0f - weight);
     
     //グレースケール
     {

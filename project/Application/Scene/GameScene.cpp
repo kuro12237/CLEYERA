@@ -2,7 +2,7 @@
 
 using namespace Engine::Manager;
 
-void GameScene::Initialize()
+void GameScene::Initialize([[maybe_unused]] GameManager* state)
 {
 
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
@@ -70,6 +70,8 @@ void GameScene::Initialize()
 
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameScene::PostProcessDraw, this));
+
+	context_ = make_unique<ISceneContext>();
 
 }
 
@@ -165,6 +167,10 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	//Ø‘Ö
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
+		contextData_.stageConinsCount = stageCoinManager_->GetCoinsCount();
+		context_->SetData(contextData_);
+
+		Scene->SetMoveSceneContext(move(context_));
 		Scene->ChangeScene(make_unique<GameClearScene>());
 		return;
 	}
@@ -208,7 +214,7 @@ void GameScene::ImGuiUpdate()
 	string bottonTitle = "Select_" + inputLevelDataFileName_;
 	if (ImGui::Button(bottonTitle.c_str()))
 	{
-		Initialize();
+		
 		return;
 	}
 

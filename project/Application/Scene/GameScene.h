@@ -25,8 +25,12 @@
 #include"GameObject/GameSceneAnimation/GameOverAnimation/EndAnimation.h"
 #include"GameObject/StageCoin/StageCoinManager.h"
 
+#include"GameObject/SceneContextData/SceneContextData.h"
+
 #include"Scene/GameClearScene.h"
 #include"Scene/TitleScene.h"
+
+#include"ISceneContext.h"
 
 /// <summary>
 /// ゲームプレイ
@@ -40,7 +44,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize()override;
+	void Initialize(GameManager* state)override;
 
 	/// <summary>
 	/// 更新
@@ -90,6 +94,9 @@ private:
 
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "LevelData_1.json";
+
+	unique_ptr<ISceneContext>context_ = nullptr;
+	SceneContextData contextData_ = {};
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;

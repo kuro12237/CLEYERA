@@ -29,7 +29,7 @@ public:
 	SelectScene() {};
 	~SelectScene() {};
 
-	void Initialize()override;
+	void Initialize(GameManager* state)override;
 
 	void Update([[maybe_unused]] GameManager* Scene)override;
 

@@ -2,7 +2,7 @@
 
 using namespace Engine::Manager;
 
-void GameOverScene::Initialize()
+void GameOverScene::Initialize([[maybe_unused]] GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameOverScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameOverScene/");

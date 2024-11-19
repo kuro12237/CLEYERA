@@ -1,7 +1,7 @@
 #include "GameClearScene.h"
 using namespace Engine::Manager;
 
-void GameClearScene::Initialize()
+void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameClearScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameClearScene/");
@@ -33,6 +33,8 @@ void GameClearScene::Initialize()
 
 	gaameClearText_ = make_unique<GameClearText>();
 	gaameClearText_->Initialize();
+
+	contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
 }
 

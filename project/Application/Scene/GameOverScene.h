@@ -41,7 +41,7 @@ public:
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	void Initialize()override;
+	void Initialize(GameManager* state)override;
 
 	/// <summary>
 	/// XV

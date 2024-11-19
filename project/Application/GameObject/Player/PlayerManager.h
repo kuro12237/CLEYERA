@@ -53,7 +53,7 @@ public:
 
 #pragma region Get
 
-	Player* GetPlayerCore() { return playerCore_.get(); }
+	Player* GetPlayerCore() const { return playerCore_.get(); }
 	PlayerReticle* GetReticle() { return reticle_.get(); }
 	PlayerGun* GetGun() { return gun_.get(); }
 	PlayerCamera* GetCamera() { return camera_.get(); }

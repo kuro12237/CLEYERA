@@ -10,12 +10,15 @@ class IScene
 public:
 	IScene() {};
 	virtual ~IScene() {};
-	virtual void Initialize() = 0;
-	virtual void Update([[maybe_unused]] GameManager* state) = 0;
+
+	virtual void Initialize(GameManager* state) = 0;
+	virtual void Update(GameManager* state) = 0;
 	void PostProcessFuncDraw();
-	void Back2dSpriteFuncDraw() ;
-	void Object3dFuncDraw() ;
-	void Flont2dSpriteFuncDraw() ;
+	void Back2dSpriteFuncDraw();
+	void Object3dFuncDraw();
+	void Flont2dSpriteFuncDraw();
+
+
 
 #pragma region Get
 

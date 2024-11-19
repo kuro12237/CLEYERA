@@ -15,8 +15,8 @@ public:
 	void Update();
 
 #pragma region Get
-
 	vector<shared_ptr<StageCoin>>GetCoins() { return stageCoins_; }
+	int32_t GetCoinsCount() { return coinsCount_; }
 #pragma endregion
 
 
@@ -27,7 +27,7 @@ private:
 	vector<shared_ptr<StageCoin>>stageCoins_ = {};
 
 	int32_t countMax_ = 0;
-	int32_t breakCoinsCount = 0;
+	int32_t coinsCount_ = 0;
 
 	float animationFlame_ = 0.0f;
 	SAnimation::Animation animationData_{};

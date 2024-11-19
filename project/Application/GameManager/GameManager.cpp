@@ -10,7 +10,7 @@ GameManager::GameManager()
 {
 	Cleyera::Initialize();
 	scene_ = make_unique<TitleScene>();
-	scene_->Initialize();
+	scene_->Initialize(this);
 }
 
 GameManager::~GameManager()
@@ -78,7 +78,7 @@ void GameManager::ChangeScene(unique_ptr<IScene> newScene)
 	GlobalVariables::GetInstance()->Clear();
 	GlobalVariables::GetInstance()->ChangeSceneLoadFiles();
 
-	scene_->Initialize();
+	scene_->Initialize(this);
 	scene_->Update(this);
 
 	return;

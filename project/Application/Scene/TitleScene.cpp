@@ -4,7 +4,7 @@ using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
 
-void TitleScene::Initialize()
+void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 {
 	//ƒQ[ƒ€–¼Ý’è
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");

@@ -210,6 +210,7 @@
     <ClInclude Include="Application\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Block\Block.h" />
     <ClInclude Include="Application\GameObject\Block\BlockManager.h" />
+    <ClInclude Include="Application\GameObject\GameClearSaveData\GameClearSaveData.h" />
     <ClInclude Include="Application\GameObject\GameClear\GameClearText.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\state\IStartAnimationState.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
+    <ClInclude Include="Application\GameObject\SceneContextData\SceneContextData.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
@@ -265,6 +267,7 @@
     <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
     <ClInclude Include="Application\Scene\GameClearScene.h" />
     <ClInclude Include="Application\Scene\GameOverScene.h" />
+    <ClInclude Include="Application\Scene\ISceneContext.h" />
     <ClInclude Include="Application\Utility\convert\convert.h" />
     <ClInclude Include="Application\Utility\LerpMotion\LerpMotion.h" />
     <ClInclude Include="Application\Utility\ObjectNumberPool\ObjectPool.h" />

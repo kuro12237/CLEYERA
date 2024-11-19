@@ -37,7 +37,7 @@ public:
 	/// </summary>
 	/// <param name="data"></param>
 	/// <param name="name"></param>
-	void PushObj3dData(shared_ptr<Game3dObjectData>& data, string name) { obj3dData_[name] = move(data); };
+	void PushObj3dData(const shared_ptr<Game3dObjectData>& data, string name) { obj3dData_[name] = move(data); };
 
 	/// <summary>
 	/// オブジェクト削除

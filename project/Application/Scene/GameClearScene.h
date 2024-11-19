@@ -41,7 +41,7 @@ public:
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
-	void Initialize()override;
+	void Initialize(GameManager* state)override;
 
 	/// <summary>
 	/// XV
@@ -68,6 +68,10 @@ private:
 	string inputLevelDataFileName_ = "GameClear.json";
 
 	PointLight_param light_{};
+
+	unique_ptr<SceneContextData>context_ = nullptr;
+	SceneContextData contextData_ = {};
+
 
 	//unique_ptr<GameOverText>gameOverText_ = nullptr;
 	unique_ptr<ClearSceneUI>ui_ = nullptr;

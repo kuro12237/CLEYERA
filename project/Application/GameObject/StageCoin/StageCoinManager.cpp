@@ -38,6 +38,8 @@ void StageCoinManager::Update()
 		
 			if (stageCoins_[i]->GetIsDead())
 			{
+
+				coinsCount_++;
 				GameObjectManager::GetInstance()->ClearObj3dData(stageCoins_[i]->INameable::GetName());
 				stageCoins_[i].reset();
 				continue;
