@@ -6,7 +6,6 @@
 #include"BottonsActions/ClearSceneJoyStick.h"
 #include"BottonsControl/ClearSceneUIControl.h"
 #include"BottonsActions/ClearSceneTitleText.h"
-
 enum class ClearSceneChangeScene
 {
 	Title,

@@ -13,10 +13,6 @@ public:
 	ClearSceneJoyStick() {};
 	~ClearSceneJoyStick() {};
 
-	void Active(BaseBottonUI& ui);
-
-	void Inactive(BaseBottonUI& ui);
-
 	void Initialize(BaseBottonUI& ui);
 	void Update(BaseBottonUI& ui);
 

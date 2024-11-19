@@ -53,6 +53,7 @@ public:
 	Engine::Transform::WorldTransform& GetWorldTransform() { return worldTransform_; }
 	uint32_t GetTexHandle() { return texHandle_; }
 	Engine::Objects::Sprite* GetSpriteData() { return sprite_.get(); }
+	string GetName() { return name_; }
 #pragma endregion
 
 #pragma region Set

@@ -47,7 +47,7 @@ protected:
 	GlobalVariables* globalVariables_ = nullptr;
 
 	vector<shared_ptr<BaseBottonUI>>bottonUis_;
-	vector<weak_ptr<ISpriteData>>sprites_;
+	map<string,weak_ptr<ISpriteData>>sprites_;
 
 #ifdef _USE_IMGUI
 

@@ -27,9 +27,9 @@ public:
     // データを設定する
     template<typename T>
     void SetData(T data) {
-        data_ = std::move(data); // データを格納
+        data_ = std::move(data); 
     }
 
 private:
-    std::any data_; // 型安全なデータ保持
+    std::any data_; 
 };

@@ -15,7 +15,6 @@ void ClearSceneUI::Initialize()
 		botton->SetUpdateFunction(std::bind(&ClearSceneTitleText::Update, texts_[i].get(), std::placeholders::_1));
 
 		bottonUis_.push_back(move(botton));
-		sprites_.push_back(bottonUis_[i]);
 	}
 
 	lJoyStick_ = make_unique<ClearSceneJoyStick>();
@@ -25,7 +24,9 @@ void ClearSceneUI::Initialize()
 
 	bottonUis_.push_back(move(joyStick));
 
-	//PushSpriteData();
+
+
+	PushSpriteData();
 	
 
 
