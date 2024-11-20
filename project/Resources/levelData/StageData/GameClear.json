@@ -51,6 +51,30 @@
         },
         {
             "type": "MESH",
+            "name": "Character",
+            "file_name": "Human",
+            "ModelFileType": "gltf",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    2.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    0.4000000059604645,
+                    0.4000000059604645,
+                    0.4000000059604645
+                ]
+            }
+        },
+        {
+            "type": "MESH",
             "name": "Block",
             "file_name": "Block",
             "ModelFileType": "obj",
@@ -205,7 +229,7 @@
             "type": "CAMERA",
             "name": "Camera",
             "paramFileNames": {
-                "File 0": "Stage_1_1"
+                "File 0": "CameraMOtion_01"
             },
             "transform": {
                 "translate": [

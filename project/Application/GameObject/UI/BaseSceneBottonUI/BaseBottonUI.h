@@ -13,7 +13,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initilaize(const string& groupName, const SceneUIEnum& ui,std::function<void(BaseBottonUI& ui)>f = nullptr);
+	virtual void Initilaize(const string& groupName, const SceneUIEnum& ui,std::function<void(BaseBottonUI& ui)>f = nullptr);
 
 	/// <summary>
 	/// 更新
@@ -27,7 +27,6 @@ public:
 	void SetControlActionFunction(std::function<bool()>f) { controlFunc_ = f; };
 	void SetIsActionActiveFunction(std::function<void(BaseBottonUI& ui)>f) { isActionTrueFunc_ = f; };
 	void SetIsActionInactiveFunction(std::function<void(BaseBottonUI& ui)>f) { isActionFalseFunc_ = f; };
-
 	void SetUpdateFunction(std::function<void(BaseBottonUI& ui)>f) { updateFunc_ = f; };
 #pragma endregion
 
@@ -35,13 +34,25 @@ public:
 	SceneUIEnum GetUIEnum(){ return ui_; }
 #pragma endregion
 
+protected:
+
+	/// <summary>
+	/// uiを作る際必ず呼び出す
+	/// </summary>
+	/// <param name="groupName"></param>
+	/// <param name="ui"></param>
+	void CreateUIData(const string& groupName, const SceneUIEnum& ui);
 
 private:
+
+	
 	std::function<bool()> controlFunc_;
 	std::function<void(BaseBottonUI& ui)>isActionTrueFunc_;
 	std::function<void(BaseBottonUI& ui)>isActionFalseFunc_;
 	std::function<void(BaseBottonUI& ui)> updateFunc_;
 	std::function<void(BaseBottonUI& ui)> initializeFunc_;
+
+	string jsonFilename_ = "";
 
 	bool isAction_ = false;
 

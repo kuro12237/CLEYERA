@@ -17,16 +17,12 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	gameObjectManager_->CameraReset("Camera");
 	gameObjectManager_->Update();
 
-
 	light_.radious = 512.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
-	ui_ = make_unique<ClearSceneUI>();
-	ui_->Initialize();
-
 
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
@@ -35,6 +31,21 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	gaameClearText_->Initialize();
 
 	contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+
+	ui_ = make_unique<ClearSceneUI>();
+
+	ui_->SetStageCoin(contextData_.stageConinsCount);
+	ui_->Initialize();
+
+	character_ = make_unique<ClearCharacter>();
+	character_->Initialize();
+
+	camera_ = make_unique<ClearCamera>();
+	camera_->Initilaize();
+	
+
+	fireParticle_ = make_unique<FireParticle>();
+	fireParticle_->Initialize();
 
 }
 
@@ -46,6 +57,7 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	gameObjectManager_->ImGuiUpdate();
 	ui_->ImGuiUpdate();
 
+	fireParticle_->ImGuiUpdate();
 #endif // _USE_IMGUI
 
 	changeSceneAnimation_->Update();
@@ -55,8 +67,16 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 	}
 
+	fireParticle_->Emit();
+	fireParticle_->Update();
+
 	ui_->Update();
 	gaameClearText_->Update();
+
+	character_->Update();
+
+	camera_->Update();
+
 
 	gameObjectManager_->Update();
 
@@ -88,6 +108,8 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 void GameClearScene::PostProcessDraw()
 {
 	gameObjectManager_->Draw();
+	fireParticle_->Draw();
+
 }
 
 void GameClearScene::Flont2dSpriteDraw()

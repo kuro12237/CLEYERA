@@ -2,12 +2,7 @@
 
 void BaseBottonUI::Initilaize(const string& groupName, const SceneUIEnum& ui, std::function<void(BaseBottonUI& ui)>f)
 {
-	name_ = groupName + CheckSceneUIEnumtoString(ui);
-	ui_ = ui;
-
-	this->CreateJsonData();
-	this->CreateObject();
-	this->CreateJsonSpriteData();
+	CreateUIData(groupName,ui);
 
 	//‰Šú‰»ŠÖ”‘ã“üŒÄ‚Ño‚µ
 	if (f)
@@ -63,4 +58,15 @@ void BaseBottonUI::Update()
 
 void BaseBottonUI::ImGuiUpdate()
 {
+}
+
+void BaseBottonUI::CreateUIData(const string& groupName, const SceneUIEnum& ui)
+{
+	name_ = groupName + CheckSceneUIEnumtoString(ui);
+	ui_ = ui;
+
+	this->CreateJsonData();
+	this->CreateObject();
+	this->CreateJsonSpriteData();
+
 }

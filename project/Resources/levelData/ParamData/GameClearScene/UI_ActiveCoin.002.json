@@ -1,10 +1,10 @@
 {
-    "ClearSceneSelectText_0": {
+    "UI_ActiveCoin.002": {
         "ankerPos": [
             0.5,
             0.5
         ],
-        "fileName": "GameOverSelectUI/uiText_01.png",
+        "fileName": "Coins/Coin.png",
         "transform": {
             "rotate": {
                 "x": 0.0,
@@ -17,8 +17,8 @@
                 "z": 1.0
             },
             "translate": {
-                "x": 920.0,
-                "y": 612.0,
+                "x": 800.0,
+                "y": 450.0,
                 "z": 0.0
             }
         }

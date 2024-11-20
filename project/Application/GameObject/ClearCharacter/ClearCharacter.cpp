@@ -1,0 +1,21 @@
+#include "ClearCharacter.h"
+
+void ClearCharacter::Initialize()
+{
+	name_ = "Character";
+	uint32_t animHandle= AnimationManager::GetInstance()->LoadAnimation("ClearHumanAnimation_01");
+	animationData_ = AnimationManager::GetInstance()->GetData(animHandle);
+}
+
+void ClearCharacter::Update()
+{
+	animFlame_ += 1.0f / 60.0f;
+    animFlame_ = std::fmod(animFlame_, animationData_.duration);
+
+	SAnimation::Skeleton& skeleton = gameObjectManager_->GetObj3dData(name_)->GetGameObject()->GetSkeleton();
+
+	AnimationManager::ApplyAnimation(skeleton, animationData_, animFlame_);
+
+	gameObjectManager_->GetObj3dData(name_)->GetGameObject()->SkeletonUpdate();
+
+}

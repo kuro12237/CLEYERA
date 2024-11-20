@@ -6,6 +6,9 @@
 #include"BottonsActions/ClearSceneJoyStick.h"
 #include"BottonsControl/ClearSceneUIControl.h"
 #include"BottonsActions/ClearSceneTitleText.h"
+#include"BottonsActions/ClearSceneCoinUI.h"
+
+
 enum class ClearSceneChangeScene
 {
 	Title,
@@ -37,6 +40,9 @@ public:
 	ClearSceneChangeScene GetNextStage() { return nextScene_; }
 #pragma endregion
 
+#pragma region Set
+	void SetStageCoin(const uint32_t stageCoinCount) { stageCoinCount_ = stageCoinCount; }
+#pragma endregion
 
 private:
 
@@ -49,6 +55,8 @@ private:
 	unique_ptr<ClearSceneUIBottonsControl>bottonControl_ = nullptr;
 	vector<unique_ptr<ClearSceneTitleText>>texts_;
 
-	bool isSelect_ = false;
+	vector<shared_ptr<ClearSceneCoinUI>>coins_;
 
+	bool isSelect_ = false;
+	uint32_t stageCoinCount_ = 0;
 };

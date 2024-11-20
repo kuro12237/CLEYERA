@@ -51,7 +51,7 @@ public:
 private:
 
 	bool InitializeLock_ = false;
-	string name_ = "CharacterMoveParticle";
+	string name_ = "Fire";
 	uint32_t texHandle_ = 0;
 
 	unique_ptr<Particle::GpuParticle>particle_ = nullptr;

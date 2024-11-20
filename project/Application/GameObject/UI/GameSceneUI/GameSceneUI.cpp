@@ -31,7 +31,8 @@ void GameSceneUI::Initialize()
 			joyStick->SetUpdateFunction(std::bind(&GameSceneUIBottonsAction::JoyStickRUpdate, bottonAction_.get(), std::placeholders::_1));
 		}
 		//関数渡す
-		bottonUis_.push_back(move(joyStick));
+		this->PushUiMapData(joyStick);
+
 	}
 
 	string bottonBackKey = "GameSceneBottonBack_";
@@ -45,7 +46,8 @@ void GameSceneUI::Initialize()
 	bottonA->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlA, bottonControl_.get()));
 	bottonA->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonAActive, bottonAction_.get(), std::placeholders::_1));
 	bottonA->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonAInactive, bottonAction_.get(), std::placeholders::_1));
-	bottonUis_.push_back(move(bottonA));
+
+	this->PushUiMapData(bottonA);
 
 	//RT
 	shared_ptr<BaseBottonUI>bottonRT = make_shared<BaseBottonUI>();
@@ -54,7 +56,7 @@ void GameSceneUI::Initialize()
 	bottonRT->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlRT, bottonControl_.get()));
 	bottonRT->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTActive, bottonAction_.get(), std::placeholders::_1));
 	bottonRT->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTInactive, bottonAction_.get(), std::placeholders::_1));
-	bottonUis_.push_back(move(bottonRT));
+	this->PushUiMapData(bottonRT);
 
 	string textGroupName = "GameSceneText_";
 	this->KeyCreateEnumNoneUI(textGroupName);
@@ -66,9 +68,6 @@ void GameSceneUI::Initialize()
 void GameSceneUI::Update()
 {
 	//ボタン更新
-	for (weak_ptr<BaseBottonUI> data : bottonUis_)
-	{
-		auto it = data.lock();
-		it->Update();
-	}
+	this->BottonUiUpdate();
+
 }

@@ -2,6 +2,8 @@
 #include"Pch.h"
 #include"GameObject/ObjectInterface/ISpriteData.h"
 #include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
+#include"Utility/convert/convert.h"
+#include"Utility/convert/convert.h"
 
 /// <summary>
 /// UIの抽象クラス
@@ -44,9 +46,19 @@ protected:
 	/// <param name="gruopKey"></param>
 	void KeyCreateEnumNoneUI(const string & gruopKey);
 
+	/// <summary>
+	/// uiマップにセット
+	/// </summary>
+	void PushUiMapData(shared_ptr<BaseBottonUI>ui);
+
+	/// <summary>
+	/// bottonUiMap更新
+	/// </summary>
+	void BottonUiUpdate();
+
 	GlobalVariables* globalVariables_ = nullptr;
 
-	vector<shared_ptr<BaseBottonUI>>bottonUis_;
+	map<string,shared_ptr<BaseBottonUI>>bottonUis_;
 	map<string,weak_ptr<ISpriteData>>sprites_;
 
 #ifdef _USE_IMGUI

@@ -2,8 +2,6 @@
 
 void ClearSceneUI::Initialize()
 {
-
-
 	texts_.resize(2);
 
 	for (size_t i = 0; i < 2; i++)
@@ -14,7 +12,7 @@ void ClearSceneUI::Initialize()
 		botton->Initilaize("ClearSceneSelectText_"+to_string(i), SceneUIEnum::JoyStick_None);
 		botton->SetUpdateFunction(std::bind(&ClearSceneTitleText::Update, texts_[i].get(), std::placeholders::_1));
 
-		bottonUis_.push_back(move(botton));
+		this->PushUiMapData(botton);
 	}
 
 	lJoyStick_ = make_unique<ClearSceneJoyStick>();
@@ -22,24 +20,29 @@ void ClearSceneUI::Initialize()
 	joyStick->Initilaize("ClearSceneJoyStick", SceneUIEnum::JoyStick_L, std::bind(&ClearSceneJoyStick::Initialize, lJoyStick_.get(), std::placeholders::_1));
 	joyStick->SetUpdateFunction(std::bind(&ClearSceneJoyStick::Update, lJoyStick_.get(), std::placeholders::_1));
 
-	bottonUis_.push_back(move(joyStick));
+	this->PushUiMapData(joyStick);
 
+	string bottonBackKey = "UI_";
 
+	coins_.resize(3);
+	for (size_t i = 0; i < stageCoinCount_; i++)
+	{
+		string key = bottonBackKey + "ActiveCoin"+FormatNumberWithDots(static_cast<uint32_t>(i));
+		coins_[i] = make_shared<ClearSceneCoinUI>();
+		coins_[i]->SetIsActive(true);
+		coins_[i]->Initilaize(key, SceneUIEnum::JoyStick_None);
+		this->PushUiMapData(coins_[i]);
+	}
 
+	//this->KeyCreateEnumNoneUI(bottonBackKey);
 	PushSpriteData();
-	
-
 
 }
 
 void ClearSceneUI::Update()
 {
 	//ボタン更新
-	for (weak_ptr<BaseBottonUI> data : bottonUis_)
-	{
-		auto it = data.lock();
-		it->Update();
-	}
+	this->BottonUiUpdate();
 
 	for (size_t i = 0; i < 2; i++)
 	{

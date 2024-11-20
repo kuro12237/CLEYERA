@@ -29,6 +29,12 @@
 
 #include"GameObject/GameClear/GameClearText.h"
 
+#include"GameObject/ClearCharacter/ClearCharacter.h"
+#include"GameObject/ClearCamera/ClearCamera.h"
+
+#include"GameObject/Particles/Fire/FireParticle.h"
+
+
 /// <summary>
 /// ゲームオーバー
 /// </summary>
@@ -72,11 +78,15 @@ private:
 	unique_ptr<SceneContextData>context_ = nullptr;
 	SceneContextData contextData_ = {};
 
-
-	//unique_ptr<GameOverText>gameOverText_ = nullptr;
 	unique_ptr<ClearSceneUI>ui_ = nullptr;
 
 	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
 
 	unique_ptr<GameClearText>gaameClearText_ = nullptr;
+
+	unique_ptr<ClearCharacter>character_ = nullptr;
+	unique_ptr<ClearCamera>camera_ = nullptr;
+
+	unique_ptr<FireParticle>fireParticle_ = nullptr;
+
 };

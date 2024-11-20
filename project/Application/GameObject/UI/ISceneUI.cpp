@@ -35,8 +35,7 @@ void ISceneUI::ImGuiUpdate()
 	{
 		shared_ptr<BaseBottonUI>ui = make_shared<BaseBottonUI>();
 		ui->Initilaize(newSpriteName_, SceneUIEnum::JoyStick_None);
-		bottonUis_.push_back(ui);
-
+		bottonUis_[ui->GetName()] = ui;
 		sprites_[ui->GetName()] = ui;
 	}
 
@@ -48,9 +47,10 @@ void ISceneUI::ImGuiUpdate()
 void ISceneUI::PushSpriteData()
 {
 	//uiをpush
-	for (weak_ptr<BaseBottonUI>ui : bottonUis_)
+	for (auto & ui : bottonUis_)
 	{
-		auto button = ui.lock();
+	  weak_ptr<BaseBottonUI> it = ui.second;
+	  auto button = it.lock();
 		if (sprites_.find(button->GetName()) == sprites_.end()) {
 			sprites_[button->GetName()] = button;
 		}
@@ -65,7 +65,23 @@ void ISceneUI::KeyCreateEnumNoneUI(const string& gruopKey)
 		{
 			shared_ptr<BaseBottonUI>ui = make_shared<BaseBottonUI>();
 			ui->Initilaize(name, SceneUIEnum::JoyStick_None);
-			bottonUis_.push_back(move(ui));
+			bottonUis_[name] = (move(ui));
 		}
+	}
+}
+
+void ISceneUI::PushUiMapData(shared_ptr<BaseBottonUI>ui)
+{
+	bottonUis_[ui->GetName()] = ui;
+}
+
+void ISceneUI::BottonUiUpdate()
+{
+	//ボタン更新
+	for (auto& data : bottonUis_)
+	{
+		weak_ptr<BaseBottonUI> it = data.second;
+		auto ui = it.lock();
+		ui->Update();
 	}
 }
