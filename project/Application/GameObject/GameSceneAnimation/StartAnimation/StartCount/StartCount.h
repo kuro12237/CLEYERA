@@ -83,6 +83,6 @@ private:
 	vector<Engine::Transform::WorldTransform>barWts_;
 	uint32_t barCount_ = 0;
 
-	TransformEular easeOutExpoMin_;
-	TransformEular easeOutExpoMax_;
+	Engine::Transform::TransformEular easeOutExpoMin_;
+	Engine::Transform::TransformEular easeOutExpoMax_;
 };

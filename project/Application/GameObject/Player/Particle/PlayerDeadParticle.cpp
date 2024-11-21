@@ -1,5 +1,9 @@
 #include "PlayerDeadParticle.h"
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void PlayerDeadParticle::Initialize()
 {
     texHandle_ = TextureManager::LoadPngTexture("deadEffect.png");

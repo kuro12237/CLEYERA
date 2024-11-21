@@ -6,6 +6,7 @@ using namespace Engine::Base::Win;
 using namespace Engine::Buffer;
 using namespace Engine::Manager;
 using namespace Engine::Light;
+using namespace Engine;
 
 PostEffect* PostEffect::GetInstance()
 {

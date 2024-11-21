@@ -1,7 +1,7 @@
 #pragma once
 #include"Particle/GpuParticle.h"
 
-namespace Particle
+namespace Engine::Particle
 {
     namespace FieldType
     {

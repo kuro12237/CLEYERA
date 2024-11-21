@@ -25,7 +25,7 @@ void ClearSceneJoyStick::Update(BaseBottonUI& ui)
 bool ClearSceneJoyStick::IsLJoystickActive()
 {
 	float joystickThreshold = 0.2f;
-	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
+	Math::Vector::Vector2 Ljoy = Engine::Input::GetInstance()->GetJoyLStickPos();
 	if (std::abs(Ljoy.x) > joystickThreshold || std::abs(Ljoy.y) > joystickThreshold) {
 
 		return true;

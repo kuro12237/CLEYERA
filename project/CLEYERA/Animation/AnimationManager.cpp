@@ -3,6 +3,8 @@
 using namespace Math::Vector;
 using namespace Math::Matrix;
 using namespace Math::Qua;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
 
 AnimationManager* AnimationManager::GetInstance()
 {

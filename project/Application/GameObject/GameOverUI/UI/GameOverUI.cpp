@@ -1,5 +1,10 @@
 #include "GameOverUI.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void GameOverUI::Initialize()
 {
 	fileName_ = "GameOverSelectUI/uiText_0" + to_string(selectIndex_) + ".png";

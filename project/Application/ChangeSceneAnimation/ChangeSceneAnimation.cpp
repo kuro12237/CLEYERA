@@ -1,5 +1,11 @@
 #include "ChangeSceneAnimation.h"
 
+
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 ChangeSceneAnimation* ChangeSceneAnimation::GetInstance()
 {
 	static ChangeSceneAnimation instance;

@@ -1,6 +1,9 @@
 #include "DebugSkeleton.h"
 
 using namespace Engine::Transform;
+using namespace Engine::Debug;
+using namespace Engine::Manager;
+using namespace Engine::Objects;
 
 void DebugSkeleton::Create(SAnimation::Skeleton skeleton, WorldTransform w)
 {

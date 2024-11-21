@@ -1,5 +1,8 @@
 #include "GameCameraData.h"
 
+using namespace Engine;
+using namespace Engine::Transform;
+
 void GameCameraData::Create(TransformEular t)
 {
 	worldTransform_.Initialize();

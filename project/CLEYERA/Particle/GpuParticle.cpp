@@ -1,12 +1,12 @@
 #include "GpuParticle.h"
 
-using namespace Particle;
+using namespace Engine::Particle;
 
 using namespace Engine::Base::DX;
 
 using namespace Engine::Base::Win;
 using namespace Engine::Manager;
-
+using namespace Engine;
 
 void GpuParticle::Create(const size_t kNum, string Name)
 {

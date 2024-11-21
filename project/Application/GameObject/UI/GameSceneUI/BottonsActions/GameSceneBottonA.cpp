@@ -1,5 +1,7 @@
 #include "GameSceneBottonA.h"
 
+using namespace Engine::Manager;
+
 void GameSceneUIBottonA::Active(BaseBottonUI& ui)
 {
 

@@ -73,7 +73,7 @@ private:
 
 	string inputLevelDataFileName_ = "GameClear.json";
 
-	PointLight_param light_{};
+	Engine::Light::PointLight_param light_{};
 
 	unique_ptr<SceneContextData>context_ = nullptr;
 	SceneContextData contextData_ = {};

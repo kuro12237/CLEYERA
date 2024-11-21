@@ -9,7 +9,7 @@
 class IGameSceneAnimation
 {
 public:
-	IGameSceneAnimation() { postEffect_ = PostEffect::GetInstance(), gameObjectManager_ = GameObjectManager::GetInstance(); }
+	IGameSceneAnimation() { postEffect_ = Engine::PostEffect::GetInstance(), gameObjectManager_ = GameObjectManager::GetInstance(); }
 	~IGameSceneAnimation() {};
 
 
@@ -38,7 +38,7 @@ protected:
 
 	string cameraName_ = "";
 
-	PostEffect* postEffect_ = nullptr;
+	Engine::PostEffect* postEffect_ = nullptr;
 	GameObjectManager* gameObjectManager_ = nullptr;
 
 	vector<unique_ptr<SplineMotion>>splineMotions_;

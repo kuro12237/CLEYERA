@@ -6,6 +6,8 @@
 #include<json.hpp>
 
 using namespace Math::Vector;
+using namespace Engine::Transform;
+
 
 GlobalVariables* GlobalVariables::GetInstance() {
 	static GlobalVariables instance;

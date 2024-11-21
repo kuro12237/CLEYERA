@@ -1,5 +1,10 @@
 #include "PlayerStateJamp.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void PlayerStateJamp::Initialize(Player* p)
 {
 	const float jampMax = 0.35f;

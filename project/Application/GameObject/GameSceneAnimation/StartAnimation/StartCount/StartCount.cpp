@@ -5,6 +5,10 @@ using namespace Engine::Objects;
 using namespace Engine::Transform;
 using namespace Engine::Base::Win;
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void StartCount::Initialize()
 {
 	//tex

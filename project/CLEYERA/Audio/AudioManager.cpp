@@ -1,6 +1,7 @@
 #include"AudioManager.h"
 
 using namespace SSound;
+using namespace Engine::Manager;
 
 AudioManager* AudioManager::GetInstance()
 {

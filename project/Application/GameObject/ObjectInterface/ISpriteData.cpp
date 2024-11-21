@@ -2,6 +2,10 @@
 
 using namespace Engine::Objects;
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 
 ISpriteData::ISpriteData()
 {

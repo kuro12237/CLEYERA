@@ -74,7 +74,7 @@ private:
 	/// <summary>
 	/// json‚©‚çtransform‚ð‚Æ‚é
 	/// </summary>
-	TransformEular GetTransform(nlohmann::json transform);
+	Engine::Transform::TransformEular GetTransform(nlohmann::json transform);
 
 	nlohmann::json deserialized = nullptr;
 	shared_ptr<LevelData> levelData_ = nullptr;

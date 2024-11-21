@@ -49,7 +49,7 @@ namespace SAnimation
 	/// ジョイント構造体
 	/// </summary>
 	struct Joint {
-		TransformQua transform;
+		Engine::Transform::TransformQua transform;
 		Math::Matrix::Matrix4x4 localMatrix;
 		Math::Matrix::Matrix4x4 skeletonSpaceMatrix;
 		std::string name;

@@ -1,5 +1,10 @@
 #include "PlayerStateFall.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void PlayerStateFall::Initialize([[maybe_unused]]Player* p)
 {
 }

@@ -80,8 +80,8 @@ private:
 	std::map<string, shared_ptr<Game3dInstancingObjectData>>objInstancing3dData_;
 	std::map<string, shared_ptr<GameCameraData>>cameraData_;
 
-	std::map<string, shared_ptr<Particle::GpuParticle>>particles_;
-	std::map<string, shared_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>>particleEmitters_;
+	std::map<string, shared_ptr<Engine::Particle::GpuParticle>>particles_;
+	std::map<string, shared_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>>particleEmitters_;
 
 #pragma region singleton
 	GameObjectManager() = default;

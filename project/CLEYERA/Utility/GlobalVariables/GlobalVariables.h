@@ -91,7 +91,7 @@ private:
 	// 項目
 	struct Item {
 		// 項目の値
-		std::variant<int32_t, float, bool, Math::Vector::Vector2, Math::Vector::Vector3, Math::Vector::Vector4, TransformQua, TransformEular, string> value;
+		std::variant<int32_t, float, bool, Math::Vector::Vector2, Math::Vector::Vector3, Math::Vector::Vector4, Engine::Transform::TransformQua, Engine::Transform::TransformEular, string> value;
 	};
 	// グループ
 	struct Group {

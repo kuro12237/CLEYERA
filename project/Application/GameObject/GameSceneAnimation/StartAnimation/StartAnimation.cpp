@@ -2,6 +2,10 @@
 
 using namespace Engine::Transform;
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+
 void StartAnimation::Initialize()
 {
 	gameObjectManager_ = GameObjectManager::GetInstance();

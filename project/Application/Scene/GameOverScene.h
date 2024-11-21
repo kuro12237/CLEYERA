@@ -67,7 +67,7 @@ private:
 
 	string inputLevelDataFileName_ = "GameOver.json";
 
-	PointLight_param light_{};
+	Engine::Light::PointLight_param light_{};
 
 	unique_ptr<GameOverText>gameOverText_ = nullptr;
 	unique_ptr<GameOverUIManager>gameOverUiManager_ = nullptr;

@@ -26,6 +26,6 @@ private:
 	/// <summary>
 	/// S,R,T‚Ì“Ç‚İ‚İŠÖ”
 	/// </summary>
-	static TransformEular GetWorldTransform(nlohmann::json transform);
+	static Engine::Transform::TransformEular GetWorldTransform(nlohmann::json transform);
 };
 

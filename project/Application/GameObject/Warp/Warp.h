@@ -34,7 +34,7 @@ public:
 private:
 
 	unique_ptr<Primitive::LineModel>line_ = nullptr;
-	unique_ptr<Game3dObject>railPointGameObject_ = nullptr;
+	unique_ptr<Engine::Objects::Game3dObject>railPointGameObject_ = nullptr;
 
     shared_ptr<WarpGate>warpGate_ = nullptr;
 	unique_ptr<WarpRuate>warpRute_ = nullptr;

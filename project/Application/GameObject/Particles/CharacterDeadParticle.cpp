@@ -1,5 +1,10 @@
 #include "CharacterDeadParticle.h"
 
+
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 CharacterDeadParticle* CharacterDeadParticle::GetInstance()
 {
     static CharacterDeadParticle instance;

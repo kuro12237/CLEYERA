@@ -1,5 +1,10 @@
 #include "Game3dObjectData.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc desc, uint32_t modelHandle)
 {
 	modelHandle_ = modelHandle;

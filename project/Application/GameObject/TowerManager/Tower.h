@@ -34,7 +34,7 @@ private:
 
 	uint32_t index_ = 0;
 	GameObjectManager* gameObjectManager_ = nullptr;
-	TransformEular initialTransform_ = {};
+	Engine::Transform::TransformEular initialTransform_ = {};
 	Math::Vector::Vector3 newPos_ = {};
 	bool isSetNewPos_ = false;
 };

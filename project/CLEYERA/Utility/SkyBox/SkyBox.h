@@ -44,7 +44,7 @@ public:
 #pragma region Set
 
 	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
-	void SetTransform(const TransformEular& transform) { worldTransform_.transform = transform; }
+	void SetTransform(const Engine::Transform::TransformEular& transform) { worldTransform_.transform = transform; }
 	void SetParent(const Engine::Transform::WorldTransform& transform) { worldTransform_.parent = &transform; }
 	
 #pragma endregion

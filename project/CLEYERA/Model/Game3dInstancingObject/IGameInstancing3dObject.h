@@ -15,7 +15,7 @@ public:
 	void Update();
 
 #pragma region Set
-	void SetTransformEular(TransformEular t) { transform_ = t; }
+	void SetTransformEular(Engine::Transform::TransformEular t) { transform_ = t; }
 	void SetBreakFlag(const bool& f) { breakFlag_ = f; }
 	void SetAABB(AABB aabb) { aabb_ = aabb; }
 	void SetUvScale(Math::Vector::Vector3 s) { uvScale_ = s; }
@@ -25,7 +25,7 @@ public:
 #pragma region Get
 	Math::Matrix::Matrix4x4 GetMatrix() { return matrix_; }
 	bool GetBreakFlag() { return breakFlag_; }
-	TransformEular &GetTransform() { return transform_; }
+	Engine::Transform::TransformEular &GetTransform() { return transform_; }
 	Math::Vector::Vector4 &GetColor() { return color_; }
 	AABB GetAABB() { return aabb_; }
 	Math::Vector::Vector3 GetUvScale() { return uvScale_; }
@@ -37,7 +37,7 @@ private:
 
 	Math::Matrix::Matrix4x4 matrix_ = {};
 	bool breakFlag_ = false;
-	TransformEular transform_ = {};
+	Engine::Transform::TransformEular transform_ = {};
 	AABB aabb_ = {};
 	Math::Vector::Vector3 uvScale_ = { 1.0f,1.0f,1.0f };
 	Math::Vector::Vector4 color_ = { 1.0f,1.0f,1.0f,1.0f };

@@ -1,5 +1,9 @@
 #include "GoalParticle.h"
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 GoalParticle* GoalParticle::GetInstance()
 {
 	static GoalParticle instance;

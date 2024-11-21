@@ -1,11 +1,17 @@
 #include "GameOverActiveUIParticle.h"
 
+using namespace Engine::Manager;
+using namespace Engine::Particle;
+
+using namespace Engine;
+using namespace Engine::Transform;
+
 void GameOverActiveUIParticle::Initialize()
 {
 	texHandle_ = TextureManager::LoadPngTexture("circle.png");
-	particle_ = make_unique<Particle::GpuParticle>();
+	particle_ = make_unique<GpuParticle>();
 	particle_->Create(1, name_);
-	particle_->SetDrawMode(Particle::mode_2d);
+	particle_->SetDrawMode(Engine::Particle::mode_2d);
 
 	Math::Vector::Vector2 texSize = TextureManager::GetTextureSize(texHandle_);
 	particle_->SetTexhandle(texHandle_);

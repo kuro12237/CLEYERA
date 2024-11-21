@@ -5,7 +5,7 @@
 #include"../GpuParticle.h"
 #include"StructGpuParticleEmitter.h"
 
-namespace Particle {
+namespace Engine::Particle {
 
 	using namespace Engine::Buffer;
 

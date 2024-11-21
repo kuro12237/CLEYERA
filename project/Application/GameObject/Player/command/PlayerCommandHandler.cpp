@@ -1,5 +1,10 @@
 #include "PlayerCommandHandler.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void PlayerCommandHandler::Handler()
 {
 	//左スティックが有効か
@@ -32,7 +37,7 @@ void PlayerCommandHandler::CommandsExec(Player& player)
 bool PlayerCommandHandler::IsLJoystickActive()
 {
 
-	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
+	Math::Vector::Vector2 Ljoy = Engine::Input::GetInstance()->GetJoyLStickPos();
 	if (std::abs(Ljoy.x) > joystickThreshold_ || std::abs(Ljoy.y) > joystickThreshold_) {
 
 		return true;

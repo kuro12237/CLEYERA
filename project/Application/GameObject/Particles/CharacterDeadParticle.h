@@ -41,7 +41,7 @@ public:
 	void Emit(){emitter_->Emit(particle_);}
 
 #pragma region Get
-	Particle::ParticleEmitter<Particle::EmitType::BoxParam>*GetEmitter() { return emitter_.get(); };
+	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>*GetEmitter() { return emitter_.get(); };
 #pragma endregion
 
 private:
@@ -49,8 +49,8 @@ private:
 	string name_ = "CharacterDeadParticle";
 	uint32_t texHandle_ = 0;
 
-	unique_ptr<Particle::GpuParticle>particle_ = nullptr;
-	unique_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>emitter_ = nullptr;
+	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
+	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
 
 	CharacterDeadParticle() = default;
 	~CharacterDeadParticle() = default;

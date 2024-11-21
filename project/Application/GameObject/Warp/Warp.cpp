@@ -24,9 +24,9 @@ void Warp::Initlaize(uint32_t index)
 		line_->SetVec(p_RailData_.data[i].GetWorldPosition(),p_RailData_.data[i+1].GetWorldPosition(),i*2);
 	}
 
-	railPointGameObject_ = make_unique<Game3dObject>();
+	railPointGameObject_ = make_unique<Engine::Objects::Game3dObject>();
 	railPointGameObject_->Create(make_unique<Phong3dPipline>());
-	railPointGameObject_->SetModel(ModelManager::LoadObjectFile("DfCube"));
+	railPointGameObject_->SetModel(Engine::Manager::ModelManager::LoadObjectFile("DfCube"));
 }
 
 void Warp::ImGuiUpdate()

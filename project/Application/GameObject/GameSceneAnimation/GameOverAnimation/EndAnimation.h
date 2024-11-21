@@ -48,7 +48,7 @@ private:
 
 
 	GameObjectManager* gameObjectManager_ = nullptr;
-	PostEffect* postEffect_ = nullptr;
+	Engine::PostEffect* postEffect_ = nullptr;
 
 	bool isComplete_ = false;
 

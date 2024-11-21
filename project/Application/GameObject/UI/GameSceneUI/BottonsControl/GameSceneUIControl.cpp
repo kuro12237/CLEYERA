@@ -1,5 +1,11 @@
 #include "GameSceneUIControl.h"
 
+
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 bool GameSceneUIBottonsControl::ControlA()
 {
 	if (Input::PushBotton(XINPUT_GAMEPAD_A))

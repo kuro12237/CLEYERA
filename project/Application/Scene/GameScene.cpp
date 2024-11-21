@@ -1,6 +1,9 @@
 #include "GameScene.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
 using namespace Engine::Manager;
+using namespace Engine::Transform;
 
 void GameScene::Initialize([[maybe_unused]] GameManager* state)
 {

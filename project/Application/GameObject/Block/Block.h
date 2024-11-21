@@ -33,6 +33,6 @@ public:
 
 private:
 
-	TransformEular initialTransform_{};
+	Engine::Transform::TransformEular initialTransform_{};
 
 };

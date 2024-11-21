@@ -25,7 +25,7 @@ private:
 
 	RailData railData_ = {};
 
-	unique_ptr<Game3dObject>gameObject_ = nullptr;
+	unique_ptr<Engine::Objects::Game3dObject>gameObject_ = nullptr;
 	Engine::Transform::WorldTransform worldTransform_ = {};
 
 	float kFlame_ = 60.0f;

@@ -37,9 +37,9 @@ public:
 	void Clear() { particle_->Clear(), emitter_->AllClear(), field_->AllClear(); }
 
 #pragma region Get
-	Particle::ParticleEmitter<Particle::EmitType::Circle>* GetEmitters() { return emitter_.get(); }
-	Particle::GpuParticle* GetParticle() { return  particle_.get(); }
-	Particle::ParticleField<Particle::FieldType::FieldSuction>* GetField() { return field_.get(); }
+	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::Circle>* GetEmitters() { return emitter_.get(); }
+	Engine::Particle::GpuParticle* GetParticle() { return  particle_.get(); }
+	Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldSuction>* GetField() { return field_.get(); }
 #pragma endregion
 
 private:
@@ -47,9 +47,9 @@ private:
 	bool InitializeLock_ = false;
 
 	uint32_t texHandle_ = 0;
-	unique_ptr<Particle::GpuParticle>particle_ = nullptr;
-	unique_ptr<Particle::ParticleEmitter<Particle::EmitType::Circle>>emitter_ = nullptr;
-	unique_ptr<Particle::ParticleField<Particle::FieldType::FieldSuction>>field_ = nullptr;
+	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
+	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::Circle>>emitter_ = nullptr;
+	unique_ptr<Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldSuction>>field_ = nullptr;
 
 	string name_ = "";
 };

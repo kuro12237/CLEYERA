@@ -4,15 +4,20 @@
 #include<json.hpp>
 
 
-/// <summary>
-/// transform
-/// </summary>
-struct TransformEular
+
+namespace Engine::Transform
 {
-	Math::Vector::Vector3 scale;
-    Math::Vector::Vector3 rotate;
-	Math::Vector::Vector3 translate;
 
-	NLOHMANN_DEFINE_TYPE_INTRUSIVE(TransformEular, scale, rotate, translate)
+	/// <summary>
+	/// transform
+	/// </summary>
+	struct TransformEular
+	{
+		Math::Vector::Vector3 scale;
+		Math::Vector::Vector3 rotate;
+		Math::Vector::Vector3 translate;
 
-};
+		NLOHMANN_DEFINE_TYPE_INTRUSIVE(TransformEular, scale, rotate, translate)
+
+	};
+}

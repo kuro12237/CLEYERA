@@ -3,6 +3,10 @@
 using namespace Engine::Base::Win;
 using namespace Engine::Objects;
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void GameOverUIManager::Initialize()
 {
 	uiPos_.x = 0.0f;

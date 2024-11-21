@@ -1,5 +1,10 @@
 #include "Player.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void Player::Initialize()
 {
 	INameable::name_ = "Player";

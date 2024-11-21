@@ -2,7 +2,7 @@
 #include"StructParticleField.h"
 #include"BufferResources.h"
 
-namespace Particle {
+namespace Engine::Particle {
 
 	using namespace Engine::Buffer;
 

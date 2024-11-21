@@ -12,9 +12,9 @@ public:
 	GameCameraData() {};
 	~GameCameraData() {};
 
-	void Create(TransformEular t);
+	void Create(Engine::Transform::TransformEular t);
 
-	void WtUpdate(TransformEular transform);
+	void WtUpdate(Engine::Transform::TransformEular transform);
 
 	void Update();
 

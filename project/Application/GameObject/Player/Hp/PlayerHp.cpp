@@ -1,6 +1,8 @@
 #include "PlayerHp.h"
 
 using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
 
 void PlayerHp::Initialize(uint32_t hp)
 {

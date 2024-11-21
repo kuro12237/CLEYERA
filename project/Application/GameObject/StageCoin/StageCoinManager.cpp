@@ -1,5 +1,7 @@
 #include "StageCoinManager.h"
 
+using namespace Engine::Manager;
+
 void StageCoinManager::Initialize()
 {
 	gameObjectManager_ = GameObjectManager::GetInstance();

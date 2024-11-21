@@ -1,5 +1,10 @@
 #include "RailLoader.h"
 
+using namespace Engine;
+using namespace Engine::Objects;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 RailData RailLoader::LoadRail(const string& filePath)
 {
 	RailData result;

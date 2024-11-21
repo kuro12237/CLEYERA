@@ -3,6 +3,7 @@
 using namespace Engine::Buffer;
 using namespace Engine::Transform;
 using namespace Engine::Manager;
+using namespace Engine::Objects;
 
 void Game3dObject::Create(unique_ptr<IPipelineCommand> piplineSelect)
 {

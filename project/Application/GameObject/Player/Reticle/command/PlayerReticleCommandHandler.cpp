@@ -1,5 +1,8 @@
 #include "PlayerReticleCommandHandler.h"
 
+
+using namespace Engine;
+
 void PlayerReticleCommandHandler::Handler()
 {
 	if (IsRJoystickActive())

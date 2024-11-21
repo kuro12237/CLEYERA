@@ -51,7 +51,7 @@ private:
 	string inputLevelDataFileName_ = "SelectSceneData.json";
 	StageManager* stageManager_ = nullptr;
 
-	PointLight_param light_{};
+	Engine::Light::PointLight_param light_{};
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 

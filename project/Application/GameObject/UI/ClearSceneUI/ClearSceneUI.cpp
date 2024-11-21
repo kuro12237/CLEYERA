@@ -1,4 +1,5 @@
 #include "ClearSceneUI.h"
+using namespace Engine;
 
 void ClearSceneUI::Initialize()
 {

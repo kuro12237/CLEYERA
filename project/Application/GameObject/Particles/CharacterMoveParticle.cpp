@@ -1,5 +1,9 @@
 #include "CharacterMoveParticle.h"
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 CharacterMoveParticle* CharacterMoveParticle::GetInstance()
 {
 	static CharacterMoveParticle instance;

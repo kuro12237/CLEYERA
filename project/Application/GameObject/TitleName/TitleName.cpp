@@ -6,6 +6,8 @@ using namespace Engine::Base::Win;
 using namespace Engine::Transform;
 using namespace Engine::Objects;
 
+using namespace Engine::Manager;
+
 void TitleName::Initialize()
 {
 	texHandle_ = TextureManager::LoadPngTexture("Title/titleName.png");

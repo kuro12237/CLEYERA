@@ -11,15 +11,15 @@ class  Game3dObjectData:public IGameObjectData
 public:
 
 	
-	void Initialize(TransformEular transform, Game3dObjectDesc desc, uint32_t modelHandle);
+	void Initialize(Engine::Transform::TransformEular transform, Game3dObjectDesc desc, uint32_t modelHandle);
 
-	void WtUpdate(TransformEular transform);
+	void WtUpdate(Engine::Transform::TransformEular transform);
 
 #pragma region Set
 
 	void SetData(Game3dObjectData* data);
 	void SetModelName(string name) { modelFileName_ = name; }
-	void SetGameObject(unique_ptr<Game3dObject> data) { gameObject_ = move(data); }
+	void SetGameObject(unique_ptr<Engine::Objects::Game3dObject> data) { gameObject_ = move(data); }
 	void SetGameObjeDesc(Game3dObjectDesc desc) { gameObject_->SetDesc( desc); }
 	void SetModelHandle(uint32_t handle) { modelHandle_ = handle; }
 
@@ -29,7 +29,7 @@ public:
 
 #pragma region Get
 
-	unique_ptr<Game3dObject>& GetGameObject() { return gameObject_; }
+	unique_ptr<Engine::Objects::Game3dObject>& GetGameObject() { return gameObject_; }
 	Game3dObjectDesc &GetDesc() { return gameObject_->GetDesc(); }
 	uint32_t GetModelHandle() { return modelHandle_; }
 #pragma endregion
@@ -37,7 +37,7 @@ public:
 private:
 
 	std::string modelFileName_;
-	unique_ptr<Game3dObject>gameObject_;
+	unique_ptr<Engine::Objects::Game3dObject>gameObject_;
 	uint32_t modelHandle_ = 0;
 
 	SAnimation::Skeleton skelton_ = {};

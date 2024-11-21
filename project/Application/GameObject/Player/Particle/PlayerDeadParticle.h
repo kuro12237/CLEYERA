@@ -39,7 +39,7 @@ public:
 	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
 
 #pragma region Get
-	Particle::ParticleEmitter<Particle::EmitType::BoxParam>* GetEmitter() { return emitter_.get(); };
+	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>* GetEmitter() { return emitter_.get(); };
 #pragma endregion
 
 private:
@@ -47,8 +47,8 @@ private:
 	string name_ = "PlayerDeadParticle";
 	uint32_t texHandle_ = 0;
 
-	unique_ptr<Particle::GpuParticle>particle_ = nullptr;
-	unique_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>emitter_ = nullptr;
+	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
+	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
 
 };
 

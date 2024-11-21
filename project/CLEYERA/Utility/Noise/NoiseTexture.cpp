@@ -1,5 +1,10 @@
 #include "NoiseTexture.h"
 
+
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 NoiseTexture* NoiseTexture::GetInstance()
 {
 	static NoiseTexture instance;

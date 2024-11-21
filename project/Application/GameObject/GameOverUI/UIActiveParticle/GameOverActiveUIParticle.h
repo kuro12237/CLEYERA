@@ -36,8 +36,8 @@ private:
 	string name_ = "GameOverActiveUIParticle";
 	uint32_t texHandle_ = 0;
 
-	unique_ptr<Particle::GpuParticle>particle_ = nullptr;
-	unique_ptr<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>emitter_ = nullptr;
+	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
+	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
 
 
 };

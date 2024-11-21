@@ -65,7 +65,7 @@ void PlayerReticle::Draw2d()
 
 void PlayerReticle::Move()
 {
-	Math::Vector::Vector2 Rjoy = Input::GetInstance()->GetJoyRStickPos();
+	Math::Vector::Vector2 Rjoy = Engine::Input::GetInstance()->GetJoyRStickPos();
 	Math::Vector::Vector2 normalizedRjoy_ = Math::Vector::Normalize(Rjoy);
 
 	// レティクルの位置を計算

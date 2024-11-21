@@ -1,5 +1,9 @@
 #include "FireParticle.h"
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void FireParticle::Initialize()
 {
 	if (InitializeLock_)

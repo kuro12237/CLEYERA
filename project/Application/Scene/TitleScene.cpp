@@ -108,7 +108,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	changeSceneAnimation_->Update();
 
-	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
+	if (Engine::Input::PushBottonPressed(XINPUT_GAMEPAD_A))
 	{
 		isChangeSelectScene_ = true;
 	}

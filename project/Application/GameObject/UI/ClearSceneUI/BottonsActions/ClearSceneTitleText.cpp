@@ -4,7 +4,7 @@ void ClearSceneTitleText::Update(BaseBottonUI& ui)
 {
 	ui;
 
-	TransformEular transform = ui.GetWorldTransform().transform;
+	Engine::Transform::TransformEular transform = ui.GetWorldTransform().transform;
 
 	const float prevScale = 0.25f;
 	const float afterScale = 0.35f;

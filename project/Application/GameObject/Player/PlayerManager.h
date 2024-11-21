@@ -88,7 +88,7 @@ private:
 	bool gameStartFlag_ = false;
 
 	GameObjectManager* gameObjectManager_ = nullptr;
-	PostEffect* postEffect_ = nullptr;
+	Engine::PostEffect* postEffect_ = nullptr;
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 	unique_ptr<PlayerReticleCommandHandler>reticleCommandHandler_ = nullptr;

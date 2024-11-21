@@ -2,7 +2,7 @@
 
 bool ClearSceneUIBottonsControl::ControlA()
 {
-	if (Input::PushBotton(XINPUT_GAMEPAD_A))
+	if (Engine::Input::PushBotton(XINPUT_GAMEPAD_A))
 	{
 		return true;
 	}

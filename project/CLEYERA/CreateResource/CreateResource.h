@@ -70,7 +70,7 @@ struct NodeData
 	Math::Matrix::Matrix4x4 localMatrix;
 	std::string name;
 	std::vector<NodeData>children;
-	TransformQua transform;
+	Engine::Transform::TransformQua transform;
 	SAnimation::Skeleton skeleton;
 };
 

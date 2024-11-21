@@ -1,5 +1,7 @@
 #include "StructGpuParticleEmitter.h"
 
+using namespace Engine;
+
 void Particle::System::CreateSphere(unique_ptr<Primitive::LineModel>& lines, string name)
 {
 	//•ªŠ„”

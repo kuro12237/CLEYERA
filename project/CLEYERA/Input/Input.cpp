@@ -2,6 +2,7 @@
 
 using namespace Math::Vector;
 using namespace Engine::Base::Win;
+using namespace Engine;
 
 Input* Input::GetInstance()
 {

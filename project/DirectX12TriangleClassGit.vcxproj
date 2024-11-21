@@ -721,7 +721,7 @@
     <ProjectReference Include="..\externals\DirectXTex\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
     </ProjectReference>
-    <ProjectReference Include="CLEYERA\externals\imgui\imgui.vcxproj">
+    <ProjectReference Include="..\externals\imgui\imgui.vcxproj">
       <Project>{719a8f6d-df9d-4bcd-9334-864931730380}</Project>
     </ProjectReference>
   </ItemGroup>
@@ -817,7 +817,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)..\externals/DirectXTex;$(ProjectDir)..\externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Application/Scene;$(ProjectDir)Application/GameManager;$(ProjectDir)Application;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)..\externals\assimp/include;$(ProjectDir)..\externals\nlohmann;$(SolutionDir)../externals/assimp/include;$(SolutionDir)../externals/nlohmann;$(SolutionDir)../externals/DirectXTex;$(SolutionDir)../externals/imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)CLEYERA/Utility/Pch;$(ProjectDir)CLEYERA;$(ProjectDir)CLEYERA/base/Win;$(ProjectDir)CLEYERA/Utility/LogManager;$(ProjectDir)CLEYERA/base/DX;$(ProjectDir)CLEYERA/Graphics/ShaderManager;$(ProjectDir)CLEYERA/Graphics/PipelineManager;$(ProjectDir)CLEYERA/Model;$(ProjectDir)CLEYERA/Model/state;$(ProjectDir)CLEYERA/math;$(ProjectDir)CLEYERA/CreateResource;$(ProjectDir)CLEYERA/Transform;$(ProjectDir)..\externals/DirectXTex;$(ProjectDir)..\externals/imgui;$(ProjectDir)CLEYERA/Utility/ImGuiManager;$(ProjectDir)Application/Scene;$(ProjectDir)Application/GameManager;$(ProjectDir)Application;$(ProjectDir)CLEYERA/Input;$(ProjectDir)CLEYERA/Audio;$(ProjectDir)CLEYERA/Utility/CollisionManager;$(ProjectDir)CLEYERA/Utility/CollisionManager/Collider;$(ProjectDir)CLEYERA/Utility/FileLoader;$(ProjectDir)..\externals\assimp/include;$(ProjectDir)..\externals\nlohmann;$(SolutionDir)..\externals\assimp\include;$(SolutionDir)../externals/nlohmann;$(SolutionDir)../externals/DirectXTex;$(SolutionDir)../externals/imgui;$(SolutionDir)..\externals|assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/Wv:18 /utf-8 %(AdditionalOptions)</AdditionalOptions>

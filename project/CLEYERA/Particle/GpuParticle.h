@@ -26,7 +26,7 @@ struct ParticleCS
 	bool isDraw_ = false;
 };
 
-namespace Particle {
+namespace Engine::Particle {
 
 	using namespace Engine::Buffer;
 

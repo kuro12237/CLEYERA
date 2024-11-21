@@ -54,7 +54,7 @@ public:
 
 #pragma region  Get
 	vector<HItDirection>GetHItDirection() { return hitDirection_; }
-	TransformEular GetpTransform() { return *pTransform_; }
+	Engine::Transform::TransformEular GetpTransform() { return *pTransform_; }
 	AABB GetAABB() { return aabb_; }
 	bool GetIsExtrusionFlag() { return isExtrusion_; }
 	uint32_t GetId() { return id_; }
@@ -65,7 +65,7 @@ public:
 #pragma endregion
 
 #pragma region Set
-	void SetObjectData(const TransformEular& t) { pTransform_ = &t; }
+	void SetObjectData(const Engine::Transform::TransformEular& t) { pTransform_ = &t; }
 	void SetId(uint32_t id) { id_ = id; };
 	void SetAABB(AABB aabb) { aabb_ = aabb; }
 	void SetExtrusion(Math::Vector::Vector2 v) {
@@ -85,6 +85,6 @@ protected:
 	uint32_t attribute_ = 0b000;
 	uint32_t mask_ = 0b000;
 private:
-	const TransformEular* pTransform_;
+	const Engine::Transform::TransformEular* pTransform_;
 	queue<uint32_t>allHitIds;
 };

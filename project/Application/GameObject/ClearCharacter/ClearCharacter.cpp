@@ -1,5 +1,9 @@
 #include "ClearCharacter.h"
 
+using namespace Engine;
+using namespace Engine::Manager;
+using namespace Engine::Transform;
+
 void ClearCharacter::Initialize()
 {
 	name_ = "Character";

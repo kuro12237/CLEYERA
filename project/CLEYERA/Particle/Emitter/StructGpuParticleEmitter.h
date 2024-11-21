@@ -2,7 +2,7 @@
 #include"Pch.h"
 #include"Model/primitive/LineModel.h"
 
-namespace Particle
+namespace Engine::Particle
 {
 	/// <summary>
 	/// 沸く感覚のパラメータ

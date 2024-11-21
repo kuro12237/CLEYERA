@@ -26,13 +26,13 @@ public:
 
 #pragma region Get
 
-	PointLight_param GetLightParam() { return light_; }
+	Engine::Light::PointLight_param GetLightParam() { return light_; }
 
 #pragma endregion
 
 private:
 
-	PointLight_param light_ = {};
+	Engine::Light::PointLight_param light_ = {};
 
 	const Math::Vector::Vector3* p_CameraPos_ = nullptr;
 

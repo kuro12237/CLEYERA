@@ -1,5 +1,8 @@
 #include "GameSceneJoyStick.h"
 
+using namespace Engine;
+using namespace Engine::Transform;
+
 void GameSceneJoyStick::Active(BaseBottonUI& ui)
 {
 	ui;
