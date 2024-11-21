@@ -45,6 +45,8 @@
     <ClCompile Include="Application\GameObject\Block\BlockManager.cpp" />
     <ClCompile Include="Application\GameObject\ClearCamera\ClearCamera.cpp" />
     <ClCompile Include="Application\GameObject\ClearCharacter\ClearCharacter.cpp" />
+    <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoin.cpp" />
+    <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoinManager.cpp" />
     <ClCompile Include="Application\GameObject\GameClear\GameClearText.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.cpp" />
     <ClCompile Include="Application\GameObject\EnemyWalk\EnemyWalk.cpp" />
@@ -215,6 +217,8 @@
     <ClInclude Include="Application\GameObject\Block\BlockManager.h" />
     <ClInclude Include="Application\GameObject\ClearCamera\ClearCamera.h" />
     <ClInclude Include="Application\GameObject\ClearCharacter\ClearCharacter.h" />
+    <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoin.h" />
+    <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoinManager.h" />
     <ClInclude Include="Application\GameObject\GameClearSaveData\GameClearSaveData.h" />
     <ClInclude Include="Application\GameObject\GameClear\GameClearText.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.h" />

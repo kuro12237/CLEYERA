@@ -13,7 +13,6 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	gameObjectManager_->MoveData(levelData.get());
 	gameObjectManager_->SetAllParents();
 
-
 	gameObjectManager_->CameraReset("Camera");
 	gameObjectManager_->Update();
 
@@ -42,22 +41,31 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 
 	camera_ = make_unique<ClearCamera>();
 	camera_->Initilaize();
-	
 
 	fireParticle_ = make_unique<FireParticle>();
 	fireParticle_->Initialize();
+
+	coinManager_ = make_unique<ClearCoinManager>();
+	coinManager_->Initilaize();
 
 }
 
 void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 {
-
 #ifdef _USE_IMGUI
 
 	gameObjectManager_->ImGuiUpdate();
 	ui_->ImGuiUpdate();
 
 	fireParticle_->ImGuiUpdate();
+
+	if (ImGui::Button("ResetScene"))
+	{
+
+		Scene->ChangeScene(make_unique<GameClearScene>());
+		return;
+	}
+
 #endif // _USE_IMGUI
 
 	changeSceneAnimation_->Update();
@@ -77,6 +85,7 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 
 	camera_->Update();
 
+	coinManager_->Update();
 
 	gameObjectManager_->Update();
 

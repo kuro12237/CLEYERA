@@ -832,6 +832,8 @@
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneCoinUI.cpp" />
     <ClCompile Include="Application\GameObject\ClearCharacter\ClearCharacter.cpp" />
     <ClCompile Include="Application\GameObject\ClearCamera\ClearCamera.cpp" />
+    <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoinManager.cpp" />
+    <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1435,6 +1437,8 @@
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneCoinUI.h" />
     <ClInclude Include="Application\GameObject\ClearCharacter\ClearCharacter.h" />
     <ClInclude Include="Application\GameObject\ClearCamera\ClearCamera.h" />
+    <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoinManager.h" />
+    <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoin.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

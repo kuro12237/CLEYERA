@@ -34,6 +34,8 @@
 
 #include"GameObject/Particles/Fire/FireParticle.h"
 
+#include"GameObject/ClearCoinManager/ClearCoinManager.h"
+
 
 /// <summary>
 /// ゲームオーバー
@@ -85,6 +87,7 @@ private:
 	unique_ptr<GameClearText>gaameClearText_ = nullptr;
 
 	unique_ptr<ClearCharacter>character_ = nullptr;
+	unique_ptr<ClearCoinManager>coinManager_ = nullptr;
 	unique_ptr<ClearCamera>camera_ = nullptr;
 
 	unique_ptr<FireParticle>fireParticle_ = nullptr;

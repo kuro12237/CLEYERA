@@ -22,7 +22,7 @@ void ClearCamera::Update()
 		if (splineMotion_->GetIsStartFlag())
 		{
 			wt.transform.translate = splineMotion_->CatmullRomInterpolation();
-			splineMotion_->UpdateParamerter(120.0f);
+			splineMotion_->UpdateParamerter(60.0f);
 		}
 		if (splineMotion_->GetIsComplete())
 		{

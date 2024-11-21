@@ -133,7 +133,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	LightingManager::AddList(light_);
 
 	//ゴールしたときplayerのアニメーションが終わったら
-	if (*isGameEnd_)
+	//if (*isGameEnd_)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 		enemyWalkManager_->SetIsStartFlag(false);
