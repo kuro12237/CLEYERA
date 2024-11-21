@@ -170,7 +170,7 @@ void PlayerManager::DrawParticle()
 	playerCore_->DrawParticle();
 }
 
-void PlayerManager::PushBullet(Math::Vector::Vector3 pos)
+void PlayerManager::PushBullet(const Math::Vector::Vector3 &pos)
 {
 	//オブジェクトの作成
 	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();

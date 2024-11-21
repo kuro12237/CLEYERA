@@ -54,11 +54,11 @@ public:
 #pragma region Get
 
 	Player* GetPlayerCore() const { return playerCore_.get(); }
-	PlayerReticle* GetReticle() { return reticle_.get(); }
-	PlayerGun* GetGun() { return gun_.get(); }
-	PlayerCamera* GetCamera() { return camera_.get(); }
-	PlayerHp* GetHp() { return hp_.get(); }
-	vector<shared_ptr<PlayerBullet>>GetBullet() { return bullets_; }
+	PlayerReticle* GetReticle() const { return reticle_.get(); }
+	PlayerGun* GetGun() const{ return gun_.get(); }
+	PlayerCamera* GetCamera() const { return camera_.get(); }
+	PlayerHp* GetHp() const{ return hp_.get(); }
+	vector<shared_ptr<PlayerBullet>>GetBullet() const{ return bullets_; }
 #pragma endregion
 
 #pragma region Set
@@ -70,7 +70,7 @@ public:
 	/// BUllet‚Ì“o˜^
 	/// </summary>
 	/// <param name="pos"></param>
-	void PushBullet(Math::Vector::Vector3 pos);
+	void PushBullet(const Math::Vector::Vector3& pos);
 
 private:
 

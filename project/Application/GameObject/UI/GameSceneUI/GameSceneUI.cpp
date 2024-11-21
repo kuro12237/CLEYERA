@@ -64,10 +64,3 @@ void GameSceneUI::Initialize()
 	PushSpriteData();
 
 }
-
-void GameSceneUI::Update()
-{
-	//ボタン更新
-	this->BottonUiUpdate();
-
-}

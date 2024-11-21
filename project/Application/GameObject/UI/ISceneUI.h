@@ -22,7 +22,7 @@ public:
 	/// <summary>
 	/// çXêV
 	/// </summary>
-	virtual void Update() = 0;
+	virtual void Update() { BottonUiUpdate(); };
 
 	/// <summary>
 	/// 2dï\é¶

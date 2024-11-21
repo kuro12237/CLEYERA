@@ -24,11 +24,6 @@ public:
 	/// </summary>
 	void Initialize()override;
 
-	/// <summary>
-	/// çXêV
-	/// </summary>
-	void Update()override;
-
 private:
 
 	unique_ptr<GameSceneUIBottonsAction>bottonAction_ = nullptr;

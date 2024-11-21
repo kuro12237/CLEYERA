@@ -136,11 +136,11 @@ public:
 	void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
 	void SetIsGameEnd(bool f) { isGameEnd_ = f; }
 	void SetIsDeadComplite(bool f) { isDeadAnimationComplite_ = f; }
-	void SetPlayerHP(shared_ptr<PlayerHp> hp) { hp_ = hp; }
+	void SetPlayerHP(const shared_ptr<PlayerHp> &hp) { hp_ = hp; }
 
-	void SetReduceHpFunc(std::function<void()>f) { reduceHpFunc_ = f; }
-	void SetDamageUpdateFunc(std::function<void()>f) { damegeUpdateFunc_ = f; }
-	void SetDamageUpdateEndFunc(std::function<void()>f) { damegeUpdateEndFunc_ = f; }
+	void SetReduceHpFunc(const std::function<void()>&f) { reduceHpFunc_ = f; }
+	void SetDamageUpdateFunc(const std::function<void()>&f) { damegeUpdateFunc_ = f; }
+	void SetDamageUpdateEndFunc(const std::function<void()>&f) { damegeUpdateEndFunc_ = f; }
 #pragma endregion
 
 private:
