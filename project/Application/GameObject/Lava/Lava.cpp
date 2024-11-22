@@ -10,7 +10,7 @@ void Lava::Update()
 {
 	auto& wt = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform();
 	auto& objParam = gameObjectManager_->GetObj3dData(name_)->GetGameObject();
-	auto& objDesc = objParam->GetDesc();
+	auto& objDesc = gameObjectManager_->GetObj3dData(name_)->GetDesc();
 	objDesc.colorDesc.uvTranslate.y += 10.0f;
 	objParam->SetDesc(objDesc);
 	

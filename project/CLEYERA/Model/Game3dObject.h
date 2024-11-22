@@ -11,7 +11,7 @@
 namespace Engine::Objects
 {
 	/// <summary>
-	/// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgƒNƒ‰ƒXmodel‚ğƒZƒbƒg‚·‚é‚±‚Æ‚Å3dƒ‚ƒfƒ‹‚ğ•\¦‚Å‚«‚é
+	/// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¯ãƒ©ã‚¹modelã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã“ã¨ã§3dãƒ¢ãƒ‡ãƒ«ã‚’è¡¨ç¤ºã§ãã‚‹
 	/// </summary>
 	class Game3dObject
 	{
@@ -20,54 +20,54 @@ namespace Engine::Objects
 		~Game3dObject() {};
 
 		/// <summary>
-		/// ì»
+		/// ä½œè£½
 		/// </summary>
 		/// <param name="piplineSelect"></param>
 		void Create(unique_ptr<IPipelineCommand> piplineSelect = nullptr);
 
 		/// <summary>
-		/// ƒ‚ƒfƒ‹‚ğİ’è
+		/// ãƒ¢ãƒ‡ãƒ«ã‚’è¨­å®š
 		/// </summary>
 		/// <param name="index"></param>
 		void SetModel(uint32_t index);
 
 		/// <summary>
-		/// ƒpƒCƒvƒ‰ƒCƒ“Ø‘Ö
+		/// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³åˆ‡æ›¿
 		/// </summary>
 		/// <param name="piplineSelect"></param>
 		void ChangePipline(unique_ptr<IPipelineCommand> piplineSelect);
 
 		/// <summary>
-		/// •`‰æ
+		/// æç”»
 		/// </summary>
 		/// <param name="worldTransform"></param>
 		void Draw(Engine::Transform::WorldTransform worldTransform);
 
 		/// <summary>
-		/// ƒXƒLƒjƒ“ƒO—p‚Ìƒoƒbƒtƒ@[‚ğì»
+		/// ã‚¹ã‚­ãƒ‹ãƒ³ã‚°ç”¨ã®ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’ä½œè£½
 		/// </summary>
 		void CreateSkinningParameter();
 
 		/// <summary>
-		/// œXV
+		/// éª¨æ›´æ–°
 		/// </summary>
 		/// <param name="fileName"></param>
 		/// <param name="t"></param>
 		void SkeletonUpdate();
 
 		/// <summary>
-		/// D‚«l‚®XV
+		/// å¥½ãäººãæ›´æ–°
 		/// </summary>
 		void SkinningUpdate();
 
 		/// <summary>
-		/// ƒIƒuƒWƒFƒNƒg‚Ì–¼‘O‚ğİ’è
+		/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰ã‚’è¨­å®š
 		/// </summary>
 		/// <param name="name"></param>
 		void SetObjectName(const string& name) { name_ = name; }
 
 #pragma region Set
-		void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = desc; }
+		void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = &desc; }
 		void SetName(string name) { name_ = name; }
 		void SetSkinningFlag(bool f) { skinningFlag_ = f; }
 #pragma endregion
@@ -75,7 +75,6 @@ namespace Engine::Objects
 #pragma region Get
 		SAnimation::Skeleton& GetSkeleton() { return skeleton_; }
 		bool GetSkinningFlag() { return skinningFlag_; }
-		Game3dObjectDesc& GetDesc() { return game3dObjectDesc_; }
 #pragma endregion
 
 	private:
@@ -100,10 +99,9 @@ namespace Engine::Objects
 		std::vector<Math::Matrix::Matrix4x4>inverseBindMatrices;
 		unique_ptr<Engine::Buffer::BufferResource<WellForGPU>>palette_ = nullptr;
 		vector<WellForGPU>paletteParam_;
-		//unique_ptr<BufferResource<>>
 #pragma endregion
 
-		Game3dObjectDesc game3dObjectDesc_{};
+		const Game3dObjectDesc *game3dObjectDesc_{};
 
 	};
 }

@@ -1,4 +1,4 @@
-﻿#include "Phong_CreatePipline.h"
+#include "Phong_CreatePipline.h"
 
 using namespace Engine::Base::DX;
 
@@ -169,7 +169,7 @@ SPSOProperty Phong_CreatePipline::CreatePhongNormalModel(SShaderMode shader)
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
 	graphicsPipelineStateDesc.VS = { shader.vertexBlob->GetBufferPointer(),
-    shader.vertexBlob->GetBufferSize() }; //VS
+	shader.vertexBlob->GetBufferSize() }; //VS
 	graphicsPipelineStateDesc.PS = { shader.pixelBlob->GetBufferPointer(),
 	shader.pixelBlob->GetBufferSize() }; //PS
 	graphicsPipelineStateDesc.GS = { shader.gsBlob->GetBufferPointer(),
@@ -820,7 +820,7 @@ SPSOProperty Phong_CreatePipline::CreateInstancingModel(SShaderMode shader)
 	return PSO;
 }
 
-SPSOProperty Phong_CreatePipline::CreateSkinningModel(SShaderMode shader)
+SPSOProperty Phong_CreatePipline::CreateSkinningModel(SShaderMode shader, bool isDepthWrite)
 {
 
 	SPSOProperty pso;
@@ -964,18 +964,32 @@ SPSOProperty Phong_CreatePipline::CreateSkinningModel(SShaderMode shader)
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = _countof(inputElementDescs);
 
+	//BlendState
 	D3D12_BLEND_DESC blendDesc{};
-	blendDesc.RenderTarget[0].RenderTargetWriteMask =
-		D3D12_COLOR_WRITE_ENABLE_ALL;
+	D3D12_RENDER_TARGET_BLEND_DESC& blenddesc = blendDesc.RenderTarget[0];
+	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
+
 
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	despthStencilDesc.DepthEnable = true;
-	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
-	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+	if (isDepthWrite)
+	{
+		despthStencilDesc.DepthEnable = true;
+		despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+		despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+	}
+	else
+	{
+
+		despthStencilDesc.DepthEnable = true;
+		despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
+		despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+
+	}
+
 
 	//PSO�̐���
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

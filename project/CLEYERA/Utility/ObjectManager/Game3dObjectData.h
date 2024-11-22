@@ -30,7 +30,7 @@ public:
 #pragma region Get
 
 	unique_ptr<Engine::Objects::Game3dObject>& GetGameObject() { return gameObject_; }
-	Game3dObjectDesc &GetDesc() { return gameObject_->GetDesc(); }
+	Game3dObjectDesc &GetDesc() { return gameObjectDesc_; }
 	uint32_t GetModelHandle() { return modelHandle_; }
 #pragma endregion
 
@@ -43,6 +43,7 @@ private:
 	SAnimation::Skeleton skelton_ = {};
 	SAnimation::Animation animationData_;
 
+	Game3dObjectDesc gameObjectDesc_;
 	float animationFlame_ = 0.0f;
 };
 

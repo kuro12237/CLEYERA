@@ -2,9 +2,10 @@
 #include"Pch.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"ClearCoin.h"
+#include"Utility/ColorConverter/ColorConverter.h"
 
 /// <summary>
-/// ƒNƒŠƒAƒV[ƒ“‚ÌƒRƒCƒ“ŠÇ—ƒNƒ‰ƒX
+/// ã‚¯ãƒªã‚¢ã‚·ãƒ¼ãƒ³ã®ã‚³ã‚¤ãƒ³ç®¡ç†ã‚¯ãƒ©ã‚¹
 /// </summary>
 class ClearCoinManager
 {
@@ -14,27 +15,35 @@ public:
 
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initilaize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 
 #pragma region Set
 	void CoinsCount(uint32_t coin) { coinCount_ = coin; };
+	void SetIsAnimStart(bool f) { isAnimStart_ = f; }
 #pragma endregion
+
+#pragma region Get
+	bool GetIsAnimStart() { return isAnimStart_; }
+#pragma endregion
+
 
 private:
 
 	/// <summary>
-	/// ƒRƒCƒ“‚ğobjectManager“ñ“o˜^
+	/// ã‚³ã‚¤ãƒ³ã‚’objectManageräºŒç™»éŒ²
 	/// </summary>
 	/// <param name="pos"></param>
 	void CreateCoinGameObject(const Math::Vector::Vector3 &pos,int32_t index);
+
+	bool isAnimStart_ = false;
 
 	int32_t coinCount_ = 0;
 	const size_t coinsMax_ = 3;

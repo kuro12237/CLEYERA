@@ -4,7 +4,7 @@
 #include"ShaderManager.h"
 
 /// <summary>
-/// PhongƒpƒCƒvƒ‰ƒCƒ“ì»ŠÖ”
+/// Phongãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ä½œè£½é–¢æ•°
 /// </summary>
 class Phong_CreatePipline
 {
@@ -14,29 +14,30 @@ public:
 
 	void Initialize();
 	/// <summary>
-    /// Phongƒ‰ƒCƒeƒBƒ“ƒO‚Ì–@üƒ}ƒbƒsƒ“ƒOƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg‚ðì¬‚·‚éŠÖ”
+    /// Phongãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°ã®æ³•ç·šãƒžãƒƒãƒ”ãƒ³ã‚°ãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹é–¢æ•°
     /// </summary>
 	SPSOProperty CreatePhongNormalModel(SShaderMode shader);
 
 	/// <summary>
-	/// ƒfƒBƒ]ƒ‹ƒuƒGƒtƒFƒNƒg•t‚«–@üƒ}ƒbƒsƒ“ƒOƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg‚ðì¬‚·‚éŠÖ”
+	/// ãƒ‡ã‚£ã‚¾ãƒ«ãƒ–ã‚¨ãƒ•ã‚§ã‚¯ãƒˆä»˜ãæ³•ç·šãƒžãƒƒãƒ”ãƒ³ã‚°ãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹é–¢æ•°
 	/// </summary>
 	SPSOProperty CreateDissolveNormalModel(SShaderMode shader);
 
 	/// <summary>
-	/// ƒTƒuƒT[ƒtƒFƒXEƒXƒLƒƒƒ^ƒŠƒ“ƒOƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg‚ðì¬‚·‚éŠÖ”
+	/// ã‚µãƒ–ã‚µãƒ¼ãƒ•ã‚§ã‚¹ãƒ»ã‚¹ã‚­ãƒ£ã‚¿ãƒªãƒ³ã‚°ãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹é–¢æ•°
 	/// </summary>
 	SPSOProperty CreateSubsurfaceModel(SShaderMode shader);
 
 	/// <summary>
-	/// ƒCƒ“ƒXƒ^ƒ“ƒVƒ“ƒOƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg‚ðì¬‚·‚éŠÖ”
+	/// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚·ãƒ³ã‚°ãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹é–¢æ•°
 	/// </summary>
 	SPSOProperty CreateInstancingModel(SShaderMode shader);
 
 	/// <summary>
-	/// ƒXƒLƒjƒ“ƒOƒ‚ƒfƒ‹—pƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒgƒIƒuƒWƒFƒNƒg‚ðì¬‚·‚éŠÖ”
+	/// ã‚¹ã‚­ãƒ‹ãƒ³ã‚°ãƒ¢ãƒ‡ãƒ«ç”¨ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹é–¢æ•°
 	/// </summary>
-	SPSOProperty CreateSkinningModel(SShaderMode shader);
+	SPSOProperty CreateSkinningModel(SShaderMode shader, bool isDepthWrite = true);
+
 
 
 private:

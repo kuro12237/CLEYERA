@@ -4,8 +4,9 @@
 #include"GameObject/GameCollider/ICollider.h"
 
 #include"Utility/ObjectId/GameObjectId.h"
+#include"Utility/ColorConverter/ColorConverter.h"
 /// <summary>
-/// ƒRƒCƒ“ƒIƒuƒWƒFƒNƒg
+/// ã‚³ã‚¤ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 /// /// </summary>
 class StageCoin:public IObjectData,public ICollider
 {

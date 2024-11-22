@@ -82,7 +82,7 @@ void GameObjectManager::Update()
 			it->GetTransforms()[i]->Update();
 			it->PushObjectData(i);
 		}
-		//“]‘—
+		//è»¢é€
 		it->GetGameObject()->Transfar();
 	}
 }
@@ -138,7 +138,7 @@ void GameObjectManager::ImGuiUpdate()
 
 		ImGui::Separator();
 
-		//ƒJƒƒ‰‘I‘ğ
+		//ã‚«ãƒ¡ãƒ©é¸æŠ
 		static char buffer[256] = "";
 		if (ImGui::InputText("SelectCameraName", buffer, sizeof(buffer)))
 		{
@@ -156,6 +156,13 @@ void GameObjectManager::ImGuiUpdate()
 
 void GameObjectManager::Draw()
 {
+	
+	//instancing
+	for (auto& data : objInstancing3dData_)
+	{
+		auto& it = data.second->GetGameObject();
+		it->Draw();
+	}
 	//normal
 	for (auto& data : obj3dData_) {
 		auto& it = data.second;
@@ -167,13 +174,6 @@ void GameObjectManager::Draw()
 			obj->Draw(wt);
 		}
 	}
-	//instancing
-	for (auto& data : objInstancing3dData_)
-	{
-		auto& it = data.second->GetGameObject();
-		it->Draw();
-	}
-
 }
 
 void GameObjectManager::ClearAllData()
@@ -216,7 +216,7 @@ void GameObjectManager::CameraReset(string name)
 	}
 	else
 	{
-		//“ü—Í‚µ‚½‚Ì–¼‘O‚ÌƒJƒƒ‰ƒIƒuƒWƒFƒNƒg‚Í‘¶İ‚µ‚È‚¢
+		//å…¥åŠ›ã—ãŸã®åå‰ã®ã‚«ãƒ¡ãƒ©ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯å­˜åœ¨ã—ãªã„
 		assert(0);
 	}
 }

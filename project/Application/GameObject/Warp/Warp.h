@@ -5,7 +5,7 @@
 #include"WarpRuate/WarpRuate.h"
 
 /// <summary>
-/// ワープクラス
+/// 繝ｯ繝ｼ繝励け繝ｩ繧ｹ
 /// </summary>
 class Warp
 {
@@ -20,7 +20,7 @@ public:
 	void Update();
 
 	/// <summary>
-	/// デバック用の線表示
+	/// 繝�繝舌ャ繧ｯ逕ｨ縺ｮ邱夊｡ｨ遉ｺ
 	/// </summary>
 	void DebugDrawLine();
 
@@ -35,6 +35,7 @@ private:
 
 	unique_ptr<Primitive::LineModel>line_ = nullptr;
 	unique_ptr<Engine::Objects::Game3dObject>railPointGameObject_ = nullptr;
+	Game3dObjectDesc gameObjectDesc_{};
 
     shared_ptr<WarpGate>warpGate_ = nullptr;
 	unique_ptr<WarpRuate>warpRute_ = nullptr;

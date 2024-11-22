@@ -15,17 +15,20 @@ void Game3dObjectData::Initialize(TransformEular transform, Game3dObjectDesc des
 
 	if (ObjectType_ == "MESH")
 	{
+		gameObjectDesc_ = desc;
 		gameObject_->Create(make_unique<Phong3dPipline>());
-		gameObject_->SetDesc(desc);
+		gameObject_->SetDesc(gameObjectDesc_);
 		gameObject_->SetModel(modelHandle_);
 
 	}
 	if (ObjectType_ == "ARMATURE")
 	{
 		gameObject_->Create(make_unique<Phong3dSkinningPipline>());
+
+		gameObjectDesc_ = desc;
+		gameObject_->SetDesc(gameObjectDesc_);
 		gameObject_->SetModel(modelHandle_);
 		gameObject_->SetName(objectName_);
-		gameObject_->SetDesc(desc);
 
 		AnimationManager::GetInstance()->LoadAnimation(modelFilePath_);
 		animationData_ = AnimationManager::GetInstance()->GetData(modelFilePath_);

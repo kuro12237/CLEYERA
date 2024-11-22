@@ -2,7 +2,7 @@
 
 void Warp::Initlaize(uint32_t index)
 {
-	///ƒQ[ƒg‚Ì‰Šú‰»///”Ô†‚ğ“ü‚ê‚é
+	///ã‚²ãƒ¼ãƒˆã®åˆæœŸåŒ–///ç•ªå·ã‚’å…¥ã‚Œã‚‹
 	warpGate_ = make_shared<WarpGate>();
 	warpGate_->Initialize(index);
 
@@ -27,6 +27,8 @@ void Warp::Initlaize(uint32_t index)
 	railPointGameObject_ = make_unique<Engine::Objects::Game3dObject>();
 	railPointGameObject_->Create(make_unique<Phong3dPipline>());
 	railPointGameObject_->SetModel(Engine::Manager::ModelManager::LoadObjectFile("DfCube"));
+	railPointGameObject_->SetDesc(gameObjectDesc_);
+
 }
 
 void Warp::ImGuiUpdate()

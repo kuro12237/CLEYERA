@@ -16,6 +16,9 @@ public:
 
 	void Update();
 
+#pragma region Get
+	bool GetIsComplite() { return isComplete_; }
+#pragma endregion
 
 private:
 

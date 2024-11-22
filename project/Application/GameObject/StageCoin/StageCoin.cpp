@@ -4,13 +4,14 @@ void StageCoin::Initilaize()
 {
 	INameable::name_ = "StageCoin"+FormatNumberWithDots(coinNumber_);
 	id_ = IStageCoinId;
-	//“–‚½‚è”»’è
-	//‰Ÿ‚µo‚µ
+	//å½“ãŸã‚Šåˆ¤å®š
+	//æŠ¼ã—å‡ºã—
 	SetObjectData(gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform);
 	aabb_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB();
 	attribute_ = CollisionMask::kWarpGateAttribute;
 	mask_ = CollisionMask::kWarpGateMask;
 
+	gameObjectManager_->GetObj3dData(INameable::name_)->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xffd700ff);
 }
 
 void StageCoin::Update()

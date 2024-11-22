@@ -835,6 +835,7 @@
     <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoinManager.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoin.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\state\ClearCoinStateActive.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1442,6 +1443,7 @@
     <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoin.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\state\ClearCoinStateActive.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\state\IClearCoinState.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

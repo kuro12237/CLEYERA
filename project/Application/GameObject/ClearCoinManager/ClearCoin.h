@@ -30,15 +30,28 @@ public:
 
 	void Update();
 
+	void ChangeState(unique_ptr<IClearCoinState>state);
+
+	void CreateState();
+
 #pragma region Set
 	void StartAnimation(bool isStart) { isStart_ = isStart; }
-	
+	void SetIsEnd(bool f) { isEnd_ = f; }
+#pragma endregion
+
+#pragma region Get
+	bool GetIsStateAnimation() { return isStart_; }
+	bool GetIsEnd() { return isEnd_; }
+
 #pragma endregion
 
 private:
 
+	CoinUse isUse_;
+
 	const Math::Vector::Vector3* cameraPos_ = nullptr;
 
+	bool isEnd_ = false;
 	bool isStart_ = false;
 	unique_ptr<IClearCoinState>state_ = nullptr;
 };

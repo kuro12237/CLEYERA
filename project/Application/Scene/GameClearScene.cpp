@@ -26,8 +26,6 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
 
-	gaameClearText_ = make_unique<GameClearText>();
-	gaameClearText_->Initialize();
 
 	contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
@@ -80,11 +78,15 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	fireParticle_->Update();
 
 	ui_->Update();
-	gaameClearText_->Update();
-
+	
 	character_->Update();
 
 	camera_->Update();
+
+	if (camera_->GetIsComplite()&&!coinManager_->GetIsAnimStart())
+	{
+		coinManager_->SetIsAnimStart(true);
+	}
 
 	coinManager_->Update();
 

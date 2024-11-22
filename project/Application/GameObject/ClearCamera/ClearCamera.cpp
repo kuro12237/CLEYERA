@@ -27,6 +27,7 @@ void ClearCamera::Update()
 		if (splineMotion_->GetIsComplete())
 		{
 			splineMotion_.release();
+			isComplete_ = true;
 		}
 	}
 }

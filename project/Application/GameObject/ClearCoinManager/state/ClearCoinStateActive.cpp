@@ -3,19 +3,28 @@
 void ClearCoinStateActive::Initialize()
 {
 	gameObjectManager_ = GameObjectManager::GetInstance();
+
 	uint32_t animHandle = Engine::Manager::AnimationManager::GetInstance()->LoadAnimation("ClearCoinAnimation");
 	animationData_ = Engine::Manager::AnimationManager::GetInstance()->GetData(animHandle);
 
 }
 
-void ClearCoinStateActive::Update([[maybe_unused]]ClearCoin* state)
+void ClearCoinStateActive::Update([[maybe_unused]] ClearCoin* state)
 {
-	auto& skeleton = gameObjectManager_->GetObj3dData(state->INameable::GetName())->GetGameObject()->GetSkeleton();
+	if (flame_ >= animationData_.duration)
+	{
+		state->SetIsEnd(true);
+		state->ChangeState(nullptr);
+	}
+	else
+	{
+		gameObjectManager_->GetObj3dData(state->INameable::GetName())->SetIsDraw(true);
 
-	flame_ += 1.0f / 60.0f;
-	flame_ = fmod(flame_, animationData_.duration);
+		auto& skeleton = gameObjectManager_->GetObj3dData(state->INameable::GetName())->GetGameObject()->GetSkeleton();
 
-	Engine::Manager::AnimationManager::ApplyAnimation(skeleton, animationData_, flame_);
+		flame_ += 1.0f / 20.0f;
 
-	gameObjectManager_->GetObj3dData(state->INameable::GetName())->GetGameObject()->SkeletonUpdate();
+		Engine::Manager::AnimationManager::ApplyAnimation(skeleton, animationData_, flame_);
+		gameObjectManager_->GetObj3dData(state->INameable::GetName())->GetGameObject()->SkeletonUpdate();
+	}
 }

@@ -6,9 +6,10 @@
 #include"commands/Phong3dSkinningPipline.h"
 #include"commands/Phong3dDissolvePiplineCommand.h"
 #include"commands/Sprite3dAddNoneWritePiplineCommand.h"
+#include"commands/Phong3dPiplineDepthNoneWriteCommand.h"
 
 /// <summary>
-/// パイプライン切替クラス
+/// 繝代う繝励Λ繧､繝ｳ蛻�譖ｿ繧ｯ繝ｩ繧ｹ
 /// </summary>
 class PipelineHandler
 {
