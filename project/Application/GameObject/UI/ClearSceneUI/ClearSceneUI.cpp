@@ -35,14 +35,14 @@ void ClearSceneUI::Initialize()
 		this->PushUiMapData(coins_[i]);
 	}
 
-	//this->KeyCreateEnumNoneUI(bottonBackKey);
+	this->KeyCreateEnumNoneUI(bottonBackKey);
 	PushSpriteData();
 
 }
 
 void ClearSceneUI::Update()
 {
-	//ボタン更新
+	//繝懊ち繝ｳ譖ｴ譁ｰ
 	this->BottonUiUpdate();
 
 	for (size_t i = 0; i < 2; i++)

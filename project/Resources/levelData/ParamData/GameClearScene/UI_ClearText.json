@@ -1,0 +1,26 @@
+{
+    "UI_ClearText": {
+        "ankerPos": [
+            0.5,
+            0.5
+        ],
+        "fileName": "GameClear/ClearText.png",
+        "transform": {
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 1.0
+            },
+            "translate": {
+                "x": 640.0,
+                "y": 165.0,
+                "z": 0.0
+            }
+        }
+    }
+}

@@ -48,10 +48,10 @@ void ClearCoinManager::Update()
 		coin->Update();
 
 
-	
+
 		if (coin->GetIsEnd())
 		{
-	
+
 			// 現在のコインが終了した際の処理
 			if (i + 1 < clearCoins_.size())
 			{
@@ -135,7 +135,7 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 		}
 		else
 		{
-			data->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xfff2aaff);
+			data->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xf0d64dff);
 		}
 		data->ChangePipline(make_unique<Phong3dSkinningPiplineDepthNoneWriteCommand>());
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
