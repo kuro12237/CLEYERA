@@ -5,7 +5,7 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameClearScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameClearScene/");
-	//levelData�̓ǂݍ���
+	//levelDataの読み込み
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
@@ -46,6 +46,7 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	fireParticle_->Initialize();
 
 	coinManager_ = make_unique<ClearCoinManager>();
+	coinManager_->CoinsCount(contextData_.stageConinsCount);
 	coinManager_->Initilaize();
 
 }

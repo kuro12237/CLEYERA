@@ -22,7 +22,7 @@ void ClearCoinManager::Update()
 
 void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos,int32_t index)
 {
-	//�I�u�W�F�N�g�̍쐬
+	//オブジェクトの作成
 	string coinName = "Coin";
 	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();
 	data->SetObjectType("ARMATURE");
@@ -48,8 +48,15 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos,int
 
 	unique_ptr<ClearCoin>coin = make_unique<ClearCoin>();
 	coin->SetName(name_num);
-	coin->Initialize();
 
+	if (index < coinCount_)
+	{
+		coin->Initialize(CoinUse::Active);
+	}
+	else
+	{
+		coin->Initialize(CoinUse::Inactive);
+	}
 	pos;
 	clearCoins_[index] = move(coin);
 }

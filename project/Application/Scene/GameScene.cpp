@@ -11,7 +11,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameScene/");
 
-	//levelData‚Ì“Ç‚İ‚İ
+	//levelDataã®èª­ã¿è¾¼ã¿
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
@@ -27,7 +27,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	light_.decay = 0.1f;
 
 
-	//Particle‰Šú‰»
+	//ParticleåˆæœŸåŒ–
 	ParticlesInitialize();
 
 	GoalParticle::GetInstance()->Clear();
@@ -63,11 +63,11 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	gameUi_ = make_unique<GameSceneUI>();
 	gameUi_->Initialize();
 
-	//XV
+	//æ›´æ–°
 	gameObjectManager_->Update();
 	LightingManager::AddList(light_);
 
-	//ƒQ[ƒ€I—¹‚Ì‚Â‚È‚®
+	//ã‚²ãƒ¼ãƒ çµ‚äº†ã®ã¤ãªã
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
 
@@ -88,13 +88,13 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	ChangeSceneAnimation::GetInstance()->Update();
 
-	//ƒV[ƒ“Ø‘Ö‚ªI‚í‚Á‚½‚ç
+	//ã‚·ãƒ¼ãƒ³åˆ‡æ›¿ãŒçµ‚ã‚ã£ãŸã‚‰
 	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
 	{
 		startAnimation_->SetIsCountStart(true);
 	}
 
-	//ƒJƒEƒ“ƒgƒ_ƒEƒ“‚ªI‚í‚Á‚½‚ç
+	//ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ãŒçµ‚ã‚ã£ãŸã‚‰
 	if (startAnimation_->GetIsGameStartFlag())
 	{
 		enemyWalkManager_->SetIsStartFlag(true);
@@ -105,7 +105,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	endAnimation_->Update();
 
 	//
-	//ƒQ[ƒ€ŠJnŒã
+	//ã‚²ãƒ¼ãƒ é–‹å§‹å¾Œ
 	//
 
 	gameUi_->Update();
@@ -132,8 +132,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	LightingManager::AddList(light_);
 
-	//ƒS[ƒ‹‚µ‚½‚Æ‚«player‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ªI‚í‚Á‚½‚ç
-	//if (*isGameEnd_)
+	//ã‚´ãƒ¼ãƒ«ã—ãŸã¨ãplayerã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚ã‚ã£ãŸã‚‰
+	if (*isGameEnd_)
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
 		enemyWalkManager_->SetIsStartFlag(false);
@@ -141,22 +141,22 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 
 
-	///ƒvƒŒƒCƒ„[‚ª€‚ñ‚¾‚Æ‚«
+	///ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ­»ã‚“ã ã¨ã
 	if (player_->GetPlayerCore()->GetIsDeadAnimationComplite())
 	{
-		//ƒV[ƒ“Ø‚è‘Ö‚¦ŠJn
+		//ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆé–‹å§‹
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
-		//ƒrƒlƒbƒg‚ªo‚Ä‚¢‚½‚çÁ‚·
+		//ãƒ“ãƒãƒƒãƒˆãŒå‡ºã¦ã„ãŸã‚‰æ¶ˆã™
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
 
 		endAnimation_->SetIsCountStart(true);
-		//objectİ’è
+		//objectè¨­å®š
 		enemyWalkManager_->SetIsStartFlag(false);
 		player_->SetStartFlag(false);
 		player_->GetPlayerCore()->SetIsGameEnd(true);
 	}
 
-	//I‚í‚è‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ªI‚í‚Á‚½‚ç
+	//çµ‚ã‚ã‚Šã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚ã‚ã£ãŸã‚‰
 	if (endAnimation_->GetCompleteFlag())
 	{
 		ChangeSceneAnimation::GetInstance()->ChangeStart();
@@ -167,7 +167,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		Scene->ChangeScene(make_unique<GameOverScene>());
 		return;
 	}
-	//Ø‘Ö
+	//åˆ‡æ›¿
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
 		contextData_.stageConinsCount = stageCoinManager_->GetCoinsCount();

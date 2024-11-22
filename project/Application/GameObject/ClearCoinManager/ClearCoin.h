@@ -1,8 +1,24 @@
 #pragma once
 #include"GameObject/ObjectInterface/IObjectData.h"
+#include"state/ClearCoinStateActive.h"
+#include"state/IClearCoinState.h"
+
+enum class CoinDirection
+{
+	Left,
+	Center,
+	Rignt
+};
+
+enum class CoinUse
+{
+	Active,
+	Inactive
+};
+
 
 /// <summary>
-/// クリアコイン制御クラス
+/// 繧ｯ繝ｪ繧｢繧ｳ繧､繝ｳ蛻ｶ蠕｡繧ｯ繝ｩ繧ｹ
 /// </summary>
 class ClearCoin:public IObjectData
 {
@@ -10,7 +26,7 @@ public:
 	ClearCoin() {};
 	~ClearCoin() {};
 
-	void Initialize();
+	void Initialize(const CoinUse&use);
 
 	void Update();
 
@@ -22,7 +38,6 @@ public:
 private:
 
 	const Math::Vector::Vector3* cameraPos_ = nullptr;
-	SAnimation::Animation animationData_{};
 
-	float flame_ = 0.0f;
+	unique_ptr<IClearCoinState>state_ = nullptr;
 };
