@@ -7,6 +7,7 @@ using namespace Engine::Transform;
 void ClearCoinSplashParticle::Initialize()
 {
 	texHandle_ = TextureManager::LoadPngTexture("GameClear/SphereNoise.png");
+
 	particle_ = make_unique<Particle::GpuParticle>();
 	particle_->Create(1, name_);
 	particle_->SetTexhandle(texHandle_);
@@ -18,7 +19,6 @@ void ClearCoinSplashParticle::Initialize()
 void ClearCoinSplashParticle::Update()
 {
 	emitter_->Update();
-
 	particle_->CallBarrier();
 	particle_->Update();
 }
@@ -28,8 +28,6 @@ void ClearCoinSplashParticle::Draw()
 	particle_->Draw();
 
 	emitter_->SpownDraw();
-
-
 }
 
 void ClearCoinSplashParticle::ImGuiUpdate()
@@ -39,6 +37,5 @@ void ClearCoinSplashParticle::ImGuiUpdate()
 
 void ClearCoinSplashParticle::Emit()
 {
-
 	emitter_->Emit(particle_);
 }

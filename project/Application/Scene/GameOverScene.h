@@ -13,8 +13,6 @@
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
 #include"GameObject/Player/PlayerManager.h"
-#include"GameObject/EnemyWalk/EnemyWalkManager.h"
-#include"GameObject/Goal/Goal.h"
 
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
@@ -30,7 +28,7 @@
 
 
 /// <summary>
-/// ƒQ[ƒ€ƒI[ƒo[
+/// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
 /// </summary>
 class GameOverScene :public IScene
 {
@@ -39,12 +37,12 @@ public:
 	~GameOverScene() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize(GameManager* state)override;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	/// <param name="Scene"></param>
 	void Update([[maybe_unused]] GameManager* Scene)override;
@@ -52,17 +50,15 @@ public:
 private:
 
 	/// <summary>
-	/// ƒ|ƒXƒgƒGƒtƒFƒNƒg‚ğ‚©‚¯‚é
+	/// ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’ã‹ã‘ã‚‹
 	/// </summary>
 	void PostProcessDraw();
 
 	/// <summary>
-	/// ‘OŒi2d
+	/// å‰æ™¯2d
 	/// </summary>
 	void Flont2dSpriteDraw();
 
-
-	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 
 	string inputLevelDataFileName_ = "GameOver.json";

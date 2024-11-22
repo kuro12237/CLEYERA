@@ -45,8 +45,6 @@ private:
 
 	bool CheckLoadScene();
 
-	
-	shared_ptr<LevelData> levelData_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "SelectSceneData.json";
 	StageManager* stageManager_ = nullptr;

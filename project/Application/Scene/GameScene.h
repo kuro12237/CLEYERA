@@ -33,7 +33,7 @@
 #include"ISceneContext.h"
 
 /// <summary>
-/// ƒQ[ƒ€ƒvƒŒƒC
+/// ã‚²ãƒ¼ãƒ ãƒ—ãƒ¬ã‚¤
 /// </summary>
 class GameScene :public IScene
 {
@@ -42,45 +42,45 @@ public:
 	~GameScene() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize(GameManager* state)override;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	/// <param name="Scene"></param>
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
 private:
 	/// <summary>
-	/// ƒ|ƒXƒgƒGƒtƒFƒNƒg‚ğ‚©‚¯‚é
+	/// ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’ã‹ã‘ã‚‹
 	/// </summary>
 	void PostProcessDraw();
 
 
 	/// <summary>
-	/// ‘OŒi2d
+	/// å‰æ™¯2d
 	/// </summary>
 	void Flont2dSpriteDraw();
 
 	/// <summary>
-	/// Imgui‚ÌXV
+	/// Imguiã®æ›´æ–°
 	/// </summary>
 	void ImGuiUpdate();
 
 	/// <summary>
-	/// “–‚½‚è”»’è
+	/// å½“ãŸã‚Šåˆ¤å®š
 	/// </summary>
 	void Collision();
 
 	/// <summary>
-	/// d—Í
+	/// é‡åŠ›
 	/// </summary>
 	void Gravitys();
 
 	/// <summary>
-	/// ƒIƒuƒWƒFƒNƒg‚ÌXV
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ›´æ–°
 	/// </summary>
 	void PlayUpdate();
 
@@ -101,11 +101,9 @@ private:
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;
 
-
 	Engine::Light::PointLight_param light_{};
 
 	unique_ptr<PlayerManager>player_ = nullptr;
-
 
 	unique_ptr<Goal>goal_ = nullptr;
 
@@ -116,7 +114,6 @@ private:
 
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
-
 
 	unique_ptr<GameSceneUI>gameUi_ = nullptr;
 
