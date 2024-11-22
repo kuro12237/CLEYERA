@@ -47,8 +47,8 @@
     <ClCompile Include="Application\GameObject\ClearCharacter\ClearCharacter.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoin.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoinManager.cpp" />
+    <ClCompile Include="Application\GameObject\ClearCoinManager\particle\ClearCoinSplashParticle.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\state\ClearCoinStateActive.cpp" />
-    <ClCompile Include="Application\GameObject\GameClear\GameClearText.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.cpp" />
     <ClCompile Include="Application\GameObject\EnemyWalk\EnemyWalk.cpp" />
     <ClCompile Include="Application\GameObject\EnemyWalk\EnemyWalkManager.cpp" />
@@ -221,10 +221,9 @@
     <ClInclude Include="Application\GameObject\ClearCharacter\ClearCharacter.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoin.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoinManager.h" />
+    <ClInclude Include="Application\GameObject\ClearCoinManager\Particle\ClearCoinSplashParticle.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\state\ClearCoinStateActive.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\state\IClearCoinState.h" />
-    <ClInclude Include="Application\GameObject\GameClearSaveData\GameClearSaveData.h" />
-    <ClInclude Include="Application\GameObject\GameClear\GameClearText.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\GameOverAnimation\EndAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\IGameSceneAnimation.h" />
     <ClInclude Include="Application\GameObject\EnemyWalk\EnemyWalk.h" />

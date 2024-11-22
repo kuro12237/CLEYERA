@@ -9,13 +9,13 @@ public:
 	static GameObjectManager* GetInstance();
 
 	/// <summary>
-	/// levelData‚Ì’†g‚ğˆÚ“®
+	/// levelDataã®ä¸­èº«ã‚’ç§»å‹•
 	/// </summary>
 	/// <param name="data"></param>
 	void MoveData(LevelData* data);
 
 	/// <summary>
-	/// ì‚Á‚½‚·‚×‚Ä‚Ì‚à‚Ì‚ÉeqŠÖŒW‚ª‚ ‚éƒ`ƒFƒbƒN‚ ‚Á‚½‚çeqŠÖŒW‚ğ‚Â‚¯‚é
+	/// ä½œã£ãŸã™ã¹ã¦ã®ã‚‚ã®ã«è¦ªå­é–¢ä¿‚ãŒã‚ã‚‹ãƒã‚§ãƒƒã‚¯ã‚ã£ãŸã‚‰è¦ªå­é–¢ä¿‚ã‚’ã¤ã‘ã‚‹
 	/// </summary>
 	void SetAllParents();
 
@@ -28,25 +28,27 @@ public:
 #pragma endregion
 
 	/// <summary>
-	/// •\¦
+	/// è¡¨ç¤º
 	/// </summary>
-	void Draw();
+	void NormalDraw();
+
+	void InstancingDraw();
 
 	/// <summary>
-	/// ƒIƒuƒWƒFƒNƒg‚ğ“o˜^
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç™»éŒ²
 	/// </summary>
 	/// <param name="data"></param>
 	/// <param name="name"></param>
 	void PushObj3dData(const shared_ptr<Game3dObjectData>& data, string name) { obj3dData_[name] = move(data); };
 
 	/// <summary>
-	/// ƒIƒuƒWƒFƒNƒgíœ
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå‰Šé™¤
 	/// </summary>
 	/// <param name="name"></param>
 	void ClearObj3dData(string name) { obj3dData_.erase(name); }
 
 	/// <summary>
-	/// ‚·‚×‚Ä‚ğíœ
+	/// ã™ã¹ã¦ã‚’å‰Šé™¤
 	/// </summary>
 	void ClearAllData();
 

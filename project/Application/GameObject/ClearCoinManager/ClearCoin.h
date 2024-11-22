@@ -3,6 +3,7 @@
 #include"state/ClearCoinStateActive.h"
 #include"state/IClearCoinState.h"
 
+
 enum class CoinDirection
 {
 	Left,

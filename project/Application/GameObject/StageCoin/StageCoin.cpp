@@ -11,7 +11,7 @@ void StageCoin::Initilaize()
 	attribute_ = CollisionMask::kWarpGateAttribute;
 	mask_ = CollisionMask::kWarpGateMask;
 
-	gameObjectManager_->GetObj3dData(INameable::name_)->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xffd700ff);
+	gameObjectManager_->GetObj3dData(INameable::name_)->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xf0d64dff);
 }
 
 void StageCoin::Update()

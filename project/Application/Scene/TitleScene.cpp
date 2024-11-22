@@ -6,25 +6,25 @@ using namespace Engine::Base::Win;
 
 void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 {
-	//ƒQ[ƒ€–¼İ’è
+	//ã‚²ãƒ¼ãƒ åè¨­å®š
 	WinApp::GetInstance()->SetTiTleName(L"GunHead");
 
-	//ƒOƒ[ƒoƒ‹•Ï”‚Ìƒpƒ‰ƒ[ƒ^[ƒtƒ@ƒCƒ‹‚Ì•Û‘¶æ•ÏX
+	//ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜å…ˆå¤‰æ›´
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/TitleScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/TitleScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/Utility/");
 	GlobalVariables::GetInstance()->SetChangeSceneLoadFilesName("Resources/LevelData/ParamData/Utility/");
 
-	//instance‚ğGet
+	//instanceã‚’Get
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	skyBox_ = SkyBox::GetInstance();
 
-	//‰æ–Ê‘JˆÚ‰Šú‰»
+	//ç”»é¢é·ç§»åˆæœŸåŒ–
 	changeSceneAnimation_->Initialize();
 
-	//”z’uƒf[ƒ^“Ç‚İ‚İ
-	//levelData‚Ì“Ç‚İ‚İ
+	//é…ç½®ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
+	//levelDataã®èª­ã¿è¾¼ã¿
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(levelDataName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
@@ -39,12 +39,12 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	camera_->Initialize();
 
 	auto& cameraWt = gameObjectManager_->GetCameraData(camera_->GetName())->GetWorldTransform();
-	//ƒJƒƒ‰‚Ìpos‚ğƒ|ƒCƒ“ƒ^‚Å‚Â‚È‚®
+	//ã‚«ãƒ¡ãƒ©ã®posã‚’ãƒã‚¤ãƒ³ã‚¿ã§ã¤ãªã
 	p_CameraPos_ = &cameraWt.transform.translate;
 
-	//SkyBoxİ’è
+	//SkyBoxè¨­å®š
 	skyBox_->Initialize();
-	//skyBox‚ÆƒJƒƒ‰ƒyƒAƒŒƒ“ƒg
+	//skyBoxã¨ã‚«ãƒ¡ãƒ©ãƒšã‚¢ãƒ¬ãƒ³ãƒˆ
 	skyBox_->SetParent(cameraWt);
 
 
@@ -157,7 +157,9 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 void TitleScene::PostProcessDraw()
 {
-	gameObjectManager_->Draw();
+
+	gameObjectManager_->InstancingDraw();
+	gameObjectManager_->NormalDraw();
 }
 
 void TitleScene::Flont2dSpriteDraw()

@@ -56,6 +56,7 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	gameObjectManager_->ImGuiUpdate();
 	ui_->ImGuiUpdate();
 
+	coinManager_->ImGuiUpdate();
 	fireParticle_->ImGuiUpdate();
 
 	if (ImGui::Button("ResetScene"))
@@ -119,9 +120,10 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 
 void GameClearScene::PostProcessDraw()
 {
-	gameObjectManager_->Draw();
+	gameObjectManager_->InstancingDraw();
+	coinManager_->ParticleDraw();
+	gameObjectManager_->NormalDraw();
 	fireParticle_->Draw();
-
 }
 
 void GameClearScene::Flont2dSpriteDraw()

@@ -11,7 +11,26 @@ void ClearCoinManager::Initilaize()
 		this->CreateCoinGameObject({ 0.0f,0.0f,0.0f }, index);
 	}
 
+	splashParticle_ = make_unique<ClearCoinSplashParticle>();
+	splashParticle_->Initialize();
 
+	auto& emit = splashParticle_->GetEmitter()[0];
+	auto& control = emit.GetControlParam();
+	control[0].frequencyTime = 0.01f;
+	control[0].useFlag_ = false;
+
+	auto& param = emit.GetEmitParam()[0];
+	param.count = 3;
+	param.sizeMax = { 0.1f,0.1f,0.0f };
+	param.sizeMin = { -0.1f,-0.1f,0.0f };
+	param.velocityMin = { -0.1f,-0.1f,0.0f };
+	param.velocityMax = { 0.1f,0.1f,0.0f };
+	param.scaleVelocityMax = { -0.01f,-0.01f,0.0f };
+	param.scaleVelocityMin = { -0.01f,-0.01f,0.0f };
+	param.scaleSizeMin = { 0.1f,0.0f,0.0f };
+	param.scaleSizeMax = { 0.2f,0.0f,0.0f };
+	param.colorDecayMax.w = 0.05f;
+	param.colorDecayMin.w = 0.03f;
 }
 
 void ClearCoinManager::Update()
@@ -28,8 +47,11 @@ void ClearCoinManager::Update()
 		unique_ptr<ClearCoin>& coin = clearCoins_[i];
 		coin->Update();
 
+
+	
 		if (coin->GetIsEnd())
 		{
+	
 			// 現在のコインが終了した際の処理
 			if (i + 1 < clearCoins_.size())
 			{
@@ -37,13 +59,43 @@ void ClearCoinManager::Update()
 				unique_ptr<ClearCoin>& nextCoin = clearCoins_[i + 1];
 				if (!nextCoin->GetIsStateAnimation())
 				{
+					auto& emit = splashParticle_->GetEmitter()[0];
+					emit.GetControlParam()[0].useFlag_ = true;
+					emit.GetEmitParam()[0].count = 3;
+					emit.GetEmitParam()[0].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
+
 					nextCoin->StartAnimation(true);
 					nextCoin->CreateState();
 				}
 			}
 		}
-
 	}
+
+	auto& emit = splashParticle_->GetEmitter()[0];
+	if (emit.GetControlParam()[0].useFlag_)
+	{
+		particleEmitFlame_ += 1.0f / 10.0f;
+
+		if (particleEmitFlame_ >= particleEmitMax_)
+		{
+			particleEmitFlame_ = 0.0f;
+			emit.GetEmitParam()[0].count = 0;
+			emit.GetControlParam()[0].useFlag_ = false;
+		}
+	}
+
+	splashParticle_->Emit();
+	splashParticle_->Update();
+}
+
+void ClearCoinManager::ParticleDraw()
+{
+	splashParticle_->Draw();
+}
+
+void ClearCoinManager::ImGuiUpdate()
+{
+	splashParticle_->ImGuiUpdate();
 }
 
 void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, int32_t index)
@@ -79,11 +131,11 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 		if (i >= 1)
 		{
 			data->SetIsDraw(true);
-			data->GetDesc().colorDesc.color_ = { 0.0f,0.0f,0.0f,0.25f };
+			data->GetDesc().colorDesc.color_ = { 0.0f,0.0f,0.0f,0.5f };
 		}
 		else
 		{
-			data->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xffd700ff);
+			data->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xfff2aaff);
 		}
 		data->ChangePipline(make_unique<Phong3dSkinningPiplineDepthNoneWriteCommand>());
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);

@@ -8,7 +8,7 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/SelectScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/SelectScene/");
 
-	//levelData‚Ì“Ç‚İ‚İ
+	//levelDataã®èª­ã¿è¾¼ã¿
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
@@ -88,7 +88,7 @@ void SelectScene::Update(GameManager* Scene)
 #endif // _USE_IMGUI
 	ChangeSceneAnimation::GetInstance()->Update();
 
-	//ƒV[ƒ“Ø‘Ö‚ªI‚í‚Á‚½‚ç
+	//ã‚·ãƒ¼ãƒ³åˆ‡æ›¿ãŒçµ‚ã‚ã£ãŸã‚‰
 	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
 	{
 		player_->SetStartFlag(true);
@@ -131,8 +131,9 @@ void SelectScene::Update(GameManager* Scene)
 
 void SelectScene::PostProcessDraw()
 {
-	SkyBox::GetInstance()->Draw();
-	gameObjectManager_->Draw();
+
+	gameObjectManager_->InstancingDraw();
+	gameObjectManager_->NormalDraw();
 
 	GoalParticle::GetInstance()->Draw();
 }
@@ -147,19 +148,19 @@ void SelectScene::Flont2dSpriteDraw()
 
 void SelectScene::Collision()
 {
-	//ƒvƒŒƒCƒ„[–{‘Ì
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æœ¬ä½“
 	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
 		gameCollisionManager_->ListPushback(player_->GetPlayerCore(), player_->GetPlayerCore());
 	}
-	//player‚Ì’e
+	//playerã®å¼¾
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)
 	{
 		if (player_->GetBullet()[index]) {
 			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get(), player_->GetBullet()[index].get());
 		}
 	}
-	//ƒuƒƒbƒN
+	//ãƒ–ãƒ­ãƒƒã‚¯
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
 		gameCollisionManager_->ListPushback(b.get(), b.get());
@@ -190,7 +191,7 @@ bool SelectScene::CheckLoadScene()
 {
 	bool changeFlag = false;
 
-	//ƒvƒŒƒCƒ„[‚Æ“–‚½‚Á‚½id‚ªportalId‚ªˆê’v‚µ‚Ä‚¢‚½ê‡
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨å½“ãŸã£ãŸidãŒportalIdãŒä¸€è‡´ã—ã¦ã„ãŸå ´åˆ
 	queue<uint32_t>allHitIds = player_->GetPlayerCore()->GetAllHitIds();
 	size_t size = allHitIds.size();
 

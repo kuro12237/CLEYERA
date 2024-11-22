@@ -154,15 +154,21 @@ void GameObjectManager::ImGuiUpdate()
 	}
 }
 
-void GameObjectManager::Draw()
+
+
+void GameObjectManager::InstancingDraw()
 {
-	
 	//instancing
 	for (auto& data : objInstancing3dData_)
 	{
 		auto& it = data.second->GetGameObject();
 		it->Draw();
 	}
+}
+
+void GameObjectManager::NormalDraw()
+{
+
 	//normal
 	for (auto& data : obj3dData_) {
 		auto& it = data.second;

@@ -6,10 +6,10 @@ void GameOverScene::Initialize([[maybe_unused]] GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameOverScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameOverScene/");
-	//levelData‚Ì“Ç‚İ‚İ
+	//levelDataã®èª­ã¿è¾¼ã¿
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
-	//objectManagerƒZƒbƒg
+	//objectManagerã‚»ãƒƒãƒˆ
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->ClearAllData();
 	gameObjectManager_->MoveData(levelData.get());
@@ -94,7 +94,9 @@ void GameOverScene::Update([[maybe_unused]] GameManager* Scene)
 
 void GameOverScene::PostProcessDraw()
 {
-	gameObjectManager_->Draw();
+
+	gameObjectManager_->InstancingDraw();
+	gameObjectManager_->NormalDraw();
 }
 
 

@@ -185,7 +185,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 void GameScene::PostProcessDraw()
 {
 
-	gameObjectManager_->Draw();
+	gameObjectManager_->InstancingDraw();
+	gameObjectManager_->NormalDraw();
 
 	ParticlesDraw();
 

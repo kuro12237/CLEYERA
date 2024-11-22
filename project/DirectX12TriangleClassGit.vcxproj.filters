@@ -828,7 +828,6 @@
     <ClCompile Include="Application\Scene\IScene.cpp" />
     <ClCompile Include="Application\GameObject\StageCoin\StageCoin.cpp" />
     <ClCompile Include="Application\GameObject\StageCoin\StageCoinManager.cpp" />
-    <ClCompile Include="Application\GameObject\GameClear\GameClearText.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneCoinUI.cpp" />
     <ClCompile Include="Application\GameObject\ClearCharacter\ClearCharacter.cpp" />
     <ClCompile Include="Application\GameObject\ClearCamera\ClearCamera.cpp" />
@@ -836,6 +835,7 @@
     <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoin.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\state\ClearCoinStateActive.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.cpp" />
+    <ClCompile Include="Application\GameObject\ClearCoinManager\particle\ClearCoinSplashParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1432,8 +1432,6 @@
     <ClInclude Include="Application\Utility\ObjectNumberPool\ObjectPool.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h" />
-    <ClInclude Include="Application\GameObject\GameClear\GameClearText.h" />
-    <ClInclude Include="Application\GameObject\GameClearSaveData\GameClearSaveData.h" />
     <ClInclude Include="Application\Scene\ISceneContext.h" />
     <ClInclude Include="Application\GameObject\SceneContextData\SceneContextData.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneCoinUI.h" />
@@ -1444,6 +1442,7 @@
     <ClInclude Include="Application\GameObject\ClearCoinManager\state\ClearCoinStateActive.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\state\IClearCoinState.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.h" />
+    <ClInclude Include="Application\GameObject\ClearCoinManager\Particle\ClearCoinSplashParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
