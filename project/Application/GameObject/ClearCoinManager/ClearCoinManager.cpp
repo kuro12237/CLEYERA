@@ -14,27 +14,27 @@ void ClearCoinManager::Initilaize()
 
 void ClearCoinManager::Update()
 {
-	for (unique_ptr<ClearCoin>&coin : clearCoins_)
+	for (unique_ptr<ClearCoin>& coin : clearCoins_)
 	{
 		coin->Update();
 	}
 }
 
-void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos,int32_t index)
+void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, int32_t index)
 {
 	//オブジェクトの作成
 	string coinName = "Coin";
 	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();
 	data->SetObjectType("ARMATURE");
 	const float kScale = 0.5f;
-	Engine::Transform::TransformEular transform = { .scale{kScale,kScale,kScale},.rotate{}};
+	Engine::Transform::TransformEular transform = { .scale{kScale,kScale,kScale},.rotate{} };
 	transform.translate.y = 3.5f;
 
 	if (index == 0)
 	{
 		transform.translate.x = -1.5f;
 	}
-	if (index == 1)
+	if (index == 2)
 	{
 		transform.translate.x = 1.5f;
 	}
@@ -49,7 +49,7 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos,int
 	unique_ptr<ClearCoin>coin = make_unique<ClearCoin>();
 	coin->SetName(name_num);
 
-	if (index < coinCount_)
+	if (index <= coinCount_ - 1)
 	{
 		coin->Initialize(CoinUse::Active);
 	}

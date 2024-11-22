@@ -31,7 +31,7 @@ public:
 	void Update();
 
 #pragma region Set
-
+	void StartAnimation(bool isStart) { isStart_ = isStart; }
 	
 #pragma endregion
 
@@ -39,5 +39,6 @@ private:
 
 	const Math::Vector::Vector3* cameraPos_ = nullptr;
 
+	bool isStart_ = false;
 	unique_ptr<IClearCoinState>state_ = nullptr;
 };
