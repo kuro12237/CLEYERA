@@ -5,10 +5,17 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameClearScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameClearScene/");
+
+	gameObjectManager_ = GameObjectManager::GetInstance();
+	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
+	
+	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
+	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
+
+
 	//levelDataの読み込み
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
-	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->ClearAllData();
 	gameObjectManager_->MoveData(levelData.get());
 	gameObjectManager_->SetAllParents();
@@ -16,21 +23,10 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	gameObjectManager_->CameraReset("Camera");
 	gameObjectManager_->Update();
 
-	light_.radious = 512.0f;
-	light_.position.y = 16.0f;
-	light_.position.z = -16.0f;
-	light_.decay = 0.1f;
-
-	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
-
-	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
-	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
-
-
+	//データ引継ぎ
 	contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
 	ui_ = make_unique<ClearSceneUI>();
-
 	ui_->SetStageCoin(contextData_.stageConinsCount);
 	ui_->Initialize();
 
@@ -46,6 +42,11 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	coinManager_ = make_unique<ClearCoinManager>();
 	coinManager_->CoinsCount(contextData_.stageConinsCount);
 	coinManager_->Initilaize();
+
+	light_.radious = 512.0f;
+	light_.position.y = 16.0f;
+	light_.position.z = -16.0f;
+	light_.decay = 0.1f;
 
 }
 

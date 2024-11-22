@@ -68,20 +68,17 @@ private:
 	/// </summary>
 	void Flont2dSpriteDraw();
 
-	shared_ptr<LevelData> levelData_ = nullptr;
+
 	GameObjectManager* gameObjectManager_;
+	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
 
 	string inputLevelDataFileName_ = "GameClear.json";
 
 	Engine::Light::PointLight_param light_{};
 
-	unique_ptr<SceneContextData>context_ = nullptr;
 	SceneContextData contextData_ = {};
 
 	unique_ptr<ClearSceneUI>ui_ = nullptr;
-
-	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
-
 
 	unique_ptr<ClearCharacter>character_ = nullptr;
 	unique_ptr<ClearCoinManager>coinManager_ = nullptr;
