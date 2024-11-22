@@ -6,8 +6,7 @@ using namespace Engine::Transform;
 
 void ClearCoinSplashParticle::Initialize()
 {
-	texHandle_ = TextureManager::LoadPngTexture("GameObject/cloud/cloud.png");
-	texHandle_ = TextureManager::LoadDDSTexture("GameObject/cloud/cloud.dds");
+	texHandle_ = TextureManager::LoadPngTexture("GameClear/SphereNoise.png");
 	particle_ = make_unique<Particle::GpuParticle>();
 	particle_->Create(1, name_);
 	particle_->SetTexhandle(texHandle_);
