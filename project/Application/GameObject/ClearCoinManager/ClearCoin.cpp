@@ -8,7 +8,6 @@ void ClearCoin::Initialize(const CoinUse& use)
 
 void ClearCoin::Update()
 {
-
 	if (state_)
 	{
 		state_->Update(this);
@@ -17,7 +16,6 @@ void ClearCoin::Update()
 
 void ClearCoin::ChangeState(unique_ptr<IClearCoinState> state)
 {
-
 	state_ = move(state);
 	if (state_)
 	{

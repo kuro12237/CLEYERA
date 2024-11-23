@@ -22,7 +22,7 @@ void ClearCoinStateActive::Update([[maybe_unused]] ClearCoin* state)
 
 		auto& skeleton = gameObjectManager_->GetObj3dData(state->INameable::GetName())->GetGameObject()->GetSkeleton();
 
-		flame_ += 1.0f / 20.0f;
+		flame_ += 1.0f / 10.0f;
 
 		Engine::Manager::AnimationManager::ApplyAnimation(skeleton, animationData_, flame_);
 		gameObjectManager_->GetObj3dData(state->INameable::GetName())->GetGameObject()->SkeletonUpdate();

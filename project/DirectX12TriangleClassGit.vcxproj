@@ -79,7 +79,7 @@
     <ClCompile Include="Application\GameObject\StageCoin\StageCoin.cpp" />
     <ClCompile Include="Application\GameObject\StageCoin\StageCoinManager.cpp" />
     <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp" />
-    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneCoinUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.cpp" />
@@ -260,7 +260,7 @@
     <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
-    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneCoinUI.h" />
+    <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneJoyStick.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.h" />

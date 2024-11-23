@@ -1,8 +1,9 @@
 #include "ClearSceneJoyStick.h"
 
-void ClearSceneJoyStick::Initialize(BaseBottonUI& ui)
+
+void ClearSceneJoyStick::Initialize(const string& groupName, const SceneUIEnum& ui)
 {
-	ui;
+	this->CreateUIData(groupName, ui);
 }
 
 void ClearSceneJoyStick::Update(BaseBottonUI& ui)

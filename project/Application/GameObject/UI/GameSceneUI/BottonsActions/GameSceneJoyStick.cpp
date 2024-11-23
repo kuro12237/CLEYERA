@@ -13,13 +13,14 @@ void GameSceneJoyStick::Inactive(BaseBottonUI& ui)
 	ui;
 }
 
-void GameSceneJoyStick::Initialize(BaseBottonUI& ui)
+void GameSceneJoyStick::Initialize(const string& groupName, const SceneUIEnum& ui)
 {
-	ui.AddJsonItem("stickRad", stickRad_);
-	stickRad_ = ui.GetJsonItem<float>("stickRad");
+	this->CreateUIData(groupName, ui);
+	this->AddJsonItem("stickRad", stickRad_);
+	stickRad_ = this->GetJsonItem<float>("stickRad");
 
-	ui.AddJsonItem("lerpFactor", lerpFactor_);
-	lerpFactor_ = ui.GetJsonItem<float>("lerpFactor");
+	this->AddJsonItem("lerpFactor", lerpFactor_);
+	lerpFactor_ =  this->GetJsonItem<float>("lerpFactor");
 }
 
 void GameSceneJoyStick::Update(BaseBottonUI& ui)
@@ -44,7 +45,7 @@ void GameSceneJoyStick::Update(BaseBottonUI& ui)
 	reticlePos_.y *= -stickRad_;
 
 	TransformEular transform = ui.GetWorldTransform().transform;
-	//•âŠÔ
+	//è£œé–“
 	interTarget_ = Math::Vector::Lerp(interTarget_, reticlePos_, lerpFactor_);
 
    transform.translate = Math::Vector::Add(transform.translate, interTarget_);

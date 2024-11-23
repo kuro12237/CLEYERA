@@ -6,8 +6,6 @@
 #include"BottonsActions/ClearSceneJoyStick.h"
 #include"BottonsControl/ClearSceneUIControl.h"
 #include"BottonsActions/ClearSceneTitleText.h"
-#include"BottonsActions/ClearSceneCoinUI.h"
-
 
 enum class ClearSceneChangeScene
 {
@@ -17,7 +15,7 @@ enum class ClearSceneChangeScene
 };
 
 /// <summary>
-/// ƒQ[ƒ€’†‚ÌUI
+/// ã‚²ãƒ¼ãƒ ä¸­ã®UI
 /// </summary>
 class ClearSceneUI :public ISceneUI
 {
@@ -26,12 +24,12 @@ public:
 	~ClearSceneUI() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize()override;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update()override;
 
@@ -54,8 +52,6 @@ private:
 
 	unique_ptr<ClearSceneUIBottonsControl>bottonControl_ = nullptr;
 	vector<unique_ptr<ClearSceneTitleText>>texts_;
-
-	vector<shared_ptr<ClearSceneCoinUI>>coins_;
 
 	bool isSelect_ = false;
 	uint32_t stageCoinCount_ = 0;

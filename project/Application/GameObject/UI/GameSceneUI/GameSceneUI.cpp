@@ -5,13 +5,13 @@ using namespace Engine::Objects;
 
 void GameSceneUI::Initialize()
 {
-	//ÉAÉNÉVÉáÉì,ÉRÉìÉgÉçÅ[ÉãÉNÉâÉXèâä˙âª
+	//„Ç¢„ÇØ„Ç∑„Éß„É≥,„Ç≥„É≥„Éà„É≠„Éº„É´„ÇØ„É©„ÇπÂàùÊúüÂåñ
 	bottonAction_ = make_unique<GameSceneUIBottonsAction>();
 	bottonControl_ = make_unique<GameSceneUIBottonsControl>();
 
 	bottonAction_->Initialize();
 
-	//îwåiì«Ç›çûÇ›
+	//ËÉåÊôØË™≠„ÅøËæº„Åø
 	string joyStickBackKey = "GameSceneJoyStickUI_Back_";
 	this->KeyCreateEnumNoneUI(joyStickBackKey);
 
@@ -22,15 +22,15 @@ void GameSceneUI::Initialize()
 		shared_ptr<BaseBottonUI>joyStick = make_shared<BaseBottonUI>();
 		if (static_cast<SceneUIEnum>(i)==SceneUIEnum::JoyStick_L)
 		{
-			joyStick->Initilaize(joyStickGropName, static_cast<SceneUIEnum>(i), std::bind(&GameSceneUIBottonsAction::JoyStickLInitialize, bottonAction_.get(), std::placeholders::_1));
+			joyStick->Initialize(joyStickGropName, static_cast<SceneUIEnum>(i));
 			joyStick->SetUpdateFunction(std::bind(&GameSceneUIBottonsAction::JoyStickLUpdate, bottonAction_.get(), std::placeholders::_1));
 		}
 		if (static_cast<SceneUIEnum>(i) == SceneUIEnum::JoyStick_R)
 		{
-			joyStick->Initilaize(joyStickGropName, static_cast<SceneUIEnum>(i), std::bind(&GameSceneUIBottonsAction::JoyStickRInitialize, bottonAction_.get(), std::placeholders::_1));
+			joyStick->Initialize(joyStickGropName, static_cast<SceneUIEnum>(i));
 			joyStick->SetUpdateFunction(std::bind(&GameSceneUIBottonsAction::JoyStickRUpdate, bottonAction_.get(), std::placeholders::_1));
 		}
-		//ä÷êîìnÇ∑
+		//Èñ¢Êï∞Ê∏°„Åô
 		this->PushUiMapData(joyStick);
 
 	}
@@ -41,8 +41,8 @@ void GameSceneUI::Initialize()
 	//A
 	string bottonsGropName = "GameSceneBotton_";
 	shared_ptr<BaseBottonUI>bottonA = make_shared<BaseBottonUI>();
-	bottonA->Initilaize(bottonsGropName, SceneUIEnum::Botton_A);
-	//ä÷êîìnÇ∑
+	bottonA->Initialize(bottonsGropName, SceneUIEnum::Botton_A);
+	//Èñ¢Êï∞Ê∏°„Åô
 	bottonA->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlA, bottonControl_.get()));
 	bottonA->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonAActive, bottonAction_.get(), std::placeholders::_1));
 	bottonA->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonAInactive, bottonAction_.get(), std::placeholders::_1));
@@ -51,8 +51,8 @@ void GameSceneUI::Initialize()
 
 	//RT
 	shared_ptr<BaseBottonUI>bottonRT = make_shared<BaseBottonUI>();
-	bottonRT->Initilaize(bottonsGropName, SceneUIEnum::Botton_RT);
-	//ä÷êîìnÇ∑
+	bottonRT->Initialize(bottonsGropName, SceneUIEnum::Botton_RT);
+	//Èñ¢Êï∞Ê∏°„Åô
 	bottonRT->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlRT, bottonControl_.get()));
 	bottonRT->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTActive, bottonAction_.get(), std::placeholders::_1));
 	bottonRT->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTInactive, bottonAction_.get(), std::placeholders::_1));

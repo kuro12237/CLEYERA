@@ -5,15 +5,15 @@
 
 
 /// <summary>
-/// ジョイスティック2d表示クラス
+/// 繧ｸ繝ｧ繧､繧ｹ繝�繧｣繝�繧ｯ2d陦ｨ遉ｺ繧ｯ繝ｩ繧ｹ
 /// </summary>
-class ClearSceneJoyStick
+class ClearSceneJoyStick:public BaseBottonUI
 {
 public:
 	ClearSceneJoyStick() {};
 	~ClearSceneJoyStick() {};
 
-	void Initialize(BaseBottonUI& ui);
+	void Initialize(const string& groupName, const SceneUIEnum& ui)override;
 	void Update(BaseBottonUI& ui);
 
 #pragma region Get

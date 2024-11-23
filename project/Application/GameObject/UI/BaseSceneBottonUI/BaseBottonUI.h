@@ -11,12 +11,12 @@ public:
 	~BaseBottonUI() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	virtual void Initilaize(const string& groupName, const SceneUIEnum& ui,std::function<void(BaseBottonUI& ui)>f = nullptr);
+	virtual void Initialize(const string& groupName, const SceneUIEnum& ui);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
@@ -37,7 +37,7 @@ public:
 protected:
 
 	/// <summary>
-	/// ui‚ğì‚éÛ•K‚¸ŒÄ‚Ño‚·
+	/// uiã‚’ä½œã‚‹éš›å¿…ãšå‘¼ã³å‡ºã™
 	/// </summary>
 	/// <param name="groupName"></param>
 	/// <param name="ui"></param>

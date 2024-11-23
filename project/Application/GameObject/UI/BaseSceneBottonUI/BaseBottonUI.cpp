@@ -1,22 +1,18 @@
 #include "BaseBottonUI.h"
 
-void BaseBottonUI::Initilaize(const string& groupName, const SceneUIEnum& ui, std::function<void(BaseBottonUI& ui)>f)
+void BaseBottonUI::Initialize(const string& groupName, const SceneUIEnum& ui)
 {
 	CreateUIData(groupName,ui);
 
-	//‰Šú‰»ŠÖ”‘ã“üŒÄ‚Ño‚µ
-	if (f)
-	{
-		initializeFunc_ = f;
-		initializeFunc_(*this);
-	}
+	//åˆæœŸåŒ–é–¢æ•°ä»£å…¥å‘¼ã³å‡ºã—
+	
 }
 
 void BaseBottonUI::Update()
 {
 	this->UpdateData();
 
-	//ƒRƒ“ƒgƒ[ƒ‹ŠÖ”ŒÄ‚Ño‚µ
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«é–¢æ•°å‘¼ã³å‡ºã—
 	if (controlFunc_)
 	{
 		if (controlFunc_())
@@ -29,7 +25,7 @@ void BaseBottonUI::Update()
 		}
 	}
 
-	//ƒRƒ“ƒgƒ[ƒ‹‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	if (isAction_)
 	{
 		if (isActionTrueFunc_)
@@ -46,7 +42,7 @@ void BaseBottonUI::Update()
 	}
 
 	
-	//XV
+	//æ›´æ–°
 	if (updateFunc_)
 	{
 		updateFunc_(*this);

@@ -33,8 +33,8 @@ void GameSceneUIBottonsAction::BottonRTInactive(BaseBottonUI& ui)
 
 void GameSceneUIBottonsAction::JoyStickRInitialize(BaseBottonUI& ui)
 {
-
-	joySticks_[static_cast<uint32_t>(SceneUIEnum::JoyStick_R)]->Initialize(ui);
+	ui;
+	//joySticks_[static_cast<uint32_t>(SceneUIEnum::JoyStick_R)]->Initialize();
 }
 
 void GameSceneUIBottonsAction::JoyStickRUpdate(BaseBottonUI& ui)
@@ -45,7 +45,8 @@ void GameSceneUIBottonsAction::JoyStickRUpdate(BaseBottonUI& ui)
 
 void GameSceneUIBottonsAction::JoyStickLInitialize(BaseBottonUI& ui)
 {
-	joySticks_[static_cast<uint32_t>(SceneUIEnum::JoyStick_L)]->Initialize(ui);
+	ui;
+	//joySticks_[static_cast<uint32_t>(SceneUIEnum::JoyStick_L)]->Initialize(ui);
 }
 
 void GameSceneUIBottonsAction::JoyStickLUpdate(BaseBottonUI& ui)
