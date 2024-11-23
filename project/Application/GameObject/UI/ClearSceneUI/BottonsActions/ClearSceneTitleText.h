@@ -4,7 +4,7 @@
 #include"GameObject//UI/BaseSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>
-/// ジョイスティック2d表示クラス
+/// 繧ｸ繝ｧ繧､繧ｹ繝�繧｣繝�繧ｯ2d陦ｨ遉ｺ繧ｯ繝ｩ繧ｹ
 /// </summary>
 class ClearSceneTitleText
 {
@@ -24,5 +24,6 @@ private:
 
 	bool isSelect_ = false;
 	float flame_ = 0.0f;
+	float flameMax_ = 1.0f;
 };
 

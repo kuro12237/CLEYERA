@@ -48,10 +48,8 @@ void ClearCoinManager::Update()
 		coin->Update();
 
 
-
 		if (coin->GetIsEnd())
 		{
-
 			// 現在のコインが終了した際の処理
 			if (i + 1 < clearCoins_.size())
 			{
@@ -66,6 +64,10 @@ void ClearCoinManager::Update()
 
 					nextCoin->StartAnimation(true);
 					nextCoin->CreateState();
+				}
+				if (nextCoin->GetIsUse() == CoinUse::Inactive)
+				{
+					isComplete_ = true;
 				}
 			}
 		}

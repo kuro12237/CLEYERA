@@ -90,6 +90,11 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 		coinManager_->SetIsAnimStart(true);
 	}
 
+	if (coinManager_->GetIsComplete())
+	{
+		ui_->SetIsCearTextUIAnimStart(true);
+	}
+
 	coinManager_->Update();
 
 	gameObjectManager_->Update();

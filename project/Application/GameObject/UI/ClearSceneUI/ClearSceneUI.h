@@ -6,6 +6,7 @@
 #include"BottonsActions/ClearSceneJoyStick.h"
 #include"BottonsControl/ClearSceneUIControl.h"
 #include"BottonsActions/ClearSceneTitleText.h"
+#include"BottonsActions/ClearSceneClearTextUi.h"
 
 enum class ClearSceneChangeScene
 {
@@ -15,7 +16,7 @@ enum class ClearSceneChangeScene
 };
 
 /// <summary>
-/// ゲーム中のUI
+/// クリア中のUI
 /// </summary>
 class ClearSceneUI :public ISceneUI
 {
@@ -40,6 +41,7 @@ public:
 
 #pragma region Set
 	void SetStageCoin(const uint32_t stageCoinCount) { stageCoinCount_ = stageCoinCount; }
+	void SetIsCearTextUIAnimStart(bool f) { clearText_->SetIsStart(f); }
 #pragma endregion
 
 private:
@@ -52,6 +54,8 @@ private:
 
 	unique_ptr<ClearSceneUIBottonsControl>bottonControl_ = nullptr;
 	vector<unique_ptr<ClearSceneTitleText>>texts_;
+
+	shared_ptr<ClearSceneClearTextUI>clearText_ = nullptr;
 
 	bool isSelect_ = false;
 	uint32_t stageCoinCount_ = 0;

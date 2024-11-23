@@ -50,7 +50,6 @@ private:
 	std::function<void(BaseBottonUI& ui)>isActionTrueFunc_;
 	std::function<void(BaseBottonUI& ui)>isActionFalseFunc_;
 	std::function<void(BaseBottonUI& ui)> updateFunc_;
-	std::function<void(BaseBottonUI& ui)> initializeFunc_;
 
 	string jsonFilename_ = "";
 

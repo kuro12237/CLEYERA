@@ -40,6 +40,7 @@ public:
 
 #pragma region Get
 	bool GetIsAnimStart() { return isAnimStart_; }
+	bool GetIsComplete() { return isComplete_; }
 #pragma endregion
 
 
@@ -52,7 +53,7 @@ private:
 	void CreateCoinGameObject(const Math::Vector::Vector3 &pos,int32_t index);
 
 	bool isAnimStart_ = false;
-	
+	bool isComplete_ = false;
 	float particleEmitFlame_ = 0.0f;
 	float particleEmitMax_ = 1.0f;
 

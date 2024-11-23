@@ -43,7 +43,7 @@ public:
 #pragma region Get
 	bool GetIsStateAnimation() { return isStart_; }
 	bool GetIsEnd() { return isEnd_; }
-
+	CoinUse GetIsUse() { return isUse_; }
 #pragma endregion
 
 private:

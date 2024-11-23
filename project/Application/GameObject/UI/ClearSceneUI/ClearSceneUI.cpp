@@ -24,9 +24,11 @@ void ClearSceneUI::Initialize()
 	this->PushUiMapData(joyStick);
 
 	string bottonBackKey = "UI_";
+	clearText_ = make_shared<ClearSceneClearTextUI>();
+	clearText_->Initialize("UI_ClearText", SceneUIEnum::JoyStick_None);
+	this->PushUiMapData(clearText_);
 
-
-	this->KeyCreateEnumNoneUI(bottonBackKey);
+	//this->KeyCreateEnumNoneUI(bottonBackKey);
 	PushSpriteData();
 
 }
