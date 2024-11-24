@@ -7,13 +7,11 @@ void ClearSceneUI::Initialize()
 
 	for (size_t i = 0; i < 2; i++)
 	{
-		texts_[i] = make_unique<ClearSceneTitleText>();
+		texts_[i] = make_shared<ClearSceneTitleText>();
 
-		shared_ptr<BaseBottonUI>botton = make_shared<BaseBottonUI>();
-		botton->Initialize("ClearSceneSelectText_"+to_string(i), SceneUIEnum::JoyStick_None);
-		botton->SetUpdateFunction(std::bind(&ClearSceneTitleText::Update, texts_[i].get(), std::placeholders::_1));
+		texts_[i]->Initialize("ClearSceneSelectText_"+to_string(i), SceneUIEnum::JoyStick_None);
 
-		this->PushUiMapData(botton);
+		this->PushUiMapData(texts_[i]);
 	}
 
 	lJoyStick_ = make_unique<ClearSceneJoyStick>();
@@ -31,10 +29,16 @@ void ClearSceneUI::Initialize()
 	//this->KeyCreateEnumNoneUI(bottonBackKey);
 	PushSpriteData();
 
+	uiActiveParticle_ = make_unique<UIActiveParticle>();
+	uiActiveParticle_->Initialize();
+
+
 }
 
 void ClearSceneUI::Update()
 {
+
+
 	//ボタン更新
 	this->BottonUiUpdate();
 
@@ -42,6 +46,7 @@ void ClearSceneUI::Update()
 	{
 		if (i == counter_)
 		{
+			this->uiActiveParticle_->SetEmitParam(texts_[i]->GetWorldTransform().transform.translate);
 			texts_[i]->SetisSelect(true);
 		}
 		else
@@ -80,4 +85,10 @@ void ClearSceneUI::Update()
 		isSelect_ = true;
 	}
 
+	uiActiveParticle_->Update();
+}
+
+void ClearSceneUI::ParticleDraw2d()
+{
+	uiActiveParticle_->Draw();
 }

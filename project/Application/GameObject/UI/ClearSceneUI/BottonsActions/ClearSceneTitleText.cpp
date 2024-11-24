@@ -1,11 +1,14 @@
 #include "ClearSceneTitleText.h"
 
-void ClearSceneTitleText::Update(BaseBottonUI& ui)
+void ClearSceneTitleText::Initialize(const string& groupName, const SceneUIEnum& ui)
 {
-	ui;
+	this->CreateUIData(groupName, ui);
+	SetUpdateFunction(std::bind(&ClearSceneTitleText::UiUpdate,this));
+}
 
-	Engine::Transform::TransformEular transform = ui.GetWorldTransform().transform;
-
+void ClearSceneTitleText::UiUpdate()
+{
+	
 	const float prevScale = 0.25f;
 	const float afterScale = 0.35f;
 
@@ -17,13 +20,13 @@ void ClearSceneTitleText::Update(BaseBottonUI& ui)
 			flame_ += 1.0f / 30.0f;
 		}
 		float scale = Math::Vector::LerpEaseOutSine(prevScale, afterScale, flame_);
-		transform.scale = {scale,scale,scale };
-		ui.SetTransform(transform);
+		worldTransform_.transform.scale = {scale,scale,scale };
+
 	}
 	else {
 		flame_ = 0.0f;
-		transform.scale = { prevScale ,prevScale ,prevScale };
-		ui.SetTransform(transform);
+		worldTransform_.transform.scale = { prevScale ,prevScale ,prevScale };
+		
 	}
 
 }

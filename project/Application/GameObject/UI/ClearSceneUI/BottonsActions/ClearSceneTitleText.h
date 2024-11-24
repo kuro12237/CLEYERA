@@ -6,13 +6,15 @@
 /// <summary>
 /// ジョイスティック2d表示クラス
 /// </summary>
-class ClearSceneTitleText
+class ClearSceneTitleText :public BaseBottonUI
 {
 public:
 	ClearSceneTitleText() {};
 	~ClearSceneTitleText() {};
 
-	void Update(BaseBottonUI& ui);
+
+	void Initialize(const string& groupName, const SceneUIEnum& ui)override;
+
 
 #pragma region Get
 
@@ -21,6 +23,9 @@ public:
 	void SetisSelect(bool f) { isSelect_ = f; }
 
 private:
+
+	void UiUpdate();
+
 
 	bool isSelect_ = false;
 	float flame_ = 0.0f;

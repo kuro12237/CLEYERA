@@ -135,6 +135,8 @@ void GameClearScene::PostProcessDraw()
 void GameClearScene::Flont2dSpriteDraw()
 {
 
+	ui_->ParticleDraw2d();
 	ui_->Draw2d();
+
 	changeSceneAnimation_->Draw();
 }

@@ -836,6 +836,7 @@
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\particle\ClearCoinSplashParticle.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.cpp" />
+    <ClCompile Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1443,6 +1444,7 @@
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\Particle\ClearCoinSplashParticle.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.h" />
+    <ClInclude Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

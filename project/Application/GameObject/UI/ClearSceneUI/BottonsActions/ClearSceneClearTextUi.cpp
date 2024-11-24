@@ -18,7 +18,7 @@ void ClearSceneClearTextUI::UiUpdate()
 		{
 			flame_ += 1.0f / 60.0f;
 			float scale = Math::Vector::LerpEaseOutSine(5.0f, 0.5f, flame_);
-			float alpha = Math::Vector::LerpEaseOutSine(0.0f, 1.0f, flame_);
+			float alpha = Math::Vector::LerpEaseOutSine(-1.0f, 1.0f, flame_);
 
 			worldTransform_.transform.scale = { scale,scale,scale };
 			sprite_->SetColor({ 1.0f,1.0f,1.0f,alpha });

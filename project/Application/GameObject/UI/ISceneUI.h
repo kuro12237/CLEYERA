@@ -6,7 +6,7 @@
 #include"Utility/convert/convert.h"
 
 /// <summary>
-/// UI‚Ì’ŠÛƒNƒ‰ƒX
+/// UIã®æŠ½è±¡ã‚¯ãƒ©ã‚¹
 /// </summary>
 class ISceneUI
 {
@@ -15,19 +15,25 @@ public:
 	virtual ~ISceneUI() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	virtual void Initialize() = 0;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	virtual void Update() { BottonUiUpdate(); };
 
 	/// <summary>
-	/// 2d•\¦
+	/// 2dè¡¨ç¤º
 	/// </summary>
 	void Draw2d();
+
+
+	/// <summary>
+	/// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®è¡¨ç¤º
+	/// </summary>
+	virtual void ParticleDraw2d() {};
 
 	void ImGuiUpdate();
 
@@ -36,23 +42,23 @@ private:
 protected:
 
 	/// <summary>
-	/// ui‚Ìƒf[ƒ^‚ğsprite‚ÉˆÚ“®
+	/// uiã®ãƒ‡ãƒ¼ã‚¿ã‚’spriteã«ç§»å‹•
 	/// </summary>
 	void PushSpriteData();
 
 	/// <summary>
-	/// SceneEnumUINone‚Åì»
+	/// SceneEnumUINoneã§ä½œè£½
 	/// </summary>
 	/// <param name="gruopKey"></param>
 	void KeyCreateEnumNoneUI(const string & gruopKey);
 
 	/// <summary>
-	/// uiƒ}ƒbƒv‚ÉƒZƒbƒg
+	/// uiãƒãƒƒãƒ—ã«ã‚»ãƒƒãƒˆ
 	/// </summary>
 	void PushUiMapData(shared_ptr<BaseBottonUI>ui);
 
 	/// <summary>
-	/// bottonUiMapXV
+	/// bottonUiMapæ›´æ–°
 	/// </summary>
 	void BottonUiUpdate();
 

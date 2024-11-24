@@ -92,6 +92,7 @@
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.cpp" />
     <ClCompile Include="Application\GameObject\UI\ISceneUI.cpp" />
     <ClCompile Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.cpp" />
     <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpGate\WarpGate.cpp" />
     <ClCompile Include="Application\GameObject\Warp\WarpManager.cpp" />
@@ -274,6 +275,7 @@
     <ClInclude Include="Application\GameObject\UI\ISceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.h" />
     <ClInclude Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.h" />
+    <ClInclude Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.h" />
     <ClInclude Include="Application\GameObject\Warp\Warp.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpGate\WarpGate.h" />
     <ClInclude Include="Application\GameObject\Warp\WarpManager.h" />

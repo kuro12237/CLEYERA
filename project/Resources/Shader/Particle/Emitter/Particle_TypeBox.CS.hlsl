@@ -29,10 +29,10 @@ struct EmitterBox
 };
 
 
-// ‰ñ“]s—ñ‚ğŒvZ‚·‚éŠÖ”iƒIƒCƒ‰[Šp‚©‚çj
+// å›è»¢è¡Œåˆ—ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°ï¼ˆã‚ªã‚¤ãƒ©ãƒ¼è§’ã‹ã‚‰ï¼‰
 float32_t3 RotatePoint(float32_t3 local, float32_t3 rotate)
 {
-    // ‰ñ“]s—ñ‚ğŒvZ
+    // å›è»¢è¡Œåˆ—ã‚’è¨ˆç®—
     float cosX = cos(rotate.x);
     float sinX = sin(rotate.x);
     float cosY = cos(rotate.y);
@@ -40,7 +40,7 @@ float32_t3 RotatePoint(float32_t3 local, float32_t3 rotate)
     float cosZ = cos(rotate.z);
     float sinZ = sin(rotate.z);
 
-    // ‰ñ“]‚ğ“K—p
+    // å›è»¢ã‚’é©ç”¨
     float32_t3 rotated;
     rotated.x = local.
     x * cosY * cosZ + local.
@@ -58,7 +58,7 @@ float32_t3 RotatePoint(float32_t3 local, float32_t3 rotate)
     return rotated;
 }
 
-// OBB‚Ì’†‚Åƒ‰ƒ“ƒ_ƒ€‚È“_‚ğ¶¬‚·‚éŠÖ”
+// OBBã®ä¸­ã§ãƒ©ãƒ³ãƒ€ãƒ ãªç‚¹ã‚’ç”Ÿæˆã™ã‚‹é–¢æ•°
 float32_t3 GenerateRandomPointInOBB(EmitterBox box, RandomGenerator generator)
 {
     float32_t3 uvw = generator.Generate3d();
@@ -73,7 +73,7 @@ float32_t3 GenerateRandomPointInOBB(EmitterBox box, RandomGenerator generator)
     return rotatedPoint;
 }
 
-// OBB‚Ì’†‚Åƒ‰ƒ“ƒ_ƒ€‚È“_‚ğ¶¬‚·‚éŠÖ”
+// OBBã®ä¸­ã§ãƒ©ãƒ³ãƒ€ãƒ ãªç‚¹ã‚’ç”Ÿæˆã™ã‚‹é–¢æ•°
 float32_t4 GenerateRandomColorDecay(EmitterBox box, RandomGenerator generator)
 {
     float32_t4 rgba;

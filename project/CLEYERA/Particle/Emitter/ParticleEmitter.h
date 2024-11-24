@@ -10,7 +10,7 @@ namespace Engine::Particle {
 	using namespace Engine::Buffer;
 
 	/// <summary>
-	/// ƒp[ƒeƒBƒNƒ‹ƒGƒ~ƒbƒ^[
+	/// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚¨ãƒŸãƒƒã‚¿ãƒ¼
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	template<typename T>
@@ -21,40 +21,40 @@ namespace Engine::Particle {
 		~ParticleEmitter() {};
 
 		/// <summary>
-		/// particle‚ğ‚à‚Æ‚Éì¬
+		/// particleã‚’ã‚‚ã¨ã«ä½œæˆ
 		/// </summary>
 		/// <param name="particle"></param>
 		void CreateType(unique_ptr<Particle::GpuParticle>& particle);
 
 		/// <summary>
-		/// imguiXV
+		/// imguiæ›´æ–°
 		/// </summary>
 		void ImGuiUpdate();
 
 		/// <summary>
-		/// XV
+		/// æ›´æ–°
 		/// </summary>
 		void Update();
 
 		/// <summary>
-		/// •¦‚©‚¹‚é
+		/// æ²¸ã‹ã›ã‚‹
 		/// </summary>
 		/// <param name="particle"></param>
 		void Emit(unique_ptr<Particle::GpuParticle>& particle);
 
 		/// <summary>
-		/// ”ÍˆÍƒfƒoƒbƒN•\¦
+		/// ç¯„å›²ãƒ‡ãƒãƒƒã‚¯è¡¨ç¤º
 		/// </summary>
 		void SpownDraw();
 
 		/// <summary>
-		/// w’è‚Ìƒpƒ‰ƒ[ƒ^‚ğ‰Šú‰»
+		/// æŒ‡å®šã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’åˆæœŸåŒ–
 		/// </summary>
 		/// <param name="index"></param>
 		void Clear(uint32_t index) { emitParam_[index] = {}; particleControl_[index] = {}; }
 		
 		/// <summary>
-		/// ‚·‚×‚Ä‚Ìƒpƒ‰ƒ[ƒ^[‚Ì‰Šú‰»
+		/// ã™ã¹ã¦ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®åˆæœŸåŒ–
 		/// </summary>
 		void AllClear();
 
@@ -72,7 +72,7 @@ namespace Engine::Particle {
 	private:
 
 		/// <summary>
-		/// ƒfƒoƒbƒN—p‚Ìdraw‚ÌƒNƒ‰ƒX‚ğì¬
+		/// ãƒ‡ãƒãƒƒã‚¯ç”¨ã®drawã®ã‚¯ãƒ©ã‚¹ã‚’ä½œæˆ
 		/// </summary>
 		void CreateDebugDraw();
 
@@ -83,7 +83,7 @@ namespace Engine::Particle {
 #pragma endregion
 
 		/// <summary>
-		/// •¦‚­ŠÔŠu‚ÌXV
+		/// æ²¸ãé–“éš”ã®æ›´æ–°
 		/// </summary>
 		/// <param name="index"></param>
 		void FrequencyUpdate(size_t index);
@@ -104,7 +104,7 @@ namespace Engine::Particle {
 	template<typename T>
 	inline void ParticleEmitter<T>::CreateType(unique_ptr<Particle::GpuParticle>& particle)
 	{
-		//Šeí\‘¢‘Ì‚Ì‚Éwt‚É‘ã“ü
+		//å„ç¨®æ§‹é€ ä½“ã®æ™‚ã«wtã«ä»£å…¥
 		if constexpr (std::is_same<T, Particle::EmitType::SphereParam>::value)
 		{
 			name_ = particle->GetName() + "EmitSphere";
@@ -123,7 +123,7 @@ namespace Engine::Particle {
 		emitBuf_->CreateResource(max_);
 		emitBuf_->CreateInstancingResource(max_, name_, sizeof(T));
 
-		//emit‚Ì‡Œv”•ªŠm•Û
+		//emitã®åˆè¨ˆæ•°åˆ†ç¢ºä¿
 		emitParam_.resize(max_);
 		particleControl_.resize(max_);
 		wTs_.resize(max_);
@@ -133,7 +133,7 @@ namespace Engine::Particle {
 			wTs_[index].Initialize();
 		}
 
-		//ƒfƒoƒbƒO—p‚Ìƒ‚ƒfƒ‹‚Ìüì¬
+		//ãƒ‡ãƒãƒƒã‚°ç”¨ã®ãƒ¢ãƒ‡ãƒ«ã®ç·šä½œæˆ
 #ifdef _USE_IMGUI
 		CreateDebugDraw();
 #endif // _USE_IMGUI
@@ -156,7 +156,7 @@ namespace Engine::Particle {
 	template<typename T>
 	inline void ParticleEmitter<T>::Update()
 	{
-		//ŠÔ‚ÌXV
+		//æ™‚é–“ã®æ›´æ–°
 		for (size_t index = 0; index < max_; index++)
 		{
 			FrequencyUpdate(index);
@@ -165,7 +165,7 @@ namespace Engine::Particle {
 
 			wTs_[index].transform.translate = emitParam_[index].translate;
 			wTs_[index].transform.rotate = emitParam_[index].rotate;
-			//Šeí\‘¢‘Ì‚Ì‚Éwt‚É‘ã“ü
+			//å„ç¨®æ§‹é€ ä½“ã®æ™‚ã«wtã«ä»£å…¥
 			if constexpr (std::is_same<T, Particle::EmitType::SphereParam>::value)
 			{
 				Particle::System::UpdateSphere(lines_[index], emitParam_[index]);
@@ -191,7 +191,7 @@ namespace Engine::Particle {
 	inline void ParticleEmitter<T>::Emit(unique_ptr<Particle::GpuParticle>& particle)
 	{
 		SPSOProperty pso = {};
-		//Œ^‚ÌƒpƒCƒvƒ‰ƒCƒ“‚ğGet
+		//å‹ã®ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚’Get
 		if constexpr (std::is_same<T, Particle::EmitType::SphereParam>::value) {
 			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_EMITTER, "Sphere");
 		}
@@ -215,8 +215,7 @@ namespace Engine::Particle {
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(3, particle->GetFreeListIndexBuf()->GetSrvIndex());
 		DescriptorManager::GetInstance()->ComputeRootParamerterCommand(4, particle->GetFreeListBuf()->GetSrvIndex());
 
-		UINT dispach = UINT(particle->GetNum() / 1024);
-		list->Dispatch(dispach, 1, 1);
+		list->Dispatch(1, 1, 1);
 	}
 
 	template<typename T>

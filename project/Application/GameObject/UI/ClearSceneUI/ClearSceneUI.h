@@ -8,6 +8,8 @@
 #include"BottonsActions/ClearSceneTitleText.h"
 #include"BottonsActions/ClearSceneClearTextUi.h"
 
+#include"../UIActiveParticle/UIActiveParticle.h"
+
 enum class ClearSceneChangeScene
 {
 	Title,
@@ -34,6 +36,8 @@ public:
 	/// </summary>
 	void Update()override;
 
+	void ParticleDraw2d()override;
+
 #pragma region Get
 	bool GetIsSelect() { return isSelect_; }
 	ClearSceneChangeScene GetNextStage() { return nextScene_; }
@@ -53,9 +57,11 @@ private:
 	unique_ptr<ClearSceneJoyStick>lJoyStick_ = nullptr;
 
 	unique_ptr<ClearSceneUIBottonsControl>bottonControl_ = nullptr;
-	vector<unique_ptr<ClearSceneTitleText>>texts_;
+	vector<shared_ptr<ClearSceneTitleText>>texts_;
 
 	shared_ptr<ClearSceneClearTextUI>clearText_ = nullptr;
+
+	unique_ptr<UIActiveParticle>uiActiveParticle_ = nullptr;
 
 	bool isSelect_ = false;
 	uint32_t stageCoinCount_ = 0;
