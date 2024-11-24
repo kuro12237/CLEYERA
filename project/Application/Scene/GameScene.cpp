@@ -38,7 +38,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize();
 
-	bulletEnemyManager_ = make_unique<BulletEnemyManager>();
+	bulletEnemyManager_ = make_unique<GunEnemyManager>();
 	bulletEnemyManager_->Initialize();
 
 	blockManager_ = make_shared<BlockManager>();
@@ -270,21 +270,35 @@ void GameScene::Collision()
 
 	}
 
-	for (shared_ptr<BulletEnemy>& e : bulletEnemyManager_->GetBulletEnemys())
+	for (shared_ptr<GunEnemy>& e : bulletEnemyManager_->GetGunEnemys())
 	{
-		if (!e)
+		weak_ptr<GunEnemy>obj = e;
+		auto it = obj.lock();
+		if (!it)
 		{
 			continue;
 		}
 		gameCollisionManager_->ListPushback(e.get(), e.get());
+
+
+		for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
+		{
+			if (b)
+			{
+				gameCollisionManager_->ListPushback(b.get(), b.get());
+			}
+
+		}
 	}
 
 	//歩く敵
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
-		if (e)
+		weak_ptr<EnemyWalk>obj = e;
+		auto it = obj.lock();
+		if (it)
 		{
-			gameCollisionManager_->ListPushback(e.get(), e.get());
+			gameCollisionManager_->ListPushback(it.get(), it.get());
 		}
 	}
 
@@ -318,7 +332,7 @@ void GameScene::Gravitys()
 		}
 	}
 
-	for (shared_ptr<BulletEnemy>& e : bulletEnemyManager_->GetBulletEnemys())
+	for (shared_ptr<GunEnemy>& e : bulletEnemyManager_->GetGunEnemys())
 	{
 		if (e)
 		{

@@ -12,7 +12,7 @@
 #include"state/EnemyWalkStateDead.h"
 
 /// <summary>
-/// •à‚­“G
+/// æ­©ãæ•µ
 /// </summary>
 class EnemyWalk :public IObjectData, public ICollider
 {
@@ -21,22 +21,22 @@ public:
 	~EnemyWalk() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// “–‚½‚Á‚½
+	/// å½“ãŸã£ãŸæ™‚
 	/// </summary>
 	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 	/// <summary>
-	/// ó‘Ô‘JˆÚ
+	/// çŠ¶æ…‹é·ç§»
 	/// </summary>
 	/// <param name="state"></param>
 	void ChangeState(unique_ptr<IEnemyWalkState>state);
@@ -58,5 +58,6 @@ private:
 
 	unique_ptr<IEnemyWalkState>state_ = nullptr;
 	GameObjectManager* gameObjIncetance_ = nullptr;
+
 };
 

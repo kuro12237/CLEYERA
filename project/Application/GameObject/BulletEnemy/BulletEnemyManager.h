@@ -3,13 +3,13 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/convert/convert.h"
 
-#include"BulletEnemy.h"
+#include"GunEnemy.h"
 
-class BulletEnemyManager
+class GunEnemyManager
 {
 public:
-	BulletEnemyManager() {};
-	~BulletEnemyManager() {};
+	GunEnemyManager() {};
+	~GunEnemyManager() {};
 
 	/// <summary>
 	/// 初期化
@@ -25,7 +25,7 @@ public:
 
 #pragma region Get
 
-	vector<shared_ptr<BulletEnemy>>GetBulletEnemys() { return enemys_; }
+	vector<shared_ptr<GunEnemy>>GetGunEnemys() { return enemys_; }
 
 #pragma endregion
 
@@ -41,7 +41,7 @@ private:
 
 	uint32_t enemyCount_ = 0;
 
-	vector<shared_ptr<BulletEnemy>>enemys_{};
+	vector<shared_ptr<GunEnemy>>enemys_{};
 
 
 	bool isGameStartFlag_ = false;

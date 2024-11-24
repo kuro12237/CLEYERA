@@ -837,8 +837,11 @@
     <ClCompile Include="Application\GameObject\ClearCoinManager\particle\ClearCoinSplashParticle.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.cpp" />
     <ClCompile Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.cpp" />
-    <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemy.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemyManager.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1447,8 +1450,12 @@
     <ClInclude Include="Application\GameObject\ClearCoinManager\Particle\ClearCoinSplashParticle.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.h" />
     <ClInclude Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.h" />
-    <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemy.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemy.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemyManager.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\state\IGunEnemyState.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

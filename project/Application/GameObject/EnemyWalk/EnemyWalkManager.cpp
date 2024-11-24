@@ -50,7 +50,7 @@ void EnemyWalkManager::Update()
 		if (enemy)
 		{
 			enemy->Update();
-			//Ž€‚ñ‚¾‚çÁ‚·
+			//ï¿½ï¿½ï¿½ñ‚¾‚ï¿½ï¿½ï¿½ï¿½
 			if (enemy->GetIsEnd())
 			{
 				GameObjectManager::GetInstance()->ClearObj3dData(enemy->INameable::GetName());
