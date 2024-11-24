@@ -31,6 +31,8 @@
 #include"Scene/TitleScene.h"
 
 #include"ISceneContext.h"
+#include"GameObject/BulletEnemy/BulletEnemyManager.h"
+
 
 /// <summary>
 /// ゲームプレイ
@@ -108,6 +110,8 @@ private:
 	unique_ptr<Goal>goal_ = nullptr;
 
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
+	unique_ptr<BulletEnemyManager>bulletEnemyManager_ = nullptr;
+
 	unique_ptr<WarpManager>warpManager_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<StageCoinManager>stageCoinManager_ = nullptr;

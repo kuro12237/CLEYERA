@@ -43,6 +43,8 @@
     <ClCompile Include="Application\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Block\Block.cpp" />
     <ClCompile Include="Application\GameObject\Block\BlockManager.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemyManager.cpp" />
     <ClCompile Include="Application\GameObject\ClearCamera\ClearCamera.cpp" />
     <ClCompile Include="Application\GameObject\ClearCharacter\ClearCharacter.cpp" />
     <ClCompile Include="Application\GameObject\ClearCoinManager\ClearCoin.cpp" />
@@ -218,6 +220,8 @@
     <ClInclude Include="Application\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Block\Block.h" />
     <ClInclude Include="Application\GameObject\Block\BlockManager.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemy.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemyManager.h" />
     <ClInclude Include="Application\GameObject\ClearCamera\ClearCamera.h" />
     <ClInclude Include="Application\GameObject\ClearCharacter\ClearCharacter.h" />
     <ClInclude Include="Application\GameObject\ClearCoinManager\ClearCoin.h" />

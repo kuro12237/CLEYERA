@@ -837,6 +837,8 @@
     <ClCompile Include="Application\GameObject\ClearCoinManager\particle\ClearCoinSplashParticle.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.cpp" />
     <ClCompile Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemyManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1445,6 +1447,8 @@
     <ClInclude Include="Application\GameObject\ClearCoinManager\Particle\ClearCoinSplashParticle.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.h" />
     <ClInclude Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemy.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemyManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

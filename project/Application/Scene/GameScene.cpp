@@ -38,6 +38,9 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize();
 
+	bulletEnemyManager_ = make_unique<BulletEnemyManager>();
+	bulletEnemyManager_->Initialize();
+
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->Initialize();
 
@@ -98,6 +101,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	if (startAnimation_->GetIsGameStartFlag())
 	{
 		enemyWalkManager_->SetIsStartFlag(true);
+		bulletEnemyManager_->setIsStartFlag(true);
 		player_->SetStartFlag(true);
 	}
 
@@ -113,6 +117,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	player_->Update();
 
 	enemyWalkManager_->Update();
+	bulletEnemyManager_->Update();
 
 	blockManager_->Update();
 
@@ -265,6 +270,16 @@ void GameScene::Collision()
 
 	}
 
+	for (shared_ptr<BulletEnemy>& e : bulletEnemyManager_->GetBulletEnemys())
+	{
+		if (!e)
+		{
+			continue;
+		}
+		gameCollisionManager_->ListPushback(e.get(), e.get());
+	}
+
+	//歩く敵
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
 		if (e)
@@ -278,9 +293,10 @@ void GameScene::Collision()
 		gameCollisionManager_->ListPushback(b.get(), b.get());
 	}
 
-
+	//ゴール
 	gameCollisionManager_->ListPushback(goal_.get(), goal_.get());
 
+	//ワープ
 	for (auto& warp : warpManager_->GetWarps())
 	{
 		gameCollisionManager_->ListPushback(warp->GetWarpGate(), warp->GetWarpGate());
@@ -301,6 +317,16 @@ void GameScene::Gravitys()
 			gravityManager_->PushList(player_->GetPlayerCore());
 		}
 	}
+
+	for (shared_ptr<BulletEnemy>& e : bulletEnemyManager_->GetBulletEnemys())
+	{
+		if (e)
+		{
+			gravityManager_->PushList(e.get());
+		}
+	}
+
+
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
 		if (e)
