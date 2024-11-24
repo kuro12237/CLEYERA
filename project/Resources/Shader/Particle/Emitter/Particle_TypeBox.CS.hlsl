@@ -119,7 +119,7 @@ RWStructuredBuffer<Particle> gParticle : register(u0);
 RWStructuredBuffer<int32_t> gFreeListIndex : register(u1);
 RWStructuredBuffer<int32_t> gFreeList : register(u2);
 
-[numthreads(1024, 1, 1)]
+[numthreads(32, 1, 1)]
 void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadID)
 {
     RandomGenerator generator;
