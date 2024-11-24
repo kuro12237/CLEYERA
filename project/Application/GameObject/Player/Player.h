@@ -22,6 +22,8 @@
 #include"state/PlayerStateWalk.h"
 #include"state/PlayerStateJamp.h"
 #include"state/PlayerStateFall.h"
+#include"state/PlayerStateDash.h"
+
 
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
@@ -30,7 +32,7 @@
 #include"Hp/PlayerHp.h"
 
 /// <summary>
-/// ‘€ì‚·‚éCoreƒNƒ‰ƒX
+/// æ“ä½œã™ã‚‹Coreã‚¯ãƒ©ã‚¹
 /// </summary>
 class Player :public IObjectData, public ICollider
 {
@@ -39,34 +41,34 @@ public:
 	~Player() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// ImGuiXV
+	/// ImGuiæ›´æ–°
 	/// </summary>
 	void ImGuiUpdate();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 
 	/// <summary>
-	/// ƒp[ƒeƒBƒNƒ‹•\¦
+	/// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«è¡¨ç¤º
 	/// </summary>
 	void DrawParticle();
 
 	/// <summary>
-	/// “–‚½‚Á‚½‚Ìˆ—
+	/// å½“ãŸã£ãŸæ™‚ã®å‡¦ç†
 	/// </summary>
 	/// <param name="c"></param>
 	void OnCollision(ICollider* c, IObjectData* objData)override;
 
 	/// <summary>
-	/// ó‘Ô‚ğ’Ç‰Á
+	/// çŠ¶æ…‹ã‚’è¿½åŠ 
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	template <typename T>
@@ -79,7 +81,7 @@ public:
 	}
 
 	/// <summary>
-	/// ó‘Ô‚ğíœ
+	/// çŠ¶æ…‹ã‚’å‰Šé™¤
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	template <typename T>
@@ -102,18 +104,23 @@ public:
 	void Jamp();
 
 	/// <summary>
-	///@MoveCommand
+	///ã€€MoveCommand
 	/// </summary>
 	/// <param name="speed"></param>
 	void Move();
 
 	/// <summary>
-	/// ËŒ‚ƒRƒ}ƒ“ƒh
+	/// å°„æ’ƒã‚³ãƒãƒ³ãƒ‰
 	/// </summary>
 	void Shoot();
 
 	/// <summary>
-	/// ˆÊ’u‚ğ‰Šú‰»
+	/// èµ°ã‚‹ã‚³ãƒãƒ³ãƒ‰
+	/// </summary>
+	void Dash();
+
+	/// <summary>
+	/// ä½ç½®ã‚’åˆæœŸåŒ–
 	/// </summary>
 	void ResetPos() { gameObjectManager_->GetObj3dData(this->INameable::name_)->GetWorldTransform().transform.translate = resetPos_; }
 #pragma endregion

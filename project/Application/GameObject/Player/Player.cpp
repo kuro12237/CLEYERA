@@ -9,22 +9,22 @@ void Player::Initialize()
 {
 	INameable::name_ = "Player";
 
-	//ó‘ÔˆÙí‚ÌƒXƒe[ƒg
-	//idİ’è
+	//çŠ¶æ…‹ç•°å¸¸ã®ã‚¹ãƒ†ãƒ¼ãƒˆ
+	//idè¨­å®š
 	id_ = kPlayerId;
-	//“–‚½‚è”»’è
-	//‰Ÿ‚µo‚µ
+	//å½“ãŸã‚Šåˆ¤å®š
+	//æŠ¼ã—å‡ºã—
 	this->isExtrusion_ = true;
 	SetObjectData(gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform);
 	aabb_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB();
 	attribute_ = CollisionMask::kPlayerAttribute;
 	mask_ = CollisionMask::kPlayerMask;
 
-	//ƒXƒP[ƒ‹’lƒZƒbƒg
+	//ã‚¹ã‚±ãƒ¼ãƒ«å€¤ã‚»ãƒƒãƒˆ
 	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	const float kScale = 0.4f;
 	transform.scale = { kScale,kScale,kScale };
-	//ƒXƒ^[ƒg“ü‚è‚Ì‹L˜^
+	//ã‚¹ã‚¿ãƒ¼ãƒˆå…¥ã‚Šã®è¨˜éŒ²
 	resetPos_ = transform.translate;
 
 	string filePath = gameObjectManager_->GetObj3dData(INameable::name_)->GetModelFilePath();
@@ -93,7 +93,7 @@ void Player::Update()
 	shootTimerFlame_++;
 
 
-	//ó‘ÔXV
+	//çŠ¶æ…‹æ›´æ–°
 	for (auto& state : states_) {
 		auto& it = state.second;
 		if (it)
@@ -104,7 +104,7 @@ void Player::Update()
 	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate();
 
 
-	// XVŒã‚ÉƒLƒ…[‚©‚çó‘Ô‚ğíœ
+	// æ›´æ–°å¾Œã«ã‚­ãƒ¥ãƒ¼ã‹ã‚‰çŠ¶æ…‹ã‚’å‰Šé™¤
 	while (!statesToRemoveQueue_.empty()) {
 		std::type_index typeIdx = statesToRemoveQueue_.front();
 		states_.erase(typeIdx);
@@ -116,7 +116,7 @@ void Player::Update()
 		this->MarkStateForRemoval<PlayerStateJamp>();
 		AddState<PlayerStateFall>();
 	}
-	//—‰º
+	//è½ä¸‹
 	if (velocity_.y <= -0.1f)
 	{
 		if (!IsInState<PlayerStateFall>())
@@ -127,7 +127,7 @@ void Player::Update()
 
 
 
-	///ƒ_ƒ[ƒWˆ—
+	///ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
 	if (IsInState<PlayerStateInvincible>())
 	{
 		damegeCoolTimer_ += DeltaTimer(damegeFlame_);
@@ -137,11 +137,11 @@ void Player::Update()
 			damegeUpdateFunc_();
 		}
 
-		//ãŒÀ’l‚É‚È‚Á‚½‚ç
+		//ä¸Šé™å€¤ã«ãªã£ãŸã‚‰
 		if (damegeCoolTimer_ >= damageCoolTimerMax_)
 		{
 			damegeCoolTimer_ = 0;
-			//ƒ_ƒ[ƒW‰‰o‚ÌI‚í‚èˆ—
+			//ãƒ€ãƒ¡ãƒ¼ã‚¸æ¼”å‡ºã®çµ‚ã‚ã‚Šå‡¦ç†
 			if (damegeUpdateEndFunc_)
 			{
 				damegeUpdateEndFunc_();
@@ -156,7 +156,7 @@ void Player::Update()
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 
 
-	//ƒp[ƒeƒBƒNƒ‹‚Ì”z’uˆÊ’uŒã‚ÅŠÖ”‰»
+	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®é…ç½®ä½ç½®å¾Œã§é–¢æ•°åŒ–
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
 	moveEmitParam.translate = transform.translate;
 	Math::Vector::Vector3 particleOffset = { 0.0f, aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,-2.0f };
@@ -168,7 +168,7 @@ void Player::Update()
 	moveEmitParam.scaleVelocityMin = { 0.05f,0.05f,0.05f };
 
 
-	//—‚¿‚½‚ç
+	//è½ã¡ãŸã‚‰
 	if (transform.translate.y <= -5.0f)
 	{
 		AddState<PlayerStateInvincible>();
@@ -180,7 +180,7 @@ void Player::Update()
 		}
 	}
 
-	//€‚ñ‚¾ƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶‚µ‚Ä‚é‚Æ‚«
+	//æ­»ã‚“ã ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿã—ã¦ã‚‹ã¨ã
 	if (IsInState<PlayerStateDeadAnimation>())
 	{
 		auto& emit = deadParticle_->GetEmitter()->GetEmitParam()[0];
@@ -270,16 +270,21 @@ void Player::Jamp()
 
 void Player::Move()
 {
-	//Î‰»‚Ì‚Æ‚«‚Í’Ê‚³‚È‚¢
+	//çŸ³åŒ–ã®ã¨ãã¯é€šã•ãªã„
 	if (IsInState<PlayerStateRock>())
 	{
 		return;
 	}
-	//€‚ñ‚¾ƒ‰’Ê‚³‚È‚¢
+	//æ­»ã‚“ã ãƒ©é€šã•ãªã„
 	if (IsInState<PlayerStateDeadAnimation>())
 	{
 		return;
 	}
+	if (IsInState<PlayerStateDash>())
+	{
+		return;
+	}
+
 
 	if (!IsInState<PlayerStateWalk>())
 	{
@@ -295,4 +300,21 @@ void Player::Shoot()
 		isShoot_ = true;
 		shootTimerFlame_ = 0;
 	}
+}
+
+void Player::Dash()
+{
+	if (IsInState<PlayerStateJamp>())
+	{
+		return;
+	}
+	if (IsInState<PlayerStateFall>())
+	{
+		return;
+	}
+	if (!IsInState<PlayerStateDash>())
+	{
+		AddState<PlayerStateDash>();
+	}
+
 }

@@ -7,12 +7,17 @@ using namespace Engine::Transform;
 
 void PlayerCommandHandler::Handler()
 {
-	//¶ƒXƒeƒBƒbƒN‚ª—LŒø‚©
+	//å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæœ‰åŠ¹ã‹
 	if (IsLJoystickActive())
 	{
 		commands_.push(make_unique<PlayerMoveCommand>());
 	}
-	//Aƒ{ƒ^ƒ“
+	if (IsLJoystickActive()&&Input::GetLJoyTHUMB())
+	{
+		commands_.push(make_unique<PlayerDashMoveCommand>());
+	}
+
+	//Aãƒœã‚¿ãƒ³
 	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
 	{
 		commands_.push(make_unique<PlayerJampCommand>());

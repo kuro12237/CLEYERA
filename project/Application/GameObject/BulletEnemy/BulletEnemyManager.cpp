@@ -48,6 +48,7 @@ void GunEnemyManager::Update()
 
 				GameObjectManager::GetInstance()->ClearObj3dData("GunEnemyLeft"+FormatNumberWithDots(enemy->GetEnemyNumber()));
 				GameObjectManager::GetInstance()->ClearObj3dData("GunEnemyRight"+ FormatNumberWithDots(enemy->GetEnemyNumber()));
+				GameObjectManager::GetInstance()->ClearObj3dData("GunEnemyBarrel" + FormatNumberWithDots(enemy->GetEnemyNumber()));
 
 				for (shared_ptr<GunEnemyBullet>& b : enemy->GetBullets())
 				{

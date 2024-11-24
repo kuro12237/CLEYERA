@@ -65,11 +65,13 @@ void ClearCoinManager::Update()
 					nextCoin->StartAnimation(true);
 					nextCoin->CreateState();
 				}
-				if (nextCoin->GetIsUse() == CoinUse::Inactive)
-				{
-					isComplete_ = true;
-				}
 			}
+			else if (i + 1 == clearCoins_.size())
+			{
+				isComplete_ = true;
+			}
+
+
 		}
 	}
 

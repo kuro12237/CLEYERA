@@ -14,7 +14,7 @@ void GunEnemy::Initialize()
 
 	ChangeState(make_unique<GunEnemyStateMove>());
 
-	modelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("DfCube");
+	modelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("PlayerNormalBullet");
 }
 
 void GunEnemy::Update()
@@ -59,7 +59,7 @@ void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
 	{//敵同士の処理
 		if (kEnemyWalkId == c->GetId())
 		{
-			speed_ *= -1.0f;
+			return;
 		}
 	}
 
@@ -129,7 +129,17 @@ void GunEnemy::CreateBullet(const Math::Vector::Vector3& Pos)
 
 	shared_ptr<GunEnemyBullet> b = make_shared<GunEnemyBullet>();
 	string name = this->INameable::name_;
-	b->SetVelocity({0.15f,0.0f,0.0f});
+	
+	const float kspeed = 0.3f;
+	if (speed_>0.0f)
+	{
+		b->SetVelocity({ kspeed,0.0f,0.0f });
+	}
+	else
+	{
+		b->SetVelocity({-kspeed,0.0f,0.0f });
+	}
+
 
 	//使っていない弾の配列がある時再利用
 	if (!deadBulletIndex_.empty())

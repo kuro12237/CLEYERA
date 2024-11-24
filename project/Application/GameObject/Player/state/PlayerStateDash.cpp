@@ -1,16 +1,16 @@
-#include "PlayerStateWalk.h"
+#include "PlayerStateDash.h"
 
 using namespace Engine;
 using namespace Engine::Objects;
 using namespace Engine::Manager;
 using namespace Engine::Transform;
 
-void PlayerStateWalk::Initialize([[maybe_unused]] Player* p)
+void PlayerStateDash::Initialize(Player* p)
 {
-
+	p;
 }
 
-void PlayerStateWalk::Update([[maybe_unused]] Player* p)
+void PlayerStateDash::Update(Player* p)
 {
 	auto& rotate = GameObjectManager::GetInstance()->GetObj3dData(p->INameable::GetName())->GetWorldTransform().transform.rotate;
 
@@ -19,11 +19,11 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 	float joystickThreshold_ = 0.2f;
 	if (std::abs(Ljoy.x) < joystickThreshold_ && std::abs(Ljoy.y) < joystickThreshold_)
 	{
-		p->MarkStateForRemoval<PlayerStateWalk>();
+		p->MarkStateForRemoval<PlayerStateDash>();
 	}
 
 	Math::Vector::Vector3 velo = p->GetVelocity();
-	velo.x = Ljoy.x * 0.2f;
+	velo.x = Ljoy.x * 0.4f;
 	p->SetVelocity(velo);
 
 	//右
@@ -46,18 +46,16 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 		GameObjectManager* gameObjectManager_ = GameObjectManager::GetInstance();
 		SAnimation::Skeleton& skeleton = gameObjectManager_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
 
-		uint32_t animationHandle = AnimationManager::GetInstance()->LoadAnimation("Human");
+		uint32_t animationHandle = AnimationManager::GetInstance()->LoadAnimation("PlayerHumanRun");
 		SAnimation::Animation walkAnimationData_ = AnimationManager::GetInstance()->GetData(animationHandle);
 
-		p->WalkanimationAddFlame((1.0f / 30.0f) * fabsf(Ljoy.x));
-		flame_ += 1.0f / 30.0f;
-	
-		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, p->GetWalkAnimationFlame());
+		animationFlame_ = std::fmod(animationFlame_, walkAnimationData_.duration);
 
+		animationFlame_ += 1.0f / 30.0f;
 
+		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, animationFlame_);
 
 		//パーティクル
 		CharacterMoveParticle::GetInstance()->Emit();
 	}
 }
-

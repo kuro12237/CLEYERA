@@ -73,6 +73,7 @@
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBulletManager.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateDash.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateInvincible.cpp" />
@@ -259,6 +260,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBulletManager.h" />
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateDash.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateFall.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateInvincible.h" />

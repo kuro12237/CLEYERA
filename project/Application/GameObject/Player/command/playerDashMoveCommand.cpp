@@ -2,5 +2,5 @@
 
 void PlayerDashMoveCommand::Exec(Player& p)
 {
-	p.Move();
+	p.Dash();
 }

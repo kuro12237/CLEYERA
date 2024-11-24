@@ -842,6 +842,7 @@
     <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateDash.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1456,6 +1457,7 @@
     <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateDash.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
