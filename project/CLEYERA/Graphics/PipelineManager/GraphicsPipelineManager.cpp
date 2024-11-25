@@ -18,7 +18,7 @@ void GraphicsPipelineManager::Initialize()
 	auto shaderInstance = ShaderManager::Getinstance();
 
 	Sprite_2d_CreatePipline::GetInstance()->Initialize();
-	piplines_[SPRITE_2d]["None"] = Sprite_2d_CreatePipline::GetInstance()->CreateNone(shaderInstance->GetShaders(Shader::SPRITE_2d,"None"));
+	piplines_[SPRITE_2d]["None"] = Sprite_2d_CreatePipline::GetInstance()->CreateNone(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
 	piplines_[SPRITE_2d]["Add"] = Sprite_2d_CreatePipline::GetInstance()->CreateAdd(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
 	piplines_[SPRITE_2d]["Subtract"] = Sprite_2d_CreatePipline::GetInstance()->CreateSubtract(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
 	piplines_[SPRITE_2d]["Multiply"] = Sprite_2d_CreatePipline::GetInstance()->CreateMultiply(shaderInstance->GetShaders(Shader::SPRITE_2d, "None"));
@@ -33,7 +33,6 @@ void GraphicsPipelineManager::Initialize()
 	piplines_[SPRITE_3d]["AddNoneWriteDepth"] = CreateSprite3dAddNoneWriteDepth(device.Get(), commands, shader.sprite3d);
 
 	piplines_[LINE_3d]["None"] = CreateLine(device.Get(), commands, shader.Line);
-
 	piplines_[SKYBOX]["None"] = ModelCreatePipline::CreateSkyBoxModel(device, commands, shader.SkyBoxModel);
 
 	Phong_CreatePipline::GetInstance()->Initialize();
@@ -41,8 +40,15 @@ void GraphicsPipelineManager::Initialize()
 	piplines_[PHONG]["Instancing_None"] = Phong_CreatePipline::GetInstance()->CreateInstancingModel(shader.Phong_Normal_InstancingModel);
 	piplines_[PHONG]["Subsurface"] = Phong_CreatePipline::GetInstance()->CreateSubsurfaceModel(shader.Phong_subsurface_Model);
 	piplines_[PHONG]["Skinning_None"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel);
-	piplines_[PHONG]["Skinning_NoneDepthWrite"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel,false);
-	piplines_[PHONG]["Dissolve"] = Phong_CreatePipline::GetInstance()->CreateDissolveNormalModel(shader.Phong_Dissolve_Model);
+	piplines_[PHONG]["Skinning_NoneDepthWrite"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel, false);
+	
+	D3D12_RASTERIZER_DESC dissolveRasterRizer{};
+	dissolveRasterRizer.CullMode = D3D12_CULL_MODE_NONE;
+	dissolveRasterRizer.FillMode = D3D12_FILL_MODE_SOLID;
+
+	piplines_[PHONG]["Dissolve"] = Phong_CreatePipline::GetInstance()->CreateDissolveNormalModel(shader.Phong_Dissolve_Model, dissolveRasterRizer);
+	dissolveRasterRizer.CullMode = D3D12_CULL_MODE_NONE;
+	piplines_[PHONG]["Dissolve_FrontBackWrite"] = Phong_CreatePipline::GetInstance()->CreateDissolveNormalModel(shader.Phong_Dissolve_Model,dissolveRasterRizer);
 
 	//PostEffect
 	piplines_[POST_EFFECT]["None"] = CreatePostEffectTest(device, commands, shader.PostEffect);

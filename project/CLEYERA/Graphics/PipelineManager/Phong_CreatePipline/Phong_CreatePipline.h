@@ -21,7 +21,7 @@ public:
 	/// <summary>
 	/// ディゾルブエフェクト付き法線マッピングモデル用パイプラインステートオブジェクトを作成する関数
 	/// </summary>
-	SPSOProperty CreateDissolveNormalModel(SShaderMode shader);
+	SPSOProperty CreateDissolveNormalModel(SShaderMode shader, D3D12_RASTERIZER_DESC rasterRizer);
 
 	/// <summary>
 	/// サブサーフェス・スキャタリングモデル用パイプラインステートオブジェクトを作成する関数

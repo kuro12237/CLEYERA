@@ -200,7 +200,7 @@ SPSOProperty Phong_CreatePipline::CreatePhongNormalModel(SShaderMode shader)
 	return PSO;
 }
 
-SPSOProperty Phong_CreatePipline::CreateDissolveNormalModel(SShaderMode shader)
+SPSOProperty Phong_CreatePipline::CreateDissolveNormalModel(SShaderMode shader, D3D12_RASTERIZER_DESC rasterRizer)
 {
 
 	SPSOProperty PSO;
@@ -361,9 +361,8 @@ SPSOProperty Phong_CreatePipline::CreateDissolveNormalModel(SShaderMode shader)
 	CreateGraphicsPiplineFanc::SettingBlendState(blenddesc, BlendNone);
 
 	//RasterrizerState
-	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
-	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
+	D3D12_RASTERIZER_DESC rasterizerDesc = rasterRizer;
+
 
 	D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
 	despthStencilDesc.DepthEnable = true;

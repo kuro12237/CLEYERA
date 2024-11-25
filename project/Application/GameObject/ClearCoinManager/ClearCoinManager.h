@@ -61,7 +61,7 @@ private:
 	const size_t coinsMax_ = 3;
 
 	uint32_t modelHandle_ = 0;
-
+	uint32_t auraModelHandle_ = 0;
 
 	vector<unique_ptr<ClearCoin>>clearCoins_{};
 

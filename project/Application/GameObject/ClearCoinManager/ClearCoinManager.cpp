@@ -3,6 +3,7 @@
 void ClearCoinManager::Initilaize()
 {
 	modelHandle_ = Engine::Manager::ModelManager::LoadGltfFile("StageCoin");
+	auraModelHandle_ = Engine::Manager::ModelManager::LoadGltfFile("StageCoinAura");
 
 	clearCoins_.resize(3);
 
@@ -65,13 +66,15 @@ void ClearCoinManager::Update()
 					nextCoin->StartAnimation(true);
 					nextCoin->CreateState();
 				}
+				else
+				{
+					isComplete_ = true;
+				}
 			}
 			else if (i + 1 == clearCoins_.size())
 			{
 				isComplete_ = true;
 			}
-
-
 		}
 	}
 
@@ -120,6 +123,7 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 	}
 
 	string coinName = "Coin";
+	string auraName = "CoinAura";
 	string name_num = coinName + to_string(index);
 
 	for (size_t i = 0; i < 2; i++)
@@ -143,6 +147,27 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 		}
 		data->ChangePipline(make_unique<Phong3dSkinningPiplineDepthNoneWriteCommand>());
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
+
+		//オーラ
+		string auraName_num=auraName+ to_string(index + i * 3);
+		shared_ptr<Game3dObjectData> dataAura = make_shared<Game3dObjectData>();
+		dataAura->SetObjectType("ARMATURE");
+		dataAura->SetIsDraw(false);
+		dataAura->SetObjName(auraName_num);
+		dataAura->SetModelFilePath("StageCoinAura");
+		dataAura->Initialize(transform, {}, auraModelHandle_);
+		if (i >= 1)
+		{
+			dataAura->SetIsDraw(true);
+			dataAura->GetDesc().colorDesc.color_ = { 0.0f,0.0f,0.0f,0.5f };
+		}
+		else
+		{
+			dataAura->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xf0d64dff);
+		}
+		dataAura->ChangePipline(make_unique<Phong3dDissolvePiplineRasterFrontBackWriteCommand>());
+		GameObjectManager::GetInstance()->PushObj3dData(dataAura, auraName_num);
+		GameObjectManager::GetInstance()->SetNormalObjectParent(name_num, auraName_num);
 	}
 
 	name_num = coinName + to_string(index);

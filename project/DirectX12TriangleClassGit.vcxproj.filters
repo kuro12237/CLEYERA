@@ -843,6 +843,7 @@
     <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDash.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\DissolvePipline\DissolvePiplineRasterFrontBackWriteCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1458,6 +1459,7 @@
     <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDash.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\DissolvePipline\DissolvePiplineRasterFrontBackWriteCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
