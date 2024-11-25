@@ -3,7 +3,7 @@
 void ClearCoinManager::Initilaize()
 {
 	modelHandle_ = Engine::Manager::ModelManager::LoadGltfFile("StageCoin");
-	auraModelHandle_ = Engine::Manager::ModelManager::LoadGltfFile("StageCoinAura");
+	auraModelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("StageCoinAura");
 
 	clearCoins_.resize(3);
 
@@ -151,7 +151,7 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 		//オーラ
 		string auraName_num=auraName+ to_string(index + i * 3);
 		shared_ptr<Game3dObjectData> dataAura = make_shared<Game3dObjectData>();
-		dataAura->SetObjectType("ARMATURE");
+		dataAura->SetObjectType("MESH");
 		dataAura->SetIsDraw(false);
 		dataAura->SetObjName(auraName_num);
 		dataAura->SetModelFilePath("StageCoinAura");
