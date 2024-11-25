@@ -18,7 +18,6 @@ void CharacterMoveParticle::Initialize()
 		return;
 	}
 	InitializeLock_ = true;
-	texHandle_ = TextureManager::LoadPngTexture("GameObject/cloud/cloud.png");
 	texHandle_ = TextureManager::LoadDDSTexture("GameObject/cloud/cloud.dds");
 	particle_ = make_unique<Particle::GpuParticle>();
 	particle_->Create(1, name_);

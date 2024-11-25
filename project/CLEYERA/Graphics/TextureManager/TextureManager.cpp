@@ -1,4 +1,4 @@
-﻿#include "TextureManager.h"
+#include "TextureManager.h"
 
 using namespace Math::Vector;
 
@@ -218,13 +218,16 @@ DirectX::ScratchImage TextureManager::CreateDDSMipImage(const std::string& fileP
 
 	DirectX::ScratchImage mipImage;
 
+	//圧縮されているときMove
 	if (DirectX::IsCompressed(image.GetMetadata().format))
 	{
 		mipImage = std::move(image);
 	}
 	else
 	{
-		mipImage = std::move(image);
+		//されていないとき
+		hr = DirectX::GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImage);
+		assert(SUCCEEDED(hr));
 		//assert(0);
 	}
 

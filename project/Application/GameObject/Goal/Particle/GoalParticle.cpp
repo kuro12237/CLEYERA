@@ -24,7 +24,7 @@ void GoalParticle::Initialize()
 	name_ = "GoalParticle";
 	particle_->Create(3, name_);
 
-	texHandle_ = TextureManager::LoadPngTexture("circle.png");
+	texHandle_ = TextureManager::LoadDDSTexture("circle.dds");
 	particle_->SetTexhandle(texHandle_);
 	particle_->SetMode(BlendAdd);
 
