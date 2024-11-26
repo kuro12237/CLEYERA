@@ -12,4 +12,4 @@
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxguid.lib")
 #pragma comment(lib,"dxcompiler.lib")
-#include"../externals/DirectXTex/DirectXTex/DirectXTex.h"
+#include"../../externals/DirectXTex/DirectXTex/DirectXTex.h"
