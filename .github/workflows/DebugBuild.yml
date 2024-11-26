@@ -15,6 +15,9 @@ env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: project/CLEYERA.sln
   CONFIGURATION: Debug
+  
+  SOLUTION_FILE_PATH: textureConverter.TextureConverter.sln
+  CONFIGURATION: Debug
 
 permissions:
   contents: read
