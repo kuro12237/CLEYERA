@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: DebugBuild
+name: ReleaseBuildTextureConverter
 
 on:
   push:
@@ -13,8 +13,8 @@ on:
 
 env:
   # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: project/CLEYERA.sln
-  CONFIGURATION: Debug
+  SOLUTION_FILE_PATH: textureConverter/TextureConverter.sln
+  CONFIGURATION: Release
 
 permissions:
   contents: read
