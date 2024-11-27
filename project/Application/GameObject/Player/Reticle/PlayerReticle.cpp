@@ -17,7 +17,6 @@ void PlayerReticle::Initialize()
 	data->Initialize({ {1.0f,1.0f,1.0f},{ } , {} }, { }, modelHandle);
 
 	GameObjectManager::GetInstance()->PushObj3dData(data, name_);
-	//GameObjectManager::GetInstance()->SetParent("Player", name_);
 
 	uint32_t texHandle = TextureManager::LoadPngTexture("Player/Reticle/Reticle.png");
 	Math::Vector::Vector2 texPos = TextureManager::GetTextureSize(texHandle);
@@ -42,19 +41,39 @@ void PlayerReticle::Update()
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
 
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform().transform;
-	Math::Vector::Vector3 playerGunPos = GameObjectManager::GetInstance()->GetObj3dData("PlayerGun")->GetWorldTransform().GetWorldPosition();
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform();
+	Math::Vector::Vector3 playerPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().GetWorldPosition();
+	playerPos.y += 1.5f;
 
-
-	Math::Vector::Vector3 pos = { playerGunPos.x + reticlePos_.x,playerGunPos.y + reticlePos_.y,playerGunPos.z };
+	Math::Vector::Vector3 pos = { playerPos.x + reticlePos_.x,playerPos.y + reticlePos_.y,playerPos.z };
 	interTarget_ = Math::Vector::Lerp(interTarget_, pos, 0.5f);
-	transform.translate = interTarget_;
+	
+	transform.transform.translate = interTarget_;
 
-	//s—ñ•ÏŠ·
+	Math::Vector::Vector3 worldPos = transform.GetWorldPosition();
+	Math::Vector::Vector3 p_r_Nlerp = Math::Vector::Normalize(Math::Vector::Subtruct(playerPos, transform.transform.translate));
+	Math::Vector::Vector3 rotate = {};
+
+	float rotateXZ = sqrt(pow(p_r_Nlerp.x, 2.0f) + pow(p_r_Nlerp.z, 2.0f));
+	float height = -p_r_Nlerp.y;
+
+	if (rotateXZ != 0.0f) {
+		rotate.y = std::acos(p_r_Nlerp.z / rotateXZ);
+		if (p_r_Nlerp.x < 0) {
+			rotate.y = -rotate.y;
+		}
+	}
+	else {
+		rotate.y = 0.0f;
+	}
+	rotate.x = std::asin(height / sqrt(pow(height, 2.0f) + pow(rotateXZ, 2.0f)));
+	transform.transform.rotate = rotate;
+
+	//è¡Œåˆ—å¤‰æ›
 	Math::Matrix::Matrix4x4 matViewport = Math::Matrix::ViewportMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0, 1);
 	Math::Matrix::Matrix4x4 matViewProjViewPort = Math::Matrix::Multiply(viewMat, Math::Matrix::Multiply(ProjMat, matViewport));
 
-	worldTransform_.transform.translate =Math::Vector::TransformByMatrix(transform.translate, matViewProjViewPort);
+	worldTransform_.transform.translate =Math::Vector::TransformByMatrix(transform.transform.translate, matViewProjViewPort);
 	worldTransform_.UpdateMatrix();
 }
 
@@ -68,7 +87,7 @@ void PlayerReticle::Move()
 	Math::Vector::Vector2 Rjoy = Engine::Input::GetInstance()->GetJoyRStickPos();
 	Math::Vector::Vector2 normalizedRjoy_ = Math::Vector::Normalize(Rjoy);
 
-	// ƒŒƒeƒBƒNƒ‹‚ÌˆÊ’u‚ğŒvZ
+	// ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã®ä½ç½®ã‚’è¨ˆç®—
 	reticlePos_ = {
 		kRetickeRad_ * normalizedRjoy_.x,
 		kRetickeRad_ * normalizedRjoy_.y
@@ -80,6 +99,6 @@ Math::Vector::Vector3 PlayerReticle::NDCToScreen(const Math::Vector::Vector3& nd
 	Math::Vector::Vector3 screenPos;
 	screenPos.x = (ndc.x * 0.5f + 0.5f) * screenWidth;
 	screenPos.y = (ndc.y * -0.5f + 0.5f) * screenHeight;
-	screenPos.z = ndc.z; // [“x‚Í‚»‚Ì‚Ü‚Ü
+	screenPos.z = ndc.z; // æ·±åº¦ã¯ãã®ã¾ã¾
 	return screenPos;
 }

@@ -86,7 +86,13 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	ImGuiUpdate();
+	string bottonTitle = "Select_" + inputLevelDataFileName_;
+	if (ImGui::Button(bottonTitle.c_str()))
+	{
+		Scene->ChangeScene(make_unique<GameScene>());
 
+		return;
+	}
 #endif // _USE_IMGUI
 
 	ChangeSceneAnimation::GetInstance()->Update();
@@ -220,12 +226,7 @@ void GameScene::ImGuiUpdate()
 	{
 		inputLevelDataFileName_ = std::string(buffer);
 	}
-	string bottonTitle = "Select_" + inputLevelDataFileName_;
-	if (ImGui::Button(bottonTitle.c_str()))
-	{
-		
-		return;
-	}
+	
 
 	ImGui::Separator();
 	if (ImGui::TreeNode("light"))

@@ -9,9 +9,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    4.054643630981445,
+                    4.0,
                     0.0,
-                    10.020990371704102
+                    10.0
                 ],
                 "rotate": [
                     0.0,
@@ -35,30 +35,6 @@
                     2.0,
                     2.0,
                     4.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "PlayerGun",
-            "file_name": "PlayerTestGun",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    4.162246227264404,
-                    0.0,
-                    11.049551010131836
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
                 ]
             }
         },
@@ -266,6 +242,30 @@
                     256.0,
                     256.0,
                     256.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "PlayerGun",
+            "file_name": "PlayerGun",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    4.169267654418945,
+                    3.3508048057556152,
+                    13.101765632629395
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             }
         },

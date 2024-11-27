@@ -1,8 +1,9 @@
 #pragma 
 #include"GameObject/ObjectInterface/IObjectData.h"
+#include"Cleyera.h"
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚Ìe
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®éŠƒ
 /// </summary>
 class PlayerGun:public IObjectData
 {
@@ -11,12 +12,12 @@ public:
 	~PlayerGun() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
