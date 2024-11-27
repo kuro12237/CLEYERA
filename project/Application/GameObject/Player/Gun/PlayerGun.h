@@ -37,5 +37,5 @@ private:
 	const Math::Vector::Vector3* playerVelo_ = nullptr;
 	const Math::Vector::Vector3* playerPos_ = nullptr;
 
-
+	Math::Vector::Vector3 gunPos_ = {};
 };

@@ -25,7 +25,26 @@ void PlayerGun::Update()
 	//銃からレティクルの補間
 	Math::Vector::Vector3 reticleRotate = gameObjectManager_->GetObj3dData("PlayerReticle")->GetWorldTransform().transform.rotate;
 	transform.transform.rotate = reticleRotate;
+	//Math::Vector::Vector3 rotate = reticleRotate;
 
-	Math::Vector::Vector3 resultPos = PlayerPos;
-	transform.transform.translate = resultPos;
+
+	Math::Vector::Vector2 Rjoy = Engine::Input::GetInstance()->GetJoyRStickPos();
+	const float  joystickThreshold_ = 0.2f;
+	if (std::abs(Rjoy.x) > joystickThreshold_ || std::abs(Rjoy.y) > joystickThreshold_) {
+		Math::Vector::Vector2 normalizedRjoy_ = Math::Vector::Normalize(Rjoy);
+
+		float kRetickeRad_ = 2.0f;
+		// レティクルの位置を計算
+		gunPos_ = {
+			kRetickeRad_ * normalizedRjoy_.x,
+			kRetickeRad_ * normalizedRjoy_.y
+		};
+	}
+	else
+	{
+		Rjoy = {};
+	}
+
+
+	transform.transform.translate = Math::Vector::Add(PlayerPos, gunPos_);
 }
