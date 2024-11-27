@@ -22,11 +22,6 @@ void PlayerGun::Update()
 
 	//銃のpos
 	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform();
-	//銃からレティクルの補間
-	Math::Vector::Vector3 reticleRotate = gameObjectManager_->GetObj3dData("PlayerReticle")->GetWorldTransform().transform.rotate;
-	transform.transform.rotate = reticleRotate;
-	//Math::Vector::Vector3 rotate = reticleRotate;
-
 
 	Math::Vector::Vector2 Rjoy = Engine::Input::GetInstance()->GetJoyRStickPos();
 	const float  joystickThreshold_ = 0.2f;
@@ -45,6 +40,8 @@ void PlayerGun::Update()
 		Rjoy = {};
 	}
 
-
+	//レティクルのと同じ角度に
+	Math::Vector::Vector3 reticleRotate = gameObjectManager_->GetObj3dData("PlayerReticle")->GetWorldTransform().transform.rotate;
+	transform.transform.rotate = reticleRotate;
 	transform.transform.translate = Math::Vector::Add(PlayerPos, gunPos_);
 }
