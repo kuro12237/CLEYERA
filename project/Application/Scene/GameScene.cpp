@@ -380,7 +380,7 @@ void GameScene::ParticlesDraw()
 
 	GoalParticle::GetInstance()->Draw();
 	characterDeadParticle_->Draw();
-	characterMoveParticle_->Draw();
+	//characterMoveParticle_->Draw();
 	player_->DrawParticle();
 }
 

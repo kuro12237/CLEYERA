@@ -33,28 +33,6 @@ void Player::Initialize()
 	//スタート入りの記録
 	resetPos_ = transform.translate;
 
-	auto* emitters = CharacterMoveParticle::GetInstance()->GetEmitter();
-
-	uint32_t index = 0;
-	for (auto& emitter : emitters->GetControlParam())
-	{
-		if (!emitter.useFlag_)
-		{
-			emitter.useFlag_ = true;
-			particleMoveIndex_ = index;
-			auto& param = emitters->GetEmitParam()[particleMoveIndex_];
-			param.count = 4;
-			emitter.frequencyTime = 0.18f;
-			param.velocityMax = { 0.0f,0.01f,0.0f };
-			param.velocityMin = { 0.0f,0.01f,0.0f };
-			param.sizeMax = { 0.1f,0.5f,0.1f };
-			param.sizeMin = { -0.1f,-0.1f,-0.1f };
-			param.colorDecayMax.w = 0.05f;
-			param.colorDecayMin.w = 0.025f;
-			break;
-		}
-		index++;
-	}
 	deadParticle_ = make_unique<PlayerDeadParticle>();
 	deadParticle_->Initialize();
 
@@ -142,18 +120,6 @@ void Player::Update()
 	TransformUpdate();
 
 	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-
-	//パーティクルの配置位置後で関数化
-	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
-	moveEmitParam.translate = transform.translate;
-	Math::Vector::Vector3 particleOffset = { 0.0f, aabb_.min.y / 2.0f + aabb_.min.y / 4.0f,-2.0f };
-	moveEmitParam.translate.y += particleOffset.y;
-	moveEmitParam.translate.z += particleOffset.z;
-	moveEmitParam.scaleSizeMin = { 0.1f,0.1f,0.1f };
-	moveEmitParam.scaleSizeMax = { 0.1f,0.1f,0.1f };
-	moveEmitParam.scaleVelocityMax = { 0.05f,0.05f,0.05f };
-	moveEmitParam.scaleVelocityMin = { 0.05f,0.05f,0.05f };
-
 
 	//落ちたら
 	if (transform.translate.y <= -5.0f)
@@ -245,7 +211,11 @@ void Player::DrawParticle()
 
 void Player::Jamp()
 {
-	if (IsInState<PlayerStateRock>())
+
+	CheckStatePush<PlayerStateRock>();
+	CheckStatePush<PlayerStateDeadAnimation>();
+
+	if (IsCheckStateRetuen())
 	{
 		return;
 	}
@@ -258,21 +228,14 @@ void Player::Jamp()
 
 void Player::Move()
 {
-	//石化のときは通さない
-	if (IsInState<PlayerStateRock>())
-	{
-		return;
-	}
-	//死んだラ通さない
-	if (IsInState<PlayerStateDeadAnimation>())
-	{
-		return;
-	}
-	if (IsInState<PlayerStateDash>())
-	{
-		return;
-	}
+	CheckStatePush<PlayerStateRock>();
+	CheckStatePush<PlayerStateDeadAnimation>();
+	CheckStatePush<PlayerStateDash>();
 
+	if (IsCheckStateRetuen())
+	{
+		return;
+	}
 
 	if (!IsInState<PlayerStateWalk>())
 	{
@@ -292,31 +255,23 @@ void Player::Shoot()
 
 void Player::Dash()
 {
-	if (IsInState<PlayerStateJamp>())
-	{
-		return;
-	}
-	if (IsInState<PlayerStateFall>())
-	{
-		return;
-	}
-
-	//石化のときは通さない
-	if (IsInState<PlayerStateRock>())
-	{
-		return;
-	}
-	//死んだラ通さない
-	if (IsInState<PlayerStateDeadAnimation>())
+	//指定のステートの場合通さない
+	CheckStatePush<PlayerStateRock>();
+	CheckStatePush<PlayerStateDeadAnimation>();
+	CheckStatePush<PlayerStateFall>();
+	CheckStatePush<PlayerStateJamp>();
+	if (IsCheckStateRetuen())
 	{
 		return;
 	}
 
+	//歩きののとき削除
 	if (IsInState<PlayerStateWalk>())
 	{
 		MarkStateForRemoval<PlayerStateWalk>();
 	}
 
+	//ダッシュがなかったら追加
 	if (!IsInState<PlayerStateDash>())
 	{
 		AddState<PlayerStateDash>();
@@ -333,6 +288,10 @@ void Player::TransformUpdate()
 	if (velocity_.x > 0.0f)
 	{
 		radian = Math::Vector::degreesToRadians(degrees);
+	}
+	if (velocity_.x == 0.0f)
+	{
+		radian = Math::Vector::degreesToRadians(-180.0f);
 	}
 	//左
 	if (velocity_.x < 0.0f)

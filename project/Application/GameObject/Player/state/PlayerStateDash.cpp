@@ -36,7 +36,6 @@ void PlayerStateDash::Update(Player* p)
 		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, animationFlame_);
 
 		//パーティクル
-		CharacterMoveParticle::GetInstance()->Emit();
 	}
 	//stateの削除
 	if (velo.x == 0.0f)

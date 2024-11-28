@@ -1,6 +1,10 @@
 #pragma once
 #include"GameObject/ObjectInterface/IParticleData.h"
 
+#include"GameObject/GameCollider/ColliderData.h"
+
+#include"Utility/ObjectManager/GameObjectManager.h"
+
 /// <summary>
 /// キャラクターの動く時のパーティクル
 /// </summary>

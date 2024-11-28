@@ -61,7 +61,6 @@ private:
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
-	CharacterMoveParticle* characterMoveParticle_ = nullptr;
-
+	
 	bool* isGameEnd_ = nullptr;
 };

@@ -26,7 +26,6 @@
 
 
 #include"Utility/ObjectManager/GameObjectManager.h"
-#include"GameObject/Particles/CharacterMoveParticle.h"
 
 #include"Particle/PlayerDeadParticle.h"
 #include"Hp/PlayerHp.h"
@@ -96,6 +95,36 @@ public:
 		return states_.find(typeIdx) != states_.end();
 	}
 
+	/// <summary>
+	/// stateをチェックするよう関数
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	template <typename T>
+	void CheckStatePush(){
+		std::type_index typeIdx(typeid(T));
+		statesToReturnCheckQueue_.push(typeIdx);
+	}
+
+	/// <summary>
+	/// プッシュした要素がstate二あった際true
+	/// </summary>
+	/// <returns></returns>
+	bool IsCheckStateRetuen(){
+		bool result = false;
+
+		while (!statesToReturnCheckQueue_.empty()) {
+			if (states_.find(statesToReturnCheckQueue_.front()) != states_.end()) {
+				result = true;
+				statesToReturnCheckQueue_.pop();
+				continue;
+			}
+			statesToReturnCheckQueue_.pop();
+		}
+
+		return result;
+	}
+
+
 #pragma region Command
 
 	/// <summary>
@@ -159,6 +188,7 @@ private:
 
 	std::unordered_map<std::type_index, std::unique_ptr<IPlayerState>> states_;
 	std::queue<std::type_index> statesToRemoveQueue_;
+	std::queue<std::type_index> statesToReturnCheckQueue_;
 
 
 	bool isShoot_ = false;

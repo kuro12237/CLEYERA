@@ -21,7 +21,6 @@ void PlayerManager::Initialize()
 	//reticle
 	reticle_ = make_unique<PlayerReticle>();
 	reticle_->Initialize();
-	gameObjectManager_->GetObj3dData(reticle_->GetName())->SetIsDraw(false);
 
 	//Gun
 	gun_ = make_unique<PlayerGun>();
@@ -31,7 +30,6 @@ void PlayerManager::Initialize()
 	camera_ = make_unique<PlayerCamera>();
 	camera_->SetTargetName(playerCore_->INameable::GetName());
 	camera_->Initialize();
-	gameObjectManager_->CameraReset(camera_->GetName());
 
 	//Hp
 	hp_ = make_shared<PlayerHp>();
@@ -40,10 +38,13 @@ void PlayerManager::Initialize()
 	playerCore_->SetPlayerHP(hp_);
 	playerCore_->SetReduceHpFunc(std::bind(&PlayerHp::ReduceHp, hp_.get()));
 
-	//ポジションのポインタ
+	gameObjectManager_->CameraReset(camera_->GetName());
+
+	//po
 	p_ReticleWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(reticle_->GetName())->GetWorldTransform().transform.translate;
 	p_GunWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(gun_->GetName())->GetWorldTransform().transform.translate;
 	p_CoreWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate;
+	gameObjectManager_->GetObj3dData(reticle_->GetName())->SetIsDraw(false);
 
 	gun_->SetTarget(*p_ReticleWorldPos_);
 	gun_->SetPlayerPos(gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
@@ -154,6 +155,15 @@ void PlayerManager::Update()
 		{
 			b->Update();
 		}
+	}
+
+	if (playerCore_->IsInState<PlayerStateWalk>()||playerCore_->IsInState<PlayerStateDash>())
+	{
+		moveParticle_->SetIsEmit(true);
+	}
+	else
+	{
+		moveParticle_->SetIsEmit(false);
 	}
 
 	moveParticle_->Update();

@@ -30,7 +30,6 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, flame_);
 
 		//パーティクル
-		CharacterMoveParticle::GetInstance()->Emit();
 	}
 	//状態解除
 	if (velo.x == 0.0f)

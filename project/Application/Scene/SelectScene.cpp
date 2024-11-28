@@ -22,8 +22,8 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
 	characterDeadParticle_->Initialize();
 
-	characterMoveParticle_ = CharacterMoveParticle::GetInstance();
-	characterMoveParticle_->Initialize();
+	//characterMoveParticle_ = CharacterMoveParticle::GetInstance();
+	//characterMoveParticle_->Initialize();
 
 	GoalParticle::GetInstance()->Initialize();
 	GoalParticle::GetInstance()->Clear();
@@ -135,7 +135,10 @@ void SelectScene::PostProcessDraw()
 	gameObjectManager_->InstancingDraw();
 	gameObjectManager_->NormalDraw();
 
+
 	GoalParticle::GetInstance()->Draw();
+
+	player_->DrawParticle();
 }
 
 

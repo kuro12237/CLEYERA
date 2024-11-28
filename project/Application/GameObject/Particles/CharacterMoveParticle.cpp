@@ -25,6 +25,7 @@ void CharacterMoveParticle::Initialize()
 
 	emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
 	emitter_->CreateType(particle_);
+
 }
 
 void CharacterMoveParticle::Update()
