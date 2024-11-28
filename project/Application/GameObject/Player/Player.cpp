@@ -8,28 +8,30 @@ using namespace Engine::Transform;
 void Player::Initialize()
 {
 	INameable::name_ = "Player";
+	jsonGropName_ = INameable::name_;
+	CreateJsonData();
 
 	//状態異常のステート
 	//id設定
 	id_ = kPlayerId;
-	//当たり判定
-	//押し出し
+	//当たり判定設定
 	this->isExtrusion_ = true;
 	SetObjectData(gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform);
 	aabb_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB();
 	attribute_ = CollisionMask::kPlayerAttribute;
 	mask_ = CollisionMask::kPlayerMask;
 
-	//スケール値セット
+	//TransformGet
 	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	const float kScale = 0.4f;
-	transform.scale = { kScale,kScale,kScale };
+
+	//Scale値を外部から読み込む
+	float dfScale = 0.0f;
+	AddJsonItem<float>("DefaultScale", dfScale);
+	dfScale = GetJsonItem<float>("DefaultScale");
+	transform.scale = { dfScale,dfScale,dfScale };
+
 	//スタート入りの記録
 	resetPos_ = transform.translate;
-
-	string filePath = gameObjectManager_->GetObj3dData(INameable::name_)->GetModelFilePath();
-	AnimationManager::GetInstance()->LoadAnimation(filePath);
-	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath);
 
 	auto* emitters = CharacterMoveParticle::GetInstance()->GetEmitter();
 
@@ -55,9 +57,6 @@ void Player::Initialize()
 	}
 	deadParticle_ = make_unique<PlayerDeadParticle>();
 	deadParticle_->Initialize();
-
-	uint32_t animationHandle = AnimationManager::GetInstance()->LoadAnimation("Human");
-	walkAnimationData_ = AnimationManager::GetInstance()->GetData(animationHandle);
 
 	AnimationManager::GetInstance()->LoadAnimation("FallDown");
 

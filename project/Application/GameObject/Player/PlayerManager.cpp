@@ -7,6 +7,9 @@ using namespace Engine::Transform;
 
 void PlayerManager::Initialize()
 {
+	postEffect_ = PostEffect::GetInstance();
+	gameObjectManager_ = GameObjectManager::GetInstance();
+
 	//commands
 	commandHandler_ = make_unique<PlayerCommandHandler>();
 	reticleCommandHandler_ = make_unique<PlayerReticleCommandHandler>();
@@ -18,6 +21,7 @@ void PlayerManager::Initialize()
 	//reticle
 	reticle_ = make_unique<PlayerReticle>();
 	reticle_->Initialize();
+	gameObjectManager_->GetObj3dData(reticle_->GetName())->SetIsDraw(false);
 
 	//Gun
 	gun_ = make_unique<PlayerGun>();
@@ -27,6 +31,7 @@ void PlayerManager::Initialize()
 	camera_ = make_unique<PlayerCamera>();
 	camera_->SetTargetName(playerCore_->INameable::GetName());
 	camera_->Initialize();
+	gameObjectManager_->CameraReset(camera_->GetName());
 
 	//Hp
 	hp_ = make_shared<PlayerHp>();
@@ -35,31 +40,29 @@ void PlayerManager::Initialize()
 	playerCore_->SetPlayerHP(hp_);
 	playerCore_->SetReduceHpFunc(std::bind(&PlayerHp::ReduceHp, hp_.get()));
 
-	gameObjectManager_ = GameObjectManager::GetInstance();
-	gameObjectManager_->CameraReset(camera_->GetName());
-
+	//ポジションのポインタ
 	p_ReticleWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(reticle_->GetName())->GetWorldTransform().transform.translate;
 	p_GunWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(gun_->GetName())->GetWorldTransform().transform.translate;
-	gameObjectManager_->GetObj3dData(reticle_->GetName())->SetIsDraw(false);
+	p_CoreWorldPos_ = &gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate;
 
 	gun_->SetTarget(*p_ReticleWorldPos_);
 	gun_->SetPlayerPos(gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
 	gun_->SetPlayerVelo(playerCore_->GetVelocity());
 
-	//isChangeGameOverAnimation_ = &playerCore_->GetIsChangeDeadAnimation();
-
-	postEffect_ = PostEffect::GetInstance();
-
+	
 	//ダメージの演出関数をセット
 	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
 	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdateEnd, this));
 
-
 	ModelManager::ModelLoadNormalMap();
 	bulletModelHandle_ = ModelManager::LoadObjectFile("PlayerNormalBullet");
-
 	bulletManager_ = make_unique<PlayerBulletManager>();
 	bulletManager_->Initialize();
+
+	moveParticle_ = make_unique<PlayerMoveParticle>();
+	moveParticle_->Initialize();
+	moveParticle_->SetPlayerPos(playerWorldPos);
+
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -79,6 +82,9 @@ void PlayerManager::ImGuiUpdate()
 		}
 		ImGui::TreePop();
 	}
+
+	moveParticle_->ImGuiUpdate();
+
 }
 
 void PlayerManager::Update()
@@ -133,7 +139,6 @@ void PlayerManager::Update()
 	//Gun
 	gun_->Update();
 
-
 	//reticle
 	reticle_->Update();
 
@@ -151,6 +156,8 @@ void PlayerManager::Update()
 		}
 	}
 
+	moveParticle_->Update();
+
 }
 
 void PlayerManager::Draw2d()
@@ -167,10 +174,11 @@ void PlayerManager::DrawHp()
 
 void PlayerManager::DrawParticle()
 {
-	playerCore_->DrawParticle();
+	//playerCore_->DrawParticle();
+	moveParticle_->Draw();
 }
 
-void PlayerManager::PushBullet(const Math::Vector::Vector3 &pos)
+void PlayerManager::PushBullet(const Math::Vector::Vector3& pos)
 {
 	//オブジェクトの作成
 	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();

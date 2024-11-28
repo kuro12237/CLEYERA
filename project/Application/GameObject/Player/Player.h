@@ -125,8 +125,7 @@ public:
 	void ResetPos() { gameObjectManager_->GetObj3dData(this->INameable::name_)->GetWorldTransform().transform.translate = resetPos_; }
 #pragma endregion
 
-	void WalkanimationAddFlame(const float& flame) { walkAnimationFlame_ += flame; }
-
+	
 #pragma region Get
 	bool GetIsShoot() { return isShoot_; }
 	bool& GetIsGameEnd() { return isGameEnd_; }
@@ -135,7 +134,6 @@ public:
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
 	PlayerDeadParticle* GetDeadParticle() { return deadParticle_.get(); }
 
-	float GetWalkAnimationFlame()const  { return walkAnimationFlame_; }
 #pragma endregion
 
 #pragma region Set
@@ -168,8 +166,6 @@ private:
 
 	bool isDeadAnimationComplite_ = false;
 
-
-
 	float damegeFlame_ = 0.0f;
 	uint32_t damegeCoolTimer_ = 0;
 	uint32_t damageCoolTimerMax_ = 2;
@@ -178,12 +174,6 @@ private:
 
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
-
-	SAnimation::Animation animationData_;
-
-	float walkAnimationFlame_ = 0.0f;
-	SAnimation::Animation walkAnimationData_;
-
 
 	float resultDataFlame_ = 0.0f;
 
@@ -197,5 +187,4 @@ private:
 
 	weak_ptr<PlayerHp> hp_;
 
-	string walkAnimationFilePath = "";
 };

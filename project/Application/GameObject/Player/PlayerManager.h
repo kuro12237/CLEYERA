@@ -14,9 +14,11 @@
 #include"Hp/PlayerHp.h"
 #include"Utility/RandomGenerator/RandomGenerator.h"
 #include"Bullet/PlayerBulletManager.h"
+#include"Particle/PlayerMoveParticle.h"
+
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚ÌƒIƒuƒWƒFƒNƒg‚ÌŠÇ—ƒNƒ‰ƒX
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç®¡ç†ã‚¯ãƒ©ã‚¹
 /// </summary>
 class PlayerManager
 {
@@ -25,27 +27,27 @@ public:
 	~PlayerManager() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// ImGui‚ÌXV
+	/// ImGuiã®æ›´æ–°
 	/// </summary>
 	void ImGuiUpdate();
 
 	/// <summary>
-	/// XVˆ—
+	/// æ›´æ–°å‡¦ç†
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// 2d•`‰æ
+	/// 2dæç”»
 	/// </summary>
 	void Draw2d();
 
 	/// <summary>
-	/// Hp‚Ì•\¦
+	/// Hpã®è¡¨ç¤º
 	/// </summary>
 	void DrawHp();
 
@@ -62,12 +64,11 @@ public:
 #pragma endregion
 
 #pragma region Set
-
 	void SetStartFlag(bool f) { gameStartFlag_ = f; }
 #pragma endregion
 
 	/// <summary>
-	/// BUllet‚Ì“o˜^
+	/// BUlletã®ç™»éŒ²
 	/// </summary>
 	/// <param name="pos"></param>
 	void PushBullet(const Math::Vector::Vector3& pos);
@@ -75,10 +76,9 @@ public:
 private:
 
 	/// <summary>
-	/// €‚ñ‚¾’e‚ÌŠm”F€‚ñ‚Å‚¢‚½‚çíœ
+	/// æ­»ã‚“ã å¼¾ã®ç¢ºèªæ­»ã‚“ã§ã„ãŸã‚‰å‰Šé™¤
 	/// </summary>
 	void CheckisDeadBullets();
-
 
 	void DamegeUpdate();
 	void DamegeUpdateEnd();
@@ -99,10 +99,8 @@ private:
 	unique_ptr<PlayerCamera>camera_ = nullptr;
 	shared_ptr<PlayerHp>hp_ = nullptr;
 
-	bool isHpReductionActive_ = false;
 	int32_t kPlayerHp_ = 2;
 
-	bool* isChangeGameOverAnimation_ = nullptr;
 
 	unique_ptr<PlayerBulletManager>bulletManager_ = nullptr;
 	vector<shared_ptr<PlayerBullet>>bullets_{};
@@ -111,7 +109,13 @@ private:
 	uint32_t bulletModelHandle_ = 0;
 
 	Math::Vector::Vector3 playerWorldPos = {};
-	const Math::Vector::Vector3* p_ReticleWorldPos_ = nullptr;
 
+	//particle
+	unique_ptr<PlayerMoveParticle>moveParticle_ = nullptr;
+
+
+	bool* isChangeGameOverAnimation_ = nullptr;
+	const Math::Vector::Vector3* p_CoreWorldPos_ = nullptr;
+	const Math::Vector::Vector3* p_ReticleWorldPos_ = nullptr;
 	const Math::Vector::Vector3* p_GunWorldPos_ = nullptr;
 };

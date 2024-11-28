@@ -2,6 +2,7 @@
 #include"Pch.h"
 #include"Transform/STransformQua.h"
 #include"Transform/STransformEular.h"
+#include"Particle/Emitter/StructGpuParticleEmitter.h"
 
 class GlobalVariables {
 public:
@@ -91,7 +92,7 @@ private:
 	// 項目
 	struct Item {
 		// 項目の値
-		std::variant<int32_t, float, bool, Math::Vector::Vector2, Math::Vector::Vector3, Math::Vector::Vector4, Engine::Transform::TransformQua, Engine::Transform::TransformEular, string> value;
+		std::variant<int32_t, float, bool, Math::Vector::Vector2, Math::Vector::Vector3, Math::Vector::Vector4, Engine::Transform::TransformQua, Engine::Transform::TransformEular, string,Engine::Particle::EmitType::BoxParam> value;
 	};
 	// グループ
 	struct Group {

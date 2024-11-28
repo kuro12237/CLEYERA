@@ -897,6 +897,8 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDash.cpp">
       <Filter>Project\GameObject\Character\Player\State</Filter>
     </ClCompile>
+    <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
+    <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1559,6 +1561,8 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDash.h">
       <Filter>Project\GameObject\Character\Player\State</Filter>
     </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Particle\PlayerMoveParticle.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

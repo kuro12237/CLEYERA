@@ -17,8 +17,7 @@ void PlayerDeadParticle::Initialize()
 }
 
 void PlayerDeadParticle::Update()
-{
-  
+{ 
     emitter_->Update();
     emitter_->Emit(particle_);
     particle_->CallBarrier();
