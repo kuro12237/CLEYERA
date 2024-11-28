@@ -142,11 +142,18 @@ bool Input::PushRShoulderPressed()
 
 Vector2 Input::GetJoyLStickPos(const float &mode)
 {
-	return Vector2
-	(
+	float deadzone = Input::GetInstance()->deadzone_;
+
+	Math::Vector::Vector2 joyPos(
 		Input::GetInstance()->joyState_.Gamepad.sThumbLX / mode,
 	    Input::GetInstance()->joyState_.Gamepad.sThumbLY / mode
 	);
+
+	if (std::abs(joyPos.x) > deadzone || std::abs(joyPos.y) > deadzone)
+	{
+		return joyPos;
+	}
+	return {};
 }
 
 bool Input::GetLJoyTHUMB()
@@ -160,11 +167,18 @@ bool Input::GetLJoyTHUMB()
 
 Vector2 Input::GetJoyRStickPos(const float& mode)
 {
-	return Vector2
-	(
+	float deadzone = Input::GetInstance()->deadzone_;
+	Math::Vector::Vector2 joyPos(
 		Input::GetInstance()->joyState_.Gamepad.sThumbRX / mode,
 		Input::GetInstance()->joyState_.Gamepad.sThumbRY / mode
 	);
+
+	if (std::abs(joyPos.x) > deadzone || std::abs(joyPos.y) > deadzone)
+	{
+		return joyPos;
+	}
+
+	return {};
 }
 
 bool Input::GetRJoyTHUMB()

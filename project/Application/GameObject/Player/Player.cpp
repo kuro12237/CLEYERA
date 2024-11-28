@@ -60,8 +60,7 @@ void Player::Initialize()
 	walkAnimationData_ = AnimationManager::GetInstance()->GetData(animationHandle);
 
 	AnimationManager::GetInstance()->LoadAnimation("FallDown");
-	animationHandle = AnimationManager::GetInstance()->LoadAnimation("JampHuman");
-	jampAnimationData_ = AnimationManager::GetInstance()->GetData("JampHuman");
+
 }
 
 void Player::ImGuiUpdate()
@@ -87,11 +86,7 @@ void Player::Update()
 {
 	deadParticle_->Update();
 
-
-	walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
-
 	shootTimerFlame_++;
-
 
 	//状態更新
 	for (auto& state : states_) {
@@ -111,11 +106,6 @@ void Player::Update()
 		statesToRemoveQueue_.pop();
 	}
 
-	if (IsInState<PlayerStateJamp>() && velocity_.y <= 0.0f)
-	{
-		this->MarkStateForRemoval<PlayerStateJamp>();
-		AddState<PlayerStateFall>();
-	}
 	//落下
 	if (velocity_.y <= -0.1f)
 	{
@@ -124,8 +114,6 @@ void Player::Update()
 			AddState<PlayerStateFall>();
 		}
 	}
-
-
 
 	///ダメージ処理
 	if (IsInState<PlayerStateInvincible>())
@@ -152,9 +140,9 @@ void Player::Update()
 
 	isShoot_ = false;
 
-	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	transform.translate = Math::Vector::Add(transform.translate, velocity_);
+	TransformUpdate();
 
+	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 
 	//パーティクルの配置位置後で関数化
 	auto& moveEmitParam = CharacterMoveParticle::GetInstance()->GetEmitter()->GetEmitParam()[particleMoveIndex_];
@@ -171,6 +159,7 @@ void Player::Update()
 	//落ちたら
 	if (transform.translate.y <= -5.0f)
 	{
+		//無敵化
 		AddState<PlayerStateInvincible>();
 		ResetPos();
 
@@ -312,9 +301,45 @@ void Player::Dash()
 	{
 		return;
 	}
+
+	//石化のときは通さない
+	if (IsInState<PlayerStateRock>())
+	{
+		return;
+	}
+	//死んだラ通さない
+	if (IsInState<PlayerStateDeadAnimation>())
+	{
+		return;
+	}
+
+	if (IsInState<PlayerStateWalk>())
+	{
+		MarkStateForRemoval<PlayerStateWalk>();
+	}
+
 	if (!IsInState<PlayerStateDash>())
 	{
 		AddState<PlayerStateDash>();
 	}
+}
+
+void Player::TransformUpdate()
+{
+	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	transform.translate = Math::Vector::Add(transform.translate, velocity_);
+
+	const float degrees = 90.0f;
+	float radian = {};
+	if (velocity_.x > 0.0f)
+	{
+		radian = Math::Vector::degreesToRadians(degrees);
+	}
+	//左
+	if (velocity_.x < 0.0f)
+	{
+		radian = Math::Vector::degreesToRadians(-degrees);
+	}
+	transform.rotate.y = radian;
 
 }

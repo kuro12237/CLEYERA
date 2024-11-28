@@ -3,7 +3,7 @@
 #include"../Player.h"
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[ƒWƒƒƒ“ƒvó‘Ô
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¸ãƒ£ãƒ³ãƒ—çŠ¶æ…‹
 /// </summary>
 class PlayerStateJamp :public IPlayerState
 {
@@ -16,5 +16,7 @@ public:
 	void Update(Player* p)override;
 
 private:
+	float jampAnimationFlame_ = 0.0f;
+	SAnimation::Animation jampAnimationData_;
 
 };

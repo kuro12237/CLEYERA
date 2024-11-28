@@ -46,11 +46,11 @@ void PlayerManager::Initialize()
 	gun_->SetPlayerPos(gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
 	gun_->SetPlayerVelo(playerCore_->GetVelocity());
 
-	isChangeGameOverAnimation_ = &playerCore_->GetIsChangeDeadAnimation();
+	//isChangeGameOverAnimation_ = &playerCore_->GetIsChangeDeadAnimation();
 
 	postEffect_ = PostEffect::GetInstance();
 
-	//ƒ_ƒ[ƒW‚Ì‰‰oŠÖ”‚ğƒZƒbƒg
+	//ãƒ€ãƒ¡ãƒ¼ã‚¸ã®æ¼”å‡ºé–¢æ•°ã‚’ã‚»ãƒƒãƒˆ
 	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
 	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdateEnd, this));
 
@@ -85,24 +85,24 @@ void PlayerManager::Update()
 {
 	playerWorldPos = gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().GetWorldPosition();
 
-	//ƒQ[ƒ€‚ªI‚í‚é’Ê’m
+	//ã‚²ãƒ¼ãƒ ãŒçµ‚ã‚ã‚‹é€šçŸ¥
 	if (playerCore_->GetIsGameEnd())
 	{
 		gameStartFlag_ = false;
 	}
 
 	//Commands
-	if (gameStartFlag_ && !playerCore_->IsInState<PlayerStateGoalAnimation>() && !*isChangeGameOverAnimation_)
+	if (gameStartFlag_ && !playerCore_->IsInState<PlayerStateGoalAnimation>())
 	{
-		//ƒvƒŒƒCƒ„[‚Ì‘€ìƒLƒƒƒ‰
+		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ“ä½œã‚­ãƒ£ãƒ©
 		commandHandler_->Handler();
 		commandHandler_->CommandsExec(*playerCore_);
-		//ƒŒƒeƒBƒNƒ‹
+		//ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«
 		reticleCommandHandler_->Handler();
 		reticleCommandHandler_->Exec(*reticle_);
 	}
 
-	//hp‚ª‚È‚­‚È‚Á‚½‚ç
+	//hpãŒãªããªã£ãŸã‚‰
 	if (hp_->GetHp() <= 0 && !playerCore_->IsInState<PlayerStateDeadAnimation>())
 	{
 		playerCore_->AddState<PlayerStateDeadAnimation>();
@@ -125,7 +125,7 @@ void PlayerManager::Update()
 	//Main
 	playerCore_->Update();
 
-	if (*isChangeGameOverAnimation_)
+	if (playerCore_->IsInState<PlayerStateDeadAnimation>())
 	{
 		gun_->SetIsDraw(false);
 	}
@@ -172,16 +172,16 @@ void PlayerManager::DrawParticle()
 
 void PlayerManager::PushBullet(const Math::Vector::Vector3 &pos)
 {
-	//ƒIƒuƒWƒFƒNƒg‚Ìì¬
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½œæˆ
 	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();
 	data->SetObjectType("MESH");
 	data->Initialize({}, {}, bulletModelHandle_);
 
-	//’e‚ÌŠgU”ÍˆÍŒvZ
+	//å¼¾ã®æ‹¡æ•£ç¯„å›²è¨ˆç®—
 	//xMin/yMax
 	const Math::Vector::Vector2 spreadRangeMax = { -0.5f,0.5f };
 
-	//velocity‚ÌŒvZ
+	//velocityã®è¨ˆç®—
 	Math::Vector::Vector3 velocity = Math::Vector::Subtruct(*p_ReticleWorldPos_, *p_GunWorldPos_);
 	velocity.x += RandomGenerator::GetFloat(spreadRangeMax.x, spreadRangeMax.y);
 	velocity.y += RandomGenerator::GetFloat(spreadRangeMax.x, spreadRangeMax.y);
@@ -192,7 +192,7 @@ void PlayerManager::PushBullet(const Math::Vector::Vector3 &pos)
 	b->SetVelocity(velocity);
 	b->SetSpownPos(pos);
 
-	//g‚Á‚Ä‚¢‚È‚¢’e‚Ì”z—ñ‚ª‚ ‚éÄ—˜—p
+	//ä½¿ã£ã¦ã„ãªã„å¼¾ã®é…åˆ—ãŒã‚ã‚‹æ™‚å†åˆ©ç”¨
 	if (!deadBulletIndex_.empty())
 	{
 		uint32_t newBulletIndex = deadBulletIndex_.front();
@@ -205,7 +205,7 @@ void PlayerManager::PushBullet(const Math::Vector::Vector3 &pos)
 	}
 	else
 	{
-		//V‚µ‚¢index‚ğ‚ÆƒŠ’e‚ÉƒZƒbƒg
+		//æ–°ã—ã„indexã‚’ã¨ãƒªå¼¾ã«ã‚»ãƒƒãƒˆ
 		int size = int(bullets_.size());
 		string name_num = name + to_string(size);
 		data->SetObjName(name_num);
@@ -237,7 +237,7 @@ void PlayerManager::DamegeUpdate()
 {
 	const float vinatteScale = 64.0f;
 	const float vinateFactorSpeed = 1.0f / 120.0f;
-	//ƒrƒlƒbƒg‚ğ‚©‚¯‚é
+	//ãƒ“ãƒãƒƒãƒˆã‚’ã‹ã‘ã‚‹
 	postEffect_->SetSelectPostEffect(VIGNETTE, true);
 	postEffect_->SetVignetteScale(vinatteScale);
 	postEffect_->SetVignetteFactor(vinatteFactor_);

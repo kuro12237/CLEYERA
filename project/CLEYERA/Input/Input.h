@@ -121,6 +121,12 @@ namespace Engine
 		/// <param name="max"></param>
 		static void VibrateController(int leftMotor, int rightMotor, float max = 60.0f);
 
+		/// <summary>
+		/// デッドゾーンの設定
+		/// </summary>
+		/// <param name="deadzone"></param>
+		static void SetDeadZone(float deadzone) { Input::GetInstance()->deadzone_ = deadzone; }
+
 	private:
 
 		/// <summary>
@@ -145,6 +151,7 @@ namespace Engine
 
 		bool isInitialize = false;
 
+		float deadzone_ = 0.0f;
 
 		Input() = default;
 		~Input() = default;

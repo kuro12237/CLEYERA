@@ -133,7 +133,6 @@ public:
 	string& GetWarpFilePath() { return warpFilePath_; }
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
-	bool& GetIsChangeDeadAnimation() { return isChangeDeadAnimation_; }
 	PlayerDeadParticle* GetDeadParticle() { return deadParticle_.get(); }
 
 	float GetWalkAnimationFlame()const  { return walkAnimationFlame_; }
@@ -155,7 +154,10 @@ private:
 	function<void()>damegeUpdateFunc_ = nullptr;
 	function<void()>damegeUpdateEndFunc_ = nullptr;
 
-
+	/// <summary>
+	/// SRTの更新
+	/// </summary>
+	void TransformUpdate();
 
 	std::unordered_map<std::type_index, std::unique_ptr<IPlayerState>> states_;
 	std::queue<std::type_index> statesToRemoveQueue_;
@@ -166,7 +168,6 @@ private:
 
 	bool isDeadAnimationComplite_ = false;
 
-	bool isChangeDeadAnimation_ = false;
 
 
 	float damegeFlame_ = 0.0f;
@@ -183,8 +184,6 @@ private:
 	float walkAnimationFlame_ = 0.0f;
 	SAnimation::Animation walkAnimationData_;
 
-	float jampAnimationFlame_ = 0.0f;
-	SAnimation::Animation jampAnimationData_;
 
 	float resultDataFlame_ = 0.0f;
 

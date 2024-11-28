@@ -15,6 +15,8 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/Utility/");
 	GlobalVariables::GetInstance()->SetChangeSceneLoadFilesName("Resources/LevelData/ParamData/Utility/");
 
+	Engine::Input::SetDeadZone(0.2f);
+
 	//instanceをGet
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 	gameObjectManager_ = GameObjectManager::GetInstance();

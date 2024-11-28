@@ -3,7 +3,7 @@
 #include"../Player.h"
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[•à‚«ó‘Ô
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ­©ãçŠ¶æ…‹
 /// </summary>
 class PlayerStateWalk :public IPlayerState
 {
@@ -16,6 +16,7 @@ public:
 	void Update(Player* p)override;
 
 private:
-
+	GameObjectManager* gameObjectManager_ = nullptr;
+	SAnimation::Animation walkAnimationData_{};
 	float flame_ = 0.0f;
 };

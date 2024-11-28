@@ -17,6 +17,16 @@ public:
 
 private:
 
-	float flame_ = 0.0f;
+	/// <summary>
+	/// 回転
+	/// </summary>
+	/// <param name="velo"></param>
+	void RotateControl(const Math::Vector::Vector3 &velo);
+
+
+
 	float animationFlame_ = 0.0f;
+	GameObjectManager* gameObjectManager_ = nullptr;
+
+	SAnimation::Animation walkAnimationData_ = {};
 };
