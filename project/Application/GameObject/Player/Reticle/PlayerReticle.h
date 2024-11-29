@@ -6,7 +6,7 @@
 #include"GameObject/ObjectInterface/IObjectData.h"
 
 /// <summary>
-/// ƒŒƒeƒBƒNƒ‹ƒNƒ‰ƒX
+/// ãƒ¬ãƒ†ã‚£ã‚¯ãƒ«ã‚¯ãƒ©ã‚¹
 /// </summary>
 class PlayerReticle :public IObjectData
 {
@@ -15,22 +15,22 @@ public:
 	~PlayerReticle() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// ImGuiXV
+	/// ImGuiæ›´æ–°
 	/// </summary>
 	void ImGuiUpdate();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// 2d•`‰æ
+	/// 2dæç”»
 	/// </summary>
 	void Draw2d();
 
@@ -40,7 +40,16 @@ public:
 
 #pragma endregion
 
+#pragma region Set
+
+	void SetIsAim(const bool& f) { p_IsAim_ = &f; }
+
+#pragma endregion
+
+
 private:
+
+	const bool* p_IsAim_ = nullptr;
 
 	Math::Vector::Vector3 NDCToScreen(const Math::Vector::Vector3& ndc, float screenWidth, float screenHeight);
 

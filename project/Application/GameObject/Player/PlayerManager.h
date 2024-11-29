@@ -6,7 +6,6 @@
 
 #include"command/PlayerCommandHandler.h"
 
-#include"Reticle/command/PlayerReticleCommandHandler.h"
 
 #include"Gun/PlayerGun.h"
 #include"Bullet/PlayerBullet.h"
@@ -91,7 +90,6 @@ private:
 	Engine::PostEffect* postEffect_ = nullptr;
 
 	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
-	unique_ptr<PlayerReticleCommandHandler>reticleCommandHandler_ = nullptr;
 
 	shared_ptr<Player>playerCore_ = nullptr;
 	unique_ptr<PlayerReticle>reticle_ = nullptr;
@@ -101,14 +99,12 @@ private:
 
 	int32_t kPlayerHp_ = 2;
 
-
 	unique_ptr<PlayerBulletManager>bulletManager_ = nullptr;
 	vector<shared_ptr<PlayerBullet>>bullets_{};
 	queue<uint32_t>deadBulletIndex_;
 
 	uint32_t bulletModelHandle_ = 0;
 
-	Math::Vector::Vector3 playerWorldPos = {};
 
 	//particle
 	unique_ptr<PlayerMoveParticle>moveParticle_ = nullptr;

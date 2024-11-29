@@ -899,6 +899,7 @@
     </ClCompile>
     <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Player\command\PlayerAimCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1563,6 +1564,7 @@
     </ClInclude>
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerMoveParticle.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
+    <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

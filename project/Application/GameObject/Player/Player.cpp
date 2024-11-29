@@ -278,6 +278,11 @@ void Player::Dash()
 	}
 }
 
+void Player::Aim()
+{
+	isAim_ = true;
+}
+
 void Player::TransformUpdate()
 {
 	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;

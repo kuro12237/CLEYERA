@@ -149,6 +149,11 @@ public:
 	void Dash();
 
 	/// <summary>
+	/// 照準コマンド
+	/// </summary>
+	void Aim();
+
+	/// <summary>
 	/// 位置を初期化
 	/// </summary>
 	void ResetPos() { gameObjectManager_->GetObj3dData(this->INameable::name_)->GetWorldTransform().transform.translate = resetPos_; }
@@ -157,6 +162,8 @@ public:
 	
 #pragma region Get
 	bool GetIsShoot() { return isShoot_; }
+	bool GetIsAim() { return isAim_; }
+
 	bool& GetIsGameEnd() { return isGameEnd_; }
 	string& GetWarpFilePath() { return warpFilePath_; }
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
@@ -191,6 +198,8 @@ private:
 	std::queue<std::type_index> statesToReturnCheckQueue_;
 
 
+	bool isAim_ = false;
+
 	bool isShoot_ = false;
 	bool isGameEnd_ = false;
 
@@ -205,7 +214,6 @@ private:
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
 
-	float resultDataFlame_ = 0.0f;
 
 	uint32_t particleMoveIndex_ = 0;
 	Math::Vector::Vector3 resetPos_ = {};

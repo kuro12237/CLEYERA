@@ -12,8 +12,7 @@ void PlayerManager::Initialize()
 
 	//commands
 	commandHandler_ = make_unique<PlayerCommandHandler>();
-	reticleCommandHandler_ = make_unique<PlayerReticleCommandHandler>();
-
+	
 	//mainBody
 	playerCore_ = make_shared<Player>();
 	playerCore_->Initialize();
@@ -55,6 +54,8 @@ void PlayerManager::Initialize()
 	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
 	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdateEnd, this));
 
+	reticle_->SetIsAim(playerCore_->GetIsAim());
+
 	ModelManager::ModelLoadNormalMap();
 	bulletModelHandle_ = ModelManager::LoadObjectFile("PlayerNormalBullet");
 	bulletManager_ = make_unique<PlayerBulletManager>();
@@ -62,7 +63,8 @@ void PlayerManager::Initialize()
 
 	moveParticle_ = make_unique<PlayerMoveParticle>();
 	moveParticle_->Initialize();
-	moveParticle_->SetPlayerPos(playerWorldPos);
+	moveParticle_->SetPlayerPos(gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().GetWorldPosition());
+
 
 }
 
@@ -90,7 +92,6 @@ void PlayerManager::ImGuiUpdate()
 
 void PlayerManager::Update()
 {
-	playerWorldPos = gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().GetWorldPosition();
 
 	//ゲームが終わる通知
 	if (playerCore_->GetIsGameEnd())
@@ -104,9 +105,6 @@ void PlayerManager::Update()
 		//プレイヤーの操作キャラ
 		commandHandler_->Handler();
 		commandHandler_->CommandsExec(*playerCore_);
-		//レティクル
-		reticleCommandHandler_->Handler();
-		reticleCommandHandler_->Exec(*reticle_);
 	}
 
 	//hpがなくなったら
