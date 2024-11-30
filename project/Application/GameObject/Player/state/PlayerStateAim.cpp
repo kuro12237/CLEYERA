@@ -15,9 +15,13 @@ void PlayerStateAim::Update(Player* p)
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
 	Math::Vector::Vector3 velo = p->GetVelocity();
 
-	velo.x = Ljoy.x * 0.1f;
+	velo.x = Ljoy.x * 0.05f;
 	p->SetVelocity(velo);
 
-
+	if (p->IsInState<PlayerStateDeadAnimation>())
+	{
+		p->MarkStateForRemoval<PlayerStateAim>();
+		return;
+	}
 }
 

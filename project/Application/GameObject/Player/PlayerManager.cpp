@@ -65,6 +65,11 @@ void PlayerManager::Initialize()
 	moveParticle_ = make_unique<PlayerMoveParticle>();
 	moveParticle_->Initialize();
 	moveParticle_->SetPlayerPos(gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
+
+
+	deadParticle_ = make_unique<PlayerDeadParticle>();
+	deadParticle_->Initialize();
+	deadParticle_->SetPlayerPos(gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
 }
 
 void PlayerManager::ImGuiUpdate()
@@ -129,10 +134,6 @@ void PlayerManager::Update()
 	//Main
 	playerCore_->Update();
 
-	if (playerCore_->IsInState<PlayerStateDeadAnimation>())
-	{
-		gun_->SetIsDraw(false);
-	}
 
 	//Gun
 	gun_->Update();
@@ -163,7 +164,13 @@ void PlayerManager::Update()
 		moveParticle_->SetIsEmit(false);
 	}
 
+	//死んだアニメーションを再生してるとき
+	if (playerCore_->IsInState<PlayerStateDeadAnimation>())
+	{
+		deadParticle_->SetIsEmit(true);
+	}
 	moveParticle_->Update();
+	deadParticle_->Update();
 
 }
 
@@ -181,8 +188,8 @@ void PlayerManager::DrawHp()
 
 void PlayerManager::DrawParticle()
 {
-	//playerCore_->DrawParticle();
 	moveParticle_->Draw();
+	deadParticle_->Draw();
 }
 
 void PlayerManager::PushBullet(const Math::Vector::Vector3& pos)

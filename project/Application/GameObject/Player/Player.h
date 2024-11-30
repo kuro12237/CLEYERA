@@ -56,11 +56,6 @@ public:
 
 
 	/// <summary>
-	/// パーティクル表示
-	/// </summary>
-	void DrawParticle();
-
-	/// <summary>
 	/// 当たった時の処理
 	/// </summary>
 	/// <param name="c"></param>
@@ -173,7 +168,6 @@ public:
 	string& GetWarpFilePath() { return warpFilePath_; }
 	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
-	PlayerDeadParticle* GetDeadParticle() { return deadParticle_.get(); }
 
 #pragma endregion
 
@@ -204,8 +198,8 @@ private:
 
 
 	bool isAim_ = false;
-
 	bool isShoot_ = false;
+
 	bool isGameEnd_ = false;
 
 	bool isDeadAnimationComplite_ = false;
@@ -214,7 +208,6 @@ private:
 	uint32_t damegeCoolTimer_ = 0;
 	uint32_t damageCoolTimerMax_ = 2;
 
-	float vinatteFactor_ = 1.0f;
 
 	uint32_t shootTimerMax_ = 10;
 	uint32_t shootTimerFlame_ = 0;
@@ -226,7 +219,6 @@ private:
 	bool isUseGravityFlag_ = true;
 	string warpFilePath_ = "";
 
-	unique_ptr<PlayerDeadParticle>deadParticle_ = nullptr;
 
 	weak_ptr<PlayerHp> hp_;
 

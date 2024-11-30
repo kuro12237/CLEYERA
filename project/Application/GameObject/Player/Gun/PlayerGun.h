@@ -36,6 +36,8 @@ private:
 
 	weak_ptr<Player>player_;
 
+	float kRadious_ = 3.0f;
+
 	const Math::Vector::Vector3 *targetPos_ = {};
 	const Math::Vector::Vector3* playerVelo_ = nullptr;
 	const Math::Vector::Vector3* playerPos_ = nullptr;

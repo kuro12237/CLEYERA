@@ -33,8 +33,6 @@ void Player::Initialize()
 	//スタート入りの記録
 	resetPos_ = transform.translate;
 
-	deadParticle_ = make_unique<PlayerDeadParticle>();
-	deadParticle_->Initialize();
 
 	AnimationManager::GetInstance()->LoadAnimation("FallDown");
 
@@ -61,7 +59,6 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
-	deadParticle_->Update();
 
 	shootTimerFlame_++;
 
@@ -142,8 +139,6 @@ void Player::Update()
 			radian = Math::Vector::degreesToRadians(degrees);
 		}
 
-		
-	
 		transform.rotate.y = radian;
 	}
 	else {
@@ -163,21 +158,7 @@ void Player::Update()
 		}
 	}
 
-	//死んだアニメーションを再生してるとき
-	if (IsInState<PlayerStateDeadAnimation>())
-	{
-		auto& emit = deadParticle_->GetEmitter()->GetEmitParam()[0];
-		auto& control = deadParticle_->GetEmitter()->GetControlParam()[0];
-
-		control.useFlag_ = true;
-		control.frequencyTime = 0.5f;
-		emit.count = 3;
-
-		emit.velocityMax = { 0.1f,0.1f,0.1f };
-		emit.velocityMin = { -0.1f,-0.1f,-0.1f };
-		emit.translate = transform.translate;
-		return;
-	}
+	
 }
 
 void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
@@ -231,11 +212,6 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 		transform.x += extrusion_.x;
 		transform.y += extrusion_.y;
 	}
-}
-
-void Player::DrawParticle()
-{
-	deadParticle_->Draw();
 }
 
 void Player::RotateUpdate()
@@ -342,6 +318,7 @@ void Player::Aim()
 	CheckStatePush<PlayerStateDeadAnimation>();
 	CheckStatePush<PlayerStateFall>();
 	CheckStatePush<PlayerStateJamp>();
+
 	if (IsCheckStateRetuen())
 	{
 		return;
@@ -351,8 +328,6 @@ void Player::Aim()
 	{
 		AddState<PlayerStateAim>();
 	}
-
-
 }
 
 void Player::TransformUpdate()

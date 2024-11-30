@@ -4,7 +4,7 @@
 #include"Graphics/TextureManager/TextureManager.h"
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚ª€‚ñ‚¾‚Æ‚«‚Ìƒp[ƒeƒBƒNƒ‹
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ­»ã‚“ã ã¨ãã®ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 /// </summary>
 class PlayerDeadParticle
 {
@@ -13,27 +13,27 @@ public:
 	PlayerDeadParticle() {};
 	~PlayerDeadParticle() {  };
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// ImGuiXV
+	/// ImGuiæ›´æ–°
 	/// </summary>
 	void ImGuiUpdate();
 
 	/// <summary>
-	/// ƒGƒ~ƒbƒ^[‚Ìˆê•”‚ğƒNƒŠƒA
+	/// ã‚¨ãƒŸãƒƒã‚¿ãƒ¼ã®ä¸€éƒ¨ã‚’ã‚¯ãƒªã‚¢
 	/// </summary>
 	/// <param name="index"></param>
 	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
@@ -41,6 +41,13 @@ public:
 #pragma region Get
 	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>* GetEmitter() { return emitter_.get(); };
 #pragma endregion
+
+#pragma region Set
+
+	void SetIsEmit(bool f) { isEmit_ = f; }
+	void SetPlayerPos(const Math::Vector::Vector3& p) { p_PlayerPos_ = &p; }
+#pragma endregion
+
 
 private:
 
@@ -50,5 +57,7 @@ private:
 	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
 	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
 
+	const Math::Vector::Vector3* p_PlayerPos_ = nullptr;
+	bool isEmit_ = false;
 };
 

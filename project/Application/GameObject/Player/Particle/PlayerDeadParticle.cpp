@@ -18,6 +18,21 @@ void PlayerDeadParticle::Initialize()
 
 void PlayerDeadParticle::Update()
 { 
+    if (isEmit_)
+    {
+
+        auto& emit = emitter_->GetEmitParam()[0];
+        auto& control = emitter_->GetControlParam()[0];
+
+        control.useFlag_ = true;
+        control.frequencyTime = 0.5f;
+        emit.count = 3;
+
+        emit.velocityMax = { 0.1f,0.1f,0.1f };
+        emit.velocityMin = { -0.1f,-0.1f,-0.1f };
+        emit.translate = *p_PlayerPos_;
+    }
+
     emitter_->Update();
     emitter_->Emit(particle_);
     particle_->CallBarrier();

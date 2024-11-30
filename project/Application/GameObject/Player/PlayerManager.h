@@ -108,6 +108,7 @@ private:
 
 	//particle
 	unique_ptr<PlayerMoveParticle>moveParticle_ = nullptr;
+	unique_ptr<PlayerDeadParticle>deadParticle_ = nullptr;
 
 
 	bool* isChangeGameOverAnimation_ = nullptr;

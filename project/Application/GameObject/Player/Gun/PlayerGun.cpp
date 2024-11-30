@@ -16,7 +16,10 @@ void PlayerGun::Initialize() {
 
 void PlayerGun::Update()
 {
+
 	//基礎位置
+	auto playerCore = player_.lock();
+
 	Math::Vector::Vector3 PlayerPos = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.translate;
 	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
 
@@ -25,9 +28,10 @@ void PlayerGun::Update()
 	//銃のpos
 	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform();
 
-	float kRadious = 3.0f;
-
-	auto playerCore = player_.lock();
+	if (playerCore->IsInState<PlayerStateDeadAnimation>())
+	{
+		SetIsDraw(false);
+	}
 
 	if (playerCore->IsInState<PlayerStateAim>())
 	{
@@ -36,8 +40,8 @@ void PlayerGun::Update()
 
 		// レティクルの位置を計算
 		gunPos_ = {
-			kRadious * normalizedRjoy_.x,
-			kRadious * normalizedRjoy_.y
+			kRadious_ * normalizedRjoy_.x,
+			kRadious_ * normalizedRjoy_.y
 		};
 	}
 	else
@@ -45,15 +49,13 @@ void PlayerGun::Update()
 		gunPos_.y = 0.0f;
 		if (playerRotate.y >= Math::Vector::degreesToRadians(90.0f))
 		{
-			gunPos_.x = kRadious * 1.0f;
+			gunPos_.x = kRadious_ * 1.0f;
 		}
 		if (playerRotate.y <= -Math::Vector::degreesToRadians(90.0f))
 		{
-			gunPos_.x = kRadious * -1.0f;
+			gunPos_.x = kRadious_ * -1.0f;
 		}
 	}
-
-
 
 	//レティクルのと同じ角度に
 	Math::Vector::Vector3 reticleRotate = gameObjectManager_->GetObj3dData("PlayerReticle")->GetWorldTransform().transform.rotate;
