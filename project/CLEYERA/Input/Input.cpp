@@ -181,6 +181,38 @@ Vector2 Input::GetJoyRStickPos(const float& mode)
 	return {};
 }
 
+bool Engine::Input::GetJoyRActive(const float& mode)
+{
+	float deadzone = Input::GetInstance()->deadzone_;
+	Math::Vector::Vector2 joyPos(
+		Input::GetInstance()->joyState_.Gamepad.sThumbRX / mode,
+		Input::GetInstance()->joyState_.Gamepad.sThumbRY / mode
+	);
+
+	if (std::abs(joyPos.x) > deadzone || std::abs(joyPos.y) > deadzone)
+	{
+		return true;;
+	}
+
+	return false;
+}
+
+bool Engine::Input::GetJoyLActive(const float& mode)
+{
+	float deadzone = Input::GetInstance()->deadzone_;
+	Math::Vector::Vector2 joyPos(
+		Input::GetInstance()->joyState_.Gamepad.sThumbLX / mode,
+		Input::GetInstance()->joyState_.Gamepad.sThumbLY / mode
+	);
+
+	if (std::abs(joyPos.x) > deadzone || std::abs(joyPos.y) > deadzone)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 bool Input::GetRJoyTHUMB()
 {
 	if (Input::GetInstance()->joyState_.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB)

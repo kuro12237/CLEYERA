@@ -19,8 +19,6 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 
 	velo.x = Ljoy.x * 0.2f;
 	p->SetVelocity(velo);
-
-
 	if (!p->IsInState<PlayerStateJamp>() && !p->IsInState<PlayerStateFall>())
 	{
 		SAnimation::Skeleton& skeleton = gameObjectManager_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
@@ -33,6 +31,11 @@ void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 	}
 	//状態解除
 	if (velo.x == 0.0f)
+	{
+		p->MarkStateForRemoval<PlayerStateWalk>();
+	}
+
+	if (p->IsInState<PlayerStateAim>())
 	{
 		p->MarkStateForRemoval<PlayerStateWalk>();
 	}

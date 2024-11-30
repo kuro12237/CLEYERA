@@ -4,6 +4,9 @@
 #include"Input.h"
 #include"Sprite/Sprite.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
+#include"../Player.h"
+
+class Player;
 
 /// <summary>
 /// レティクルクラス
@@ -41,15 +44,12 @@ public:
 #pragma endregion
 
 #pragma region Set
-
-	void SetIsAim(const bool& f) { p_IsAim_ = &f; }
-
+	void SetPlayer(shared_ptr<Player> p) { player_ = p; }
 #pragma endregion
-
 
 private:
 
-	const bool* p_IsAim_ = nullptr;
+	weak_ptr<Player>player_;
 
 	Math::Vector::Vector3 NDCToScreen(const Math::Vector::Vector3& ndc, float screenWidth, float screenHeight);
 

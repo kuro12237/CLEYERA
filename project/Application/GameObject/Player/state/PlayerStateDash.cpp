@@ -35,12 +35,17 @@ void PlayerStateDash::Update(Player* p)
 		animationFlame_ = std::fmod(animationFlame_, walkAnimationData_.duration);
 		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, animationFlame_);
 
-		//パーティクル
 	}
 	//stateの削除
 	if (velo.x == 0.0f)
 	{
 		p->MarkStateForRemoval<PlayerStateDash>();
 	}
+	if (p->IsInState<PlayerStateAim>())
+	{
+
+		p->MarkStateForRemoval<PlayerStateDash>();
+	}
+
 }
 

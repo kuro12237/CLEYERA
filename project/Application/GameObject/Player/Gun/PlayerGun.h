@@ -1,6 +1,7 @@
 #pragma 
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Cleyera.h"
+#include"../Player.h"
 
 /// <summary>
 /// プレイヤーの銃
@@ -28,10 +29,12 @@ public:
 	void SetPlayerVelo(const Math::Vector::Vector3& velo) { playerVelo_ = &velo; }
 
 	void SetIsDraw(bool flag) { gameObjectManager_->GetObj3dData(name_)->SetIsDraw(flag); }
+	void SetPlayer(shared_ptr<Player>p) { player_ = p; }
 #pragma endregion
 
-
 private:
+
+	weak_ptr<Player>player_;
 
 	const Math::Vector::Vector3 *targetPos_ = {};
 	const Math::Vector::Vector3* playerVelo_ = nullptr;

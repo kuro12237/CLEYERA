@@ -92,6 +92,11 @@ void Player::Update()
 		}
 	}
 
+	if (!isAim_&&IsInState<PlayerStateAim>())
+	{
+		this->MarkStateForRemoval<PlayerStateAim>();
+	}
+
 	///ダメージ処理
 	if (IsInState<PlayerStateInvincible>())
 	{
@@ -115,11 +120,35 @@ void Player::Update()
 		}
 	}
 
+	isAim_ = false;
 	isShoot_ = false;
 
 	TransformUpdate();
 
 	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+
+	if (IsInState<PlayerStateAim>())
+	{
+		float rotateY = gameObjectManager_->GetObj3dData("PlayerGun")->GetWorldTransform().transform.rotate.y;
+		const float degrees = 90.0f;
+		float radian = 0.0f;
+
+		if (rotateY >= Math::Vector::degreesToRadians(90.0f))
+		{
+			radian = Math::Vector::degreesToRadians(-degrees);
+		}
+		else
+		{
+			radian = Math::Vector::degreesToRadians(degrees);
+		}
+
+		
+	
+		transform.rotate.y = radian;
+	}
+	else {
+		RotateUpdate();
+	}
 
 	//落ちたら
 	if (transform.translate.y <= -5.0f)
@@ -209,9 +238,33 @@ void Player::DrawParticle()
 	deadParticle_->Draw();
 }
 
+void Player::RotateUpdate()
+{
+	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	
+	const float degrees = 90.0f;
+	float radian = 0.0f;
+	if (velocity_.x > 0.0f)
+	{
+		radian = Math::Vector::degreesToRadians(degrees);
+	}
+	if (velocity_.x == 0.0f)
+	{
+		radian = Math::Vector::degreesToRadians(-180.0f);
+	}
+	//左
+	if (velocity_.x < 0.0f)
+	{
+		radian = Math::Vector::degreesToRadians(-degrees);
+	}
+	transform.rotate.y = radian;
+
+}
+
 void Player::Jamp()
 {
 
+	CheckStatePush<PlayerStateAim>();
 	CheckStatePush<PlayerStateRock>();
 	CheckStatePush<PlayerStateDeadAnimation>();
 
@@ -228,6 +281,8 @@ void Player::Jamp()
 
 void Player::Move()
 {
+
+	CheckStatePush<PlayerStateAim>();
 	CheckStatePush<PlayerStateRock>();
 	CheckStatePush<PlayerStateDeadAnimation>();
 	CheckStatePush<PlayerStateDash>();
@@ -256,6 +311,7 @@ void Player::Shoot()
 void Player::Dash()
 {
 	//指定のステートの場合通さない
+	CheckStatePush<PlayerStateAim>();
 	CheckStatePush<PlayerStateRock>();
 	CheckStatePush<PlayerStateDeadAnimation>();
 	CheckStatePush<PlayerStateFall>();
@@ -281,28 +337,26 @@ void Player::Dash()
 void Player::Aim()
 {
 	isAim_ = true;
+	//指定のステートの場合通さない
+	CheckStatePush<PlayerStateRock>();
+	CheckStatePush<PlayerStateDeadAnimation>();
+	CheckStatePush<PlayerStateFall>();
+	CheckStatePush<PlayerStateJamp>();
+	if (IsCheckStateRetuen())
+	{
+		return;
+	}
+
+	if (!IsInState<PlayerStateAim>())
+	{
+		AddState<PlayerStateAim>();
+	}
+
+
 }
 
 void Player::TransformUpdate()
 {
 	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
-
-	const float degrees = 90.0f;
-	float radian = {};
-	if (velocity_.x > 0.0f)
-	{
-		radian = Math::Vector::degreesToRadians(degrees);
-	}
-	if (velocity_.x == 0.0f)
-	{
-		radian = Math::Vector::degreesToRadians(-180.0f);
-	}
-	//左
-	if (velocity_.x < 0.0f)
-	{
-		radian = Math::Vector::degreesToRadians(-degrees);
-	}
-	transform.rotate.y = radian;
-
 }

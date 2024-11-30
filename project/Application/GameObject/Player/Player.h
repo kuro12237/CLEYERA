@@ -23,7 +23,7 @@
 #include"state/PlayerStateJamp.h"
 #include"state/PlayerStateFall.h"
 #include"state/PlayerStateDash.h"
-
+#include"state/PlayerStateAim.h"
 
 #include"Utility/ObjectManager/GameObjectManager.h"
 
@@ -124,6 +124,11 @@ public:
 		return result;
 	}
 
+	/// <summary>
+	/// 回転を更新
+	/// </summary>
+	void RotateUpdate();
+
 
 #pragma region Command
 
@@ -162,7 +167,7 @@ public:
 	
 #pragma region Get
 	bool GetIsShoot() { return isShoot_; }
-	bool GetIsAim() { return isAim_; }
+	bool &GetIsAim() { return isAim_; }
 
 	bool& GetIsGameEnd() { return isGameEnd_; }
 	string& GetWarpFilePath() { return warpFilePath_; }

@@ -107,6 +107,9 @@ namespace Engine
 		/// <returns></returns>
 		static Math::Vector::Vector2 GetJoyRStickPos(const float& mode = SHRT_MAX);
 
+		static bool GetJoyRActive(const float& mode = SHRT_MAX);
+		static bool GetJoyLActive(const float& mode = SHRT_MAX);
+
 		/// <summary>
 		/// Lsyic押し込み検知
 		/// </summary>

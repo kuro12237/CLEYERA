@@ -780,12 +780,6 @@
     <ClCompile Include="Application\GameObject\Player\command\PlayerMoveCommand.cpp">
       <Filter>Project\GameObject\Character\Player\Command</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp">
-      <Filter>Project\GameObject\Character\Player\Command</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp">
-      <Filter>Project\GameObject\Character\Player\Command</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Player\command\PlayerShootCommand.cpp">
       <Filter>Project\GameObject\Character\Player\Command</Filter>
     </ClCompile>
@@ -900,6 +894,7 @@
     <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\command\PlayerAimCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateAim.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1403,9 +1398,6 @@
     <ClInclude Include="Application\GameObject\Player\command\IPlayerCommand.h">
       <Filter>Project\GameObject\Character\Player\Command</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\IPlayerReticleCommand.h">
-      <Filter>Project\GameObject\Character\Player\Command</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Player\command\PlayerCommandHandler.h">
       <Filter>Project\GameObject\Character\Player\Command</Filter>
     </ClInclude>
@@ -1425,12 +1417,6 @@
       <Filter>Project\GameObject\Character\Player\Reticle</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Player\command\PlayerMoveCommand.h">
-      <Filter>Project\GameObject\Character\Player\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h">
-      <Filter>Project\GameObject\Character\Player\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h">
       <Filter>Project\GameObject\Character\Player\Command</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Player\command\PlayerShootCommand.h">
@@ -1565,6 +1551,7 @@
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerMoveParticle.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
     <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateAim.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

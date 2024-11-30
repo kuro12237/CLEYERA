@@ -10,7 +10,7 @@ void PlayerReticle::Initialize()
 {
 	name_ = "PlayerReticle";
 	uint32_t modelHandle = ModelManager::LoadObjectFile("DfCube");
-	shared_ptr<Game3dObjectData> data=make_shared<Game3dObjectData>();
+	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();
 	data->SetObjectType("MESH");
 	data->SetObjName(name_);
 	data->SetModelHandle(modelHandle);
@@ -32,14 +32,29 @@ void PlayerReticle::Initialize()
 
 void PlayerReticle::ImGuiUpdate()
 {
-	
+
 }
 
 void PlayerReticle::Update()
 {
-	if (*p_IsAim_)
+	auto playerCore = player_.lock();
+	if (playerCore->IsInState<PlayerStateAim>())
 	{
 		Move();
+	}
+	else
+	{
+		reticlePos_.y = 0.0f;
+		if (playerCore->GetVelocity().x >= 0.0f)
+		{
+			// レティクルの位置を計算
+			reticlePos_.x = kRetickeRad_ * 1.0f;
+		}
+		if (playerCore->GetVelocity().x <= 0.0f)
+		{
+			// レティクルの位置を計算
+			reticlePos_.x = kRetickeRad_ * -1.0f;
+		}
 	}
 
 	//Get
@@ -52,7 +67,7 @@ void PlayerReticle::Update()
 
 	Math::Vector::Vector3 pos = { playerPos.x + reticlePos_.x,playerPos.y + reticlePos_.y,playerPos.z };
 	interTarget_ = Math::Vector::Lerp(interTarget_, pos, 0.5f);
-	
+
 	transform.transform.translate = interTarget_;
 
 	Math::Vector::Vector3 worldPos = transform.GetWorldPosition();
@@ -78,7 +93,7 @@ void PlayerReticle::Update()
 	Math::Matrix::Matrix4x4 matViewport = Math::Matrix::ViewportMatrix(0, 0, float(WinApp::GetkCilientWidth()), float(WinApp::GetkCilientHeight()), 0, 1);
 	Math::Matrix::Matrix4x4 matViewProjViewPort = Math::Matrix::Multiply(viewMat, Math::Matrix::Multiply(ProjMat, matViewport));
 
-	worldTransform_.transform.translate =Math::Vector::TransformByMatrix(transform.transform.translate, matViewProjViewPort);
+	worldTransform_.transform.translate = Math::Vector::TransformByMatrix(transform.transform.translate, matViewProjViewPort);
 	worldTransform_.UpdateMatrix();
 }
 

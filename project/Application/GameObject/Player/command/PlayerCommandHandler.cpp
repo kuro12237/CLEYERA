@@ -27,6 +27,11 @@ void PlayerCommandHandler::Handler()
 		commands_.push(make_unique<PlayerShootCommand>());
 	}
 
+	if (Input::GetJoyRActive())
+	{
+		commands_.push(make_unique<PlayerAimCommand>());
+	}
+
 }
 
 void PlayerCommandHandler::CommandsExec(Player& player)

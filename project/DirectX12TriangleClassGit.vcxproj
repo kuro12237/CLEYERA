@@ -76,6 +76,7 @@
     <ClCompile Include="Application\GameObject\Player\command\PlayerAimCommand.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerDeadParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateAim.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDash.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateFall.cpp" />
@@ -130,8 +131,6 @@
     <ClCompile Include="Application\GameObject\Player\Player.cpp" />
     <ClCompile Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.cpp" />
     <ClCompile Include="Application\GameObject\Player\PlayerManager.cpp" />
-    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.cpp" />
-    <ClCompile Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.cpp" />
     <ClCompile Include="Application\GameObject\Player\Reticle\PlayerReticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateNone.cpp" />
@@ -267,6 +266,7 @@
     <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h" />
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerDeadParticle.h" />
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerMoveParticle.h" />
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateAim.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDash.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDeadAnimation.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateFall.h" />
@@ -327,9 +327,6 @@
     <ClInclude Include="Application\GameObject\Player\Player.h" />
     <ClInclude Include="Application\GameObject\Player\PlayerCamera\PlayerCamera.h" />
     <ClInclude Include="Application\GameObject\Player\PlayerManager.h" />
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\IPlayerReticleCommand.h" />
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleCommandHandler.h" />
-    <ClInclude Include="Application\GameObject\Player\Reticle\command\PlayerReticleMoveCommand.h" />
     <ClInclude Include="Application\GameObject\Player\Reticle\PlayerReticle.h" />
     <ClInclude Include="Application\GameObject\Player\state\IPlayerState.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateGoalAnimation.h" />

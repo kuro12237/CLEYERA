@@ -54,7 +54,8 @@ void PlayerManager::Initialize()
 	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
 	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdateEnd, this));
 
-	reticle_->SetIsAim(playerCore_->GetIsAim());
+	reticle_->SetPlayer(playerCore_);
+	gun_->SetPlayer(playerCore_);
 
 	ModelManager::ModelLoadNormalMap();
 	bulletModelHandle_ = ModelManager::LoadObjectFile("PlayerNormalBullet");
@@ -63,9 +64,7 @@ void PlayerManager::Initialize()
 
 	moveParticle_ = make_unique<PlayerMoveParticle>();
 	moveParticle_->Initialize();
-	moveParticle_->SetPlayerPos(gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().GetWorldPosition());
-
-
+	moveParticle_->SetPlayerPos(gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
 }
 
 void PlayerManager::ImGuiUpdate()

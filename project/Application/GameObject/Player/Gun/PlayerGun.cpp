@@ -10,35 +10,50 @@ using namespace Engine::Manager;
 void PlayerGun::Initialize() {
 
 	name_ = "PlayerGun";
-	auto& transform =gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
+	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.scale = { 1,1,1 };
 }
 
 void PlayerGun::Update()
 {
 	//基礎位置
-	Math::Vector::Vector3 PlayerPos =gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.translate;
+	Math::Vector::Vector3 PlayerPos = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.translate;
+	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
+
 	PlayerPos.y += 1.5f;
 
 	//銃のpos
 	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform();
 
-	Math::Vector::Vector2 Rjoy = Engine::Input::GetInstance()->GetJoyRStickPos();
-	const float  joystickThreshold_ = 0.2f;
-	if (std::abs(Rjoy.x) > joystickThreshold_ || std::abs(Rjoy.y) > joystickThreshold_) {
+	float kRadious = 3.0f;
+
+	auto playerCore = player_.lock();
+
+	if (playerCore->IsInState<PlayerStateAim>())
+	{
+		Math::Vector::Vector2 Rjoy = Engine::Input::GetInstance()->GetJoyRStickPos();
 		Math::Vector::Vector2 normalizedRjoy_ = Math::Vector::Normalize(Rjoy);
 
-		float kRetickeRad_ = 2.0f;
 		// レティクルの位置を計算
 		gunPos_ = {
-			kRetickeRad_ * normalizedRjoy_.x,
-			kRetickeRad_ * normalizedRjoy_.y
+			kRadious * normalizedRjoy_.x,
+			kRadious * normalizedRjoy_.y
 		};
 	}
 	else
 	{
-		Rjoy = {};
+		gunPos_.y = 0.0f;
+		if (playerRotate.y >= Math::Vector::degreesToRadians(90.0f))
+		{
+			gunPos_.x = kRadious * 1.0f;
+		}
+		if (playerRotate.y <= -Math::Vector::degreesToRadians(90.0f))
+		{
+			gunPos_.x = kRadious * -1.0f;
+		}
 	}
+
+
 
 	//レティクルのと同じ角度に
 	Math::Vector::Vector3 reticleRotate = gameObjectManager_->GetObj3dData("PlayerReticle")->GetWorldTransform().transform.rotate;

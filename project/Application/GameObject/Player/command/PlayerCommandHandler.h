@@ -5,9 +5,10 @@
 #include"PlayerMoveCommand.h"
 #include"PlayerShootCommand.h"
 #include"playerDashMoveCommand.h"
+#include"PlayerAimCommand.h"
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‘€ìd•ª‚¯
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ“ä½œä»•åˆ†ã‘
 /// </summary>
 class PlayerCommandHandler
 {
@@ -16,12 +17,12 @@ public:
 	~PlayerCommandHandler() {};
 
 	/// <summary>
-	/// ƒNƒ‰ƒXì»
+	/// ã‚¯ãƒ©ã‚¹ä½œè£½
 	/// </summary>
 	void Handler();
 
 	/// <summary>
-	/// Às
+	/// å®Ÿè¡Œ
 	/// </summary>
 	/// <param name="player"></param>
 	void CommandsExec(Player& player);
@@ -29,7 +30,7 @@ public:
 private:
 
 	/// <summary>
-	/// LƒXƒeƒBƒbƒN‚ªg‚¦‚é‚©
+	/// Lã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒä½¿ãˆã‚‹ã‹
 	/// </summary>
 	/// <returns></returns>
 	bool IsLJoystickActive();
