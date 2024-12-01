@@ -2,11 +2,13 @@
 
 ConstantBuffer<Material> gMaterial : register(b0);
 ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
-StructuredBuffer<PointLight> gPointLight : register(t1);
+StructuredBuffer<TransformationMatrix> gTransformationMatrix : register(t1);
+
+StructuredBuffer<PointLight> gPointLight : register(t2);
 ConstantBuffer<NowLightTotal> gNowLightTotal : register(b4);
 
-Texture2D<float32_t4> gTexture : register(t2);
-Texture2D<float32_t4> gNormalTexture : register(t3);
+Texture2D<float32_t4> gTexture : register(t3);
+Texture2D<float32_t4> gNormalTexture : register(t4);
 
 SamplerState gSampler : register(s0);
 

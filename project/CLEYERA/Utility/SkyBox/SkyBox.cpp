@@ -85,7 +85,7 @@ void SkyBox::Draw()
 	CameraManager::GetInstance()->PsCommandCall(2);
 	CameraManager::GetInstance()->VsCommandCall(3);
 	LightingManager::GetInstance()->CallCommand();
-	DescriptorManager::rootParamerterCommand(6, texHandle_);
+	DescriptorManager::rootParamerterCommand(7, texHandle_);
 	command->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	command->DrawIndexedInstanced(36, 1, 0, 0, 0);
 }

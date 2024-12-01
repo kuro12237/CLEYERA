@@ -70,17 +70,19 @@ void GameInstancing3dObject::Draw()
 
 	material_->CommandCall(0);
 	DescriptorManager::rootParamerterCommand(1, instancing_->GetSrvIndex());
-	CameraManager::GetInstance()->PsCommandCall(2);
-	CameraManager::GetInstance()->VsCommandCall(3);
+	DescriptorManager::rootParamerterCommand(2, instancing_->GetSrvIndex());
+
+	CameraManager::GetInstance()->PsCommandCall(3);
+	CameraManager::GetInstance()->VsCommandCall(4);
 
 	LightingManager::GetInstance()->CallCommand();
-	DescriptorManager::rootParamerterCommand(6, texHandle_);
-	DescriptorManager::rootParamerterCommand(7, normalTexHandle_);
+	DescriptorManager::rootParamerterCommand(7, texHandle_);
+	DescriptorManager::rootParamerterCommand(8, normalTexHandle_);
 	if (UseLight_)
 	{
 		//if (ModelShaderSelect_ == PHONG_NORMAL_MODEL || ModelShaderSelect_ == UE4_BRDF || ModelShaderSelect_ == PHONG_SUBSURFACE_MODEL)
 		{
-			DescriptorManager::rootParamerterCommand(7, normalTexHandle_);
+			DescriptorManager::rootParamerterCommand(9, normalTexHandle_);
 		}
 	}
 	model_->Draw(uint32_t(params_.size()));

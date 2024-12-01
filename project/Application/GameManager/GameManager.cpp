@@ -42,7 +42,7 @@ void GameManager::Run()
 		ImGuiDebugPanelEnd();
 #endif // _USE_IMGUI
 
-		//sceneŠÖ”‚Édraw‚ª“ü‚Á‚Ä‚¢‚½Žž
+		//sceneé–¢æ•°ã«drawãŒå…¥ã£ã¦ã„ãŸæ™‚
 		if (scene_->GetIsPostEffectDrawFunc())
 		{
 			PostEffect::GetInstance()->PreDraw();
@@ -58,7 +58,7 @@ void GameManager::Run()
 		scene_->Back2dSpriteFuncDraw();
 		scene_->Object3dFuncDraw();
 
-		//ŠÖ”‚ª“ü‚Á‚Ä‚¢‚é‚Æ‚«
+		//é–¢æ•°ãŒå…¥ã£ã¦ã„ã‚‹ã¨ã
 		if (scene_->GetIsPostEffectDrawFunc())
 		{
 			PostEffect::GetInstance()->Draw();

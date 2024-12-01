@@ -61,13 +61,14 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	MaterialBuffer_->CommandCall(0);
 	//行列
 	worldTransform.buffer_->CommandCall(1);
+	worldTransform.buffer_->CommandCall(2);
 	//カメラ
-	CameraManager::GetInstance()->PsCommandCall(2);
-	CameraManager::GetInstance()->VsCommandCall(3);
-	//4.5を使用
+	CameraManager::GetInstance()->PsCommandCall(3);
+	CameraManager::GetInstance()->VsCommandCall(4);
+	//5.6を使用
 	LightingManager::GetInstance()->CallCommand();
 	//テクスチャ
-	DescriptorManager::rootParamerterCommand(6, modelData_.material.handle);
+	DescriptorManager::rootParamerterCommand(7, modelData_.material.handle);
 
 	//subsurface
 	//DescriptorManager::rootParamerterCommand(8, baseTexHandle_);
@@ -75,7 +76,7 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	//ここを後でどうにかする
 	if (skinningFlag_)
 	{
-		DescriptorManager::rootParamerterCommand(8, palette_->GetSrvIndex());
+		DescriptorManager::rootParamerterCommand(9, palette_->GetSrvIndex());
 	}
 
 	model_->Draw(1);

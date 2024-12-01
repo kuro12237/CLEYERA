@@ -1,8 +1,9 @@
 #include"PhongObject3d.hlsli"
 
 ConstantBuffer<Material> gMaterial : register(b0);
-ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b1);
-ConstantBuffer<NowLightTotal> gNowLightTotal : register(b2);
+ConstantBuffer<TransformationMatrix> gTransformationMatrix : register(b1);
+ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2);
+ConstantBuffer<NowLightTotal> gNowLightTotal : register(b3);
 
 StructuredBuffer<PointLight> gPointLight : register(t0);
 Texture2D<float32_t4> gTexture : register(t1);
@@ -37,13 +38,14 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t3 pTotalRimColor = 0;
  
     //法線を行列で調整
-    
     N = normalize(input.normal);
     //N = normalColor.rgb * 2.0f + N - 1.0f;
     //N = normalize(N);
+
     for (int32_t i = 0; i < gNowLightTotal.count; i++)
     {
 		//点光源
+        float32_t4 pos = mul(input.position, gTransformationMatrix.WVP);
         float32_t distance = length(gPointLight[i].position - input.worldPosition);
         float32_t factor = pow(saturate(-distance / gPointLight[i].radious + 1.0f), gPointLight[i].decay);
 

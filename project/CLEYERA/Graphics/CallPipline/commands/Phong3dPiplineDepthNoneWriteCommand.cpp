@@ -6,5 +6,5 @@ void Phong3dSkinningPiplineDepthNoneWriteCommand::Exec(const SModelData& modelDa
 	SetPso(PSO);
 	CallCommand();
 
-	DescriptorManager::rootParamerterCommand(7, modelData.normalTexHandle);
+	DescriptorManager::rootParamerterCommand(8, modelData.normalTexHandle);
 }

@@ -49,8 +49,8 @@ void LightingManager::TransfarBuffers()
 void LightingManager::CallCommand()
 {
 	ComPtr<ID3D12GraphicsCommandList>list = DirectXCommon::GetInstance()->GetCommands().m_pList;
-	DescriptorManager::rootParamerterCommand(4, lightParamsBuf_->GetSrvIndex());
-	lightCountBuf_->CommandCall(5);
+	DescriptorManager::rootParamerterCommand(5, lightParamsBuf_->GetSrvIndex());
+	lightCountBuf_->CommandCall(6);
 }
 
 void LightingManager::TransfarBuffer()
