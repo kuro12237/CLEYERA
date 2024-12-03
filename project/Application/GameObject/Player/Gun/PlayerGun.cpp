@@ -12,6 +12,11 @@ void PlayerGun::Initialize() {
 	name_ = "PlayerGun";
 	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
 	transform.scale = { 1,1,1 };
+	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
+
+
+	gunPos_.x = kRadious_ * 1.0f;
+
 }
 
 void PlayerGun::Update()

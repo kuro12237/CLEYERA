@@ -45,12 +45,12 @@ void PlayerReticle::Update()
 	else
 	{
 		reticlePos_.y = 0.0f;
-		if (playerCore->GetVelocity().x >= 0.0f)
+		if (playerCore->GetVelocity().x > 0.0f)
 		{
 			// レティクルの位置を計算
 			reticlePos_.x = kRetickeRad_ * 1.0f;
 		}
-		if (playerCore->GetVelocity().x <= 0.0f)
+		if (playerCore->GetVelocity().x < 0.0f)
 		{
 			// レティクルの位置を計算
 			reticlePos_.x = kRetickeRad_ * -1.0f;

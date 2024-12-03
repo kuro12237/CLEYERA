@@ -224,10 +224,6 @@ void Player::RotateUpdate()
 	{
 		radian = Math::Vector::degreesToRadians(degrees);
 	}
-	if (velocity_.x == 0.0f)
-	{
-		radian = Math::Vector::degreesToRadians(-180.0f);
-	}
 	//左
 	if (velocity_.x < 0.0f)
 	{

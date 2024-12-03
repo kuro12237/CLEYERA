@@ -46,6 +46,11 @@ void PlayerStateDash::Update(Player* p)
 
 		p->MarkStateForRemoval<PlayerStateDash>();
 	}
+	if (p->IsInState<PlayerStateDeadAnimation>())
+	{
+
+		p->MarkStateForRemoval<PlayerStateDash>();
+	}
 
 }
 
