@@ -895,6 +895,8 @@
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\command\PlayerAimCommand.cpp" />
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateAim.cpp" />
+    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlock.cpp" />
+    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1552,6 +1554,8 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
     <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h" />
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateAim.h" />
+    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockManager.h" />
+    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlock.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

@@ -8,6 +8,7 @@
 #include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
 #include"GameObject/Block/BlockManager.h"
+#include"GameObject/BreakBlock/BreakBlockManager.h"
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Goal/Goal.h"
 #include"GameObject/Warp/WarpManager.h"
@@ -114,6 +115,7 @@ private:
 
 	unique_ptr<WarpManager>warpManager_ = nullptr;
 	shared_ptr<BlockManager>blockManager_ = nullptr;
+	unique_ptr<BreakBlockManager>breakBlockManager_ = nullptr;
 	unique_ptr<StageCoinManager>stageCoinManager_ = nullptr;
 
 	unique_ptr<GravityManager>gravityManager_ = nullptr;

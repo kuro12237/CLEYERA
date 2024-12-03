@@ -38,22 +38,25 @@ void PlayerReticle::ImGuiUpdate()
 void PlayerReticle::Update()
 {
 	auto playerCore = player_.lock();
+	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
+
 	if (playerCore->IsInState<PlayerStateAim>())
 	{
 		Move();
 	}
 	else
 	{
-		reticlePos_.y = 0.0f;
-		if (playerCore->GetVelocity().x > 0.0f)
+		if (playerRotate.y >= Math::Vector::degreesToRadians(90.0f))
 		{
 			// レティクルの位置を計算
 			reticlePos_.x = kRetickeRad_ * 1.0f;
+			reticlePos_.y = 0.0f;
 		}
-		if (playerCore->GetVelocity().x < 0.0f)
+		if (playerRotate.y<= -Math::Vector::degreesToRadians(90.0f))
 		{
 			// レティクルの位置を計算
 			reticlePos_.x = kRetickeRad_ * -1.0f;
+			reticlePos_.y = 0.0f;
 		}
 	}
 

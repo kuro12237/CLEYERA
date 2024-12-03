@@ -44,6 +44,9 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->Initialize();
 
+	breakBlockManager_ = make_unique<BreakBlockManager>();
+	breakBlockManager_->Initialize();
+
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 
@@ -126,6 +129,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	bulletEnemyManager_->Update();
 
 	blockManager_->Update();
+	breakBlockManager_->Update();
 
 	stageCoinManager_->Update();
 

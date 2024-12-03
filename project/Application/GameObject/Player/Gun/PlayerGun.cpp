@@ -60,6 +60,7 @@ void PlayerGun::Update()
 		{
 			gunPos_.x = kRadious_ * -1.0f;
 		}
+	
 	}
 
 	//レティクルのと同じ角度に

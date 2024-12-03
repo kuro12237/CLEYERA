@@ -219,7 +219,6 @@ private:
 	bool isUseGravityFlag_ = true;
 	string warpFilePath_ = "";
 
-
 	weak_ptr<PlayerHp> hp_;
 
 };

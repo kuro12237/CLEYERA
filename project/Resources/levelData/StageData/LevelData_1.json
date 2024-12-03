@@ -271,6 +271,126 @@
         },
         {
             "type": "MESH",
+            "name": "smallRock",
+            "file_name": "smallRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -9.56491756439209,
+                    141.36395263671875,
+                    -12.626368522644043
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "smallRock.001",
+            "file_name": "smallRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -29.750558853149414,
+                    65.6171646118164,
+                    -12.626368522644043
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    4.0,
+                    4.0,
+                    4.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "smallRock.002",
+            "file_name": "smallRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    23.01106071472168,
+                    65.6171646118164,
+                    -12.626368522644043
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    4.0,
+                    4.0,
+                    4.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -115.6849365234375,
+                    221.90225219726562,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    40.0,
+                    40.0,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "smallRock.003",
+            "file_name": "smallRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -73.41242980957031,
+                    239.95162963867188,
+                    23.303783416748047
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    4.0,
+                    4.0,
+                    4.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
             "name": "Block",
             "file_name": "Block",
             "ModelFileType": "obj",
@@ -950,6 +1070,31 @@
                     2.0,
                     2.0,
                     2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "BreakBlockMap",
+            "file_name": "BreakBlock",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "BreakMap",
+            "transform": {
+                "translate": [
+                    9.557600021362305,
+                    0.0,
+                    4.016928195953369
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             }
         },
@@ -3157,31 +3302,6 @@
                 "translate": [
                     -121.5,
                     -56.0,
-                    92.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "WarpRoot.047",
-            "file_name": "WarpRoot",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpRoot",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -58.8505859375,
                     92.0
                 ],
                 "rotate": [

@@ -59,6 +59,7 @@ void Player::ImGuiUpdate()
 
 void Player::Update()
 {
+	auto& objData = gameObjectManager_->GetObj3dData(INameable::name_);
 
 	shootTimerFlame_++;
 
@@ -70,7 +71,7 @@ void Player::Update()
 			it->Update(this);
 		}
 	}
-	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SkeletonUpdate();
+	objData->GetGameObject()->SkeletonUpdate();
 
 
 	// 更新後にキューから状態を削除
@@ -122,7 +123,7 @@ void Player::Update()
 
 	TransformUpdate();
 
-	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	TransformEular& transform = objData->GetWorldTransform().transform;
 
 	if (IsInState<PlayerStateAim>())
 	{
@@ -157,8 +158,6 @@ void Player::Update()
 			reduceHpFunc_();
 		}
 	}
-
-	
 }
 
 void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
@@ -223,14 +222,14 @@ void Player::RotateUpdate()
 	if (velocity_.x > 0.0f)
 	{
 		radian = Math::Vector::degreesToRadians(degrees);
+		transform.rotate.y = radian;
 	}
 	//左
 	if (velocity_.x < 0.0f)
 	{
 		radian = Math::Vector::degreesToRadians(-degrees);
+		transform.rotate.y = radian;
 	}
-	transform.rotate.y = radian;
-
 }
 
 void Player::Jamp()
