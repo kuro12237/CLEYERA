@@ -12,5 +12,5 @@ void BreakBlockHp::Update()
 
 void BreakBlockHp::SubtructHp(int32_t hpSub)
 {
-	hpCount_ -= hpSub;
+	hpCount_ += hpSub;
 }

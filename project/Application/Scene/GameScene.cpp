@@ -319,7 +319,6 @@ void GameScene::Collision()
 		{
 			weak_ptr<BreakBlock>it = b;
 			auto obj = it.lock();
-
 			gameCollisionManager_->ListPushback(obj.get(), obj.get());
 		}
 	}

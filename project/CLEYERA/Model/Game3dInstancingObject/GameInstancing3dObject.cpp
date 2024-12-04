@@ -10,7 +10,7 @@ void GameInstancing3dObject::Create(const uint32_t& kNum, const string& name)
 {
 	instancingNum_ = kNum;
 	name_ = name;
-	
+
 	instancing_ = make_unique<BufferResource<TransformationMatrix>>();
 	instancing_->CreateResource(sizeof(TransformationMatrix) * kNum);
 	instancing_->CreateInstancingResource(kNum, name_, sizeof(TransformationMatrix));
@@ -26,26 +26,19 @@ void GameInstancing3dObject::Create(const uint32_t& kNum, const string& name)
 void GameInstancing3dObject::Transfar()
 {
 	int count = 0;
-	for (shared_ptr<IGameInstancing3dObject>&p : params_) 
+	for (shared_ptr<IGameInstancing3dObject>& p : params_)
 	{
 		if (p)
 		{
-			if (!p->GetBreakFlag())
-			{
-			
-				materialData_.uvTransform = Math::Matrix::AffineMatrix(p->GetUvScale(), Math::Vector::Vector3(0, 0, 0), { 0,0,0 });
-				instancingData_[count].WVP = p->GetMatrix();
-				instancingData_[count].world = p->GetMatrix();
-				count++;
-			}
-			if (p->GetBreakFlag())
-			{
-				p.reset();
-			}
+
+			materialData_.uvTransform = Math::Matrix::AffineMatrix(p->GetUvScale(), Math::Vector::Vector3(0, 0, 0), { 0,0,0 });
+			instancingData_[count].WVP = p->GetMatrix();
+			instancingData_[count].world = p->GetMatrix();
+			count++;
 		}
 	}
 	instancing_->Map();
-	instancing_->Setbuffer(instancingData_,uint32_t(params_.size()));
+	instancing_->Setbuffer(instancingData_, uint32_t(params_.size()));
 	instancing_->UnMap();
 
 	material_->Map();
@@ -108,7 +101,7 @@ void GameInstancing3dObject::SetModel(const uint32_t& index)
 	prevModelIndex_ = modelHandle_;
 }
 
-void GameInstancing3dObject::PushVector(shared_ptr<IGameInstancing3dObject> obj,uint32_t index)
+void GameInstancing3dObject::PushVector(shared_ptr<IGameInstancing3dObject> obj, uint32_t index)
 {
 	if (params_[index])
 	{

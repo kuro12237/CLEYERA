@@ -79,6 +79,12 @@ void GameObjectManager::Update()
 		//object
 		for (uint32_t i = 0; i < it->GetTransforms().size(); i++)
 		{
+			
+			if (it->GetTransforms()[i]->GetBreakFlag()==true)
+			{
+				it->GetTransforms()[i]->SetTransformEular({});
+			}
+
 			it->GetTransforms()[i]->Update();
 			it->PushObjectData(i);
 		}

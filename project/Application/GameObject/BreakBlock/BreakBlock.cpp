@@ -28,7 +28,7 @@ void BreakBlock::OnCollision([[maybe_unused]] ICollider* c, [[maybe_unused]] IOb
 {
 	if (c->GetId() == kPlayerBullet)
 	{
-		hp_->SubtructHp();
+		hp_->SubtructHp(-1);
 
 		if (hp_->GetHpCount() == 0)
 		{

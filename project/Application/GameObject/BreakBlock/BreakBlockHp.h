@@ -29,7 +29,7 @@ public:
 
 #pragma region Get
 
-	uint32_t GetHpCount() { return hpCount_; }
+	int32_t GetHpCount() { return hpCount_; }
 
 #pragma endregion
 

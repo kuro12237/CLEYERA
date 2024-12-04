@@ -16,16 +16,16 @@ void BreakBlockManager::Initialize()
 
 void BreakBlockManager::Update()
 {
-	for (shared_ptr<BreakBlock>& b : blocks_)
-	{
-		weak_ptr<BreakBlock>it = b;
-		auto obj = it.lock();
-		obj->Update();
 
+	for (std::vector<std::shared_ptr<BreakBlock>>::iterator it = blocks_.begin(); it != blocks_.end();) {
+		(*it)->Update();
 
-		if (obj->GetIsDead())
-		{
-			gameObjectManager_->GetObjInstancingData(name_)->GetTransforms()[obj->GetInstancingIndex()]->SetBreakFlag(true);
+		if ((*it)->GetIsDead()) {
+			gameObjectManager_->GetObjInstancingData(name_)->GetTransforms()[(*it)->GetInstancingIndex()]->SetBreakFlag(true);
+			it = blocks_.erase(it); // 削除後、次のイテレーターを取得
+		}
+		else {
+			++it; // 削除しない場合のみインクリメント
 		}
 	}
 }
