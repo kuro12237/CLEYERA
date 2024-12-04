@@ -2,31 +2,31 @@
 #include"Pch.h"
 
 /// <summary>
-/// ƒQ[ƒ€‚Ì“–‚½‚è”»’è‚Ìmaskİ’è
+/// ã‚²ãƒ¼ãƒ ã®å½“ãŸã‚Šåˆ¤å®šã®maskè¨­å®š
 /// </summary>
 namespace CollisionMask
 {
 	// Block-related definitions
-	const static uint32_t kBlockMask = 0b111111111;        // 0b111111111 (511) (‚·‚×‚Ä‚Æ“–‚½‚é)
+	const static uint32_t kBlockMask      = 0b111111111;        // 0b111111111 (511) (ã™ã¹ã¦ã¨å½“ãŸã‚‹)
 	const static uint32_t kBlockAttribute = 0b000000001;   // 0b000000001 (1)
 
 	// Player-related definitions
-	const static uint32_t kPlayerMask = 0b111111101;       // 0b111111101 (253) (ƒvƒŒƒCƒ„[‚Ì’eˆÈŠO‚Æ“–‚½‚é)
-	const static uint32_t kPlayerAttribute = 0b000000010;  // 0b000000010 (2)
+	const static uint32_t kPlayerMask            = 0b111111101;       // 0b111111101 (253) (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ä»¥å¤–ã¨å½“ãŸã‚‹)
+	const static uint32_t kPlayerAttribute       = 0b000000010;  // 0b000000010 (2)
 
 	// Player bullet-related definitions
-	const static uint32_t kPlayerBulletMask = 0b111111001; // 0b111111001 (249) (ƒvƒŒƒCƒ„[‚Æƒ|[ƒ^ƒ‹ˆÈŠO‚Æ“–‚½‚é)
+	const static uint32_t kPlayerBulletMask      = 0b111111001; // 0b111111001 (249) (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ãƒãƒ¼ã‚¿ãƒ«ä»¥å¤–ã¨å½“ãŸã‚‹)
 	const static uint32_t kPlayerBulletAttribute = 0b000000100; // 0b000000100 (4)
 
 	// Enemy-related definitions
-	const static uint32_t kEnemyWalkMask = 0b111101111;    // 0b111101111 (487) (ƒ|[ƒ^ƒ‹ˆÈŠO‚Æ“–‚½‚é)
+	const static uint32_t kEnemyWalkMask = 0b111101111;    // 0b111101111 (487) (ãƒãƒ¼ã‚¿ãƒ«ä»¥å¤–ã¨å½“ãŸã‚‹)
 	const static uint32_t kEnemyWalkAttribute = 0b000001000; // 0b000001000 (8)
 
 	// Portal-related definitions
-	const static uint32_t kPortalMask = 0b111101111;       // 0b111101111 (487) (ƒvƒŒƒCƒ„[‚Ì’e‚ÆƒGƒlƒ~[ˆÈŠO‚Æ“–‚½‚é)
+	const static uint32_t kPortalMask = 0b111101111;       // 0b111101111 (487) (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ä»¥å¤–ã¨å½“ãŸã‚‹)
 	const static uint32_t kPortalAttribute = 0b000010000;  // 0b000010000 (16)
 
-	// Player only (ƒvƒŒƒCƒ„[‚Æ‚µ‚©“–‚½‚ç‚È‚¢)
-	const static uint32_t kWarpGateMask = 0b000000010;    // 0b000000010 (2) (ƒvƒŒƒCƒ„[‚Æ‚µ‚©“–‚½‚ç‚È‚¢)
+	// Player only (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã—ã‹å½“ãŸã‚‰ãªã„)
+	const static uint32_t kWarpGateMask = 0b000000010;    // 0b000000010 (2) (ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã—ã‹å½“ãŸã‚‰ãªã„)
 	const static uint32_t kWarpGateAttribute = 0b001000000; // 0b001000000 (64)
 }

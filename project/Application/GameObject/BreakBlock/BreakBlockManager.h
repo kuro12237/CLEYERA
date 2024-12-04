@@ -29,6 +29,7 @@ private:
 
 	vector<shared_ptr<BreakBlock>>blocks_;
 
+	GameObjectManager* gameObjectManager_ = nullptr;
 private:
 
 };

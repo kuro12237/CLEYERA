@@ -4,6 +4,8 @@
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Utility/ObjectId/GameObjectId.h"
 
+#include"BreakBlockHp.h"
+
 /// <summary>
 /// 壊れるマップのブロッククラス
 /// </summary>
@@ -31,8 +33,20 @@ public:
 	/// <param name="c"></param>
 	void OnCollision(ICollider* c, IObjectData* objData)override;
 
+
+#pragma region Get
+
+	int32_t GetInstancingIndex() { return instancingIndex_; }
+	bool GetIsDead() { return isDead_; }
+#pragma endregion
+
+
 private:
 
 	Engine::Transform::TransformEular initialTransform_{};
 
+	unique_ptr<BreakBlockHp>hp_ = nullptr;
+
+	int32_t instancingIndex_ = 0;
+	bool isDead_ = false;
 };

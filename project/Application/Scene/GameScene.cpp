@@ -307,11 +307,22 @@ void GameScene::Collision()
 		}
 	}
 
+	//ブロック
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
 		gameCollisionManager_->ListPushback(b.get(), b.get());
 	}
+	//壊れるブロック
+	for (shared_ptr<BreakBlock> b : breakBlockManager_->GetBlocks())
+	{
+		if (b)
+		{
+			weak_ptr<BreakBlock>it = b;
+			auto obj = it.lock();
 
+			gameCollisionManager_->ListPushback(obj.get(), obj.get());
+		}
+	}
 	//ゴール
 	gameCollisionManager_->ListPushback(goal_.get(), goal_.get());
 

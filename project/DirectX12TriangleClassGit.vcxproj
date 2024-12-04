@@ -44,6 +44,7 @@
     <ClCompile Include="Application\GameObject\Block\Block.cpp" />
     <ClCompile Include="Application\GameObject\Block\BlockManager.cpp" />
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlock.cpp" />
+    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockHp.cpp" />
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockManager.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemy.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemyManager.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="Application\GameObject\Block\Block.h" />
     <ClInclude Include="Application\GameObject\Block\BlockManager.h" />
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlock.h" />
+    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockHp.h" />
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockManager.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemy.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemyManager.h" />

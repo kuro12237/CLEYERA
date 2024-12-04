@@ -10,6 +10,8 @@ void BreakBlockManager::Initialize()
 		block->Initialize(name_, i);
 		blocks_.push_back(move(block));
 	}
+
+	gameObjectManager_ = GameObjectManager::GetInstance();
 }
 
 void BreakBlockManager::Update()
@@ -17,6 +19,13 @@ void BreakBlockManager::Update()
 	for (shared_ptr<BreakBlock>& b : blocks_)
 	{
 		weak_ptr<BreakBlock>it = b;
-		it.lock()->Update();
+		auto obj = it.lock();
+		obj->Update();
+
+
+		if (obj->GetIsDead())
+		{
+			gameObjectManager_->GetObjInstancingData(name_)->GetTransforms()[obj->GetInstancingIndex()]->SetBreakFlag(true);
+		}
 	}
 }
