@@ -4,7 +4,7 @@ void ClearCoinManager::Initilaize()
 {
 	modelHandle_ = Engine::Manager::ModelManager::LoadGltfFile("StageCoin");
 	auraModelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("StageCoinAura");
-	const float sizeMax = 3;
+	const int32_t sizeMax = 3;
 	clearCoins_.resize(sizeMax);
 
 	for (int32_t index = 0; index < coinsMax_; index++)
