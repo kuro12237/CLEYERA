@@ -4,17 +4,18 @@ void ClearCoinManager::Initilaize()
 {
 	modelHandle_ = Engine::Manager::ModelManager::LoadGltfFile("StageCoin");
 	auraModelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("StageCoinAura");
-
-	clearCoins_.resize(3);
+	const float sizeMax = 3;
+	clearCoins_.resize(sizeMax);
 
 	for (int32_t index = 0; index < coinsMax_; index++)
 	{
-		this->CreateCoinGameObject({ 0.0f,0.0f,0.0f }, index);
+		this->CreateCoinGameObject({}, index);
 	}
 
 	splashParticle_ = make_unique<ClearCoinSplashParticle>();
 	splashParticle_->Initialize();
 
+	///パーティクルエディターを作る一旦そのまま
 	auto& emit = splashParticle_->GetEmitter()[0];
 	auto& control = emit.GetControlParam();
 	control[0].frequencyTime = 0.01f;
@@ -58,10 +59,11 @@ void ClearCoinManager::Update()
 				unique_ptr<ClearCoin>& nextCoin = clearCoins_[i + 1];
 				if (!nextCoin->GetIsStateAnimation())
 				{
-					auto& emit = splashParticle_->GetEmitter()[0];
-					emit.GetControlParam()[0].useFlag_ = true;
-					emit.GetEmitParam()[0].count = 3;
-					emit.GetEmitParam()[0].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
+					const int32_t countMax = 3;
+					auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
+					emit.GetControlParam()[useEmitterIndex_].useFlag_ = true;
+					emit.GetEmitParam()[useEmitterIndex_].count = countMax;
+					emit.GetEmitParam()[useEmitterIndex_].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
 
 					nextCoin->StartAnimation(true);
 					nextCoin->CreateState();
@@ -78,16 +80,17 @@ void ClearCoinManager::Update()
 		}
 	}
 
-	auto& emit = splashParticle_->GetEmitter()[0];
-	if (emit.GetControlParam()[0].useFlag_)
+	auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
+	if (emit.GetControlParam()[useEmitterIndex_].useFlag_)
 	{
-		particleEmitFlame_ += 1.0f / 10.0f;
+		const float particleEmitAddFlame = 1.0f / 10.0f;
+		particleEmitFlame_ += particleEmitAddFlame;
 
 		if (particleEmitFlame_ >= particleEmitMax_)
 		{
 			particleEmitFlame_ = 0.0f;
-			emit.GetEmitParam()[0].count = 0;
-			emit.GetControlParam()[0].useFlag_ = false;
+			emit.GetEmitParam()[useEmitterIndex_].count = 0;
+			emit.GetControlParam()[useEmitterIndex_].useFlag_ = false;
 		}
 	}
 
@@ -110,16 +113,17 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 	//オブジェクトの作成
 	const float kScale = 0.5f;
 	Engine::Transform::TransformEular transform = { .scale{kScale,kScale,kScale},.rotate{} };
-	Math::Vector::Vector3 offset = { 0.0f,4.0f,-2.0f };
+	const Math::Vector::Vector3 offset = { 0.0f,4.0f,-2.0f };
 	transform.translate = offset;
 
-	if (index == 0)
+	const float posX = 2.0f;
+	if (index == static_cast<int>(CoinDirection::Left))
 	{
-		transform.translate.x = -2.0f;
+		transform.translate.x = -posX;
 	}
-	if (index == 2)
+	if (index == static_cast<int>(CoinDirection::Rigft))
 	{
-		transform.translate.x = 2.0f;
+		transform.translate.x = posX;
 	}
 
 	string coinName = "Coin";
@@ -138,8 +142,9 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 		data->Initialize(transform, {}, modelHandle_);
 		if (i >= 1)
 		{
+			const Math::Vector::Vector4 color = { 0.0f, 0.0f, 0.0f, 0.5f };
 			data->SetIsDraw(true);
-			data->GetDesc().colorDesc.color_ = { 0.0f,0.0f,0.0f,0.5f };
+			data->GetDesc().colorDesc.color_ = color;
 		}
 		else
 		{
@@ -158,8 +163,10 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 		dataAura->Initialize(transform, {}, auraModelHandle_);
 		if (i >= 1)
 		{
+			const Math::Vector::Vector4 color = { 0.0f, 0.0f, 0.0f, 0.5f };
+
 			dataAura->SetIsDraw(true);
-			dataAura->GetDesc().colorDesc.color_ = { 0.0f,0.0f,0.0f,0.5f };
+			dataAura->GetDesc().colorDesc.color_ = color;
 		}
 		else
 		{

@@ -13,7 +13,8 @@ void BreakBlock::Initialize(string name, uint32_t index)
 
 	instancingIndex_ = index;
 	hp_ = make_unique<BreakBlockHp>();
-	hp_->Initialize(2);
+	const int32_t hpMax = 2;
+	hp_->Initialize(hpMax);
 }
 
 void BreakBlock::Update()
@@ -28,7 +29,8 @@ void BreakBlock::OnCollision([[maybe_unused]] ICollider* c, [[maybe_unused]] IOb
 {
 	if (c->GetId() == kPlayerBullet)
 	{
-		hp_->SubtructHp(-1);
+		const int32_t subHp = -1;
+		hp_->SubtructHp(subHp);
 
 		if (hp_->GetHpCount() == 0)
 		{

@@ -5,7 +5,7 @@ void GunEnemy::Initialize()
 	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	SetObjectData(transform);
 
-	Math::Vector::Vector2 minmax = { -1.0f,1.0f };
+	const Math::Vector::Vector2 minmax = { -1.0f,1.0f };
 	aabb_ = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
 	isExtrusion_ = true;
 	id_ = kEnemyWalkId;
@@ -124,7 +124,7 @@ void GunEnemy::CreateBullet(const Math::Vector::Vector3& Pos)
 	shared_ptr<Game3dObjectData> data = make_shared<Game3dObjectData>();
 	data->SetObjectType("MESH");
 
-	Engine::Transform::TransformEular transform = { {1.0f,1.0f,1.0f},{},Pos };
+	const Engine::Transform::TransformEular transform = { {1.0f,1.0f,1.0f},{},Pos };
 	data->Initialize(transform, {}, modelHandle_);
 
 	shared_ptr<GunEnemyBullet> b = make_shared<GunEnemyBullet>();

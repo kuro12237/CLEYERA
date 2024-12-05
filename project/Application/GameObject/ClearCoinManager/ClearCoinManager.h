@@ -46,6 +46,13 @@ public:
 
 private:
 
+
+	enum class CoinDirection{
+		Left,
+		Center,
+		Rigft
+	};
+
 	/// <summary>
 	/// コインをobjectManager二登録
 	/// </summary>
@@ -66,4 +73,6 @@ private:
 	vector<unique_ptr<ClearCoin>>clearCoins_{};
 
 	unique_ptr<ClearCoinSplashParticle>splashParticle_ = nullptr;
+
+	const int32_t useEmitterIndex_ = 0;
 };

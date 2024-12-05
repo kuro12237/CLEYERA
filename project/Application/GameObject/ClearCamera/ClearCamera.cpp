@@ -21,8 +21,9 @@ void ClearCamera::Update()
 	{
 		if (splineMotion_->GetIsStartFlag())
 		{
+			const float flameMax = 60.0f;
 			wt.transform.translate = splineMotion_->CatmullRomInterpolation();
-			splineMotion_->UpdateParamerter(60.0f);
+			splineMotion_->UpdateParamerter(flameMax);
 		}
 		if (splineMotion_->GetIsComplete())
 		{

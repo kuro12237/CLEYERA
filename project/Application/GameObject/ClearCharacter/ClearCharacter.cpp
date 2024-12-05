@@ -13,7 +13,8 @@ void ClearCharacter::Initialize()
 
 void ClearCharacter::Update()
 {
-	animFlame_ += 1.0f / 60.0f;
+	const float addFlame = 1.0f / 60.0f;
+	animFlame_ += addFlame;
     animFlame_ = std::fmod(animFlame_, animationData_.duration);
 
 	SAnimation::Skeleton& skeleton = gameObjectManager_->GetObj3dData(name_)->GetGameObject()->GetSkeleton();
