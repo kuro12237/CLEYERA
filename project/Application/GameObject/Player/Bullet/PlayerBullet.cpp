@@ -12,7 +12,7 @@ void PlayerBullet::Initialize(string number)
 
 	SetObjectData(transform);
 
-	//âÒì]ìKóp
+	//ÂõûËª¢ÈÅ©Áî®
 	float velocityXZ = sqrt(pow(velocity_.x, 2.0f) + pow(velocity_.z, 2.0f));
 	float height = -velocity_.y;
 	Math::Vector::Vector3 rotate = {};
@@ -22,7 +22,8 @@ void PlayerBullet::Initialize(string number)
 
 	velocity_ = Math::Vector::Multiply(velocity_, { speed_,speed_,speed_ });
 	id_ = kPlayerBullet;
-	aabb_ = { {-0.1f,-0.1f,-0.1f,},{0.1f,0.1f,0.1f} };
+	const AABB aabb = { {-0.1f,-0.1f,-0.1f,},{0.1f,0.1f,0.1f} };
+	aabb_ = aabb;
 	attribute_ = CollisionMask::kPlayerBulletAttribute;
 	mask_ = CollisionMask::kPlayerBulletMask;
 }

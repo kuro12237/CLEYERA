@@ -22,7 +22,8 @@ void PlayerCamera::Update()
 		interTarget_ = Math::Vector::Lerp(interTarget_, target_->transform.translate, 0.25f);
 	}
 
-	Math::Vector::Vector3 offset = CalcOffset(cameraWt, { 0.0f,0.0f,-64.0f });
+	Math::Vector::Vector3 offset ={ 0.0f,0.0f,-64.0f };
+	offset = CalcOffset(cameraWt, offset);
 	cameraWt.transform.translate = Math::Vector::Add(interTarget_, offset);
 }
 

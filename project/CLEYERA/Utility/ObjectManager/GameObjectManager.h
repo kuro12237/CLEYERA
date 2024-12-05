@@ -74,7 +74,7 @@ public:
 
 private:
 
-	void checkChildren(shared_ptr<Game3dObjectData>& data);
+	void CheckChildren(shared_ptr<Game3dObjectData>& data);
 
 	string inputTextSelectCamera_ = "";
 

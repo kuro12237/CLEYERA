@@ -115,4 +115,7 @@ private:
 	const Math::Vector::Vector3* p_CoreWorldPos_ = nullptr;
 	const Math::Vector::Vector3* p_ReticleWorldPos_ = nullptr;
 	const Math::Vector::Vector3* p_GunWorldPos_ = nullptr;
+
+	const float vinatteFactorMax_ = 1.0f;
+
 };

@@ -11,11 +11,10 @@ void PlayerGun::Initialize() {
 
 	name_ = "PlayerGun";
 	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform().transform;
-	transform.scale = { 1,1,1 };
+	transform.scale = { 1.0f,1.0f,1.0f };
 	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
 
-
-	gunPos_.x = kRadious_ * 1.0f;
+	gunPos_.x = kRadious_;
 
 }
 
@@ -24,11 +23,11 @@ void PlayerGun::Update()
 
 	//基礎位置
 	auto playerCore = player_.lock();
-
+	const float offset = 1.5f;
 	Math::Vector::Vector3 PlayerPos = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.translate;
 	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
 
-	PlayerPos.y += 1.5f;
+	PlayerPos.y += offset;
 
 	//銃のpos
 	auto& transform = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform();
@@ -51,12 +50,13 @@ void PlayerGun::Update()
 	}
 	else
 	{
+		const float degree = 90.0f;
 		gunPos_.y = 0.0f;
-		if (playerRotate.y >= Math::Vector::degreesToRadians(90.0f))
+		if (playerRotate.y >= Math::Vector::degreesToRadians(degree))
 		{
 			gunPos_.x = kRadious_ * 1.0f;
 		}
-		if (playerRotate.y <= -Math::Vector::degreesToRadians(90.0f))
+		if (playerRotate.y <= -Math::Vector::degreesToRadians(degree))
 		{
 			gunPos_.x = kRadious_ * -1.0f;
 		}

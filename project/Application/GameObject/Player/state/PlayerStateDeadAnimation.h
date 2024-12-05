@@ -4,7 +4,7 @@
 #include"../Player.h"
 
 /// <summary>
-/// プレイヤーが死んだときのアニメーション
+/// 繝励Ξ繧､繝､繝ｼ縺梧ｭｻ繧薙□縺ｨ縺阪�ｮ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
 /// </summary>
 class PlayerStateDeadAnimation :public IPlayerState
 {
@@ -17,8 +17,8 @@ public:
 	void Update(Player* p)override;
 
 private:
-	float walkAnimationFlame_ = 0.0f;
-	SAnimation::Animation walkAnimationData_;
+	float deadAnimationFlame_ = 0.0f;
+	SAnimation::Animation deadAnimationData_;
 
 	GameObjectManager* gameObjectInstance_ = nullptr;
 	string filePath_ = "";

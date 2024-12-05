@@ -14,16 +14,18 @@ void PlayerStateWalk::Initialize([[maybe_unused]] Player* p)
 
 void PlayerStateWalk::Update([[maybe_unused]] Player* p)
 {
+	const float speed = 0.2f;
+	const float flameAdd = 1.0f / 30.0f;
 	Math::Vector::Vector2 Ljoy = Input::GetInstance()->GetJoyLStickPos();
 	Math::Vector::Vector3 velo = p->GetVelocity();
 
-	velo.x = Ljoy.x * 0.2f;
+	velo.x = Ljoy.x * speed;
 	p->SetVelocity(velo);
 	if (!p->IsInState<PlayerStateJamp>() && !p->IsInState<PlayerStateFall>())
 	{
 		SAnimation::Skeleton& skeleton = gameObjectManager_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
 
-		flame_ += 1.0f / 30.0f * std::abs(Ljoy.x);
+		flame_ += flameAdd * std::abs(Ljoy.x);
 		flame_ = std::fmod(flame_, walkAnimationData_.duration);
 		AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, flame_);
 

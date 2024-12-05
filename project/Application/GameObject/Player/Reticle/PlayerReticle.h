@@ -55,12 +55,14 @@ private:
 
 	float rethickeAngle_ = 0.0f;
 	const float kRetickeRad_ = 6.0f;
-	Math::Vector::Vector2 reticlePos_ = {kRetickeRad_,0.0f};
+	Math::Vector::Vector2 reticlePos_ = { kRetickeRad_,0.0f };
 
 	Math::Vector::Vector2 pos2d_ = {};
 
 	unique_ptr<Engine::Objects::Sprite>sprite_ = nullptr;
 	Engine::Transform::WorldTransform worldTransform_;
 	Math::Vector::Vector3 interTarget_ = {};
+
+	float lerpFlame_ = 0.5f;
 };
 

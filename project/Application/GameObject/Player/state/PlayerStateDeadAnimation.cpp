@@ -11,15 +11,17 @@ void PlayerStateDeadAnimation::Initialize([[maybe_unused]] Player* p)
 
 	filePath_ = "FallDown";
 	AnimationManager::GetInstance()->LoadAnimation(filePath_);
-	walkAnimationData_ = AnimationManager::GetInstance()->GetData(filePath_);
+	deadAnimationData_ = AnimationManager::GetInstance()->GetData(filePath_);
 }
 
 
 void PlayerStateDeadAnimation::Update([[maybe_unused]] Player* p)
 {
-	if (walkAnimationFlame_ <= 1.0f) {
-		walkAnimationFlame_ += (1.0f / 30.0f);
-		walkAnimationFlame_ = std::fmod(walkAnimationFlame_, walkAnimationData_.duration);
+
+	const float flameAdd = 1.0f / 30.0f;
+	if (deadAnimationFlame_ <= 1.0f) {
+		deadAnimationFlame_ += flameAdd;
+		deadAnimationFlame_ = std::fmod(deadAnimationFlame_, deadAnimationData_.duration);
 	}
 	else
 	{
@@ -32,6 +34,5 @@ void PlayerStateDeadAnimation::Update([[maybe_unused]] Player* p)
 	}
 
 	SAnimation::Skeleton& skeleton = gameObjectInstance_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
-
-	AnimationManager::ApplyAnimation(skeleton, walkAnimationData_, walkAnimationFlame_);
+	AnimationManager::ApplyAnimation(skeleton, deadAnimationData_, deadAnimationFlame_);
 }

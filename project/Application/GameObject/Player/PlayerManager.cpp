@@ -259,11 +259,12 @@ void PlayerManager::DamegeUpdate()
 {
 	const float vinatteScale = 64.0f;
 	const float vinateFactorSpeed = 1.0f / 120.0f;
+	const Math::Vector::Vector3 color = { 1.0f,0.0f,0.0f };
 	//ビネットをかける
 	postEffect_->SetSelectPostEffect(VIGNETTE, true);
 	postEffect_->SetVignetteScale(vinatteScale);
 	postEffect_->SetVignetteFactor(vinatteFactor_);
-	postEffect_->SetVignetteColor({ 1.0f,0.0f,0.0f });
+	postEffect_->SetVignetteColor(color);
 
 	vinatteFactor_ -= vinateFactorSpeed;
 
@@ -273,7 +274,7 @@ void PlayerManager::DamegeUpdateEnd()
 {
 	postEffect_->SetSelectPostEffect(VIGNETTE, false);
 	postEffect_->SetVignetteFactor(0.0f);
-	vinatteFactor_ = 1.0f;
+	vinatteFactor_ = vinatteFactorMax_;
 }
 
 

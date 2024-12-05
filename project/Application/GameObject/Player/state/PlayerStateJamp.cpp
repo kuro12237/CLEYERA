@@ -18,10 +18,11 @@ void PlayerStateJamp::Initialize(Player* p)
 
 void PlayerStateJamp::Update([[maybe_unused]]Player* p)
 {
+	const float flame = 0.5f;
 	GameObjectManager* gameObjectManager_ = GameObjectManager::GetInstance();
 	SAnimation::Skeleton& skeleton = gameObjectManager_->GetObj3dData(p->INameable::GetName())->GetGameObject()->GetSkeleton();
 
-	AnimationManager::ApplyAnimation(skeleton, jampAnimationData_, 0.5f);
+	AnimationManager::ApplyAnimation(skeleton, jampAnimationData_, flame);
 
 	if (p->IsInState<PlayerStateJamp>() && p->GetVelocity().y <= 0.0f)
 	{

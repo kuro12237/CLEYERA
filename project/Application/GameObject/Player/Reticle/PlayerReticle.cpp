@@ -37,6 +37,7 @@ void PlayerReticle::ImGuiUpdate()
 
 void PlayerReticle::Update()
 {
+	const float degree = 90.0f;
 	auto playerCore = player_.lock();
 	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
 
@@ -46,13 +47,13 @@ void PlayerReticle::Update()
 	}
 	else
 	{
-		if (playerRotate.y >= Math::Vector::degreesToRadians(90.0f))
+		if (playerRotate.y >= Math::Vector::degreesToRadians(degree))
 		{
 			// レティクルの位置を計算
 			reticlePos_.x = kRetickeRad_ * 1.0f;
 			reticlePos_.y = 0.0f;
 		}
-		if (playerRotate.y<= -Math::Vector::degreesToRadians(90.0f))
+		if (playerRotate.y<= -Math::Vector::degreesToRadians(degree))
 		{
 			// レティクルの位置を計算
 			reticlePos_.x = kRetickeRad_ * -1.0f;
@@ -64,12 +65,13 @@ void PlayerReticle::Update()
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
 
+	const float offset = 0.5f;
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform();
 	Math::Vector::Vector3 playerPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().GetWorldPosition();
-	playerPos.y += 1.5f;
+	playerPos.y += offset;
 
 	Math::Vector::Vector3 pos = { playerPos.x + reticlePos_.x,playerPos.y + reticlePos_.y,playerPos.z };
-	interTarget_ = Math::Vector::Lerp(interTarget_, pos, 0.5f);
+	interTarget_ = Math::Vector::Lerp(interTarget_, pos, lerpFlame_);
 
 	transform.transform.translate = interTarget_;
 

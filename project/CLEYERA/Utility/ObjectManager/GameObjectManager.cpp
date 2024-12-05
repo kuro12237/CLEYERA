@@ -19,35 +19,37 @@ void GameObjectManager::SetAllParents()
 {
 	for (auto& data : obj3dData_) {
 		auto& it = data.second;
-		if (!it->GetChildsName().empty())
+		if (it->GetChildsName().empty())
 		{
-			for (string name : it->GetChildsName())
+			continue;
+		}
+
+		//子の名前チェック
+		for (string name : it->GetChildsName())
+		{
+			if (obj3dData_.find(name) != obj3dData_.end())
 			{
-				if (obj3dData_.find(name) != obj3dData_.end())
-				{
-					SetNormalObjectParent(it->GetObjectName(), name);
-					checkChildren(obj3dData_[name]);
-				}
-				else if (cameraData_.find(name) != cameraData_.end())
-				{
-					cameraData_[name]->SetParent(obj3dData_[it->GetObjectName()]->GetWorldTransform());
-				}
+				SetNormalObjectParent(it->GetObjectName(), name);
+				CheckChildren(obj3dData_[name]);
+			}
+			else if (cameraData_.find(name) != cameraData_.end())
+			{
+				cameraData_[name]->SetParent(obj3dData_[it->GetObjectName()]->GetWorldTransform());
+			}
 
-				for (auto& datas : objInstancing3dData_)
+			for (auto& datas : objInstancing3dData_)
+			{
+				auto& instancingDatas = datas.second;
+				for (auto& instancingData : instancingDatas->GetTransforms())
 				{
-					auto& instancingDatas = datas.second;
-					for (auto& instancingData : instancingDatas->GetTransforms())
+					if (name == instancingData->GetName())
 					{
-						if (name == instancingData->GetName())
-						{
-
-							instancingData->SetParent(it->GetWorldTransform().matWorld);
-
-						}
+						instancingData->SetParent(it->GetWorldTransform().matWorld);
 					}
 				}
 			}
 		}
+
 	}
 }
 
@@ -79,8 +81,8 @@ void GameObjectManager::Update()
 		//object
 		for (uint32_t i = 0; i < it->GetTransforms().size(); i++)
 		{
-			
-			if (it->GetTransforms()[i]->GetBreakFlag()==true)
+			//壊れているときすべて0に
+			if (it->GetTransforms()[i]->GetBreakFlag() == true)
 			{
 				it->GetTransforms()[i]->SetTransformEular({});
 			}
@@ -238,7 +240,7 @@ void GameObjectManager::SetObjectPipline(unique_ptr<IPipelineCommand> piplineSel
 	obj3dData_[name]->ChangePipline(move(piplineSelect));
 }
 
-void GameObjectManager::checkChildren(shared_ptr<Game3dObjectData>& data)
+void GameObjectManager::CheckChildren(shared_ptr<Game3dObjectData>& data)
 {
 	if (!data->GetChildsName().empty())
 	{
