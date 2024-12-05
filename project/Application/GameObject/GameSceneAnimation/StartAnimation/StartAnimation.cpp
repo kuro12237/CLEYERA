@@ -24,16 +24,15 @@ void StartAnimation::Initialize()
 	this->LoadRailData();
 	this->SettingSplineMotionData();
 
-
-
 	gameObjectManager_->CameraReset(cameraName_);
 	splineMotions_[0]->SetIsStartFlag(true);
 	isCountStart_ = true;
 
+	const float vinatteScaleMax = 10.0f;
 
-	postEffect_->SetVignetteScale(10.0f);
+	postEffect_->SetVignetteScale(vinatteScaleMax);
 	postEffect_->SetSelectPostEffect(VIGNETTE, true);
-	postEffect_->SetVignetteColor({ 0.0f,0.0f,0.0f });
+	postEffect_->SetVignetteColor({});
 
 	state_ = make_unique<StartAnimationStateCamera>();
 	state_->Initialize();
@@ -80,7 +79,7 @@ void StartAnimation::Update()
 
 		if (splineMotions_[i]->GetIsStartFlag())
 		{
-			//ƒŒ[ƒ‹‚ðŒvŽZ
+			//ãƒ¬ãƒ¼ãƒ«ã‚’è¨ˆç®—
 			camera.transform.translate = CalcRailData(i, 180.0f);
 
 			if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
@@ -92,7 +91,7 @@ void StartAnimation::Update()
 
 			if (!isSkip_)
 			{
-				//ƒrƒlƒbƒg‚ÌŒÄ‚Ño‚µ
+				//ãƒ“ãƒãƒƒãƒˆã®å‘¼ã³å‡ºã—
 				EndUpdate([this]() {EndVinatteAnimation(); });
 			}
 		}
@@ -121,7 +120,7 @@ void StartAnimation::Update()
 
 	startCount_->Update();
 
-	///ƒJƒEƒ“ƒgƒ_ƒEƒ“Š®—¹‚µ‚½‚ç
+	///ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³å®Œäº†ã—ãŸã‚‰
 	if (startCount_->GetStartFlag())
 	{
 		isGameStart_ = true;
@@ -146,13 +145,14 @@ void StartAnimation::FlameUpdate()
 {
 	if ( isFlameCount_)
 	{
-		flameCount_ += 1.0f / 120.0f;
+		const float addFlame = 1.0f / 120.0f;
+		flameCount_ += addFlame;
 	}
 }
 
 void StartAnimation::EndVinatteAnimation()
 {
-	//I‚í‚è
+	//çµ‚ã‚ã‚Š
 	if (splineMotions_[splineSelectIndex_]->GetTargetIndex() == railData_[splineSelectIndex_].size - 2)
 	{
 		postEffect_->SetSelectPostEffect(VIGNETTE, true);

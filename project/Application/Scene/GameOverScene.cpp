@@ -18,7 +18,6 @@ void GameOverScene::Initialize([[maybe_unused]] GameManager* state)
 	gameObjectManager_->CameraReset("Camera");
 	gameObjectManager_->Update();
 
-
 	light_.radious = 512.0f;
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
@@ -35,7 +34,6 @@ void GameOverScene::Initialize([[maybe_unused]] GameManager* state)
 
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameOverScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameOverScene::PostProcessDraw, this));
-
 }
 
 void GameOverScene::Update([[maybe_unused]] GameManager* Scene)
@@ -87,7 +85,6 @@ void GameOverScene::Update([[maybe_unused]] GameManager* Scene)
 	{
 		Scene->ChangeScene(make_unique<SelectScene>());
 		return;
-
 	}
 
 }
