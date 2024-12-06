@@ -8,25 +8,60 @@ using namespace Engine::Base::Win;
 using namespace Engine::Manager;
 using namespace Engine;
 
-void GpuParticle::Create(const size_t kNum, string Name)
+void GpuParticle::Create(const size_t kNum, string Name, uint32_t modelHandle)
 {
 	mulNum = uint32_t(kNum);
 	particleNum_ = uint32_t(mulNum) * particleMin;
 	name_ = Name;
 
-	{//’¸“_ì¬
-		vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
-		vertexBuf_->CreateResource(vertexNum);
-		vertexBuf_->CreateVertexBufferView();
-		vertexParam_.resize(vertexNum);
+	if (modelHandle == 0)
+	{
+		{//é ‚ç‚¹ä½œæˆ
+			vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
+			vertexBuf_->CreateResource(vertexNum_);
+			vertexBuf_->CreateVertexBufferView();
+			vertexParam_.resize(vertexNum_);
+			vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
+			vertexParam_[0].texcoord = { 0.0f,1.0f };
+			vertexParam_[1].position = { -1.0f ,1.0f,0,1 };
+			vertexParam_[1].texcoord = { 0.0f,0.0f };
+			vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
+			vertexParam_[2].texcoord = { 1.0f,1.0f };
+			vertexParam_[3].position = { 1.0f,1.0f,0,1 };
+			vertexParam_[3].texcoord = { 1.0f,0.0f };
+		}
+		{//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ä½œæˆ
+			indexBuf_ = make_unique<BufferResource<uint32_t>>();
+			indexBuf_->CreateResource(indexNum_);
+			indexBuf_->CreateIndexBufferView();
+			indexParam_.resize(indexNum_);
+
+			indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
+			indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
+		}
 	}
-	{//ƒCƒ“ƒfƒbƒNƒXì¬
-		indexBuf_ = make_unique<BufferResource<uint32_t>>();
-		indexBuf_->CreateResource(indexNum);
-		indexBuf_->CreateIndexBufferView();
-		indexParam_.resize(indexNum);
+	else
+	{
+		modelHandle_ = modelHandle;
+		modelData_ = ModelManager::GetModel(modelHandle_)->GetModelData();
+		texHandle_ = ModelManager::GetModel(modelHandle_)->GetModelData().material.handle;
+		vertexNum_ = int(modelData_.vertices.size());
+		indexNum_ = int(modelData_.indecs.size());
+		{//é ‚ç‚¹ä½œæˆ
+			vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
+			vertexBuf_->CreateResource(vertexNum_);
+			vertexBuf_->CreateVertexBufferView();
+			vertexParam_.resize(vertexNum_);
+		}
+		{//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ä½œæˆ
+			indexBuf_ = make_unique<BufferResource<uint32_t>>();
+			indexBuf_->CreateResource(indexNum_);
+			indexBuf_->CreateIndexBufferView();
+			indexParam_.resize(indexNum_);
+		}
 	}
-	{//writeparticleUAVì¬
+
+	{//writeparticleUAVä½œæˆ
 		writeParticleBuf_ = make_unique<BufferResource<ParticleCS>>();
 		writeParticleBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_Write", sizeof(ParticleCS));
 		writeParticleParam_.resize(particleNum_);
@@ -44,35 +79,23 @@ void GpuParticle::Create(const size_t kNum, string Name)
 		freeList_.resize(particleNum_);
 	}
 
-	vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
-	vertexParam_[0].texcoord = { 0.0f,1.0f };
-	vertexParam_[1].position = { -1.0f ,1.0f,0,1 };
-	vertexParam_[1].texcoord = { 0.0f,0.0f };
-	vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
-	vertexParam_[2].texcoord = { 1.0f,1.0f };
-	vertexParam_[3].position = { 1.0f,1.0f,0,1 };
-	vertexParam_[3].texcoord = { 1.0f,0.0f };
-
-
-	indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
-	indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
-	{//’¸“_ƒ}ƒbƒv
+	{//é ‚ç‚¹ãƒãƒƒãƒ—
 		vertexBuf_->Map();
 		vertexBuf_->Setbuffer(vertexParam_);
 		vertexBuf_->UnMap();
 	}
-	{//ƒCƒ“ƒfƒbƒNƒXƒ}ƒbƒv
+	{//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ—
 		indexBuf_->Map();
 		indexBuf_->Setbuffer(indexParam_);
 		indexBuf_->UnMap();
 	}
 
-	//Dissolve‚È‚Ç‚Ìƒ}ƒeƒŠƒAƒ‹ƒf[ƒ^‚ğì»
+	//Dissolveãªã©ã®ãƒãƒ†ãƒªã‚¢ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’ä½œè£½
 	effectDataBuf_ = make_unique<BufferResource<Particle::System::StructData::EffectData>>();
 	effectDataBuf_->CreateResource();
 
 
-	{//‰Šú‰»CS_Dispatch
+	{//åˆæœŸåŒ–CS_Dispatch
 		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_INIT, "None");;
 		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 		ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };
@@ -109,15 +132,35 @@ void GpuParticle::Update()
 		vertexParam_[3].position = { pos_.x + size_.x,pos_.y,0,1 };
 		vertexParam_[3].texcoord = srcTR;
 	}
+
+
+	if (drawMode_ == mode_3d && modelHandle_ != 0)
+	{
+		for (size_t i = 0; i <modelData_.vertices.size(); i++)
+		{
+			vertexParam_[i].position = modelData_.vertices[i].position;
+			vertexParam_[i].normal = modelData_.vertices[i].normal;
+			vertexParam_[i].texcoord = modelData_.vertices[i].texcoord;
+		}
+		for (size_t i = 0; i < modelData_.indecs.size(); i++)
+		{
+			indexParam_[i] = modelData_.indecs[i];
+		}
+	}
+
 	vertexBuf_->Map();
 	vertexBuf_->Setbuffer(vertexParam_);
 	vertexBuf_->UnMap();
+
+	indexBuf_->Map();
+	indexBuf_->Setbuffer(indexParam_);
+	indexBuf_->UnMap();
 
 	effectDataBuf_->Map();
 	effectDataBuf_->Setbuffer(effectParam_);
 	effectDataBuf_->UnMap();
 
-	//XVCS_Dispatch
+	//æ›´æ–°CS_Dispatch
 	ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 
 	SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_UPDATE, "None");
@@ -136,7 +179,7 @@ void GpuParticle::Update()
 
 void GpuParticle::Draw()
 {
-	//Š·‚¦‚é
+	//æ›ãˆã‚‹
 	SPSOProperty pso;
 	if (blend_ == BlendNone)
 	{
@@ -161,7 +204,7 @@ void GpuParticle::Draw()
 		}
 	}
 
-	if (blend_==DissolveNone)
+	if (blend_ == DissolveNone)
 	{
 		if (drawMode_ == DrawMode::mode_3d)
 		{
@@ -187,7 +230,7 @@ void GpuParticle::Draw()
 
 	if (blend_ == DissolveNone)
 	{
-	
+
 		if (drawMode_ == DrawMode::mode_2d)
 		{
 			DescriptorManager::GetInstance()->rootParamerterCommand(5, noiseTexHandle_);
@@ -195,7 +238,7 @@ void GpuParticle::Draw()
 		}
 	}
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	commandList->DrawIndexedInstanced(6, UINT(particleNum_), 0, 0, 0);
+	commandList->DrawIndexedInstanced(vertexNum_, UINT(particleNum_), 0, 0, 0);
 }
 
 void GpuParticle::CallBarrier()
@@ -216,7 +259,7 @@ void GpuParticle::CallUavRootparam(uint32_t rootParamIndex)
 void Particle::GpuParticle::Clear()
 {
 
-	{//‰Šú‰»CS_Dispatch
+	{//åˆæœŸåŒ–CS_Dispatch
 		SPSOProperty pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_INIT, "None");;
 		ComPtr<ID3D12GraphicsCommandList>commandList = DirectXCommon::GetInstance()->GetCommands().m_pList;
 		ID3D12DescriptorHeap* heap[] = { DirectXCommon::GetInstance()->GetSrvHeap() };

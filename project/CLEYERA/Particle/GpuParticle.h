@@ -7,9 +7,10 @@
 #include"Utility/CameraManager/CameraManager.h"
 #include"Utility/RuntimeCounter/RunTimeCounter.h"
 #include"Emitter/StructGpuParticleEmitter.h"
+#include"Model/ModelManager.h"
 
 /// <summary>
-/// ƒp[ƒeƒBƒNƒ‹\‘¢‘Ì
+/// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æ§‹é€ ä½“
 /// </summary>
 struct ParticleCS
 {
@@ -31,7 +32,7 @@ namespace Engine::Particle {
 	using namespace Engine::Buffer;
 
 	/// <summary>
-	/// Mode@2dor3d
+	/// Modeã€€2dor3d
 	/// </summary>
 	enum DrawMode
 	{
@@ -40,7 +41,7 @@ namespace Engine::Particle {
 	};
 
 	/// <summary>
-	/// ƒp[ƒeƒBƒNƒ‹–{‘Ì
+	/// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æœ¬ä½“
 	/// </summary>
 	class GpuParticle
 	{
@@ -49,35 +50,35 @@ namespace Engine::Particle {
 		~GpuParticle() {};
 
 		/// <summary>
-		/// ì¬
+		/// ä½œæˆ
 		/// </summary>
-		/// <param name="‡Œv”"></param>
-		/// <param name="–¼‘O"></param>
-		void Create(const size_t kNum, string Name);
+		/// <param name="åˆè¨ˆæ•°"></param>
+		/// <param name="åå‰"></param>
+		void Create(const size_t kNum, string Name, uint32_t modelHandle = 0);
 
 		/// <summary>
-		/// XV
+		/// æ›´æ–°
 		/// </summary>
 		void Update();
 
 		/// <summary>
-		/// •\¦
+		/// è¡¨ç¤º
 		/// </summary>
 		void Draw();
 
 		/// <summary>
-		/// XVˆ—‘OŒãŠÖŒW‚ÌƒoƒŠƒA
+		/// æ›´æ–°å‡¦ç†å‰å¾Œé–¢ä¿‚ã®ãƒãƒªã‚¢
 		/// </summary>
 		void CallBarrier();
 
 		/// <summary>
-		/// g‚í‚È‚¢@commandÏ‚Ş
+		/// ä½¿ã‚ãªã„ã€€commandç©ã‚€
 		/// </summary>
 		/// <param name="rootParamIndex"></param>
 		void CallUavRootparam(uint32_t rootParamIndex);
 
 		/// <summary>
-		/// ƒpƒ‰ƒ[ƒ^[‚ğ‰Šú‰»
+		/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’åˆæœŸåŒ–
 		/// </summary>
 		void Clear();
 
@@ -87,7 +88,7 @@ namespace Engine::Particle {
 		void SetDrawMode(DrawMode mode) { drawMode_ = mode; }
 		void Set2dSize(const Math::Vector::Vector2& size) { size_ = size; }
 		void SetNoiseTexHandle(uint32_t handle) { noiseTexHandle_ = handle; }
-		void SetPos(const Math::Vector::Vector2& pos){ pos_ = pos; }
+		void SetPos(const Math::Vector::Vector2& pos) { pos_ = pos; }
 
 #pragma endregion
 
@@ -105,8 +106,8 @@ namespace Engine::Particle {
 		size_t particleNum_ = 0;
 		string name_ = "";
 		uint32_t mulNum = 1;
-		const int vertexNum = 4;
-		const int indexNum = 6;
+		int vertexNum_ = 4;
+		int indexNum_ = 6;
 		unique_ptr<BufferResource<Particle::System::StructData::ParticleVertexData>>vertexBuf_ = nullptr;
 		vector<Particle::System::StructData::ParticleVertexData>vertexParam_;
 		unique_ptr<BufferResource<uint32_t>>indexBuf_ = nullptr;
@@ -118,7 +119,7 @@ namespace Engine::Particle {
 		unique_ptr<BufferResource<ParticleCS>>writeParticleBuf_ = nullptr;
 		vector<ParticleCS>writeParticleParam_;
 
-		//ƒtƒŠ[ƒŠƒXƒg‚ÌƒCƒ“ƒfƒbƒNƒX
+		//ãƒ•ãƒªãƒ¼ãƒªã‚¹ãƒˆã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 		unique_ptr<BufferResource<uint32_t>>freeListIndexBuf_ = nullptr;
 		vector<uint32_t>freeListIndex_;
 
@@ -128,6 +129,9 @@ namespace Engine::Particle {
 
 		uint32_t texHandle_ = 1;
 		uint32_t noiseTexHandle_ = 1;
+		uint32_t modelHandle_ = 0;
+		SModelData modelData_{};
+
 
 		SpriteMode  blend_ = BlendNone;
 		DrawMode drawMode_ = DrawMode::mode_3d;

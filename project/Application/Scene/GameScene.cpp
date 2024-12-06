@@ -209,7 +209,6 @@ void GameScene::PostProcessDraw()
 
 void GameScene::Flont2dSpriteDraw()
 {
-	
 	if (startAnimation_->GetIsGameStartFlag())
 	{
 		player_->Draw2d();
@@ -230,7 +229,6 @@ void GameScene::ImGuiUpdate()
 	{
 		inputLevelDataFileName_ = std::string(buffer);
 	}
-	
 
 	ImGui::Separator();
 	if (ImGui::TreeNode("light"))
