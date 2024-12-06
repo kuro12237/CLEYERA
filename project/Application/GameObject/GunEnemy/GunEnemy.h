@@ -2,6 +2,7 @@
 #include"STransformEular.h"
 #include"Pch.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
+#include"Utility/convert/convert.h"
 
 #include"GameObject/GameCollider/ICollider.h"
 #include"Input.h"
@@ -37,7 +38,6 @@ public:
 #pragma region Get
 
 	bool &GetIsEnd() { return isEnd_; }
-	float GetSpeed() { return speed_; }
 	bool &GetIsDead() { return isDead_; }
 	int32_t GetEnemyNumber() { return enemyNumber_; }
 	vector<shared_ptr<GunEnemyBullet>>GetBullets() { return bullets_; }
@@ -52,7 +52,6 @@ private:
 	bool isDead_ = false;
 	bool isEnd_ = false;
 
-	float speed_ = -0.1f;
 
 	int32_t enemyNumber_ = 0;
 

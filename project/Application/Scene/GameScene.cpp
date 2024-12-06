@@ -34,7 +34,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 
 	player_ = make_unique<PlayerManager>();
 	player_->Initialize();
-	
+
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize();
 
@@ -277,22 +277,17 @@ void GameScene::Collision()
 	{
 		weak_ptr<GunEnemy>obj = e;
 		auto it = obj.lock();
-		if (!it)
-		{
-			continue;
-		}
-		if (!it->GetIsEnd())
+		if (it)
 		{
 			gameCollisionManager_->ListPushback(e.get(), e.get());
-		}
-
-		for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
-		{
-			if (b)
+			for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
 			{
-				gameCollisionManager_->ListPushback(b.get(), b.get());
-			}
+				if (b)
+				{
+					gameCollisionManager_->ListPushback(b.get(), b.get());
+				}
 
+			}
 		}
 	}
 

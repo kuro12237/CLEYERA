@@ -837,7 +837,7 @@
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemyManager.cpp">
+    <ClCompile Include="Application\GameObject\GunEnemy\BulletEnemyManager.cpp">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.cpp">
@@ -873,16 +873,16 @@
     <ClCompile Include="Application\GameObject\StageCoin\StageCoinManager.cpp">
       <Filter>Project\GameObject\StageCoin</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemy.cpp">
+    <ClCompile Include="Application\GameObject\GunEnemy\GunEnemy.cpp">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.cpp">
+    <ClCompile Include="Application\GameObject\GunEnemy\GunEnemyBullet\GunEnemyBullet.cpp">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.cpp">
+    <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateMove.cpp">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.cpp">
+    <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateShoot.cpp">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.cpp">
@@ -898,7 +898,7 @@
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlock.cpp" />
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockManager.cpp" />
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockHp.cpp" />
-    <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateDeadAnimation.cpp" />
+    <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1489,7 +1489,7 @@
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemyManager.h">
+    <ClInclude Include="Application\GameObject\GunEnemy\BulletEnemyManager.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.h">
@@ -1531,19 +1531,19 @@
     <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h">
       <Filter>Project\GameObject\StageCoin</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\BulletEnemy\state\IGunEnemyState.h">
+    <ClInclude Include="Application\GameObject\GunEnemy\state\IGunEnemyState.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemy.h">
+    <ClInclude Include="Application\GameObject\GunEnemy\GunEnemy.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.h">
+    <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyBullet\GunEnemyBullet.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.h">
+    <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateMove.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.h">
+    <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateShoot.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.h">
@@ -1559,7 +1559,7 @@
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockManager.h" />
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlock.h" />
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockHp.h" />
-    <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateDeadAnimation.h" />
+    <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

@@ -28,5 +28,5 @@ private:
 	float flameMax_ = 1.0f;
 
 	int32_t deltaTime_ = 0;
-	int32_t deltaTimerMax_ = 3;
+	int32_t deltaTimerMax_ = 1;
 };

@@ -32,7 +32,7 @@
 #include"Scene/TitleScene.h"
 
 #include"ISceneContext.h"
-#include"GameObject/BulletEnemy/BulletEnemyManager.h"
+#include"GameObject/GunEnemy/BulletEnemyManager.h"
 
 
 /// <summary>

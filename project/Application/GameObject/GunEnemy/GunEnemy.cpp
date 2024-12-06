@@ -13,13 +13,30 @@ void GunEnemy::Initialize()
 	mask_ = CollisionMask::kEnemyWalkMask;
 
 	ChangeState(make_unique<GunEnemyStateMove>());
+	velocity_.x = 0.1f;
 
 	modelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("PlayerNormalBullet");
 }
 
 void GunEnemy::Update()
 {
-	for (size_t index = 0; index < bullets_.size(); ++index)
+#ifdef _USE_IMGUI
+
+	if (ImGui::TreeNode("ebullet"))
+	{
+		ImGui::Text("size::%d", int(bullets_.size()));
+
+
+		ImGui::TreePop();
+	}
+#endif // _USE_IMGUI
+
+	if (isEnd_)
+	{
+		id_ = kOnlyCollideWithBlocksid;
+	}
+
+	for (size_t index = 0; index < bullets_.size(); index++)
 	{
 		if (!bullets_[index])
 		{
@@ -27,8 +44,6 @@ void GunEnemy::Update()
 		}
 		if (bullets_[index]->GetIsDead())
 		{
-			bullets_[index]->INameable::GetName();
-			deadBulletIndex_.push(uint32_t(index));
 			GameObjectManager::GetInstance()->ClearObj3dData(bullets_[index]->INameable::GetName());
 			bullets_[index].reset();
 		}
@@ -91,15 +106,15 @@ void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
 		{
 			if (hitDirection == TOP)
 			{
-				velocity_ = {};
+				velocity_.y = 0.0f;
 			}
 			if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
 			{
-				velocity_ = {};
+				velocity_.y = 0.0f;
 			}
 			if (hitDirection == LEFT || hitDirection == RIGHT)
 			{
-				speed_ *= -1.0f;
+				velocity_.x *= -1.0f;
 			}
 		}
 		auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
@@ -128,10 +143,11 @@ void GunEnemy::CreateBullet(const Math::Vector::Vector3& Pos)
 	data->Initialize(transform, {}, modelHandle_);
 
 	shared_ptr<GunEnemyBullet> b = make_shared<GunEnemyBullet>();
-	string name = this->INameable::name_;
+	string name = "";
+	name = "GunEnemy" + FormatNumberWithDots(enemyNumber_) + string("Bullet");
 
-	const float kspeed = 0.3f;
-	if (speed_ > 0.0f)
+	const float kspeed = 0.4f;
+	if (velocity_.x > 0.0f)
 	{
 		b->SetVelocity({ kspeed,0.0f,0.0f });
 	}
@@ -140,28 +156,12 @@ void GunEnemy::CreateBullet(const Math::Vector::Vector3& Pos)
 		b->SetVelocity({ -kspeed,0.0f,0.0f });
 	}
 
-
-	//使っていない弾の配列がある時再利用
-	if (!deadBulletIndex_.empty())
-	{
-		uint32_t newBulletIndex = deadBulletIndex_.front();
-		string name_num = name + to_string(newBulletIndex);
-		data->SetObjName(name_num);
-		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
-		b->INameable::SetName(name_num);
-		bullets_[newBulletIndex] = move(b);
-		deadBulletIndex_.pop();
-	}
-	else
-	{
-		//新しいindexをとリ弾にセット
-		int size = int(bullets_.size());
-		string name_num = name + to_string(size);
-		data->SetObjName(name_num);
-		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
-		b->INameable::SetName(name_num);
-		b->Initialize();
-		bullets_.push_back(move(b));
-	}
-
+	//新しいindexをとリ弾にセット
+	int size = int(bullets_.size());
+	string name_num = name + to_string(size);
+	data->SetObjName(name_num);
+	GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
+	b->INameable::SetName(name_num);
+	b->Initialize();
+	bullets_.push_back(move(b));
 }
