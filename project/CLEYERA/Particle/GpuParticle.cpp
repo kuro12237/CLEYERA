@@ -8,61 +8,24 @@ using namespace Engine::Base::Win;
 using namespace Engine::Manager;
 using namespace Engine;
 
-void GpuParticle::Create(const size_t kNum, string Name, uint32_t modelHandle)
+void GpuParticle::Create(const size_t kNum, string Name,uint32_t modelHandle)
 {
 	mulNum = uint32_t(kNum);
 	particleNum_ = uint32_t(mulNum) * particleMin;
 	name_ = Name;
-
-	if (modelHandle == 0)
-	{
-		vertexNum_ = 4;
-		indexNum_ = 6;
-		{//頂点作成
-			vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
-			vertexBuf_->CreateResource(vertexNum_);
-			vertexBuf_->CreateVertexBufferView();
-			vertexParam_.resize(vertexNum_);
-			vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
-			vertexParam_[0].texcoord = { 0.0f,1.0f };
-			vertexParam_[1].position = { -1.0f ,1.0f,0,1 };
-			vertexParam_[1].texcoord = { 0.0f,0.0f };
-			vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
-			vertexParam_[2].texcoord = { 1.0f,1.0f };
-			vertexParam_[3].position = { 1.0f,1.0f,0,1 };
-			vertexParam_[3].texcoord = { 1.0f,0.0f };
-		}
-		{//インデックス作成
-			indexBuf_ = make_unique<BufferResource<uint32_t>>();
-			indexBuf_->CreateResource(indexNum_);
-			indexBuf_->CreateIndexBufferView();
-			indexParam_.resize(indexNum_);
-
-			indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
-			indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
-		}
+	modelHandle;
+	{//頂点作成
+		vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
+		vertexBuf_->CreateResource(vertexNum_);
+		vertexBuf_->CreateVertexBufferView();
+		vertexParam_.resize(vertexNum_);
 	}
-	else
-	{
-		modelHandle_ = modelHandle;
-		modelData_ = ModelManager::GetModel(modelHandle_)->GetModelData();
-		texHandle_ = ModelManager::GetModel(modelHandle_)->GetModelData().material.handle;
-		vertexNum_ = int(modelData_.vertices.size());
-		indexNum_ = int(modelData_.indecs.size());
-		{//頂点作成
-			vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
-			vertexBuf_->CreateResource(vertexNum_);
-			vertexBuf_->CreateVertexBufferView();
-			vertexParam_.resize(vertexNum_);
-		}
-		{//インデックス作成
-			indexBuf_ = make_unique<BufferResource<uint32_t>>();
-			indexBuf_->CreateResource(indexNum_);
-			indexBuf_->CreateIndexBufferView();
-			indexParam_.resize(indexNum_);
-		}
+	{//インデックス作成
+		indexBuf_ = make_unique<BufferResource<uint32_t>>();
+		indexBuf_->CreateResource(indexNum_);
+		indexBuf_->CreateIndexBufferView();
+		indexParam_.resize(indexNum_);
 	}
-
 	{//writeparticleUAV作成
 		writeParticleBuf_ = make_unique<BufferResource<ParticleCS>>();
 		writeParticleBuf_->CreateUAVResource(uint32_t(particleNum_), name_ + "_Write", sizeof(ParticleCS));
@@ -81,6 +44,18 @@ void GpuParticle::Create(const size_t kNum, string Name, uint32_t modelHandle)
 		freeList_.resize(particleNum_);
 	}
 
+	vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
+	vertexParam_[0].texcoord = { 0.0f,1.0f };
+	vertexParam_[1].position = { -1.0f ,1.0f,0,1 };
+	vertexParam_[1].texcoord = { 0.0f,0.0f };
+	vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
+	vertexParam_[2].texcoord = { 1.0f,1.0f };
+	vertexParam_[3].position = { 1.0f,1.0f,0,1 };
+	vertexParam_[3].texcoord = { 1.0f,0.0f };
+
+
+	indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
+	indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
 	{//頂点マップ
 		vertexBuf_->Map();
 		vertexBuf_->Setbuffer(vertexParam_);
@@ -134,43 +109,9 @@ void GpuParticle::Update()
 		vertexParam_[3].position = { pos_.x + size_.x,pos_.y,0,1 };
 		vertexParam_[3].texcoord = srcTR;
 	}
-
-
-	if (drawMode_ == mode_3d && modelHandle_ != 0)
-	{
-		for (size_t i = 0; i <modelData_.vertices.size(); i++)
-		{
-			vertexParam_[i].position = modelData_.vertices[i].position;
-			vertexParam_[i].normal = modelData_.vertices[i].normal;
-			vertexParam_[i].texcoord = modelData_.vertices[i].texcoord;
-		}
-		for (size_t i = 0; i < modelData_.indecs.size(); i++)
-		{
-			indexParam_[i] = modelData_.indecs[i];
-		}
-	}
-	else if (drawMode_ == mode_3d && modelHandle_ == 0)
-	{
-		vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
-		vertexParam_[0].texcoord = { 0.0f,1.0f };
-		vertexParam_[1].position = { -1.0f ,1.0f,0,1 };
-		vertexParam_[1].texcoord = { 0.0f,0.0f };
-		vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
-		vertexParam_[2].texcoord = { 1.0f,1.0f };
-		vertexParam_[3].position = { 1.0f,1.0f,0,1 };
-		vertexParam_[3].texcoord = { 1.0f,0.0f };
-
-		indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
-		indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
-	}
-
 	vertexBuf_->Map();
 	vertexBuf_->Setbuffer(vertexParam_);
 	vertexBuf_->UnMap();
-
-	indexBuf_->Map();
-	indexBuf_->Setbuffer(indexParam_);
-	indexBuf_->UnMap();
 
 	effectDataBuf_->Map();
 	effectDataBuf_->Setbuffer(effectParam_);
@@ -195,14 +136,6 @@ void GpuParticle::Update()
 
 void GpuParticle::Draw()
 {
-
-	vertexBuf_->Map();
-	vertexBuf_->Setbuffer(vertexParam_,static_cast<uint32_t>(vertexParam_.size()));
-	vertexBuf_->UnMap();
-
-	indexBuf_->Map();
-	indexBuf_->Setbuffer(indexParam_,static_cast<uint32_t>(indexParam_.size()));
-	indexBuf_->UnMap();
 	//換える
 	SPSOProperty pso;
 	if (blend_ == BlendNone)
@@ -262,7 +195,7 @@ void GpuParticle::Draw()
 		}
 	}
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	commandList->DrawIndexedInstanced(vertexNum_, UINT(particleNum_), 0, 0, 0);
+	commandList->DrawIndexedInstanced(6, UINT(particleNum_), 0, 0, 0);
 }
 
 void GpuParticle::CallBarrier()

@@ -2,12 +2,12 @@
 
 void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 {
-	//ƒuƒƒbƒNˆÈŠO‚Æ‚Í“–‚½‚ç‚È‚¢id
+	//ãƒ–ãƒ­ãƒƒã‚¯ä»¥å¤–ã¨ã¯å½“ãŸã‚‰ãªã„id
 	e->SetId(kOnlyCollideWithBlocksid);
 
 	gameObjIncetance_ = GameObjectManager::GetInstance();
 	auto* emitters = CharacterDeadParticle::GetInstance()->GetEmitter();
-	
+
 	uint32_t index = 0;
 	for (auto& emitter : emitters->GetControlParam())
 	{
@@ -20,13 +20,17 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 			emitter.frequencyTime = 0.3f;
 			param.velocityMax = { 0.01f,0.05f,0.0f };
 			param.velocityMin = { -0.01f,0.1f,0.0f };
-			//“–‚½‚è”»’è‚Ì‘å‚«‚³‚ð‚à‚Æ‚Éemitter‚ðÝ’è
+			//å½“ãŸã‚Šåˆ¤å®šã®å¤§ãã•ã‚’ã‚‚ã¨ã«emitterã‚’è¨­å®š
 			param.sizeMax = e->GetAABB().min;
 			param.sizeMax = e->GetAABB().max;
 			break;
 		}
 		index++;
 	}
+	auto velo = e->GetVelocity();
+	velo.y = 0.4f;
+	velo.x = e->GetImpactDirection().x * 0.1f;
+	e->SetVelocity(velo);
 }
 
 void EnemyWalkStateDead::Update([[maybe_unused]] EnemyWalk* e)
@@ -36,7 +40,7 @@ void EnemyWalkStateDead::Update([[maybe_unused]] EnemyWalk* e)
 	auto& objData = gameObjIncetance_->GetObj3dDatas()[e->INameable::GetName()];
 	auto& desc = gameObjIncetance_->GetObjectDesc(e->INameable::GetName());
 
-	//edgeÝ’è
+	//edgeè¨­å®š
 	desc.edgeDesc.minmax = { -0.1f,0.2f };
 	desc.edgeDesc.mask += 1.0f / 60.0f;
 	flame_ += 1.0f / 60.0f;
@@ -47,5 +51,6 @@ void EnemyWalkStateDead::Update([[maybe_unused]] EnemyWalk* e)
 		emitters->Clear(particleIndex_);
 	}
 	//emitter
+
 	emitterParam.translate = objData->GetWorldTransform().GetWorldPosition();
 }

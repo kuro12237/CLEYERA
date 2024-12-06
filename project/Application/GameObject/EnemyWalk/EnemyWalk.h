@@ -42,22 +42,24 @@ public:
 	void ChangeState(unique_ptr<IEnemyWalkState>state);
 
 #pragma region Get
-	bool &GetIsHit() { return IsHit_; }
+	bool &GetIsHit() { return isHit_; }
 	bool &GetIsDead() { return isDead_; }
 	bool &GetIsEnd() { return isEnd_; }
-	float &GetSpeed() { return speed_; }
+	Math::Vector::Vector3 GetImpactDirection() { return impactDirection_; }
+
 #pragma endregion
 
 private:
 
-	bool IsHit_ = false;
+	bool isHit_ = false;
 	bool isDead_ = false;
 	bool isEnd_ = false;
 
-	float speed_ = -0.1f;
 
 	unique_ptr<IEnemyWalkState>state_ = nullptr;
 	GameObjectManager* gameObjIncetance_ = nullptr;
+
+	Math::Vector::Vector3 impactDirection_ = {};
 
 };
 

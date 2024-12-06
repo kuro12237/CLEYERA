@@ -15,33 +15,39 @@ void EnemyWalk::Initialize()
 
 	state_ = make_unique<EnemyWalkStateMove>();
 	state_->Initialize(this);
+	velocity_.x = 0.1f;
 }
 
 void EnemyWalk::Update()
 {
 	state_->Update(this);
 
+	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	transform.translate.x += velocity_.x;
+	transform.translate.y += velocity_.y;
+
 	ClearExtrusion();
 	ClearHitDirection();
-	IsHit_ = false;
+	isHit_ = false;
 }
 
 void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 {
-	IsHit_ = true;
+	isHit_ = true;
 
-	{//“G“¯Žm‚Ìˆ—
+	{//æ•µåŒå£«ã®å‡¦ç†
 		if (kEnemyWalkId == c->GetId())
 		{
-			speed_ *= -1.0f;
+			velocity_.x *= 1.0f;
 		}
 	}
 
-	{//ƒvƒŒƒCƒ„[‚Æ‚Ìˆ—
+	{//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®å‡¦ç†
 		if (kPlayerBullet == c->GetId())
 		{
 			if (!isDead_)
 			{
+				impactDirection_ = objData->GetVelocity();
 				isDead_ = true;
 				gameObjIncetance_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), INameable::name_);
 				ChangeState(make_unique<EnemyWalkStateDead>());
@@ -59,21 +65,21 @@ void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 		}
 	}
 
-	//ƒuƒƒbƒN‚Æ‚Ìˆ—
+	//ãƒ–ãƒ­ãƒƒã‚¯ã¨ã®å‡¦ç†
 	if (kNormalBlock == c->GetId()) {
 		for (auto& hitDirection : hitDirection_)
 		{
 			if (hitDirection == TOP)
 			{
-				velocity_ = {};
+				velocity_.y = 0.0f;;
 			}
 			if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
 			{
-				velocity_ = {};
+				velocity_ .y=0.0f;
 			}
 			if (hitDirection == LEFT || hitDirection == RIGHT)
 			{
-				speed_ *= -1.0f;
+				velocity_.x *= -1.0f;
 			}
 		}
 		auto& transform = gameObjIncetance_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;

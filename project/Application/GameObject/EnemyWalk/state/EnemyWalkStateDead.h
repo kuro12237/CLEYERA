@@ -4,7 +4,7 @@
 #include"GameObject/Particles/CharacterDeadParticle.h"
 
 /// <summary>
-/// •à‚­“G‚Ì€‚ñ‚¾‚Æ‚«‚Ìó‘Ô
+/// æ­©ãæ•µã®æ­»ã‚“ã ã¨ãã®çŠ¶æ…‹
 /// </summary>
 class EnemyWalkStateDead :public IEnemyWalkState
 {
@@ -24,4 +24,5 @@ private:
 
 	uint32_t particleIndex_ = 0;
 
+	Math::Vector::Vector3 impactDirectin_ = { 0.4f,0.1f,0.0f };
 };
