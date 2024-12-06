@@ -898,6 +898,7 @@
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlock.cpp" />
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockManager.cpp" />
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockHp.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateDeadAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1558,6 +1559,7 @@
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockManager.h" />
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlock.h" />
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockHp.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateDeadAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

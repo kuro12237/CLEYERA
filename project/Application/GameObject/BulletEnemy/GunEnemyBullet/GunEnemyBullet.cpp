@@ -5,10 +5,10 @@ void GunEnemyBullet::Initialize()
 	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	SetObjectData(transform);
 
-	Math::Vector::Vector2 minmax = { -0.5f,0.5f };
-	aabb_ = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
 
-	id_ = kEnemyWalkId;
+	const AABB aabb = { {-0.1f,-0.1f,-0.1f,},{0.1f,0.1f,0.1f} };
+	aabb_ = aabb;
+	id_ = kGunEnemyBulletId;
 	attribute_ = CollisionMask::kEnemyWalkAttribute;
 	mask_ = CollisionMask::kEnemyWalkMask;
 
@@ -27,16 +27,34 @@ void GunEnemyBullet::Update()
 
 	transform.transform.translate.x += velocity_.x;
 
+	deltaTime_ += DeltaTimer(flame_);
+	if (deltaTime_>=deltaTimeMax_)
+	{
+		isDead_ = true;
+	}
+
 }
 
 void GunEnemyBullet::OnCollision(ICollider* c, IObjectData* objData)
 {
 	c, objData;
-	if (c->GetId() == kPlayerId)
+	if (c->GetId()==kEnemyWalkId)
 	{
-		isDead_ = true;
 		return;
 	}
 
+	if (c->GetId()==kGunEnemyId)
+	{
+		return;
+	}
+
+	if (c->GetId() == kPlayerId)
+	{
+		isDead_ = true;
+	}
+	if (c->GetId() == kNormalBlock)
+	{
+		isDead_ = true;
+	}
 
 }

@@ -8,7 +8,7 @@ void GunEnemy::Initialize()
 	const Math::Vector::Vector2 minmax = { -1.0f,1.0f };
 	aabb_ = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
 	isExtrusion_ = true;
-	id_ = kEnemyWalkId;
+	id_ = kGunEnemyId;
 	attribute_ = CollisionMask::kEnemyWalkAttribute;
 	mask_ = CollisionMask::kEnemyWalkMask;
 
@@ -66,21 +66,21 @@ void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
 	{//プレイヤーとの処理
 		if (kPlayerBullet == c->GetId())
 		{
-			if (!isDead_)
+			if (!isEnd_)
 			{
-				isDead_ = true;
+				isEnd_ = true;
 				gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), INameable::name_);
-		
+				ChangeState(make_unique<GunEnemyStateDeadAnimation>());
 			}
 		}
 
 		if (kPlayerId == c->GetId())
 		{
-			if (!isDead_)
+			if (!isEnd_)
 			{
-				isDead_ = true;
+				isEnd_ = true;
 				gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), INameable::name_);
-
+				ChangeState(make_unique<GunEnemyStateDeadAnimation>());
 			}
 		}
 	}
@@ -129,15 +129,15 @@ void GunEnemy::CreateBullet(const Math::Vector::Vector3& Pos)
 
 	shared_ptr<GunEnemyBullet> b = make_shared<GunEnemyBullet>();
 	string name = this->INameable::name_;
-	
+
 	const float kspeed = 0.3f;
-	if (speed_>0.0f)
+	if (speed_ > 0.0f)
 	{
 		b->SetVelocity({ kspeed,0.0f,0.0f });
 	}
 	else
 	{
-		b->SetVelocity({-kspeed,0.0f,0.0f });
+		b->SetVelocity({ -kspeed,0.0f,0.0f });
 	}
 
 

@@ -2,7 +2,7 @@
 #include"Pch.h"
 
 /// <summary>
-/// ƒIƒuƒWƒFƒNƒg‚Ìidİ’è
+/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®idè¨­å®š
 /// </summary>
 
 const static uint32_t kOnlyCollideWithBlocksid = 0b000000000;
@@ -13,6 +13,10 @@ const static uint32_t kPlayerBullet = 0b000000100;     // 4
 
 const static uint32_t kEnemyWalkId = 0b000001000;      // 8
 const static uint32_t kGoalId = 0b000010000;           // 16
+
+
+const static uint32_t kGunEnemyId = 0b000100000;
+const static uint32_t kGunEnemyBulletId = 0b000100001;
 
 const static uint32_t kPortalIds[] = {
     0b000100000,  // 32

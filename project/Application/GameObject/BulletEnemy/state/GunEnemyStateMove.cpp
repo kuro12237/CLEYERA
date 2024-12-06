@@ -17,10 +17,8 @@ void GunEnemyStateMove::Update(GunEnemy* e)
 	}
 	else
 	{
-
 		transform.rotate.y = -Math::Vector::degreesToRadians(degree);
 	}
-
 
 	deltaTime_ += DeltaTimer(flame_);
 
@@ -29,5 +27,4 @@ void GunEnemyStateMove::Update(GunEnemy* e)
 		e->ChangeState(make_unique<GunEnemyStateShoot>());
 		return;
 	}
-
 }

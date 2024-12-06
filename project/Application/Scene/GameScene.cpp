@@ -281,8 +281,10 @@ void GameScene::Collision()
 		{
 			continue;
 		}
-		gameCollisionManager_->ListPushback(e.get(), e.get());
-
+		if (!it->GetIsEnd())
+		{
+			gameCollisionManager_->ListPushback(e.get(), e.get());
+		}
 
 		for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
 		{

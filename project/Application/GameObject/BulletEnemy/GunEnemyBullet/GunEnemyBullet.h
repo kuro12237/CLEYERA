@@ -32,4 +32,8 @@ private:
 
 	bool isDead_ = false;
 
+	float flame_ = 0.0f;
+	int32_t deltaTime_ = 0;
+	int32_t deltaTimeMax_ = 4;
+
 };

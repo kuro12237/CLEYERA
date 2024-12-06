@@ -49,6 +49,7 @@
     <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemy.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\BulletEnemyManager.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.cpp" />
+    <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateDeadAnimation.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.cpp" />
     <ClCompile Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.cpp" />
     <ClCompile Include="Application\GameObject\ClearCamera\ClearCamera.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemy.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\BulletEnemyManager.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\GunEnemyBullet\GunEnemyBullet.h" />
+    <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateDeadAnimation.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateMove.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\state\GunEnemyStateShoot.h" />
     <ClInclude Include="Application\GameObject\BulletEnemy\state\IGunEnemyState.h" />

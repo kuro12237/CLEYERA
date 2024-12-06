@@ -192,6 +192,23 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 			}
 			AddState<PlayerStateInvincible>();
 		}
+
+		if (c->GetId() == kGunEnemyId)
+		{
+			if (reduceHpFunc_)
+			{
+				reduceHpFunc_();
+			}
+			AddState<PlayerStateInvincible>();
+		}
+		if (c->GetId()==kGunEnemyBulletId)
+		{
+			if (reduceHpFunc_)
+			{
+				reduceHpFunc_();
+			}
+			AddState<PlayerStateInvincible>();
+		}
 	}
 
 	if (c->GetId() == kNormalBlock)

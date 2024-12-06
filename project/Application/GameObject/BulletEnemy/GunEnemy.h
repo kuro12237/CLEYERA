@@ -8,6 +8,7 @@
 #include"Utility/ObjectId/GameObjectId.h"
 
 #include"state/GunEnemyStateMove.h"
+#include"state/GunEnemyStateDeadAnimation.h"
 
 #include"GunEnemyBullet/GunEnemyBullet.h"
 
@@ -35,9 +36,9 @@ public:
 
 #pragma region Get
 
-	bool GetIsEnd() { return isEnd_; }
+	bool &GetIsEnd() { return isEnd_; }
 	float GetSpeed() { return speed_; }
-	bool GetIsDead() { return isDead_; }
+	bool &GetIsDead() { return isDead_; }
 	int32_t GetEnemyNumber() { return enemyNumber_; }
 	vector<shared_ptr<GunEnemyBullet>>GetBullets() { return bullets_; }
 #pragma endregion
@@ -45,7 +46,6 @@ public:
 #pragma region Set
 	void SetEnemyNumber(int32_t number) { enemyNumber_ = number; }
 #pragma endregion
-
 
 private:
 	bool IsHit_ = false;

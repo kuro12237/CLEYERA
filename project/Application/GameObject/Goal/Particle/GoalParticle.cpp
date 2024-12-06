@@ -24,11 +24,11 @@ void GoalParticle::Initialize()
 	emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::Circle>>();
 	field_ = make_unique<Particle::ParticleField<Particle::FieldType::FieldSuction>>();
 	name_ = "GoalParticle";
-	particle_->Create(3, name_,modelHandle);
+	particle_->Create(1, name_,modelHandle);
 
 	texHandle_ = TextureManager::LoadDDSTexture("circle.dds");
-	//particle_->SetTexhandle(texHandle_);
-	//particle_->SetMode(BlendAdd);
+	particle_->SetTexhandle(texHandle_);
+	particle_->SetMode(BlendAdd);
 
 	emitter_->CreateType(particle_);
 	field_->CreateType(name_ + "Suction");

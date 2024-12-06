@@ -21,8 +21,9 @@ private:
 	GameObjectManager* gameObjIncetance_ = nullptr;
 	float flame_ = 0.0f;
 	float flameMax_ = 1.0f;
+	float flameAdd_ = 1.0f / 120.0f;
 
 	uint32_t particleIndex_ = 0;
 
-	Math::Vector::Vector3 impactDirectin_ = { 0.4f,0.1f,0.0f };
+	Math::Vector::Vector3 impactDirection_ = { 0.1f,0.4f,0.0f };
 };

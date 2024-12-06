@@ -28,8 +28,8 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 		index++;
 	}
 	auto velo = e->GetVelocity();
-	velo.y = 0.4f;
-	velo.x = e->GetImpactDirection().x * 0.1f;
+	velo.y = impactDirection_.y;
+	velo.x = e->GetImpactDirection().x;
 	e->SetVelocity(velo);
 }
 
@@ -40,10 +40,11 @@ void EnemyWalkStateDead::Update([[maybe_unused]] EnemyWalk* e)
 	auto& objData = gameObjIncetance_->GetObj3dDatas()[e->INameable::GetName()];
 	auto& desc = gameObjIncetance_->GetObjectDesc(e->INameable::GetName());
 
+	flame_ += flameAdd_;
 	//edge設定
 	desc.edgeDesc.minmax = { -0.1f,0.2f };
-	desc.edgeDesc.mask += 1.0f / 60.0f;
-	flame_ += 1.0f / 60.0f;
+	desc.edgeDesc.mask = flame_;
+
 	if (flame_ >= flameMax_)
 	{
 		bool& flag = e->GetIsEnd();
