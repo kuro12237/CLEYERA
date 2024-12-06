@@ -16,6 +16,8 @@ void GpuParticle::Create(const size_t kNum, string Name, uint32_t modelHandle)
 
 	if (modelHandle == 0)
 	{
+		vertexNum_ = 4;
+		indexNum_ = 6;
 		{//頂点作成
 			vertexBuf_ = make_unique<BufferResource<System::StructData::ParticleVertexData>>();
 			vertexBuf_->CreateResource(vertexNum_);
@@ -147,6 +149,20 @@ void GpuParticle::Update()
 			indexParam_[i] = modelData_.indecs[i];
 		}
 	}
+	else if (drawMode_ == mode_3d && modelHandle_ == 0)
+	{
+		vertexParam_[0].position = { -1.0f,-1.0f,0,1 };
+		vertexParam_[0].texcoord = { 0.0f,1.0f };
+		vertexParam_[1].position = { -1.0f ,1.0f,0,1 };
+		vertexParam_[1].texcoord = { 0.0f,0.0f };
+		vertexParam_[2].position = { 1.0f,-1.0f,0,1 };
+		vertexParam_[2].texcoord = { 1.0f,1.0f };
+		vertexParam_[3].position = { 1.0f,1.0f,0,1 };
+		vertexParam_[3].texcoord = { 1.0f,0.0f };
+
+		indexParam_[0] = 0; indexParam_[1] = 1; indexParam_[2] = 2;
+		indexParam_[3] = 1; indexParam_[4] = 3; indexParam_[5] = 2;
+	}
 
 	vertexBuf_->Map();
 	vertexBuf_->Setbuffer(vertexParam_);
@@ -179,6 +195,14 @@ void GpuParticle::Update()
 
 void GpuParticle::Draw()
 {
+
+	vertexBuf_->Map();
+	vertexBuf_->Setbuffer(vertexParam_,static_cast<uint32_t>(vertexParam_.size()));
+	vertexBuf_->UnMap();
+
+	indexBuf_->Map();
+	indexBuf_->Setbuffer(indexParam_,static_cast<uint32_t>(indexParam_.size()));
+	indexBuf_->UnMap();
 	//換える
 	SPSOProperty pso;
 	if (blend_ == BlendNone)

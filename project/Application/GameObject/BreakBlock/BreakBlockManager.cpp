@@ -2,16 +2,43 @@
 
 void BreakBlockManager::Initialize()
 {
-	auto& transforms = GameObjectManager::GetInstance()->GetObjInstancingData(name_)->GetTransforms();
-
-	for (int i = 0; i < int(transforms.size()); i++)
-	{
-		shared_ptr<BreakBlock>block = make_shared<BreakBlock>();
-		block->Initialize(name_, i);
-		blocks_.push_back(move(block));
-	}
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
+	const string name = "BreakBlockMap";
+
+	uint32_t enemyCount = 0;
+
+	for (uint32_t Count_ = 0; Count_ < uint32_t(gameObjectManager_->GetObj3dDatas().size()); Count_++)
+	{
+		string count = to_string(enemyCount);
+
+		string enemyName = "";
+		if (count == "0")
+		{
+			enemyName = name;
+		}
+		else {
+			enemyName = name + "." + string(3 - to_string(enemyCount).length(), '0') + to_string(enemyCount);
+		}
+
+		if (gameObjectManager_->GetObj3dDatas().find(enemyName) != gameObjectManager_->GetObj3dDatas().end())
+		{
+			auto obj = gameObjectManager_->GetObj3dData(enemyName);
+
+			shared_ptr<BreakBlock>enemyWalk = nullptr;
+			enemyWalk = make_shared<BreakBlock>();
+			enemyWalk->INameable::SetName(enemyName);
+			enemyWalk->Initialize(enemyName,enemyCount);
+
+			blocks_.push_back(enemyWalk);
+			enemyCount++;
+		}
+		else
+		{
+			break;
+		}
+	}
+
 }
 
 void BreakBlockManager::Update()
@@ -21,7 +48,7 @@ void BreakBlockManager::Update()
 		(*it)->Update();
 
 		if ((*it)->GetIsDead()) {
-			gameObjectManager_->GetObjInstancingData(name_)->GetTransforms()[(*it)->GetInstancingIndex()]->SetBreakFlag(true);
+			gameObjectManager_->ClearObj3dData((*it)->INameable::GetName());
 			it = blocks_.erase(it); // 削除後、次のイテレーターを取得
 		}
 		else {

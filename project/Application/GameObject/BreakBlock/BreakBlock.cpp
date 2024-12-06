@@ -2,10 +2,10 @@
 
 void BreakBlock::Initialize(string name, uint32_t index)
 {
-	INameable::name_ = name + to_string(index);
-	auto& transforms = gameObjectManager_->GetObjInstancingData(name)->GetTransforms()[index];
-	SetObjectData(transforms->GetTransform());
-	SetAABB(transforms->GetAABB());
+	INameable::name_ = name;
+	auto& transforms = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform();
+	SetObjectData(transforms.transform);
+	SetAABB(gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB());
 
 	id_ = kNormalBlock;
 	attribute_ = CollisionMask::kBlockAttribute;

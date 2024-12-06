@@ -1078,13 +1078,49 @@
             "name": "BreakBlockMap",
             "file_name": "BreakBlock",
             "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "BreakMap",
+            "DrawType": "Normal",
             "transform": {
                 "translate": [
                     9.557600021362305,
                     0.0,
                     4.016928195953369
+                ],
+                "rotate": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "BreakBlockMap.001",
+            "file_name": "BreakBlock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    15.391332626342773,
+                    0.0,
+                    8.311111450195312
                 ],
                 "rotate": [
                     90.00000762939453,

@@ -65,7 +65,7 @@ void PlayerReticle::Update()
 	Math::Matrix::Matrix4x4 viewMat = CameraManager::GetInstance()->GetCameraData()->matView_;
 	Math::Matrix::Matrix4x4 ProjMat = CameraManager::GetInstance()->GetCameraData()->matProj_;
 
-	const float offset = 0.5f;
+	const float offset = 1.5f;
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(name_)->GetWorldTransform();
 	Math::Vector::Vector3 playerPos = GameObjectManager::GetInstance()->GetObj3dData("Player")->GetWorldTransform().GetWorldPosition();
 	playerPos.y += offset;
