@@ -837,7 +837,7 @@
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.cpp">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\GunEnemy\BulletEnemyManager.cpp">
+    <ClCompile Include="Application\GameObject\GunEnemy\GunEnemyManager.cpp">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.cpp">
@@ -1489,7 +1489,7 @@
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.h">
       <Filter>CLEYERA\Graphics\GraphicsPipelineManager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\GunEnemy\BulletEnemyManager.h">
+    <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyManager.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneClearTextUi.h">

@@ -1,4 +1,4 @@
-#include "BulletEnemyManager.h"
+#include "GunEnemyManager.h"
 
 void GunEnemyManager::Initialize()
 {

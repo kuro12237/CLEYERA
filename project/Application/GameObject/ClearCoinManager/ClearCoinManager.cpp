@@ -49,49 +49,45 @@ void ClearCoinManager::Update()
 		unique_ptr<ClearCoin>& coin = clearCoins_[i];
 		coin->Update();
 
-
-		if (coin->GetIsEnd())
+		if (!coin->GetIsEnd())
 		{
-			// 現在のコインが終了した際の処理
-			if (i + 1 < clearCoins_.size())
-			{
-				// 次のコインにアクセス
-				unique_ptr<ClearCoin>& nextCoin = clearCoins_[i + 1];
-				if (!nextCoin->GetIsStateAnimation())
-				{
-					const int32_t countMax = 3;
-					auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
-					emit.GetControlParam()[useEmitterIndex_].useFlag_ = true;
-					emit.GetEmitParam()[useEmitterIndex_].count = countMax;
-					emit.GetEmitParam()[useEmitterIndex_].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
+			continue;
+		}
 
-					nextCoin->StartAnimation(true);
-					nextCoin->CreateState();
-				}
-				else
-				{
-					isComplete_ = true;
-				}
-			}
-			else if (i + 1 == clearCoins_.size())
+		// 現在のコインが終了した際の処理
+		if (i + 1 < clearCoins_.size())
+		{
+			// 次のコインにアクセス
+			unique_ptr<ClearCoin>& nextCoin = clearCoins_[i + 1];
+
+			if (coin->GetIsEnd()&&!nextCoin->GetIsStateAnimation())
 			{
-				isComplete_ = true;
+				const int32_t countMax = 3;
+				auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
+				emit.GetControlParam()[useEmitterIndex_].useFlag_ = true;
+				emit.GetEmitParam()[useEmitterIndex_].count = countMax;
+				emit.GetEmitParam()[useEmitterIndex_].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
+			}
+			else {
+				const int32_t countMax = 0;
+				auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
+				emit.GetControlParam()[useEmitterIndex_].useFlag_ = false;
+				emit.GetEmitParam()[useEmitterIndex_].count = countMax;
+				emit.GetEmitParam()[useEmitterIndex_].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
+
+			}
+
+			if (!nextCoin->GetIsStateAnimation())
+			{
+				nextCoin->StartAnimation(true);
+				nextCoin->CreateState();
 			}
 		}
-	}
-
-	auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
-	if (emit.GetControlParam()[useEmitterIndex_].useFlag_)
-	{
-		const float particleEmitAddFlame = 1.0f / 10.0f;
-		particleEmitFlame_ += particleEmitAddFlame;
-
-		if (particleEmitFlame_ >= particleEmitMax_)
+		else if (i + 1 == clearCoins_.size())
 		{
-			particleEmitFlame_ = 0.0f;
-			emit.GetEmitParam()[useEmitterIndex_].count = 0;
-			emit.GetControlParam()[useEmitterIndex_].useFlag_ = false;
+			isComplete_ = true;
 		}
+
 	}
 
 	splashParticle_->Emit();
@@ -154,7 +150,7 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
 
 		//オーラ
-		string auraName_num=auraName+ to_string(index + i * 3);
+		string auraName_num = auraName + to_string(index + i * 3);
 		shared_ptr<Game3dObjectData> dataAura = make_shared<Game3dObjectData>();
 		dataAura->SetObjectType("MESH");
 		dataAura->SetIsDraw(false);

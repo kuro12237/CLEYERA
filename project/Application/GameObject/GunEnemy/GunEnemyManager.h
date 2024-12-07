@@ -5,6 +5,9 @@
 
 #include"GunEnemy.h"
 
+/// <summary>
+/// 銃の敵管理クラス
+/// </summary>
 class GunEnemyManager
 {
 public:

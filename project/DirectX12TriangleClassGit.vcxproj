@@ -47,7 +47,7 @@
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockHp.cpp" />
     <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockManager.cpp" />
     <ClCompile Include="Application\GameObject\GunEnemy\GunEnemy.cpp" />
-    <ClCompile Include="Application\GameObject\GunEnemy\BulletEnemyManager.cpp" />
+    <ClCompile Include="Application\GameObject\GunEnemy\GunEnemyManager.cpp" />
     <ClCompile Include="Application\GameObject\GunEnemy\GunEnemyBullet\GunEnemyBullet.cpp" />
     <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateMove.cpp" />
@@ -235,7 +235,7 @@
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockHp.h" />
     <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockManager.h" />
     <ClInclude Include="Application\GameObject\GunEnemy\GunEnemy.h" />
-    <ClInclude Include="Application\GameObject\GunEnemy\BulletEnemyManager.h" />
+    <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyManager.h" />
     <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyBullet\GunEnemyBullet.h" />
     <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.h" />
     <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateMove.h" />
