@@ -44,7 +44,7 @@ void GunEnemy::Update()
 		}
 		if (bullets_[index]->GetIsDead())
 		{
-			GameObjectManager::GetInstance()->ClearObj3dData(bullets_[index]->INameable::GetName());
+			gameObjectManager_->ClearObj3dData(bullets_[index]->INameable::GetName());
 			bullets_[index].reset();
 		}
 	}
@@ -52,6 +52,18 @@ void GunEnemy::Update()
 	if (state_)
 	{
 		state_->Update(this);
+	}
+
+	
+
+	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	transform.translate.x += velocity_.x;
+	transform.translate.y += velocity_.y;
+
+	if (isShot_)
+	{
+		CreateBullet(transform.translate);
+		isShot_ = false;
 	}
 	for (shared_ptr<GunEnemyBullet>& b : bullets_)
 	{
@@ -124,14 +136,6 @@ void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
 
 }
 
-void GunEnemy::ChangeState(unique_ptr<IGunEnemyState> state)
-{
-	state_ = move(state);
-
-	state_->Initialize(this);
-	state_->Update(this);
-
-}
 
 void GunEnemy::CreateBullet(const Math::Vector::Vector3& Pos)
 {

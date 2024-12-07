@@ -12,14 +12,14 @@ public:
    /// 初期化
    /// </summary>
    /// <param name="本体"></param>
-	void Initialize(GunEnemy* e);
+	void Initialize(IGunEnemy* e);
 
 
 	/// <summary>
 	/// 更新
 	/// </summary>
 	/// <param name="本体"></param>
-	void Update(GunEnemy* e);
+	void Update(IGunEnemy* e);
 private:
 
 

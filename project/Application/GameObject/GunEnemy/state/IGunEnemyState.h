@@ -1,6 +1,6 @@
 #pragma once
 
-class GunEnemy;
+class IGunEnemy;
 
 /// <summary>
 /// Enemyの状態遷移
@@ -15,14 +15,14 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="本体"></param>
-	virtual void Initialize(GunEnemy* e) = 0;
+	virtual void Initialize(IGunEnemy* e) = 0;
 
 
 	/// <summary>
 	/// 更新
 	/// </summary>
 	/// <param name="本体"></param>
-	virtual void Update(GunEnemy* e) = 0;
+	virtual void Update(IGunEnemy* e) = 0;
 
 private:
 

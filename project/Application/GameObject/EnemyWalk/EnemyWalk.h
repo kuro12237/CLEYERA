@@ -55,9 +55,7 @@ private:
 	bool isDead_ = false;
 	bool isEnd_ = false;
 
-
 	unique_ptr<IEnemyWalkState>state_ = nullptr;
-	GameObjectManager* gameObjIncetance_ = nullptr;
 
 	Math::Vector::Vector3 impactDirection_ = {};
 

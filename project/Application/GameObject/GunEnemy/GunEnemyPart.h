@@ -1,4 +1,6 @@
 #pragma once
+
+
 #include"STransformEular.h"
 #include"Pch.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
@@ -12,13 +14,16 @@
 #include"state/GunEnemyStateDeadAnimation.h"
 
 #include"GunEnemyBullet/GunEnemyBullet.h"
-#include"IGunEnemy.h"
 
-class GunEnemy : public IGunEnemy, public ICollider
+
+/// <summary>
+/// 右足
+/// </summary>
+class GunEnemyPart :public IGunEnemy, public ICollider
 {
 public:
-	GunEnemy() {};
-	~GunEnemy() {};
+	GunEnemyPart() {};
+	~GunEnemyPart() {};
 
 	/// <summary>
 	/// 初期化
@@ -32,19 +37,11 @@ public:
 	/// </summary>
 	void OnCollision(ICollider* c, IObjectData* objData)override;
 
-	void CreateBullet(const Math::Vector::Vector3& Pos);
-
-#pragma region Get
-	int32_t GetEnemyNumber() { return enemyNumber_; }
-	vector<shared_ptr<GunEnemyBullet>>GetBullets() { return bullets_; }
+#pragma region Set
+	void SetIsCoreEnd(bool& f) { isCoreEnd_ = &f; }
 #pragma endregion
-
 
 private:
 
-	uint32_t modelHandle_ = 0;
-
-	vector<shared_ptr<GunEnemyBullet>>bullets_;
-	queue<uint32_t>deadBulletIndex_;
-
+	bool* isCoreEnd_ = nullptr;
 };

@@ -202,6 +202,11 @@ void GameObjectManager::ClearAllData()
 	}
 }
 
+void GameObjectManager::DeleateParent(string name)
+{
+	obj3dData_[name]->DeleateParent();
+}
+
 void GameObjectManager::SetNormalObjectParent(string parentName, string childName)
 {
 	obj3dData_[childName]->SetParent(obj3dData_[parentName]->GetWorldTransform());

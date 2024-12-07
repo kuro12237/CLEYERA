@@ -273,13 +273,14 @@ void GameScene::Collision()
 
 	}
 
-	for (shared_ptr<GunEnemy>& e : bulletEnemyManager_->GetGunEnemys())
+	for (auto& enemy : bulletEnemyManager_->GetGunEnemys())
 	{
-		weak_ptr<GunEnemy>obj = e;
+		weak_ptr<GunEnemy>obj = enemy.core;
 		auto it = obj.lock();
 		if (it)
 		{
-			gameCollisionManager_->ListPushback(e.get(), e.get());
+			gameCollisionManager_->ListPushback(it.get(), it.get());
+
 			for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
 			{
 				if (b)
@@ -287,6 +288,18 @@ void GameScene::Collision()
 					gameCollisionManager_->ListPushback(b.get(), b.get());
 				}
 
+			}
+		}
+
+		for (auto& parts : enemy.parts)
+		{
+			if (!parts)
+			{
+				continue;
+			}
+			if (parts->GetIsEnd())
+			{
+				gameCollisionManager_->ListPushback(parts.get(), parts.get());
 			}
 		}
 	}
@@ -342,12 +355,24 @@ void GameScene::Gravitys()
 		}
 	}
 
-	for (shared_ptr<GunEnemy>& e : bulletEnemyManager_->GetGunEnemys())
+	for (auto& e : bulletEnemyManager_->GetGunEnemys())
 	{
-		if (e)
+		if (e.core)
 		{
-			gravityManager_->PushList(e.get());
+			gravityManager_->PushList(e.core.get());
 		}
+		for (auto& parts : e.parts)
+		{
+			if (!parts)
+			{
+				continue;
+			}
+			if (parts->GetIsEnd())
+			{
+				gravityManager_->PushList(parts.get());
+			}
+		}
+
 	}
 
 

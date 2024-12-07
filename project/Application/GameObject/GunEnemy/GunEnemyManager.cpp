@@ -5,22 +5,45 @@ void GunEnemyManager::Initialize()
 	gameObjectManager_ = GameObjectManager::GetInstance();
 
 	const string name = "GunEnemyCore";
+	const string leftName = "GunEnemyLeft";
+	const string rightName = "GunEnemyRight";
+	const string barrelName = "GunEnemyBarrel";
 
 	for (uint32_t index = 0; index < uint32_t(gameObjectManager_->GetObj3dDatas().size()); index++)
 	{
-		string enemyName = "";
-		enemyName = name + FormatNumberWithDots(enemyCount_);
 
-		if (gameObjectManager_->GetObj3dDatas().find(enemyName) != gameObjectManager_->GetObj3dDatas().end())
+		vector<string>names{
+			 name + FormatNumberWithDots(enemyCount_),
+			 leftName + FormatNumberWithDots(enemyCount_),
+			 rightName + FormatNumberWithDots(enemyCount_),
+			 barrelName + FormatNumberWithDots(enemyCount_)
+		};
+
+		if (gameObjectManager_->GetObj3dDatas().find(names[0]) != gameObjectManager_->GetObj3dDatas().end())
 		{
-			shared_ptr<GunEnemy>enemyBullet = nullptr;
-			enemyBullet = make_shared<GunEnemy>();
-			enemyBullet->INameable::SetName(enemyName);
-			enemyBullet->Initialize();
-			enemyBullet->SetEnemyNumber(enemyCount_);
-
 			enemys_.resize(enemyCount_ + 1);
-			enemys_[enemyCount_] = move(enemyBullet);
+
+			shared_ptr<GunEnemy>core = nullptr;
+			core = make_shared<GunEnemy>();
+			core->INameable::SetName(names[0]);
+			core->Initialize();
+			core->SetEnemyNumber(enemyCount_);
+
+
+			enemys_[enemyCount_].parts.resize(enemys_[enemyCount_].partsSize);
+
+			for (size_t i = 0; i < enemys_[enemyCount_].partsSize; i++)
+			{
+				shared_ptr<GunEnemyPart>parts = make_shared<GunEnemyPart>();
+				parts->INameable::SetName(names[i + 1]);
+				parts->Initialize();
+				parts->SetEnemyNumber(enemyCount_);
+				parts->SetIsCoreEnd(core->GetIsEnd());
+
+				enemys_[enemyCount_].parts[i] = move(parts);
+			}
+
+			enemys_[enemyCount_].core = move(core);
 			enemyCount_++;
 		}
 		else
@@ -38,19 +61,24 @@ void GunEnemyManager::Update()
 	}
 	for (auto& enemy : enemys_)
 	{
-		if (enemy)
+		if (enemy.core)
 		{
-			enemy->Update();
+			enemy.core->Update();
+			for (auto& parts : enemy.parts) {
+				parts->Update();
+			}
+
+
 			//死んだら消す
-			if (enemy->GetIsDead())
+			if (enemy.core->GetIsDead())
 			{
-				gameObjectManager_ ->ClearObj3dData(enemy->INameable::GetName());
+				gameObjectManager_->ClearObj3dData(enemy.core->INameable::GetName());
+				for (auto& parts : enemy.parts) {
 
-				GameObjectManager::GetInstance()->ClearObj3dData("GunEnemyLeft"+FormatNumberWithDots(enemy->GetEnemyNumber()));
-				GameObjectManager::GetInstance()->ClearObj3dData("GunEnemyRight"+ FormatNumberWithDots(enemy->GetEnemyNumber()));
-				GameObjectManager::GetInstance()->ClearObj3dData("GunEnemyBarrel" + FormatNumberWithDots(enemy->GetEnemyNumber()));
+					gameObjectManager_->ClearObj3dData(parts->INameable::GetName());
+				}
 
-				for (shared_ptr<GunEnemyBullet>& b : enemy->GetBullets())
+				for (shared_ptr<GunEnemyBullet>& b : enemy.core->GetBullets())
 				{
 					if (!b)
 					{
@@ -61,7 +89,7 @@ void GunEnemyManager::Update()
 					b.reset();
 				}
 
-				enemy.reset();
+				enemy.Reset();
 			}
 		}
 	}

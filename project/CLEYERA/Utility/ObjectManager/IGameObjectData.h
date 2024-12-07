@@ -3,6 +3,9 @@
 #include"Utility/GlobalVariables/GlobalVariables.h"
 #include"GameObject/GameCollider/ColliderData.h"
 
+/// <summary>
+/// オブジェクトのデータ
+/// </summary>
 class IGameObjectData
 {
 public:
@@ -13,6 +16,8 @@ public:
 
 	void PushBackChildren(string name) { childName_.push_back(name); }
 	void PushBackParamFilePath(string name) { paramFilePaths_.push_back(name); }
+
+	void DeleateParent() { worldTransform_.DeleateParent(); }
 
 #pragma region Get
 	vector<string> GetChildsName() { return childName_; }

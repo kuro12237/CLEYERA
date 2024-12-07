@@ -1,14 +1,14 @@
 #include "GunEnemyStateMove.h"
 
-void GunEnemyStateMove::Initialize([[maybe_unused]] GunEnemy* e)
+void GunEnemyStateMove::Initialize([[maybe_unused]] IGunEnemy* e)
 {
+	e;
 }
 
-void GunEnemyStateMove::Update(GunEnemy* e)
+void GunEnemyStateMove::Update(IGunEnemy* e)
 {
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(e->INameable::GetName())->GetWorldTransform().transform;
-	transform.translate.x += e->GetVelocity().x;
-	
+
 	const float degree = 90.0f;
 
 	if (e->GetVelocity().x >= 0.0f)

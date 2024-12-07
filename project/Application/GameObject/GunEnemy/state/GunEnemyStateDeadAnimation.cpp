@@ -1,20 +1,34 @@
 #include "GunEnemyStateDeadAnimation.h"
 
-void GunEnemyStateDeadAnimation::Initialize(GunEnemy* e)
+void GunEnemyStateDeadAnimation::Initialize(IGunEnemy* e)
 {
-	e;
-	gameObjectInstance_ = GameObjectManager::GetInstance();
+	gameObjectManager_ = GameObjectManager::GetInstance();
+	gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), e->INameable::GetName());
+
+	gameObjectManager_->DeleateParent(e->INameable::GetName());
+
+	Math::Vector::Vector3 min = {-0.4f,0.2f,0.0f};
+	Math::Vector::Vector3 max = {0.2f,0.4f,0.0f};
+
+	for (size_t i = 0; i < impactVec_.size(); i++)
+	{
+		impactVec_[i] = RandomGenerator::GetParam<Math::Vector::Vector3>(min, max);
+	}
+
+	e->SetVelocity(impactVec_[0]);
 }
 
-void GunEnemyStateDeadAnimation::Update(GunEnemy* e)
+void GunEnemyStateDeadAnimation::Update(IGunEnemy* e)
 {
-	//auto& objData = gameObjectInstance_->GetObj3dDatas()[e->INameable::GetName()];
-	auto& desc = gameObjectInstance_->GetObjectDesc(e->INameable::GetName());
+	auto& coreDesc = gameObjectManager_->GetObjectDesc(e->INameable::GetName());
 
 	flame_ += flameAdd_;
+
 	//edge設定
-	desc.edgeDesc.minmax = { -0.1f,0.2f };
-	desc.edgeDesc.mask = flame_;
+	coreDesc.edgeDesc.minmax = { -0.1f,0.2f };
+	coreDesc.edgeDesc.mask = flame_;
+
+
 
 	if (flame_ >= flameMax_)
 	{

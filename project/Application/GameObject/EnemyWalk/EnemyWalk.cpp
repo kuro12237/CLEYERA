@@ -2,8 +2,7 @@
 
 void EnemyWalk::Initialize()
 {
-	gameObjIncetance_ = GameObjectManager::GetInstance();
-	auto& transform = gameObjIncetance_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	SetObjectData(transform);
 
 	Math::Vector::Vector2 minmax = { -1.0f,1.0f };
@@ -49,7 +48,7 @@ void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 			{
 				impactDirection_ = objData->GetVelocity();
 				isDead_ = true;
-				gameObjIncetance_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), INameable::name_);
+				gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), INameable::name_);
 				ChangeState(make_unique<EnemyWalkStateDead>());
 			}
 		}
@@ -59,7 +58,7 @@ void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 			if (!isDead_)
 			{
 				isDead_ = true;
-				gameObjIncetance_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), INameable::name_);
+				gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), INameable::name_);
 				ChangeState(make_unique<EnemyWalkStateDead>());
 			}
 		}
@@ -82,7 +81,7 @@ void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 				velocity_.x *= -1.0f;
 			}
 		}
-		auto& transform = gameObjIncetance_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+		auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 		transform.translate.x += extrusion_.x;
 		transform.translate.y += extrusion_.y;
 	}

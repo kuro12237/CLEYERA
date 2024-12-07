@@ -3,6 +3,7 @@
 #include"../GunEnemy.h"
 
 #include"GunEnemyStateShoot.h"
+#include"Utility/RandomGenerator/RandomGenerator.h"
 
 /// <summary>
 /// 死ぬ状態
@@ -17,17 +18,20 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="本体"></param>
-	void Initialize(GunEnemy* e);
-
+	void Initialize(IGunEnemy* e);
 
 	/// <summary>
 	/// 更新
 	/// </summary>
 	/// <param name="本体"></param>
-	void Update(GunEnemy* e);
+	void Update(IGunEnemy* e);
 private:
 
-	GameObjectManager* gameObjectInstance_ = nullptr;
+	array<Math::Vector::Vector3,4>impactVec_ = {};
+	
+	vector<Engine::Transform::TransformEular*>transforms_;
+
+	GameObjectManager* gameObjectManager_ = nullptr;
 	float flame_ = 0.0f;
 	float flameMax_ = 1.0f;
 	float flameAdd_ = 1.0f / 120.0f;

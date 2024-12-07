@@ -52,6 +52,12 @@ public:
 	/// </summary>
 	void ClearAllData();
 
+	/// <summary>
+	/// 親子付け解除
+	/// </summary>
+	/// <param name="name"></param>
+	void DeleateParent(string name);
+
 #pragma region Get
 
 	shared_ptr<Game3dObjectData>& GetObj3dData(string name) { return obj3dData_[name]; };
@@ -60,7 +66,6 @@ public:
 
 	shared_ptr<GameCameraData>& GetCameraData(string name) { return cameraData_[name]; }
 	shared_ptr<Game3dInstancingObjectData>& GetObjInstancingData(string name) { return objInstancing3dData_[name]; };
-
 	Game3dObjectDesc& GetObjectDesc(string name) { return obj3dData_[name]->GetDesc(); }
 
 #pragma endregion

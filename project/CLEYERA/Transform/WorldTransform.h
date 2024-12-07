@@ -73,6 +73,9 @@ namespace Engine::Transform
 
 #pragma region Get
 		Math::Vector::Vector3 GetWorldPosition();
+		Math::Vector::Vector3 GetWorldRotate();
+		Math::Vector::Vector3 GetWorldScale();
+
 		Math::Matrix::Matrix4x4 GetMat() { return matWorld; }
 #pragma endregion
 	private:
