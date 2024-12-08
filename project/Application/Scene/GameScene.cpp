@@ -49,6 +49,8 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
+	gravityManager_->Initilaize();
+
 
 	goal_ = make_unique<Goal>();
 	goal_->Initialize(kGoalId, 0);
@@ -137,6 +139,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	warpManager_->Update();
 
+	gravityManager_->Update();
 	Gravitys();
 
 	Collision();
@@ -383,6 +386,9 @@ void GameScene::Gravitys()
 			gravityManager_->PushList(e.get());
 		}
 	}
+
+	gravityManager_->PushParticleList(CharacterDeadParticle::GetInstance()->GetParticle());
+
 	gravityManager_->CheckGravity();
 }
 

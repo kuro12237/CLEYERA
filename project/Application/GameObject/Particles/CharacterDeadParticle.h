@@ -4,7 +4,7 @@
 #include"Graphics/TextureManager/TextureManager.h"
 
 /// <summary>
-/// ƒLƒƒƒ‰ƒNƒ^[‚ª€‚ñ‚¾‚Æ‚«‚Ìƒp[ƒeƒBƒNƒ‹
+/// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãŒæ­»ã‚“ã ã¨ãã®ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 /// </summary>
 class CharacterDeadParticle
 {
@@ -13,27 +13,27 @@ public:
 	static CharacterDeadParticle * GetInstance();
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// ImGuiXV
+	/// ImGuiæ›´æ–°
 	/// </summary>
 	void ImGuiUpdate();
 
 	/// <summary>
-	/// ƒGƒ~ƒbƒ^[‚Ìˆê•”‚ğƒNƒŠƒA
+	/// ã‚¨ãƒŸãƒƒã‚¿ãƒ¼ã®ä¸€éƒ¨ã‚’ã‚¯ãƒªã‚¢
 	/// </summary>
 	/// <param name="index"></param>
 	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
@@ -42,6 +42,7 @@ public:
 
 #pragma region Get
 	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>*GetEmitter() { return emitter_.get(); };
+	Engine::Particle::GpuParticle* GetParticle() { return particle_.get(); }
 #pragma endregion
 
 private:

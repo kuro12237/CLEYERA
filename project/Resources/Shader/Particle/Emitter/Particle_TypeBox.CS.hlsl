@@ -150,6 +150,7 @@ void main(uint32_t3 DTid : SV_DispatchThreadID, uint32_t3 GTid : SV_GroupThreadI
                 gParticle[particleIndex].matWorld = Mat4x4Identity();
                 gParticle[particleIndex].colorDecay = GenerateRandomColorDecay(gEmitterSphere[index], generator);
                 
+                
                 gParticle[particleIndex].scaleVelocity = GenerateRandomScaleVelocity(gEmitterSphere[index].scaleVelocityMin, gEmitterSphere[index].scaleVelocityMax, generator);
                 gParticle[particleIndex].isDraw = true;
             }

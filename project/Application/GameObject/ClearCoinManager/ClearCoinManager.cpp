@@ -53,11 +53,6 @@ void ClearCoinManager::Update()
 
 		if (!coin->GetIsEnd())
 		{
-			const int32_t countMax = 3;
-			auto& emit = splashParticle_->GetEmitter()[i];
-			emit.GetControlParam()[i].useFlag_ = true;
-			emit.GetEmitParam()[i].count = countMax;
-			emit.GetEmitParam()[i].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
 			continue;
 		}
 

@@ -18,8 +18,9 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 			auto& param = emitters->GetEmitParam()[particleIndex_];
 			param.count = 5;
 			emitter.frequencyTime = 0.3f;
-			param.velocityMax = { 0.01f,0.05f,0.0f };
-			param.velocityMin = { -0.01f,0.1f,0.0f };
+			param.velocityMax = { 0.1f,0.2f,0.0f };
+			param.velocityMin = { -0.1f,0.4f,0.0f };
+			param.color = { 0.0f,0.0f,1.0f,1.0f };
 			//当たり判定の大きさをもとにemitterを設定
 			param.sizeMax = e->GetAABB().min;
 			param.sizeMax = e->GetAABB().max;

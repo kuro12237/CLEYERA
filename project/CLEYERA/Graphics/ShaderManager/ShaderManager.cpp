@@ -374,6 +374,10 @@ void ShaderManager::Particles()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Particle/Field/Particle_Field_TypeBox_Suction.CS.hlsl",
 			L"cs_6_0");
+	instance->shaders[Shader::PARTICLE_FIELD]["Gravity"].csBlob=
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Field/Particle_Field_TypeBox_Gravity.CS.hlsl",
+			L"cs_6_0");
 	//Draw
 	instance->shaders[Shader::PARTICLE_DRAW]["None3d"].vertexBlob =
 		ShaderManager::CompilerShaderFanc(

@@ -1677,5 +1677,6 @@
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle2d_Draw.VS.hlsl">
       <Filter>Shader\Particle</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Gravity.CS.hlsl" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ namespace Engine::Particle
     namespace FieldType
     {
         /// <summary>
-        /// ãzÇ¢çûÇ›
+        /// Âê∏„ÅÑËæº„Åø
         /// </summary>
         struct FieldSuction
         {
@@ -21,5 +21,23 @@ namespace Engine::Particle
 
             float suctionPower;
         };
+
+        /// <summary>
+        /// ÈáçÂäõ
+        /// </summary>
+        struct FieldGravity
+        {
+            Math::Vector::Vector3 translate;
+            Math::Vector::Vector3 scale;
+            Math::Vector::Vector3 rotate;
+
+            int32_t use;
+
+            Math::Vector::Vector3 sizeMin;
+            Math::Vector::Vector3 sizeMax;
+
+            float gravity;
+        };
+
     }
 }

@@ -7,7 +7,7 @@ namespace Engine::Particle {
 	using namespace Engine::Buffer;
 
 	/// <summary>
-	/// ƒtƒB[ƒ‹ƒhƒNƒ‰ƒX
+	/// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚¯ãƒ©ã‚¹
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	template<typename T>
@@ -18,34 +18,34 @@ namespace Engine::Particle {
 		~ParticleField() {};
 
 		/// <summary>
-		/// ƒtƒB[ƒ‹ƒh‚Ì–¼‘O“ü‚ê‚ÄBufferì¬
+		/// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®åå‰å…¥ã‚Œã¦Bufferä½œæˆ
 		/// </summary>
 		/// <param name="name"></param>
 		void CreateType(string name);
 
 		/// <summary>
-		/// XV
+		/// æ›´æ–°
 		/// </summary>
 		void Update();
 
 		/// <summary>
-		/// ŽÀsˆ—
+		/// å®Ÿè¡Œå‡¦ç†
 		/// </summary>
-		/// <param name="ˆ—‚ð‚©‚¯‚éƒp[ƒeƒBƒNƒ‹"></param>
+		/// <param name="å‡¦ç†ã‚’ã‹ã‘ã‚‹ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«"></param>
 		void Dispach(Particle::GpuParticle* particle);
 
 		/// <summary>
-		/// imguiXV
+		/// imguiæ›´æ–°
 		/// </summary>
 		void ImGuiUpdate();
 
 		/// <summary>
-		/// ƒtƒB[ƒ‹ƒhƒfƒoƒbƒO•\Ž¦
+		/// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ‡ãƒãƒƒã‚°è¡¨ç¤º
 		/// </summary>
 		void FieldDraw();
 
 		/// <summary>
-		/// ƒpƒ‰ƒ[ƒ^[‚ð‰Šú‰»
+		/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’åˆæœŸåŒ–
 		/// </summary>
 		void AllClear();
 
@@ -89,6 +89,11 @@ namespace Engine::Particle {
 			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_FIELD, "Suction");
 		}
 
+		if constexpr (std::is_same<T, Particle::FieldType::FieldGravity>::value)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_FIELD, "Gravity");
+		}
+
 		ComPtr<ID3D12GraphicsCommandList> list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommands().m_pList;
 
 		list->SetComputeRootSignature(pso.rootSignature.Get());
@@ -104,6 +109,7 @@ namespace Engine::Particle {
 	template<typename T>
 	inline void ParticleField<T>::ImGuiUpdate()
 	{
+#ifdef _USE_IMGUI
 
 		if constexpr (std::is_same<T, Particle::FieldType::FieldSuction>::value)
 		{
@@ -128,6 +134,30 @@ namespace Engine::Particle {
 				ImGui::TreePop();
 			}
 		}
+		if constexpr (std::is_same<T, Particle::FieldType::FieldGravity>::value)
+		{
+			if (ImGui::TreeNode(name_.c_str()))
+			{
+				for (size_t index = 0; index < max_; index++)
+				{
+					string paramName = to_string(index);
+					ImGui::Separator();
+					if (ImGui::TreeNode(paramName.c_str()))
+					{
+						ImGui::DragFloat3("translate", &param_[index].translate.x, 0.1f);
+						ImGui::DragFloat3("rotate", &param_[index].rotate.x, 0.1f);
+						ImGui::DragInt("use", &param_[index].use, 1);
+
+						ImGui::DragFloat3("sizeMin", &param_[index].sizeMin.x, 0.1f);
+						ImGui::DragFloat3("sizeMax", &param_[index].sizeMax.x, 0.1f);
+						ImGui::DragFloat("gravity", &param_[index].gravity, 0.1f);
+						ImGui::TreePop();
+					}
+				}
+				ImGui::TreePop();
+			}
+		}
+#endif // _USE_IMGUI
 
 	}
 

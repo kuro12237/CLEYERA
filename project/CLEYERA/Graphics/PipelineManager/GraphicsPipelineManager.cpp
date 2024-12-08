@@ -65,6 +65,7 @@ void GraphicsPipelineManager::Initialize()
 	piplines_[PARTICLE_EMITTER]["Goal"] = CreateGpuParticle::CreateGpuParticcle_Emitter_Box(device, commands, shaderInstance->GetShaders(Shader::PARTICLE_EMITTER, "Goal"));
 
 	piplines_[PARTICLE_FIELD]["Suction"] = CreateGpuParticle::CreateGpuParticle_Field_Suction(device, commands, shaderInstance->GetShaders(Shader::PARTICLE_FIELD, "Suction"));
+	piplines_[PARTICLE_FIELD]["Gravity"] = CreateGpuParticle::CreateGpuParticle_Field_Suction(device, commands, shaderInstance->GetShaders(Shader::PARTICLE_FIELD, "Gravity"));
 
 	piplines_[PARTICLE_DRAW]["None3d"] = CreateGpuParticle::CreateGpuParticle_NoneDraw(device, commands, shaderInstance->GetShaders(Shader::PARTICLE_DRAW, "None3d"));
 	piplines_[PARTICLE_DRAW]["Add3d"] = CreateGpuParticle::CreateGpuParticle_AddDraw(device, commands, shaderInstance->GetShaders(Shader::PARTICLE_DRAW, "None3d"));

@@ -1,7 +1,7 @@
 #include"../MatrixFanc.hlsli"
 #include"../Particle.hlsli"
 
-struct FieldGravity
+struct FieldSuction
 {
     float32_t3 translate;
     float32_t3 scale;
@@ -12,12 +12,12 @@ struct FieldGravity
     float32_t3 sizeMin;
     float32_t3 sizeMax;
     
-    float32_t suctionPower;
+    float32_t gravity;
 };
 
 static const uint32_t FildMax = 32;
 
-StructuredBuffer<FieldGravity> gFieldSuction : register(t0);
+StructuredBuffer<FieldSuction> gFieldSuction : register(t0);
 RWStructuredBuffer<Particle> gParticle : register(u0);
 
 
@@ -40,10 +40,7 @@ void main(uint3 DTid : SV_DispatchThreadID, uint Gid : SV_GroupID)
                 gParticle[index].translate.z >= gFieldSuction[i].translate.z + gFieldSuction[i].sizeMin.z &&
                 gParticle[index].translate.z <= gFieldSuction[i].translate.z + gFieldSuction[i].sizeMax.z)
             {
-                // 吸い込み処理をここで行う
-                // 例えば、粒子の速度を吸い込み中心へ向かうように変更するなど
-                float32_t3 suctionDirection = normalize(gFieldSuction[i].translate - gParticle[index].translate);
-                gParticle[index].translate += suctionDirection * gFieldSuction[i].suctionPower;
+               gParticle[index].velocity.y += gFieldSuction[i].gravity;
             }
         }
     }
