@@ -16,8 +16,9 @@ void ClearCoinManager::Initilaize()
 	splashParticle_->Initialize();
 
 	///パーティクルエディターを作る一旦そのまま
+
 	auto& emit = splashParticle_->GetEmitter()[0];
-	auto& control = emit.GetControlParam();
+	auto& control = splashParticle_->GetEmitter()->GetControlParam();
 	control[0].frequencyTime = 0.01f;
 	control[0].useFlag_ = false;
 
@@ -33,6 +34,7 @@ void ClearCoinManager::Initilaize()
 	param.scaleSizeMax = { 0.2f,0.0f,0.0f };
 	param.colorDecayMax.w = 0.05f;
 	param.colorDecayMin.w = 0.03f;
+
 }
 
 void ClearCoinManager::Update()
@@ -51,6 +53,11 @@ void ClearCoinManager::Update()
 
 		if (!coin->GetIsEnd())
 		{
+			const int32_t countMax = 3;
+			auto& emit = splashParticle_->GetEmitter()[i];
+			emit.GetControlParam()[i].useFlag_ = true;
+			emit.GetEmitParam()[i].count = countMax;
+			emit.GetEmitParam()[i].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
 			continue;
 		}
 
@@ -59,24 +66,6 @@ void ClearCoinManager::Update()
 		{
 			// 次のコインにアクセス
 			unique_ptr<ClearCoin>& nextCoin = clearCoins_[i + 1];
-
-			if (coin->GetIsEnd()&&!nextCoin->GetIsStateAnimation())
-			{
-				const int32_t countMax = 3;
-				auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
-				emit.GetControlParam()[useEmitterIndex_].useFlag_ = true;
-				emit.GetEmitParam()[useEmitterIndex_].count = countMax;
-				emit.GetEmitParam()[useEmitterIndex_].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
-			}
-			else {
-				const int32_t countMax = 0;
-				auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
-				emit.GetControlParam()[useEmitterIndex_].useFlag_ = false;
-				emit.GetEmitParam()[useEmitterIndex_].count = countMax;
-				emit.GetEmitParam()[useEmitterIndex_].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
-
-			}
-
 			if (!nextCoin->GetIsStateAnimation())
 			{
 				nextCoin->StartAnimation(true);
@@ -86,6 +75,12 @@ void ClearCoinManager::Update()
 		else if (i + 1 == clearCoins_.size())
 		{
 			isComplete_ = true;
+			const int32_t countMax = 0;
+			auto& emit = splashParticle_->GetEmitter()[useEmitterIndex_];
+			emit.GetControlParam()[useEmitterIndex_].useFlag_ = false;
+			emit.GetEmitParam()[useEmitterIndex_].count = countMax;
+			emit.GetEmitParam()[useEmitterIndex_].translate = GameObjectManager::GetInstance()->GetObj3dData(coin->GetName())->GetWorldTransform().transform.translate;
+
 		}
 
 	}

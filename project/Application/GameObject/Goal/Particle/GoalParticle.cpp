@@ -18,13 +18,11 @@ void GoalParticle::Initialize()
 	}
 	InitializeLock_ = true;
 
-	uint32_t modelHandle = ModelManager::LoadObjectFile("DfCube");
-
 	particle_ = make_unique<Particle::GpuParticle>();
 	emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::Circle>>();
 	field_ = make_unique<Particle::ParticleField<Particle::FieldType::FieldSuction>>();
 	name_ = "GoalParticle";
-	particle_->Create(1, name_,modelHandle);
+	particle_->Create(1, name_);
 
 	texHandle_ = TextureManager::LoadDDSTexture("circle.dds");
 	particle_->SetTexhandle(texHandle_);
@@ -32,7 +30,6 @@ void GoalParticle::Initialize()
 
 	emitter_->CreateType(particle_);
 	field_->CreateType(name_ + "Suction");
-
 }
 
 void GoalParticle::ImGuiUpdate()
