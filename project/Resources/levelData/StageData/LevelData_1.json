@@ -47,7 +47,7 @@
             "transform": {
                 "translate": [
                     -142.647705078125,
-                    -60.0,
+                    -75.6334228515625,
                     43.150001525878906
                 ],
                 "rotate": [
@@ -349,8 +349,8 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -115.6849365234375,
-                    221.90225219726562,
+                    -0.491851806640625,
+                    292.93310546875,
                     0.0
                 ],
                 "rotate": [
@@ -362,30 +362,6 @@
                     40.0,
                     40.0,
                     40.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "smallRock.003",
-            "file_name": "smallRock",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    -73.41242980957031,
-                    239.95162963867188,
-                    23.303783416748047
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    4.0,
-                    4.0,
-                    4.0
                 ]
             }
         },
@@ -499,6 +475,198 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock.001",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    138.61061096191406,
+                    156.22412109375,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    0.0,
+                    -59.77857208251953
+                ],
+                "scale": [
+                    39.999996185302734,
+                    39.999996185302734,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock.002",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    76.77031707763672,
+                    235.2974853515625,
+                    24.184154510498047
+                ],
+                "rotate": [
+                    -56.34930419921875,
+                    15.824295043945312,
+                    2.4749114513397217
+                ],
+                "scale": [
+                    40.0,
+                    40.0,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock.003",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -107.11499786376953,
+                    187.89419555664062,
+                    24.184154510498047
+                ],
+                "rotate": [
+                    -56.34928512573242,
+                    15.824288368225098,
+                    54.425819396972656
+                ],
+                "scale": [
+                    40.0,
+                    40.0,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock.004",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -229.3517608642578,
+                    187.89419555664062,
+                    -17.897319793701172
+                ],
+                "rotate": [
+                    -56.34929656982422,
+                    15.824295043945312,
+                    83.17274475097656
+                ],
+                "scale": [
+                    39.999996185302734,
+                    40.0,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock.005",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    195.84487915039062,
+                    182.30857849121094,
+                    24.184154510498047
+                ],
+                "rotate": [
+                    -34.98954772949219,
+                    -15.36042308807373,
+                    -53.193382263183594
+                ],
+                "scale": [
+                    40.0,
+                    40.0,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock.006",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -229.3517608642578,
+                    26.600814819335938,
+                    -17.897319793701172
+                ],
+                "rotate": [
+                    -73.04010009765625,
+                    22.21875762939453,
+                    78.35961151123047
+                ],
+                "scale": [
+                    39.999996185302734,
+                    40.0,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "FlatRock.007",
+            "file_name": "FlatRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -211.4626007080078,
+                    116.02888488769531,
+                    50.62700271606445
+                ],
+                "rotate": [
+                    -64.32703399658203,
+                    23.627952575683594,
+                    81.75916290283203
+                ],
+                "scale": [
+                    39.999996185302734,
+                    40.0,
+                    40.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "smallRock.003",
+            "file_name": "smallRock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -37.183807373046875,
+                    -35.32072448730469,
+                    -12.626368522644043
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    4.0,
+                    4.0,
+                    4.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -1118,7 +1286,7 @@
             "transform": {
                 "translate": [
                     -118.0,
-                    -60.0,
+                    -75.6334228515625,
                     20.0
                 ],
                 "rotate": [
@@ -1156,7 +1324,7 @@
             "transform": {
                 "translate": [
                     -155.0,
-                    -60.0,
+                    -75.0,
                     20.0
                 ],
                 "rotate": [
@@ -1342,7 +1510,7 @@
             "transform": {
                 "translate": [
                     -81.0,
-                    -60.0,
+                    -75.6334228515625,
                     20.0
                 ],
                 "rotate": [
@@ -3425,6 +3593,81 @@
                 "translate": [
                     -121.5,
                     -56.0,
+                    92.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.047",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    -121.5,
+                    -61.0,
+                    92.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.048",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    -121.5,
+                    -66.0,
+                    92.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.049",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    -121.5,
+                    -71.0,
                     92.0
                 ],
                 "rotate": [
