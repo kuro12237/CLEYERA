@@ -70,6 +70,7 @@ namespace Engine::Objects
 		void SetDesc(const Game3dObjectDesc& desc) { game3dObjectDesc_ = &desc; }
 		void SetName(string name) { name_ = name; }
 		void SetSkinningFlag(bool f) { skinningFlag_ = f; }
+		void SetTexHandle(uint32_t texHandle) { modelData_.material.handle = texHandle; }
 #pragma endregion
 
 #pragma region Get

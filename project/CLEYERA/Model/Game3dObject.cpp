@@ -31,6 +31,7 @@ void Game3dObject::SetModel(uint32_t index)
 	}
 
 	prevModelIndex_ = index;
+	modelData_ = model_->GetModelData();
 }
 
 void Game3dObject::ChangePipline(unique_ptr<IPipelineCommand> piplineSelect)
@@ -45,8 +46,6 @@ void Game3dObject::Draw(WorldTransform worldTransform)
 	{
 		return;
 	}
-
-	modelData_ = model_->GetModelData();
 
 
 	MaterialBuffer_->Map();

@@ -24,7 +24,7 @@ public:
 	void SetModelHandle(uint32_t handle) { modelHandle_ = handle; }
 
 	void ChangePipline(unique_ptr<IPipelineCommand> piplineSelect);
-
+	void SetTexHandle(uint32_t handle) { gameObject_->SetTexHandle(handle); }
 #pragma endregion
 
 #pragma region Get

@@ -49,4 +49,6 @@ private:
 
 	int32_t instancingIndex_ = 0;
 	bool isDead_ = false;
+
+	vector<uint32_t>texHandles_;
 };
