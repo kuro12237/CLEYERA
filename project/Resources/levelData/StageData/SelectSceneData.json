@@ -5019,15 +5019,63 @@
         },
         {
             "type": "MESH",
+            "name": "Lava",
+            "file_name": "LavaPlane",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    -10.494704246520996
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    128.0,
+                    128.0,
+                    128.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "PlayerGun",
+            "file_name": "PlayerGun",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    4.169267654418945,
+                    3.3508048057556152,
+                    13.101765632629395
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
             "name": "Player",
             "file_name": "Human",
             "ModelFileType": "gltf",
             "DrawType": "Normal",
             "transform": {
                 "translate": [
+                    4.0,
                     0.0,
-                    0.0,
-                    4.0
+                    10.0
                 ],
                 "rotate": [
                     0.0,
@@ -5051,54 +5099,6 @@
                     2.0,
                     2.0,
                     4.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "PlayerGun",
-            "file_name": "PlayerTestGun",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    4.0
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Lava",
-            "file_name": "LavaPlane",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    0.0,
-                    0.0,
-                    -10.494704246520996
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    128.0,
-                    128.0,
-                    128.0
                 ]
             }
         },

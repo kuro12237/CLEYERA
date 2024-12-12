@@ -1465,43 +1465,6 @@
         },
         {
             "type": "MESH",
-            "name": "EnemyWalk.002",
-            "file_name": "EnemyWalk",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    -6.65296745300293,
-                    0.0,
-                    63.594078063964844
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
             "name": "Block.018",
             "file_name": "Block",
             "ModelFileType": "obj",
@@ -1540,7 +1503,7 @@
         },
         {
             "type": "MESH",
-            "name": "EnemyWalk.003",
+            "name": "EnemyWalk.002",
             "file_name": "EnemyWalk",
             "ModelFileType": "obj",
             "DrawType": "Normal",
@@ -4092,6 +4055,117 @@
                 {
                     "type": "MESH",
                     "name": "GunEnemyRight",
+                    "file_name": "GunEnemyRight",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            0.0,
+                            0.0,
+                            -0.6382675170898438
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "type": "MESH",
+            "name": "GunEnemyCore.002",
+            "file_name": "GunEnemyCore",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -47.48731994628906,
+                    0.0,
+                    44.06755447387695
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "scale": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "GunEnemyBarrel.002",
+                    "file_name": "GunEnemyBarrel",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            1.1368683772161603e-13,
+                            1.1100006103515625,
+                            0.0048675537109375
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                },
+                {
+                    "type": "MESH",
+                    "name": "GunEnemyLeft.002",
+                    "file_name": "GunEnemyLeft",
+                    "ModelFileType": "obj",
+                    "DrawType": "Normal",
+                    "transform": {
+                        "translate": [
+                            0.0,
+                            0.0,
+                            -0.6382675170898438
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    }
+                },
+                {
+                    "type": "MESH",
+                    "name": "GunEnemyRight.002",
                     "file_name": "GunEnemyRight",
                     "ModelFileType": "obj",
                     "DrawType": "Normal",
