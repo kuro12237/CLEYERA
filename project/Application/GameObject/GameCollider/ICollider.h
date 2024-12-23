@@ -5,8 +5,11 @@
 #include"ColliderData.h"
 #include"GameObject/ObjectInterface/INameable.h"
 
+
+
+
 /// <summary>
-/// •ûŒü
+/// æ–¹å‘
 /// </summary>
 enum HItDirection {
 	NONE,
@@ -16,38 +19,40 @@ enum HItDirection {
 	BOTTOM
 };
 
+class IObjectData;
+
 /// <summary>
-/// ƒRƒ‰ƒCƒ_[ƒCƒ“ƒ^[ƒtƒF[ƒX
+/// ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 /// </summary>
-class ICollider :public INameable
+class ICollider
 {
 public:
 	ICollider() {};
-	virtual ~ICollider() {};
+	~ICollider() {};
 
 	/// <summary>
-	/// “–‚½‚Á‚½
+	/// å½“ãŸã£ãŸæ™‚
 	/// </summary>
 	/// <param name="c"></param>
-	virtual void OnCollision(ICollider* c,IObjectData*objData) = 0;
+	void OnCollision(IObjectData* objData) { OnCollisionfunc_(objData); }
 
 	/// <summary>
-	/// ‚ß‚è‚İ”’l0‚É
+	/// ã‚ã‚Šè¾¼ã¿æ•°å€¤0ã«
 	/// </summary>
 	void ClearExtrusion() { extrusion_ = {}; }
 
 	/// <summary>
-	/// “–‚½‚Á‚½•ûŒü‚Ìqueue‚ğƒNƒŠƒA
+	/// å½“ãŸã£ãŸæ–¹å‘ã®queueã‚’ã‚¯ãƒªã‚¢
 	/// </summary>
 	void ClearHitDirection() { hitDirection_.clear(); }
 
 	/// <summary>
-	/// “–‚½‚Á‚½‚à‚Ì‚Ìid‚Ìqueue‚ğíœ
+	/// å½“ãŸã£ãŸã‚‚ã®ã®idã®queueã‚’å‰Šé™¤
 	/// </summary>
 	void ClearAllHitsIds();
 
 	/// <summary>
-	/// “–‚½‚Á‚½•ûŒü‚ğ•Û‘¶
+	/// å½“ãŸã£ãŸæ–¹å‘ã‚’ä¿å­˜
 	/// </summary>
 	/// <param name="h"></param>
 	void PushBackHitDirection(HItDirection h) { hitDirection_.push_back(h); }
@@ -61,12 +66,17 @@ public:
 	uint32_t GetCollosionAttribute() { return attribute_; }
 	uint32_t GetCollisionMask() { return mask_; }
 	queue<uint32_t> GetAllHitIds() { return allHitIds; }
+	Math::Vector::Vector2 GetExtrusion() { return Math::Vector::Vector2(extrusion_.x,extrusion_.y); }
 
 #pragma endregion
 
 #pragma region Set
+	void SetOnCollisionFunc(std::function<void(IObjectData* data)>func) { OnCollisionfunc_ = func; }
 	void SetObjectData(const Engine::Transform::TransformEular& t) { pTransform_ = &t; }
 	void SetId(uint32_t id) { id_ = id; };
+	void SetAttribute(uint32_t attribute) { attribute_ = attribute; }
+	void SetMask(uint32_t mask) { mask_ = mask; }
+	void SetIsExtrusion(bool f) { isExtrusion_ = f; }
 	void SetAABB(AABB aabb) { aabb_ = aabb; }
 	void SetExtrusion(Math::Vector::Vector2 v) {
 		Math::Vector::Vector3 va = Math::Vector::Add({ extrusion_.x, extrusion_.y, 0.0f }, { v.x,v.y,0.0f });
@@ -85,6 +95,10 @@ protected:
 	uint32_t attribute_ = 0b000;
 	uint32_t mask_ = 0b000;
 private:
+
+	std::function<void(IObjectData*data)> OnCollisionfunc_ = nullptr;
+
+
 	const Engine::Transform::TransformEular* pTransform_;
 	queue<uint32_t>allHitIds;
 };

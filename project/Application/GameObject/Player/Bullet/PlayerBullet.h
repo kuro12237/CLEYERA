@@ -9,30 +9,30 @@
 #include"Utility/ObjectId/GameObjectId.h"
 
 /// <summary>
-/// e‚Ì’e
+/// éŠƒã®å¼¾
 /// </summary>
-class PlayerBullet:public IObjectData,public ICollider
+class PlayerBullet:public IObjectData
 {
 public:
 	PlayerBullet() {};
 	~PlayerBullet() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	/// <param name="number"></param>
 	void Initialize(string number);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	///@“–‚½‚Á‚½‚Ì
+	///ã€€å½“ãŸã£ãŸæ™‚ã®
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 #pragma region Set
 	void SetSpownPos(Math::Vector::Vector3 pos) { spownPos_ = pos; }

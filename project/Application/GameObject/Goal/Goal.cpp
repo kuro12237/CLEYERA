@@ -16,13 +16,19 @@ void Goal::Initialize(uint32_t id, uint32_t index)
 	}
 
 	INameable::name_ = "Goal" + GoalCountName;
-	auto& transform = gameObjIncetance_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	SetObjectData(transform);
-	aabb_ = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
-	id_ = id;
-	attribute_ = CollisionMask::kPortalAttribute;
-	mask_ = CollisionMask::kPortalMask;
 
+	AABB aabb = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
+
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
+
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetAABB(aabb);
+	collider_->SetId(id);
+	collider_->SetIsExtrusion(false);
+	collider_->SetMask(CollisionMask::kPortalMask);
+	collider_->SetAttribute(CollisionMask::kPortalAttribute);
 
 	gameObjIncetance_->SetObjectPipline(make_unique<Sprite3dAddNoneWritePiplineCommand>(), backName_ + GoalCountName);
 
@@ -71,9 +77,10 @@ void Goal::Update()
 	field.translate = transform.translate;
 }
 
-void Goal::OnCollision(ICollider* c,[[maybe_unused]] IObjectData* objData)
+void Goal::OnCollision([[maybe_unused]] IObjectData* objData)
 {
-	if (c->GetId() == kPlayerId)
+	auto c = objData->GetCollider();
+	if (c->GetId() == ObjectId::kPlayerId)
 	{
 		isGoalFlag_ = true;
 	}

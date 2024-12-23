@@ -3,13 +3,17 @@
 void BreakBlock::Initialize(string name, uint32_t index)
 {
 	INameable::name_ = name;
-	auto& transforms = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform();
-	SetObjectData(transforms.transform);
-	SetAABB(gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB());
 
-	id_ = kNormalBlock;
-	attribute_ = CollisionMask::kBlockAttribute;
-	mask_ = CollisionMask::kBlockMask;
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
+
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetId(ObjectId::kNormalBlock);
+	collider_->SetIsExtrusion(false);
+	collider_->SetMask(CollisionMask::kBlockAttribute);
+	collider_->SetAttribute(CollisionMask::kBlockMask);
+
 
 	instancingIndex_ = index;
 	hp_ = make_unique<BreakBlockHp>();
@@ -35,9 +39,10 @@ void BreakBlock::Update()
 
 }
 
-void BreakBlock::OnCollision([[maybe_unused]] ICollider* c, [[maybe_unused]] IObjectData* objData)
+void BreakBlock::OnCollision([[maybe_unused]] IObjectData* objData)
 {
-	if (c->GetId() == kPlayerBullet)
+	auto c = objData->GetCollider();
+	if (c->GetId() == ObjectId::kPlayerBullet)
 	{
 		const int32_t subHp = -1;
 		hp_->SubtructHp(subHp);

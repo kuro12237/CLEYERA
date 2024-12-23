@@ -31,7 +31,7 @@ public:
 	/// 当たった処理
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 
 #pragma region Get

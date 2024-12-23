@@ -6,11 +6,13 @@ void PlayerBullet::Initialize(string number)
 	state_->Initialize(this);
 
 	INameable::name_ = number;
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
+
+	auto& transform = objectData_.lock()->GetWorldTransform().transform;
+
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.translate = spownPos_;
-
-	SetObjectData(transform);
 
 	//回転適用
 	float velocityXZ = sqrt(pow(velocity_.x, 2.0f) + pow(velocity_.z, 2.0f));
@@ -21,11 +23,16 @@ void PlayerBullet::Initialize(string number)
 	transform.rotate = rotate;
 
 	velocity_ = Math::Vector::Multiply(velocity_, { speed_,speed_,speed_ });
-	id_ = kPlayerBullet;
 	const AABB aabb = { {-0.1f,-0.1f,-0.1f,},{0.1f,0.1f,0.1f} };
-	aabb_ = aabb;
-	attribute_ = CollisionMask::kPlayerBulletAttribute;
-	mask_ = CollisionMask::kPlayerBulletMask;
+
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetAABB(aabb);
+	collider_->SetId(ObjectId::kPlayerBullet);
+	collider_->SetIsExtrusion(false);
+	collider_->SetMask(CollisionMask::kPlayerBulletMask);
+	collider_->SetAttribute(CollisionMask::kPlayerBulletAttribute);
+
 }
 
 void PlayerBullet::Update()
@@ -39,16 +46,17 @@ void PlayerBullet::Update()
 
 	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
-
 }
 
-void PlayerBullet::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
+void PlayerBullet::OnCollision([[maybe_unused]]IObjectData* objData)
 {
-	if (c->GetId() == kOnlyCollideWithBlocksid)
+	auto c = objData->GetCollider();
+
+	if (c->GetId() == ObjectId::kOnlyCollideWithBlocksid)
 	{
 		return;
 	}
-	if (c->GetId() == kPlayerId)
+	if (c->GetId() == ObjectId::kPlayerId)
 	{
 		return;
 	}

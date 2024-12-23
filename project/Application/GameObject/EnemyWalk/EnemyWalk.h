@@ -14,7 +14,7 @@
 /// <summary>
 /// 歩く敵
 /// </summary>
-class EnemyWalk :public IObjectData, public ICollider
+class EnemyWalk :public IObjectData
 {
 public:
 	EnemyWalk() {};
@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// 当たった時
 	/// </summary>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 	/// <summary>
 	/// 状態遷移

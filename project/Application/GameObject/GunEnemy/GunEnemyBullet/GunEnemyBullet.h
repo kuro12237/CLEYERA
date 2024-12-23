@@ -4,7 +4,7 @@
 #include"GameObject/GameCollider/ICollider.h"
 #include"Utility/ObjectId/GameObjectId.h"
 
-class GunEnemyBullet:public IObjectData,public ICollider
+class GunEnemyBullet:public IObjectData
 
 {
 public:
@@ -18,7 +18,7 @@ public:
 	/// <summary>
 	/// 当たった時
 	/// </summary>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 
 #pragma region get

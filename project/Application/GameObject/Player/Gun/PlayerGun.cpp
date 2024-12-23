@@ -24,7 +24,7 @@ void PlayerGun::Update()
 	//基礎位置
 	auto playerCore = player_.lock();
 	const float offset = 1.5f;
-	Math::Vector::Vector3 PlayerPos = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.translate;
+	Math::Vector::Vector3 PlayerPos = playerCore->GetObjectData().lock()->GetWorldTransform().transform.translate;
 	Math::Vector::Vector3 playerRotate = gameObjectManager_->GetObj3dData("Player")->GetWorldTransform().transform.rotate;
 
 	PlayerPos.y += offset;

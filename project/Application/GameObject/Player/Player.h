@@ -33,7 +33,7 @@
 /// <summary>
 /// 操作するCoreクラス
 /// </summary>
-class Player :public IObjectData, public ICollider
+class Player :public IObjectData
 {
 public:
 	Player() {};
@@ -59,7 +59,7 @@ public:
 	/// 当たった時の処理
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 	/// <summary>
 	/// 状態を追加

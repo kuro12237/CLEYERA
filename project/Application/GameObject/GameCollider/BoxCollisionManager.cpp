@@ -2,11 +2,7 @@
 
 void BoxCollisionManager::CollidersAllHitsIdsClear()
 {
-	for (auto& collider : datas_) {
-		if (collider.collider) {
-			collider.collider->ClearAllHitsIds();
-		}
-	}
+	datas_.clear();
 }
 
 void BoxCollisionManager::ListClear()
@@ -20,53 +16,45 @@ void BoxCollisionManager::End()
 	CollidersAllHitsIdsClear();
 }
 
-void BoxCollisionManager::ListPushback(ICollider* c, IObjectData* data)
+void BoxCollisionManager::ListPushback(IObjectData* data)
 {
-	datas_.push_back({ c, data });
+	datas_.push_back(data);
 }
 
 void BoxCollisionManager::CheckAllCollisoin()
 {
-	vector<CollisionData>::iterator itrA = datas_.begin();
-	int32_t indexA = 0;
+	for (auto itr1 = datas_.begin(); itr1 != datas_.end(); ++itr1) {
+		for (auto itr2 = std::next(itr1); itr2 != datas_.end(); ++itr2) {
 
-	for (; itrA != datas_.end(); ++itrA) {
-		int32_t indexB = 0;
-		CollisionData colliderA = *itrA;
-		vector<CollisionData>::iterator itrB = itrA;
-		itrB++;
-
-		for (; itrB != datas_.end(); ++itrB) {
-			CollisionData colliderB = *itrB;
-
-			// ƒRƒŠƒWƒ‡ƒ“ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
-			if ((colliderA.collider->GetCollosionAttribute() & colliderB.collider->GetCollisionMask()) == 0 ||
-				(colliderA.collider->GetCollisionMask() & colliderB.collider->GetCollosionAttribute()) == 0)
+			// ã‚³ãƒªã‚¸ãƒ§ãƒ³ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
+			if (((*itr1)->GetCollider()->GetCollosionAttribute() && (*itr2)->GetCollider()->GetCollisionMask()) == 0 ||
+				((*itr1)->GetCollider()->GetCollisionMask() && (*itr2)->GetCollider()->GetCollosionAttribute()) == 0)
 			{
 				continue;
 			}
 
-			AABB a = SettingAABBParam(colliderA.collider);
-			AABB b = SettingAABBParam(colliderB.collider);
+			AABB a = SettingAABBParam((*itr1)->GetCollider());
+			AABB b = SettingAABBParam((*itr2)->GetCollider());
 
-			if (IsCollision(a, b))
+			// è¡çªåˆ¤å®šã‚’ã¨ã‚‹
+			if (IsCollision(a, b)) 
 			{
-				//‚ß‚èž‚ÝŒvŽZ
-				colliderA.collider->ClearExtrusion();
-				colliderA.collider->ClearHitDirection();
+				//ã‚ã‚Šè¾¼ã¿è¨ˆç®—
+				(*itr1)->GetCollider()->ClearExtrusion();
+				(*itr1)->GetCollider()->ClearHitDirection();
 
-				CheckExtrusion(colliderA.collider, colliderB.collider);
+				CheckExtrusion((*itr1)->GetCollider(), (*itr2)->GetCollider());
 
-				colliderA.collider->OnCollision(colliderB.collider,colliderB.objData);
-				colliderA.collider->PushAllHitsIds(colliderB.collider->GetId());
+				(*itr1)->GetCollider()->OnCollision((*itr2));
+				(*itr1)->GetCollider()->PushAllHitsIds((*itr2)->GetCollider()->GetId());
 
-				colliderB.collider->OnCollision(colliderA.collider,colliderA.objData);
-				colliderB.collider->PushAllHitsIds(colliderA.collider->GetId());
-				indexB++;
+				(*itr2)->GetCollider()->OnCollision((*itr1));
+				(*itr2)->GetCollider()->PushAllHitsIds((*itr1)->GetCollider()->GetId());
+
 			}
 		}
-		indexA++;
 	}
+
 
 }
 
@@ -184,11 +172,11 @@ float BoxCollisionManager::LeftExtrusion(ICollider* a, ICollider* b)
 
 void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 {
-	//A‚ð‚à‚Æ‚É‚ß‚èž‚Ý“x‚ðŽZo
+	//Aã‚’ã‚‚ã¨ã«ã‚ã‚Šè¾¼ã¿åº¦ã‚’ç®—å‡º
 	Math::Vector::Vector2 extrusionA = {};
 	Math::Vector::Vector2 extrusionB = {};
 
-	//b‚Ì‘ÎŠpü‚ÌŠp“xŽZo
+	//bã®å¯¾è§’ç·šã®è§’åº¦ç®—å‡º
 	//xRT/yRB/zLT/wLB
 	Math::Vector::Vector4 vertexDegrees = {
 		std::atan2(b->GetAABB().max.y, b->GetAABB().max.x)* (180.0f / float(std::numbers::pi)),
@@ -208,29 +196,29 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 
 	if (CheckBottomCollsion(theta, vertexDegrees))
 	{
-		//‰º
+		//ä¸‹
 		if (a->GetIsExtrusionFlag())
 		{
 			a->PushBackHitDirection(BOTTOM);
 			extrusionA.y = BottomExtrusion(a, b);
 		}
-		//ã
+		//ä¸Š
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(TOP);
 			extrusionB.y = TopExtrusion(a, b);
 		}
-	}//ã
+	}//ä¸Š
 
 	if (CheckTopCollision(theta, vertexDegrees))
 	{
-		//ã
+		//ä¸Š
 		if (a->GetIsExtrusionFlag())
 		{
 			a->PushBackHitDirection(TOP);
 			extrusionA.y = TopExtrusion(a, b);
 		}
-		//‰º
+		//ä¸‹
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(BOTTOM);
@@ -238,7 +226,7 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 		}
 	}
 
-	//¶
+	//å·¦
 	if (CheckLeftCollision(theta, vertexDegrees))
 	{
 		if (a->GetIsExtrusionFlag())
@@ -246,14 +234,14 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 			a->PushBackHitDirection(LEFT);
 			extrusionA.x = RightExtrusion(a, b);
 		}
-		//‰E
+		//å³
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(RIGHT);
 			extrusionB.x = LeftExtrusion(a, b);
 		}
 	}
-	//‰E
+	//å³
 	if (CheckRightCollision(theta, vertexDegrees))
 	{
 		if (a->GetIsExtrusionFlag())
@@ -261,7 +249,7 @@ void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
 			a->PushBackHitDirection(RIGHT);
 			extrusionA.x = LeftExtrusion(a, b);
 		}
-		//¶
+		//å·¦
 		if (b->GetIsExtrusionFlag())
 		{
 			b->PushBackHitDirection(LEFT);

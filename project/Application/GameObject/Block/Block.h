@@ -5,31 +5,31 @@
 #include"Utility/ObjectId/GameObjectId.h"
 
 /// <summary>
-/// ƒ}ƒbƒv‚ÌƒuƒƒbƒNƒNƒ‰ƒX
+/// ãƒãƒƒãƒ—ã®ãƒ–ãƒ­ãƒƒã‚¯ã‚¯ãƒ©ã‚¹
 /// </summary>
-class Block :public IObjectData, public ICollider
+class Block :public IObjectData
 {
 public:
 	Block() {};
 	~Block() {};
 
 	/// <summary>
-	/// ‰Šú‰» 
+	/// åˆæœŸåŒ– 
 	/// </summary>
-	/// <param name="ƒOƒ‹[ƒv–¼"></param>
-	/// <param name="”Ô†"></param>
+	/// <param name="ã‚°ãƒ«ãƒ¼ãƒ—å"></param>
+	/// <param name="ç•ªå·"></param>
 	void Initialize(string name,uint32_t index);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// “–‚½‚Á‚½ˆ—
+	/// å½“ãŸã£ãŸå‡¦ç†
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 private:
 

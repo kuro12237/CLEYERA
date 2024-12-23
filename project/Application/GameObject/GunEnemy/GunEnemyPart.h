@@ -19,7 +19,7 @@
 /// <summary>
 /// 右足
 /// </summary>
-class GunEnemyPart :public IGunEnemy, public ICollider
+class GunEnemyPart :public IGunEnemy
 {
 public:
 	GunEnemyPart() {};
@@ -35,7 +35,7 @@ public:
 	/// <summary>
 	/// 当たった時
 	/// </summary>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 #pragma region Set
 	void SetIsCoreEnd(bool& f) { isCoreEnd_ = &f; }

@@ -47,7 +47,7 @@ private:
 
 	list<Engine::Particle::GpuParticle*>particles_;
 
-	float gravity_ = 0.01f;
+	float gravity_ = 0.05f;
 
 	unique_ptr<Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldGravity>>particleGravityField_ = nullptr;
 

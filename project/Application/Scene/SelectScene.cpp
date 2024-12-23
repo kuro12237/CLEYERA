@@ -37,7 +37,7 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 		shared_ptr<Goal>goal = make_shared<Goal>();
 
 		goals_[portalIndex] = make_shared<Goal>();
-		goals_[portalIndex]->Initialize(kPortalIds[portalIndex], uint32_t(portalIndex));
+		goals_[portalIndex]->Initialize(ObjectId::kPortalIds[portalIndex], uint32_t(portalIndex));
 
 	}
 
@@ -85,6 +85,7 @@ void SelectScene::Update(GameManager* Scene)
 
 	ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
 
+
 #endif // _USE_IMGUI
 	ChangeSceneAnimation::GetInstance()->Update();
 
@@ -93,6 +94,8 @@ void SelectScene::Update(GameManager* Scene)
 	{
 		player_->SetStartFlag(true);
 	}
+
+
 
 	player_->Update();
 
@@ -106,6 +109,7 @@ void SelectScene::Update(GameManager* Scene)
 	blockManager_->Update();
 
 	LightingManager::AddList(light_);
+
 
 	Gravitys();
 
@@ -154,24 +158,24 @@ void SelectScene::Collision()
 	//プレイヤー本体
 	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
-		gameCollisionManager_->ListPushback(player_->GetPlayerCore(), player_->GetPlayerCore());
+		gameCollisionManager_->ListPushback( player_->GetPlayerCore());
 	}
 	//playerの弾
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)
 	{
 		if (player_->GetBullet()[index]) {
-			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get(), player_->GetBullet()[index].get());
+			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
 		}
 	}
 	//ブロック
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
-		gameCollisionManager_->ListPushback(b.get(), b.get());
+		gameCollisionManager_->ListPushback(b.get());
 	}
 	//portal
 	for (shared_ptr<Goal>g : goals_)
 	{
-		gameCollisionManager_->ListPushback(g.get(), g.get());
+		gameCollisionManager_->ListPushback(g.get());
 	}
 
 	gameCollisionManager_->CheckAllCollisoin();
@@ -195,7 +199,7 @@ bool SelectScene::CheckLoadScene()
 	bool changeFlag = false;
 
 	//プレイヤーと当たったidがportalIdが一致していた場合
-	queue<uint32_t>allHitIds = player_->GetPlayerCore()->GetAllHitIds();
+	queue<uint32_t>allHitIds = player_->GetPlayerCore()->GetCollider()->GetAllHitIds();
 	size_t size = allHitIds.size();
 
 	for (size_t id = 0; id < size; id++)
@@ -204,7 +208,7 @@ bool SelectScene::CheckLoadScene()
 		allHitIds.pop();
 		for (size_t portalCount = 0; portalCount < portalMax_; portalCount++)
 		{
-			if (hitId == kPortalIds[portalCount])
+			if (hitId == ObjectId::kPortalIds[portalCount])
 			{
 				changeFlag = true;
 			}

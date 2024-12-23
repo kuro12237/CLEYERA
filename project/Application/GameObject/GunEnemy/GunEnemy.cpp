@@ -2,15 +2,16 @@
 
 void GunEnemy::Initialize()
 {
-	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	SetObjectData(transform);
+	
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
 
-	const Math::Vector::Vector2 minmax = { -1.0f,1.0f };
-	aabb_ = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
-	isExtrusion_ = true;
-	id_ = kGunEnemyId;
-	attribute_ = CollisionMask::kEnemyWalkAttribute;
-	mask_ = CollisionMask::kEnemyWalkMask;
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetId(ObjectId::kGunEnemyId);
+	collider_->SetIsExtrusion(true);
+	collider_->SetMask(CollisionMask::kEnemyWalkMask);
+	collider_->SetAttribute(CollisionMask::kEnemyWalkAttribute);
 
 	ChangeState(make_unique<GunEnemyStateMove>());
 	velocity_.x = 0.1f;
@@ -33,7 +34,7 @@ void GunEnemy::Update()
 
 	if (isEnd_)
 	{
-		id_ = kOnlyCollideWithBlocksid;
+		collider_->SetId(ObjectId::kOnlyCollideWithBlocksid);
 	}
 
 	for (size_t index = 0; index < bullets_.size(); index++)
@@ -73,25 +74,25 @@ void GunEnemy::Update()
 		}
 	}
 
-	ClearExtrusion();
-	ClearHitDirection();
+	collider_->ClearExtrusion();
+	collider_->ClearHitDirection();
 	IsHit_ = false;
 }
 
-void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
+void GunEnemy::OnCollision(IObjectData* objData)
 {
 	objData;
 	IsHit_ = true;
-
+	auto c = objData->GetCollider();
 	{//敵同士の処理
-		if (kEnemyWalkId == c->GetId())
+		if (ObjectId::kEnemyWalkId == c->GetId())
 		{
 			return;
 		}
 	}
 
 	{//プレイヤーとの処理
-		if (kPlayerBullet == c->GetId())
+		if (ObjectId::kPlayerBullet == c->GetId())
 		{
 			if (!isEnd_)
 			{
@@ -101,7 +102,7 @@ void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
 			}
 		}
 
-		if (kPlayerId == c->GetId())
+		if (ObjectId::kPlayerId == c->GetId())
 		{
 			if (!isEnd_)
 			{
@@ -113,8 +114,8 @@ void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
 	}
 
 	//ブロックとの処理
-	if (kNormalBlock == c->GetId()) {
-		for (auto& hitDirection : hitDirection_)
+	if (ObjectId::kNormalBlock == c->GetId()) {
+		for (auto& hitDirection : collider_->GetHItDirection())
 		{
 			if (hitDirection == TOP)
 			{
@@ -130,8 +131,8 @@ void GunEnemy::OnCollision(ICollider* c, IObjectData* objData)
 			}
 		}
 		auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-		transform.translate.x += extrusion_.x;
-		transform.translate.y += extrusion_.y;
+		transform.translate.x += c->GetExtrusion().x;
+		transform.translate.y += c->GetExtrusion().y;
 	}
 
 }

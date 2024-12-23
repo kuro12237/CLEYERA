@@ -10,7 +10,7 @@ void PlayerStateJamp::Initialize(Player* p)
 	uint32_t animationHandle = AnimationManager::GetInstance()->LoadAnimation("JampHuman");
 	jampAnimationData_ = AnimationManager::GetInstance()->GetData(animationHandle);
 
-	const float jampMax = 0.35f;
+	const float jampMax = 1.0f;
 	Math::Vector::Vector3 velo = p->GetVelocity();
 	velo.y = jampMax;
 	p->SetVelocity(velo);

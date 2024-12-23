@@ -11,18 +11,18 @@ void Player::Initialize()
 	jsonGropName_ = INameable::name_;
 	CreateJsonData();
 
-	//状態異常のステート
-	//id設定
-	id_ = kPlayerId;
-	//当たり判定設定
-	this->isExtrusion_ = true;
-	SetObjectData(gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform);
-	aabb_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB();
-	attribute_ = CollisionMask::kPlayerAttribute;
-	mask_ = CollisionMask::kPlayerMask;
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
 
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetId(ObjectId::kPlayerId);
+	collider_->SetIsExtrusion(true);
+	collider_->SetMask(CollisionMask::kPlayerMask);
+	collider_->SetAttribute(CollisionMask::kPlayerAttribute);
+	
 	//TransformGet
-	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	auto& transform = objectData_.lock()->GetWorldTransform().transform;
 
 	//Scale値を外部から読み込む
 	float dfScale = 0.0f;
@@ -33,9 +33,7 @@ void Player::Initialize()
 	//スタート入りの記録
 	resetPos_ = transform.translate;
 
-
 	AnimationManager::GetInstance()->LoadAnimation("FallDown");
-
 }
 
 void Player::ImGuiUpdate()
@@ -47,9 +45,6 @@ void Player::ImGuiUpdate()
 		{
 			velocity_ = {};
 		}
-
-		ImGui::DragFloat3("min", &aabb_.min.x, 0.1f);
-		ImGui::DragFloat3("max", &aabb_.max.x, 0.1f);
 
 		ImGui::Text("%d", static_cast<int>(states_.size()));
 
@@ -90,7 +85,7 @@ void Player::Update()
 		}
 	}
 
-	if (!isAim_&&IsInState<PlayerStateAim>())
+	if (!isAim_ && IsInState<PlayerStateAim>())
 	{
 		this->MarkStateForRemoval<PlayerStateAim>();
 	}
@@ -160,14 +155,16 @@ void Player::Update()
 	}
 }
 
-void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
+void Player::OnCollision([[maybe_unused]] IObjectData* objData)
 {
-	if (kOnlyCollideWithBlocksid)
+	auto c = objData->GetCollider();
+
+	if (ObjectId::kOnlyCollideWithBlocksid)
 	{
 		return;
 	}
 
-	if (c->GetId() == kGoalId)
+	if (c->GetId() == ObjectId::kGoalId)
 	{
 		if (!IsInState<PlayerStateGoalAnimation>())
 		{
@@ -176,7 +173,7 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 		return;
 	}
 
-	if (c->GetId() == kWarpGateId)
+	if (c->GetId() == ObjectId::kWarpGateId)
 	{
 		warpFilePath_ = gameObjectManager_->GetObj3dData(objData->GetName())->GetParamFilePaths()[0];
 		AddState<PlayerStateWarpMove>();
@@ -184,7 +181,7 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 
 	if (!IsInState<PlayerStateInvincible>())
 	{
-		if (c->GetId() == kEnemyWalkId)
+		if (c->GetId() == ObjectId::kEnemyWalkId)
 		{
 			if (reduceHpFunc_)
 			{
@@ -193,7 +190,7 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 			AddState<PlayerStateInvincible>();
 		}
 
-		if (c->GetId() == kGunEnemyId)
+		if (c->GetId() == ObjectId::kGunEnemyId)
 		{
 			if (reduceHpFunc_)
 			{
@@ -201,7 +198,7 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 			}
 			AddState<PlayerStateInvincible>();
 		}
-		if (c->GetId()==kGunEnemyBulletId)
+		if (c->GetId() == ObjectId::kGunEnemyBulletId)
 		{
 			if (reduceHpFunc_)
 			{
@@ -211,9 +208,9 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 		}
 	}
 
-	if (c->GetId() == kNormalBlock)
+	if (c->GetId() == ObjectId::kNormalBlock)
 	{
-		for (auto& hitDirection : hitDirection_)
+		for (auto& hitDirection : collider_->GetHItDirection())
 		{
 			if (hitDirection == TOP && velocity_.y >= 0.0f)
 			{
@@ -224,16 +221,18 @@ void Player::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
 				velocity_ = {};
 			}
 		}
-		auto& transform = GameObjectManager::GetInstance()->GetObj3dData(INameable::name_)->GetWorldTransform().transform.translate;
-		transform.x += extrusion_.x;
-		transform.y += extrusion_.y;
+	
+		auto& transform = objectData_.lock()->GetWorldTransform().transform;
+
+		transform.translate.x += collider_->GetExtrusion().x;
+		transform.translate.y += collider_->GetExtrusion().y;
 	}
 }
 
 void Player::RotateUpdate()
 {
 	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	
+
 	const float degrees = 90.0f;
 	float radian = 0.0f;
 	if (velocity_.x > 0.0f)

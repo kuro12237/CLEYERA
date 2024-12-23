@@ -3,7 +3,7 @@
 void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 {
 	//ブロック以外とは当たらないid
-	e->SetId(kOnlyCollideWithBlocksid);
+	e->GetCollider()->SetId(ObjectId::kOnlyCollideWithBlocksid);
 
 	gameObjIncetance_ = GameObjectManager::GetInstance();
 	auto* emitters = CharacterDeadParticle::GetInstance()->GetEmitter();
@@ -22,8 +22,8 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 			param.velocityMin = { -0.1f,0.4f,0.0f };
 			param.color = { 0.0f,0.0f,1.0f,1.0f };
 			//当たり判定の大きさをもとにemitterを設定
-			param.sizeMax = e->GetAABB().min;
-			param.sizeMax = e->GetAABB().max;
+			param.sizeMax = e->GetCollider()->GetAABB().min;
+			param.sizeMax = e->GetCollider()->GetAABB().max;
 			break;
 		}
 		index++;

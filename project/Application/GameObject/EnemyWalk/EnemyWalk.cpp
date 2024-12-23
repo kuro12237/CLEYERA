@@ -3,14 +3,20 @@
 void EnemyWalk::Initialize()
 {
 	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	SetObjectData(transform);
 
 	Math::Vector::Vector2 minmax = { -1.0f,1.0f };
-	aabb_ = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
-	isExtrusion_ = true;
-	id_ = kEnemyWalkId;
-	attribute_ = CollisionMask::kEnemyWalkAttribute;
-	mask_ = CollisionMask::kEnemyWalkMask;
+	AABB aabb = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
+
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
+
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetAABB(aabb);
+	collider_->SetId(ObjectId::kEnemyWalkId);
+	collider_->SetIsExtrusion(true);
+	collider_->SetMask(CollisionMask::kEnemyWalkMask);
+	collider_->SetAttribute(CollisionMask::kEnemyWalkAttribute);
 
 	state_ = make_unique<EnemyWalkStateMove>();
 	state_->Initialize(this);
@@ -25,24 +31,25 @@ void EnemyWalk::Update()
 	transform.translate.x += velocity_.x;
 	transform.translate.y += velocity_.y;
 
-	ClearExtrusion();
-	ClearHitDirection();
+	collider_->ClearExtrusion();
+	collider_->ClearHitDirection();
 	isHit_ = false;
 }
 
-void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
+void EnemyWalk::OnCollision([[maybe_unused]]IObjectData* objData)
 {
 	isHit_ = true;
+	auto c = objData->GetCollider();
 
 	{//敵同士の処理
-		if (kEnemyWalkId == c->GetId())
+		if (ObjectId::kEnemyWalkId == c->GetId())
 		{
 			velocity_.x *= 1.0f;
 		}
 	}
 
 	{//プレイヤーとの処理
-		if (kPlayerBullet == c->GetId())
+		if (ObjectId::kPlayerBullet == c->GetId())
 		{
 			if (!isDead_)
 			{
@@ -53,7 +60,7 @@ void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 			}
 		}
 
-		if (kPlayerId == c->GetId())
+		if (ObjectId::kPlayerId == c->GetId())
 		{
 			if (!isDead_)
 			{
@@ -65,8 +72,8 @@ void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 	}
 
 	//ブロックとの処理
-	if (kNormalBlock == c->GetId()) {
-		for (auto& hitDirection : hitDirection_)
+	if (ObjectId::kNormalBlock == c->GetId()) {
+		for (auto& hitDirection : collider_->GetHItDirection())
 		{
 			if (hitDirection == TOP)
 			{
@@ -82,8 +89,8 @@ void EnemyWalk::OnCollision(ICollider* c, [[maybe_unused]]IObjectData* objData)
 			}
 		}
 		auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-		transform.translate.x += extrusion_.x;
-		transform.translate.y += extrusion_.y;
+		transform.translate.x += c->GetExtrusion().x;
+		transform.translate.y += c->GetExtrusion().y;
 	}
 }
 

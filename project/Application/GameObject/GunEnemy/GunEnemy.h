@@ -14,7 +14,7 @@
 #include"GunEnemyBullet/GunEnemyBullet.h"
 #include"IGunEnemy.h"
 
-class GunEnemy : public IGunEnemy, public ICollider
+class GunEnemy : public IGunEnemy
 {
 public:
 	GunEnemy() {};
@@ -30,7 +30,7 @@ public:
 	/// <summary>
 	/// 当たった時
 	/// </summary>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 	void CreateBullet(const Math::Vector::Vector3& Pos);
 

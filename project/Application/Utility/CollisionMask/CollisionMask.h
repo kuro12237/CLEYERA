@@ -7,7 +7,7 @@
 namespace CollisionMask
 {
 	// Block-related definitions
-	const static uint32_t kBlockMask      = 0b111111111;        // 0b111111111 (511) (すべてと当たる)
+	const static uint32_t kBlockMask      = 0b111111110;        // 0b111111111 (511) (すべてと当たる)
 	const static uint32_t kBlockAttribute = 0b000000001;   // 0b000000001 (1)
 
 	// Player-related definitions

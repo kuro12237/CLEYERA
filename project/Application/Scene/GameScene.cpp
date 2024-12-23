@@ -47,14 +47,13 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	breakBlockManager_ = make_unique<BreakBlockManager>();
 	breakBlockManager_->Initialize();
 
-
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 	gravityManager_->Initilaize();
 
 
 	goal_ = make_unique<Goal>();
-	goal_->Initialize(kGoalId, 0);
+	goal_->Initialize(ObjectId::kGoalId, 0);
 
 	warpManager_ = make_unique<WarpManager>();
 	warpManager_->Initialize();
@@ -141,6 +140,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	warpManager_->Update();
 
 	gravityManager_->Update();
+
 	Gravitys();
 
 	Collision();
@@ -259,12 +259,12 @@ void GameScene::Collision()
 {
 	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
-		gameCollisionManager_->ListPushback(player_->GetPlayerCore(), player_->GetPlayerCore());
+		gameCollisionManager_->ListPushback(player_->GetPlayerCore());
 	}
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)
 	{
 		if (player_->GetBullet()[index]) {
-			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get(), player_->GetBullet()[index].get());
+			gameCollisionManager_->ListPushback(player_->GetBullet()[index].get());
 		}
 	}
 
@@ -272,9 +272,8 @@ void GameScene::Collision()
 	{
 		if (coin)
 		{
-			gameCollisionManager_->ListPushback(coin.get(), coin.get());
+			gameCollisionManager_->ListPushback(coin.get());
 		}
-
 	}
 
 	for (auto& enemy : bulletEnemyManager_->GetGunEnemys())
@@ -283,13 +282,13 @@ void GameScene::Collision()
 		auto it = obj.lock();
 		if (it)
 		{
-			gameCollisionManager_->ListPushback(it.get(), it.get());
+			gameCollisionManager_->ListPushback(it.get());
 
 			for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
 			{
 				if (b)
 				{
-					gameCollisionManager_->ListPushback(b.get(), b.get());
+					gameCollisionManager_->ListPushback(b.get());
 				}
 
 			}
@@ -303,7 +302,7 @@ void GameScene::Collision()
 			}
 			if (parts->GetIsEnd())
 			{
-				gameCollisionManager_->ListPushback(parts.get(), parts.get());
+				gameCollisionManager_->ListPushback(parts.get());
 			}
 		}
 	}
@@ -315,14 +314,14 @@ void GameScene::Collision()
 		auto it = obj.lock();
 		if (it)
 		{
-			gameCollisionManager_->ListPushback(it.get(), it.get());
+			gameCollisionManager_->ListPushback(it.get());
 		}
 	}
 
 	//ブロック
 	for (shared_ptr<Block> b : blockManager_->GetBlocks())
 	{
-		gameCollisionManager_->ListPushback(b.get(), b.get());
+		gameCollisionManager_->ListPushback(b.get());
 	}
 	//壊れるブロック
 	for (shared_ptr<BreakBlock> b : breakBlockManager_->GetBlocks())
@@ -331,16 +330,17 @@ void GameScene::Collision()
 		{
 			weak_ptr<BreakBlock>it = b;
 			auto obj = it.lock();
-			gameCollisionManager_->ListPushback(obj.get(), obj.get());
+			obj;
+			gameCollisionManager_->ListPushback( obj.get());
 		}
 	}
 	//ゴール
-	gameCollisionManager_->ListPushback(goal_.get(), goal_.get());
+	gameCollisionManager_->ListPushback(goal_.get());
 
 	//ワープ
 	for (auto& warp : warpManager_->GetWarps())
 	{
-		gameCollisionManager_->ListPushback(warp->GetWarpGate(), warp->GetWarpGate());
+		gameCollisionManager_->ListPushback(warp->GetWarpGate());
 	}
 
 	gameCollisionManager_->CheckAllCollisoin();

@@ -4,26 +4,25 @@ void WarpGate::Initialize(const int& index)
 {
 	INameable::name_ = "WarpGate" + FormatNumberWithDots(index);
 
-
 	railDataFileName_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetParamFilePaths()[0];
 
-	//idÝ’è
-	id_ = kWarpGateId;
+	//dataã‚’ã‚»ãƒƒãƒˆ
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
 
-	//“–‚½‚è”»’è
-	//‰Ÿ‚µo‚µ
-	this->isExtrusion_ = false;
-	SetObjectData(gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform);
-	aabb_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetAABB();
-	attribute_ = CollisionMask::kWarpGateAttribute;
-	mask_ = CollisionMask::kWarpGateMask;
+	//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚»ãƒƒãƒˆ
+	this->SetColliderParamData();
+	collider_->SetId(ObjectId::kWarpGateId);
+	collider_->SetIsExtrusion(true);
+	collider_->SetMask(CollisionMask::kWarpGateAttribute);
+	collider_->SetAttribute(CollisionMask::kWarpGateMask);
+
 }
 
 void WarpGate::Update()
 {
 }
 
-void WarpGate::OnCollision([[maybe_unused]] ICollider* c,[[maybe_unused]] IObjectData* objData)
+void WarpGate::OnCollision([[maybe_unused]] IObjectData* objData)
 {
 
 }

@@ -8,29 +8,29 @@
 #include"Graphics/CallPipline/PipelineHandler.h"
 
 /// <summary>
-/// ƒS[ƒ‹ƒNƒ‰ƒX
+/// ã‚´ãƒ¼ãƒ«ã‚¯ãƒ©ã‚¹
 /// </summary>
-class Goal :public IObjectData, public ICollider
+class Goal :public IObjectData
 {
 public:
 	Goal() {};
 	~Goal() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize(uint32_t id, uint32_t index);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// “–‚½‚Á‚½
+	/// å½“ãŸã£ãŸæ™‚
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 #pragma region Get
 	bool GetIsGoalFlag() { return isGoalFlag_; }

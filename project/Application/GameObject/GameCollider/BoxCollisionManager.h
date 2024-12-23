@@ -1,15 +1,8 @@
 #pragma once
 #include"ICollider.h"
 
-
-struct CollisionData
-{
-	ICollider* collider;
-	IObjectData* objData;
-};
-
 /// <summary>
-/// ” ‚Ì“–‚½‚è”»’è
+/// ç®±ã®å½“ãŸã‚Šåˆ¤å®š
 /// </summary>
 class BoxCollisionManager
 {
@@ -18,34 +11,34 @@ public:
 	~BoxCollisionManager() { End(); }
 
 	/// <summary>
-	/// íœ
+	/// å‰Šé™¤
 	/// </summary>
 	void End();
 
 	/// <summary>
-	/// ƒŠƒXƒg‚É“o˜^
+	/// ãƒªã‚¹ãƒˆã«ç™»éŒ²
 	/// </summary>
 	/// <param name="c"></param>
-	void ListPushback(ICollider* c,IObjectData*data);
+	void ListPushback(IObjectData*data);
 
 	/// <summary>
-	/// “o˜^‚µ‚½‚à‚Ì‚ğ’T¸
+	/// ç™»éŒ²ã—ãŸã‚‚ã®ã‚’æ¢æŸ»
 	/// </summary>
 	void CheckAllCollisoin();
 
 private:
 	/// <summary>
-	/// “o˜^‰ºid‚ğíœ
+	/// ç™»éŒ²ä¸‹idã‚’å‰Šé™¤
 	/// </summary>
 	void CollidersAllHitsIdsClear();
 
 	/// <summary>
-	/// ƒŠƒXƒgíœ
+	/// ãƒªã‚¹ãƒˆå‰Šé™¤
 	/// </summary>
 	void ListClear();
 
 	/// <summary>
-	/// “–‚½‚Á‚½Šp“xZo
+	/// å½“ãŸã£ãŸè§’åº¦ç®—å‡º
 	/// </summary>
 	/// <param name="x"></param>
 	/// <param name="y"></param>
@@ -53,68 +46,68 @@ private:
 	float CalculateAngle(float x, float y);
 
 	/// <summary>
-	/// “x”‚ğ³‹K‰»
+	/// åº¦æ•°ã‚’æ­£è¦åŒ–
 	/// </summary>
 	/// <param name="theta"></param>
 	/// <returns></returns>
 	float NomalizeDegree(float theta);
 
 	/// <summary>
-	/// AABB‚Ìƒpƒ‰ƒ[ƒ^‚ÉŒ^•ÏŠ·
+	/// AABBã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã«å‹å¤‰æ›
 	/// </summary>
 	/// <param name="c"></param>
 	/// <returns></returns>
 	AABB SettingAABBParam(ICollider* c);
 
 	/// <summary>
-	/// “–‚½‚Á‚Ä‚¢‚é‚©‚Ì”»’è
+	/// å½“ãŸã£ã¦ã„ã‚‹ã‹ã®åˆ¤å®š
 	/// </summary>
 	bool IsCollision(const AABB& aabb1, const AABB& aabb2);
 
 	/// <summary>
-	/// •ûŒü‚ğZo
+	/// æ–¹å‘ã‚’ç®—å‡º
 	/// </summary>
 	bool CheckBottomCollsion(float t, Math::Vector::Vector4 bDegree);
 	/// <summary>
-    /// •ûŒü‚ğZo
+    /// æ–¹å‘ã‚’ç®—å‡º
     /// </summary>
 	bool CheckTopCollision(float t, Math::Vector::Vector4 bDegree);
 	/// <summary>
-    /// •ûŒü‚ğZo
+    /// æ–¹å‘ã‚’ç®—å‡º
     /// </summary>
 	bool CheckLeftCollision(float t, Math::Vector::Vector4 bDegree);
 	
 	/// <summary>
-    /// •ûŒü‚ğZo
+    /// æ–¹å‘ã‚’ç®—å‡º
     /// </summary>
 	bool CheckRightCollision(float t, Math::Vector::Vector4 bDegree);
 
 	/// <summary>
-	/// ‰Ÿ‚µo‚µ‚ğZo
+	/// æŠ¼ã—å‡ºã—ã‚’ç®—å‡º
 	/// </summary>
 	float BottomExtrusion(ICollider* a, ICollider* b);
 
 	/// <summary>
-	/// ‰Ÿ‚µo‚µ‚ğZo
+	/// æŠ¼ã—å‡ºã—ã‚’ç®—å‡º
 	/// </summary>
 	float TopExtrusion(ICollider* a, ICollider* b);
 
 	/// <summary>
-	/// ‰Ÿ‚µo‚µ‚ğZo
+	/// æŠ¼ã—å‡ºã—ã‚’ç®—å‡º
 	/// </summary>
 	float RightExtrusion(ICollider* a, ICollider* b);
 
 	/// <summary>
-	/// ‰Ÿ‚µo‚µ‚ğZo
+	/// æŠ¼ã—å‡ºã—ã‚’ç®—å‡º
 	/// </summary>
 	float LeftExtrusion(ICollider* a, ICollider* b);
 
 	/// <summary>
-	/// ‰Ÿ‚µo‚µ‚Ì’l‚ÌŠm”F
+	/// æŠ¼ã—å‡ºã—ã®å€¤ã®ç¢ºèª
 	/// </summary>
 	void CheckExtrusion(ICollider* a, ICollider* b);
 
-	vector<CollisionData>datas_;
+	vector<IObjectData*>datas_;
 
 };
 

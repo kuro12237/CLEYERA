@@ -2,14 +2,20 @@
 
 void GunEnemyBullet::Initialize()
 {
-	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	SetObjectData(transform);
+	//auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 
 	const AABB aabb = { {-0.1f,-0.1f,-0.1f,},{0.1f,0.1f,0.1f} };
-	aabb_ = aabb;
-	id_ = kGunEnemyBulletId;
-	attribute_ = CollisionMask::kEnemyWalkAttribute;
-	mask_ = CollisionMask::kEnemyWalkMask;
+	
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
+
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetAABB(aabb);
+	collider_->SetId(ObjectId::kGunEnemyBulletId);
+	collider_->SetMask(CollisionMask::kEnemyWalkMask);
+	collider_->SetAttribute(CollisionMask::kEnemyWalkAttribute);
+
 }
 
 void GunEnemyBullet::Update()
@@ -34,24 +40,25 @@ void GunEnemyBullet::Update()
 
 }
 
-void GunEnemyBullet::OnCollision(ICollider* c, IObjectData* objData)
+void GunEnemyBullet::OnCollision(IObjectData* objData)
 {
+	auto c = objData->GetCollider();
 	c, objData;
-	if (c->GetId() == kEnemyWalkId)
+	if (c->GetId() == ObjectId::kEnemyWalkId)
 	{
 		return;
 	}
 
-	if (c->GetId() == kGunEnemyId)
+	if (c->GetId() == ObjectId::kGunEnemyId)
 	{
 		return;
 	}
 
-	if (c->GetId() == kPlayerId)
+	if (c->GetId() == ObjectId::kPlayerId)
 	{
 		isDead_ = true;
 	}
-	if (c->GetId() == kNormalBlock)
+	if (c->GetId() == ObjectId::kNormalBlock)
 	{
 		isDead_ = true;
 	}

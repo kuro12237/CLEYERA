@@ -8,9 +8,9 @@
 
 
 /// <summary>
-/// ワープゲートクラス
+/// 繝ｯ繝ｼ繝励ご繝ｼ繝医け繝ｩ繧ｹ
 /// </summary>
-class WarpGate :public IObjectData,public ICollider
+class WarpGate :public IObjectData
 {
 public:
 	WarpGate() {};
@@ -20,7 +20,7 @@ public:
 
 	void Update();
 
-	void OnCollision(ICollider* c, IObjectData* objData)override;
+	void OnCollision(IObjectData* objData)override;
 
 #pragma region Get
 

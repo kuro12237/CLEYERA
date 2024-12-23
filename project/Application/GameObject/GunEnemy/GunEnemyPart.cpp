@@ -3,21 +3,28 @@
 void GunEnemyPart::Initialize()
 {
 	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-	SetObjectData(transform);
 
 	const Math::Vector::Vector2 minmax = { -1.0f,1.0f };
-	aabb_ = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
-	isExtrusion_ = true;
-	id_ = kGunEnemyId;
-	attribute_ = CollisionMask::kEnemyWalkAttribute;
-	mask_ = CollisionMask::kEnemyWalkMask;
+	AABB aabb = { Math::Vector::Multiply(transform.scale,minmax.x), Math::Vector::Multiply(transform.scale,minmax.y) };
+
+	//dataをセット
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
+
+	//コライダーセット
+	this->SetColliderParamData();
+	collider_->SetAABB(aabb);
+	collider_->SetId(ObjectId::kGunEnemyId);
+	collider_->SetIsExtrusion(true);
+	collider_->SetMask(CollisionMask::kEnemyWalkMask);
+	collider_->SetAttribute(CollisionMask::kEnemyWalkAttribute);
+
 }
 
 void GunEnemyPart::Update()
 {
 	if (*isCoreEnd_ && !isEnd_)
 	{
-		id_ = kOnlyCollideWithBlocksid;
+		collider_->SetId(ObjectId::kOnlyCollideWithBlocksid);
 		ChangeState(make_unique<GunEnemyStateDeadAnimation>());
 		isEnd_ = *isCoreEnd_;
 	}
@@ -31,13 +38,14 @@ void GunEnemyPart::Update()
 	transform.translate.y += velocity_.y;
 }
 
-void GunEnemyPart::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objData)
+void GunEnemyPart::OnCollision([[maybe_unused]] IObjectData* objData)
 {
 	IsHit_ = true;
+	auto c = objData->GetCollider();
 
 	//ブロックとの処理
-	if (kNormalBlock == c->GetId()) {
-		for (auto& hitDirection : hitDirection_)
+	if (ObjectId::kNormalBlock == c->GetId()) {
+		for (auto& hitDirection : c->GetHItDirection())
 		{
 			if (hitDirection == TOP)
 			{
@@ -53,7 +61,8 @@ void GunEnemyPart::OnCollision(ICollider* c, [[maybe_unused]] IObjectData* objDa
 			}
 		}
 		auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-		transform.translate.x += extrusion_.x;
-		transform.translate.y += extrusion_.y;
+		
+		transform.translate.x += c->GetExtrusion().x;
+		transform.translate.y += c->GetExtrusion().y;
 	}
 }
