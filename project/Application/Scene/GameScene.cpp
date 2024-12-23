@@ -47,6 +47,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	breakBlockManager_ = make_unique<BreakBlockManager>();
 	breakBlockManager_->Initialize();
 
+
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
 	gravityManager_->Initilaize();
