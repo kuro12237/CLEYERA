@@ -87,6 +87,15 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 {
 #ifdef _USE_IMGUI
 
+	ImGui::Begin("PostEffect");
+	ImGui::DragFloat("scale::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_,0.01f);
+	ImGui::DragFloat("att::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
+	ImGui::DragFloat("start::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+	ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
+
+	ImGui::End();
+
+
 	ImGuiUpdate();
 	string bottonTitle = "Select_" + inputLevelDataFileName_;
 	if (ImGui::Button(bottonTitle.c_str()))

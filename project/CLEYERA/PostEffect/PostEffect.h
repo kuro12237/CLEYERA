@@ -55,6 +55,7 @@ namespace Engine
 
 		bool GetIsUseVinatte() { return adjustedColorParam_.vignetteFlag; }
 
+		PostEffectAdjustedColorParam &GetAdjustedColorParam() { return adjustedColorParam_; }
 #pragma endregion
 
 #pragma region Set

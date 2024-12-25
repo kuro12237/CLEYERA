@@ -22,6 +22,10 @@ struct PostEffectAdjustedColor
     float vignetteFactor;
     float vignatteScale;
     float32_t3 vignetteColor;
+    float32_t fogScale;
+    float32_t fogAttenuationRate;
+    float32_t fogStart;
+    float32_t fogEnd;
 };
 
 struct PostEffectBlurParam
@@ -95,7 +99,7 @@ static const float32_t kPrewittVerticelKernel[3][3] =
     { 1.0f / 6.0f, 1.0f / 6.0f, 1.0f / 6.0f },
 };
 
-// 5x5の水平Prewittカーネル
+// 5x5縺ｮ豌ｴ蟷ｳPrewitt繧ｫ繝ｼ繝阪Ν
 static const float32_t kPrewittHorizontalKernel5x5[5][5] =
 {
     { -1.0f / 24.0f, -1.0f / 24.0f, 0.0f, 1.0f / 24.0f, 1.0f / 24.0f },
@@ -105,7 +109,7 @@ static const float32_t kPrewittHorizontalKernel5x5[5][5] =
     { -1.0f / 24.0f, -1.0f / 24.0f, 0.0f, 1.0f / 24.0f, 1.0f / 24.0f },
 };
 
-// 5x5の垂直Prewittカーネル
+// 5x5縺ｮ蝙ら峩Prewitt繧ｫ繝ｼ繝阪Ν
 static const float32_t kPrewittVerticelKernel5x5[5][5] =
 {
     { -1.0f / 24.0f, -1.0f / 12.0f, -1.0f / 6.0f, -1.0f / 12.0f, -1.0f / 24.0f },
@@ -128,7 +132,7 @@ static const float32_t2 kIndex9x9[9][9] =
     { { -4.0f, 4.0f }, { -3.0f, 4.0f }, { -2.0f, 4.0f }, { -1.0f, 4.0f }, { 0.0f, 4.0f }, { 1.0f, 4.0f }, { 2.0f, 4.0f }, { 3.0f, 4.0f }, { 4.0f, 4.0f } },
 };
 
-//ガウシアン
+//繧ｬ繧ｦ繧ｷ繧｢繝ｳ
 float gauss(float x, float y, float sigma)
 {
     float exponent = -(x * x + y * y) * rcp(2.0f * sigma * sigma);

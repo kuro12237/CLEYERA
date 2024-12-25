@@ -50,6 +50,23 @@ PixelShaderOutput main(VertexShaderOutput input)
     weight = saturate(weight);
     //resultColor.rgb = resultColor.rgb * (1.0f - weight);
     
+   //view変換
+    float32_t ndcDepth = gDepthTexture.Sample(gSamplerPoint, transformedUV.xy);
+    float32_t4 viewSpace = mul(float32_t4(0.0f,0.0f, ndcDepth, 1.0f), gTransformationViewMatrix.InverseProj);
+    float32_t viewZ = viewSpace.z * rcp(viewSpace.w);
+ 
+    float fogStart =gPostEffectAdjustedColorParam_.fogStart; // フォグが始まる距離
+    float fogEnd = gPostEffectAdjustedColorParam_.fogEnd;  // フォグが完全にかかる距離
+    float fogWeight = 0.0f;
+    if (viewZ > fogStart)
+    {
+        fogWeight = saturate((viewZ - fogStart) / (fogEnd - fogStart));
+        fogWeight *= gPostEffectAdjustedColorParam_.fogScale * max(0.0f, 1.0f - exp(-gPostEffectAdjustedColorParam_.fogAttenuationRate * viewZ));
+    }
+    float32_t3 fogColor = float32_t3(0.8f, 0.8f, 0.8f);
+    
+    resultColor.rgb = lerp(resultColor.rgb, fogColor, fogWeight);
+
     //グレースケール
     {
         float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));

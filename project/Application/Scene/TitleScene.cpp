@@ -91,7 +91,7 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	this->SetFlont2dSpriteDrawFunc(std::bind(&TitleScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&TitleScene::PostProcessDraw, this));
 
-
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.0001f;
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
@@ -104,7 +104,13 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	changeSceneAnimation_->ImGuiUpdate();
 	ui_->ImGuiUpdate();
-	
+	ImGui::Begin("PostEffect");
+	ImGui::DragFloat("scale::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
+	ImGui::DragFloat("att::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
+	ImGui::DragFloat("start::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+	ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
+
+	ImGui::End();
 #endif // _USE_IMGUI
 
 

@@ -158,6 +158,11 @@ struct PostEffectAdjustedColorParam
 	float vignetteFactor = 0.0f;
 	float vignetteScale = 0.0f;
 	Math::Vector::Vector3 viganetteColor_ = { 1,0,0 };
+
+	float fogScale_ = 1.0f;
+	float fogAttenuationRate_ = 1.0f;
+	float fogStart = 10.0f;
+	float fogEnd = 100.0f;
 };
 
 struct  PostEffectBlurParam
