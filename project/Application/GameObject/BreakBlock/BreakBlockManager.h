@@ -2,8 +2,9 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"BreakBlock.h"
+#include"GameObject/ObjectInterface/IManagerList.h"
 
-class BreakBlockManager
+class BreakBlockManager :public IManagerList
 {
 public:
 	BreakBlockManager() {};
@@ -12,12 +13,12 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 #pragma region Get
 	vector<shared_ptr<BreakBlock>>GetBlocks() { return blocks_; }

@@ -1,18 +1,19 @@
 #pragma once
 #include"StageCoin.h"
+#include"GameObject/ObjectInterface/IManagerList.h"
 
 /// <summary>
-/// コイン管理クラス
+/// 繧ｳ繧､繝ｳ邂｡逅�繧ｯ繝ｩ繧ｹ
 /// </summary>
-class StageCoinManager:public INameable,public IJsonHandler
+class StageCoinManager :public INameable, public IJsonHandler, public IManagerList
 {
 public:
 	StageCoinManager() {};
 	~StageCoinManager() {};
 
-	void Initialize();
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
 #pragma region Get
 	vector<shared_ptr<StageCoin>>GetCoins() { return stageCoins_; }

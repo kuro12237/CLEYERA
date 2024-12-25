@@ -2,25 +2,26 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Block.h"
+#include"GameObject/ObjectInterface/IManagerList.h"
 
 /// <summary>
-/// ƒuƒƒbƒNŠÇ—
+/// ãƒ–ãƒ­ãƒƒã‚¯ç®¡ç†
 /// </summary>
-class BlockManager
+class BlockManager :public IManagerList
 {
 public:
 	BlockManager() {};
 	~BlockManager() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	void Initialize();
+	void Initialize()override;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
-	void Update();
+	void Update()override;
 
 #pragma region Get
 	vector<shared_ptr<Block>>GetBlocks() { return blocks_; }

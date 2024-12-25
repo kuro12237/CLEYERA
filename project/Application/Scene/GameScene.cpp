@@ -7,7 +7,6 @@ using namespace Engine::Transform;
 
 void GameScene::Initialize([[maybe_unused]] GameManager* state)
 {
-
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameScene/");
 
@@ -26,7 +25,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	light_.position.z = -64.0f;
 	light_.decay = 0.1f;
 
-
 	//Particle初期化
 	ParticlesInitialize();
 
@@ -34,32 +32,31 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 
 	player_ = make_unique<PlayerManager>();
 	player_->Initialize();
+	managerList_.push_back(player_.get());
 
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
 	enemyWalkManager_->Initialize();
+	managerList_.push_back(enemyWalkManager_.get());
 
 	bulletEnemyManager_ = make_unique<GunEnemyManager>();
 	bulletEnemyManager_->Initialize();
+	managerList_.push_back(bulletEnemyManager_.get());
 
 	blockManager_ = make_shared<BlockManager>();
 	blockManager_->Initialize();
+	managerList_.push_back(blockManager_.get());
 
 	breakBlockManager_ = make_unique<BreakBlockManager>();
 	breakBlockManager_->Initialize();
-
-	gameCollisionManager_ = make_unique<BoxCollisionManager>();
-	gravityManager_ = make_unique<GravityManager>();
-	gravityManager_->Initilaize();
-
-
-	goal_ = make_unique<Goal>();
-	goal_->Initialize(ObjectId::kGoalId, 0);
+	managerList_.push_back(breakBlockManager_.get());
 
 	warpManager_ = make_unique<WarpManager>();
 	warpManager_->Initialize();
+	managerList_.push_back(warpManager_.get());
 
 	stageCoinManager_ = make_unique<StageCoinManager>();
 	stageCoinManager_->Initialize();
+	managerList_.push_back(stageCoinManager_.get());
 
 	//2dObj
 	startAnimation_ = make_unique<StartAnimation>();
@@ -68,22 +65,22 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	endAnimation_ = make_unique<EndAnimation>();
 	endAnimation_->Initialize();
 
+	gameCollisionManager_ = make_unique<BoxCollisionManager>();
+	gravityManager_ = make_unique<GravityManager>();
+	gravityManager_->Initilaize();
+
+	goal_ = make_unique<Goal>();
+	goal_->Initialize(ObjectId::kGoalId, 0);
+
 	gameUi_ = make_unique<GameSceneUI>();
 	gameUi_->Initialize();
 
-	//更新
-	gameObjectManager_->Update();
-	LightingManager::AddList(light_);
-
 	//ゲーム終了のつなぐ
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
-
-
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameScene::PostProcessDraw, this));
 
 	context_ = make_unique<ISceneContext>();
-
 }
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
@@ -125,20 +122,12 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	gameUi_->Update();
 
-	player_->Update();
-
-	enemyWalkManager_->Update();
-	bulletEnemyManager_->Update();
-
-	blockManager_->Update();
-	breakBlockManager_->Update();
-
-	stageCoinManager_->Update();
+	for (IManagerList* it : managerList_)
+	{
+		it->Update();
+	}
 
 	goal_->Update();
-
-	warpManager_->Update();
-
 	gravityManager_->Update();
 
 	Gravitys();
@@ -252,7 +241,6 @@ void GameScene::ImGuiUpdate()
 
 	this->gameUi_->ImGuiUpdate();
 
-
 }
 
 void GameScene::Collision()
@@ -276,37 +264,39 @@ void GameScene::Collision()
 		}
 	}
 
-	for (auto& enemy : bulletEnemyManager_->GetGunEnemys())
+	if (bulletEnemyManager_->GetIsStartFlag())
 	{
-		weak_ptr<GunEnemy>obj = enemy.core;
-		auto it = obj.lock();
-		if (it)
+		for (auto& enemy : bulletEnemyManager_->GetGunEnemys())
 		{
-			gameCollisionManager_->ListPushback(it.get());
-
-			for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
+			weak_ptr<GunEnemy>obj = enemy.core;
+			auto it = obj.lock();
+			if (it)
 			{
-				if (b)
+				gameCollisionManager_->ListPushback(it.get());
+
+				for (shared_ptr<GunEnemyBullet>& b : it->GetBullets())
 				{
-					gameCollisionManager_->ListPushback(b.get());
+					if (b)
+					{
+						gameCollisionManager_->ListPushback(b.get());
+					}
+
 				}
-
 			}
-		}
 
-		for (auto& parts : enemy.parts)
-		{
-			if (!parts)
+			for (auto& parts : enemy.parts)
 			{
-				continue;
-			}
-			if (parts->GetIsEnd())
-			{
-				gameCollisionManager_->ListPushback(parts.get());
+				if (!parts)
+				{
+					continue;
+				}
+				if (parts->GetIsEnd())
+				{
+					gameCollisionManager_->ListPushback(parts.get());
+				}
 			}
 		}
 	}
-
 	//歩く敵
 	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
 	{
@@ -331,7 +321,7 @@ void GameScene::Collision()
 			weak_ptr<BreakBlock>it = b;
 			auto obj = it.lock();
 			obj;
-			gameCollisionManager_->ListPushback( obj.get());
+			gameCollisionManager_->ListPushback(obj.get());
 		}
 	}
 	//ゴール
@@ -359,35 +349,38 @@ void GameScene::Gravitys()
 		}
 	}
 
-	for (auto& e : bulletEnemyManager_->GetGunEnemys())
+	if (bulletEnemyManager_->GetIsStartFlag())
 	{
-		if (e.core)
+		for (auto& e : bulletEnemyManager_->GetGunEnemys())
 		{
-			gravityManager_->PushList(e.core.get());
-		}
-		for (auto& parts : e.parts)
-		{
-			if (!parts)
+			if (e.core)
 			{
-				continue;
+				gravityManager_->PushList(e.core.get());
 			}
-			if (parts->GetIsEnd())
+			for (auto& parts : e.parts)
 			{
-				gravityManager_->PushList(parts.get());
+				if (!parts)
+				{
+					continue;
+				}
+				if (parts->GetIsEnd())
+				{
+					gravityManager_->PushList(parts.get());
+				}
 			}
-		}
-
-	}
-
-
-	for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
-	{
-		if (e)
-		{
-			gravityManager_->PushList(e.get());
 		}
 	}
 
+	if (enemyWalkManager_->GetIsStartFlag())
+	{
+		for (shared_ptr<EnemyWalk>& e : enemyWalkManager_->GetData())
+		{
+			if (e)
+			{
+				gravityManager_->PushList(e.get());
+			}
+		}
+	}
 	gravityManager_->PushParticleList(CharacterDeadParticle::GetInstance()->GetParticle());
 
 	gravityManager_->CheckGravity();

@@ -5,6 +5,7 @@
 
 #include"GunEnemy.h"
 #include"GunEnemyPart.h"
+#include"GameObject/ObjectInterface/IManagerList.h"
 
 struct GunEnemyData
 {
@@ -13,13 +14,13 @@ struct GunEnemyData
 	vector<shared_ptr<GunEnemyPart>>parts;
 	size_t partsSize = 3;
 
-	void Reset() { core.reset(),parts.clear(); }
+	void Reset() { core.reset(), parts.clear(); }
 };
 
 /// <summary>
 /// 銃の敵管理クラス
 /// </summary>
-class GunEnemyManager
+class GunEnemyManager :public IManagerList
 {
 public:
 	GunEnemyManager() {};
@@ -29,12 +30,12 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="data"></param>
-	void Initialize();
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 
 
@@ -47,6 +48,7 @@ public:
 
 #pragma region Set
 	void setIsStartFlag(bool flag) { isGameStartFlag_ = flag; }
+	bool GetIsStartFlag() { return isGameStartFlag_; }
 #pragma endregion
 
 private:

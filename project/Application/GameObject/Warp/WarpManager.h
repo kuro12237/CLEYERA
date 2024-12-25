@@ -1,15 +1,19 @@
 #pragma once
 #include"Warp.h"
+#include"GameObject/ObjectInterface/IManagerList.h"
 
-class WarpManager
+/// <summary>
+/// ワープ管理クラス
+/// </summary>
+class WarpManager :public IManagerList
 {
 public:
 	WarpManager() {};
 	~WarpManager() {};
 
-	void Initialize();
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
 	void DebugDraw();
 

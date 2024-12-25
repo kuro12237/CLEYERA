@@ -271,6 +271,7 @@
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IJsonHandler.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />

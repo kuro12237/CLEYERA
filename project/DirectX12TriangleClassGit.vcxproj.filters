@@ -1564,6 +1564,7 @@
     <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.h" />
     <ClInclude Include="Application\GameObject\GunEnemy\IGunEnemy.h" />
     <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyPart.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

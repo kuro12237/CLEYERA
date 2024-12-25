@@ -14,12 +14,13 @@
 #include"Utility/RandomGenerator/RandomGenerator.h"
 #include"Bullet/PlayerBulletManager.h"
 #include"Particle/PlayerMoveParticle.h"
+#include"GameObject/ObjectInterface/IManagerList.h"
 
 
 /// <summary>
 /// プレイヤーのオブジェクトの管理クラス
 /// </summary>
-class PlayerManager
+class PlayerManager :public IManagerList
 {
 public:
 	PlayerManager() {};
@@ -28,7 +29,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize()override;
 
 	/// <summary>
 	/// ImGuiの更新
@@ -38,7 +39,7 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update();
+	void Update()override;
 
 	/// <summary>
 	/// 2d描画

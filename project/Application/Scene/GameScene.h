@@ -33,7 +33,7 @@
 
 #include"ISceneContext.h"
 #include"GameObject/GunEnemy/GunEnemyManager.h"
-
+#include"GameObject/ObjectInterface/IManagerList.h"
 
 /// <summary>
 /// ゲームプレイ
@@ -100,6 +100,9 @@ private:
 
 	unique_ptr<ISceneContext>context_ = nullptr;
 	SceneContextData contextData_ = {};
+
+	list<IManagerList*>managerList_;
+
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;
