@@ -2,6 +2,7 @@
 #include"Particle/GpuParticle.h"
 #include"Particle/Emitter/ParticleEmitter.h"
 #include"Graphics/TextureManager/TextureManager.h"
+#include"Particle/Field/ParticleField.h"
 
 /// <summary>
 /// キャラクターが死んだときのパーティクル
@@ -21,6 +22,7 @@ public:
 	/// 更新
 	/// </summary>
 	void Update();
+	
 
 	/// <summary>
 	/// 描画
@@ -52,6 +54,8 @@ private:
 
 	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
 	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
+	unique_ptr<Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>>block_ = nullptr;
+	
 
 	CharacterDeadParticle() = default;
 	~CharacterDeadParticle() = default;

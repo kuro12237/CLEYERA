@@ -378,6 +378,10 @@ void ShaderManager::Particles()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Particle/Field/Particle_Field_TypeBox_Gravity.CS.hlsl",
 			L"cs_6_0");
+	instance->shaders[Shader::PARTICLE_FIELD]["HitBox"].csBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/Particle/Field/Particle_Field_TypeBox_HitBlock.CS.hlsl",
+			L"cs_6_0");
 	//Draw
 	instance->shaders[Shader::PARTICLE_DRAW]["None3d"].vertexBlob =
 		ShaderManager::CompilerShaderFanc(
@@ -463,7 +467,6 @@ void ShaderManager::Particle_EmitterSphere()
 
 void ShaderManager::Particle_EmitterBox()
 {
-
 	SShaderMode shaders{};
 	shaders.csBlob =
 		ShaderManager::CompilerShaderFanc(

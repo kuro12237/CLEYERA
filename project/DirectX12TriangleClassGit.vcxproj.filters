@@ -1679,5 +1679,6 @@
       <Filter>Shader\Particle</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Gravity.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_HitBlock.CS.hlsl" />
   </ItemGroup>
 </Project>

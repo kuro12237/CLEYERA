@@ -93,7 +93,10 @@ namespace Engine::Particle {
 		{
 			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_FIELD, "Gravity");
 		}
-
+		if constexpr (std::is_same<T, Particle::FieldType::FieldHitBox>::value)
+		{
+			pso = GraphicsPipelineManager::GetInstance()->GetPiplines(Pipline::PARTICLE_FIELD, "HitBox");
+		}
 		ComPtr<ID3D12GraphicsCommandList> list = Engine::Base::DX::DirectXCommon::GetInstance()->GetCommands().m_pList;
 
 		list->SetComputeRootSignature(pso.rootSignature.Get());
@@ -151,6 +154,29 @@ namespace Engine::Particle {
 						ImGui::DragFloat3("sizeMin", &param_[index].sizeMin.x, 0.1f);
 						ImGui::DragFloat3("sizeMax", &param_[index].sizeMax.x, 0.1f);
 						ImGui::DragFloat("gravity", &param_[index].gravity, 0.1f);
+						ImGui::TreePop();
+					}
+				}
+				ImGui::TreePop();
+			}
+		}
+
+		if constexpr (std::is_same<T, Particle::FieldType::FieldHitBox>::value)
+		{
+			if (ImGui::TreeNode(name_.c_str()))
+			{
+				for (size_t index = 0; index < max_; index++)
+				{
+					string paramName = to_string(index);
+					ImGui::Separator();
+					if (ImGui::TreeNode(paramName.c_str()))
+					{
+						ImGui::DragFloat3("translate", &param_[index].translate.x, 0.1f);
+						ImGui::DragFloat3("rotate", &param_[index].rotate.x, 0.1f);
+						ImGui::DragInt("use", &param_[index].use, 1);
+
+						ImGui::DragFloat3("sizeMin", &param_[index].sizeMin.x, 0.1f);
+						ImGui::DragFloat3("sizeMax", &param_[index].sizeMax.x, 0.1f);
 						ImGui::TreePop();
 					}
 				}

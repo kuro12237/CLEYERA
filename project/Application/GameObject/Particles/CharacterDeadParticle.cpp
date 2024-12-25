@@ -26,12 +26,21 @@ void CharacterDeadParticle::Initialize()
 
     emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
     emitter_->CreateType(particle_);
+
+	block_ = make_unique<Particle::ParticleField<Particle::FieldType::FieldHitBox>>();
+	block_->CreateType("Block");
 }
 
 void CharacterDeadParticle::Update()
 {
+    particle_->CallBarrier();
     emitter_->Update();
     emitter_->Emit(particle_);
+
+    particle_->CallBarrier();
+    block_->Update();
+    block_->Dispach(particle_.get());
+
     particle_->CallBarrier();
     particle_->Update();
 }
@@ -44,5 +53,7 @@ void CharacterDeadParticle::Draw()
 
 void CharacterDeadParticle::ImGuiUpdate()
 {
+
+    block_->ImGuiUpdate();
     emitter_->ImGuiUpdate();
 }

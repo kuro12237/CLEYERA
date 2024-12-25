@@ -401,7 +401,9 @@ void GameScene::ParticlesInitialize()
 
 void GameScene::ParticlesUpdate()
 {
+
 	characterDeadParticle_->Update();
+
 	characterMoveParticle_->Update();
 	GoalParticle::GetInstance()->Update();
 
