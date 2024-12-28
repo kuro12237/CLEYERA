@@ -357,6 +357,7 @@
     <None Include="Resources\Shader\SkyBox.hlsli">
       <Filter>Shader</Filter>
     </None>
+    <None Include="Resources\Shader\PBR\PBR.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -1680,5 +1681,8 @@
     </FxCompile>
     <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Gravity.CS.hlsl" />
     <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_HitBlock.CS.hlsl" />
+    <FxCompile Include="Resources\Shader\PBR\PBR.PS.hlsl" />
+    <FxCompile Include="Resources\Shader\PBR\PBR.VS.hlsl" />
+    <FxCompile Include="Resources\Shader\PBR\PBR.GS.hlsl" />
   </ItemGroup>
 </Project>

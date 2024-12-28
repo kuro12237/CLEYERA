@@ -42,6 +42,9 @@ void GraphicsPipelineManager::Initialize()
 	piplines_[PHONG]["Skinning_None"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel);
 	piplines_[PHONG]["Skinning_NoneDepthWrite"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel, false);
 	
+	//PBR
+	piplines_[PBR]["None"] = Phong_CreatePipline::GetInstance()->CreatePhongNormalModel(ShaderManager::Getinstance()->GetShaders(Shader::PBR,"None"));
+
 	D3D12_RASTERIZER_DESC dissolveRasterRizer{};
 	dissolveRasterRizer.CullMode = D3D12_CULL_MODE_NONE;
 	dissolveRasterRizer.FillMode = D3D12_FILL_MODE_SOLID;

@@ -172,8 +172,11 @@ SPSOProperty Phong_CreatePipline::CreatePhongNormalModel(SShaderMode shader)
 	shader.vertexBlob->GetBufferSize() }; //VS
 	graphicsPipelineStateDesc.PS = { shader.pixelBlob->GetBufferPointer(),
 	shader.pixelBlob->GetBufferSize() }; //PS
-	graphicsPipelineStateDesc.GS = { shader.gsBlob->GetBufferPointer(),
-	shader.gsBlob->GetBufferSize() };//GS
+	if (shader.gsBlob.Get())
+	{
+		graphicsPipelineStateDesc.GS = { shader.gsBlob->GetBufferPointer(),
+		shader.gsBlob->GetBufferSize() };//GS
+	}
 	graphicsPipelineStateDesc.pRootSignature = PSO.rootSignature.Get(); //RootSignature
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; //InputLayout
 	graphicsPipelineStateDesc.BlendState = blendDesc; //BlendState

@@ -38,6 +38,7 @@ namespace Shader
 		SPRITE_2d,
 		SPRITE_3d,
 		PHONG,
+		PBR,
 		PARTICLE_INIT,
 		PARTICLE_UPDATE,
 		PARTICLE_EMITTER,

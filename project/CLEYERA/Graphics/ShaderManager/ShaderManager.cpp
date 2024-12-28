@@ -113,6 +113,16 @@ void ShaderManager::ShaderComples()
 		ShaderManager::CompilerShaderFanc(
 			L"Resources/Shader/Sprite2d/SpriteObject2d_PerlinNoise.PS.hlsl",
 			L"ps_6_0");
+	//PBR
+	instance->shaders[Shader::PBR]["None"].vertexBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/PBR/PBR.VS.hlsl",
+			L"vs_6_0");
+	instance->shaders[Shader::PBR]["None"].pixelBlob =
+		ShaderManager::CompilerShaderFanc(
+			L"Resources/Shader/PBR/PBR.PS.hlsl",
+			L"ps_6_0");
+
 
 	ShapeShader();
 	Sprite3dShader();
