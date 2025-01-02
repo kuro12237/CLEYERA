@@ -38,7 +38,6 @@ void ClearSceneUI::Initialize()
 void ClearSceneUI::Update()
 {
 
-
 	//ボタン更新
 	this->BottonUiUpdate();
 

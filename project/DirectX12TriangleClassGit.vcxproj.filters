@@ -313,6 +313,9 @@
     <Filter Include="Project\GameObject\Character\GunEnemy">
       <UniqueIdentifier>{733770d1-4f3e-4d4e-b70d-f786db579b82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\BreakBlock">
+      <UniqueIdentifier>{0662c8cb-8dfe-4d80-b044-23890165e5c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -357,7 +360,9 @@
     <None Include="Resources\Shader\SkyBox.hlsli">
       <Filter>Shader</Filter>
     </None>
-    <None Include="Resources\Shader\PBR\PBR.hlsli" />
+    <None Include="Resources\Shader\PBR\PBR.hlsli">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">
@@ -892,17 +897,39 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateDash.cpp">
       <Filter>Project\GameObject\Character\Player\State</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
-    <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp" />
-    <ClCompile Include="Application\GameObject\Player\command\PlayerAimCommand.cpp" />
-    <ClCompile Include="Application\GameObject\Player\state\PlayerStateAim.cpp" />
-    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlock.cpp" />
-    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockManager.cpp" />
-    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockHp.cpp" />
-    <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.cpp" />
-    <ClCompile Include="Application\GameObject\GunEnemy\IGunEnemy.cpp" />
-    <ClCompile Include="Application\GameObject\GunEnemy\GunEnemyPart.cpp" />
-    <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp" />
+    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlock.cpp">
+      <Filter>Project\GameObject\BreakBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockHp.cpp">
+      <Filter>Project\GameObject\BreakBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\BreakBlock\BreakBlockManager.cpp">
+      <Filter>Project\GameObject\BreakBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GunEnemy\GunEnemyPart.cpp">
+      <Filter>Project\GameObject\Character\GunEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.cpp">
+      <Filter>Project\GameObject\Character\GunEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\GunEnemy\IGunEnemy.cpp">
+      <Filter>Project\GameObject\Character\GunEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp">
+      <Filter>Project\GameObject\ObjectData</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp">
+      <Filter>Project\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\command\PlayerAimCommand.cpp">
+      <Filter>Project\GameObject\Character\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Player\state\PlayerStateAim.cpp">
+      <Filter>Project\GameObject\Character\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp">
+      <Filter>Project\GameObject\Lava</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1556,18 +1583,42 @@
     <ClInclude Include="Application\GameObject\Player\state\PlayerStateDash.h">
       <Filter>Project\GameObject\Character\Player\State</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Player\Particle\PlayerMoveParticle.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
-    <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h" />
-    <ClInclude Include="Application\GameObject\Player\state\PlayerStateAim.h" />
-    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockManager.h" />
-    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlock.h" />
-    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockHp.h" />
-    <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.h" />
-    <ClInclude Include="Application\GameObject\GunEnemy\IGunEnemy.h" />
-    <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyPart.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h" />
-    <ClInclude Include="Application\GameObject\Lava\LavaParticle.h" />
+    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlock.h">
+      <Filter>Project\GameObject\BreakBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockHp.h">
+      <Filter>Project\GameObject\BreakBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\BreakBlock\BreakBlockManager.h">
+      <Filter>Project\GameObject\BreakBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyPart.h">
+      <Filter>Project\GameObject\Character\GunEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.h">
+      <Filter>Project\GameObject\Character\GunEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GunEnemy\IGunEnemy.h">
+      <Filter>Project\GameObject\Character\GunEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h">
+      <Filter>Project\GameObject\ObjectData</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h">
+      <Filter>Project\GameObject\ObjectData</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\Particle\PlayerMoveParticle.h">
+      <Filter>Project\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h">
+      <Filter>Project\GameObject\Character\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Player\state\PlayerStateAim.h">
+      <Filter>Project\GameObject\Character\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Lava\LavaParticle.h">
+      <Filter>Project\GameObject\Lava</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
@@ -1681,10 +1732,20 @@
     <FxCompile Include="Resources\Shader\Particle\Draw\Particle2d_Draw.VS.hlsl">
       <Filter>Shader\Particle</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Gravity.CS.hlsl" />
-    <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_HitBlock.CS.hlsl" />
-    <FxCompile Include="Resources\Shader\PBR\PBR.PS.hlsl" />
-    <FxCompile Include="Resources\Shader\PBR\PBR.VS.hlsl" />
-    <FxCompile Include="Resources\Shader\PBR\PBR.GS.hlsl" />
+    <FxCompile Include="Resources\Shader\PBR\PBR.GS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PBR\PBR.PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\PBR\PBR.VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_Gravity.CS.hlsl">
+      <Filter>Shader\Particle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shader\Particle\Field\Particle_Field_TypeBox_HitBlock.CS.hlsl">
+      <Filter>Shader\Particle</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

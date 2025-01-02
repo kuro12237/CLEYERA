@@ -90,10 +90,9 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 		coinManager_->SetIsAnimStart(true);
 	}
 
-	if (coinManager_->GetIsComplete())
-	{
+
 		ui_->SetIsCearTextUIAnimStart(true);
-	}
+	
 
 	coinManager_->Update();
 
@@ -135,7 +134,7 @@ void GameClearScene::PostProcessDraw()
 void GameClearScene::Flont2dSpriteDraw()
 {
 
-	ui_->ParticleDraw2d();
+	//ui_->ParticleDraw2d();
 	ui_->Draw2d();
 
 	changeSceneAnimation_->Draw();
