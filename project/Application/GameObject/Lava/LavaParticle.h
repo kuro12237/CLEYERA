@@ -1,0 +1,29 @@
+#pragma once
+#include"Particle/GpuParticle.h"
+#include"Particle/Emitter/ParticleEmitter.h"
+#include"Graphics/TextureManager/TextureManager.h"
+#include"GameObject/ObjectInterface/IParticleData.h"
+
+class LavaParticle :public IParticleData
+{
+public:
+	LavaParticle() {};
+	~LavaParticle() {};
+
+	void Initialize()override;
+
+	void Update()override;
+
+#pragma region Set
+
+	void SetLavaPos(const Math::Vector::Vector3& pos) { p_LavaPos_ = &pos; }
+#pragma endregion
+
+
+private:
+
+	const Math::Vector::Vector3* p_LavaPos_ = nullptr;
+
+
+};
+

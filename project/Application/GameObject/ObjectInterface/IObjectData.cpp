@@ -14,11 +14,17 @@ void IObjectData::CalcGravity(float g)
 
 void IObjectData::SetColliderParamData()
 {
+
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
 	auto data = objectData_.lock();
-	gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
 	collider_->SetObjectData(gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform);
 	collider_->SetAABB(data->GetAABB());
 	collider_->SetOnCollisionFunc(std::bind(&IObjectData::OnCollision, this, std::placeholders::_1));
+}
+
+void IObjectData::SetObjectParamData()
+{
+	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
 }
 
 

@@ -902,6 +902,7 @@
     <ClCompile Include="Application\GameObject\GunEnemy\state\GunEnemyStateDeadAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GunEnemy\IGunEnemy.cpp" />
     <ClCompile Include="Application\GameObject\GunEnemy\GunEnemyPart.cpp" />
+    <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1566,6 +1567,7 @@
     <ClInclude Include="Application\GameObject\GunEnemy\IGunEnemy.h" />
     <ClInclude Include="Application\GameObject\GunEnemy\GunEnemyPart.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h" />
+    <ClInclude Include="Application\GameObject\Lava\LavaParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

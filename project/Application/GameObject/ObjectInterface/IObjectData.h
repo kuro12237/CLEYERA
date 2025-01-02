@@ -25,6 +25,8 @@ public:
 	/// </summary>
 	void SetColliderParamData();
 
+	void SetObjectParamData();
+
 	virtual void OnCollision([[maybe_unused]]IObjectData* objectData) {};
 
 #pragma region Set

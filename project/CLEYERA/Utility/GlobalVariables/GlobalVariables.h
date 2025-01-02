@@ -3,6 +3,8 @@
 #include"Transform/STransformQua.h"
 #include"Transform/STransformEular.h"
 #include"Particle/Emitter/StructGpuParticleEmitter.h"
+#include"Particle/Emitter/ParticleEmitter.h"
+#include"Particle/Field/ParticleField.h"
 
 class GlobalVariables {
 public:
@@ -88,6 +90,9 @@ private:
 	GlobalVariables(const GlobalVariables& obj) = delete;
 	GlobalVariables& operator=(const GlobalVariables& obj) = delete;
 #pragma endregion
+
+	void WriteVector3(string name,Math::Vector::Vector3 &T);
+
 
 	// 項目
 	struct Item {

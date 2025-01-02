@@ -10,6 +10,7 @@ namespace Math
 			float y;
 			float z;
 			float w;
+			NLOHMANN_DEFINE_TYPE_INTRUSIVE(Vector4, x, y, z, w);
 		};
 	}
 }

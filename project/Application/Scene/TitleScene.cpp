@@ -36,7 +36,6 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
 
-
 	camera_ = make_unique<TitleCamera>();
 	camera_->Initialize();
 
@@ -60,6 +59,7 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	lava_ = make_unique<Lava>();
 	lava_->Initialize();
 	lava_->SetCameraParent(cameraWt.transform.translate);
+	p_LavaPos_ = &lava_->GetObjectData().lock()->GetWorldTransform().transform.translate;
 
 	titleName_ = make_unique<TitleName>();
 	titleName_->Initialize();
@@ -85,8 +85,10 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	ui_->Initialize();
 
 	stageManager_ = StageManager::GetInstance();
-
 	stageManager_->Initilaize();
+
+	gravityManager_ = make_unique<GravityManager>();
+	gravityManager_->Initilaize();
 
 	this->SetFlont2dSpriteDrawFunc(std::bind(&TitleScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&TitleScene::PostProcessDraw, this));
@@ -146,7 +148,16 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 	towerManager_->Update();
 
+	//lavaの位置をセット
+	gravityManager_->GetParticleGravityField()->GetParam(0).translate = *p_LavaPos_;
+
+	gravityManager_->ClearList();
+	gravityManager_->PushParticleList(lava_->GetLavaParticle()->GetParticle());
+
+	gravityManager_->Update();
+	gravityManager_->CheckGravity();
 	gameObjectManager_->Update();
+
 
 	ui_->Update();
 
@@ -165,9 +176,10 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 void TitleScene::PostProcessDraw()
 {
-
 	gameObjectManager_->InstancingDraw();
 	gameObjectManager_->NormalDraw();
+	lava_->GetLavaParticle()->Draw();
+
 }
 
 void TitleScene::Flont2dSpriteDraw()

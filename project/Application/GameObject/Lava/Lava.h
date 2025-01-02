@@ -2,9 +2,10 @@
 #include"Lava.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
+#include"LavaParticle.h"
 
 /// <summary>
-/// —nŠâ‚ÌƒIƒuƒWƒF‚­ƒg§ŒäƒNƒ‰ƒX
+/// æº¶å²©ã®ã‚ªãƒ–ã‚¸ã‚§ããƒˆåˆ¶å¾¡ã‚¯ãƒ©ã‚¹
 /// </summary>
 class Lava :public IObjectData
 {
@@ -13,21 +14,29 @@ public:
 	~Lava() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 #pragma region Set
-	void SetCameraParent(const Math::Vector::Vector3 &pos) { p_CameraPos_ = &pos; }
+	void SetCameraParent(const Math::Vector::Vector3& pos) { p_CameraPos_ = &pos; }
 #pragma endregion
+
+#pragma region Get
+
+	LavaParticle* GetLavaParticle() { return lavaParticle_.get(); }
+
+#pragma endregion
+
 
 private:
 
 	const Math::Vector::Vector3* p_CameraPos_ = nullptr;
+	unique_ptr<LavaParticle>lavaParticle_ = nullptr;
 
 };

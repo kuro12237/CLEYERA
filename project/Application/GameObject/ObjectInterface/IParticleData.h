@@ -5,7 +5,7 @@
 #include"GameObject/ObjectInterface/IJsonHandler.h"
 
 
-class IParticleData:public IJsonHandler
+class IParticleData :public IJsonHandler
 {
 public:
 	IParticleData() {};
@@ -22,20 +22,20 @@ public:
 	void Draw();
 
 	/// <summary>
-    /// Emitterのパラメーターを初期化
-    /// </summary>
-    /// <param name="index"></param>
+	/// Emitterのパラメーターを初期化
+	/// </summary>
+	/// <param name="index"></param>
 	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
 
 	/// <summary>
-    /// ImGui更新
-    /// </summary>
+	/// ImGui更新
+	/// </summary>
 	void ImGuiUpdate();
 
 #pragma region Get
 
 	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>* GetEmitter() { return emitter_.get(); };
-
+	Engine::Particle::GpuParticle* GetParticle() { return particle_.get(); };
 #pragma endregion
 
 protected:
@@ -43,7 +43,7 @@ protected:
 	/// <summary>
 	/// パーティクル作成
 	/// </summary>
-	void Create();
+	void Create(uint32_t modelHandle = 0);
 
 	void CreateParamJson();
 

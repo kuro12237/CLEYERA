@@ -77,6 +77,7 @@
     <ClCompile Include="Application\GameObject\Goal\Goal.cpp" />
     <ClCompile Include="Application\GameObject\Goal\Particle\GoalParticle.cpp" />
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp" />
+    <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBulletManager.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="Application\GameObject\Goal\Goal.h" />
     <ClInclude Include="Application\GameObject\Goal\Particle\GoalParticle.h" />
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h" />
+    <ClInclude Include="Application\GameObject\Lava\LavaParticle.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IJsonHandler.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />

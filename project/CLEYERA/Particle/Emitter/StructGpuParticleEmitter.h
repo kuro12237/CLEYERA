@@ -5,7 +5,7 @@
 namespace Engine::Particle
 {
 	/// <summary>
-	/// •¦‚­Š´Šo‚Ìƒpƒ‰ƒ[ƒ^
+	/// æ²¸ãæ„Ÿè¦šã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	/// </summary>
 	struct  ParticleEmitControl
 	{
@@ -16,12 +16,12 @@ namespace Engine::Particle
 	};
 
 	/// <summary>
-	/// emitter‚ÌŒ`
+	/// emitterã®å½¢
 	/// </summary>
 	namespace EmitType {
 		
 		/// <summary>
-		/// ” 
+		/// ç®±
 		/// </summary>
 		struct BoxParam
 		{
@@ -44,9 +44,11 @@ namespace Engine::Particle
 
 			Math::Vector::Vector3 scaleSizeMin = { 1.0f,1.0f };
 			Math::Vector::Vector3 scaleSizeMax = { 1.0f,1.0f };
+			NLOHMANN_DEFINE_TYPE_INTRUSIVE(BoxParam, translate, rotate,count,emit, sizeMin,sizeMax,velocityMin,velocityMax
+			,color,colorDecayMin,colorDecayMax,scaleVelocityMin,scaleVelocityMax,scaleSizeMin,scaleSizeMax)
 		};
 		/// <summary>
-		/// ‰~
+		/// å††
 		/// </summary>
 		struct Circle
 		{
@@ -72,7 +74,7 @@ namespace Engine::Particle
 			Math::Vector::Vector3 scaleSizeMax = { 1.0f,1.0f,1.0f };
 		};
 		/// <summary>
-		/// ‹…
+		/// çƒ
 		/// </summary>
 		struct SphereParam
 		{

@@ -356,6 +356,18 @@ void GlobalVariables::Update()
 						*ptr = buffer;
 					}
 				}
+				else if (std::holds_alternative<Engine::Particle::EmitType::BoxParam>(item.value)) {
+
+					Engine::Particle::EmitType::BoxParam* ptr = std::get_if<Engine::Particle::EmitType::BoxParam>(&item.value);
+					string  Name = itemName;
+					if (ImGui::TreeNode(itemName.c_str()))
+					{
+						Name = itemName + "translate";
+						WriteVector3(Name, ptr->translate);
+						ImGui::TreePop();
+					}
+
+				}
 			}
 
 			// 改行
@@ -407,4 +419,9 @@ void GlobalVariables::SetChangeSceneLoadFilesName(const string& filePath)
 		// 存在しなければ追加
 		this->changeSceneLoadFilePaths_.push_back(filePath);
 	}
+}
+
+void GlobalVariables::WriteVector3(string name, Math::Vector::Vector3& T)
+{
+	ImGui::DragFloat3(name.c_str(), reinterpret_cast<float*>(&T));
 }

@@ -29,7 +29,7 @@
 #include"GameObject/StageManager/StageManager.h"
 
 /// <summary>
-/// ƒ^ƒCƒgƒ‹
+/// ã‚¿ã‚¤ãƒˆãƒ«
 /// </summary>
 class TitleScene :public IScene
 {
@@ -38,29 +38,29 @@ public:
 	~TitleScene() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize(GameManager* state)override;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
 private:
 
 	/// <summary>
-   /// ƒ|ƒXƒgƒGƒtƒFƒNƒg•`‰æ
+   /// ãƒã‚¹ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆæç”»
    /// </summary>
 	void PostProcessDraw();
 
 	/// <summary>
-	/// ‘O–Ê2d•`‰æ
+	/// å‰é¢2dæç”»
 	/// </summary>
 	void Flont2dSpriteDraw();
 
 	/// <summary>
-	/// .000Œ`®‚É•ÏŠ·‚·‚éŠÖ”
+	/// .000å½¢å¼ã«å¤‰æ›ã™ã‚‹é–¢æ•°
 	/// </summary>
 	std::string FormatNumberWithDots(int num);
 
@@ -69,9 +69,9 @@ private:
 	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
 	StageManager* stageManager_ = nullptr;
 
-
 	SkyBox* skyBox_ = nullptr;
 	const float kSkyBoxScale_ = 256.0f;
+	const Math::Vector::Vector3* p_LavaPos_ = nullptr;
 
 	string levelDataName_ = "TitleScene.json";
 
@@ -83,6 +83,7 @@ private:
 	unique_ptr<TitleLight>titleLight_ = nullptr;
 	unique_ptr<Lava>lava_ = nullptr;
 	unique_ptr<TowerManager>towerManager_ = nullptr;
+	unique_ptr<GravityManager>gravityManager_ = nullptr;
 
 	unique_ptr<TitleName>titleName_ = nullptr;
 

@@ -41,6 +41,13 @@ public:
 	/// </summary>
 	void CheckGravity();
 
+#pragma region Get
+
+	Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldGravity>* GetParticleGravityField() { return particleGravityField_.get(); }
+
+#pragma endregion
+
+
 private:
 
 	list<IObjectData*>objectDatas_;
