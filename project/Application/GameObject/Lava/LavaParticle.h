@@ -15,7 +15,7 @@ public:
 	void Update()override;
 
 #pragma region Set
-
+	void SetLavaScale(const Math::Vector::Vector3& scale) { lavaScale_ = scale; }
 	void SetLavaPos(const Math::Vector::Vector3& pos) { p_LavaPos_ = &pos; }
 #pragma endregion
 
@@ -23,7 +23,7 @@ public:
 private:
 
 	const Math::Vector::Vector3* p_LavaPos_ = nullptr;
-
+	Math::Vector::Vector3 lavaScale_ = {};
 
 };
 

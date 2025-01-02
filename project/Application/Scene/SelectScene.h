@@ -2,21 +2,21 @@
 
 #include"Cleyera.h"
 
-
-
-#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"GameFileLoader/SceneFileLoder/SceneFileLoader.h"
 
 
 #include"GameObject/GameCollider/BoxCollisionManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
 
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/Player/PlayerManager.h"
 
-#include"GameObject/Goal/Goal.h"
 #include"GameObject/StageManager/StageManager.h"
+
+#include"GameObject/Goal/Goal.h"
+#include"GameObject/Lava/Lava.h"
 
 #include"GameScene.h"
 
@@ -60,6 +60,7 @@ private:
 	shared_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
+	unique_ptr<Lava>lava_ = nullptr;
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	
 	bool* isGameEnd_ = nullptr;

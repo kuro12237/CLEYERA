@@ -5,15 +5,17 @@
 
 #include"GameObject/GameCollider/BoxCollisionManager.h"
 #include"GameObject/GravityManager/GravityManager.h"
-#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 
 #include"GameObject/Block/BlockManager.h"
 #include"GameObject/BreakBlock/BreakBlockManager.h"
 #include"GameObject/EnemyWalk/EnemyWalkManager.h"
-#include"GameObject/Goal/Goal.h"
 #include"GameObject/Warp/WarpManager.h"
-
 #include"GameObject/Player/PlayerManager.h"
+#include"GameObject/StageCoin/StageCoinManager.h"
+#include"GameObject/GunEnemy/GunEnemyManager.h"
+
+#include"GameObject/Goal/Goal.h"
+#include"GameObject/Lava/Lava.h"
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
@@ -22,9 +24,10 @@
 #include"GameObject/UI/GameSceneUI/GameSceneUI.h"
 
 #include"GameFileLoader/RailLoader/RailLoader.h"
+
+#include"ChangeSceneAnimation/ChangeSceneAnimation.h"
 #include"GameObject/GameSceneAnimation/StartAnimation/StartAnimation.h"
 #include"GameObject/GameSceneAnimation/GameOverAnimation/EndAnimation.h"
-#include"GameObject/StageCoin/StageCoinManager.h"
 
 #include"GameObject/SceneContextData/SceneContextData.h"
 
@@ -32,7 +35,6 @@
 #include"Scene/TitleScene.h"
 
 #include"ISceneContext.h"
-#include"GameObject/GunEnemy/GunEnemyManager.h"
 #include"GameObject/ObjectInterface/IManagerList.h"
 
 /// <summary>
@@ -129,5 +131,6 @@ private:
 	unique_ptr<StartAnimation>startAnimation_ = nullptr;
 	unique_ptr<EndAnimation>endAnimation_ = nullptr;
 
+	unique_ptr<Lava>lava_ = nullptr;
 	bool* isGameEnd_ = nullptr;
 };

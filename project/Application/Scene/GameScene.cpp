@@ -72,6 +72,10 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	goal_ = make_unique<Goal>();
 	goal_->Initialize(ObjectId::kGoalId, 0);
 
+	lava_ = make_unique<Lava>();
+	lava_->Initialize();
+
+
 	gameUi_ = make_unique<GameSceneUI>();
 	gameUi_->Initialize();
 
@@ -137,6 +141,8 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 
 	goal_->Update();
+	lava_->Update();
+
 	gravityManager_->Update();
 
 	Gravitys();
@@ -329,7 +335,6 @@ void GameScene::Collision()
 		{
 			weak_ptr<BreakBlock>it = b;
 			auto obj = it.lock();
-			obj;
 			gameCollisionManager_->ListPushback(obj.get());
 		}
 	}
@@ -391,6 +396,7 @@ void GameScene::Gravitys()
 		}
 	}
 	gravityManager_->PushParticleList(CharacterDeadParticle::GetInstance()->GetParticle());
+	gravityManager_->PushParticleList(lava_->GetLavaParticle()->GetParticle());
 
 	gravityManager_->CheckGravity();
 }
@@ -422,10 +428,10 @@ void GameScene::ParticlesDraw()
 {
 	warpManager_->DebugDraw();
 
-
 	GoalParticle::GetInstance()->Draw();
 	characterDeadParticle_->Draw();
-	//characterMoveParticle_->Draw();
+	lava_->GetLavaParticle()->Draw();
+
 	player_->DrawParticle();
 }
 

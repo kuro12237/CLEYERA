@@ -55,4 +55,6 @@ protected:
 	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
 	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
 
+private:
+	bool isWriteEmitFileParam_ = false;
 };

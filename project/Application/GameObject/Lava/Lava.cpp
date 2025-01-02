@@ -2,12 +2,15 @@
 
 void Lava::Initialize()
 {
-	name_ = "LavaPlane";
+	name_ = "Lava";
 	this->SetObjectParamData();
 
-	lavaParticle_ = make_unique<LavaParticle>();
-	lavaParticle_->Initialize();
+
 	auto data = objectData_.lock();
+
+	lavaParticle_ = make_unique<LavaParticle>();
+	lavaParticle_->SetLavaScale(data->GetWorldTransform().transform.scale);
+	lavaParticle_->Initialize();
 	lavaParticle_->SetLavaPos(data->GetWorldTransform().transform.translate);
 }
 

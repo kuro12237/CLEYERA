@@ -3258,7 +3258,7 @@
         },
         {
             "type": "MESH",
-            "name": "LavaPlane",
+            "name": "Lava",
             "file_name": "LavaPlane",
             "ModelFileType": "obj",
             "DrawType": "Normal",

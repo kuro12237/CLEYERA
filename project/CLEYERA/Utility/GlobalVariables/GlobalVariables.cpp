@@ -364,6 +364,12 @@ void GlobalVariables::Update()
 					{
 						Name = itemName + "translate";
 						WriteVector3(Name, ptr->translate);
+						Name = itemName + "rotate";
+						WriteVector3(Name, ptr->rotate);
+						Name = itemName + "SizeMin";
+						WriteVector3(Name, ptr->sizeMin);
+						Name = itemName + "SizeMax";
+						WriteVector3(Name, ptr->sizeMax);
 						ImGui::TreePop();
 					}
 

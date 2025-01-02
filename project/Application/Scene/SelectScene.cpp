@@ -22,8 +22,6 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
 	characterDeadParticle_->Initialize();
 
-	//characterMoveParticle_ = CharacterMoveParticle::GetInstance();
-	//characterMoveParticle_->Initialize();
 
 	GoalParticle::GetInstance()->Initialize();
 	GoalParticle::GetInstance()->Clear();
@@ -45,6 +43,10 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	blockManager_->Initialize();
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
+	gravityManager_->Initilaize();
+
+	lava_ = make_unique<Lava>();
+	lava_->Initialize();
 
 	light_.radious = 512.0f;
 	light_.position.y = 64.0f;
@@ -52,12 +54,12 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	light_.decay = 0.1f;
 	gameObjectManager_->Update();
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
+
 	SkyBox::GetInstance()->Reset();
 	const float kSkyBoxScale_ = 256.0f;
 	SkyBox::GetInstance()->SetTransform({ {kSkyBoxScale_,kSkyBoxScale_,kSkyBoxScale_} });
 	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
 	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
-	player_->Update();
 
 
 	this->SetFlont2dSpriteDrawFunc(std::bind(&SelectScene::Flont2dSpriteDraw, this));
@@ -105,6 +107,7 @@ void SelectScene::Update(GameManager* Scene)
 	}
 	SkyBox::GetInstance()->Update();
 	GoalParticle::GetInstance()->Update();
+	lava_->Update();
 
 	blockManager_->Update();
 
@@ -139,6 +142,7 @@ void SelectScene::PostProcessDraw()
 	gameObjectManager_->InstancingDraw();
 	gameObjectManager_->NormalDraw();
 
+	lava_->GetLavaParticle()->Draw();
 
 	GoalParticle::GetInstance()->Draw();
 
@@ -184,12 +188,14 @@ void SelectScene::Collision()
 
 void SelectScene::Gravitys()
 {
+	gravityManager_->Update();
 	gravityManager_->ClearList();
 
 	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
 		gravityManager_->PushList(player_->GetPlayerCore());
 	}
+	gravityManager_->PushParticleList(lava_->GetLavaParticle()->GetParticle());
 
 	gravityManager_->CheckGravity();
 }

@@ -33,7 +33,6 @@ void IParticleData::Create(uint32_t modelHandle)
 
 		this->AddJsonItem(name.c_str(), emitter_->GetEmitParam()[i]);
 
-
 	}
 
 }
@@ -57,5 +56,15 @@ void IParticleData::UpdateParamJson()
 
 void IParticleData::ImGuiUpdate()
 {
+	string name = emitter_->GetEmitName() + "writeParam";
+	if (ImGui::Checkbox(name.c_str(), &isWriteEmitFileParam_))
+	{
+		for (size_t i = 0; i < emitter_->GetEmitMax(); i++)
+		{
+			string name = "emitParam" + to_string(i);
+
+			emitter_->GetEmitParam()[i] = this->GetJsonItem<Particle::EmitType::BoxParam>(name);
+		}
+	}
 	emitter_->ImGuiUpdate();
 }
