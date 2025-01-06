@@ -40,7 +40,7 @@ void GraphicsPipelineManager::Initialize()
 	piplines_[PHONG]["Instancing_None"] = Phong_CreatePipline::GetInstance()->CreateInstancingModel(shader.Phong_Normal_InstancingModel);
 	piplines_[PHONG]["Subsurface"] = Phong_CreatePipline::GetInstance()->CreateSubsurfaceModel(shader.Phong_subsurface_Model);
 	piplines_[PHONG]["Skinning_None"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel);
-	piplines_[PHONG]["Skinning_NoneDepthWrite"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel, false);
+	piplines_[PHONG]["Skinning_NoneDepthWrite"] = Phong_CreatePipline::GetInstance()->CreateSkinningModel(shader.skinningPhongModel, true);
 	
 	//PBR
 	piplines_[PBR]["None"] = Phong_CreatePipline::GetInstance()->CreatePhongNormalModel(ShaderManager::Getinstance()->GetShaders(Shader::PBR,"None"));

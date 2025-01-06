@@ -48,6 +48,11 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 
+	//fog設定
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.5f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.5f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 70.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 280.0f;
 }
 
 void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
@@ -66,7 +71,12 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 		Scene->ChangeScene(make_unique<GameClearScene>());
 		return;
 	}
-
+	ImGui::Begin("PostEffect");
+	ImGui::DragFloat("scale::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
+	ImGui::DragFloat("att::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
+	ImGui::DragFloat("start::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+	ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
+	ImGui::End();
 #endif // _USE_IMGUI
 
 	changeSceneAnimation_->Update();
