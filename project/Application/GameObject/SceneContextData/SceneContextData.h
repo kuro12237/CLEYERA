@@ -2,10 +2,11 @@
 #include"Pch.h"
 
 /// <summary>
-/// ゲームシーンからクリアへの移動データ
+/// 繧ｲ繝ｼ繝繧ｷ繝ｼ繝ｳ縺九ｉ繧ｯ繝ｪ繧｢縺ｸ縺ｮ遘ｻ蜍輔ョ繝ｼ繧ｿ
 /// </summary>
 struct SceneContextData
 {
+	int32_t stageNumber = 0;
 	int32_t stageConinsCount = 0;
 
 

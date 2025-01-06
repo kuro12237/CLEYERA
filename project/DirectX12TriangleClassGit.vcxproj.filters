@@ -930,6 +930,7 @@
     <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp">
       <Filter>Project\GameObject\Lava</Filter>
     </ClCompile>
+    <ClCompile Include="Application\GameObject\Particles\WallHitParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1619,6 +1620,7 @@
     <ClInclude Include="Application\GameObject\Lava\LavaParticle.h">
       <Filter>Project\GameObject\Lava</Filter>
     </ClInclude>
+    <ClInclude Include="Application\GameObject\Particles\WallHitParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

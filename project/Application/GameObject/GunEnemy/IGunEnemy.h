@@ -26,8 +26,8 @@ public:
 #pragma region Set
 
 	void SetIsShot(bool f) { isShot_ = f; }
-
 	void SetEnemyNumber(int32_t number) { enemyNumber_ = number; }
+
 #pragma endregion
 
 
@@ -40,9 +40,6 @@ protected:
 	bool isEnd_ = false;
 	bool isShot_ = false;
 
-
-
 	int32_t enemyNumber_ = 0;
-
 	unique_ptr<IGunEnemyState>state_ = nullptr;
 };

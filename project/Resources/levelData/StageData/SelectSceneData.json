@@ -5104,6 +5104,44 @@
         },
         {
             "type": "MESH",
+            "name": "Block.004",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    15.687261581420898
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    15.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
             "name": "Block",
             "file_name": "Block",
             "ModelFileType": "obj",
@@ -5346,9 +5384,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -123.53428649902344,
+                    -21.478567123413086,
                     0.0,
-                    21.0
+                    4.636369705200195
                 ],
                 "rotate": [
                     0.0,
@@ -5383,9 +5421,9 @@
                     "DrawType": "Normal",
                     "transform": {
                         "translate": [
+                            -1.9073486328125e-06,
                             0.0,
-                            0.0,
-                            0.0
+                            -1.9073486328125e-06
                         ],
                         "rotate": [
                             0.0,
@@ -5407,9 +5445,9 @@
                     "DrawType": "Normal",
                     "transform": {
                         "translate": [
+                            -1.9073486328125e-06,
                             0.0,
-                            0.0,
-                            0.0
+                            -1.9073486328125e-06
                         ],
                         "rotate": [
                             0.0,
@@ -5546,9 +5584,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -129.03369140625,
+                    -7.615989685058594,
                     0.0,
-                    12.0
+                    20.792863845825195
                 ],
                 "rotate": [
                     0.0,
@@ -5602,206 +5640,6 @@
                 {
                     "type": "MESH",
                     "name": "GoalPortal.002",
-                    "file_name": "GoalPortal",
-                    "ModelFileType": "obj",
-                    "DrawType": "Normal",
-                    "transform": {
-                        "translate": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "collider": {
-                        "type": "Box",
-                        "center": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "size": [
-                            2.0,
-                            2.0,
-                            2.0
-                        ]
-                    }
-                }
-            ]
-        },
-        {
-            "type": "MESH",
-            "name": "Goal.003",
-            "file_name": "Goal",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    -129.75437927246094,
-                    0.0,
-                    29.87747573852539
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "children": [
-                {
-                    "type": "MESH",
-                    "name": "GoalBack.003",
-                    "file_name": "GoalBack",
-                    "ModelFileType": "obj",
-                    "DrawType": "Normal",
-                    "transform": {
-                        "translate": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            2.0,
-                            2.0,
-                            2.0
-                        ]
-                    }
-                },
-                {
-                    "type": "MESH",
-                    "name": "GoalPortal.003",
-                    "file_name": "GoalPortal",
-                    "ModelFileType": "obj",
-                    "DrawType": "Normal",
-                    "transform": {
-                        "translate": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "collider": {
-                        "type": "Box",
-                        "center": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "size": [
-                            2.0,
-                            2.0,
-                            2.0
-                        ]
-                    }
-                }
-            ]
-        },
-        {
-            "type": "MESH",
-            "name": "Goal.004",
-            "file_name": "Goal",
-            "ModelFileType": "obj",
-            "DrawType": "Normal",
-            "transform": {
-                "translate": [
-                    -143.02426147460938,
-                    0.0,
-                    29.87747573852539
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "children": [
-                {
-                    "type": "MESH",
-                    "name": "GoalBack.004",
-                    "file_name": "GoalBack",
-                    "ModelFileType": "obj",
-                    "DrawType": "Normal",
-                    "transform": {
-                        "translate": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            2.0,
-                            2.0,
-                            2.0
-                        ]
-                    }
-                },
-                {
-                    "type": "MESH",
-                    "name": "GoalPortal.004",
                     "file_name": "GoalPortal",
                     "ModelFileType": "obj",
                     "DrawType": "Normal",

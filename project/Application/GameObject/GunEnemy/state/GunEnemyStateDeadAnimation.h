@@ -5,6 +5,9 @@
 #include"GunEnemyStateShoot.h"
 #include"Utility/RandomGenerator/RandomGenerator.h"
 
+#include"GameObject/Particles/CharacterDeadParticle.h"
+
+
 /// <summary>
 /// 死ぬ状態
 /// </summary>
@@ -35,6 +38,8 @@ private:
 	float flame_ = 0.0f;
 	float flameMax_ = 1.0f;
 	float flameAdd_ = 1.0f / 120.0f;
+	float nextCallTime_ = 0.0f;
+
 	int32_t deltaTime_ = 0;
 	int32_t deltaTimerMax_ = 3;
 };

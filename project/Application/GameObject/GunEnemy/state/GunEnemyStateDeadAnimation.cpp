@@ -28,11 +28,10 @@ void GunEnemyStateDeadAnimation::Update(IGunEnemy* e)
 	coreDesc.edgeDesc.minmax = { -0.1f,0.2f };
 	coreDesc.edgeDesc.mask = flame_;
 
-
-
 	if (flame_ >= flameMax_)
 	{
-		bool& flag = e->GetIsDead();
+		bool& flag = e->GetIsEnd();
 		flag = true;
 	}
+
 }

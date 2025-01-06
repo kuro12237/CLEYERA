@@ -10,7 +10,9 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameScene/");
 
+	SceneContextData data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 	//levelDataの読み込み
+	inputLevelDataFileName_ = "LevelData_" + to_string(data.stageNumber + 1) + ".json";
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
@@ -85,6 +87,14 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	this->SetPostEffectDrawFunc(std::bind(&GameScene::PostProcessDraw, this));
 
 	context_ = make_unique<ISceneContext>();
+
+	wallHitParticle_ = make_unique<WallHitParticle>();
+	wallHitParticle_->Initialize();
+
+	PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
+	PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 1.0f;
+	PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 200.0f;
+	PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 900.0f;
 }
 
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
@@ -92,11 +102,10 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 #ifdef _USE_IMGUI
 
 	ImGui::Begin("PostEffect");
-	ImGui::DragFloat("scale::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_,0.01f);
+	ImGui::DragFloat("scale::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
 	ImGui::DragFloat("att::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
 	ImGui::DragFloat("start::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
 	ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
-
 	ImGui::End();
 
 
@@ -420,6 +429,8 @@ void GameScene::ParticlesUpdate()
 	characterDeadParticle_->Update();
 
 	characterMoveParticle_->Update();
+	wallHitParticle_->Update();
+
 	GoalParticle::GetInstance()->Update();
 
 }
@@ -431,6 +442,8 @@ void GameScene::ParticlesDraw()
 	GoalParticle::GetInstance()->Draw();
 	characterDeadParticle_->Draw();
 	lava_->GetLavaParticle()->Draw();
+
+	wallHitParticle_->Draw();
 
 	player_->DrawParticle();
 }

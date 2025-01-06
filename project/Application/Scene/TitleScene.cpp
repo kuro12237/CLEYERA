@@ -93,7 +93,11 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	this->SetFlont2dSpriteDrawFunc(std::bind(&TitleScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&TitleScene::PostProcessDraw, this));
 
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.0001f;
+	//fog設定
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.1f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 27.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 79.0f;
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)

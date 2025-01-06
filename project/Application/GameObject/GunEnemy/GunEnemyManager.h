@@ -37,18 +37,15 @@ public:
 	/// </summary>
 	void Update()override;
 
-
-
-
 #pragma region Get
-
 	vector<GunEnemyData>GetGunEnemys() { return enemys_; }
-
 #pragma endregion
 
 #pragma region Set
 	void setIsStartFlag(bool flag) { isGameStartFlag_ = flag; }
 	bool GetIsStartFlag() { return isGameStartFlag_; }
+	void SetWallHitParticleFunc(function<void(const Math::Vector::Vector3& pos, const Math::Vector::Vector3& velo)>func);
+
 #pragma endregion
 
 private:

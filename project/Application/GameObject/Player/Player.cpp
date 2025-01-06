@@ -166,6 +166,7 @@ void Player::OnCollision([[maybe_unused]] IObjectData* objData)
 
 	if (c->GetId() == ObjectId::kGoalId)
 	{
+		hitGoalName_ = objData->GetName();
 		if (!IsInState<PlayerStateGoalAnimation>())
 		{
 			AddState<PlayerStateGoalAnimation>();

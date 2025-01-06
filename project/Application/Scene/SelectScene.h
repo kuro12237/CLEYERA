@@ -20,6 +20,9 @@
 
 #include"GameScene.h"
 
+#include"GameObject/SceneContextData/SceneContextData.h"
+
+
 /// <summary>
 /// MapSelect
 /// </summary>
@@ -45,6 +48,10 @@ private:
 
 	bool CheckLoadScene();
 
+	list<IObjectData*>objectDataList_;
+
+	SceneContextData contextData_;
+	unique_ptr<ISceneContext>context_ = nullptr;
 	GameObjectManager* gameObjectManager_;
 	string inputLevelDataFileName_ = "SelectSceneData.json";
 	StageManager* stageManager_ = nullptr;
@@ -53,7 +60,7 @@ private:
 
 	unique_ptr<PlayerManager>player_ = nullptr;
 
-	uint32_t portalMax_ = 5;
+	uint32_t portalMax_ = 3;
 	vector<shared_ptr<Goal>>goals_;
 
 

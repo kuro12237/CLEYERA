@@ -35,7 +35,7 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 		shared_ptr<Goal>goal = make_shared<Goal>();
 
 		goals_[portalIndex] = make_shared<Goal>();
-		goals_[portalIndex]->Initialize(ObjectId::kPortalIds[portalIndex], uint32_t(portalIndex));
+		goals_[portalIndex]->Initialize(ObjectId::kGoalId, uint32_t(portalIndex));
 
 	}
 
@@ -52,8 +52,10 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	light_.position.y = 64.0f;
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
-	gameObjectManager_->Update();
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
+
+	context_ = make_unique<ISceneContext>();
+
 
 	SkyBox::GetInstance()->Reset();
 	const float kSkyBoxScale_ = 256.0f;
@@ -65,11 +67,15 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	this->SetFlont2dSpriteDrawFunc(std::bind(&SelectScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&SelectScene::PostProcessDraw, this));
 
+
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 1.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 50.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 900.0f;
 }
 
 void SelectScene::Update(GameManager* Scene)
 {
-	Scene;
 
 #ifdef _USE_IMGUI
 
@@ -84,11 +90,9 @@ void SelectScene::Update(GameManager* Scene)
 		ImGui::TreePop();
 	}
 
-
 	ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
-
-
 #endif // _USE_IMGUI
+
 	ChangeSceneAnimation::GetInstance()->Update();
 
 	//シーン切替が終わったら
@@ -96,8 +100,6 @@ void SelectScene::Update(GameManager* Scene)
 	{
 		player_->SetStartFlag(true);
 	}
-
-
 
 	player_->Update();
 
@@ -120,14 +122,28 @@ void SelectScene::Update(GameManager* Scene)
 
 	gameObjectManager_->Update();
 
-	if (CheckLoadScene())
+	for (size_t i = 0; i < goals_.size(); i++)
 	{
-		ChangeSceneAnimation::GetInstance()->ChangeStart();
-		player_->SetStartFlag(false);
+		if (goals_[i]->GetIsGoalFlag()) {
+
+			ChangeSceneAnimation::GetInstance()->ChangeStart();
+			player_->SetStartFlag(false);
+		}
 	}
 
 	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
 	{
+		int32_t stageNumber = 0;
+		for (size_t i = 0; i < goals_.size(); i++)
+		{
+			if (goals_[i]->GetIsGoalFlag()) {
+				stageNumber = int32_t(i);
+			}
+		}
+
+		contextData_.stageNumber = stageNumber;
+		context_->SetData(contextData_);
+		Scene->SetMoveSceneContext(move(context_));
 		Scene->ChangeScene(make_unique<GameScene>());
 		return;
 	}
@@ -162,7 +178,7 @@ void SelectScene::Collision()
 	//プレイヤー本体
 	if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>())
 	{
-		gameCollisionManager_->ListPushback( player_->GetPlayerCore());
+		gameCollisionManager_->ListPushback(player_->GetPlayerCore());
 	}
 	//playerの弾
 	for (size_t index = 0; index < player_->GetBullet().size(); index++)

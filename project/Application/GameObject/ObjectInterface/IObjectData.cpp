@@ -9,7 +9,6 @@ IObjectData::IObjectData()
 void IObjectData::CalcGravity(float g)
 {
 	velocity_.y += g;
-
 }
 
 void IObjectData::SetColliderParamData()

@@ -26,8 +26,6 @@ void GunEnemy::Update()
 	if (ImGui::TreeNode("ebullet"))
 	{
 		ImGui::Text("size::%d", int(bullets_.size()));
-
-
 		ImGui::TreePop();
 	}
 #endif // _USE_IMGUI
@@ -81,7 +79,6 @@ void GunEnemy::Update()
 
 void GunEnemy::OnCollision(IObjectData* objData)
 {
-	objData;
 	IsHit_ = true;
 	auto c = objData->GetCollider();
 	{//敵同士の処理

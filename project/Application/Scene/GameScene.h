@@ -36,6 +36,7 @@
 
 #include"ISceneContext.h"
 #include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/Particles/WallHitParticle.h"
 
 /// <summary>
 /// ゲームプレイ
@@ -98,7 +99,7 @@ private:
 
 
 	GameObjectManager* gameObjectManager_;
-	string inputLevelDataFileName_ = "LevelData_1.json";
+	string inputLevelDataFileName_ = "";
 
 	unique_ptr<ISceneContext>context_ = nullptr;
 	SceneContextData contextData_ = {};
@@ -130,6 +131,8 @@ private:
 
 	unique_ptr<StartAnimation>startAnimation_ = nullptr;
 	unique_ptr<EndAnimation>endAnimation_ = nullptr;
+
+	unique_ptr<WallHitParticle>wallHitParticle_ = nullptr;
 
 	unique_ptr<Lava>lava_ = nullptr;
 	bool* isGameEnd_ = nullptr;
