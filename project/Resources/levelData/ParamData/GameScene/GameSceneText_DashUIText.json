@@ -1,0 +1,26 @@
+{
+    "GameSceneText_DashUIText": {
+        "ankerPos": [
+            0.0,
+            0.0
+        ],
+        "fileName": "GameUI/DashUIText.png",
+        "transform": {
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.05999999865889549,
+                "y": 0.05999999865889549,
+                "z": 1.0
+            },
+            "translate": {
+                "x": 78.0,
+                "y": 370.0,
+                "z": 0.0
+            }
+        }
+    }
+}

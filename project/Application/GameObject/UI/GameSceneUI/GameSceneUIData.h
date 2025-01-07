@@ -1,7 +1,7 @@
 #pragma once
 
 /// <summary>
-/// ゲームシーンで使うUI列挙
+/// 繧ｲ繝ｼ繝繧ｷ繝ｼ繝ｳ縺ｧ菴ｿ縺�UI蛻玲嫌
 /// </summary>
 enum class SceneUIEnum
 {
@@ -9,11 +9,12 @@ enum class SceneUIEnum
 	JoyStick_R,
 	Botton_A,
 	Botton_RT,
+	Botton_RB,
 	JoyStick_None,
 };
 
 /// <summary>
-/// joyStickの方向を入手する関数
+/// joyStick縺ｮ譁ｹ蜷代ｒ蜈･謇九☆繧矩未謨ｰ
 /// </summary>
 /// <param name="direction"></param>
 /// <returns></returns>
@@ -34,6 +35,10 @@ inline std::string CheckSceneUIEnumtoString(const SceneUIEnum& ui)
 	if (ui == SceneUIEnum::Botton_RT)
 	{
 		return "RT";
+	}
+	if (ui == SceneUIEnum::Botton_RB)
+	{
+		return "RB";
 	}
 	return "";
 }

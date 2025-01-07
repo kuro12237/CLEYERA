@@ -26,7 +26,9 @@ void ClearSceneUI::Initialize()
 	clearText_->Initialize("UI_ClearText", SceneUIEnum::JoyStick_None);
 	this->PushUiMapData(clearText_);
 
-	//this->KeyCreateEnumNoneUI(bottonBackKey);
+	string textGroupName = "ClearSceneText_";
+	this->KeyCreateEnumNoneUI(textGroupName);
+
 	PushSpriteData();
 
 	uiActiveParticle_ = make_unique<UIActiveParticle>();

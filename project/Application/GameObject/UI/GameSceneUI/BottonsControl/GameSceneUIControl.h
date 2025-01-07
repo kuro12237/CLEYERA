@@ -3,7 +3,7 @@
 #include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>
-/// ui‚Ì§Œä
+/// uiã®åˆ¶å¾¡
 /// </summary>
 class GameSceneUIBottonsControl
 {
@@ -14,6 +14,7 @@ public:
 	bool ControlA();
 
 	bool ControlRT();
+	bool ControlRB();
 
 	bool ControlJoStick();
 

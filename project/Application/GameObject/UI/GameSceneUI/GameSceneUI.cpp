@@ -57,6 +57,14 @@ void GameSceneUI::Initialize()
 	bottonRT->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTActive, bottonAction_.get(), std::placeholders::_1));
 	bottonRT->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTInactive, bottonAction_.get(), std::placeholders::_1));
 	this->PushUiMapData(bottonRT);
+	//RB
+	shared_ptr<BaseBottonUI>bottonRB = make_shared<BaseBottonUI>();
+	bottonRB->Initialize(bottonsGropName, SceneUIEnum::Botton_RB);
+	//関数渡す
+	bottonRB->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlRB, bottonControl_.get()));
+	bottonRB->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRBActive, bottonAction_.get(), std::placeholders::_1));
+	bottonRB->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRBInactive, bottonAction_.get(), std::placeholders::_1));
+	this->PushUiMapData(bottonRB);
 
 	string textGroupName = "GameSceneText_";
 	this->KeyCreateEnumNoneUI(textGroupName);

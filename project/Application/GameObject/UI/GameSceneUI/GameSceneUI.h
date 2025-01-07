@@ -8,10 +8,10 @@
 #include"BottonsControl/GameSceneUIControl.h"
 #include"GameSceneUIData.h"
 #include"BottonsActions/GameSceneJoyStick.h"
-
+#include"BottonsActions/GameSceneBottonRB.h"
 
 /// <summary>
-/// ƒQ[ƒ€’†‚ÌUI
+/// ã‚²ãƒ¼ãƒ ä¸­ã®UI
 /// </summary>
 class GameSceneUI :public ISceneUI
 {
@@ -20,7 +20,7 @@ public:
 	~GameSceneUI() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize()override;
 

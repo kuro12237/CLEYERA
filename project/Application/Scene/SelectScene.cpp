@@ -68,10 +68,10 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	this->SetPostEffectDrawFunc(std::bind(&SelectScene::PostProcessDraw, this));
 
 
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 1.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.2f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.6f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 50.0f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 900.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 215.0f;
 }
 
 void SelectScene::Update(GameManager* Scene)
@@ -79,6 +79,12 @@ void SelectScene::Update(GameManager* Scene)
 
 #ifdef _USE_IMGUI
 
+	ImGui::Begin("PostEffect");
+	ImGui::DragFloat("scale::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
+	ImGui::DragFloat("att::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
+	ImGui::DragFloat("start::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+	ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
+	ImGui::End();
 	gameObjectManager_->ImGuiUpdate();
 	if (ImGui::TreeNode("light"))
 	{

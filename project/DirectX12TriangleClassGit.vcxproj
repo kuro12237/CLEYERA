@@ -107,9 +107,11 @@
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.cpp" />
     <ClCompile Include="Application\GameObject\UI\BaseSceneBottonUI\BaseBottonUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRB.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.cpp" />
     <ClCompile Include="Application\GameObject\UI\ISceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.cpp" />
     <ClCompile Include="Application\GameObject\Warp\Warp.cpp" />
@@ -279,6 +281,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
+    <ClInclude Include="Application\GameObject\Particles\Explosion\Explosion.h" />
     <ClInclude Include="Application\GameObject\Particles\WallHitParticle.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBulletManager.h" />
     <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h" />
@@ -308,10 +311,12 @@
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.h" />
     <ClInclude Include="Application\GameObject\UI\BaseSceneBottonUI\BaseBottonUI.h" />
+    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRB.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\GameSceneUIData.h" />
     <ClInclude Include="Application\GameObject\UI\ISceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.h" />
+    <ClInclude Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\TitleSceneUI\TitleSceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\UIActiveParticle\UIActiveParticle.h" />
     <ClInclude Include="Application\GameObject\Warp\Warp.h" />

@@ -94,10 +94,10 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	this->SetPostEffectDrawFunc(std::bind(&TitleScene::PostProcessDraw, this));
 
 	//fog設定
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.5f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.1f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 27.0f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 79.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 10.0f;
+	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 125.0f;
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)

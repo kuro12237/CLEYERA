@@ -12,7 +12,7 @@ void PlayerCommandHandler::Handler()
 	{
 		commands_.push(make_unique<PlayerMoveCommand>());
 	}
-	if (IsLJoystickActive()&&Input::GetLJoyTHUMB())
+	if (IsLJoystickActive()&& Input::PushBotton(XINPUT_GAMEPAD_RIGHT_SHOULDER))
 	{
 		commands_.push(make_unique<PlayerDashMoveCommand>());
 	}

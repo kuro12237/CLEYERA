@@ -43,6 +43,9 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	coinManager_->CoinsCount(contextData_.stageConinsCount);
 	coinManager_->Initilaize();
 
+	lava_ = make_unique<Lava>();
+	lava_->Initialize();
+
 	light_.radious = 512.0f;
 	light_.position.y = 16.0f;
 	light_.position.z = -16.0f;
@@ -62,6 +65,7 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	gameObjectManager_->ImGuiUpdate();
 	ui_->ImGuiUpdate();
 
+	lava_->Update();
 	coinManager_->ImGuiUpdate();
 	fireParticle_->ImGuiUpdate();
 
@@ -139,12 +143,11 @@ void GameClearScene::PostProcessDraw()
 	coinManager_->ParticleDraw();
 	gameObjectManager_->NormalDraw();
 	fireParticle_->Draw();
+	lava_->GetLavaParticle()->Draw();
 }
 
 void GameClearScene::Flont2dSpriteDraw()
 {
-
-	//ui_->ParticleDraw2d();
 	ui_->Draw2d();
 
 	changeSceneAnimation_->Draw();

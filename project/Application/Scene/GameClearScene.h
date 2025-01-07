@@ -84,6 +84,8 @@ private:
 	unique_ptr<ClearCoinManager>coinManager_ = nullptr;
 	unique_ptr<ClearCamera>camera_ = nullptr;
 
+	unique_ptr<Lava>lava_ = nullptr;
+
 	unique_ptr<FireParticle>fireParticle_ = nullptr;
 
 };

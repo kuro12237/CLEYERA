@@ -24,3 +24,12 @@ bool GameSceneUIBottonsControl::ControlRT()
 	return false;
 }
 
+bool GameSceneUIBottonsControl::ControlRB()
+{
+	if (Input::PushBotton(XINPUT_GAMEPAD_RIGHT_SHOULDER))
+	{
+		return true;
+	}
+	return false;
+}
+
