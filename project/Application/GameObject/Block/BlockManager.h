@@ -4,6 +4,8 @@
 #include"Block.h"
 #include"GameObject/ObjectInterface/IManagerList.h"
 
+#include"Particle/Field/ParticleField.h"
+#include"Particle/Field/StructParticleField.h"
 /// <summary>
 /// ブロック管理
 /// </summary>
@@ -23,6 +25,8 @@ public:
 	/// </summary>
 	void Update()override;
 
+	void Dispach(Engine::Particle::GpuParticle* particle) { boxField_->Dispach(particle); }
+
 #pragma region Get
 	vector<shared_ptr<Block>>GetBlocks() { return blocks_; }
 #pragma endregion
@@ -35,6 +39,7 @@ private:
 
 	bool isInitialize = false;
 
+	unique_ptr<Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>>boxField_ = nullptr;
 
 };
 

@@ -22,7 +22,7 @@ void WarpManager::Initialize()
 
 		if (gameObjectManager_->GetObj3dDatas().find(warpName) != gameObjectManager_->GetObj3dDatas().end())
 		{
-			//‹ô”‚Ì‚Éì¬
+			//å¶æ•°ã®æ™‚ã«ä½œæˆ
 			if (warpCount_ % 2 == 1)
 			{
 
@@ -30,7 +30,7 @@ void WarpManager::Initialize()
 				continue;
 			}
 			auto obj = gameObjectManager_->GetObj3dData(warpName);
-			//ì¬
+			//ä½œæˆ
 			shared_ptr<Warp>warp = make_shared<Warp>();
 			warp->Initlaize(warpCount_);
 			warps_.push_back(move(warp));
@@ -55,8 +55,8 @@ void WarpManager::Update()
 
 void WarpManager::DebugDraw()
 {
-	for (shared_ptr<Warp>& warp : warps_)
+	//for (shared_ptr<Warp>& warp : warps_)
 	{
-		warp->DebugDrawLine();
+		//warp->DebugDrawLine();
 	}
 }

@@ -651,9 +651,6 @@
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp">
       <Filter>Project\GameObject\ObjectInterface</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Particles\Fire\FireParticle.cpp">
-      <Filter>Project\GameObject\Particles</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Lava\Lava.cpp">
       <Filter>Project\GameObject\Lava</Filter>
     </ClCompile>
@@ -933,6 +930,8 @@
     <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.cpp" />
     <ClCompile Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.cpp" />
+    <ClCompile Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\SelectStageNumber\StageNumber.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1301,9 +1300,6 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\ISpriteData.h">
       <Filter>Project\GameObject\ObjectInterface</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Particles\Fire\FireParticle.h">
-      <Filter>Project\GameObject\Particles</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Lava\Lava.h">
       <Filter>Project\GameObject\Lava</Filter>
     </ClInclude>
@@ -1625,6 +1621,8 @@
     <ClInclude Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.h" />
     <ClInclude Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.h" />
+    <ClInclude Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.h" />
+    <ClInclude Include="Application\GameObject\SelectStageNumber\StageNumber.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

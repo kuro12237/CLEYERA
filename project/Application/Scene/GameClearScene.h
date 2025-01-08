@@ -30,13 +30,13 @@
 #include"GameObject/ClearCharacter/ClearCharacter.h"
 #include"GameObject/ClearCamera/ClearCamera.h"
 
-#include"GameObject/Particles/Fire/FireParticle.h"
 
 #include"GameObject/ClearCoinManager/ClearCoinManager.h"
 #include"GameObject/Particles/Explosion/ExplosionParticle.h"
 
+
 /// <summary>
-/// ゲームオーバー
+/// ゲームクリア
 /// </summary>
 class GameClearScene :public IScene
 {
@@ -87,7 +87,6 @@ private:
 	unique_ptr<Lava>lava_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 
-	unique_ptr<FireParticle>fireParticle_ = nullptr;
 	unique_ptr<ExplosionParticle>explosionParticle_ = nullptr;
 
 };

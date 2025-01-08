@@ -8,8 +8,9 @@ void ExplosionParticle::Initialize()
 	this->Create(modelHandle);
 	this->particle_->SetMode(SpriteMode::BlendAdd);
 
-	auto& control = boxEmitter_->GetControlParam()[0];
-	control.useFlag_ = true;
+	auto& control = boxEmitter_->GetControlParam();
+	control[0].useFlag_ = true;
+	control[1].useFlag_ = true;
 
 	this->GetLoadDatas();
 }

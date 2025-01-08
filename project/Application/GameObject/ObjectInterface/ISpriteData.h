@@ -4,7 +4,7 @@
 #include"Utility/GlobalVariables/GlobalVariables.h"
 
 /// <summary>
-/// 2d‚ÌSprite‚Ì’ŠÛƒNƒ‰ƒX
+/// 2dã®Spriteã®æŠ½è±¡ã‚¯ãƒ©ã‚¹
 /// </summary>
 class ISpriteData
 {
@@ -13,39 +13,39 @@ public:
 	virtual ~ISpriteData() {};
 
 	/// <summary>
-	/// ImGuiXV’ŠÛ
+	/// ImGuiæ›´æ–°æŠ½è±¡
 	/// </summary>
-	virtual void ImGuiUpdate() = 0;
+	virtual void ImGuiUpdate() {};
 
 	/// <summary>
-	/// Json˜g‚ğì¬
+	/// Jsonæ ã‚’ä½œæˆ
 	/// </summary>
 	void CreateJsonData(const string& directoryPath = "");
 
 	/// <summary>
-	/// €–Ú‚ğ“o˜^
+	/// é …ç›®ã‚’ç™»éŒ²
 	/// </summary>
 	template<typename T>
 	void AddJsonItem(string itemName, T value) { return globalVariables_->AddItem(name_, itemName, value); }
 
 	/// <summary>
-	/// Jsonƒf[ƒ^‚ğ“üè
+	/// Jsonãƒ‡ãƒ¼ã‚¿ã‚’å…¥æ‰‹
 	/// </summary>
 	template<typename T>
 	T GetJsonItem(string itemName) { return globalVariables_->GetValue<T>(name_, itemName); }
 
 	/// <summary>
-	/// SpriteWorldTransform‚È‚Ç‚Ìƒf[ƒ^‚ğJson“ñì¬
+	/// SpriteWorldTransformãªã©ã®ãƒ‡ãƒ¼ã‚¿ã‚’JsonäºŒä½œæˆ
 	/// </summary>
 	void CreateJsonSpriteData();
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw2d();
 
 	/// <summary>
-	/// ƒAƒ“ƒJ[‚ğŒvZ
+	/// ã‚¢ãƒ³ã‚«ãƒ¼ã‚’è¨ˆç®—
 	/// </summary>
 	void CalcAnkerPos();
 
@@ -69,12 +69,12 @@ private:
 protected:
 
 	/// <summary>
-	/// –{‘Ì‚Ìì¬
+	/// æœ¬ä½“ã®ä½œæˆ
 	/// </summary>
 	void CreateObject();
 
 	/// <summary>
-	/// ƒpƒ‰ƒ[ƒ^[‚ÌXV
+	/// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®æ›´æ–°
 	/// </summary>
 	void UpdateData();
 

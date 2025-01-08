@@ -9,8 +9,11 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameScene/");
-
-	SceneContextData data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+	SceneContextData data;
+	if (state->GetMoveSceneContext())
+	{
+		data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+	}
 	//levelDataの読み込み
 	inputLevelDataFileName_ = "LevelData_" + to_string(data.stageNumber + 1) + ".json";
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
@@ -62,7 +65,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 
 	//2dObj
 	startAnimation_ = make_unique<StartAnimation>();
-	startAnimation_->Initialize();
+	startAnimation_->Initialize(data.stageNumber);
 
 	endAnimation_ = make_unique<EndAnimation>();
 	endAnimation_->Initialize();
@@ -101,6 +104,16 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 {
 #ifdef _USE_IMGUI
 
+	ImGui::Begin("Scene");
+	{
+		if (ImGui::Button("SkipScene"))
+		{
+			Scene->ChangeScene(make_unique<GameClearScene>());
+			return;
+		}
+	}
+	ImGui::End();
+
 	ImGui::Begin("PostEffect");
 	ImGui::DragFloat("scale::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
 	ImGui::DragFloat("att::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
@@ -114,7 +127,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	if (ImGui::Button(bottonTitle.c_str()))
 	{
 		Scene->ChangeScene(make_unique<GameScene>());
-
 		return;
 	}
 #endif // _USE_IMGUI
@@ -426,6 +438,8 @@ void GameScene::ParticlesInitialize()
 
 void GameScene::ParticlesUpdate()
 {
+	characterDeadParticle_->GetParticle()->CallBarrier();
+	blockManager_->Dispach(characterDeadParticle_->GetParticle());
 
 	characterDeadParticle_->Update();
 
@@ -433,6 +447,7 @@ void GameScene::ParticlesUpdate()
 	wallHitParticle_->Update();
 
 	GoalParticle::GetInstance()->Update();
+
 
 }
 

@@ -73,6 +73,14 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	ui_ = make_unique<SelectSceneUI>();
 	ui_->Initialize();
 
+	stageNumbers_.resize(portalMax_);
+
+	for (size_t i = 0; i < portalMax_; i++)
+	{
+		stageNumbers_[i] = make_unique<StageNumber>();
+		stageNumbers_[i]->Initialize(uint32_t(i) + 1);
+
+	}
 }
 
 void SelectScene::Update(GameManager* Scene)
@@ -115,6 +123,12 @@ void SelectScene::Update(GameManager* Scene)
 	{
 		goals_[i]->Update();
 	}
+
+	for (size_t i = 0; i < portalMax_; i++)
+	{
+		stageNumbers_[i]->Update();
+	}
+
 	SkyBox::GetInstance()->Update();
 	GoalParticle::GetInstance()->Update();
 	lava_->Update();

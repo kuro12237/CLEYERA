@@ -24,7 +24,11 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	gameObjectManager_->Update();
 
 	//データ引継ぎ
-	contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+
+	if (state->GetMoveSceneContext())
+	{
+		contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+	}
 
 	ui_ = make_unique<ClearSceneUI>();
 	ui_->SetStageCoin(contextData_.stageConinsCount);
@@ -36,13 +40,12 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	camera_ = make_unique<ClearCamera>();
 	camera_->Initilaize();
 
-	fireParticle_ = make_unique<FireParticle>();
-	fireParticle_->Initialize();
 
 	explosionParticle_ = make_unique<ExplosionParticle>();
 	explosionParticle_->Initialize();
 
 	coinManager_ = make_unique<ClearCoinManager>();
+
 	coinManager_->CoinsCount(contextData_.stageConinsCount);
 	coinManager_->Initilaize();
 
@@ -73,8 +76,7 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 
 	lava_->Update();
 	coinManager_->ImGuiUpdate();
-	fireParticle_->ImGuiUpdate();
-
+	
 	if (ImGui::Button("ResetScene"))
 	{
 
@@ -94,8 +96,6 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 
 	changeSceneAnimation_->Update();
 
-	fireParticle_->Emit();
-	fireParticle_->Update();
 
 	explosionParticle_->Update();
 
@@ -154,7 +154,7 @@ void GameClearScene::PostProcessDraw()
 	gameObjectManager_->InstancingDraw();
 	coinManager_->ParticleDraw();
 	gameObjectManager_->NormalDraw();
-	fireParticle_->Draw();
+
 
 	explosionParticle_->Draw();
 	lava_->GetLavaParticle()->Draw();

@@ -97,6 +97,7 @@
     <ClCompile Include="Application\GameObject\Player\state\PlayerStateWarpMove.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.cpp" />
     <ClCompile Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.cpp" />
+    <ClCompile Include="Application\GameObject\SelectStageNumber\StageNumber.cpp" />
     <ClCompile Include="Application\GameObject\StageCoin\StageCoin.cpp" />
     <ClCompile Include="Application\GameObject\StageCoin\StageCoinManager.cpp" />
     <ClCompile Include="Application\GameObject\StageManager\StageManager.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.cpp" />
     <ClCompile Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonA.cpp" />
     <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRT.cpp" />
     <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonsAction.cpp" />
@@ -157,7 +159,6 @@
     <ClCompile Include="Application\GameObject\Arch\Arch.cpp" />
     <ClCompile Include="Application\GameObject\Bridge\Bridge.cpp" />
     <ClCompile Include="Application\GameObject\Lava\Lava.cpp" />
-    <ClCompile Include="Application\GameObject\Particles\Fire\FireParticle.cpp" />
     <ClCompile Include="Application\GameObject\TitleCamera\TitleCamera.cpp" />
     <ClCompile Include="Application\GameObject\TitleLight\TitleLight.cpp" />
     <ClCompile Include="Application\GameObject\TitleName\TitleName.cpp" />
@@ -302,6 +303,7 @@
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartAnimation.h" />
     <ClInclude Include="Application\GameObject\GameSceneAnimation\StartAnimation\StartCameraMotion\StartCameraMotion.h" />
     <ClInclude Include="Application\GameObject\SceneContextData\SceneContextData.h" />
+    <ClInclude Include="Application\GameObject\SelectStageNumber\StageNumber.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoin.h" />
     <ClInclude Include="Application\GameObject\StageCoin\StageCoinManager.h" />
     <ClInclude Include="Application\GameObject\StageManager\StageManager.h" />
@@ -310,6 +312,7 @@
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsActions\ClearSceneTitleText.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\BottonsControl\ClearSceneUIControl.h" />
     <ClInclude Include="Application\GameObject\UI\ClearSceneUI\ClearSceneUI.h" />
+    <ClInclude Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.h" />
     <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonA.h" />
     <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRT.h" />
     <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonsAction.h" />
@@ -369,7 +372,6 @@
     <ClInclude Include="Application\GameObject\Arch\state\IArchState.h" />
     <ClInclude Include="Application\GameObject\Bridge\Bridge.h" />
     <ClInclude Include="Application\GameObject\Lava\Lava.h" />
-    <ClInclude Include="Application\GameObject\Particles\Fire\FireParticle.h" />
     <ClInclude Include="Application\GameObject\TitleCamera\TitleCamera.h" />
     <ClInclude Include="Application\GameObject\TitleLight\TitleLight.h" />
     <ClInclude Include="Application\GameObject\TitleName\TitleName.h" />

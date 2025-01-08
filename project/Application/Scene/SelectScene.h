@@ -23,6 +23,8 @@
 #include"GameObject/SceneContextData/SceneContextData.h"
 #include"GameObject/UI/SelectSceneUI/SelectSceneUI.h"
 
+#include"GameObject/SelectStageNumber/StageNumber.h"
+
 /// <summary>
 /// MapSelect
 /// </summary>
@@ -71,6 +73,8 @@ private:
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	
 	unique_ptr<SelectSceneUI>ui_ = nullptr;
+
+	vector<unique_ptr<StageNumber>>stageNumbers_;
 
 	bool* isGameEnd_ = nullptr;
 };

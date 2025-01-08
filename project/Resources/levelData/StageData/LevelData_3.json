@@ -108,7 +108,7 @@
             "ModelFileType": "obj",
             "DrawType": "Normal",
             "paramFileNames": {
-                "File 0": "stage_1/WarpGate"
+                "File 0": "stage_1/stage1_3_1"
             },
             "transform": {
                 "translate": [
@@ -1600,7 +1600,7 @@
             "type": "CAMERA",
             "name": "StartCamera",
             "paramFileNames": {
-                "File 0": "Stage_1_0"
+                "File 0": "Stage_1_3"
             },
             "transform": {
                 "translate": [
@@ -3669,6 +3669,102 @@
                     -121.5,
                     -71.0,
                     92.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    45.0,
+                    0.0,
+                    30.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole.001",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    45.0,
+                    0.0,
+                    64.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole.002",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -78.0,
+                    0.0,
+                    58.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole.003",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -122.16475677490234,
+                    -74.2877197265625,
+                    92.07691955566406
                 ],
                 "rotate": [
                     0.0,

@@ -1,12 +1,18 @@
 #include "BlockManager.h"
 
+using namespace Engine::Particle;
 void BlockManager::Initialize()
 {
 	auto& transforms = GameObjectManager::GetInstance()->GetObjInstancingData(name_)->GetTransforms();
 
+
+	boxField_ = make_unique<ParticleField<FieldType::FieldHitBox>>();
+	boxField_->CreateType(name_ + "Particle");
 	for (int i = 0; i < int(transforms.size()); i++)
 	{
 		shared_ptr<Block>block = make_shared<Block>();
+
+		block->SetParticleField(boxField_.get());
 		block->Initialize(name_, i);
 		blocks_.push_back(block);
 	}
@@ -18,4 +24,6 @@ void BlockManager::Update()
 	{
 		b->Update();
 	}
+
+	boxField_->Update();
 }

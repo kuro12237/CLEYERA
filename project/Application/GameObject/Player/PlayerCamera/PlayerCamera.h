@@ -4,7 +4,7 @@
 #include"GameObject/ObjectInterface/IObjectData.h"
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[ƒJƒƒ‰
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚«ãƒ¡ãƒ©
 /// </summary>
 class PlayerCamera:public IObjectData
 {
@@ -13,12 +13,12 @@ public:
 	~PlayerCamera() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
@@ -34,6 +34,9 @@ public:
 
 private:
 
+	void Shake();
+
+
 	Math::Vector::Vector3 CalcOffset(const Engine::Transform::WorldTransform& w ,const Math::Vector::Vector3 v)const;
 
 	GameObjectManager* gameObjInstance_ = nullptr;
@@ -43,5 +46,8 @@ private:
 	Math::Vector::Vector3 interTarget_{};
 	float distructionAngleY_ = 0.0f;
 	float lerp_t = 0.0f;
+
+	Math::Vector::Vector2 cameraShakeRadious_ = { -1.0f,1.0f };
+	bool isShake_ = false;
 };
 

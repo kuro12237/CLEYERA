@@ -28,6 +28,11 @@ void PlayerCamera::Update()
 	cameraWt.transform.translate = Math::Vector::Add(interTarget_, offset);
 }
 
+void PlayerCamera::Shake()
+{
+	
+}
+
 Math::Vector::Vector3 PlayerCamera::CalcOffset(const WorldTransform& w, const Math::Vector::Vector3 v) const
 {
 	Math::Matrix::Matrix4x4 rotateMatrix = Math::Matrix::RotateXYZMatrix(

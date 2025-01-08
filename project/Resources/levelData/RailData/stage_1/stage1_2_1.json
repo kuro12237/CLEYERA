@@ -1,0 +1,89 @@
+{
+    "name": "Rail",
+    "positions": [
+        {
+            "number": 0,
+            "RailGroup": "warpRoot_1",
+            "transform": {
+                "translate": [
+                    45.0,
+                    -62.927513122558594,
+                    30.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.5,
+                    0.5,
+                    0.5
+                ]
+            }
+        },
+        {
+            "number": 1,
+            "RailGroup": "warpRoot_1",
+            "transform": {
+                "translate": [
+                    0.0,
+                    153.74111938476562,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "number": 2,
+            "RailGroup": "warpRoot_1",
+            "transform": {
+                "translate": [
+                    0.0,
+                    0.0,
+                    68.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "number": 3,
+            "RailGroup": "warpRoot_1",
+            "transform": {
+                "translate": [
+                    0.0,
+                    -28.720569610595703,
+                    0.200714111328125
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ]
+}

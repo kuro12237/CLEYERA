@@ -1,28 +1,31 @@
 #pragma once
 #include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ISpriteData.h"
 
-class GameOverText:public IObjectData
+
+class GameOverText:public ISpriteData
 {
 public:
 	GameOverText() {};
 	~GameOverText() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
+	void ImGuiUpdate()override;
 
 private:
 
 	float flame_ = 0.0f;
 	float flameMax_ = 1.0f;
 
-	float scaleMax_ = 4.0f;
+	float scaleMax_ = 0.5f;
 
 };

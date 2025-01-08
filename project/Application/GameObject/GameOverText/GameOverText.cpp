@@ -3,24 +3,36 @@
 void GameOverText::Initialize()
 {
 	name_ = "GameOverText";
-
-	auto& wt = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform();
-	wt.transform.scale = {};
+	this->CreateJsonData("GameOverScene/");
+	this->CreateObject();
+	this->CreateJsonSpriteData();
+	this->CalcAnkerPos();
 
 }
 
+void GameOverText::ImGuiUpdate()
+{
+	string label = name_ + "LoadData";
+	if (ImGui::Button(label.c_str()))
+	{
+		this->UpdateData();
+	}
+
+}
 void GameOverText::Update()
 {
 
+
+	this->CalcAnkerPos();
 	if (flame_<=flameMax_)
 	{
 		flame_ += 1.0f/120.0f;
 	}
 
-	auto& wt = gameObjectManager_->GetObj3dData(name_)->GetWorldTransform();
-
+	
 	float scaleSpeed = Math::Vector::LerpEaseOutSine(0.0f, scaleMax_, flame_);
-	wt.transform.scale = { scaleSpeed,scaleSpeed,scaleSpeed };
+	worldTransform_.transform.scale = { scaleSpeed,scaleSpeed,scaleSpeed };
 
+	worldTransform_.UpdateMatrix();
 
 }

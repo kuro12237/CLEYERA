@@ -10,7 +10,7 @@
 #include"state/StartAnimationStateCamera.h"
 
 /// <summary>
-/// ƒXƒ^[ƒg‰‰o‚Ìƒ‚[ƒVƒ‡ƒ“
+/// ã‚¹ã‚¿ãƒ¼ãƒˆæ¼”å‡ºã®ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³
 /// </summary>
 class StartAnimation:public IGameSceneAnimation
 {
@@ -19,22 +19,22 @@ public:
 	~StartAnimation() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	void Initialize();
+	void Initialize(uint32_t stageNum);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// point‚ğ•`‰æ
+	/// pointã‚’æç”»
 	/// </summary>
 	void DebugLine();
 
 	/// <summary>
-	/// 2dƒXƒvƒ‰ƒCƒg•\¦
+	/// 2dã‚¹ãƒ—ãƒ©ã‚¤ãƒˆè¡¨ç¤º
 	/// </summary>
 	void Draw2d();
 
@@ -50,7 +50,7 @@ public:
 private:
 
 	/// <summary>
-	/// ƒtƒŒ[ƒ€‚ğXV
+	/// ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ›´æ–°
 	/// </summary>
 	void FlameUpdate();
 

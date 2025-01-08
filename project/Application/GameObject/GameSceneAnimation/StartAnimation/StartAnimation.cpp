@@ -6,19 +6,20 @@ using namespace Engine;
 using namespace Engine::Objects;
 using namespace Engine::Manager;
 
-void StartAnimation::Initialize()
+void StartAnimation::Initialize(uint32_t stageNum)
 {
+	stageNum;
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	postEffect_ = PostEffect::GetInstance();
 
 	startCount_ = make_unique<StartCount>();
 	startCount_->Initialize();
-
+	this->cameraName_ = "StartCamera";
+	this->splineMotionsMax_ = 1;
 	railData_.resize(splineMotionsMax_);
 	splineMotions_.resize(splineMotionsMax_);
 
-	this->cameraName_ = "StartCamera";
-	this->splineMotionsMax_ = 1;
+
 	splineSelectIndex_ = 0;
 
 	this->LoadRailData();

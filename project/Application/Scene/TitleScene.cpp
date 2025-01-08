@@ -101,12 +101,22 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.1f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 10.0f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 125.0f;
+
+	
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 {
-
 #ifdef _USE_IMGUI
+
+
+	ImGui::Begin("Scene");
+	if (ImGui::Button("SkipScene"))
+	{
+		Scene->ChangeScene(make_unique<GameScene>());
+		return;
+	}
+	ImGui::End();
 
 	gameObjectManager_->ImGuiUpdate();
 	//fireEmberParticle_->ImGuiUpdate();

@@ -31,8 +31,11 @@ public:
 	/// <param name="c"></param>
 	void OnCollision(IObjectData* objData)override;
 
+	void SetParticleField(Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>* instance) { boxField_ = instance; }
+
 private:
 
 	Engine::Transform::TransformEular initialTransform_{};
+	Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>*boxField_ = nullptr;
 
 };

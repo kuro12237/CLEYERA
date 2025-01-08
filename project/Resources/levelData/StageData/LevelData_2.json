@@ -9,9 +9,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    4.0,
-                    0.0,
-                    10.0
+                    37.19013214111328,
+                    -63.51780319213867,
+                    31.987987518310547
                 ],
                 "rotate": [
                     0.0,
@@ -108,12 +108,12 @@
             "ModelFileType": "obj",
             "DrawType": "Normal",
             "paramFileNames": {
-                "File 0": "stage_1/WarpGate"
+                "File 0": "stage_1/stage1_2_1"
             },
             "transform": {
                 "translate": [
                     45.0,
-                    0.0,
+                    -63.106815338134766,
                     30.0
                 ],
                 "rotate": [
@@ -188,7 +188,7 @@
             "ModelFileType": "obj",
             "DrawType": "Normal",
             "paramFileNames": {
-                "File 0": "stage_1/WarpGate_1"
+                "File 0": "stage_1/stage1_2_2"
             },
             "transform": {
                 "translate": [
@@ -253,9 +253,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    4.169267654418945,
-                    3.3508048057556152,
-                    13.101765632629395
+                    37.359397888183594,
+                    -60.16699981689453,
+                    33.233211517333984
                 ],
                 "rotate": [
                     0.0,
@@ -373,9 +373,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -13.222973823547363,
+                    -61.4559440612793,
                     0.0,
-                    44.06755447387695
+                    36.61708068847656
                 ],
                 "rotate": [
                     0.0,
@@ -411,7 +411,7 @@
                     "transform": {
                         "translate": [
                             0.0,
-                            1.1100001335144043,
+                            1.1100006103515625,
                             0.0048675537109375
                         ],
                         "rotate": [
@@ -715,9 +715,9 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    -10.0,
+                    -79.0,
                     0.0,
-                    8.0
+                    32.0
                 ],
                 "rotate": [
                     0.0,
@@ -727,45 +727,7 @@
                 "scale": [
                     10.0,
                     1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Block.002",
-            "file_name": "Block",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
-            "transform": {
-                "translate": [
-                    -54.0,
-                    0.0,
-                    20.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    34.0,
-                    1.0,
-                    20.0
+                    5.0
                 ]
             },
             "collider": {
@@ -831,7 +793,7 @@
                 "translate": [
                     10.0,
                     0.0,
-                    17.0
+                    7.8303632736206055
                 ],
                 "rotate": [
                     0.0,
@@ -867,9 +829,9 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    -1.0,
+                    -18.964025497436523,
                     0.0,
-                    24.0
+                    13.653057098388672
                 ],
                 "rotate": [
                     0.0,
@@ -943,7 +905,7 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    18.0,
+                    36.0,
                     0.0,
                     57.0
                 ],
@@ -953,7 +915,7 @@
                     0.0
                 ],
                 "scale": [
-                    38.0,
+                    20.0,
                     1.0,
                     1.0
                 ]
@@ -1019,9 +981,9 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    -33.0,
+                    -59.0,
                     0.0,
-                    41.0
+                    23.589895248413086
                 ],
                 "rotate": [
                     0.0,
@@ -1031,7 +993,7 @@
                 "scale": [
                     10.0,
                     1.0,
-                    1.0
+                    8.0
                 ]
             },
             "collider": {
@@ -1057,9 +1019,9 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    -44.77476119995117,
+                    -48.91761016845703,
                     0.0,
-                    59.5101318359375
+                    44.98434066772461
                 ],
                 "rotate": [
                     0.0,
@@ -1095,9 +1057,9 @@
             "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    -15.0,
+                    31.0,
                     0.0,
-                    34.0
+                    42.0
                 ],
                 "rotate": [
                     0.0,
@@ -1107,45 +1069,7 @@
                 "scale": [
                     5.0,
                     1.0,
-                    1.0
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Block.013",
-            "file_name": "Block",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Map",
-            "transform": {
-                "translate": [
-                    -91.0,
-                    0.0,
-                    30.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    3.0,
-                    1.0,
-                    30.0
+                    14.0
                 ]
             },
             "collider": {
@@ -1354,15 +1278,16 @@
         },
         {
             "type": "MESH",
-            "name": "BreakBlockMap",
-            "file_name": "BreakBlock",
+            "name": "Block.002",
+            "file_name": "Block",
             "ModelFileType": "obj",
-            "DrawType": "Normal",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
             "transform": {
                 "translate": [
-                    18.0,
-                    0.0,
-                    43.0
+                    41.0,
+                    -63.743507385253906,
+                    3.0656542778015137
                 ],
                 "rotate": [
                     0.0,
@@ -1370,9 +1295,236 @@
                     0.0
                 ],
                 "scale": [
-                    8.0,
+                    15.0,
+                    1.0,
+                    25.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.013",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -75.343994140625,
+                    0.0,
+                    8.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
                     1.0,
                     8.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.019",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -24.589021682739258,
+                    0.0,
+                    2.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    1.0,
+                    2.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.020",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -40.0,
+                    0.0,
+                    24.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.021",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -34.48173141479492,
+                    0.0,
+                    57.73512268066406
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    7.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Block.022",
+            "file_name": "Block",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "Map",
+            "transform": {
+                "translate": [
+                    -54.119197845458984,
+                    0.0,
+                    63.51290512084961
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    7.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "Box",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "BreakBlockMap",
+            "file_name": "BreakBlock",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -51.0,
+                    0.0,
+                    33.5
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    2.0,
+                    1.0,
+                    2.0
                 ]
             },
             "collider": {
@@ -2098,44 +2250,6 @@
                     7.5,
                     7.5,
                     7.5
-                ]
-            },
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Tower.013",
-            "file_name": "Tower",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "Tower",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -17.0,
-                    -2.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    10.5,
-                    10.5,
-                    10.5
                 ]
             },
             "collider": {
@@ -3109,31 +3223,6 @@
         },
         {
             "type": "MESH",
-            "name": "WarpRootConnector.005",
-            "file_name": "WarpRootConnector",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpConnector",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -16.0,
-                    58.5
-                ],
-                "rotate": [
-                    0.0,
-                    0.0,
-                    -3.187270704074763e-05
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
             "name": "WarpRoot.029",
             "file_name": "WarpRoot",
             "ModelFileType": "obj",
@@ -3234,181 +3323,6 @@
         },
         {
             "type": "MESH",
-            "name": "WarpRoot.033",
-            "file_name": "WarpRoot",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpRoot",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -16.5,
-                    62.5
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "WarpRoot.034",
-            "file_name": "WarpRoot",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpRoot",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -16.5,
-                    67.5
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "WarpRoot.035",
-            "file_name": "WarpRoot",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpRoot",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -16.5,
-                    72.5
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "WarpRoot.036",
-            "file_name": "WarpRoot",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpRoot",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -16.5,
-                    77.5
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "WarpRoot.037",
-            "file_name": "WarpRoot",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpRoot",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -16.5,
-                    82.5
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "WarpRoot.038",
-            "file_name": "WarpRoot",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpRoot",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -16.5,
-                    87.5
-                ],
-                "rotate": [
-                    90.00000762939453,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "WarpRootConnector.006",
-            "file_name": "WarpRootConnector",
-            "ModelFileType": "obj",
-            "DrawType": "Instancing",
-            "InstancingObjName": "WarpConnector",
-            "transform": {
-                "translate": [
-                    -121.5,
-                    -17.0,
-                    91.5
-                ],
-                "rotate": [
-                    -179.99998474121094,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
             "name": "WarpRoot.039",
             "file_name": "WarpRoot",
             "ModelFileType": "obj",
@@ -3417,8 +3331,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -21.0,
-                    92.0
+                    -16.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3442,8 +3356,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -26.0,
-                    92.0
+                    -21.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3467,8 +3381,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -31.0,
-                    92.0
+                    -26.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3492,8 +3406,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -36.0,
-                    92.0
+                    -31.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3517,8 +3431,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -41.0,
-                    92.0
+                    -36.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3542,8 +3456,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -46.0,
-                    92.0
+                    -41.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3567,8 +3481,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -51.0,
-                    92.0
+                    -46.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3592,8 +3506,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -56.0,
-                    92.0
+                    -51.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3617,8 +3531,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -61.0,
-                    92.0
+                    -56.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3642,8 +3556,8 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -66.0,
-                    92.0
+                    -61.540985107421875,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
@@ -3667,13 +3581,459 @@
             "transform": {
                 "translate": [
                     -121.5,
-                    -71.0,
-                    92.0
+                    -66.54098510742188,
+                    57.996212005615234
                 ],
                 "rotate": [
                     0.0,
                     -0.0,
                     0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    45.0,
+                    -63.20078659057617,
+                    30.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole.001",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    45.0,
+                    0.0,
+                    64.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole.002",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -78.0,
+                    0.0,
+                    58.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpHole.003",
+            "file_name": "WarpHole",
+            "ModelFileType": "obj",
+            "DrawType": "Normal",
+            "transform": {
+                "translate": [
+                    -121.4224624633789,
+                    -74.90371704101562,
+                    58.01034164428711
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.033",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    -121.5,
+                    -71.61760711669922,
+                    57.996212005615234
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.034",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -1.962702751159668,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.035",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -6.962702751159668,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.036",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -16.891571044921875,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.037",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -11.891571044921875,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.038",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -21.91839599609375,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.050",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -26.91839599609375,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.051",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -36.84449768066406,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.052",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -31.844497680664062,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.053",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -41.79719161987305,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.054",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -46.79719161987305,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.055",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -56.78788757324219,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.056",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.768959045410156,
+                    -51.78788757324219,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "WarpRoot.057",
+            "file_name": "WarpRoot",
+            "ModelFileType": "obj",
+            "DrawType": "Instancing",
+            "InstancingObjName": "WarpRoot",
+            "transform": {
+                "translate": [
+                    44.65343475341797,
+                    -61.02679443359375,
+                    30.000003814697266
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
                 ],
                 "scale": [
                     1.0,
@@ -3940,9 +4300,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -35.025733947753906,
+                    -60.487247467041016,
                     0.0,
-                    64.286865234375
+                    5.170384883880615
                 ],
                 "rotate": [
                     0.0,
@@ -3964,9 +4324,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    -78.66403198242188,
+                    -70.63290405273438,
                     0.0,
-                    45.930885314941406
+                    57.18120193481445
                 ],
                 "rotate": [
                     0.0,
@@ -3988,7 +4348,7 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
-                    34.594200134277344,
+                    0.622100830078125,
                     0.0,
                     64.286865234375
                 ],
@@ -4012,9 +4372,9 @@
             "DrawType": "Normal",
             "transform": {
                 "translate": [
+                    -34.80347442626953,
                     0.0,
-                    0.0,
-                    30.0
+                    12.346145629882812
                 ],
                 "rotate": [
                     0.0,
@@ -4050,7 +4410,7 @@
                     "transform": {
                         "translate": [
                             0.0,
-                            1.1100000143051147,
+                            1.1100006103515625,
                             0.0048675537109375
                         ],
                         "rotate": [

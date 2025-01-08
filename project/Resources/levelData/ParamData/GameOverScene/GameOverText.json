@@ -1,0 +1,26 @@
+{
+    "GameOverText": {
+        "ankerPos": [
+            0.5,
+            0.5
+        ],
+        "fileName": "GameOver/GameOverText.png",
+        "transform": {
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.10000000149011612,
+                "y": 0.10000000149011612,
+                "z": 1.0
+            },
+            "translate": {
+                "x": 640.0,
+                "y": 180.0,
+                "z": 0.0
+            }
+        }
+    }
+}

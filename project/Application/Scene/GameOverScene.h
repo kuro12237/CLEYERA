@@ -22,10 +22,11 @@
 #include"GameObject/GameOverText/GameOverText.h"
 #include"GameObject/GameOverUI/GameOverUIManager.h"
 
+#include"GameObject/UI/GameOverUI/GameOverSceneUI.h"
+
 #include"TitleScene.h"
 #include"GameScene.h"
 #include"SelectScene.h"
-
 
 /// <summary>
 /// ゲームオーバー
@@ -65,6 +66,8 @@ private:
 
 	Engine::Light::PointLight_param light_{};
 
+
+	unique_ptr<GameOverSceneUI>ui_ = nullptr;
 	unique_ptr<GameOverText>gameOverText_ = nullptr;
 	unique_ptr<GameOverUIManager>gameOverUiManager_ = nullptr;
 	ChangeSceneAnimation* changeSceneAnimation_ = nullptr;
