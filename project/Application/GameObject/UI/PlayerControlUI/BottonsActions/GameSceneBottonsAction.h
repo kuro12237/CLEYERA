@@ -31,8 +31,13 @@ public:
 
 	void JoyStickRInitialize(BaseBottonUI& ui);
 	void JoyStickRUpdate(BaseBottonUI& ui);
-#pragma endregion
 
+	bool BottonA() { return bottonA_->ControlA(); }
+	bool BottonRT() { return bottonRT_->ControlRT(); }
+	bool BottonRB() { return bottonRB_->ControlRB(); }
+
+#pragma endregion
+	
 
 private:
 

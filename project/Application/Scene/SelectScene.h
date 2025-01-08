@@ -21,7 +21,7 @@
 #include"GameScene.h"
 
 #include"GameObject/SceneContextData/SceneContextData.h"
-
+#include"GameObject/UI/SelectSceneUI/SelectSceneUI.h"
 
 /// <summary>
 /// MapSelect
@@ -70,5 +70,7 @@ private:
 	unique_ptr<Lava>lava_ = nullptr;
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	
+	unique_ptr<SelectSceneUI>ui_ = nullptr;
+
 	bool* isGameEnd_ = nullptr;
 };

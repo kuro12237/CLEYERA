@@ -5,7 +5,7 @@ void GunEnemyStateDeadAnimation::Initialize(IGunEnemy* e)
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	gameObjectManager_->SetObjectPipline(make_unique<Phong3dDissolvePipline>(), e->INameable::GetName());
 
-	gameObjectManager_->DeleateParent(e->INameable::GetName());
+	e->GetObjectData().lock()->DeleateParent();
 
 	Math::Vector::Vector3 min = {-0.4f,0.2f,0.0f};
 	Math::Vector::Vector3 max = {0.2f,0.4f,0.0f};
@@ -30,7 +30,7 @@ void GunEnemyStateDeadAnimation::Update(IGunEnemy* e)
 
 	if (flame_ >= flameMax_)
 	{
-		bool& flag = e->GetIsEnd();
+		bool& flag = e->GetIsDead();
 		flag = true;
 	}
 

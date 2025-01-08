@@ -17,3 +17,12 @@ void GameSceneUIBottonRT::Inactive(BaseBottonUI& ui)
 	uint32_t texHandle = TextureManager::LoadPngTexture("GameUI/GameBottonUIRT.png");
 	ui.SetTexHandle(texHandle);
 }
+
+bool GameSceneUIBottonRT::ControlRT()
+{
+	if (Input::PushRShoulder())
+	{
+		return true;
+	}
+	return false;
+}

@@ -1,7 +1,7 @@
 #pragma once
 #include"GameObject/ObjectInterface/ISpriteData.h"
 #include"Input.h"
-#include"../GameSceneUIData.h"
+#include"../GameObject/UI/GameSceneUI/GameSceneUIData.h"
 #include"GameObject//UI/BaseSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>

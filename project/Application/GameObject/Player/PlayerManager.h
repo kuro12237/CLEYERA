@@ -51,6 +51,8 @@ public:
 	/// </summary>
 	void DrawHp();
 
+	void Draw2dBullet();
+
 	void DrawParticle();
 
 #pragma region Get

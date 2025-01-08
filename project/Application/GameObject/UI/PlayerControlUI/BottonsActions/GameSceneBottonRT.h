@@ -2,7 +2,7 @@
 #include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>
-/// BottonRTëÄçÏÉNÉâÉX
+/// BottonRTÊìç‰Ωú„ÇØ„É©„Çπ
 /// </summary>
 class GameSceneUIBottonRT
 {
@@ -14,6 +14,7 @@ public:
 
 	void Inactive(BaseBottonUI& ui);
 
+	bool ControlRT();
 private:
 
 };

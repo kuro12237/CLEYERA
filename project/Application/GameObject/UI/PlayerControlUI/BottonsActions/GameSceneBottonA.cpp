@@ -1,6 +1,16 @@
 #include "GameSceneBottonA.h"
 
 using namespace Engine::Manager;
+using namespace Engine;
+
+bool GameSceneUIBottonA::ControlA()
+{
+	if (Input::PushBotton(XINPUT_GAMEPAD_A))
+	{
+		return true;
+	}
+	return false;
+}
 
 void GameSceneUIBottonA::Active(BaseBottonUI& ui)
 {

@@ -1,15 +1,19 @@
 #pragma once
 
 #include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
+#include"Input.h"
 
 /// <summary>
-/// BottonRT操作クラス
+/// BottonA操作クラス
 /// </summary>
-class GameSceneUIBottonRB
+class GameSceneUIBottonA
 {
 public:
-	GameSceneUIBottonRB() {};
-	~GameSceneUIBottonRB() {};
+	GameSceneUIBottonA() {};
+	~GameSceneUIBottonA() {};
+
+
+	bool ControlA();
 
 	void Active(BaseBottonUI& ui);
 

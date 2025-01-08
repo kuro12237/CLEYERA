@@ -4,11 +4,10 @@
 
 #include"../BaseSceneBottonUI/BaseBottonUI.h"
 
-#include"BottonsActions/GameSceneBottonsAction.h"
-#include"BottonsControl/GameSceneUIControl.h"
+#include"../PlayerControlUI/BottonsActions/GameSceneBottonsAction.h"
 #include"GameSceneUIData.h"
-#include"BottonsActions/GameSceneJoyStick.h"
-#include"BottonsActions/GameSceneBottonRB.h"
+#include"../PlayerControlUI/BottonsActions/GameSceneJoyStick.h"
+#include"../PlayerControlUI/BottonsActions/GameSceneBottonRB.h"
 
 /// <summary>
 /// ゲーム中のUI
@@ -27,5 +26,4 @@ public:
 private:
 
 	unique_ptr<GameSceneUIBottonsAction>bottonAction_ = nullptr;
-	unique_ptr<GameSceneUIBottonsControl>bottonControl_ = nullptr;
 };

@@ -229,6 +229,7 @@ void GameScene::Flont2dSpriteDraw()
 	if (startAnimation_->GetIsGameStartFlag())
 	{
 		player_->Draw2d();
+		player_->Draw2dBullet();
 		player_->DrawHp();
 		gameUi_->Draw2d();
 	}

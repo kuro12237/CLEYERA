@@ -3,18 +3,20 @@
 #include"GameObject/UI/BaseSceneBottonUI/BaseBottonUI.h"
 
 /// <summary>
-/// BottonAëÄçÏÉNÉâÉX
+/// BottonRTÊìç‰Ωú„ÇØ„É©„Çπ
 /// </summary>
-class GameSceneUIBottonA
+class GameSceneUIBottonRB
 {
 public:
-	GameSceneUIBottonA() {};
-	~GameSceneUIBottonA() {};
+	GameSceneUIBottonRB() {};
+	~GameSceneUIBottonRB() {};
 
 	void Active(BaseBottonUI& ui);
 
 	void Inactive(BaseBottonUI& ui);
 
+
+	bool ControlRB();
 private:
 
 };

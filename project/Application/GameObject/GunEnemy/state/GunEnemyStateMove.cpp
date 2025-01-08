@@ -7,7 +7,7 @@ void GunEnemyStateMove::Initialize([[maybe_unused]] IGunEnemy* e)
 
 void GunEnemyStateMove::Update(IGunEnemy* e)
 {
-	auto& transform = GameObjectManager::GetInstance()->GetObj3dData(e->INameable::GetName())->GetWorldTransform().transform;
+	auto& transform = e->GetObjectData().lock()->GetWorldTransform().transform;
 
 	const float degree = 90.0f;
 

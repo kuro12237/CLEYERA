@@ -5,6 +5,7 @@
 
 #include"../BaseSceneBottonUI/BaseBottonUI.h"
 
+#include"../PlayerControlUI/BottonsActions/GameSceneBottonsAction.h"
 
 /// <summary>
 /// ゲーム中のUI
@@ -22,4 +23,5 @@ public:
 
 private:
 
+	unique_ptr<GameSceneUIBottonsAction>bottonAction_ = nullptr;
 };

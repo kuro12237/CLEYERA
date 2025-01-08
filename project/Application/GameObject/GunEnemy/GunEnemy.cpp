@@ -53,9 +53,8 @@ void GunEnemy::Update()
 		state_->Update(this);
 	}
 
-	
 
-	auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+	auto& transform = objectData_.lock()->GetWorldTransform().transform;
 	transform.translate.x += velocity_.x;
 	transform.translate.y += velocity_.y;
 
@@ -127,9 +126,10 @@ void GunEnemy::OnCollision(IObjectData* objData)
 				velocity_.x *= -1.0f;
 			}
 		}
-		auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-		transform.translate.x += c->GetExtrusion().x;
-		transform.translate.y += c->GetExtrusion().y;
+		auto& transform = objectData_.lock()->GetWorldTransform().transform;
+
+		transform.translate.x += collider_->GetExtrusion().x;
+		transform.translate.y += collider_->GetExtrusion().y;
 	}
 
 }

@@ -182,8 +182,11 @@ void PlayerManager::Draw2d()
 void PlayerManager::DrawHp()
 {
 	hp_->Draw2d();
-	bulletManager_->Draw2d();
+}
 
+void PlayerManager::Draw2dBullet()
+{
+	bulletManager_->Draw2d();
 }
 
 void PlayerManager::DrawParticle()

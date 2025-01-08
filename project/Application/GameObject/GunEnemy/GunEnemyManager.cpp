@@ -11,7 +11,6 @@ void GunEnemyManager::Initialize()
 
 	for (uint32_t index = 0; index < uint32_t(gameObjectManager_->GetObj3dDatas().size()); index++)
 	{
-
 		vector<string>names{
 			 name + FormatNumberWithDots(enemyCount_),
 			 leftName + FormatNumberWithDots(enemyCount_),

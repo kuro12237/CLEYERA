@@ -77,7 +77,7 @@ void EnemyWalk::OnCollision([[maybe_unused]] IObjectData* objData)
 		{
 			if (hitDirection == TOP)
 			{
-				velocity_.y = 0.0f;;
+				velocity_.y = 0.0f;
 			}
 			if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
 			{
@@ -88,9 +88,11 @@ void EnemyWalk::OnCollision([[maybe_unused]] IObjectData* objData)
 				velocity_.x *= -1.0f;
 			}
 		}
-		auto& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
-		transform.translate.x += c->GetExtrusion().x;
-		transform.translate.y += c->GetExtrusion().y;
+
+		auto& transform = objectData_.lock()->GetWorldTransform().transform;
+
+		transform.translate.x += collider_->GetExtrusion().x;
+		transform.translate.y += collider_->GetExtrusion().y;
 	}
 }
 

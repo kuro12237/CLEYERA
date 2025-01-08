@@ -18,13 +18,12 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
 
-
 	characterDeadParticle_ = CharacterDeadParticle::GetInstance();
 	characterDeadParticle_->Initialize();
 
-
 	GoalParticle::GetInstance()->Initialize();
 	GoalParticle::GetInstance()->Clear();
+
 	player_ = make_unique<PlayerManager>();
 	player_->Initialize();
 
@@ -33,10 +32,8 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	for (size_t portalIndex = 0; portalIndex < portalMax_; portalIndex++)
 	{
 		shared_ptr<Goal>goal = make_shared<Goal>();
-
 		goals_[portalIndex] = make_shared<Goal>();
 		goals_[portalIndex]->Initialize(ObjectId::kGoalId, uint32_t(portalIndex));
-
 	}
 
 	blockManager_ = make_shared<BlockManager>();
@@ -72,6 +69,10 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.6f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 50.0f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 215.0f;
+
+	ui_ = make_unique<SelectSceneUI>();
+	ui_->Initialize();
+
 }
 
 void SelectScene::Update(GameManager* Scene)
@@ -96,6 +97,7 @@ void SelectScene::Update(GameManager* Scene)
 		ImGui::TreePop();
 	}
 
+	ui_->ImGuiUpdate();
 	ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
 #endif // _USE_IMGUI
 
@@ -127,6 +129,8 @@ void SelectScene::Update(GameManager* Scene)
 	Collision();
 
 	gameObjectManager_->Update();
+
+	ui_->Update();
 
 	for (size_t i = 0; i < goals_.size(); i++)
 	{
@@ -174,8 +178,9 @@ void SelectScene::PostProcessDraw()
 
 void SelectScene::Flont2dSpriteDraw()
 {
-
 	player_->Draw2d();
+	player_->Draw2dBullet();
+	ui_->Draw2d();
 	ChangeSceneAnimation::GetInstance()->Draw();
 }
 

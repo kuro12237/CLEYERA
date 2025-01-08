@@ -7,8 +7,6 @@ void GameSceneUI::Initialize()
 {
 	//アクション,コントロールクラス初期化
 	bottonAction_ = make_unique<GameSceneUIBottonsAction>();
-	bottonControl_ = make_unique<GameSceneUIBottonsControl>();
-
 	bottonAction_->Initialize();
 
 	//背景読み込み
@@ -43,7 +41,7 @@ void GameSceneUI::Initialize()
 	shared_ptr<BaseBottonUI>bottonA = make_shared<BaseBottonUI>();
 	bottonA->Initialize(bottonsGropName, SceneUIEnum::Botton_A);
 	//関数渡す
-	bottonA->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlA, bottonControl_.get()));
+	bottonA->SetControlActionFunction(std::bind(&GameSceneUIBottonsAction::BottonA, bottonAction_.get()));
 	bottonA->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonAActive, bottonAction_.get(), std::placeholders::_1));
 	bottonA->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonAInactive, bottonAction_.get(), std::placeholders::_1));
 
@@ -53,7 +51,7 @@ void GameSceneUI::Initialize()
 	shared_ptr<BaseBottonUI>bottonRT = make_shared<BaseBottonUI>();
 	bottonRT->Initialize(bottonsGropName, SceneUIEnum::Botton_RT);
 	//関数渡す
-	bottonRT->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlRT, bottonControl_.get()));
+	bottonRT->SetControlActionFunction(std::bind(&GameSceneUIBottonsAction::BottonRT, bottonAction_.get()));
 	bottonRT->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTActive, bottonAction_.get(), std::placeholders::_1));
 	bottonRT->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRTInactive, bottonAction_.get(), std::placeholders::_1));
 	this->PushUiMapData(bottonRT);
@@ -61,7 +59,7 @@ void GameSceneUI::Initialize()
 	shared_ptr<BaseBottonUI>bottonRB = make_shared<BaseBottonUI>();
 	bottonRB->Initialize(bottonsGropName, SceneUIEnum::Botton_RB);
 	//関数渡す
-	bottonRB->SetControlActionFunction(std::bind(&GameSceneUIBottonsControl::ControlRB, bottonControl_.get()));
+	bottonRB->SetControlActionFunction(std::bind(&GameSceneUIBottonsAction::BottonRB, bottonAction_.get()));
 	bottonRB->SetIsActionActiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRBActive, bottonAction_.get(), std::placeholders::_1));
 	bottonRB->SetIsActionInactiveFunction(std::bind(&GameSceneUIBottonsAction::BottonRBInactive, bottonAction_.get(), std::placeholders::_1));
 	this->PushUiMapData(bottonRB);

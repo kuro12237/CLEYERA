@@ -729,19 +729,16 @@
     <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp">
       <Filter>Project\GameObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.cpp">
+    <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonA.cpp">
       <Filter>Project\GameObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.cpp">
+    <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRT.cpp">
       <Filter>Project\GameObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.cpp">
+    <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonsAction.cpp">
       <Filter>Project\GameObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.cpp">
-      <Filter>Project\GameObject\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.cpp">
+    <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneJoyStick.cpp">
       <Filter>Project\GameObject\UI</Filter>
     </ClCompile>
     <ClCompile Include="Application\Scene\GameClearScene.cpp">
@@ -931,7 +928,7 @@
       <Filter>Project\GameObject\Lava</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Particles\WallHitParticle.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRB.cpp" />
+    <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRB.cpp" />
     <ClCompile Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.cpp" />
@@ -1384,19 +1381,16 @@
     <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h">
       <Filter>Project\GameObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonA.h">
+    <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonA.h">
       <Filter>Project\GameObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRT.h">
+    <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRT.h">
       <Filter>Project\GameObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonsAction.h">
+    <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonsAction.h">
       <Filter>Project\GameObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneJoyStick.h">
-      <Filter>Project\GameObject\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsControl\GameSceneUIControl.h">
+    <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneJoyStick.h">
       <Filter>Project\GameObject\UI</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\GameSceneUIData.h">
@@ -1625,7 +1619,7 @@
       <Filter>Project\GameObject\Lava</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Particles\WallHitParticle.h" />
-    <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRB.h" />
+    <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRB.h" />
     <ClInclude Include="Application\GameObject\Particles\Explosion\ExplosionParticle.h" />
     <ClInclude Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.h" />

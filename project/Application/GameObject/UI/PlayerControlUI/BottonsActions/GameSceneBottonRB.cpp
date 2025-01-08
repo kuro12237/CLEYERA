@@ -16,3 +16,12 @@ void GameSceneUIBottonRB::Inactive(BaseBottonUI& ui)
 	uint32_t texHandle = TextureManager::LoadPngTexture("GameUI/GameBottonUIRB.png");
 	ui.SetTexHandle(texHandle);
 }
+
+bool GameSceneUIBottonRB::ControlRB()
+{
+	if (Input::PushBotton(XINPUT_GAMEPAD_RIGHT_SHOULDER))
+	{
+		return true;
+	}
+	return false;
+}
