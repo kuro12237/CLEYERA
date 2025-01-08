@@ -80,6 +80,7 @@
     <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp" />
     <ClCompile Include="Application\GameObject\Particles\WallHitParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBulletManager.cpp" />
     <ClCompile Include="Application\GameObject\Player\command\PlayerAimCommand.cpp" />
@@ -281,7 +282,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
-    <ClInclude Include="Application\GameObject\Particles\Explosion\Explosion.h" />
+    <ClInclude Include="Application\GameObject\Particles\Explosion\ExplosionParticle.h" />
     <ClInclude Include="Application\GameObject\Particles\WallHitParticle.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBulletManager.h" />
     <ClInclude Include="Application\GameObject\Player\command\PlayerAimCommand.h" />

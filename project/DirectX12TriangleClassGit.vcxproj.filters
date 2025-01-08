@@ -933,6 +933,7 @@
     <ClCompile Include="Application\GameObject\Particles\WallHitParticle.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRB.cpp" />
     <ClCompile Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1624,7 +1625,7 @@
     </ClInclude>
     <ClInclude Include="Application\GameObject\Particles\WallHitParticle.h" />
     <ClInclude Include="Application\GameObject\UI\GameSceneUI\BottonsActions\GameSceneBottonRB.h" />
-    <ClInclude Include="Application\GameObject\Particles\Explosion\Explosion.h" />
+    <ClInclude Include="Application\GameObject\Particles\Explosion\ExplosionParticle.h" />
     <ClInclude Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.h" />
   </ItemGroup>
   <ItemGroup>

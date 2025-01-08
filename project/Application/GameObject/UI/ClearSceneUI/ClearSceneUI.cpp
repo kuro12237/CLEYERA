@@ -8,9 +8,7 @@ void ClearSceneUI::Initialize()
 	for (size_t i = 0; i < 2; i++)
 	{
 		texts_[i] = make_shared<ClearSceneTitleText>();
-
-		texts_[i]->Initialize("ClearSceneSelectText_"+to_string(i), SceneUIEnum::JoyStick_None);
-
+		texts_[i]->Initialize("ClearSceneSelectText_" + to_string(i), SceneUIEnum::JoyStick_None);
 		this->PushUiMapData(texts_[i]);
 	}
 
@@ -33,8 +31,6 @@ void ClearSceneUI::Initialize()
 
 	uiActiveParticle_ = make_unique<UIActiveParticle>();
 	uiActiveParticle_->Initialize();
-
-
 }
 
 void ClearSceneUI::Update()
@@ -79,7 +75,6 @@ void ClearSceneUI::Update()
 	}
 
 	nextScene_ = static_cast<ClearSceneChangeScene>(counter_);
-
 
 	if (Input::PushBottonPressed(XINPUT_GAMEPAD_A))
 	{

@@ -39,12 +39,18 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	fireParticle_ = make_unique<FireParticle>();
 	fireParticle_->Initialize();
 
+	explosionParticle_ = make_unique<ExplosionParticle>();
+	explosionParticle_->Initialize();
+
 	coinManager_ = make_unique<ClearCoinManager>();
 	coinManager_->CoinsCount(contextData_.stageConinsCount);
 	coinManager_->Initilaize();
 
 	lava_ = make_unique<Lava>();
 	lava_->Initialize();
+
+	gravityManager_ = make_unique<GravityManager>();
+	gravityManager_->Initilaize();
 
 	light_.radious = 512.0f;
 	light_.position.y = 16.0f;
@@ -81,17 +87,17 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	ImGui::DragFloat("start::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
 	ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
 	ImGui::End();
+
+	explosionParticle_->ImGuiUpdate();
+
 #endif // _USE_IMGUI
 
 	changeSceneAnimation_->Update();
 
-
-	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
-	{
-	}
-
 	fireParticle_->Emit();
 	fireParticle_->Update();
+
+	explosionParticle_->Update();
 
 	ui_->Update();
 	
@@ -105,10 +111,16 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 
 
-		ui_->SetIsCearTextUIAnimStart(true);
+	ui_->SetIsCearTextUIAnimStart(true);
 	
 
 	coinManager_->Update();
+
+	gravityManager_->Update();
+	gravityManager_->ClearList();
+
+	gravityManager_->PushParticleList(explosionParticle_->GetParticle());
+	gravityManager_->CheckGravity();
 
 	gameObjectManager_->Update();
 
@@ -143,6 +155,8 @@ void GameClearScene::PostProcessDraw()
 	coinManager_->ParticleDraw();
 	gameObjectManager_->NormalDraw();
 	fireParticle_->Draw();
+
+	explosionParticle_->Draw();
 	lava_->GetLavaParticle()->Draw();
 }
 
