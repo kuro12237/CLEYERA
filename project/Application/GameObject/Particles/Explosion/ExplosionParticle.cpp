@@ -2,22 +2,21 @@
 
 void ExplosionParticle::Initialize()
 {
-	this->name_ = "WallHitParticle";
+	this->name_ = "ExplosionParticle";
 
 	uint32_t modelHandle = Engine::Manager::ModelManager::LoadObjectFile("DfCube");
 	this->Create(modelHandle);
 
-	auto& control = emitter_->GetControlParam()[0];
+	auto& control = boxEmitter_->GetControlParam()[0];
 	control.useFlag_ = true;
 
-	auto& emit = emitter_->GetEmitParam()[0];
-	emit.count = 0;
+	this->GetLoadDatas();
 }
 
 void ExplosionParticle::Update()
 {
-	emitter_->Update();
-	emitter_->Emit(particle_);
+	boxEmitter_->Update();
+	boxEmitter_->Emit(particle_);
 	particle_->CallBarrier();
 	particle_->Update();
 }

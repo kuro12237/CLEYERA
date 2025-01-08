@@ -14,12 +14,16 @@ void StageCoin::Initilaize()
 	collider_->SetMask(CollisionMask::kWarpGateMask);
 	collider_->SetAttribute(CollisionMask::kWarpGateAttribute);
 
-	gameObjectManager_->GetObj3dData(INameable::name_)->GetDesc().colorDesc.color_ = ColorConverter::ColorConversion(0xf0d64dff);
+
 }
 
 void StageCoin::Update()
 {
+	ImGui::Begin(INameable::name_.c_str());
+	ImGui::DragFloat("metalness", &gameObjectManager_->GetObj3dData(INameable::name_)->GetDesc().pbrDesc.metalness_);
+	ImGui::DragFloat("rougmness", &gameObjectManager_->GetObj3dData(INameable::name_)->GetDesc().pbrDesc.roughness_);
 
+	ImGui::End();
 }
 
 void StageCoin::OnCollision(IObjectData* objData)

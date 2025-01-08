@@ -53,7 +53,6 @@ protected:
 	bool isDraw_ = true;
 
 	vector<string>paramFilePaths_;
-
 private:
 
 };

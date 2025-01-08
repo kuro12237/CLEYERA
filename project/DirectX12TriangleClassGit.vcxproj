@@ -126,6 +126,7 @@
     <ClCompile Include="Application\Utility\LerpMotion\LerpMotion.cpp" />
     <ClCompile Include="Application\Utility\SplineMotion\SplineMotion.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\DissolvePipline\DissolvePiplineRasterFrontBackWriteCommand.cpp" />
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.cpp" />
     <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\IObjectData.cpp" />
@@ -332,6 +333,7 @@
     <ClInclude Include="Application\Utility\ObjectNumberPool\ObjectPool.h" />
     <ClInclude Include="Application\Utility\SplineMotion\SplineMotion.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\DissolvePipline\DissolvePiplineRasterFrontBackWriteCommand.h" />
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.h" />
     <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IObjectData.h" />

@@ -92,6 +92,14 @@ void GlobalVariables::SaveFile(const std::string& groupName)
 			nlohmann::json back_json = nlohmann::json::parse(json_as_string);
 			root[groupName][itemName] = back_json.get<TransformEular>();
 		}
+		if (std::holds_alternative<Engine::Particle::EmitType::BoxParam>(item.value)) {
+			Engine::Particle::EmitType::BoxParam value = std::get<Engine::Particle::EmitType::BoxParam>(item.value);
+
+			nlohmann::json json = value;
+			std::string json_as_string = json.dump();
+			nlohmann::json back_json = nlohmann::json::parse(json_as_string);
+			root[groupName][itemName] = back_json.get<Engine::Particle::EmitType::BoxParam>();
+		}
 		if (std::holds_alternative<string>(item.value)) {
 			// string
 			string value = std::get<string>(item.value);
@@ -199,6 +207,10 @@ void GlobalVariables::LoadFile(const string& DirectoryPath, const std::string& g
 		}
 		else if (itItem->is_object() && itItem->size() == 4) {
 			TransformQua value = itItem.value();
+			SetValue(groupName, itemName, value);
+		}
+		else if (itItem->is_object() && itItem->size() == 15) {
+			Engine::Particle::EmitType::BoxParam value = itItem.value();
 			SetValue(groupName, itemName, value);
 		}
 		else if (itItem->is_string())
@@ -362,14 +374,40 @@ void GlobalVariables::Update()
 					string  Name = itemName;
 					if (ImGui::TreeNode(itemName.c_str()))
 					{
+						ImGui::DragInt("count", reinterpret_cast<int*>(&ptr->count), 0, 100);
+						ImGui::Text("Transform");
 						Name = itemName + "translate";
 						WriteVector3(Name, ptr->translate);
 						Name = itemName + "rotate";
 						WriteVector3(Name, ptr->rotate);
+						ImGui::Text("Emitter");
 						Name = itemName + "SizeMin";
 						WriteVector3(Name, ptr->sizeMin);
 						Name = itemName + "SizeMax";
 						WriteVector3(Name, ptr->sizeMax);
+					
+						Name = itemName + "velocityMin";
+						WriteVector3(Name, ptr->velocityMin);
+
+						Name = itemName + "velocityMax";
+						WriteVector3(Name, ptr->velocityMax);
+
+						ImGui::Separator();
+						ImGui::DragFloat4("colorDecayMin", &ptr->colorDecayMin.x, 0.1f);
+						ImGui::DragFloat4("colorDecayMax", &ptr->colorDecayMax.x, 0.1f);
+						ImGui::Separator();
+						Name = itemName + "scaleVelocityMin";
+						WriteVector3(Name, ptr->scaleVelocityMin);
+						ImGui::Separator();
+						Name = itemName + "scaleVelocityMax";
+						WriteVector3(Name, ptr->scaleVelocityMax);
+						ImGui::Separator();
+						Name = itemName + "scaleSizeMin";
+						WriteVector3(Name, ptr->scaleSizeMin);
+						ImGui::Separator();
+						Name = itemName + "scaleSizeMax";
+						WriteVector3(Name, ptr->scaleSizeMax);
+
 						ImGui::TreePop();
 					}
 

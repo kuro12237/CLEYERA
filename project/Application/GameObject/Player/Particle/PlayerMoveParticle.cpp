@@ -8,12 +8,12 @@ void PlayerMoveParticle::Initialize()
 	texHandle_ = Engine::Manager::TextureManager::LoadDDSTexture("GameObject/cloud/cloud.dds");
 	particle_->SetTexhandle(texHandle_);
 
-	auto& emitter = emitter_->GetControlParam()[0];
+	auto& emitter = boxEmitter_->GetControlParam()[0];
 
 	emitter.useFlag_ = true;
 	emitter.frequencyTime = 0.04f;
 
-	auto& param = emitter_->GetEmitParam()[0];
+	auto& param = boxEmitter_->GetEmitParam()[0];
 
 	param.sizeMax = { 0.01f,0.01f, 0.01f };
 	param.sizeMin = { -0.01f,-0.01f, -0.01f };
@@ -32,7 +32,7 @@ void PlayerMoveParticle::Initialize()
 
 void PlayerMoveParticle::Update()
 {
-	auto &param = emitter_->GetEmitParam()[0];
+	auto &param = boxEmitter_->GetEmitParam()[0];
 	if (isEmit_)
 	{
 		param.translate = *playerWorldPos_;
@@ -47,8 +47,8 @@ void PlayerMoveParticle::Update()
 		param.count = 0;
 	}
 
-	emitter_->Emit(particle_);
-	emitter_->Update();
+	boxEmitter_->Emit(particle_);
+	boxEmitter_->Update();
 	particle_->CallBarrier();
 	particle_->Update();
 }

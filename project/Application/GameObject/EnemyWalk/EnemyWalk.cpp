@@ -36,7 +36,7 @@ void EnemyWalk::Update()
 	isHit_ = false;
 }
 
-void EnemyWalk::OnCollision([[maybe_unused]]IObjectData* objData)
+void EnemyWalk::OnCollision([[maybe_unused]] IObjectData* objData)
 {
 	isHit_ = true;
 	auto c = objData->GetCollider();
@@ -81,7 +81,7 @@ void EnemyWalk::OnCollision([[maybe_unused]]IObjectData* objData)
 			}
 			if (hitDirection == BOTTOM && velocity_.y <= 0.0f)
 			{
-				velocity_ .y=0.0f;
+				velocity_.y = 0.0f;
 			}
 			if (hitDirection == LEFT || hitDirection == RIGHT)
 			{

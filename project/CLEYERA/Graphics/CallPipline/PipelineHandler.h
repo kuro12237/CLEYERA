@@ -8,6 +8,8 @@
 #include"commands/Sprite3dAddNoneWritePiplineCommand.h"
 #include"commands/Phong3dPiplineDepthNoneWriteCommand.h"
 #include"commands/DissolvePipline/DissolvePiplineRasterFrontBackWriteCommand.h"
+#include"commands/PBRPiplineCommand.h"
+
 
 /// <summary>
 /// パイプライン切替クラス

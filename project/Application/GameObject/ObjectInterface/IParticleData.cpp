@@ -13,58 +13,56 @@ void IParticleData::Update()
 
 void IParticleData::Draw()
 {
+	boxEmitter_->SpownDraw();
 	particle_->Draw();
 }
 
 void IParticleData::Create(uint32_t modelHandle)
 {
 	particle_ = make_unique<Particle::GpuParticle>();
-	particle_->Create(1, name_,modelHandle);
+	particle_->Create(1, name_, modelHandle);
 
-	emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
-	emitter_->CreateType(particle_);
+	boxEmitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
+	boxEmitter_->CreateType(particle_);
 
-	jsonGropName_ = emitter_->GetEmitName();
+	sphereEmitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::SphereParam>>();
+	sphereEmitter_->CreateType(particle_);
+
+	jsonGropName_ = boxEmitter_->GetEmitName();
 	CreateJsonData();
 
-	for (size_t i = 0; i < emitter_->GetEmitMax(); i++)
+	for (size_t i = 0; i < boxEmitter_->GetEmitMax(); i++)
 	{
 		string name = "emitParam" + to_string(i);
 
-		this->AddJsonItem(name.c_str(), emitter_->GetEmitParam()[i]);
-
+		this->AddJsonItem(name.c_str(), boxEmitter_->GetEmitParam()[i]);
+		boxEmitter_->GetEmitParam()[i] = GetJsonItem<Particle::EmitType::BoxParam>(name);
 	}
 
 }
 
-void IParticleData::CreateParamJson()
+void IParticleData::GetLoadDatas()
 {
-	for (size_t i = 0; i < emitter_->GetEmitMax(); i++)
+	for (size_t i = 0; i < boxEmitter_->GetEmitMax(); i++)
 	{
-
-	}
-
-}
-
-void IParticleData::UpdateParamJson()
-{
-	for (size_t i = 0; i < emitter_->GetEmitMax(); i++)
-	{
-
+		string name = "emitParam" + to_string(i);
+		boxEmitter_->GetEmitParam()[i] = GetJsonItem<Particle::EmitType::BoxParam>(name);
 	}
 }
 
 void IParticleData::ImGuiUpdate()
 {
-	string name = emitter_->GetEmitName() + "writeParam";
-	if (ImGui::Checkbox(name.c_str(), &isWriteEmitFileParam_))
+	string name = boxEmitter_->GetEmitName() + "writeParam";
+	ImGui::Checkbox(name.c_str(), &isWriteEmitFileParam_);
+	if (isWriteEmitFileParam_)
 	{
-		for (size_t i = 0; i < emitter_->GetEmitMax(); i++)
+		for (size_t i = 0; i < boxEmitter_->GetEmitMax(); i++)
 		{
 			string name = "emitParam" + to_string(i);
-
-			emitter_->GetEmitParam()[i] = this->GetJsonItem<Particle::EmitType::BoxParam>(name);
+			boxEmitter_->GetEmitParam()[i] = GetJsonItem<Particle::EmitType::BoxParam>(name);
 		}
 	}
-	emitter_->ImGuiUpdate();
+
+	boxEmitter_->ImGuiUpdate();
+
 }

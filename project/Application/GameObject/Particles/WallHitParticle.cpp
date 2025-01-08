@@ -7,10 +7,10 @@ void WallHitParticle::Initialize()
 	uint32_t modelHandle = Engine::Manager::ModelManager::LoadObjectFile("DfCube");
 	this->Create(modelHandle);
 
-	auto& control = emitter_->GetControlParam()[0];
+	auto& control = boxEmitter_->GetControlParam()[0];
 	control.useFlag_ = true;
 
-	auto& emit = emitter_->GetEmitParam()[0];
+	auto& emit = boxEmitter_->GetEmitParam()[0];
 	emit.count = 0;
 
 	emit.sizeMax = { 0.1f,0.1f,0.1f };
@@ -30,12 +30,12 @@ void WallHitParticle::Update()
 
 void WallHitParticle::Emit(Math::Vector::Vector3 pos, Math::Vector::Vector3 velo)
 {
-	auto& emit = emitter_->GetEmitParam()[0];
+	auto& emit = boxEmitter_->GetEmitParam()[0];
 	emit.count = 10;
 	emit.translate = pos;
 	emit.velocityMax = velo;
 	emit.velocityMin = velo;
-	this->emitter_->Update();
-	this->emitter_->Emit(particle_);
+	this->boxEmitter_->Update();
+	this->boxEmitter_->Emit(particle_);
 	emit.count = 0;
 }
