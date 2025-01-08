@@ -6,6 +6,7 @@ void ExplosionParticle::Initialize()
 
 	uint32_t modelHandle = Engine::Manager::ModelManager::LoadObjectFile("DfCube");
 	this->Create(modelHandle);
+	this->particle_->SetMode(SpriteMode::BlendAdd);
 
 	auto& control = boxEmitter_->GetControlParam()[0];
 	control.useFlag_ = true;

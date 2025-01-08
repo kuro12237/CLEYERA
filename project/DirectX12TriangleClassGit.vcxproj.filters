@@ -932,6 +932,7 @@
     <ClCompile Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.cpp" />
+    <ClCompile Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1623,6 +1624,7 @@
     <ClInclude Include="Application\GameObject\Particles\Explosion\ExplosionParticle.h" />
     <ClInclude Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.h" />
+    <ClInclude Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

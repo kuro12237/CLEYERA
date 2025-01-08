@@ -16,12 +16,6 @@ void LavaParticle::Initialize()
 
 	emit.sizeMax = lavaScale_;
 	emit.sizeMin = Math::Vector::Multiply(lavaScale_, -1.0f);
-	emit.velocityMax = Math::Vector::Vector3(0.0f, 0.01f, 0.0f);
-	emit.velocityMin = Math::Vector::Vector3(0.0f, 0.1f, 0.0f);
-	emit.colorDecayMax = Math::Vector::Vector4(0.0f, 0.05f, 0.1f, 0.01f);
-	emit.colorDecayMin = Math::Vector::Vector4(0.0f, 0.05f, 0.1f, 0.01f);
-	emit.scaleSizeMax = Math::Vector::Vector3(0.1f, 0.0f, 1.0f);
-	emit.scaleSizeMin = Math::Vector::Vector3(0.2f, 0.0f, 1.0f);
 }
 
 void LavaParticle::Update()

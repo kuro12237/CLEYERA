@@ -90,6 +90,9 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	gravityManager_ = make_unique<GravityManager>();
 	gravityManager_->Initilaize();
 
+	titleNameParticle_ = make_unique<TitleNameParticle>();
+	titleNameParticle_->Initialize();
+
 	this->SetFlont2dSpriteDrawFunc(std::bind(&TitleScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&TitleScene::PostProcessDraw, this));
 
@@ -117,6 +120,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
 
 	ImGui::End();
+	titleNameParticle_->ImGuiUpdate();
 #endif // _USE_IMGUI
 
 
@@ -130,7 +134,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 	arch_->Update();
 	lava_->Update();
 
-
+	titleNameParticle_->Update();
 	camera_->Update();
 
 	if (camera_->GetIsBridgeAnimationStart() && !isAnimationStart_)
@@ -190,6 +194,7 @@ void TitleScene::Flont2dSpriteDraw()
 {
 	//fireEmberParticle_->Draw();
 	ui_->Draw2d();
+	titleNameParticle_->Draw();
 
 	changeSceneAnimation_->Draw();
 

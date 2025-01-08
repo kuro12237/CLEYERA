@@ -27,6 +27,7 @@
 
 #include"GameObject/UI/TitleSceneUI/TitleSceneUI.h"
 #include"GameObject/StageManager/StageManager.h"
+#include"GameObject/Particles/TitleNameParticle/TitleNameParticle.h"
 
 /// <summary>
 /// タイトル
@@ -91,7 +92,7 @@ private:
 
 #pragma region Particle
 
-	unique_ptr<FireParticle>fireParticle_ = nullptr;
+	unique_ptr<TitleNameParticle>titleNameParticle_ = nullptr;
 
 #pragma endregion
 

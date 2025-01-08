@@ -8,6 +8,10 @@ void TitleSceneUI::Initialize()
 
 	this->PushUiMapData(bottonRT);
 
+
+	string textGroupName = "TitleScene";
+	this->KeyCreateEnumNoneUI(textGroupName);
+
 	PushSpriteData();
 }
 
