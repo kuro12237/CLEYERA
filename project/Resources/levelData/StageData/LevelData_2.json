@@ -1752,7 +1752,7 @@
             "type": "CAMERA",
             "name": "StartCamera",
             "paramFileNames": {
-                "File 0": "Stage_1_0"
+                "File 0": "Stage_1_2"
             },
             "transform": {
                 "translate": [

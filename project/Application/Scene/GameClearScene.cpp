@@ -1,14 +1,14 @@
 #include "GameClearScene.h"
 using namespace Engine::Manager;
 
-void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
+void GameClearScene::Initialize([[maybe_unused]] GameManager* state)
 {
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameClearScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameClearScene/");
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
-	
+
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
 
@@ -24,11 +24,8 @@ void GameClearScene::Initialize([[maybe_unused]]GameManager* state)
 	gameObjectManager_->Update();
 
 	//データ引継ぎ
+	contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
-	if (state->GetMoveSceneContext())
-	{
-		contextData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
-	}
 
 	ui_ = make_unique<ClearSceneUI>();
 	ui_->SetStageCoin(contextData_.stageConinsCount);
@@ -76,7 +73,7 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 
 	lava_->Update();
 	coinManager_->ImGuiUpdate();
-	
+
 	if (ImGui::Button("ResetScene"))
 	{
 
@@ -100,19 +97,19 @@ void GameClearScene::Update([[maybe_unused]] GameManager* Scene)
 	explosionParticle_->Update();
 
 	ui_->Update();
-	
+
 	character_->Update();
 
 	camera_->Update();
 
-	if (camera_->GetIsComplite()&&!coinManager_->GetIsAnimStart())
+	if (camera_->GetIsComplite() && !coinManager_->GetIsAnimStart())
 	{
 		coinManager_->SetIsAnimStart(true);
 	}
 
 
 	ui_->SetIsCearTextUIAnimStart(true);
-	
+
 
 	coinManager_->Update();
 

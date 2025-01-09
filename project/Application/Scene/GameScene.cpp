@@ -10,10 +10,9 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
 	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameScene/");
 	SceneContextData data;
-	if (state->GetMoveSceneContext())
-	{
-		data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
-	}
+
+	data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+
 	//levelDataの読み込み
 	inputLevelDataFileName_ = "LevelData_" + to_string(data.stageNumber + 1) + ".json";
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
@@ -34,6 +33,9 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	ParticlesInitialize();
 
 	GoalParticle::GetInstance()->Clear();
+	CharacterDeadParticle::GetInstance()->GetEmitter()->AllClear();
+	CharacterDeadParticle::GetInstance()->GetParticle()->Clear();
+
 
 	player_ = make_unique<PlayerManager>();
 	player_->Initialize();
