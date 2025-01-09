@@ -8,7 +8,7 @@ using namespace Engine::Transform;
 void GameSceneUIBottonRT::Active(BaseBottonUI& ui)
 {
 
-	uint32_t texHandle = TextureManager::LoadPngTexture("normalMap.png");
+	uint32_t texHandle = TextureManager::LoadPngTexture("GameUI/GameBottonUIRT_Active.png");
 	ui.SetTexHandle(texHandle);
 }
 

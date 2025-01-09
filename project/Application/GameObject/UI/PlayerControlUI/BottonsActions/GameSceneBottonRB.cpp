@@ -6,7 +6,7 @@ using namespace Engine::Transform;
 
 void GameSceneUIBottonRB::Active(BaseBottonUI& ui)
 {
-	uint32_t texHandle = TextureManager::LoadPngTexture("normalMap.png");
+	uint32_t texHandle = TextureManager::LoadPngTexture("GameUI/GameBottonUIRB_Active.png");
 	ui.SetTexHandle(texHandle);
 }
 

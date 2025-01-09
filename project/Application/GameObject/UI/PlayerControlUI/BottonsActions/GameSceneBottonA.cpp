@@ -15,7 +15,7 @@ bool GameSceneUIBottonA::ControlA()
 void GameSceneUIBottonA::Active(BaseBottonUI& ui)
 {
 
-	uint32_t texHandle = TextureManager::LoadPngTexture("normalMap.png");
+	uint32_t texHandle = TextureManager::LoadPngTexture("GameUI/GameBottonUIA_Active.png");
 	ui.SetTexHandle(texHandle);
 }
 
