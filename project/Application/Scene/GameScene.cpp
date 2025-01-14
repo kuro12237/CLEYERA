@@ -18,16 +18,13 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
 	gameObjectManager_ = GameObjectManager::GetInstance();
+	changeSceneAnmation_ = ChangeSceneAnimation::GetInstance();
+
 	gameObjectManager_->ClearAllData();
 	gameObjectManager_->MoveData(levelData.get());
 	gameObjectManager_->SetAllParents();
 	gameObjectManager_->CameraReset();
 	gameObjectManager_->Update();
-
-	light_.radious = 1024.0f;
-	light_.position.y = 128.0f;
-	light_.position.z = -64.0f;
-	light_.decay = 0.1f;
 
 	//Particle初期化
 	ParticlesInitialize();
@@ -36,34 +33,34 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	CharacterDeadParticle::GetInstance()->GetEmitter()->AllClear();
 	CharacterDeadParticle::GetInstance()->GetParticle()->Clear();
 
-
 	player_ = make_unique<PlayerManager>();
-	player_->Initialize();
 	managerList_.push_back(player_.get());
 
 	enemyWalkManager_ = make_unique<EnemyWalkManager>();
-	enemyWalkManager_->Initialize();
 	managerList_.push_back(enemyWalkManager_.get());
 
 	bulletEnemyManager_ = make_unique<GunEnemyManager>();
-	bulletEnemyManager_->Initialize();
 	managerList_.push_back(bulletEnemyManager_.get());
 
-	blockManager_ = make_shared<BlockManager>();
-	blockManager_->Initialize();
+	blockManager_ = make_unique<BlockManager>();
 	managerList_.push_back(blockManager_.get());
 
 	breakBlockManager_ = make_unique<BreakBlockManager>();
-	breakBlockManager_->Initialize();
 	managerList_.push_back(breakBlockManager_.get());
 
 	warpManager_ = make_unique<WarpManager>();
-	warpManager_->Initialize();
 	managerList_.push_back(warpManager_.get());
 
 	stageCoinManager_ = make_unique<StageCoinManager>();
-	stageCoinManager_->Initialize();
 	managerList_.push_back(stageCoinManager_.get());
+
+	gravityManager_ = make_unique<GravityManager>();
+	managerList_.push_back(gravityManager_.get());
+
+	for (IManagerList* manager : managerList_)
+	{
+		manager->Initialize();
+	}
 
 	//2dObj
 	startAnimation_ = make_unique<StartAnimation>();
@@ -73,8 +70,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	endAnimation_->Initialize();
 
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
-	gravityManager_ = make_unique<GravityManager>();
-	gravityManager_->Initilaize();
 
 	goal_ = make_unique<Goal>();
 	goal_->Initialize(ObjectId::kGoalId, 0);
@@ -82,12 +77,15 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	lava_ = make_unique<Lava>();
 	lava_->Initialize();
 
+	light_ = make_unique<GameLight>();
+	light_->Initialize();
 
 	gameUi_ = make_unique<GameSceneUI>();
 	gameUi_->Initialize();
 
 	//ゲーム終了のつなぐ
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
+
 	this->SetFlont2dSpriteDrawFunc(std::bind(&GameScene::Flont2dSpriteDraw, this));
 	this->SetPostEffectDrawFunc(std::bind(&GameScene::PostProcessDraw, this));
 
@@ -95,6 +93,8 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 
 	wallHitParticle_ = make_unique<WallHitParticle>();
 	wallHitParticle_->Initialize();
+	particleList_.push_back(wallHitParticle_.get());
+
 
 	PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
 	PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 1.0f;
@@ -105,16 +105,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 void GameScene::Update([[maybe_unused]] GameManager* Scene)
 {
 #ifdef _USE_IMGUI
-
-	ImGui::Begin("Scene");
-	{
-		if (ImGui::Button("SkipScene"))
-		{
-			Scene->ChangeScene(make_unique<GameClearScene>());
-			return;
-		}
-	}
-	ImGui::End();
 
 	ImGui::Begin("PostEffect");
 	ImGui::DragFloat("scale::%f", &PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
@@ -133,10 +123,10 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 #endif // _USE_IMGUI
 
-	ChangeSceneAnimation::GetInstance()->Update();
+	changeSceneAnmation_->Update();
 
 	//シーン切替が終わったら
-	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
+	if (changeSceneAnmation_->GetIsComplite())
 	{
 		startAnimation_->SetIsCountStart(true);
 	}
@@ -166,32 +156,38 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	goal_->Update();
 	lava_->Update();
 
-	gravityManager_->Update();
-
 	Gravitys();
-
 	Collision();
 
 	gameObjectManager_->Update();
 
 	ParticlesUpdate();
 
-	LightingManager::AddList(light_);
+	light_->Update();
 
+	CheckChangeScene(Scene);
+
+	gameCollisionManager_->End();
+
+}
+
+void GameScene::CheckChangeScene(GameManager* Scene)
+{
 	//ゴールしたときplayerのアニメーションが終わったら
 	if (*isGameEnd_)
 	{
-		ChangeSceneAnimation::GetInstance()->ChangeStart();
+		changeSceneAnmation_->ChangeStart();
+
 		enemyWalkManager_->SetIsStartFlag(false);
 		player_->SetStartFlag(false);
 	}
-
 
 	///プレイヤーが死んだとき
 	if (player_->GetPlayerCore()->GetIsDeadAnimationComplite())
 	{
 		//シーン切り替え開始
-		ChangeSceneAnimation::GetInstance()->ChangeStart();
+		changeSceneAnmation_->ChangeStart();
+
 		//ビネットが出ていたら消す
 		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
 
@@ -205,16 +201,16 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	//終わりのアニメーションが終わったら
 	if (endAnimation_->GetCompleteFlag())
 	{
-		ChangeSceneAnimation::GetInstance()->ChangeStart();
+		changeSceneAnmation_->ChangeStart();
 	}
 
-	if (player_->GetHp()->GetHp() <= 0 && ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
+	if (player_->GetHp()->GetHp() <= 0 && changeSceneAnmation_->GetIsChangeSceneFlag())
 	{
 		Scene->ChangeScene(make_unique<GameOverScene>());
 		return;
 	}
 	//切替
-	if (ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
+	if (changeSceneAnmation_->GetIsChangeSceneFlag())
 	{
 		contextData_.stageConinsCount = stageCoinManager_->GetCoinsCount();
 		context_->SetData(contextData_);
@@ -224,13 +220,10 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 		return;
 	}
 
-	gameCollisionManager_->End();
-
 }
 
 void GameScene::PostProcessDraw()
 {
-
 	gameObjectManager_->InstancingDraw();
 	gameObjectManager_->NormalDraw();
 
@@ -248,7 +241,7 @@ void GameScene::Flont2dSpriteDraw()
 		gameUi_->Draw2d();
 	}
 	startAnimation_->Draw2d();
-	ChangeSceneAnimation::GetInstance()->Draw();
+	changeSceneAnmation_->Draw();
 }
 
 void GameScene::ImGuiUpdate()
@@ -261,22 +254,12 @@ void GameScene::ImGuiUpdate()
 	{
 		inputLevelDataFileName_ = std::string(buffer);
 	}
-
 	ImGui::Separator();
-	if (ImGui::TreeNode("light"))
-	{
-		ImGui::DragFloat3("t", &light_.position.x);
-		ImGui::DragFloat("radious", &light_.radious);
-		ImGui::DragFloat("decay", &light_.decay);
-		ImGui::DragFloat("intencity", &light_.intencity);
-
-		ImGui::TreePop();
-	}
 
 	player_->ImGuiUpdate();
 
 	ParticleImGuiUpdate();
-	ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
+	changeSceneAnmation_->ImGuiUpdate();
 
 	this->gameUi_->ImGuiUpdate();
 

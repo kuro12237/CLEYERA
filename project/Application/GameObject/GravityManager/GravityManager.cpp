@@ -1,6 +1,6 @@
 #include "GravityManager.h"
 
-void GravityManager::Initilaize()
+void GravityManager::Initialize()
 {
 	particleGravityField_= make_unique<Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldGravity>>();
 	particleGravityField_->CreateType("GameSceneParticleGravity");

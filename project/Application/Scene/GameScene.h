@@ -16,6 +16,7 @@
 
 #include"GameObject/Goal/Goal.h"
 #include"GameObject/Lava/Lava.h"
+#include"GameObject/Light/GameLight.h"
 
 #include"GameObject/Particles/CharacterDeadParticle.h"
 #include"GameObject/Particles/CharacterMoveParticle.h"
@@ -29,12 +30,12 @@
 #include"GameObject/GameSceneAnimation/StartAnimation/StartAnimation.h"
 #include"GameObject/GameSceneAnimation/GameOverAnimation/EndAnimation.h"
 
-#include"GameObject/SceneContextData/SceneContextData.h"
-
 #include"Scene/GameClearScene.h"
 #include"Scene/TitleScene.h"
 
 #include"ISceneContext.h"
+#include"GameObject/SceneContextData/SceneContextData.h"
+
 #include"GameObject/ObjectInterface/IManagerList.h"
 #include"GameObject/Particles/WallHitParticle.h"
 
@@ -59,6 +60,13 @@ public:
 	void Update([[maybe_unused]] GameManager* Scene)override;
 
 private:
+
+	/// <summary>
+	/// 切替処理
+	/// </summary>
+	void CheckChangeScene(GameManager* Scene);
+
+
 	/// <summary>
 	/// ポストエフェクトをかける
 	/// </summary>
@@ -98,42 +106,48 @@ private:
 #pragma endregion
 
 
-	GameObjectManager* gameObjectManager_;
+	GameObjectManager* gameObjectManager_ = nullptr;
+	ChangeSceneAnimation* changeSceneAnmation_ = nullptr;
+
 	string inputLevelDataFileName_ = "";
 
 	unique_ptr<ISceneContext>context_ = nullptr;
 	SceneContextData contextData_ = {};
 
 	list<IManagerList*>managerList_;
-
+	list<IParticleData*>particleList_;
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;
 
-	Engine::Light::PointLight_param light_{};
-
-	unique_ptr<PlayerManager>player_ = nullptr;
-
+	//obj
 	unique_ptr<Goal>goal_ = nullptr;
+	unique_ptr<Lava>lava_ = nullptr;
 
+	//light
+	unique_ptr<GameLight>light_ = nullptr;
+
+	//manager
+	unique_ptr<PlayerManager>player_ = nullptr;
 	unique_ptr<EnemyWalkManager>enemyWalkManager_ = nullptr;
 	unique_ptr<GunEnemyManager>bulletEnemyManager_ = nullptr;
-
 	unique_ptr<WarpManager>warpManager_ = nullptr;
-	shared_ptr<BlockManager>blockManager_ = nullptr;
+	unique_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<BreakBlockManager>breakBlockManager_ = nullptr;
 	unique_ptr<StageCoinManager>stageCoinManager_ = nullptr;
 
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
 
+	//ui
 	unique_ptr<GameSceneUI>gameUi_ = nullptr;
 
+	//anim
 	unique_ptr<StartAnimation>startAnimation_ = nullptr;
 	unique_ptr<EndAnimation>endAnimation_ = nullptr;
 
+	//particle
 	unique_ptr<WallHitParticle>wallHitParticle_ = nullptr;
 
-	unique_ptr<Lava>lava_ = nullptr;
 	bool* isGameEnd_ = nullptr;
 };

@@ -88,7 +88,7 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	stageManager_->Initilaize();
 
 	gravityManager_ = make_unique<GravityManager>();
-	gravityManager_->Initilaize();
+	gravityManager_->Initialize();
 
 	titleNameParticle_ = make_unique<TitleNameParticle>();
 	titleNameParticle_->Initialize();

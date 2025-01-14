@@ -932,6 +932,8 @@
     <ClCompile Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.cpp" />
     <ClCompile Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.cpp" />
     <ClCompile Include="Application\GameObject\SelectStageNumber\StageNumber.cpp" />
+    <ClCompile Include="Application\GameObject\Light\GameLight.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\LightComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1399,7 +1401,7 @@
     <ClInclude Include="Application\Scene\GameClearScene.h">
       <Filter>Project\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\ObjectInterface\IJsonHandler.h">
+    <ClInclude Include="Application\GameObject\ObjectInterface\JsonComponent.h">
       <Filter>Project\GameObject\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h">
@@ -1623,6 +1625,8 @@
     <ClInclude Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.h" />
     <ClInclude Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.h" />
     <ClInclude Include="Application\GameObject\SelectStageNumber\StageNumber.h" />
+    <ClInclude Include="Application\GameObject\Light\GameLight.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\LightComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

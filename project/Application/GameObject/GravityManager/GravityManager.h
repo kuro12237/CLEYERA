@@ -3,11 +3,12 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Particle/Field/ParticleField.h"
+#include"GameObject/ObjectInterface/IManagerList.h"
 
 /// <summary>
 /// 重力処理を
 /// </summary>
-class GravityManager
+class GravityManager :public IManagerList
 {
 public:
 	GravityManager() {};
@@ -16,14 +17,14 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initilaize();
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
-	void PushParticleList(Engine::Particle::GpuParticle* p) { particles_.push_back(p);}
+	void PushParticleList(Engine::Particle::GpuParticle* p) { particles_.push_back(p); }
 
 	/// <summary>
 	/// リスト削除

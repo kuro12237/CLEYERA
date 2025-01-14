@@ -2,12 +2,12 @@
 #include"Pch.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
 
-class IJsonHandler
+class JsonComponent
 {
 public:
 
-	IJsonHandler() { globalVariables_ = GlobalVariables::GetInstance(); }
-	~IJsonHandler() = default;
+	JsonComponent() { globalVariables_ = GlobalVariables::GetInstance(); }
+	~JsonComponent() = default;
 
 	void CreateJsonData() { globalVariables_->CreateGroup(jsonGropName_); }
 

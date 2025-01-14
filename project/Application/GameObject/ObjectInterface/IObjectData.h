@@ -2,7 +2,9 @@
 #include"WorldTransform.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/GlobalVariables/GlobalVariables.h"
-#include"IJsonHandler.h"
+
+#include"JsonComponent.h"
+
 #include"INameable.h"
 #include"../GameCollider/ICollider.h"
 
@@ -12,7 +14,7 @@ class ICollider;
 /// <summary>
 /// オブジェクトの抽象クラス
 /// </summary>
-class IObjectData : public INameable, public IJsonHandler
+class IObjectData : public INameable, public JsonComponent
 {
 public:
 	IObjectData();
@@ -26,6 +28,8 @@ public:
 	void SetColliderParamData();
 
 	virtual void OnCollision([[maybe_unused]]IObjectData* objectData) {};
+
+	void SetObjectParamData();
 
 #pragma region Set
 	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }

@@ -2,10 +2,11 @@
 #include"Particle/GpuParticle.h"
 #include"Particle/Emitter/ParticleEmitter.h"
 #include"Graphics/TextureManager/TextureManager.h"
-#include"GameObject/ObjectInterface/IJsonHandler.h"
+
+#include"JsonComponent.h"
 
 
-class IParticleData :public IJsonHandler
+class IParticleData :public JsonComponent
 {
 public:
 	IParticleData() {};

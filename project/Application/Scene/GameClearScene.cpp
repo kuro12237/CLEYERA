@@ -50,7 +50,7 @@ void GameClearScene::Initialize([[maybe_unused]] GameManager* state)
 	lava_->Initialize();
 
 	gravityManager_ = make_unique<GravityManager>();
-	gravityManager_->Initilaize();
+	gravityManager_->Initialize();
 
 	light_.radious = 512.0f;
 	light_.position.y = 16.0f;

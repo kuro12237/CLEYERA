@@ -40,7 +40,7 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	blockManager_->Initialize();
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 	gravityManager_ = make_unique<GravityManager>();
-	gravityManager_->Initilaize();
+	gravityManager_->Initialize();
 
 	lava_ = make_unique<Lava>();
 	lava_->Initialize();

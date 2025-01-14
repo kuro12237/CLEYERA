@@ -29,7 +29,7 @@
 
 #include"GameObject/ClearCharacter/ClearCharacter.h"
 #include"GameObject/ClearCamera/ClearCamera.h"
-
+#include"GameObject/SceneContextData/SceneContextData.h"
 
 #include"GameObject/ClearCoinManager/ClearCoinManager.h"
 #include"GameObject/Particles/Explosion/ExplosionParticle.h"
@@ -83,7 +83,7 @@ private:
 	unique_ptr<ClearCharacter>character_ = nullptr;
 	unique_ptr<ClearCoinManager>coinManager_ = nullptr;
 	unique_ptr<ClearCamera>camera_ = nullptr;
-
+    
 	unique_ptr<Lava>lava_ = nullptr;
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 

@@ -2,7 +2,7 @@
 #include"WorldTransform.h"
 
 /// <summary>
-/// オブジェクトのpos,rotate,scaleのクラス
+/// 繧ｪ繝悶ず繧ｧ繧ｯ繝医�ｮpos,rotate,scale縺ｮ繧ｯ繝ｩ繧ｹ
 /// </summary>
 class ITransform
 {
@@ -13,7 +13,6 @@ public:
 #pragma region Get
 	Engine::Transform::WorldTransform GetWorldTransform() const { return worldTransform_; }
 #pragma endregion
-
 
 private:
 

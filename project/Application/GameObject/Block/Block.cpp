@@ -6,10 +6,6 @@ void Block::Initialize(string name, uint32_t index)
 	auto& transforms = gameObjectManager_->GetObjInstancingData(name)->GetTransforms()[index];
 
 	//dataをセット
-	//objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
-
-	//コライダーセット
-	//this->SetColliderParamData();
 	collider_->SetOnCollisionFunc(std::bind(&IObjectData::OnCollision, this, std::placeholders::_1));
 
 	collider_->SetObjectData(transforms->GetTransform());
@@ -22,7 +18,6 @@ void Block::Initialize(string name, uint32_t index)
 	boxField_->GetParam(index).translate = transforms->GetTransform().translate;
 	boxField_->GetParam(index).sizeMax = transforms->GetTransform().scale;
 	boxField_->GetParam(index).sizeMin = Math::Vector::Multiply(transforms->GetTransform().scale,-1.0f);
-
 }
 
 void Block::Update()
