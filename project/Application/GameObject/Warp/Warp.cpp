@@ -4,7 +4,8 @@ void Warp::Initlaize(uint32_t index)
 {
 	///ゲートの初期化///番号を入れる
 	warpGate_ = make_shared<WarpGate>();
-	warpGate_->Initialize(index);
+	warpGate_->SetIndex(index);
+	warpGate_->Initialize();
 
 	string railFileName = warpGate_->GetRailDataFilePath();
 

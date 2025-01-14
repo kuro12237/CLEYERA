@@ -64,7 +64,7 @@ private:
 	/// <summary>
 	/// 切替処理
 	/// </summary>
-	void CheckChangeScene(GameManager* Scene);
+	bool CheckChangeScene(GameManager* Scene);
 
 
 	/// <summary>
@@ -105,8 +105,6 @@ private:
 	void ParticleImGuiUpdate();
 #pragma endregion
 
-
-	GameObjectManager* gameObjectManager_ = nullptr;
 	ChangeSceneAnimation* changeSceneAnmation_ = nullptr;
 
 	string inputLevelDataFileName_ = "";
@@ -116,6 +114,7 @@ private:
 
 	list<IManagerList*>managerList_;
 	list<IParticleData*>particleList_;
+	list<IObjectData*>objctDataList_;
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;

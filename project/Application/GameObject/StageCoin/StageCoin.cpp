@@ -1,6 +1,6 @@
 #include "StageCoin.h"
 
-void StageCoin::Initilaize()
+void StageCoin::Initialize()
 {
 	INameable::name_ = "StageCoin" + FormatNumberWithDots(coinNumber_);
 

@@ -20,12 +20,12 @@ public:
 	/// </summary>
 	/// <param name="グループ名"></param>
 	/// <param name="番号"></param>
-	void Initialize(string name, uint32_t index);
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 	/// <summary>
 	/// 当たった処理
@@ -38,6 +38,11 @@ public:
 
 	int32_t GetInstancingIndex() { return instancingIndex_; }
 	bool GetIsDead() { return isDead_; }
+#pragma endregion
+
+#pragma region Set
+	void SetInstanceINdex(uint32_t index) { instancingIndex_ = index; }
+	void SetName(string name) { name_ = name; }
 #pragma endregion
 
 

@@ -102,7 +102,6 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 10.0f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 125.0f;
 
-	
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)

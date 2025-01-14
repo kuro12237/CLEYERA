@@ -1,9 +1,8 @@
 #include "ClearCoin.h"
 
-void ClearCoin::Initialize(const CoinUse& use)
+void ClearCoin::Initialize()
 {
 	cameraPos_ = &gameObjectManager_->GetCameraData("Camera")->GetWorldTransform().transform.translate;
-	isUse_ = use;
 }
 
 void ClearCoin::Update()

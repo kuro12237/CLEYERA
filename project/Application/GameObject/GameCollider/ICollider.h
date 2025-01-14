@@ -57,6 +57,7 @@ public:
 	/// <param name="h"></param>
 	void PushBackHitDirection(HItDirection h) { hitDirection_.push_back(h); }
 
+
 #pragma region  Get
 	vector<HItDirection>GetHItDirection() { return hitDirection_; }
 	Engine::Transform::TransformEular GetpTransform() { return *pTransform_; }

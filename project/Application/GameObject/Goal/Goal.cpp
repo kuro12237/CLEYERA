@@ -1,18 +1,17 @@
 #include "Goal.h"
 
-void Goal::Initialize(uint32_t id, uint32_t index)
+void Goal::Initialize()
 {
 	gameObjIncetance_ = GameObjectManager::GetInstance();
 
-	index_ = index;
-	string indexCount = to_string(index);
+	string indexCount = to_string(index_);
 
 	string GoalCountName = "";
 	if (indexCount == "0")
 	{
 	}
 	else {
-		GoalCountName = "." + string(3 - to_string(index).length(), '0') + to_string(index);
+		GoalCountName = "." + string(3 - to_string(index_).length(), '0') + to_string(index_);
 	}
 
 	INameable::name_ = "Goal" + GoalCountName;
@@ -25,7 +24,6 @@ void Goal::Initialize(uint32_t id, uint32_t index)
 	//コライダーセット
 	this->SetColliderParamData();
 	collider_->SetAABB(aabb);
-	collider_->SetId(id);
 	collider_->SetIsExtrusion(false);
 	collider_->SetMask(CollisionMask::kPortalMask);
 	collider_->SetAttribute(CollisionMask::kPortalAttribute);

@@ -25,12 +25,14 @@ void BreakBlockManager::Initialize()
 		{
 			auto obj = gameObjectManager_->GetObj3dData(enemyName);
 
-			shared_ptr<BreakBlock>enemyWalk = nullptr;
-			enemyWalk = make_shared<BreakBlock>();
-			enemyWalk->INameable::SetName(enemyName);
-			enemyWalk->Initialize(enemyName,enemyCount);
+			shared_ptr<BreakBlock>breakBlock = nullptr;
+			breakBlock = make_shared<BreakBlock>();
+			breakBlock->INameable::SetName(enemyName);
+			breakBlock->SetName(enemyName);
+			breakBlock->SetInstanceINdex(enemyCount);
+			breakBlock->Initialize();
 
-			blocks_.push_back(enemyWalk);
+			blocks_.push_back(breakBlock);
 			enemyCount++;
 		}
 		else

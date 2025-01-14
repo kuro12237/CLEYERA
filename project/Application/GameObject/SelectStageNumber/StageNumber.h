@@ -11,12 +11,13 @@ public:
 	StageNumber() {};
 	~StageNumber() {};
 
-	void Initialize(uint32_t num);
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
+	void SetNum(uint32_t num) { number_ = num; }
 
 private:
-
+	uint32_t number_ = 0;
 };
 

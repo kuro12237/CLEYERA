@@ -224,7 +224,8 @@ void PlayerManager::PushBullet(const Math::Vector::Vector3& pos)
 		string name_num = name + to_string(newBulletIndex);
 		data->SetObjName(name_num);
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
-		b->Initialize(name_num);
+		b->SetName(name_num);
+		b->Initialize();
 		bullets_[newBulletIndex] = move(b);
 		deadBulletIndex_.pop();
 	}
@@ -235,7 +236,8 @@ void PlayerManager::PushBullet(const Math::Vector::Vector3& pos)
 		string name_num = name + to_string(size);
 		data->SetObjName(name_num);
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
-		b->Initialize(name_num);
+		b->SetName(name_num);
+		b->Initialize();
 		bullets_.push_back(move(b));
 	}
 }

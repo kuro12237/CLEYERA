@@ -147,12 +147,14 @@ void ClearCoinManager::CreateCoinGameObject(const Math::Vector::Vector3& pos, in
 
 	if (index <= coinCount_ - 1)
 	{
-		coin->Initialize(CoinUse::Active);
+		coin->SetCoinUse(CoinUse::Active);
 	}
 	else
 	{
-		coin->Initialize(CoinUse::Inactive);
+		coin->SetCoinUse(CoinUse::Inactive);
 	}
+
+	coin->Initialize();
 	pos;
 	clearCoins_[index] = move(coin);
 }

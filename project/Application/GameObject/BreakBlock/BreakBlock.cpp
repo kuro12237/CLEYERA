@@ -1,8 +1,7 @@
 #include "BreakBlock.h"
 
-void BreakBlock::Initialize(string name, uint32_t index)
+void BreakBlock::Initialize()
 {
-	INameable::name_ = name;
 
 	//dataをセット
 	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
@@ -15,7 +14,6 @@ void BreakBlock::Initialize(string name, uint32_t index)
 	collider_->SetAttribute(CollisionMask::kBlockMask);
 
 
-	instancingIndex_ = index;
 	hp_ = make_unique<BreakBlockHp>();
 	const int32_t hpMax = 2;
 	hp_->Initialize(hpMax);

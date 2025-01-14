@@ -1,14 +1,16 @@
 #pragma once
 #include"Pch.h"
+#include"Cleyera.h"
+#include"Utility/ObjectManager/GameObjectManager.h"
 
 class GameManager;
 /// <summary>
-/// シーンインターフェース
+/// 繧ｷ繝ｼ繝ｳ繧､繝ｳ繧ｿ繝ｼ繝輔ぉ繝ｼ繧ｹ
 /// </summary>
 class IScene
 {
 public:
-	IScene() {};
+	IScene() { postEffect_ = Engine::PostEffect::GetInstance(), gameObjectManager_ = GameObjectManager::GetInstance(); globalVariables_ = GlobalVariables::GetInstance(); };
 	virtual ~IScene() {};
 
 	virtual void Initialize(GameManager* state) = 0;
@@ -17,8 +19,6 @@ public:
 	void Back2dSpriteFuncDraw();
 	void Object3dFuncDraw();
 	void Flont2dSpriteFuncDraw();
-
-
 
 #pragma region Get
 
@@ -30,6 +30,12 @@ public:
 	void SetBack2dSpriteDrawFunc(std::function<void()> f) { back2dSpriteDrawFunc_ = f; }
 	void SetObject3dDrawFunc(std::function<void()> f) { object3dDrawFunc_ = f; }
 	void SetFlont2dSpriteDrawFunc(std::function<void()> f) { flont2dSpriteDrawFunc_ = f; }
+
+protected:
+
+	Engine::PostEffect* postEffect_ = nullptr;
+	GameObjectManager* gameObjectManager_ = nullptr;
+	GlobalVariables* globalVariables_ = nullptr;
 
 private:
 	std::function<void()>postEffectDrawFunc_ = nullptr;

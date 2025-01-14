@@ -20,7 +20,7 @@ void StageCoinManager::Initialize()
 	{
 		stageCoins_[i] = make_shared<StageCoin>();
 		stageCoins_[i]->SetCoinNumber(i);
-		stageCoins_[i]->Initilaize();
+		stageCoins_[i]->Initialize();
 	}
 	uint32_t animationHandle = AnimationManager::GetInstance()->LoadAnimation("StageCoin");
 	animationData_ = AnimationManager::GetInstance()->GetData(animationHandle);

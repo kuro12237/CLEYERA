@@ -31,6 +31,11 @@ public:
 
 	void SetObjectParamData();
 
+	virtual void Initialize() = 0;
+
+	virtual void Update() = 0;
+
+
 #pragma region Set
 	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
 #pragma endregion

@@ -1,11 +1,10 @@
 #include "PlayerBullet.h"
 
-void PlayerBullet::Initialize(string number)
+void PlayerBullet::Initialize()
 {
 	state_ = make_unique<PlayerBulletStateNone>();
 	state_->Initialize(this);
 
-	INameable::name_ = number;
 	//dataをセット
 	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
 

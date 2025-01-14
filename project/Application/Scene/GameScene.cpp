@@ -7,17 +7,17 @@ using namespace Engine::Transform;
 
 void GameScene::Initialize([[maybe_unused]] GameManager* state)
 {
-	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
-	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameScene/");
+	//paramfilePath変更
+	globalVariables_->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
+	globalVariables_->LoadFiles("Resources/LevelData/ParamData/GameScene/");
+	//selectからのデータ
 	SceneContextData data;
-
 	data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
 	//levelDataの読み込み
 	inputLevelDataFileName_ = "LevelData_" + to_string(data.stageNumber + 1) + ".json";
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
-	gameObjectManager_ = GameObjectManager::GetInstance();
 	changeSceneAnmation_ = ChangeSceneAnimation::GetInstance();
 
 	gameObjectManager_->ClearAllData();
@@ -72,10 +72,19 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
 	goal_ = make_unique<Goal>();
-	goal_->Initialize(ObjectId::kGoalId, 0);
+	goal_->SetGoalIndex(0);
+	goal_->SetGoalObjectId(ObjectId::kGoalId);
+
+	objctDataList_.push_back(goal_.get());
 
 	lava_ = make_unique<Lava>();
 	lava_->Initialize();
+	objctDataList_.push_back(lava_.get());
+
+	for (IObjectData* data : objctDataList_)
+	{
+		data->Initialize();
+	}
 
 	light_ = make_unique<GameLight>();
 	light_->Initialize();
@@ -165,13 +174,15 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	light_->Update();
 
-	CheckChangeScene(Scene);
+	if (CheckChangeScene(Scene)) {
+		return;
+	}
 
 	gameCollisionManager_->End();
 
 }
 
-void GameScene::CheckChangeScene(GameManager* Scene)
+bool GameScene::CheckChangeScene(GameManager* Scene)
 {
 	//ゴールしたときplayerのアニメーションが終わったら
 	if (*isGameEnd_)
@@ -207,7 +218,7 @@ void GameScene::CheckChangeScene(GameManager* Scene)
 	if (player_->GetHp()->GetHp() <= 0 && changeSceneAnmation_->GetIsChangeSceneFlag())
 	{
 		Scene->ChangeScene(make_unique<GameOverScene>());
-		return;
+		return true;
 	}
 	//切替
 	if (changeSceneAnmation_->GetIsChangeSceneFlag())
@@ -217,9 +228,9 @@ void GameScene::CheckChangeScene(GameManager* Scene)
 
 		Scene->SetMoveSceneContext(move(context_));
 		Scene->ChangeScene(make_unique<GameClearScene>());
-		return;
+		return true;
 	}
-
+	return false;
 }
 
 void GameScene::PostProcessDraw()

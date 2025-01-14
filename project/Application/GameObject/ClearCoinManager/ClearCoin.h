@@ -27,9 +27,9 @@ public:
 	ClearCoin() {};
 	~ClearCoin() {};
 
-	void Initialize(const CoinUse&use);
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
 	void ChangeState(unique_ptr<IClearCoinState>state);
 
@@ -38,6 +38,7 @@ public:
 #pragma region Set
 	void StartAnimation(bool isStart) { isStart_ = isStart; }
 	void SetIsEnd(bool f) { isEnd_ = f; }
+	void SetCoinUse(const CoinUse& use) { isUse_ = use; }
 #pragma endregion
 
 #pragma region Get

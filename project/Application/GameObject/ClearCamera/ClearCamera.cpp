@@ -1,6 +1,6 @@
 #include "ClearCamera.h"
 
-void ClearCamera::Initilaize()
+void ClearCamera::Initialize()
 {
 	name_ = "Camera";
 

@@ -14,9 +14,9 @@ public:
 	StageCoin() {};
 	~StageCoin() {};
 
-	void Initilaize();
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
 	void OnCollision(IObjectData* objData)override;
 

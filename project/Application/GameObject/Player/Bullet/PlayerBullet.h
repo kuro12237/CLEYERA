@@ -21,12 +21,12 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="number"></param>
-	void Initialize(string number);
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 	/// <summary>
 	///　当たった時の
@@ -38,6 +38,7 @@ public:
 	void SetSpownPos(Math::Vector::Vector3 pos) { spownPos_ = pos; }
 	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
 	void SetPlayerSpeed(Math::Vector::Vector3 v) { playerSpeed_ = v; }
+	void SetBuletName(string num) { name_ = num; }
 #pragma endregion
 
 #pragma region Get

@@ -1,12 +1,12 @@
 #include "StageNumber.h"
 
-void StageNumber::Initialize(uint32_t num)
+void StageNumber::Initialize()
 {
-	INameable::name_ = "StageNumPlane.00" + to_string(num);
+	INameable::name_ = "StageNumPlane.00" + to_string(number_);
 	//dataをセット
 	objectData_ = gameObjectManager_->GetObj3dData(INameable::name_);
 
-	string name = "SelectScene/num" + to_string(num) + ".png";
+	string name = "SelectScene/num" + to_string(number_) + ".png";
 	uint32_t texHandle = Engine::Manager::TextureManager::LoadPngTexture(name);
 
 	gameObjectManager_->GetObj3dData(INameable::name_)->GetGameObject()->SetTexHandle(texHandle);

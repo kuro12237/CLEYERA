@@ -35,7 +35,7 @@ void GameClearScene::Initialize([[maybe_unused]] GameManager* state)
 	character_->Initialize();
 
 	camera_ = make_unique<ClearCamera>();
-	camera_->Initilaize();
+	camera_->Initialize();
 
 
 	explosionParticle_ = make_unique<ExplosionParticle>();

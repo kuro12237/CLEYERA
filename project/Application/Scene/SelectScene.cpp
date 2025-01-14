@@ -33,7 +33,9 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	{
 		shared_ptr<Goal>goal = make_shared<Goal>();
 		goals_[portalIndex] = make_shared<Goal>();
-		goals_[portalIndex]->Initialize(ObjectId::kGoalId, uint32_t(portalIndex));
+		goals_[portalIndex]->SetGoalObjectId(ObjectId::kGoalId);
+		goals_[portalIndex]->SetGoalIndex(uint32_t(portalIndex));
+		goals_[portalIndex]->Initialize();
 	}
 
 	blockManager_ = make_shared<BlockManager>();
@@ -78,7 +80,8 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	for (size_t i = 0; i < portalMax_; i++)
 	{
 		stageNumbers_[i] = make_unique<StageNumber>();
-		stageNumbers_[i]->Initialize(uint32_t(i) + 1);
+		stageNumbers_[i]->SetNum(uint32_t(i) + 1);
+		stageNumbers_[i]->Initialize();
 
 	}
 }

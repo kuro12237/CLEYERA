@@ -1,8 +1,8 @@
 #include "WarpGate.h"
 
-void WarpGate::Initialize(const int& index)
+void WarpGate::Initialize()
 {
-	INameable::name_ = "WarpGate" + FormatNumberWithDots(index);
+	INameable::name_ = "WarpGate" + FormatNumberWithDots(index_);
 
 	railDataFileName_ = gameObjectManager_->GetObj3dData(INameable::name_)->GetParamFilePaths()[0];
 

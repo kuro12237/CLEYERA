@@ -6,7 +6,7 @@
 #include"GameObject/ObjectInterface/IObjectData.h"
 
 /// <summary>
-/// “ƒ‚ÌƒNƒ‰ƒX
+/// å¡”ã®ã‚¯ãƒ©ã‚¹
 /// </summary>
 class Tower :public IObjectData
 {
@@ -15,19 +15,21 @@ public:
 	~Tower() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	/// <param name="name"></param>
 	/// <param name="index"></param>
-	void Initialize(string name, uint32_t index);
+	void Initialize()override;
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
-	void Update();
+	void Update()override;
 
 #pragma region Set
 	void SetPos(const Math::Vector::Vector3& newPos);
+	void SetName(string name) { name_ = name; }
+	void SetTowerIndex(uint32_t index) { index_ = index; }
 #pragma endregion
 
 private:

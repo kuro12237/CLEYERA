@@ -12,9 +12,9 @@ public:
 	ClearCamera() {}
 	~ClearCamera() {}
 
-	void Initilaize();
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
 #pragma region Get
 	bool GetIsComplite() { return isComplete_; }

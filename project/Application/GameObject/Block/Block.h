@@ -18,12 +18,12 @@ public:
 	/// </summary>
 	/// <param name="グループ名"></param>
 	/// <param name="番号"></param>
-	void Initialize(string name,uint32_t index);
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 	/// <summary>
 	/// 当たった処理
@@ -31,9 +31,19 @@ public:
 	/// <param name="c"></param>
 	void OnCollision(IObjectData* objData)override;
 
+#pragma region Set
+
+	void SetName(string name) { name_ = name; }
+	void SetBlockIndex(uint32_t index) { blockNumber_ = index; }
+
+#pragma endregion
+
+
 	void SetParticleField(Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>* instance) { boxField_ = instance; }
 
 private:
+
+	uint32_t blockNumber_ = 0;
 
 	Engine::Transform::TransformEular initialTransform_{};
 	Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>*boxField_ = nullptr;

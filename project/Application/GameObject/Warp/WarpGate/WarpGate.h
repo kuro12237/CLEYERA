@@ -16,9 +16,9 @@ public:
 	WarpGate() {};
 	~WarpGate() {};
 
-	void Initialize(const int& index);
+	void Initialize()override;
 
-	void Update();
+	void Update()override;
 
 	void OnCollision(IObjectData* objData)override;
 
@@ -29,7 +29,7 @@ public:
 #pragma endregion
 
 #pragma region Set
-
+	void SetIndex(const int& index) { index_ = index; }
 	void SetWarpObjectIndex(const uint32_t index) { warpObjectIndex_ = index; }
 #pragma endregion
 
@@ -38,6 +38,6 @@ private:
 
 	string railDataFileName_ = "";
 	uint32_t warpObjectIndex_ = 0;
-
+	uint32_t index_ = 0;
 
 };

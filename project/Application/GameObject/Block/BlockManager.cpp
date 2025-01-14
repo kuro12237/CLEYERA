@@ -12,8 +12,10 @@ void BlockManager::Initialize()
 	{
 		shared_ptr<Block>block = make_shared<Block>();
 
+		block->SetName(name_);
+		block->SetBlockIndex(i);
 		block->SetParticleField(boxField_.get());
-		block->Initialize(name_, i);
+		block->Initialize();
 		blocks_.push_back(block);
 	}
 }

@@ -1,9 +1,7 @@
 #include "Tower.h"
 
-void Tower::Initialize(string name, uint32_t index)
+void Tower::Initialize()
 {
-	name_ = name;
-	index_ = index;
 	gameObjectManager_ = GameObjectManager::GetInstance();
 
 }

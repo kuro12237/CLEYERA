@@ -19,12 +19,12 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(uint32_t id, uint32_t index);
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 	/// <summary>
 	/// 当たった時
@@ -35,6 +35,13 @@ public:
 #pragma region Get
 	bool GetIsGoalFlag() { return isGoalFlag_; }
 #pragma endregion
+
+#pragma region Set
+
+	void SetGoalIndex(uint32_t index) { index_ = index; }
+	void SetGoalObjectId(uint32_t id) { IObjectData::collider_->SetId(id); }
+#pragma endregion
+
 
 private:
 

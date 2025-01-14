@@ -7,14 +7,16 @@ void TowerManager::Initialize()
 	for (int i = 0; i < int(transforms.size()); i++)
 	{
 		shared_ptr<Tower>tower = make_shared<Tower>();
-		tower->Initialize(name_, i);
+		tower->SetName(name_);
+		tower->SetTowerIndex(i);
+		tower->Initialize();
 		towers_.push_back(tower);
 	}
 }
 
 void TowerManager::Update()
 {
-	//カメラより後ろにある時に前にワープさせる
+	//繧ｫ繝｡繝ｩ繧医ｊ蠕後ｍ縺ｫ縺ゅｋ譎ゅ↓蜑阪↓繝ｯ繝ｼ繝励＆縺帙ｋ
 	if (p_CameraPos_)
 	{
 		size_t index = 0;
