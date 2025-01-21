@@ -1599,7 +1599,7 @@
     <ClInclude Include="Application\GameObject\GunEnemy\IGunEnemy.h">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h">
+    <ClInclude Include="Application\GameObject\ObjectInterface\ManagerComponent.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h">

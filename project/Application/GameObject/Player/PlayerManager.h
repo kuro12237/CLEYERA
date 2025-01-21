@@ -14,7 +14,7 @@
 #include"Utility/RandomGenerator/RandomGenerator.h"
 #include"Bullet/PlayerBulletManager.h"
 #include"Particle/PlayerMoveParticle.h"
-#include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/ObjectInterface/ManagerComponent.h"
 
 
 /// <summary>
@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// ImGuiの更新
 	/// </summary>
-	void ImGuiUpdate();
+	void ImGuiUpdate()override;
 
 	/// <summary>
 	/// 更新処理

@@ -284,7 +284,7 @@
     <ClInclude Include="Application\GameObject\Light\GameLight.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\JsonComponent.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\LightComponent.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\IManagerList.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\ManagerComponent.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />

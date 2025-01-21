@@ -44,7 +44,7 @@ void GameClearScene::Initialize([[maybe_unused]] GameManager* state)
 	coinManager_ = make_unique<ClearCoinManager>();
 
 	coinManager_->CoinsCount(contextData_.stageConinsCount);
-	coinManager_->Initilaize();
+	coinManager_->Initialize();
 
 	lava_ = make_unique<Lava>();
 	lava_->Initialize();

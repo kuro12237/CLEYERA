@@ -1,6 +1,6 @@
 #pragma once
 #include"Warp.h"
-#include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/ObjectInterface/ManagerComponent.h"
 
 /// <summary>
 /// ワープ管理クラス

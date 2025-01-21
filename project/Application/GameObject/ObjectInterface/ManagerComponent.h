@@ -10,7 +10,7 @@
 class ManagerComponent
 {
 public:
-	ManagerComponent() {};
+	ManagerComponent() { gameObjectManager_ = GameObjectManager::GetInstance(); };
 	virtual ~ManagerComponent() {};
 
 	/// <summary>
@@ -23,6 +23,14 @@ public:
 	/// 更新
 	/// </summary>
 	virtual void Update() = 0;
+
+	/// <summary>
+	/// ImGui更新
+	/// </summary>
+	virtual void ImGuiUpdate() {};
+
+	void ImGuiBegin(string tag) { ImGui::Begin(tag.c_str()); };
+	void ImGuiEnd() { ImGui::End(); }
 
 private:
 

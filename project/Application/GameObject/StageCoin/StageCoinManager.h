@@ -1,6 +1,6 @@
 #pragma once
 #include"StageCoin.h"
-#include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/ObjectInterface/ManagerComponent.h"
 
 /// <summary>
 /// コイン管理クラス

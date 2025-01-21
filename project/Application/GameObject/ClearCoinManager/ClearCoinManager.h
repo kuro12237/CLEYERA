@@ -4,11 +4,12 @@
 #include"ClearCoin.h"
 #include"Utility/ColorConverter/ColorConverter.h"
 #include"Particle/ClearCoinSplashParticle.h"
+#include"GameObject/ObjectInterface/ManagerComponent.h"
 
 /// <summary>
 /// クリアシーンのコイン管理クラス
 /// </summary>
-class ClearCoinManager
+class ClearCoinManager:public ManagerComponent
 {
 public:
 	ClearCoinManager() {};
@@ -18,12 +19,12 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initilaize();
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 	/// <summary>
 	/// パーティクル表示

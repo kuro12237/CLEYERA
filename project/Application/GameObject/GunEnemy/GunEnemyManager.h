@@ -5,7 +5,7 @@
 
 #include"GunEnemy.h"
 #include"GunEnemyPart.h"
-#include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/ObjectInterface/ManagerComponent.h"
 
 struct GunEnemyData
 {

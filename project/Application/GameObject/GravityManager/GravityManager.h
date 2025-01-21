@@ -3,7 +3,7 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Particle/Field/ParticleField.h"
-#include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/ObjectInterface/ManagerComponent.h"
 
 /// <summary>
 /// 重力処理を

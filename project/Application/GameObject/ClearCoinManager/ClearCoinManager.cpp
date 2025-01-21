@@ -1,6 +1,6 @@
 #include "ClearCoinManager.h"
 
-void ClearCoinManager::Initilaize()
+void ClearCoinManager::Initialize()
 {
 	modelHandle_ = Engine::Manager::ModelManager::LoadGltfFile("StageCoin");
 	auraModelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("StageCoinAura");

@@ -3,7 +3,7 @@
 #include"Cleyera.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 
-#include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/ObjectInterface/ManagerComponent.h"
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"GameObject/ObjectInterface/IParticleData.h"
 
