@@ -6,17 +6,16 @@ using namespace Engine::Transform;
 void PlayerCamera::Initialize()
 {
 	name_ = "PlayerCamera";
-	gameObjInstance_ = GameObjectManager::GetInstance();
-	auto& transform = gameObjInstance_->GetCameraData(name_)->GetWorldTransform().transform;
+	
+	objectData_ = gameObjectManager_->GetCameraData(name_);
+	auto transform = objectData_.lock()->GetWorldTransform().transform;
 	transform.scale = { 1.0f,1.0f,1.0f };
 	transform.rotate.x = 0.1f;
-
-	target_ = &gameObjInstance_->GetObj3dData_ptr(targetName_)->GetWorldTransform();
 }
 
 void PlayerCamera::Update()
 {
-	auto& cameraWt = gameObjInstance_->GetCameraData(name_)->GetWorldTransform();
+	auto& cameraWt = objectData_.lock()->GetWorldTransform();
 
 	if (target_)
 	{

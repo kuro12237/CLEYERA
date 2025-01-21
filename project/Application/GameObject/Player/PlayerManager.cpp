@@ -10,32 +10,39 @@ void PlayerManager::Initialize()
 	postEffect_ = PostEffect::GetInstance();
 	gameObjectManager_ = GameObjectManager::GetInstance();
 
-	//commands
-	commandHandler_ = make_unique<PlayerCommandHandler>();
-	
 	//mainBody
 	playerCore_ = make_shared<Player>();
-	playerCore_->Initialize();
+	objDataList_.push_back(playerCore_);
 
 	//reticle
-	reticle_ = make_unique<PlayerReticle>();
-	reticle_->Initialize();
+	reticle_ = make_shared<PlayerReticle>();
+	objDataList_.push_back(reticle_);
 
 	//Gun
-	gun_ = make_unique<PlayerGun>();
-	gun_->Initialize();
+	gun_ = make_shared<PlayerGun>();
+	objDataList_.push_back(gun_);
 
 	//Camera
-	camera_ = make_unique<PlayerCamera>();
-	camera_->SetTargetName(playerCore_->INameable::GetName());
-	camera_->Initialize();
+	camera_ = make_shared<PlayerCamera>();
+	objDataList_.push_back(camera_);
+	
+	for (auto& it : objDataList_)
+	{
+		auto obj = it.lock();
+		obj->Initialize();
+	}
+	camera_->SetTarget(playerCore_->INameable::GetName());
 
 	//Hp
 	hp_ = make_shared<PlayerHp>();
 	hp_->Initialize(kPlayerHp_);
 
+	//commands
+	commandHandler_ = make_shared<PlayerCommandHandler>();
+
 	playerCore_->SetPlayerHP(hp_);
 	playerCore_->SetReduceHpFunc(std::bind(&PlayerHp::ReduceHp, hp_.get()));
+
 
 	gameObjectManager_->CameraReset(camera_->GetName());
 
@@ -96,6 +103,7 @@ void PlayerManager::ImGuiUpdate()
 
 void PlayerManager::Update()
 {
+	RemoveEmptyObjList();
 
 	//ゲームが終わる通知
 	if (playerCore_->GetIsGameEnd())
@@ -131,29 +139,15 @@ void PlayerManager::Update()
 
 	hp_->Update();
 
-	//Main
-	playerCore_->Update();
-
-
-	//Gun
-	gun_->Update();
-
-	//reticle
-	reticle_->Update();
-
-	//Camera
-	camera_->Update();
+	for (auto& it : objDataList_)
+	{
+		if (auto obj = it.lock()) {
+			obj->Update();
+		}
+	}
 
 	//Bullets
 	CheckisDeadBullets();
-
-	for (shared_ptr<PlayerBullet>& b : bullets_)
-	{
-		if (b)
-		{
-			b->Update();
-		}
-	}
 
 	if (playerCore_->IsInState<PlayerStateWalk>()||playerCore_->IsInState<PlayerStateDash>())
 	{
@@ -182,6 +176,7 @@ void PlayerManager::Draw2d()
 void PlayerManager::DrawHp()
 {
 	hp_->Draw2d();
+
 }
 
 void PlayerManager::Draw2dBullet()
@@ -226,6 +221,7 @@ void PlayerManager::PushBullet(const Math::Vector::Vector3& pos)
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
 		b->SetName(name_num);
 		b->Initialize();
+		objDataList_.push_back(b);
 		bullets_[newBulletIndex] = move(b);
 		deadBulletIndex_.pop();
 	}
@@ -238,6 +234,7 @@ void PlayerManager::PushBullet(const Math::Vector::Vector3& pos)
 		GameObjectManager::GetInstance()->PushObj3dData(data, name_num);
 		b->SetName(name_num);
 		b->Initialize();
+		objDataList_.push_back(b);
 		bullets_.push_back(move(b));
 	}
 }

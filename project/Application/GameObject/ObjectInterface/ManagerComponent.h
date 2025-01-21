@@ -2,7 +2,7 @@
 
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/convert/convert.h"
-
+#include"IObjectData.h"
 
 /// <summary>
 /// マネージャーリスト抽象クラス
@@ -32,8 +32,15 @@ public:
 	void ImGuiBegin(string tag) { ImGui::Begin(tag.c_str()); };
 	void ImGuiEnd() { ImGui::End(); }
 
+	/// <summary>
+	/// 空か確認空だった場合削除
+	/// </summary>
+	void RemoveEmptyObjList();
+
 private:
 
-	GameObjectManager* gameObjectManager_ = nullptr;
+protected:
 
+	GameObjectManager* gameObjectManager_ = nullptr;
+	list<weak_ptr<IObjectData>>objDataList_;
 };

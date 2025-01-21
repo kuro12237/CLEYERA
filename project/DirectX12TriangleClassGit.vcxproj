@@ -82,6 +82,7 @@
     <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\LightComponent.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\ManagerComponent.cpp" />
     <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp" />
     <ClCompile Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.cpp" />
     <ClCompile Include="Application\GameObject\Particles\WallHitParticle.cpp" />

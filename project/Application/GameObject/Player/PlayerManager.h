@@ -92,12 +92,12 @@ private:
 	GameObjectManager* gameObjectManager_ = nullptr;
 	Engine::PostEffect* postEffect_ = nullptr;
 
-	unique_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
+	shared_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 
 	shared_ptr<Player>playerCore_ = nullptr;
-	unique_ptr<PlayerReticle>reticle_ = nullptr;
-	unique_ptr<PlayerGun>gun_ = nullptr;
-	unique_ptr<PlayerCamera>camera_ = nullptr;
+	shared_ptr<PlayerReticle>reticle_ = nullptr;
+	shared_ptr<PlayerGun>gun_ = nullptr;
+	shared_ptr<PlayerCamera>camera_ = nullptr;
 	shared_ptr<PlayerHp>hp_ = nullptr;
 
 	int32_t kPlayerHp_ = 2;

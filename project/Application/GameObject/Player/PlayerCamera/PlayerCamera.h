@@ -15,16 +15,19 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	void Initialize()override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
-	void Update();
+	void Update()override;
 
 #pragma region Set
 
-	void SetTargetName(string target) { targetName_ = target; }
+	void SetTarget(string target) {
+		targetName_ = target;
+		target_ = &gameObjectManager_->GetObj3dData_ptr(targetName_)->GetWorldTransform();
+	}
 
 #pragma endregion
 
@@ -36,10 +39,8 @@ private:
 
 	void Shake();
 
-
 	Math::Vector::Vector3 CalcOffset(const Engine::Transform::WorldTransform& w ,const Math::Vector::Vector3 v)const;
 
-	GameObjectManager* gameObjInstance_ = nullptr;
 	string targetName_ = "";
 	const Engine::Transform::WorldTransform* target_ = nullptr;
 

@@ -934,6 +934,7 @@
     <ClCompile Include="Application\GameObject\SelectStageNumber\StageNumber.cpp" />
     <ClCompile Include="Application\GameObject\Light\GameLight.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\LightComponent.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\ManagerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
