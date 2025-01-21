@@ -4,7 +4,7 @@
 #include"BreakBlock.h"
 #include"GameObject/ObjectInterface/IManagerList.h"
 
-class BreakBlockManager :public IManagerList
+class BreakBlockManager :public ManagerComponent
 {
 public:
 	BreakBlockManager() {};

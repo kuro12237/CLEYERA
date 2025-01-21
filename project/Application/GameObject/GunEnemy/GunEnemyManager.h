@@ -20,7 +20,7 @@ struct GunEnemyData
 /// <summary>
 /// 銃の敵管理クラス
 /// </summary>
-class GunEnemyManager :public IManagerList
+class GunEnemyManager :public ManagerComponent
 {
 public:
 	GunEnemyManager() {};

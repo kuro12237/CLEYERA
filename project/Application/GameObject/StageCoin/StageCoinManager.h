@@ -5,7 +5,7 @@
 /// <summary>
 /// コイン管理クラス
 /// </summary>
-class StageCoinManager :public INameable, public JsonComponent, public IManagerList
+class StageCoinManager :public INameable, public JsonComponent, public ManagerComponent
 {
 public:
 	StageCoinManager() {};

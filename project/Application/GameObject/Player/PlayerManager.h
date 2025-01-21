@@ -20,7 +20,7 @@
 /// <summary>
 /// プレイヤーのオブジェクトの管理クラス
 /// </summary>
-class PlayerManager :public IManagerList
+class PlayerManager :public ManagerComponent
 {
 public:
 	PlayerManager() {};

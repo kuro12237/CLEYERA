@@ -8,7 +8,7 @@
 /// <summary>
 /// 重力処理を
 /// </summary>
-class GravityManager :public IManagerList
+class GravityManager :public ManagerComponent
 {
 public:
 	GravityManager() {};

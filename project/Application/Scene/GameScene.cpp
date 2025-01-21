@@ -57,7 +57,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	gravityManager_ = make_unique<GravityManager>();
 	managerList_.push_back(gravityManager_.get());
 
-	for (IManagerList* manager : managerList_)
+	for (ManagerComponent* manager : managerList_)
 	{
 		manager->Initialize();
 	}
@@ -157,7 +157,7 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 
 	gameUi_->Update();
 
-	for (IManagerList* it : managerList_)
+	for (ManagerComponent* it : managerList_)
 	{
 		it->Update();
 	}

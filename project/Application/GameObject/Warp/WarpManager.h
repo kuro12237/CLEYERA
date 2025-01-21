@@ -5,7 +5,7 @@
 /// <summary>
 /// ワープ管理クラス
 /// </summary>
-class WarpManager :public IManagerList
+class WarpManager :public ManagerComponent
 {
 public:
 	WarpManager() {};

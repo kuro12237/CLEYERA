@@ -9,7 +9,7 @@
 /// <summary>
 /// ブロック管理
 /// </summary>
-class BlockManager :public IManagerList
+class BlockManager :public ManagerComponent
 {
 public:
 	BlockManager() {};

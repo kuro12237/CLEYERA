@@ -36,7 +36,6 @@
 #include"ISceneContext.h"
 #include"GameObject/SceneContextData/SceneContextData.h"
 
-#include"GameObject/ObjectInterface/IManagerList.h"
 #include"GameObject/Particles/WallHitParticle.h"
 
 /// <summary>
@@ -112,9 +111,6 @@ private:
 	unique_ptr<ISceneContext>context_ = nullptr;
 	SceneContextData contextData_ = {};
 
-	list<IManagerList*>managerList_;
-	list<IParticleData*>particleList_;
-	list<IObjectData*>objctDataList_;
 
 	CharacterDeadParticle* characterDeadParticle_ = nullptr;
 	CharacterMoveParticle* characterMoveParticle_ = nullptr;

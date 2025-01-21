@@ -3,6 +3,10 @@
 #include"Cleyera.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 
+#include"GameObject/ObjectInterface/IManagerList.h"
+#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/IParticleData.h"
+
 class GameManager;
 /// <summary>
 /// シーンインターフェース
@@ -33,9 +37,15 @@ public:
 
 protected:
 
+
 	Engine::PostEffect* postEffect_ = nullptr;
 	GameObjectManager* gameObjectManager_ = nullptr;
 	GlobalVariables* globalVariables_ = nullptr;
+
+
+	list<ManagerComponent*>managerList_;
+	list<IParticleData*>particleList_;
+	list<IObjectData*>objctDataList_;
 
 private:
 	std::function<void()>postEffectDrawFunc_ = nullptr;

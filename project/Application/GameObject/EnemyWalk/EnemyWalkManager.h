@@ -7,7 +7,7 @@
 /// <summary>
 /// 歩く敵の管理クラス
 /// </summary>
-class EnemyWalkManager :public IManagerList
+class EnemyWalkManager :public ManagerComponent
 {
 public:
 	EnemyWalkManager() {};

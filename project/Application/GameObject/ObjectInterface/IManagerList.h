@@ -7,11 +7,11 @@
 /// <summary>
 /// マネージャーリスト抽象クラス
 /// </summary>
-class IManagerList
+class ManagerComponent
 {
 public:
-	IManagerList() {};
-	virtual ~IManagerList() {};
+	ManagerComponent() {};
+	virtual ~ManagerComponent() {};
 
 	/// <summary>
 	/// 初期化
