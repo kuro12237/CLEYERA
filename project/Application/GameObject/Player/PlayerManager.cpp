@@ -7,9 +7,6 @@ using namespace Engine::Transform;
 
 void PlayerManager::Initialize()
 {
-	postEffect_ = PostEffect::GetInstance();
-	gameObjectManager_ = GameObjectManager::GetInstance();
-
 	//mainBody
 	playerCore_ = make_shared<Player>();
 	objDataList_.push_back(playerCore_);
@@ -72,7 +69,6 @@ void PlayerManager::Initialize()
 	moveParticle_ = make_unique<PlayerMoveParticle>();
 	moveParticle_->Initialize();
 	moveParticle_->SetPlayerPos(gameObjectManager_->GetObj3dData(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
-
 
 	deadParticle_ = make_unique<PlayerDeadParticle>();
 	deadParticle_->Initialize();
@@ -274,6 +270,7 @@ void PlayerManager::DamegeUpdate()
 
 void PlayerManager::DamegeUpdateEnd()
 {
+
 	postEffect_->SetSelectPostEffect(VIGNETTE, false);
 	postEffect_->SetVignetteFactor(0.0f);
 	vinatteFactor_ = vinatteFactorMax_;

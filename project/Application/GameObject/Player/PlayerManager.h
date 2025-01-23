@@ -89,9 +89,6 @@ private:
 
 	bool gameStartFlag_ = false;
 
-	GameObjectManager* gameObjectManager_ = nullptr;
-	Engine::PostEffect* postEffect_ = nullptr;
-
 	shared_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 
 	shared_ptr<Player>playerCore_ = nullptr;
