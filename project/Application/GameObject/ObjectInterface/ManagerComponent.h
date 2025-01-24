@@ -10,7 +10,7 @@
 class ManagerComponent
 {
 public:
-	ManagerComponent() { gameObjectManager_ = GameObjectManager::GetInstance(); postEffect_ = Engine::PostEffect::GetInstance(); };
+	ManagerComponent() { gameObjectManager_ = GameObjectManager::GetInstance();};
 	virtual ~ManagerComponent() {};
 
 	/// <summary>
@@ -42,6 +42,5 @@ private:
 protected:
 
 	GameObjectManager* gameObjectManager_ = nullptr;
-	Engine::PostEffect* postEffect_ = nullptr;
 	list<weak_ptr<IObjectData>>objDataList_;
 };

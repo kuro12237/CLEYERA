@@ -22,7 +22,7 @@ void PlayerManager::Initialize()
 	//Camera
 	camera_ = make_shared<PlayerCamera>();
 	objDataList_.push_back(camera_);
-	
+
 	for (auto& it : objDataList_)
 	{
 		auto obj = it.lock();
@@ -53,7 +53,7 @@ void PlayerManager::Initialize()
 	gun_->SetPlayerPos(gameObjectManager_->GetObj3dData_ptr(playerCore_->INameable::GetName())->GetWorldTransform().transform.translate);
 	gun_->SetPlayerVelo(playerCore_->GetVelocity());
 
-	
+
 	//ダメージの演出関数をセット
 	playerCore_->SetDamageUpdateFunc(std::bind(&PlayerManager::DamegeUpdate, this));
 	playerCore_->SetDamageUpdateEndFunc(std::bind(&PlayerManager::DamegeUpdateEnd, this));
@@ -145,7 +145,7 @@ void PlayerManager::Update()
 	//Bullets
 	CheckisDeadBullets();
 
-	if (playerCore_->IsInState<PlayerStateWalk>()||playerCore_->IsInState<PlayerStateDash>())
+	if (playerCore_->IsInState<PlayerStateWalk>() || playerCore_->IsInState<PlayerStateDash>())
 	{
 		moveParticle_->SetIsEmit(true);
 	}
@@ -259,10 +259,11 @@ void PlayerManager::DamegeUpdate()
 	const float vinateFactorSpeed = 1.0f / 120.0f;
 	const Math::Vector::Vector3 color = { 1.0f,0.0f,0.0f };
 	//ビネットをかける
-	postEffect_->SetSelectPostEffect(VIGNETTE, true);
-	postEffect_->SetVignetteScale(vinatteScale);
-	postEffect_->SetVignetteFactor(vinatteFactor_);
-	postEffect_->SetVignetteColor(color);
+
+	PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, true);
+	PostEffect::GetInstance()->SetVignetteScale(vinatteScale);
+	PostEffect::GetInstance()->SetVignetteFactor(vinatteFactor_);
+	PostEffect::GetInstance()->SetVignetteColor(color);
 
 	vinatteFactor_ -= vinateFactorSpeed;
 
@@ -271,8 +272,8 @@ void PlayerManager::DamegeUpdate()
 void PlayerManager::DamegeUpdateEnd()
 {
 
-	postEffect_->SetSelectPostEffect(VIGNETTE, false);
-	postEffect_->SetVignetteFactor(0.0f);
+	PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
+	PostEffect::GetInstance()->SetVignetteFactor(0.0f);
 	vinatteFactor_ = vinatteFactorMax_;
 }
 
