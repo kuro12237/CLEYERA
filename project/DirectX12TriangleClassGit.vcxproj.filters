@@ -720,9 +720,6 @@
     <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp">
       <Filter>Project\GameObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Scene\GameOverScene.cpp">
-      <Filter>Project\GameObject\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp">
       <Filter>Project\GameObject\UI</Filter>
     </ClCompile>
@@ -924,17 +921,42 @@
     <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp">
       <Filter>Project\GameObject\Lava</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Particles\WallHitParticle.cpp" />
-    <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRB.cpp" />
-    <ClCompile Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.cpp" />
-    <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp" />
-    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.cpp" />
-    <ClCompile Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.cpp" />
-    <ClCompile Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.cpp" />
-    <ClCompile Include="Application\GameObject\SelectStageNumber\StageNumber.cpp" />
-    <ClCompile Include="Application\GameObject\Light\GameLight.cpp" />
-    <ClCompile Include="Application\GameObject\ObjectInterface\LightComponent.cpp" />
-    <ClCompile Include="Application\GameObject\ObjectInterface\ManagerComponent.cpp" />
+    <ClCompile Include="Application\Scene\GameOverScene.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Particles\Explosion\ExplosionParticle.cpp">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.cpp">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Particles\WallHitParticle.cpp">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\SelectStageNumber\StageNumber.cpp">
+      <Filter>Project\GameObject\StageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.cpp">
+      <Filter>CLEYERA\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Light\GameLight.cpp">
+      <Filter>Project\GameObject\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRB.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.cpp">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\ObjectInterface\LightComponent.cpp">
+      <Filter>Project\GameObject\ObjectInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\ObjectInterface\ManagerComponent.cpp">
+      <Filter>Project\GameObject\ObjectInterface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1375,9 +1397,6 @@
     <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h">
       <Filter>Project\GameObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Scene\GameOverScene.h">
-      <Filter>Project\GameObject\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h">
       <Filter>Project\GameObject\UI</Filter>
     </ClInclude>
@@ -1618,16 +1637,39 @@
     <ClInclude Include="Application\GameObject\Lava\LavaParticle.h">
       <Filter>Project\GameObject\Lava</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Particles\WallHitParticle.h" />
-    <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRB.h" />
-    <ClInclude Include="Application\GameObject\Particles\Explosion\ExplosionParticle.h" />
-    <ClInclude Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.h" />
-    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.h" />
-    <ClInclude Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.h" />
-    <ClInclude Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.h" />
-    <ClInclude Include="Application\GameObject\SelectStageNumber\StageNumber.h" />
-    <ClInclude Include="Application\GameObject\Light\GameLight.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\LightComponent.h" />
+    <ClInclude Include="Application\Scene\GameOverScene.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Particles\Explosion\ExplosionParticle.h">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Particles\WallHitParticle.h">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.h">
+      <Filter>Project\GameObject\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\SelectStageNumber\StageNumber.h">
+      <Filter>Project\GameObject\StageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.h">
+      <Filter>CLEYERA\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Light\GameLight.h">
+      <Filter>Project\GameObject\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\PlayerControlUI\BottonsActions\GameSceneBottonRB.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\GameOverUI\GameOverSceneUI.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\UI\SelectSceneUI\SelectSceneUI.h">
+      <Filter>Project\GameObject\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\ObjectInterface\LightComponent.h">
+      <Filter>Project\GameObject\ObjectInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">
