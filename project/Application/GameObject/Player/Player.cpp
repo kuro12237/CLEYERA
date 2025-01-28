@@ -32,7 +32,6 @@ void Player::Initialize()
 
 	//スタート入りの記録
 	resetPos_ = transform.translate;
-
 	AnimationManager::GetInstance()->LoadAnimation("FallDown");
 }
 
