@@ -47,6 +47,7 @@ protected:
 	string ObjectType_ = "";
 	std::string objectName_ = "";
 	Engine::Transform::WorldTransform worldTransform_;
+	//weak_ptr<Engine::Objects::Game3dObject>gameObejct_;
 	AABB aabb_;
 	vector<string>childName_;
 	string modelFilePath_ = "";

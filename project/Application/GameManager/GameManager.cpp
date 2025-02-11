@@ -11,14 +11,11 @@ GameManager::GameManager()
 	Cleyera::Initialize();
 	scene_ = make_unique<TitleScene>();
 	scene_->Initialize(this);
-
-
 }
 
 GameManager::~GameManager()
 {
 	Input::GetInstance()->VibrateController(0,0);
-
 	Cleyera::Finalize();
 }
 

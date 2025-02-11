@@ -1,12 +1,9 @@
 import bpy;
 
 from bpy.props import (
-    IntProperty,
-    FloatProperty,
-    FloatVectorProperty,
+ 
     EnumProperty,
-    BoolProperty,
-     PointerProperty
+ 
 )
 
 
@@ -21,6 +18,9 @@ class ObjectType(bpy.types.PropertyGroup):
             ('Fence',"フェンス","フェンス"),
             ('FenceEnd',"フェンスの端","フェンス端"),
             ('Tower',"塔","塔"),
+            ('WarpRoot',"ワープの道","ワープの道"),
+            ('WarpConnector',"ワープ接続","ワープ接続"),
+            ('BreakMap', "壊れるブロック", "壊れるブロック"),
 
         ],
         #items=get_enum_items,

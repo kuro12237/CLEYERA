@@ -9,6 +9,7 @@ import json
 import gpu
 import gpu_extras.batch
 
+
 from bpy.props import (
     IntProperty,
     FloatProperty,
@@ -52,6 +53,13 @@ from LevelEditor.RailSet import MYADDON_OT_export_Rail
 from LevelEditor.disabled import MYADDON_OT_Disabled
 from LevelEditor.disabled import OBJECT_PT_Disabled
 
+from LevelEditor.spown import MYADDON_OT_load_spawn
+from LevelEditor.spown import MYADDON_OT_create_spawn
+from LevelEditor.spown import MYADDON_OT_spawn_create_player
+from LevelEditor.spown import MYADDON_OT_spawn_create_player_menu
+from LevelEditor.spown import MYADDON_OT_spawn_create_enemy
+from LevelEditor.spown import MYADDON_OT_spawn_create_enemy_menu
+
 bl_info={
     "name": "test 10_10",
     "author": "Ibu",
@@ -74,7 +82,7 @@ classes =(
     ###トップメニュー
     MYADDON_OT_export_scene,
     TOPBAR_MT_my_menu,
-    
+    MYADDON_OT_export_Rail,
     #export無効化
     MYADDON_OT_Disabled,
     OBJECT_PT_Disabled,
@@ -85,6 +93,13 @@ classes =(
     ParamFileNameItem,
     MYADDON_OT_add_paramfilename,
     OBJECT_PT_FilesObject,
+
+    MYADDON_OT_load_spawn,
+    MYADDON_OT_create_spawn,
+    MYADDON_OT_spawn_create_player,
+    MYADDON_OT_spawn_create_player_menu,
+    MYADDON_OT_spawn_create_enemy,
+    MYADDON_OT_spawn_create_enemy_menu,
     ###コライダー
     MYADDON_OT_add_collider,
     OBJECT_PT_collider,
@@ -94,7 +109,7 @@ classes =(
     ###Rail
     OBJECT_PT_RailObject,
     MYADDON_OT_add_RailGroupName,
-    MYADDON_OT_export_Rail,
+    
 )
     
 def register():

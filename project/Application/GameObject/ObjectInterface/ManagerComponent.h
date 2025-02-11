@@ -7,7 +7,7 @@
 /// <summary>
 /// マネージャーリスト抽象クラス
 /// </summary>
-class ManagerComponent
+class ManagerComponent:public JsonComponent
 {
 public:
 	ManagerComponent() { gameObjectManager_ = GameObjectManager::GetInstance();};
