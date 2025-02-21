@@ -11,8 +11,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	globalVariables_->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
 	globalVariables_->LoadFiles("Resources/LevelData/ParamData/GameScene/");
 	//selectからのデータ
-	SceneContextData data;
-	data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+	SceneContextData data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
 	//levelDataの読み込み
 	inputLevelDataFileName_ = "LevelData_" + to_string(data.stageNumber + 1) + ".json";
@@ -103,7 +102,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	wallHitParticle_ = make_unique<WallHitParticle>();
 	wallHitParticle_->Initialize();
 	particleList_.push_back(wallHitParticle_.get());
-
 
 	PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
 	PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 1.0f;
@@ -200,8 +198,7 @@ bool GameScene::CheckChangeScene(GameManager* Scene)
 		changeSceneAnmation_->ChangeStart();
 
 		//ビネットが出ていたら消す
-		PostEffect::GetInstance()->SetSelectPostEffect(VIGNETTE, false);
-
+		postEffect_->SetSelectPostEffect(VIGNETTE, false);
 		endAnimation_->SetIsCountStart(true);
 		//object設定
 		enemyWalkManager_->SetIsStartFlag(false);

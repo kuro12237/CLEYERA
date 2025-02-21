@@ -28,7 +28,7 @@
 /// <summary>
 /// MapSelect
 /// </summary>
-class SelectScene :public IScene
+class SelectScene :public IScene,JsonComponent
 {
 public:
 	SelectScene() {};

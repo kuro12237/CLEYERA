@@ -23,8 +23,6 @@ protected:
 
 	string jsonGropName_ = "";
 
-private:
-
 	GlobalVariables* globalVariables_ = nullptr;
 };
 

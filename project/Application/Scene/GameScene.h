@@ -41,7 +41,7 @@
 /// <summary>
 /// ゲームプレイ
 /// </summary>
-class GameScene :public IScene
+class GameScene :public IScene,JsonComponent
 {
 public:
 	GameScene() {};

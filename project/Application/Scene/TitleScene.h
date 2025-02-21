@@ -31,7 +31,7 @@
 /// <summary>
 /// タイトル
 /// </summary>
-class TitleScene :public IScene
+class TitleScene :public IScene, JsonComponent
 {
 public:
 	TitleScene() {};

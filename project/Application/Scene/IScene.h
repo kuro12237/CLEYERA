@@ -14,7 +14,7 @@ class GameManager;
 class IScene
 {
 public:
-	IScene() { postEffect_ = Engine::PostEffect::GetInstance(), gameObjectManager_ = GameObjectManager::GetInstance(); globalVariables_ = GlobalVariables::GetInstance(); };
+	IScene() { postEffect_ = Engine::PostEffect::GetInstance(), gameObjectManager_ = GameObjectManager::GetInstance();};
 	virtual ~IScene() {};
 
 	virtual void Initialize(GameManager* state) = 0;
@@ -40,7 +40,6 @@ protected:
 
 	Engine::PostEffect* postEffect_ = nullptr;
 	GameObjectManager* gameObjectManager_ = nullptr;
-	GlobalVariables* globalVariables_ = nullptr;
 
 
 	list<ManagerComponent*>managerList_;

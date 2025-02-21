@@ -38,7 +38,7 @@
 /// <summary>
 /// ゲームクリア
 /// </summary>
-class GameClearScene :public IScene
+class GameClearScene :public IScene,JsonComponent
 {
 public:
 	GameClearScene() {};
