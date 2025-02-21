@@ -56,10 +56,15 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 	gravityManager_ = make_unique<GravityManager>();
 	managerList_.push_back(gravityManager_.get());
 
+	lavaManager_ = make_unique<LavaManager>();
+	managerList_.push_back(lavaManager_.get());
+	
 	for (ManagerComponent* manager : managerList_)
 	{
 		manager->Initialize();
 	}
+
+	particleList_.push_back(lavaManager_->GetLava(0).lock()->GetLavaParticle());
 
 	//2dObj
 	startAnimation_ = make_unique<StartAnimation>();
@@ -76,9 +81,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager* state)
 
 	objctDataList_.push_back(goal_.get());
 
-	lava_ = make_unique<Lava>();
-	lava_->Initialize();
-	objctDataList_.push_back(lava_.get());
 
 	for (IObjectData* data : objctDataList_)
 	{
@@ -161,7 +163,6 @@ void GameScene::Update([[maybe_unused]] GameManager* Scene)
 	}
 
 	goal_->Update();
-	lava_->Update();
 
 	Gravitys();
 	Collision();
@@ -411,7 +412,7 @@ void GameScene::Gravitys()
 		}
 	}
 	gravityManager_->PushParticleList(CharacterDeadParticle::GetInstance()->GetParticle());
-	gravityManager_->PushParticleList(lava_->GetLavaParticle()->GetParticle());
+	gravityManager_->PushParticleList(lavaManager_->GetLava(0).lock()->GetLavaParticle()->GetParticle());
 
 	gravityManager_->CheckGravity();
 }
@@ -450,7 +451,11 @@ void GameScene::ParticlesDraw()
 
 	GoalParticle::GetInstance()->Draw();
 	characterDeadParticle_->Draw();
-	lava_->GetLavaParticle()->Draw();
+	
+	for (auto p : particleList_)
+	{
+		p->Draw();
+	}
 
 	wallHitParticle_->Draw();
 

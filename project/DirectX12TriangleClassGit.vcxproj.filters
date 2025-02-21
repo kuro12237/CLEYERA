@@ -957,6 +957,7 @@
     <ClCompile Include="Application\GameObject\ObjectInterface\ManagerComponent.cpp">
       <Filter>Project\GameObject\ObjectInterface</Filter>
     </ClCompile>
+    <ClCompile Include="Application\GameObject\Lava\LavaManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1670,6 +1671,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\LightComponent.h">
       <Filter>Project\GameObject\ObjectInterface</Filter>
     </ClInclude>
+    <ClInclude Include="Application\GameObject\Lava\LavaManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

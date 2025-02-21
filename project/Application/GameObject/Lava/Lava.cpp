@@ -12,6 +12,7 @@ void Lava::Initialize()
 	lavaParticle_->SetLavaScale(data->GetWorldTransform().transform.scale);
 	lavaParticle_->Initialize();
 	lavaParticle_->SetLavaPos(data->GetWorldTransform().transform.translate);
+
 }
 
 void Lava::Update()

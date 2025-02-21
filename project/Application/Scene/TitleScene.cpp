@@ -97,17 +97,16 @@ void TitleScene::Initialize([[maybe_unused]] GameManager* state)
 	this->SetPostEffectDrawFunc(std::bind(&TitleScene::PostProcessDraw, this));
 
 	//fog設定
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.5f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.1f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 10.0f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 125.0f;
+	postEffect_->GetAdjustedColorParam().fogScale_ = 0.5f;
+	postEffect_->GetAdjustedColorParam().fogAttenuationRate_ = 0.1f;
+	postEffect_->GetAdjustedColorParam().fogStart = 10.0f;
+	postEffect_->GetAdjustedColorParam().fogEnd = 125.0f;
 
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 {
 #ifdef _USE_IMGUI
-
 
 	ImGui::Begin("Scene");
 	if (ImGui::Button("SkipScene"))
@@ -160,9 +159,7 @@ void TitleScene::Update([[maybe_unused]] GameManager* Scene)
 
 
 	titleLight_->Update();
-
 	titleName_->Update();
-
 	towerManager_->Update();
 
 	//lavaの位置をセット
@@ -201,10 +198,8 @@ void TitleScene::PostProcessDraw()
 
 void TitleScene::Flont2dSpriteDraw()
 {
-	//fireEmberParticle_->Draw();
 	ui_->Draw2d();
 	titleNameParticle_->Draw();
-
 	changeSceneAnimation_->Draw();
 
 }

@@ -13,6 +13,7 @@
 #include"GameObject/Player/PlayerManager.h"
 #include"GameObject/StageCoin/StageCoinManager.h"
 #include"GameObject/GunEnemy/GunEnemyManager.h"
+#include"GameObject/Lava/LavaManager.h"
 
 #include"GameObject/Goal/Goal.h"
 #include"GameObject/Lava/Lava.h"
@@ -117,7 +118,6 @@ private:
 
 	//obj
 	unique_ptr<Goal>goal_ = nullptr;
-	unique_ptr<Lava>lava_ = nullptr;
 
 	//light
 	unique_ptr<GameLight>light_ = nullptr;
@@ -130,6 +130,7 @@ private:
 	unique_ptr<BlockManager>blockManager_ = nullptr;
 	unique_ptr<BreakBlockManager>breakBlockManager_ = nullptr;
 	unique_ptr<StageCoinManager>stageCoinManager_ = nullptr;
+	unique_ptr<LavaManager>lavaManager_ = nullptr;
 
 	unique_ptr<GravityManager>gravityManager_ = nullptr;
 	unique_ptr<BoxCollisionManager>gameCollisionManager_ = nullptr;
