@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".clang-format" />
     <None Include="CLEYERA\Config\.editorconfig" />
     <None Include="Resources\Shader\PBR\PBR.hlsli" />
     <None Include="Resources\Shader\LightingObject3d.hlsli" />

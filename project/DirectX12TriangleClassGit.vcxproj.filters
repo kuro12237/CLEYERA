@@ -363,6 +363,7 @@
     <None Include="Resources\Shader\PBR\PBR.hlsli">
       <Filter>Shader</Filter>
     </None>
+    <None Include=".clang-format" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLEYERA\Cleyera.cpp">

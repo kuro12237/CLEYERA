@@ -1,0 +1,19 @@
+BasedOnStyle: LLVM
+IndentWidth: 2
+UseTab: Never
+
+ColumnLimit: 100
+BreakBeforeBraces: Custom
+AlignTrailingComments: true
+AllowShortFunctionsOnASingleLine: Inline
+NamespaceIndentation: Inner
+
+BraceWrapping:
+  AfterFunction: true
+  AfterClass: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterEnum: true
+  BeforeElse: true
+  IndentBraces: false
+
