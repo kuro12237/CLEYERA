@@ -6,7 +6,7 @@ void Block::Initialize()
 	auto& transforms = gameObjectManager_->GetObjInstancingData(name_)->GetTransforms()[blockNumber_];
 
 	//dataをセット
-	collider_->SetOnCollisionFunc(std::bind(&IObjectData::OnCollision, this, std::placeholders::_1));
+	collider_->SetOnCollisionFunc(std::bind(&ObjectComponent::OnCollision, this, std::placeholders::_1));
 
 	collider_->SetObjectData(transforms->GetTransform());
 	collider_->SetAABB(transforms->GetAABB());
@@ -27,7 +27,7 @@ void Block::Update()
 	collider_->ClearHitDirection();
 }
 
-void Block::OnCollision([[maybe_unused]]IObjectData* objData)
+void Block::OnCollision([[maybe_unused]]ObjectComponent* objData)
 {
 	//c;
 }

@@ -75,7 +75,7 @@ void Goal::Update()
 	field.translate = transform.translate;
 }
 
-void Goal::OnCollision([[maybe_unused]] IObjectData* objData)
+void Goal::OnCollision([[maybe_unused]] ObjectComponent* objData)
 {
 	auto c = objData->GetCollider();
 	if (c->GetId() == ObjectId::kPlayerId)

@@ -6,7 +6,7 @@
 /// <summary>
 /// プレイヤーカメラ
 /// </summary>
-class PlayerCamera:public IObjectData
+class PlayerCamera:public ObjectComponent
 {
 public:
 	PlayerCamera() {};

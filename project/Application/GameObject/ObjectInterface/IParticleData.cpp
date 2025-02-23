@@ -5,19 +5,19 @@ using namespace Engine;
 using namespace Engine::Manager;
 using namespace Engine::Transform;
 
-void IParticleData::Update()
+void ParticleComponent::Update()
 {
 	particle_->CallBarrier();
 	particle_->Update();
 }
 
-void IParticleData::Draw()
+void ParticleComponent::Draw()
 {
 	boxEmitter_->SpownDraw();
 	particle_->Draw();
 }
 
-void IParticleData::Create(uint32_t modelHandle)
+void ParticleComponent::Create(uint32_t modelHandle)
 {
 	particle_ = make_unique<Particle::GpuParticle>();
 	particle_->Create(1, name_, modelHandle);
@@ -41,7 +41,7 @@ void IParticleData::Create(uint32_t modelHandle)
 
 }
 
-void IParticleData::GetLoadDatas()
+void ParticleComponent::GetLoadDatas()
 {
 	for (size_t i = 0; i < boxEmitter_->GetEmitMax(); i++)
 	{
@@ -50,7 +50,7 @@ void IParticleData::GetLoadDatas()
 	}
 }
 
-void IParticleData::ImGuiUpdate()
+void ParticleComponent::ImGuiUpdate()
 {
 	string name = boxEmitter_->GetEmitName() + "writeParam";
 	ImGui::Checkbox(name.c_str(), &isWriteEmitFileParam_);

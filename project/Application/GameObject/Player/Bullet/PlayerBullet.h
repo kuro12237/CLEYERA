@@ -11,7 +11,7 @@
 /// <summary>
 /// 銃の弾
 /// </summary>
-class PlayerBullet:public IObjectData
+class PlayerBullet:public ObjectComponent
 {
 public:
 	PlayerBullet() {};
@@ -32,7 +32,7 @@ public:
 	///　当たった時の
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 #pragma region Set
 	void SetSpownPos(Math::Vector::Vector3 pos) { spownPos_ = pos; }

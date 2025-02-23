@@ -6,11 +6,11 @@
 #include"JsonComponent.h"
 
 
-class IParticleData :public JsonComponent
+class ParticleComponent :public JsonComponent
 {
 public:
-	IParticleData() {};
-	virtual ~IParticleData() {};
+	ParticleComponent() {};
+	virtual ~ParticleComponent() {};
 
 	virtual void Initialize() = 0;
 

@@ -14,7 +14,7 @@
 /// <summary>
 /// 歩く敵
 /// </summary>
-class EnemyWalk :public IObjectData
+class EnemyWalk :public ObjectComponent
 {
 public:
 	EnemyWalk() {};
@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// 当たった時
 	/// </summary>
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 	/// <summary>
 	/// 状態遷移

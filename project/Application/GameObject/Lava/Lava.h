@@ -7,7 +7,7 @@
 /// <summary>
 /// 溶岩のオブジェくト制御クラス
 /// </summary>
-class Lava :public IObjectData
+class Lava :public ObjectComponent
 {
 public:
 	Lava() {};
@@ -29,7 +29,7 @@ public:
 
 #pragma region Get
 
-	LavaParticle* GetLavaParticle() { return lavaParticle_.get(); }
+	weak_ptr<LavaParticle> GetLavaParticle() { return lavaParticle_; }
 
 #pragma endregion
 
@@ -37,6 +37,6 @@ public:
 private:
 
 	const Math::Vector::Vector3* p_CameraPos_ = nullptr;
-	unique_ptr<LavaParticle>lavaParticle_ = nullptr;
+	shared_ptr<LavaParticle>lavaParticle_ = nullptr;
 
 };

@@ -30,7 +30,7 @@ public:
 	/// <summary>
 	/// 当たった時
 	/// </summary>
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 	void CreateBullet(const Math::Vector::Vector3& Pos);
 

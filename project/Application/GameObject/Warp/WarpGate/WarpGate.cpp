@@ -22,7 +22,7 @@ void WarpGate::Update()
 {
 }
 
-void WarpGate::OnCollision([[maybe_unused]] IObjectData* objData)
+void WarpGate::OnCollision([[maybe_unused]] ObjectComponent* objData)
 {
 
 }

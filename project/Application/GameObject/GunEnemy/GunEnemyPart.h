@@ -35,7 +35,7 @@ public:
 	/// <summary>
 	/// 当たった時
 	/// </summary>
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 #pragma region Set
 	void SetIsCoreEnd(bool& f) { isCoreEnd_ = &f; }

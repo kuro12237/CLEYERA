@@ -5,113 +5,101 @@ using namespace Engine::Base::Win;
 using namespace Engine::Base::DX;
 using namespace Engine::Manager;
 
-
 GameManager::GameManager()
 {
-	Cleyera::Initialize();
-	scene_ = make_unique<TitleScene>();
-	scene_->Initialize(this);
+   Cleyera::Initialize();
+   scene_ = make_unique<TitleScene>();
+   scene_->Initialize(this);
 }
 
 GameManager::~GameManager()
 {
-	Input::GetInstance()->VibrateController(0,0);
-	Cleyera::Finalize();
+   Input::GetInstance()->VibrateController(0, 0);
+   Cleyera::Finalize();
 }
 
 void GameManager::Run()
 {
-	while (WinApp::GetInstance()->WinMsg())
-	{
-		Cleyera::BeginFlame();
+   while (WinApp::GetInstance()->WinMsg()) {
+      Cleyera::BeginFlame();
 
-#ifdef  _USE_IMGUI
-		ImGuiDebugPanelBegin();
+#ifdef _USE_IMGUI
+      ImGuiDebugPanelBegin();
+      scene_->ImGuiUpdate();
+      ImGuiDebugPanelEnd();
 #endif //  _USE_IMGUI
 
-		LightingManager::ClearList();
+      LightingManager::ClearList();
 
-		scene_->Update(this);
+      scene_->Update(this);
+      GameObjectManager::GetInstance()->Update();
 
-		PostEffect::GetInstance()->Update();
-		DirectionalLight::Update();
-		LightingManager::GetInstance()->TransfarBuffers();
+      PostEffect::GetInstance()->Update();
 
-#ifdef  _USE_IMGUI
-		ImGuiDebugPanelEnd();
-#endif // _USE_IMGUI
+      DirectionalLight::Update();
+      LightingManager::GetInstance()->TransfarBuffers();
 
-		//scene関数にdrawが入っていた時
-		if (scene_->GetIsPostEffectDrawFunc())
-		{
-			PostEffect::GetInstance()->PreDraw();
+      /// 描画
+      PostEffect::GetInstance()->PreDraw();
 
-			SkyBox::GetInstance()->Draw();
-			scene_->PostProcessFuncDraw();
+      SkyBox::GetInstance()->Draw();
+      scene_->PostProcessDraw();
 
-			PostEffect::GetInstance()->PostDraw();
-		}
+      PostEffect::GetInstance()->PostDraw();
 
-		DirectXCommon::GetInstance()->PreDraw();
+      DirectXCommon::GetInstance()->PreDraw();
 
-		scene_->Back2dSpriteFuncDraw();
-		scene_->Object3dFuncDraw();
+      scene_->Back2dSpriteDraw();
+      scene_->Object3dDraw();
 
-		//関数が入っているとき
-		if (scene_->GetIsPostEffectDrawFunc())
-		{
-			PostEffect::GetInstance()->Draw();
-		}
+      PostEffect::GetInstance()->Draw();
 
-		scene_->Flont2dSpriteFuncDraw();
+      scene_->Flont2dSpriteDraw();
 
-		Cleyera::EndFlame();
-		DirectXCommon::GetInstance()->PostDraw();
-	}
+      Cleyera::EndFlame();
+      DirectXCommon::GetInstance()->PostDraw();
+   }
 }
 
 void GameManager::ChangeScene(unique_ptr<IScene> newScene)
 {
-	scene_ = move(newScene);
+   scene_ = move(newScene);
 
-	GlobalVariables::GetInstance()->Clear();
-	GlobalVariables::GetInstance()->ChangeSceneLoadFiles();
+   GlobalVariables::GetInstance()->Clear();
+   GlobalVariables::GetInstance()->ChangeSceneLoadFiles();
 
-	scene_->Initialize(this);
-	scene_->Update(this);
+   scene_->Initialize(this);
+   scene_->Update(this);
 
-	return;
+   return;
 }
 
 void GameManager::ImGuiDebugPanelBegin()
 {
-	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.08f, 0.08f, 0.08f, 1.0f));
-	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.02f, 0.02f, 0.02f, 1.0f));
-	ImGui::Begin("Debug");
+   ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.08f, 0.08f, 0.08f, 1.0f));
+   ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.02f, 0.02f, 0.02f, 1.0f));
+   ImGui::Begin("Debug");
 
-	if (ImGui::BeginMenu("System"))
-	{
-		WinApp::GetInstance()->ImGuiUpdate();
-		DirectXCommon::GetInstance()->ImGuiUpdate();
-		if (ImGui::TreeNode("Descriptor"))
-		{
-			DSVDescriptorManager::ImGuiUpdate();
-			RTVDescriptorManager::ImGuiUpdate();
-			DescriptorManager::ImGuiUpdate();
-			ImGui::TreePop();
-		}
-		ImGui::EndMenu();
-	}
+   if (ImGui::BeginMenu("System")) {
+      WinApp::GetInstance()->ImGuiUpdate();
+      DirectXCommon::GetInstance()->ImGuiUpdate();
+      if (ImGui::TreeNode("Descriptor")) {
+         DSVDescriptorManager::ImGuiUpdate();
+         RTVDescriptorManager::ImGuiUpdate();
+         DescriptorManager::ImGuiUpdate();
+         ImGui::TreePop();
+      }
+      ImGui::EndMenu();
+   }
 
-	SkyBox::GetInstance()->ImGuiUpdate();
+   SkyBox::GetInstance()->ImGuiUpdate();
 
-	GlobalVariables::GetInstance()->Update();
-
+   GlobalVariables::GetInstance()->Update();
 }
 
 void GameManager::ImGuiDebugPanelEnd()
 {
-	ImGui::End();
-	ImGui::PopStyleColor();
-	ImGui::PopStyleColor();
+   ImGui::End();
+   ImGui::PopStyleColor();
+   ImGui::PopStyleColor();
 }

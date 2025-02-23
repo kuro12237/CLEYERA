@@ -40,7 +40,7 @@ void GunEnemyBullet::Update()
 
 }
 
-void GunEnemyBullet::OnCollision(IObjectData* objData)
+void GunEnemyBullet::OnCollision(ObjectComponent* objData)
 {
 	auto c = objData->GetCollider();
 	c, objData;

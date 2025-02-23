@@ -8,7 +8,7 @@
 /// <summary>
 /// 爆発時のパーティクル
 /// </summary>
-class ExplosionParticle :public IParticleData
+class ExplosionParticle :public ParticleComponent
 {
 public:
 	ExplosionParticle() {};

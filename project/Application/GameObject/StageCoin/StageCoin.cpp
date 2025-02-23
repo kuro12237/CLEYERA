@@ -23,7 +23,7 @@ void StageCoin::Update()
 
 }
 
-void StageCoin::OnCollision(IObjectData* objData)
+void StageCoin::OnCollision(ObjectComponent* objData)
 {
 	auto c = objData->GetCollider();
 	objData;

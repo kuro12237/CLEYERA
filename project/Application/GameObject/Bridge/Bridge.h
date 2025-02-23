@@ -5,7 +5,7 @@
 /// <summary>
 /// ‹´
 /// </summary>
-class Bridge :public IObjectData
+class Bridge :public ObjectComponent
 {
 public:
 	Bridge() {};

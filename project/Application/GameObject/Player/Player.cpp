@@ -154,7 +154,7 @@ void Player::Update()
 	}
 }
 
-void Player::OnCollision([[maybe_unused]] IObjectData* objData)
+void Player::OnCollision([[maybe_unused]] ObjectComponent* objData)
 {
 	auto c = objData->GetCollider();
 

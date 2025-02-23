@@ -57,6 +57,20 @@ public:
   /// </summary>
   /// <param name="Scene"></param>
   void Update([[maybe_unused]] GameManager *Scene) override;
+  /// <summary>
+  /// ポストエフェクトをかける
+  /// </summary>
+  void PostProcessDraw()override;
+
+  /// <summary>
+  /// 前景2d
+  /// </summary>
+  void Flont2dSpriteDraw()override;
+
+  /// <summary>
+  /// Imguiの更新
+  /// </summary>
+  void ImGuiUpdate()override;
 
 private:
   /// <summary>
@@ -64,20 +78,6 @@ private:
   /// </summary>
   bool CheckChangeScene(GameManager *Scene);
 
-  /// <summary>
-  /// ポストエフェクトをかける
-  /// </summary>
-  void PostProcessDraw();
-
-  /// <summary>
-  /// 前景2d
-  /// </summary>
-  void Flont2dSpriteDraw();
-
-  /// <summary>
-  /// Imguiの更新
-  /// </summary>
-  void ImGuiUpdate();
 
   /// <summary>
   /// 当たり判定
@@ -104,6 +104,7 @@ private:
   ChangeSceneAnimation *changeSceneAnmation_ = nullptr;
 
   string inputLevelDataFileName_ = "";
+  bool startFlag_ = false;
 
   unique_ptr<ISceneContext> context_ = nullptr;
   SceneContextData contextData_ = {};
@@ -112,23 +113,23 @@ private:
   CharacterMoveParticle *characterMoveParticle_ = nullptr;
 
   // obj
-  unique_ptr<Goal> goal_ = nullptr;
+  shared_ptr<Goal> goal_ = nullptr;
 
   // light
-  unique_ptr<GameLight> light_ = nullptr;
+  shared_ptr<GameLight> light_ = nullptr;
 
   // manager
-  unique_ptr<PlayerManager> player_ = nullptr;
-  unique_ptr<EnemyWalkManager> enemyWalkManager_ = nullptr;
-  unique_ptr<GunEnemyManager> bulletEnemyManager_ = nullptr;
-  unique_ptr<WarpManager> warpManager_ = nullptr;
-  unique_ptr<BlockManager> blockManager_ = nullptr;
-  unique_ptr<BreakBlockManager> breakBlockManager_ = nullptr;
-  unique_ptr<StageCoinManager> stageCoinManager_ = nullptr;
-  unique_ptr<LavaManager> lavaManager_ = nullptr;
+  shared_ptr<PlayerManager> player_ = nullptr;
+  shared_ptr<EnemyWalkManager> enemyWalkManager_ = nullptr;
+  shared_ptr<GunEnemyManager> bulletEnemyManager_ = nullptr;
+  shared_ptr<WarpManager> warpManager_ = nullptr;
+  shared_ptr<BlockManager> blockManager_ = nullptr;
+  shared_ptr<BreakBlockManager> breakBlockManager_ = nullptr;
+  shared_ptr<StageCoinManager> stageCoinManager_ = nullptr;
+  shared_ptr<LavaManager> lavaManager_ = nullptr;
 
-  unique_ptr<GravityManager> gravityManager_ = nullptr;
-  unique_ptr<BoxCollisionManager> gameCollisionManager_ = nullptr;
+  shared_ptr<GravityManager> gravityManager_ = nullptr;
+  shared_ptr<BoxCollisionManager> gameCollisionManager_ = nullptr;
 
   // ui
   unique_ptr<GameSceneUI> gameUi_ = nullptr;
@@ -138,7 +139,7 @@ private:
   unique_ptr<EndAnimation> endAnimation_ = nullptr;
 
   // particle
-  unique_ptr<WallHitParticle> wallHitParticle_ = nullptr;
+  shared_ptr<WallHitParticle> wallHitParticle_ = nullptr;
 
   bool *isGameEnd_ = nullptr;
 };

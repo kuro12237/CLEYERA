@@ -22,11 +22,11 @@ void GravityManager::Update()
 
 void GravityManager::CheckGravity()
 {
-	list<IObjectData*>::iterator itrA = objectDatas_.begin();
+	list<ObjectComponent*>::iterator itrA = objectDatas_.begin();
 
 	for (; itrA != objectDatas_.end(); ++itrA) {
 
-		IObjectData* objA = *itrA;
+		ObjectComponent* objA = *itrA;
 		objA->CalcGravity(-gravity_);
 	}
 

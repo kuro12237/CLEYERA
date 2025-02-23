@@ -1,33 +1,58 @@
 #include "IScene.h"
 
-void IScene::PostProcessFuncDraw()
+void IScene::ListInitialize() 
 {
-	if (this->postEffectDrawFunc_)
-	{
-		postEffectDrawFunc_();
-	}
+   for (auto obj : managerList_) {
+      auto it = obj.lock();
+      if (it)
+         continue;
+      it->Initialize();
+   }
+
+   for (auto obj : particleList_) {
+      auto it = obj.lock();
+      if (it)
+         continue;
+      it->Initialize();
+   }
+
+   for (auto obj : objctDataList_) {
+      auto it = obj.lock();
+      if (it)
+         continue;
+      it->Initialize();
+   }
 }
 
-void IScene::Back2dSpriteFuncDraw()
+void IScene::ListUpdate()
 {
-	if (this->back2dSpriteDrawFunc_)
-	{
-		back2dSpriteDrawFunc_();
-	}
-}
 
-void IScene::Object3dFuncDraw()
-{
-	if (this->object3dDrawFunc_)
-	{
-		object3dDrawFunc_();
-	}
-}
+   for (auto obj : managerList_) {
+      auto it = obj.lock();
+      if (it)
+         continue;
 
-void IScene::Flont2dSpriteFuncDraw()
-{
-	if (flont2dSpriteDrawFunc_)
-	{
-		flont2dSpriteDrawFunc_();
-	}
+      it->Update();
+   }
+
+   for (auto obj : particleList_) {
+       auto it = obj.lock();
+      if (it)
+         continue;
+      it->Update();
+   }
+
+   for (auto obj : objctDataList_) {
+      auto it = obj.lock();
+      if (it)
+         continue;
+      it->Update();
+   }
+
+   for (auto obj : lightDataList_) {
+      auto it = obj.lock();
+      if (it)
+         continue;
+      it->Update();
+   }
 }

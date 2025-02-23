@@ -21,10 +21,10 @@ enum class CoinUse
 /// <summary>
 /// クリアコイン制御クラス
 /// </summary>
-class ClearCoin:public IObjectData
+class ClearCoin:public ObjectComponent
 {
 public:
-	ClearCoin() {};
+	ClearCoin() : isUse_(CoinUse::Inactive) {};
 	~ClearCoin() {};
 
 	void Initialize()override;

@@ -1,6 +1,6 @@
 #pragma once
-#include"Cleyera.h"
 #include"JsonComponent.h"
+#include"Light/LightingManager.h"
 
 /// <summary>
 /// ライト抽象クラス

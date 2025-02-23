@@ -8,7 +8,7 @@
 /// <summary>
 /// キャラクターの動く時のパーティクル
 /// </summary>
-class PlayerMoveParticle :public IParticleData
+class PlayerMoveParticle :public ParticleComponent
 {
 public:
 

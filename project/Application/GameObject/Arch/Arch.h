@@ -7,7 +7,7 @@
 /// <summary>
 /// ƒ^ƒCƒgƒ‹‚Ì”à
 /// </summary>
-class Arch :public IObjectData
+class Arch :public ObjectComponent
 {
 public:
 	Arch() {};

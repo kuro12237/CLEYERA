@@ -8,7 +8,7 @@
 /// <summary>
 /// スタートのカメラの動き
 /// </summary>
-class StartCameraMotion :public IObjectData
+class StartCameraMotion :public ObjectComponent
 {
 public:
 	StartCameraMotion() {};

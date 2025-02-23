@@ -11,7 +11,7 @@ class Player;
 /// <summary>
 /// レティクルクラス
 /// </summary>
-class PlayerReticle :public IObjectData
+class PlayerReticle :public ObjectComponent
 {
 public:
 	PlayerReticle() {};

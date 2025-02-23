@@ -47,7 +47,7 @@ void PlayerBullet::Update()
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 }
 
-void PlayerBullet::OnCollision([[maybe_unused]]IObjectData* objData)
+void PlayerBullet::OnCollision([[maybe_unused]]ObjectComponent* objData)
 {
 	auto c = objData->GetCollider();
 

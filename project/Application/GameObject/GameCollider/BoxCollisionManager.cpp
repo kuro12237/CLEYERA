@@ -16,7 +16,7 @@ void BoxCollisionManager::End()
 	CollidersAllHitsIdsClear();
 }
 
-void BoxCollisionManager::ListPushback(IObjectData* data)
+void BoxCollisionManager::ListPushback(ObjectComponent* data)
 {
 	datas_.push_back(data);
 }

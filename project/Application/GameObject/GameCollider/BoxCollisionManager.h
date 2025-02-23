@@ -19,7 +19,7 @@ public:
 	/// リストに登録
 	/// </summary>
 	/// <param name="c"></param>
-	void ListPushback(IObjectData*data);
+	void ListPushback(ObjectComponent*data);
 
 	/// <summary>
 	/// 登録したものを探査
@@ -107,7 +107,7 @@ private:
 	/// </summary>
 	void CheckExtrusion(ICollider* a, ICollider* b);
 
-	vector<IObjectData*>datas_;
+	vector<ObjectComponent*>datas_;
 
 };
 

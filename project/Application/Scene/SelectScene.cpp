@@ -62,11 +62,6 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
 	SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 
-
-	this->SetFlont2dSpriteDrawFunc(std::bind(&SelectScene::Flont2dSpriteDraw, this));
-	this->SetPostEffectDrawFunc(std::bind(&SelectScene::PostProcessDraw, this));
-
-
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.2f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.6f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 50.0f;
@@ -185,7 +180,7 @@ void SelectScene::PostProcessDraw()
 	gameObjectManager_->InstancingDraw();
 	gameObjectManager_->NormalDraw();
 
-	lava_->GetLavaParticle()->Draw();
+	lava_->GetLavaParticle().lock()->Draw();
 
 	GoalParticle::GetInstance()->Draw();
 
@@ -239,7 +234,7 @@ void SelectScene::Gravitys()
 	{
 		gravityManager_->PushList(player_->GetPlayerCore());
 	}
-	gravityManager_->PushParticleList(lava_->GetLavaParticle()->GetParticle());
+        gravityManager_->PushParticleList(lava_->GetLavaParticle().lock()->GetParticle());
 
 	gravityManager_->CheckGravity();
 }

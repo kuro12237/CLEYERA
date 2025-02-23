@@ -14,11 +14,11 @@ class ICollider;
 /// <summary>
 /// オブジェクトの抽象クラス
 /// </summary>
-class IObjectData : public INameable, public JsonComponent
+class ObjectComponent : public INameable, public JsonComponent
 {
 public:
-	IObjectData();
-	virtual ~IObjectData() {};
+	ObjectComponent();
+	virtual ~ObjectComponent() {};
 
 	void CalcGravity(float g);
 
@@ -27,7 +27,7 @@ public:
 	/// </summary>
 	void SetColliderParamData();
 
-	virtual void OnCollision([[maybe_unused]]IObjectData* objectData) {};
+	virtual void OnCollision([[maybe_unused]]ObjectComponent* objectData) {};
 
 	void SetObjectParamData();
 

@@ -4,7 +4,7 @@
 #include"Graphics/TextureManager/TextureManager.h"
 #include"GameObject/ObjectInterface/IParticleData.h"
 
-class LavaParticle :public IParticleData
+class LavaParticle :public ParticleComponent
 {
 public:
 	LavaParticle() {};

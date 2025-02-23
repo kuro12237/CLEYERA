@@ -8,7 +8,7 @@
 /// <summary>
 /// 塔のクラス
 /// </summary>
-class Tower :public IObjectData
+class Tower :public ObjectComponent
 {
 public:
 	Tower() {};

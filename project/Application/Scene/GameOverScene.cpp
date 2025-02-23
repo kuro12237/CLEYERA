@@ -35,9 +35,6 @@ void GameOverScene::Initialize([[maybe_unused]] GameManager* state)
 	ui_ = make_unique<GameOverSceneUI>();
 	ui_->Initialize();
 
-	this->SetFlont2dSpriteDrawFunc(std::bind(&GameOverScene::Flont2dSpriteDraw, this));
-	this->SetPostEffectDrawFunc(std::bind(&GameOverScene::PostProcessDraw, this));
-
 	//fog設定
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.5f;
 	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.5f;

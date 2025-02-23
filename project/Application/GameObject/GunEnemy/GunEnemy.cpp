@@ -76,7 +76,7 @@ void GunEnemy::Update()
 	IsHit_ = false;
 }
 
-void GunEnemy::OnCollision(IObjectData* objData)
+void GunEnemy::OnCollision(ObjectComponent* objData)
 {
 	IsHit_ = true;
 	auto c = objData->GetCollider();

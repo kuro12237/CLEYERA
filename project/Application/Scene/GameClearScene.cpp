@@ -9,9 +9,6 @@ void GameClearScene::Initialize([[maybe_unused]] GameManager* state)
 	gameObjectManager_ = GameObjectManager::GetInstance();
 	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 
-	this->SetFlont2dSpriteDrawFunc(std::bind(&GameClearScene::Flont2dSpriteDraw, this));
-	this->SetPostEffectDrawFunc(std::bind(&GameClearScene::PostProcessDraw, this));
-
 
 	//levelDataの読み込み
 	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
@@ -154,7 +151,7 @@ void GameClearScene::PostProcessDraw()
 
 
 	explosionParticle_->Draw();
-	lava_->GetLavaParticle()->Draw();
+        lava_->GetLavaParticle().lock()->Draw();
 }
 
 void GameClearScene::Flont2dSpriteDraw()

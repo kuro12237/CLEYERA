@@ -6,7 +6,7 @@
 #include"GameObject/ObjectInterface/IObjectData.h"
 #include"Utility/convert/convert.h"
 
-class ClearCamera :public IObjectData
+class ClearCamera :public ObjectComponent
 {
 public:
 	ClearCamera() {}

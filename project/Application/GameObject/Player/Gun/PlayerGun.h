@@ -6,7 +6,7 @@
 /// <summary>
 /// プレイヤーの銃
 /// </summary>
-class PlayerGun:public IObjectData
+class PlayerGun:public ObjectComponent
 {
 public:
 	PlayerGun() {};

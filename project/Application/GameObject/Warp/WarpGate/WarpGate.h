@@ -10,7 +10,7 @@
 /// <summary>
 /// ワープゲートクラス
 /// </summary>
-class WarpGate :public IObjectData
+class WarpGate :public ObjectComponent
 {
 public:
 	WarpGate() {};
@@ -20,7 +20,7 @@ public:
 
 	void Update()override;
 
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 #pragma region Get
 

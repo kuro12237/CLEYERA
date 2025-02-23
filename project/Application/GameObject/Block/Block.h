@@ -7,7 +7,7 @@
 /// <summary>
 /// マップのブロッククラス
 /// </summary>
-class Block :public IObjectData
+class Block :public ObjectComponent
 {
 public:
 	Block() {};
@@ -29,7 +29,7 @@ public:
 	/// 当たった処理
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 #pragma region Set
 

@@ -7,7 +7,7 @@
 /// <summary>
 /// タイトルのカメラ
 /// </summary>
-class TitleCamera :public IObjectData
+class TitleCamera :public ObjectComponent
 {
 public:
 	TitleCamera() {};

@@ -37,7 +37,7 @@ void BreakBlock::Update()
 
 }
 
-void BreakBlock::OnCollision([[maybe_unused]] IObjectData* objData)
+void BreakBlock::OnCollision([[maybe_unused]] ObjectComponent* objData)
 {
 	auto c = objData->GetCollider();
 	if (c->GetId() == ObjectId::kPlayerBullet)

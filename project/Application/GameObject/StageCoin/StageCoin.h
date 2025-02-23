@@ -8,7 +8,7 @@
 /// <summary>
 /// コインオブジェクト
 /// /// </summary>
-class StageCoin:public IObjectData
+class StageCoin:public ObjectComponent
 {
 public:
 	StageCoin() {};
@@ -18,7 +18,7 @@ public:
 
 	void Update()override;
 
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 #pragma region Get
 	bool GetIsDead() { return isDead_; }

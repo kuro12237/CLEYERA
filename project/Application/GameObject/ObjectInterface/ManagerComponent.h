@@ -42,7 +42,7 @@ private:
 protected:
 
 	GameObjectManager* gameObjectManager_ = nullptr;
-	list<weak_ptr<IObjectData>>objDataList_;
+	list<weak_ptr<ObjectComponent>>objDataList_;
 	size_t countMax_ = 0;
 
 };

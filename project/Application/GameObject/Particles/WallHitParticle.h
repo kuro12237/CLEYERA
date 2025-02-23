@@ -8,7 +8,7 @@
 /// <summary>
 /// 壁に当たった時のパーティクル
 /// </summary>
-class WallHitParticle :public IParticleData
+class WallHitParticle :public ParticleComponent
 {
 public:
 	WallHitParticle() {};

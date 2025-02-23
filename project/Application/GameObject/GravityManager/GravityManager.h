@@ -35,7 +35,7 @@ public:
 	/// リスト登録
 	/// </summary>
 	/// <param name="data"></param>
-	void PushList(IObjectData* data) { objectDatas_.push_back(data); }
+	void PushList(ObjectComponent* data) { objectDatas_.push_back(data); }
 
 	/// <summary>
 	/// 重力処理
@@ -51,7 +51,7 @@ public:
 
 private:
 
-	list<IObjectData*>objectDatas_;
+	list<ObjectComponent*>objectDatas_;
 
 	list<Engine::Particle::GpuParticle*>particles_;
 

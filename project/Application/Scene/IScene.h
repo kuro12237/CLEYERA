@@ -1,10 +1,11 @@
 #pragma once
-#include "Cleyera.h"
+#include"PostEffect/PostEffect.h"
 #include "Pch.h"
 #include "Utility/ObjectManager/GameObjectManager.h"
 
 #include "GameObject/ObjectInterface/IObjectData.h"
 #include "GameObject/ObjectInterface/IParticleData.h"
+#include "GameObject/ObjectInterface/LightComponent.h"
 #include "GameObject/ObjectInterface/ManagerComponent.h"
 
 class GameManager;
@@ -14,47 +15,34 @@ class GameManager;
 /// </summary>
 class IScene
 {
-public:
-  IScene()
-  {
-    postEffect_ = Engine::PostEffect::GetInstance(),
-    gameObjectManager_ = GameObjectManager::GetInstance();
-  };
+ public:
+   IScene()
+   {
+      postEffect_ = Engine::PostEffect::GetInstance(),
+      gameObjectManager_ = GameObjectManager::GetInstance();
+   };
 
-  virtual ~IScene() {};
+   virtual ~IScene() {};
 
-  virtual void Initialize(GameManager *state) = 0;
-  virtual void Update(GameManager *state) = 0;
-  void PostProcessFuncDraw();
-  void Back2dSpriteFuncDraw();
-  void Object3dFuncDraw();
-  void Flont2dSpriteFuncDraw();
+   virtual void Initialize(GameManager *state) = 0;
+   virtual void ImGuiUpdate() {};
+   virtual void Update(GameManager *state) = 0;
+   virtual void PostProcessDraw() {};
+   virtual void Back2dSpriteDraw() {};
+   virtual void Object3dDraw() {};
+   virtual void Flont2dSpriteDraw() {};
 
-#pragma region Get
+ protected:
+   void ListInitialize();
+   void ListUpdate();
 
-  std::function<void()> GetIsPostEffectDrawFunc() { return postEffectDrawFunc_; }
+   Engine::PostEffect *postEffect_ = nullptr;
+   GameObjectManager *gameObjectManager_ = nullptr;
 
-#pragma endregion
+   list<weak_ptr<ManagerComponent>> managerList_;
+   list<weak_ptr<ParticleComponent>> particleList_;
+   list<weak_ptr<ObjectComponent>> objctDataList_;
+   list<weak_ptr<LightComponent>> lightDataList_;
 
-  void SetPostEffectDrawFunc(std::function<void()> f) { postEffectDrawFunc_ = f; }
-
-  void SetBack2dSpriteDrawFunc(std::function<void()> f) { back2dSpriteDrawFunc_ = f; }
-
-  void SetObject3dDrawFunc(std::function<void()> f) { object3dDrawFunc_ = f; }
-
-  void SetFlont2dSpriteDrawFunc(std::function<void()> f) { flont2dSpriteDrawFunc_ = f; }
-
-protected:
-  Engine::PostEffect *postEffect_ = nullptr;
-  GameObjectManager *gameObjectManager_ = nullptr;
-
-  list<ManagerComponent *> managerList_;
-  list<IParticleData *> particleList_;
-  list<IObjectData *> objctDataList_;
-
-private:
-  std::function<void()> postEffectDrawFunc_ = nullptr;
-  std::function<void()> back2dSpriteDrawFunc_ = nullptr;
-  std::function<void()> object3dDrawFunc_ = nullptr;
-  std::function<void()> flont2dSpriteDrawFunc_ = nullptr;
+ private:
 };

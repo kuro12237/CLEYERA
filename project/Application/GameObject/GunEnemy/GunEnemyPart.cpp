@@ -41,7 +41,7 @@ void GunEnemyPart::Update()
 	collider_->ClearHitDirection();
 }
 
-void GunEnemyPart::OnCollision([[maybe_unused]] IObjectData* objData)
+void GunEnemyPart::OnCollision([[maybe_unused]] ObjectComponent* objData)
 {
 	auto c = objData->GetCollider();
 

@@ -10,7 +10,7 @@
 /// <summary>
 /// クリアシーンでのキャラクターの更新
 /// </summary>
-class ClearCharacter :public IObjectData
+class ClearCharacter :public ObjectComponent
 {
 public:
 	ClearCharacter() {};

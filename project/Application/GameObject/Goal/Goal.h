@@ -10,7 +10,7 @@
 /// <summary>
 /// ゴールクラス
 /// </summary>
-class Goal :public IObjectData
+class Goal :public ObjectComponent
 {
 public:
 	Goal() {};
@@ -30,7 +30,7 @@ public:
 	/// 当たった時
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 #pragma region Get
 	bool GetIsGoalFlag() { return isGoalFlag_; }
@@ -39,7 +39,7 @@ public:
 #pragma region Set
 
 	void SetGoalIndex(uint32_t index) { index_ = index; }
-	void SetGoalObjectId(uint32_t id) { IObjectData::collider_->SetId(id); }
+	void SetGoalObjectId(uint32_t id) { ObjectComponent::collider_->SetId(id); }
 #pragma endregion
 
 

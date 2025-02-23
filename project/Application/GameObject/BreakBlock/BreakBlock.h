@@ -9,7 +9,7 @@
 /// <summary>
 /// 壊れるマップのブロッククラス
 /// </summary>
-class BreakBlock :public IObjectData, public ICollider
+class BreakBlock :public ObjectComponent, public ICollider
 {
 public:
 	BreakBlock() {};
@@ -31,7 +31,7 @@ public:
 	/// 当たった処理
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(IObjectData* objData)override;
+	void OnCollision(ObjectComponent* objData)override;
 
 
 #pragma region Get

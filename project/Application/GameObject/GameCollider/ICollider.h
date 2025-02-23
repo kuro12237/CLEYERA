@@ -19,7 +19,7 @@ enum HItDirection {
 	BOTTOM
 };
 
-class IObjectData;
+class ObjectComponent;
 
 /// <summary>
 /// コライダーインターフェース
@@ -34,7 +34,7 @@ public:
 	/// 当たった時
 	/// </summary>
 	/// <param name="c"></param>
-	void OnCollision(IObjectData* objData) { OnCollisionfunc_(objData); }
+	void OnCollision(ObjectComponent* objData) { OnCollisionfunc_(objData); }
 
 	/// <summary>
 	/// めり込み数値0に
@@ -72,7 +72,7 @@ public:
 #pragma endregion
 
 #pragma region Set
-	void SetOnCollisionFunc(std::function<void(IObjectData* data)>func) { OnCollisionfunc_ = func; }
+	void SetOnCollisionFunc(std::function<void(ObjectComponent* data)>func) { OnCollisionfunc_ = func; }
 	void SetObjectData(const Engine::Transform::TransformEular& t) { pTransform_ = &t; }
 	void SetId(uint32_t id) { id_ = id; };
 	void SetAttribute(uint32_t attribute) { attribute_ = attribute; }
@@ -97,7 +97,7 @@ protected:
 	uint32_t mask_ = 0b000;
 private:
 
-	std::function<void(IObjectData*data)> OnCollisionfunc_ = nullptr;
+	std::function<void(ObjectComponent*data)> OnCollisionfunc_ = nullptr;
 
 
 	const Engine::Transform::TransformEular* pTransform_;

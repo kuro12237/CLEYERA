@@ -6,7 +6,7 @@
 /// <summary>
 /// 銃の敵の抽象クラス
 /// </summary>
-class IGunEnemy :public IObjectData
+class IGunEnemy :public ObjectComponent
 {
 public:
 	IGunEnemy() {};

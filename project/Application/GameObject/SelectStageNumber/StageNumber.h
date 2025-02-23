@@ -5,7 +5,7 @@
 /// <summary>
 /// ステージ番号
 /// </summary>
-class StageNumber:public IObjectData
+class StageNumber:public ObjectComponent
 {
 public:
 	StageNumber() {};
