@@ -316,6 +316,9 @@
     <Filter Include="Project\GameObject\BreakBlock">
       <UniqueIdentifier>{0662c8cb-8dfe-4d80-b044-23890165e5c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Scene\GameSceneState">
+      <UniqueIdentifier>{202d6f36-d2d1-4ffa-9edd-ff4835357478}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="CLEYERA\Config\.editorconfig">
@@ -958,7 +961,18 @@
     <ClCompile Include="Application\GameObject\ObjectInterface\ManagerComponent.cpp">
       <Filter>Project\GameObject\ObjectInterface</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Lava\LavaManager.cpp" />
+    <ClCompile Include="Application\Scene\GameScene\GameSceneEndState.cpp">
+      <Filter>Project\Scene\GameSceneState</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Scene\GameScene\GameScenePlayState.cpp">
+      <Filter>Project\Scene\GameSceneState</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Scene\GameScene\GameSceneStartState.cpp">
+      <Filter>Project\Scene\GameSceneState</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Lava\LavaManager.cpp">
+      <Filter>Project\GameObject\Lava</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLEYERA\Utility\Pch\Pch.h">
@@ -1672,7 +1686,21 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\LightComponent.h">
       <Filter>Project\GameObject\ObjectInterface</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Lava\LavaManager.h" />
+    <ClInclude Include="Application\Scene\GameScene\GameSceneEndState.h">
+      <Filter>Project\Scene\GameSceneState</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Scene\GameScene\GameScenePlayState.h">
+      <Filter>Project\Scene\GameSceneState</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Scene\GameScene\GameSceneStartState.h">
+      <Filter>Project\Scene\GameSceneState</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Scene\GameScene\IGameSceneState.h">
+      <Filter>Project\Scene\GameSceneState</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Lava\LavaManager.h">
+      <Filter>Project\GameObject\Lava</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\ShapeObject3d.PS.hlsl">

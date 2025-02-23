@@ -11,10 +11,10 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    globalVariables_->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
    globalVariables_->LoadFiles("Resources/LevelData/ParamData/GameScene/");
    // selectからのデータ
-   SceneContextData data = *state->GetMoveSceneContext()->GetData<SceneContextData>();
+   selectSceneData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
    // levelDataの読み込み
-   inputLevelDataFileName_ = "LevelData_" + to_string(data.stageNumber + 1) + ".json";
+   inputLevelDataFileName_ = "LevelData_" + to_string(selectSceneData_.stageNumber + 1) + ".json";
    shared_ptr<LevelData> levelData =
        move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
@@ -64,7 +64,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
       manager.lock()->Initialize();
    }
 
-   //obj
+   // obj
    goal_ = make_unique<Goal>();
    goal_->SetGoalIndex(0);
    goal_->SetGoalObjectId(ObjectId::kGoalId);
@@ -75,7 +75,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
       data.lock()->Initialize();
    }
 
-   //ライト
+   // ライト
    light_ = make_shared<GameLight>();
    lightDataList_.push_back(light_);
    for (auto light : lightDataList_) {
@@ -85,12 +85,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
    // その他
-   startAnimation_ = make_unique<StartAnimation>();
-   startAnimation_->Initialize(data.stageNumber);
-
-   endAnimation_ = make_unique<EndAnimation>();
-   endAnimation_->Initialize();
-
    gameUi_ = make_unique<GameSceneUI>();
    gameUi_->Initialize();
 
@@ -100,36 +94,32 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    // シーンコンテキスト
    context_ = make_unique<ISceneContext>();
 
+   // パーティクル
    wallHitParticle_ = make_unique<WallHitParticle>();
    wallHitParticle_->Initialize();
    particleList_.push_back(wallHitParticle_);
    particleList_.push_back(lavaManager_->GetLava(0).lock()->GetLavaParticle());
 
-
    PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
    PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 1.0f;
    PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 200.0f;
    PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 900.0f;
+
+   this->ChangeGameSceneState(make_unique<GameSceneStartState>());
 }
 
 void GameScene::Update([[maybe_unused]] GameManager *Scene)
 {
    changeSceneAnmation_->Update();
 
-   // シーン切替が終わったら
-   if (changeSceneAnmation_->GetIsComplite()) {
-      startAnimation_->SetIsCountStart(true);
-   }
-
    // カウントダウンが終わったら
-   if (startAnimation_->GetIsGameStartFlag()) {
-      enemyWalkManager_->SetIsStartFlag(true);
-      bulletEnemyManager_->setIsStartFlag(true);
-      player_->SetStartFlag(true);
-   }
+   enemyWalkManager_->SetIsStartFlag(this->isGameStartFlag_);
+   bulletEnemyManager_->setIsStartFlag(this->isGameStartFlag_);
+   player_->SetStartFlag(this->isGameStartFlag_);
 
-   startAnimation_->Update();
-   endAnimation_->Update();
+   if (state_) {
+      state_->Update(this);
+   }
 
    gameUi_->Update();
 
@@ -150,39 +140,16 @@ void GameScene::Update([[maybe_unused]] GameManager *Scene)
 
 bool GameScene::CheckChangeScene(GameManager *Scene)
 {
-   // ゴールしたときplayerのアニメーションが終わったら
-   if (*isGameEnd_) {
-      changeSceneAnmation_->ChangeStart();
-
-      enemyWalkManager_->SetIsStartFlag(false);
-      player_->SetStartFlag(false);
+   if (!changeSceneAnmation_->GetIsChangeSceneFlag()) 
+   {
+      return false;
    }
 
-   /// プレイヤーが死んだとき
-   if (player_->GetPlayerCore()->GetIsDeadAnimationComplite()) {
-      // シーン切り替え開始
-      changeSceneAnmation_->ChangeStart();
-
-      // ビネットが出ていたら消す
-      postEffect_->SetSelectPostEffect(VIGNETTE, false);
-      endAnimation_->SetIsCountStart(true);
-      // object設定
-      enemyWalkManager_->SetIsStartFlag(false);
-      player_->SetStartFlag(false);
-      player_->GetPlayerCore()->SetIsGameEnd(true);
-   }
-
-   // 終わりのアニメーションが終わったら
-   if (endAnimation_->GetCompleteFlag()) {
-      changeSceneAnmation_->ChangeStart();
-   }
-
-   if (player_->GetHp()->GetHp() <= 0 && changeSceneAnmation_->GetIsChangeSceneFlag()) {
+   if (player_->GetHp()->GetHp() <= 0) {
       Scene->ChangeScene(make_unique<GameOverScene>());
       return true;
    }
-   // 切替
-   if (changeSceneAnmation_->GetIsChangeSceneFlag()) {
+   else{
       contextData_.stageConinsCount = stageCoinManager_->GetCoinsCount();
       context_->SetData(contextData_);
 
@@ -203,13 +170,17 @@ void GameScene::PostProcessDraw()
 
 void GameScene::Flont2dSpriteDraw()
 {
-   if (startAnimation_->GetIsGameStartFlag()) {
+   if (isGameStartFlag_) {
       player_->Draw2d();
       player_->Draw2dBullet();
       player_->DrawHp();
       gameUi_->Draw2d();
    }
-   startAnimation_->Draw2d();
+
+   if (state_) {
+      state_->Draw2d();
+   }
+
    changeSceneAnmation_->Draw();
 }
 
@@ -226,18 +197,34 @@ void GameScene::ImGuiUpdate()
 
    player_->ImGuiUpdate();
 
-   ParticleImGuiUpdate();
+   if (ImGui::TreeNode("Particles")) {
+      GoalParticle::GetInstance()->ImGuiUpdate();
+      characterDeadParticle_->ImGuiUpdate();
+      characterMoveParticle_->ImGuiUpdate();
+      ImGui::TreePop();
+   }
+
    changeSceneAnmation_->ImGuiUpdate();
 
-   ImGui::Begin("PostEffect");
-   ImGui::DragFloat("scale::%f", &postEffect_->GetAdjustedColorParam().fogScale_, 0.01f);
-   ImGui::DragFloat("att::%f", &postEffect_->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
-   ImGui::DragFloat("start::%f", &postEffect_->GetAdjustedColorParam().fogStart, 1.0f);
-   ImGui::DragFloat("end::%f", &postEffect_->GetAdjustedColorParam().fogEnd, 1.0f);
-   ImGui::End();
+   ///*  ImGui::Begin("PostEffect");
+   //  ImGui::DragFloat("scale::%f", &postEffect_->GetAdjustedColorParam().fogScale_, 0.01f);
+   //  ImGui::DragFloat("att::%f", &postEffect_->GetAdjustedColorParam().fogAttenuationRate_,
+   //  0.01f); ImGui::DragFloat("start::%f", &postEffect_->GetAdjustedColorParam().fogStart, 1.0f);
+   //  ImGui::DragFloat("end::%f", &postEffect_->GetAdjustedColorParam().fogEnd, 1.0f);
+   //  ImGui::End();*/
 
-   ImGuiUpdate();
-   this->gameUi_->ImGuiUpdate();
+   //  ImGuiUpdate();
+   //  this->gameUi_->ImGuiUpdate();
+}
+
+void GameScene::ChangeGameSceneState(unique_ptr<IGameSceneState> state)
+{
+   state_ = move(state);
+
+   if (state_) {
+      state_->Initialize(this);
+      state_->Update(this);
+   }
 }
 
 void GameScene::Collision()
@@ -347,7 +334,8 @@ void GameScene::Gravitys()
       }
    }
    gravityManager_->PushParticleList(CharacterDeadParticle::GetInstance()->GetParticle());
-   gravityManager_->PushParticleList(lavaManager_->GetLava(0).lock()->GetLavaParticle().lock()->GetParticle());
+   gravityManager_->PushParticleList(
+       lavaManager_->GetLava(0).lock()->GetLavaParticle().lock()->GetParticle());
 
    gravityManager_->CheckGravity();
 }
@@ -388,14 +376,4 @@ void GameScene::ParticlesDraw()
    wallHitParticle_->Draw();
 
    player_->DrawParticle();
-}
-
-void GameScene::ParticleImGuiUpdate()
-{
-   if (ImGui::TreeNode("Particles")) {
-      GoalParticle::GetInstance()->ImGuiUpdate();
-      characterDeadParticle_->ImGuiUpdate();
-      characterMoveParticle_->ImGuiUpdate();
-      ImGui::TreePop();
-   }
 }

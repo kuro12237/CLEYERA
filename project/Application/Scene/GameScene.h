@@ -38,108 +38,117 @@
 
 #include "GameObject/Particles/WallHitParticle.h"
 
+#include "GameScene/GameSceneStartState.h"
+#include "GameScene/IGameSceneState.h"
+
 /// <summary>
 /// ゲームプレイ
 /// </summary>
 class GameScene : public IScene, JsonComponent
 {
-public:
-  GameScene() {};
-  ~GameScene() {};
+ public:
+   GameScene() {};
+   ~GameScene() {};
 
-  /// <summary>
-  /// 初期化
-  /// </summary>
-  void Initialize(GameManager *state) override;
+   /// <summary>
+   /// 初期化
+   /// </summary>
+   void Initialize(GameManager *state) override;
 
-  /// <summary>
-  /// 更新
-  /// </summary>
-  /// <param name="Scene"></param>
-  void Update([[maybe_unused]] GameManager *Scene) override;
-  /// <summary>
-  /// ポストエフェクトをかける
-  /// </summary>
-  void PostProcessDraw()override;
+   /// <summary>
+   /// 更新
+   /// </summary>
+   /// <param name="Scene"></param>
+   void Update([[maybe_unused]] GameManager *Scene) override;
+   /// <summary>
+   /// ポストエフェクトをかける
+   /// </summary>
+   void PostProcessDraw() override;
 
-  /// <summary>
-  /// 前景2d
-  /// </summary>
-  void Flont2dSpriteDraw()override;
+   /// <summary>
+   /// 前景2d
+   /// </summary>
+   void Flont2dSpriteDraw() override;
 
-  /// <summary>
-  /// Imguiの更新
-  /// </summary>
-  void ImGuiUpdate()override;
+   /// <summary>
+   /// Imguiの更新
+   /// </summary>
+   void ImGuiUpdate() override;
 
-private:
-  /// <summary>
-  /// 切替処理
-  /// </summary>
-  bool CheckChangeScene(GameManager *Scene);
+   void ChangeGameSceneState(unique_ptr<IGameSceneState> state);
 
-
-  /// <summary>
-  /// 当たり判定
-  /// </summary>
-  void Collision();
-
-  /// <summary>
-  /// 重力
-  /// </summary>
-  void Gravitys();
-
-  /// <summary>
-  /// オブジェクトの更新
-  /// </summary>
-  void PlayUpdate();
-
-#pragma region Particle
-  void ParticlesInitialize();
-  void ParticlesUpdate();
-  void ParticlesDraw();
-  void ParticleImGuiUpdate();
+#pragma region Get
+   weak_ptr<PlayerManager> GetPlayerManager() { return player_; }
+   bool GetIsGameEnd() { return *isGameEnd_; }
+   const SceneContextData &GetSelectSceneContextData() { return selectSceneData_; }
 #pragma endregion
 
-  ChangeSceneAnimation *changeSceneAnmation_ = nullptr;
+#pragma region Set
 
-  string inputLevelDataFileName_ = "";
-  bool startFlag_ = false;
+   void SetIsGameStartFlag(bool f) { isGameStartFlag_ = f; }
+#pragma endregion
 
-  unique_ptr<ISceneContext> context_ = nullptr;
-  SceneContextData contextData_ = {};
+ private:
+   /// <summary>
+   /// 切替処理
+   /// </summary>
+   bool CheckChangeScene(GameManager *Scene);
 
-  CharacterDeadParticle *characterDeadParticle_ = nullptr;
-  CharacterMoveParticle *characterMoveParticle_ = nullptr;
+   /// <summary>
+   /// 当たり判定
+   /// </summary>
+   void Collision();
 
-  // obj
-  shared_ptr<Goal> goal_ = nullptr;
+   /// <summary>
+   /// 重力
+   /// </summary>
+   void Gravitys();
 
-  // light
-  shared_ptr<GameLight> light_ = nullptr;
+#pragma region Particle
+   void ParticlesInitialize();
+   void ParticlesUpdate();
+   void ParticlesDraw();
+#pragma endregion
 
-  // manager
-  shared_ptr<PlayerManager> player_ = nullptr;
-  shared_ptr<EnemyWalkManager> enemyWalkManager_ = nullptr;
-  shared_ptr<GunEnemyManager> bulletEnemyManager_ = nullptr;
-  shared_ptr<WarpManager> warpManager_ = nullptr;
-  shared_ptr<BlockManager> blockManager_ = nullptr;
-  shared_ptr<BreakBlockManager> breakBlockManager_ = nullptr;
-  shared_ptr<StageCoinManager> stageCoinManager_ = nullptr;
-  shared_ptr<LavaManager> lavaManager_ = nullptr;
+   ChangeSceneAnimation *changeSceneAnmation_ = nullptr;
 
-  shared_ptr<GravityManager> gravityManager_ = nullptr;
-  shared_ptr<BoxCollisionManager> gameCollisionManager_ = nullptr;
+   string inputLevelDataFileName_ = "";
+   bool isGameStartFlag_ = false;
 
-  // ui
-  unique_ptr<GameSceneUI> gameUi_ = nullptr;
+   unique_ptr<ISceneContext> context_ = nullptr;
+   SceneContextData selectSceneData_ = {};
+   SceneContextData contextData_ = {};
 
-  // anim
-  unique_ptr<StartAnimation> startAnimation_ = nullptr;
-  unique_ptr<EndAnimation> endAnimation_ = nullptr;
+   CharacterDeadParticle *characterDeadParticle_ = nullptr;
+   CharacterMoveParticle *characterMoveParticle_ = nullptr;
 
-  // particle
-  shared_ptr<WallHitParticle> wallHitParticle_ = nullptr;
+   unique_ptr<IGameSceneState> state_ = nullptr;
 
-  bool *isGameEnd_ = nullptr;
+   // obj
+   shared_ptr<Goal> goal_ = nullptr;
+
+   // light
+   shared_ptr<GameLight> light_ = nullptr;
+
+   // manager
+   shared_ptr<PlayerManager> player_ = nullptr;
+   shared_ptr<EnemyWalkManager> enemyWalkManager_ = nullptr;
+   shared_ptr<GunEnemyManager> bulletEnemyManager_ = nullptr;
+   shared_ptr<WarpManager> warpManager_ = nullptr;
+   shared_ptr<BlockManager> blockManager_ = nullptr;
+   shared_ptr<BreakBlockManager> breakBlockManager_ = nullptr;
+   shared_ptr<StageCoinManager> stageCoinManager_ = nullptr;
+   shared_ptr<LavaManager> lavaManager_ = nullptr;
+
+   shared_ptr<GravityManager> gravityManager_ = nullptr;
+   shared_ptr<BoxCollisionManager> gameCollisionManager_ = nullptr;
+
+   // ui
+   unique_ptr<GameSceneUI> gameUi_ = nullptr;
+
+
+   // particle
+   shared_ptr<WallHitParticle> wallHitParticle_ = nullptr;
+
+   bool *isGameEnd_ = nullptr;
 };

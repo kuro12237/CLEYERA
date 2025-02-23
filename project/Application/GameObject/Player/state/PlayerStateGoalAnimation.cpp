@@ -29,7 +29,6 @@ void PlayerStateGoalAnimation::Update(Player* p)
 		playerGunTransform.transform.scale = Math::Vector::Add(playerGunTransform.transform.scale, { -kGunScale , -kGunScale , -kGunScale });
 		playerGunTransform.transform.translate = Math::Vector::Lerp(playerGunTransform.GetWorldPosition(), endPos_, 0.1f);
 		playerGunTransform.transform.rotate.z += float(numbers::pi / 30.0f);
-
 	}
 	
 }

@@ -128,6 +128,9 @@
     <ClCompile Include="Application\GameObject\Warp\WarpRuate\WarpRuate.cpp" />
     <ClCompile Include="Application\Scene\GameClearScene.cpp" />
     <ClCompile Include="Application\Scene\GameOverScene.cpp" />
+    <ClCompile Include="Application\Scene\GameScene\GameSceneEndState.cpp" />
+    <ClCompile Include="Application\Scene\GameScene\GameScenePlayState.cpp" />
+    <ClCompile Include="Application\Scene\GameScene\GameSceneStartState.cpp" />
     <ClCompile Include="Application\Scene\IScene.cpp" />
     <ClCompile Include="Application\Utility\convert\convert.cpp" />
     <ClCompile Include="Application\Utility\LerpMotion\LerpMotion.cpp" />
@@ -338,7 +341,11 @@
     <ClInclude Include="Application\GameObject\Warp\WarpRuate\WarpRuate.h" />
     <ClInclude Include="Application\Scene\GameClearScene.h" />
     <ClInclude Include="Application\Scene\GameOverScene.h" />
+    <ClInclude Include="Application\Scene\GameScene\GameSceneEndState.h" />
+    <ClInclude Include="Application\Scene\GameScene\GameScenePlayState.h" />
+    <ClInclude Include="Application\Scene\GameScene\GameSceneStartState.h" />
     <ClInclude Include="Application\Scene\ISceneContext.h" />
+    <ClInclude Include="Application\Scene\GameScene\IGameSceneState.h" />
     <ClInclude Include="Application\Utility\convert\convert.h" />
     <ClInclude Include="Application\Utility\LerpMotion\LerpMotion.h" />
     <ClInclude Include="Application\Utility\ObjectNumberPool\ObjectPool.h" />
