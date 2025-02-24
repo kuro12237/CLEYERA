@@ -52,6 +52,8 @@ void SelectScene::Initialize([[maybe_unused]] GameManager* state)
 	light_.position.z = -16.0f;
 	light_.decay = 0.1f;
 	isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
+        player_->SetGameStartFlag(&isGameStart_);
+
 
 	context_ = make_unique<ISceneContext>();
 
@@ -112,7 +114,7 @@ void SelectScene::Update(GameManager* Scene)
 	//シーン切替が終わったら
 	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
 	{
-		player_->SetStartFlag(true);
+           isGameStart_ = true;
 	}
 
 	player_->Update();
@@ -149,7 +151,6 @@ void SelectScene::Update(GameManager* Scene)
 		if (goals_[i]->GetIsGoalFlag()) {
 
 			ChangeSceneAnimation::GetInstance()->ChangeStart();
-			player_->SetStartFlag(false);
 		}
 	}
 

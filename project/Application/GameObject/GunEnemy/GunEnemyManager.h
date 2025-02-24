@@ -42,22 +42,12 @@ public:
 #pragma endregion
 
 #pragma region Set
-	void setIsStartFlag(bool flag) { isGameStartFlag_ = flag; }
-	bool GetIsStartFlag() { return isGameStartFlag_; }
-	void SetWallHitParticleFunc(function<void(const Math::Vector::Vector3& pos, const Math::Vector::Vector3& velo)>func);
-
 #pragma endregion
 
 private:
 
-
-	GameObjectManager* gameObjectManager_ = nullptr;
-
 	uint32_t enemyCount_ = 0;
 
 	vector<GunEnemyData>enemys_{};
-
-
-	bool isGameStartFlag_ = false;
 };
 

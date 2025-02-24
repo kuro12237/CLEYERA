@@ -62,6 +62,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
 
    for (weak_ptr<ManagerComponent> manager : managerList_) {
       manager.lock()->Initialize();
+      manager.lock()->SetGameStartFlag(&isGameStartFlag_);
    }
 
    // obj
@@ -106,16 +107,12 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 900.0f;
 
    this->ChangeGameSceneState(make_unique<GameSceneStartState>());
+
 }
 
 void GameScene::Update([[maybe_unused]] GameManager *Scene)
 {
    changeSceneAnmation_->Update();
-
-   // カウントダウンが終わったら
-   enemyWalkManager_->SetIsStartFlag(this->isGameStartFlag_);
-   bulletEnemyManager_->setIsStartFlag(this->isGameStartFlag_);
-   player_->SetStartFlag(this->isGameStartFlag_);
 
    if (state_) {
       state_->Update(this);

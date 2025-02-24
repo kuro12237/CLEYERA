@@ -80,4 +80,5 @@ class SelectScene : public IScene, JsonComponent
    vector<unique_ptr<StageNumber>> stageNumbers_;
 
    bool *isGameEnd_ = nullptr;
+   bool isGameStart_ = false;
 };

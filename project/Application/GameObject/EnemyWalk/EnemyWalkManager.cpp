@@ -41,7 +41,7 @@ void EnemyWalkManager::Initialize()
 
 void EnemyWalkManager::Update()
 {
-	if (!isGameStartFlag_)
+	if (!*isGameStartFlag_)
 	{
 		return;
 	}

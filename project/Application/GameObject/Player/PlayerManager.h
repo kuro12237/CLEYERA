@@ -66,7 +66,6 @@ public:
 #pragma endregion
 
 #pragma region Set
-	void SetStartFlag(bool f) { gameStartFlag_ = f; }
 #pragma endregion
 
 	/// <summary>
@@ -86,8 +85,6 @@ private:
 	void DamegeUpdateEnd();
 
 	float vinatteFactor_ = 1.0f;
-
-	bool gameStartFlag_ = false;
 
 	shared_ptr<PlayerCommandHandler>commandHandler_ = nullptr;
 

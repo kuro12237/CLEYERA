@@ -7,12 +7,14 @@ void GameScenePlayState::Initialize([[maybe_unused]] GameScene *scene)
 
 void GameScenePlayState::Update([[maybe_unused]] GameScene *scene) 
 {
+
+
    auto core = playerManager_.lock()->GetPlayerCore();
    core->CheckStatePush<PlayerStateDeadAnimation>();
    core->CheckStatePush<PlayerStateGoalAnimation>();
    if (core->IsCheckStateRetuen())
    {
-      scene->ChangeGameSceneState(nullptr);
+      scene->ChangeGameSceneState(make_unique<GameSceneEndState>());
    }
 }
 

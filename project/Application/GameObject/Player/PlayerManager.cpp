@@ -104,11 +104,11 @@ void PlayerManager::Update()
 	//ゲームが終わる通知
 	if (playerCore_->GetIsGameEnd())
 	{
-		gameStartFlag_ = false;
+	
 	}
 
 	//Commands
-	if (gameStartFlag_ && !playerCore_->IsInState<PlayerStateGoalAnimation>())
+	if (*this->isGameStartFlag_ && !playerCore_->IsInState<PlayerStateGoalAnimation>())
 	{
 		//プレイヤーの操作キャラ
 		commandHandler_->Handler();

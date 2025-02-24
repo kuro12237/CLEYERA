@@ -1,48 +1,57 @@
 #pragma once
 
-#include"Utility/ObjectManager/GameObjectManager.h"
-#include"Utility/convert/convert.h"
-#include"IObjectData.h"
+#include "IObjectData.h"
+#include "Utility/ObjectManager/GameObjectManager.h"
+#include "Utility/convert/convert.h"
 
 /// <summary>
 /// マネージャーリスト抽象クラス
 /// </summary>
-class ManagerComponent:public JsonComponent
+class ManagerComponent : public JsonComponent
 {
-public:
-	ManagerComponent() { gameObjectManager_ = GameObjectManager::GetInstance();};
-	virtual ~ManagerComponent() {};
+ public:
+   ManagerComponent() { gameObjectManager_ = GameObjectManager::GetInstance(); };
+   virtual ~ManagerComponent() {};
 
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	/// <param name="data"></param>
-	virtual void Initialize() = 0;
+   /// <summary>
+   /// 初期化
+   /// </summary>
+   /// <param name="data"></param>
+   virtual void Initialize() = 0;
 
-	/// <summary>
-	/// 更新
-	/// </summary>
-	virtual void Update() = 0;
+   /// <summary>
+   /// 更新
+   /// </summary>
+   virtual void Update() = 0;
 
-	/// <summary>
-	/// ImGui更新
-	/// </summary>
-	virtual void ImGuiUpdate() {};
+   /// <summary>
+   /// ImGui更新
+   /// </summary>
+   virtual void ImGuiUpdate() {};
 
-	void ImGuiBegin(string tag) { ImGui::Begin(tag.c_str()); };
-	void ImGuiEnd() { ImGui::End(); }
+   void ImGuiBegin(string tag) { ImGui::Begin(tag.c_str()); };
+   void ImGuiEnd() { ImGui::End(); }
 
-	/// <summary>
-	/// 空か確認空だった場合削除
-	/// </summary>
-	void RemoveEmptyObjList();
+   /// <summary>
+   /// 空か確認空だった場合削除
+   /// </summary>
+   void RemoveEmptyObjList();
 
-private:
+#pragma region Set
 
-protected:
+   void SetGameStartFlag(bool *f) { isGameStartFlag_ = f; }
 
-	GameObjectManager* gameObjectManager_ = nullptr;
-	list<weak_ptr<ObjectComponent>>objDataList_;
-	size_t countMax_ = 0;
+#pragma endregion
 
+#pragma region Get
+   bool GetIsStartFlag() { return &isGameStartFlag_; }
+#pragma endregion
+
+ private:
+ protected:
+   GameObjectManager *gameObjectManager_ = nullptr;
+   list<weak_ptr<ObjectComponent>> objDataList_;
+   size_t countMax_ = 0;
+
+   bool *isGameStartFlag_ = nullptr;
 };

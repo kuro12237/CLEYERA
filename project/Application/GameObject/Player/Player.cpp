@@ -343,6 +343,7 @@ void Player::Aim()
 
 void Player::TransformUpdate()
 {
-	TransformEular& transform = gameObjectManager_->GetObj3dData(INameable::name_)->GetWorldTransform().transform;
+   TransformEular &transform = objectData_.lock()->GetWorldTransform().transform;
+
 	transform.translate = Math::Vector::Add(transform.translate, velocity_);
 }

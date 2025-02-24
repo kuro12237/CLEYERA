@@ -27,6 +27,7 @@ void IScene::ListUpdate()
    for (auto obj : managerList_) {
       auto it = obj.lock();
       if (it)
+         it->RemoveEmptyObjList();
          it->Update();
    }
 

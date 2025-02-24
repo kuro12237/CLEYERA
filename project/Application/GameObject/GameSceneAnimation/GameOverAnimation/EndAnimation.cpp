@@ -15,6 +15,7 @@ void EndAnimation::Initialize()
 
 void EndAnimation::Update()
 {
+   this->isComplete_ = true;
 }
 
 void EndAnimation::Draw2d()

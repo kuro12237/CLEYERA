@@ -54,7 +54,7 @@ void GunEnemyManager::Initialize()
 
 void GunEnemyManager::Update()
 {
-	if (!isGameStartFlag_)
+	if (!*isGameStartFlag_)
 	{
 		return;
 	}

@@ -4,20 +4,32 @@ void GameSceneEndState::Initialize([[maybe_unused]]GameScene *scene)
 {
    changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 
+   playerManager_ = scene->GetPlayerManager();
+
    scene->SetIsGameStartFlag(false);
    endAnimation_ = make_unique<EndAnimation>();
    endAnimation_->Initialize();
 }
 
-void GameSceneEndState::Update(GameScene *scene) 
+void GameSceneEndState::Update([[maybe_unused]]GameScene *scene) 
 {
    endAnimation_->Update();
-   if (scene->GetIsGameEnd())
-   {
-      endAnimation_->SetIsCountStart(true);
+
+   auto core = playerManager_.lock()->GetPlayerCore();
+
+   //dead
+   core->CheckStatePush<PlayerStateDeadAnimation>();
+   if (core->IsCheckStateRetuen()) {
+      if (core->GetIsDeadAnimationComplite())
+      {
+         changeSceneAnimation_->ChangeStart();
+      }
    }
 
-   if (endAnimation_->GetCompleteFlag()) {
+   //clear
+   core->CheckStatePush<PlayerStateGoalAnimation>();
+   if (core->IsCheckStateRetuen()) {
+
       changeSceneAnimation_->ChangeStart();
    }
 
