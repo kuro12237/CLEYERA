@@ -28,6 +28,8 @@ class EnemyWalkManager : public ManagerComponent
 #pragma endregion
 
 #pragma region Set
+   void SetDeadParticle(const weak_ptr<CharacterDeadParticle> &p);
+
 #pragma endregion
 
  private:

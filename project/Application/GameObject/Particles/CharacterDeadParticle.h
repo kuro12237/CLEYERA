@@ -1,65 +1,36 @@
 #pragma once
-#include"Particle/GpuParticle.h"
-#include"Particle/Emitter/ParticleEmitter.h"
-#include"Graphics/TextureManager/TextureManager.h"
-#include"Particle/Field/ParticleField.h"
+#include "GameObject/ObjectInterface/IParticleData.h"
+#include "Graphics/TextureManager/TextureManager.h"
+#include "Particle/Emitter/ParticleEmitter.h"
+#include "Particle/Field/ParticleField.h"
+#include "Particle/GpuParticle.h"
 
 /// <summary>
 /// キャラクターが死んだときのパーティクル
 /// </summary>
-class CharacterDeadParticle
+class CharacterDeadParticle : public ParticleComponent
 {
-public:
+ public:
+   CharacterDeadParticle() {};
+   ~CharacterDeadParticle() {};
+   /// <summary>
+   /// 初期化
+   /// </summary>
+   void Initialize() override;
 
-	static CharacterDeadParticle * GetInstance();
-
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	void Initialize();
-
-	/// <summary>
-	/// 更新
-	/// </summary>
-	void Update();
-	
-
-	/// <summary>
-	/// 描画
-	/// </summary>
-	void Draw();
-
-	/// <summary>
-	/// ImGui更新
-	/// </summary>
-	void ImGuiUpdate();
-
-	/// <summary>
-	/// エミッターの一部をクリア
-	/// </summary>
-	/// <param name="index"></param>
-	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
-
-	void Emit(){emitter_->Emit(particle_);}
+   /// <summary>
+   /// 更新
+   /// </summary>
+   void Update() override;
 
 #pragma region Get
-	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>*GetEmitter() { return emitter_.get(); };
-	Engine::Particle::GpuParticle* GetParticle() { return particle_.get(); }
 #pragma endregion
 
-private:
-	bool initializeLock_ = false;
-	string name_ = "CharacterDeadParticle";
-	uint32_t texHandle_ = 0;
+ private:
+   bool initializeLock_ = false;
+   string name_ = "CharacterDeadParticle";
+   uint32_t texHandle_ = 0;
 
-	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
-	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
-	unique_ptr<Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>>block_ = nullptr;
-	
-
-	CharacterDeadParticle() = default;
-	~CharacterDeadParticle() = default;
-	CharacterDeadParticle(const CharacterDeadParticle&) = delete;
-	const CharacterDeadParticle& operator=(const CharacterDeadParticle&) = delete;
+   unique_ptr<Engine::Particle::ParticleField<Engine::Particle::FieldType::FieldHitBox>> block_ =
+       nullptr;
 };
-

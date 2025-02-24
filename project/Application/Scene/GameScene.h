@@ -114,15 +114,15 @@ class GameScene : public IScene, JsonComponent
 
    string inputLevelDataFileName_ = "";
    bool isGameStartFlag_ = false;
+   bool *isGameEnd_ = nullptr;
 
+   int32_t lavaIndex_ = 0;
 
    unique_ptr<ISceneContext> context_ = nullptr;
    SceneContextData selectSceneData_ = {};
-   SceneContextData contextData_ = {};
+   SceneContextData nextSceneData_ = {};
 
-   CharacterDeadParticle *characterDeadParticle_ = nullptr;
-   CharacterMoveParticle *characterMoveParticle_ = nullptr;
-
+   //state
    unique_ptr<IGameSceneState> state_ = nullptr;
 
    // obj
@@ -146,6 +146,10 @@ class GameScene : public IScene, JsonComponent
 
    // particle
    shared_ptr<WallHitParticle> wallHitParticle_ = nullptr;
+   shared_ptr<CharacterDeadParticle> deadParticle_ = nullptr;
+   shared_ptr<CharacterMoveParticle> moveParticle_ = nullptr;
 
-   bool *isGameEnd_ = nullptr;
+   shared_ptr<PlayerMoveParticle> playerMoveParticle_ = nullptr;
+   shared_ptr<PlayerDeadParticle> playerDeadParticle_ = nullptr;
+
 };

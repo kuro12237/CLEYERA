@@ -6,46 +6,34 @@ using namespace Engine::Transform;
 
 void PlayerDeadParticle::Initialize()
 {
-    texHandle_ = TextureManager::LoadPngTexture("deadEffect.png");
 
-    particle_ = make_unique<Particle::GpuParticle>();
-    particle_->Create(1, name_);
-    particle_->SetTexhandle(texHandle_);
+   name_ = VAR_NAME(PlayerDeadParticle);
+   this->Create();
 
-    emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
-    emitter_->CreateType(particle_);
+   texHandle_ = Engine::Manager::TextureManager::LoadPngTexture("deadEffect.png");
+   particle_->SetTexhandle(texHandle_);
+
 }
 
 void PlayerDeadParticle::Update()
-{ 
-    if (isEmit_)
-    {
-
-        auto& emit = emitter_->GetEmitParam()[0];
-        auto& control = emitter_->GetControlParam()[0];
-
-        control.useFlag_ = true;
-        control.frequencyTime = 0.5f;
-        emit.count = 3;
-
-        emit.velocityMax = { 0.1f,0.1f,0.1f };
-        emit.velocityMin = { -0.1f,-0.1f,-0.1f };
-        emit.translate = *p_PlayerPos_;
-    }
-
-    emitter_->Update();
-    emitter_->Emit(particle_);
-    particle_->CallBarrier();
-    particle_->Update();
-}
-
-void PlayerDeadParticle::Draw()
 {
-    particle_->Draw();
-    emitter_->SpownDraw();
-}
+   if (isEmit_) {
 
-void PlayerDeadParticle::ImGuiUpdate()
-{
-    emitter_->ImGuiUpdate();
+      auto &emit = boxEmitter_->GetEmitParam()[0];
+      auto &control = boxEmitter_->GetControlParam()[0];
+
+      control.useFlag_ = true;
+      control.frequencyTime = 0.5f;
+      emit.count = 3;
+
+      emit.velocityMax = {0.1f, 0.1f, 0.1f};
+      emit.velocityMin = {-0.1f, -0.1f, -0.1f};
+      emit.translate = *p_PlayerPos_;
+   }
+
+ 
+   boxEmitter_->Emit(particle_);
+   boxEmitter_->Update();
+   particle_->CallBarrier();
+   particle_->Update();
 }

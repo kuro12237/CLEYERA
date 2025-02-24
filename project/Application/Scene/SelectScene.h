@@ -73,8 +73,7 @@ class SelectScene : public IScene, JsonComponent
    unique_ptr<GravityManager> gravityManager_ = nullptr;
    unique_ptr<BoxCollisionManager> gameCollisionManager_ = nullptr;
    unique_ptr<Lava> lava_ = nullptr;
-   CharacterDeadParticle *characterDeadParticle_ = nullptr;
-
+  
    unique_ptr<SelectSceneUI> ui_ = nullptr;
 
    vector<unique_ptr<StageNumber>> stageNumbers_;

@@ -10,6 +10,10 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    // paramfilePath変更
    globalVariables_->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
    globalVariables_->LoadFiles("Resources/LevelData/ParamData/GameScene/");
+
+   this->jsonGropName_ = VAR_NAME(GameScene);
+   this->CreateJsonData();
+
    // selectからのデータを移動
    selectSceneData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
@@ -27,12 +31,9 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    gameObjectManager_->Update();
 
    // Particle初期化
-   ParticlesInitialize();
-
    GoalParticle::GetInstance()->Clear();
-   CharacterDeadParticle::GetInstance()->GetEmitter()->AllClear();
-   CharacterDeadParticle::GetInstance()->GetParticle()->Clear();
 
+   // マネージャー初期化
    player_ = make_shared<PlayerManager>();
    managerList_.push_back(player_);
 
@@ -65,9 +66,18 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
       manager.lock()->SetGameStartFlag(&isGameStartFlag_);
    }
 
+   int32_t goalIndex = 0;
+   string goalName = VAR_NAME(goalIndex);
+   AddJsonItem<decltype(goalIndex)>(goalName, goalIndex);
+   goalIndex = GetJsonItem<decltype(goalIndex)>(goalName);
+
+   string lavaName = VAR_NAME(lavaIndex_);
+   AddJsonItem<decltype(lavaIndex_)>(lavaName, lavaIndex_);
+   lavaIndex_ = GetJsonItem<decltype(lavaIndex_)>(lavaName);
+
    // obj
    goal_ = make_unique<Goal>();
-   goal_->SetGoalIndex(0);
+   goal_->SetGoalIndex(goalIndex);
    goal_->SetGoalObjectId(ObjectId::kGoalId);
 
    objctDataList_.push_back(goal_);
@@ -85,7 +95,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
 
    gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
-  
    // ゲーム終了のつなぐ
    isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
@@ -94,14 +103,44 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
 
    // パーティクル
    wallHitParticle_ = make_unique<WallHitParticle>();
-   wallHitParticle_->Initialize();
    particleList_.push_back(wallHitParticle_);
-   particleList_.push_back(lavaManager_->GetLava(0).lock()->GetLavaParticle());
 
-   PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 1.0f;
-   PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 1.0f;
-   PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 200.0f;
-   PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 900.0f;
+   playerDeadParticle_ = make_unique<PlayerDeadParticle>();
+   particleList_.push_back(playerDeadParticle_);
+
+   playerMoveParticle_ = make_unique<PlayerMoveParticle>();
+   particleList_.push_back(playerMoveParticle_);
+
+   deadParticle_ = make_unique<CharacterDeadParticle>();
+   particleList_.push_back(deadParticle_);
+
+   for (auto obj : particleList_) {
+      obj.lock()->Initialize();
+   }
+
+   particleList_.push_back(lavaManager_->GetLava(lavaIndex_).lock()->GetLavaParticle());
+
+   // 各クラスの設定
+
+   enemyWalkManager_->SetDeadParticle(deadParticle_);
+
+   player_->SetDeadParticle(playerDeadParticle_);
+   player_->SetMoveParticle(playerMoveParticle_);
+   player_->SetParticlePos();
+
+#pragma region PostEffectSetting
+
+   Math::Vector::Vector4 fogParam = {};
+   string key = VAR_NAME(fogParam);
+   AddJsonItem<decltype(fogParam)>(key, fogParam);
+   fogParam = GetJsonItem<decltype(fogParam)>(key);
+
+   postEffect_->GetAdjustedColorParam().fogScale_ = fogParam.x;
+   postEffect_->GetAdjustedColorParam().fogAttenuationRate_ = fogParam.y;
+   postEffect_->GetAdjustedColorParam().fogStart = fogParam.z;
+   postEffect_->GetAdjustedColorParam().fogEnd = fogParam.w;
+
+#pragma endregion
 
    this->ChangeGameSceneState(make_unique<GameSceneStartState>());
 }
@@ -138,8 +177,8 @@ bool GameScene::CheckChangeScene(GameManager *Scene)
       return true;
    }
    else {
-      contextData_.stageConinsCount = stageCoinManager_->GetCoinsCount();
-      context_->SetData(contextData_);
+      nextSceneData_.stageConinsCount = stageCoinManager_->GetCoinsCount();
+      context_->SetData(nextSceneData_);
 
       Scene->SetMoveSceneContext(move(context_));
       Scene->ChangeScene(make_unique<GameClearScene>());
@@ -180,8 +219,8 @@ void GameScene::ImGuiUpdate()
 
    if (ImGui::TreeNode("Particles")) {
       GoalParticle::GetInstance()->ImGuiUpdate();
-      characterDeadParticle_->ImGuiUpdate();
-      characterMoveParticle_->ImGuiUpdate();
+      deadParticle_->ImGuiUpdate();
+      moveParticle_->ImGuiUpdate();
       ImGui::TreePop();
    }
 
@@ -282,39 +321,24 @@ void GameScene::Gravitys()
    gravityManager_->ClearList();
 
    // managerの中のオブジェクトをリストに追加
-   for (weak_ptr<ManagerComponent> m : managerList_) {
-      auto mObj = m.lock();
-      if (mObj) {
-
-         mObj->GravityManagerObjListPush(gravityManager_.get());
+   for (weak_ptr<ManagerComponent> obj : managerList_) {
+      auto it = obj.lock();
+      if (it) {
+         it->GravityManagerObjListPush(gravityManager_);
       }
    }
 
-   gravityManager_->PushParticleList(CharacterDeadParticle::GetInstance()->GetParticle());
+   gravityManager_->PushParticleList(deadParticle_->GetParticle());
    gravityManager_->PushParticleList(
-       lavaManager_->GetLava(0).lock()->GetLavaParticle().lock()->GetParticle());
+       lavaManager_->GetLava(lavaIndex_).lock()->GetLavaParticle().lock()->GetParticle());
 
    gravityManager_->CheckGravity();
 }
 
-void GameScene::ParticlesInitialize()
-{
-   characterDeadParticle_ = CharacterDeadParticle::GetInstance();
-   characterDeadParticle_->Initialize();
-
-   characterMoveParticle_ = CharacterMoveParticle::GetInstance();
-   characterMoveParticle_->Initialize();
-}
-
 void GameScene::ParticlesUpdate()
 {
-   characterDeadParticle_->GetParticle()->CallBarrier();
-   blockManager_->Dispach(characterDeadParticle_->GetParticle());
-
-   characterDeadParticle_->Update();
-
-   characterMoveParticle_->Update();
-   wallHitParticle_->Update();
+   deadParticle_->GetParticle()->CallBarrier();
+   blockManager_->Dispach(deadParticle_->GetParticle());
 
    GoalParticle::GetInstance()->Update();
 }
@@ -322,13 +346,8 @@ void GameScene::ParticlesUpdate()
 void GameScene::ParticlesDraw()
 {
    GoalParticle::GetInstance()->Draw();
-   characterDeadParticle_->Draw();
 
    for (auto p : particleList_) {
       p.lock()->Draw();
    }
-
-   wallHitParticle_->Draw();
-
-   player_->DrawParticle();
 }

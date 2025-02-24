@@ -60,3 +60,13 @@ void EnemyWalkManager::Update()
       }
    }
 }
+
+void EnemyWalkManager::SetDeadParticle(const weak_ptr<CharacterDeadParticle> &p) 
+{
+   for (auto &enemy : enemys_) {
+      if (enemy) {
+          enemy->SetDeadParticle(p);
+      }
+   }
+
+}

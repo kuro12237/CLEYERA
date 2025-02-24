@@ -118,8 +118,6 @@ void GlobalVariables::SaveFile(const std::string& groupName)
 	// 書き込むJSONファイルのフルパスを合成する
 	std::string filePath = directoryPath + groupName + ".json";
 
-
-
 	// 書き込み用ファイルストリーム
 	std::ofstream ofs{};
 	// ファイルを書き込みように開く

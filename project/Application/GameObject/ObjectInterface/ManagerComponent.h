@@ -39,7 +39,7 @@ class ManagerComponent : public JsonComponent
    /// </summary>
    void RemoveEmptyObjList();
 
-   void GravityManagerObjListPush(GravityManager *g);
+   void GravityManagerObjListPush(weak_ptr<GravityManager> g);
 
 #pragma region Set
 

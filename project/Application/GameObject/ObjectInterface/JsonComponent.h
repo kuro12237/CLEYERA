@@ -1,28 +1,36 @@
 #pragma once
-#include"Pch.h"
-#include"Utility/GlobalVariables/GlobalVariables.h"
+#include "Pch.h"
+#include "Utility/GlobalVariables/GlobalVariables.h"
 
+///変数ヲ文字列に変換するマクロ
+#define VAR_NAME(var) (#var)
+
+/// <summary>
+/// json使うようのクラス
+/// </summary>
 class JsonComponent
 {
-public:
+ public:
+   JsonComponent() { globalVariables_ = GlobalVariables::GetInstance(); }
+   ~JsonComponent() = default;
 
-	JsonComponent() { globalVariables_ = GlobalVariables::GetInstance(); }
-	~JsonComponent() = default;
+   void CreateJsonData() { globalVariables_->CreateGroup(jsonGropName_); }
 
-	void CreateJsonData() { globalVariables_->CreateGroup(jsonGropName_); }
+   template <typename T> void AddJsonItem(string itemName, T value)
+   {
+      return globalVariables_->AddItem(jsonGropName_, itemName, value);
+   }
 
-	template<typename T>
-	void AddJsonItem(string itemName, T value) { return globalVariables_->AddItem(jsonGropName_, itemName, value); }
+   template <typename T> T GetJsonItem(string itemName)
+   {
+      return globalVariables_->GetValue<T>(jsonGropName_, itemName);
+   }
 
-	template<typename T>
-	T GetJsonItem(string itemName) { return globalVariables_->GetValue<T>(jsonGropName_, itemName); }
 
-	void SaveFile() { globalVariables_->SaveFile(jsonGropName_); }
+   void SaveFile() { globalVariables_->SaveFile(jsonGropName_); }
 
-protected:
+ protected:
+   string jsonGropName_ = "";
 
-	string jsonGropName_ = "";
-
-	GlobalVariables* globalVariables_ = nullptr;
+   GlobalVariables *globalVariables_ = nullptr;
 };
-

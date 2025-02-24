@@ -1,63 +1,63 @@
 #pragma once
-#include"Particle/GpuParticle.h"
-#include"Particle/Emitter/ParticleEmitter.h"
-#include"Graphics/TextureManager/TextureManager.h"
+#include "GameObject/ObjectInterface/IParticleData.h"
+#include "Graphics/TextureManager/TextureManager.h"
+#include "Particle/Emitter/ParticleEmitter.h"
+#include "Particle/GpuParticle.h"
 
 /// <summary>
-/// ƒLƒƒƒ‰ƒNƒ^[‚Ì“®‚­‚Ìƒp[ƒeƒBƒNƒ‹
+/// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®å‹•ãæ™‚ã®ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 /// </summary>
-class CharacterMoveParticle
+class CharacterMoveParticle : public ParticleComponent
 {
-public:
-	static CharacterMoveParticle* GetInstance();
+ public:
+   CharacterMoveParticle() {};
+   ~CharacterMoveParticle() {};
 
-	/// <summary>
-	/// ‰Šú‰»
-	/// </summary>
-	void Initialize();
+   /// <summary>
+   /// åˆæœŸåŒ–
+   /// </summary>
+   void Initialize();
 
-	/// <summary>
-	/// XV
-	/// </summary>
-	void Update();
+   /// <summary>
+   /// æ›´æ–°
+   /// </summary>
+   void Update();
 
-	/// <summary>
-	/// •`‰æ
-	/// </summary>
-	void Draw();
+   /// <summary>
+   /// æç”»
+   /// </summary>
+   void Draw();
 
-	/// <summary>
-	/// ImGuiXV
-	/// </summary>
-	void ImGuiUpdate();
+   /// <summary>
+   /// ImGuiæ›´æ–°
+   /// </summary>
+   void ImGuiUpdate();
 
-	/// <summary>
-	/// Emitter‚Ìƒpƒ‰ƒ[ƒ^[‚ğ‰Šú‰»
-	/// </summary>
-	/// <param name="index"></param>
-	void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
+   /// <summary>
+   /// Emitterã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’åˆæœŸåŒ–
+   /// </summary>
+   /// <param name="index"></param>
+   void ClearEmitter(uint32_t index) { emitter_->Clear(index); }
 
-	/// <summary>
-	/// ƒp[ƒeƒBƒNƒ‹‚ğ•¦‚©‚¹‚é
-	/// </summary>
-	void Emit();
+   /// <summary>
+   /// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’æ²¸ã‹ã›ã‚‹
+   /// </summary>
+   void Emit();
 
 #pragma region Get
-	Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>* GetEmitter() { return emitter_.get(); };
+   Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam> *GetEmitter()
+   {
+      return emitter_.get();
+   };
 #pragma endregion
 
-private:
+ private:
+   bool InitializeLock_ = false;
+   string name_ = "CharacterMoveParticle";
+   uint32_t texHandle_ = 0;
 
-	bool InitializeLock_ = false;
-	string name_ = "CharacterMoveParticle";
-	uint32_t texHandle_ = 0;
+   unique_ptr<Engine::Particle::GpuParticle> particle_ = nullptr;
+   unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>> emitter_ =
+       nullptr;
 
-	unique_ptr<Engine::Particle::GpuParticle>particle_ = nullptr;
-	unique_ptr<Engine::Particle::ParticleEmitter<Engine::Particle::EmitType::BoxParam>>emitter_ = nullptr;
-
-	CharacterMoveParticle() = default;
-	~CharacterMoveParticle() = default;
-	CharacterMoveParticle(const CharacterMoveParticle&) = delete;
-	const CharacterMoveParticle& operator=(const CharacterMoveParticle&) = delete;
 };
-

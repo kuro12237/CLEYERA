@@ -9,9 +9,9 @@ void ManagerComponent::RemoveEmptyObjList()
        objDataList_.end());
 }
 
-void ManagerComponent::GravityManagerObjListPush(GravityManager *g)
+void ManagerComponent::GravityManagerObjListPush(weak_ptr<GravityManager> g)
 {
-   GravityManager *gravityManager = g;
+   auto gravityManager = g.lock();
 
    for (weak_ptr<ObjectComponent> obj : objDataList_) {
       auto it = obj.lock();

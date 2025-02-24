@@ -5,11 +5,6 @@ using namespace Engine;
 using namespace Engine::Manager;
 using namespace Engine::Transform;
 
-CharacterDeadParticle* CharacterDeadParticle::GetInstance()
-{
-    static CharacterDeadParticle instance;
-    return &instance;
-}
 
 void CharacterDeadParticle::Initialize()
 {
@@ -21,11 +16,9 @@ void CharacterDeadParticle::Initialize()
     texHandle_ = TextureManager::LoadPngTexture("circle.png");
     uint32_t modelHandle = ModelManager::LoadObjectFile("DfCube");
 
-    particle_ = make_unique<Particle::GpuParticle>();
-    particle_->Create(1,name_,modelHandle);
+    name_ = VAR_NAME(CharacterDeadParticle);
 
-    emitter_ = make_unique<Particle::ParticleEmitter<Particle::EmitType::BoxParam>>();
-    emitter_->CreateType(particle_);
+    Create(modelHandle);
 
 	block_ = make_unique<Particle::ParticleField<Particle::FieldType::FieldHitBox>>();
 	block_->CreateType("Block");
@@ -33,9 +26,11 @@ void CharacterDeadParticle::Initialize()
 
 void CharacterDeadParticle::Update()
 {
-    particle_->CallBarrier();
-    emitter_->Update();
-    emitter_->Emit(particle_);
+
+   particle_->CallBarrier();
+   boxEmitter_->Emit(particle_);
+   boxEmitter_->Update();
+ 
 
     particle_->CallBarrier();
     block_->Update();
@@ -45,15 +40,3 @@ void CharacterDeadParticle::Update()
     particle_->Update();
 }
 
-void CharacterDeadParticle::Draw()
-{
-    particle_->Draw();
-    emitter_->SpownDraw();
-}
-
-void CharacterDeadParticle::ImGuiUpdate()
-{
-
-    block_->ImGuiUpdate();
-    emitter_->ImGuiUpdate();
-}

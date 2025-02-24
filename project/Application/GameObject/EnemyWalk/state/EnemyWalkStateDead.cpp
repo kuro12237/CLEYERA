@@ -1,4 +1,6 @@
 #include "EnemyWalkStateDead.h"
+#include"GameObject/Particles/CharacterDeadParticle.h"
+
 
 void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 {
@@ -6,7 +8,7 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 	e->GetCollider()->SetId(ObjectId::kOnlyCollideWithBlocksid);
 
 	gameObjIncetance_ = GameObjectManager::GetInstance();
-	auto* emitters = CharacterDeadParticle::GetInstance()->GetEmitter();
+        auto *emitters = e->GetDeadParticle().lock()->GetEmitter();
 
 	uint32_t index = 0;
 	for (auto& emitter : emitters->GetControlParam())
@@ -39,7 +41,7 @@ void EnemyWalkStateDead::Initialize([[maybe_unused]] EnemyWalk* e)
 
 void EnemyWalkStateDead::Update([[maybe_unused]] EnemyWalk* e)
 {
-	auto* emitters = CharacterDeadParticle::GetInstance()->GetEmitter();
+   auto *emitters = e->GetDeadParticle().lock()->GetEmitter();
 	auto& emitterParam = emitters->GetEmitParam()[particleIndex_];
 	auto& objData = gameObjIncetance_->GetObj3dDatas()[e->INameable::GetName()];
 	auto& desc = gameObjIncetance_->GetObjectDesc(e->INameable::GetName());
