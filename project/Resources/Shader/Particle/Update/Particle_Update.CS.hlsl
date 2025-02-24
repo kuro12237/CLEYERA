@@ -41,6 +41,7 @@ void main(uint3 DTid : SV_DispatchThreadID)
         
         gParticle[particleIndex].matWorld = AffineMatrix(gParticle[particleIndex].scale, gParticle[particleIndex].rotate, gParticle[particleIndex].translate);
         
+        //消滅処理
         if (gParticle[particleIndex].color.a <= 0.0f)
         {
             gParticle[particleIndex].scale = float32_t3(0.0f, 0.0f, 0.0f);

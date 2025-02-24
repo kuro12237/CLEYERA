@@ -44,7 +44,7 @@
 /// <summary>
 /// ゲームプレイ
 /// </summary>
-class GameScene : public IScene, JsonComponent
+class GameScene : public IScene, public JsonComponent
 {
  public:
    GameScene() {};
@@ -84,7 +84,6 @@ class GameScene : public IScene, JsonComponent
 #pragma endregion
 
 #pragma region Set
-
    void SetIsGameStartFlag(bool f) { isGameStartFlag_ = f; }
 #pragma endregion
 
@@ -105,7 +104,6 @@ class GameScene : public IScene, JsonComponent
    void Gravitys();
 
 #pragma region Particle
-   void ParticlesInitialize();
    void ParticlesUpdate();
    void ParticlesDraw();
 #pragma endregion
@@ -147,9 +145,9 @@ class GameScene : public IScene, JsonComponent
    // particle
    shared_ptr<WallHitParticle> wallHitParticle_ = nullptr;
    shared_ptr<CharacterDeadParticle> deadParticle_ = nullptr;
-   shared_ptr<CharacterMoveParticle> moveParticle_ = nullptr;
 
    shared_ptr<PlayerMoveParticle> playerMoveParticle_ = nullptr;
    shared_ptr<PlayerDeadParticle> playerDeadParticle_ = nullptr;
 
+   shared_ptr<GoalParticle> goalParticle_ = nullptr;
 };

@@ -4,35 +4,35 @@
 #include"Particle/Field/ParticleField.h"
 #include"Graphics/TextureManager/TextureManager.h"
 #include"Utility/ColorConverter/ColorConverter.h"
+#include"GameObject/ObjectInterface/IParticleData.h"
 
 class GoalParticle
 {
 public:
 
-	static GoalParticle* GetInstance();
-
+	
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// ImGuiXV
+	/// ImGuiæ›´æ–°
 	/// </summary>
 	void ImGuiUpdate();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// •`‰æ
+	/// æç”»
 	/// </summary>
 	void Draw();
 
 	/// <summary>
-	/// emitter,field,particlle‚Ì’l‚ğƒNƒŠƒA
+	/// emitter,field,particlleã®å€¤ã‚’ã‚¯ãƒªã‚¢
 	/// </summary>
 	void Clear() { particle_->Clear(), emitter_->AllClear(), field_->AllClear(); }
 

@@ -22,51 +22,26 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t4 textureColor = gTexture.Sample(gSamplerLiner, transformedUV.xy);
 
     float32_t4 resultColor = textureColor;
-     
-    //uvSize
-    uint32_t width, height;
-    gTexture.GetDimensions(width, height);
-    float32_t2 uvStepSize = float32_t2(rcp(width), rcp(height));
-    
-    float32_t2 difference = float32_t2(0.0f, 0.0f);
-    
-    for (int32_t x = 0; x < 3; ++x)
-    {
-        for (int32_t y = 0; y < 3; ++y)
+
+    {//fog
+        
+        //view変換
+        float32_t ndcDepth = gDepthTexture.Sample(gSamplerPoint, transformedUV.xy);
+        float32_t4 viewSpace = mul(float32_t4(0.0f, 0.0f, ndcDepth, 1.0f), gTransformationViewMatrix.InverseProj);
+        float32_t viewZ = viewSpace.z * rcp(viewSpace.w);
+ 
+        float fogStart = gPostEffectAdjustedColorParam_.fogStart; // フォグが始まる距離
+        float fogEnd = gPostEffectAdjustedColorParam_.fogEnd; // フォグが完全にかかる距離
+        float fogWeight = 0.0f;
+        if (viewZ > fogStart)
         {
-            float32_t2 texcoord = transformedUV.xy + kIndex3x3[x][y] * uvStepSize;
-             //view変換
-            float32_t ndcDepth = gDepthTexture.Sample(gSamplerPoint, texcoord);
-
-            float32_t4 viewSpace = mul(float32_t4(0.0f,0.0f, ndcDepth, 1.0f), gTransformationViewMatrix.InverseProj);
-            float32_t view = viewSpace.z * rcp(viewSpace.w);
- 
-            difference.x += view * kPrewittHorizontalKernel[x][y];
-            difference.y += view * kPrewittVerticelKernel[x][y];
+            fogWeight = saturate((viewZ - fogStart) / (fogEnd - fogStart));
+            fogWeight *= gPostEffectAdjustedColorParam_.fogScale * max(0.0f, 1.0f - exp(-gPostEffectAdjustedColorParam_.fogAttenuationRate * viewZ));
         }
-    }
-
-    float32_t weight = length(difference*0.1f);
-    weight = saturate(weight);
-    //resultColor.rgb = resultColor.rgb * (1.0f - weight);
+        float32_t3 fogColor = float32_t3(0.8f, 0.8f, 0.8f);
     
-   //view変換
-    float32_t ndcDepth = gDepthTexture.Sample(gSamplerPoint, transformedUV.xy);
-    float32_t4 viewSpace = mul(float32_t4(0.0f,0.0f, ndcDepth, 1.0f), gTransformationViewMatrix.InverseProj);
-    float32_t viewZ = viewSpace.z * rcp(viewSpace.w);
- 
-    float fogStart =gPostEffectAdjustedColorParam_.fogStart; // フォグが始まる距離
-    float fogEnd = gPostEffectAdjustedColorParam_.fogEnd;  // フォグが完全にかかる距離
-    float fogWeight = 0.0f;
-    if (viewZ > fogStart)
-    {
-        fogWeight = saturate((viewZ - fogStart) / (fogEnd - fogStart));
-        fogWeight *= gPostEffectAdjustedColorParam_.fogScale * max(0.0f, 1.0f - exp(-gPostEffectAdjustedColorParam_.fogAttenuationRate * viewZ));
+        resultColor.rgb = lerp(resultColor.rgb, fogColor, fogWeight);
     }
-    float32_t3 fogColor = float32_t3(0.8f, 0.8f, 0.8f);
-    
-    resultColor.rgb = lerp(resultColor.rgb, fogColor, fogWeight);
-
     //グレースケール
     {
         float32_t grayscaleFactor = dot(resultColor.rgb, float32_t3(0.2125f, 0.7154f, 0.0721f));
@@ -78,14 +53,13 @@ PixelShaderOutput main(VertexShaderOutput input)
     {
         float32_t2 correct = transformedUV.xy * (1.0f - transformedUV.xy);
         float32_t vignette = correct.x * correct.y * gPostEffectAdjustedColorParam_.vignatteScale;
-        vignette = 1-saturate(pow(vignette, gPostEffectAdjustedColorParam_.vignetteFactor));
+        vignette = 1 - saturate(pow(vignette, gPostEffectAdjustedColorParam_.vignetteFactor));
 
         resultColor.rgb = lerp(resultColor.rgb, gPostEffectAdjustedColorParam_.vignetteColor.rgb, vignette);
     }
- 
+
     output.color.rgb = resultColor.rgb;
     output.color.a = 1.0f;
-  
- 
+
     return output;
 }

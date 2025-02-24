@@ -78,6 +78,7 @@ class SelectScene : public IScene, JsonComponent
 
    vector<unique_ptr<StageNumber>> stageNumbers_;
 
+   shared_ptr<GoalParticle> goalParticle_ = nullptr;
    bool *isGameEnd_ = nullptr;
    bool isGameStart_ = false;
 };

@@ -30,9 +30,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    gameObjectManager_->CameraReset();
    gameObjectManager_->Update();
 
-   // Particle初期化
-   GoalParticle::GetInstance()->Clear();
-
+  
    // マネージャー初期化
    player_ = make_shared<PlayerManager>();
    managerList_.push_back(player_);
@@ -75,16 +73,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    AddJsonItem<decltype(lavaIndex_)>(lavaName, lavaIndex_);
    lavaIndex_ = GetJsonItem<decltype(lavaIndex_)>(lavaName);
 
-   // obj
-   goal_ = make_unique<Goal>();
-   goal_->SetGoalIndex(goalIndex);
-   goal_->SetGoalObjectId(ObjectId::kGoalId);
 
-   objctDataList_.push_back(goal_);
-
-   for (weak_ptr<ObjectComponent> data : objctDataList_) {
-      data.lock()->Initialize();
-   }
 
    // ライト
    light_ = make_shared<GameLight>();
@@ -98,7 +87,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    // ゲーム終了のつなぐ
    isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
-   // シーンコンテキスト
+   
    context_ = make_unique<ISceneContext>();
 
    // パーティクル
@@ -114,14 +103,27 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    deadParticle_ = make_unique<CharacterDeadParticle>();
    particleList_.push_back(deadParticle_);
 
+   goalParticle_ = make_shared<GoalParticle>();
+   goalParticle_->Initialize();
+
    for (auto obj : particleList_) {
       obj.lock()->Initialize();
    }
 
    particleList_.push_back(lavaManager_->GetLava(lavaIndex_).lock()->GetLavaParticle());
 
-   // 各クラスの設定
+   // obj
+   goal_ = make_unique<Goal>();
+   goal_->SetGoalIndex(goalIndex);
+   goal_->SetGoalObjectId(ObjectId::kGoalId);
+   goal_->SetGoalParticle(goalParticle_);
+   objctDataList_.push_back(goal_);
 
+   for (weak_ptr<ObjectComponent> data : objctDataList_) {
+      data.lock()->Initialize();
+   }
+
+   // 各クラスの設定
    enemyWalkManager_->SetDeadParticle(deadParticle_);
 
    player_->SetDeadParticle(playerDeadParticle_);
@@ -218,9 +220,7 @@ void GameScene::ImGuiUpdate()
    player_->ImGuiUpdate();
 
    if (ImGui::TreeNode("Particles")) {
-      GoalParticle::GetInstance()->ImGuiUpdate();
       deadParticle_->ImGuiUpdate();
-      moveParticle_->ImGuiUpdate();
       ImGui::TreePop();
    }
 
@@ -339,15 +339,14 @@ void GameScene::ParticlesUpdate()
 {
    deadParticle_->GetParticle()->CallBarrier();
    blockManager_->Dispach(deadParticle_->GetParticle());
-
-   GoalParticle::GetInstance()->Update();
+   goalParticle_->Update();
 }
 
 void GameScene::ParticlesDraw()
 {
-   GoalParticle::GetInstance()->Draw();
 
    for (auto p : particleList_) {
       p.lock()->Draw();
    }
+   goalParticle_->Draw();
 }
