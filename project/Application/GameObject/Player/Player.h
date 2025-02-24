@@ -166,9 +166,9 @@ public:
 
 	bool& GetIsGameEnd() { return isGameEnd_; }
 	string& GetWarpFilePath() { return warpFilePath_; }
-	bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 	bool GetIsDeadAnimationComplite() { return isDeadAnimationComplite_; }
 	string GetHitGoalName() { return hitGoalName_; }
+
 #pragma endregion
 
 #pragma region Set
@@ -216,7 +216,6 @@ private:
 	uint32_t particleMoveIndex_ = 0;
 	Math::Vector::Vector3 resetPos_ = {};
 
-	bool isUseGravityFlag_ = true;
 	string warpFilePath_ = "";
 
 	weak_ptr<PlayerHp> hp_;

@@ -53,10 +53,4 @@ void WarpManager::Update()
 	}
 }
 
-void WarpManager::DebugDraw()
-{
-	//for (shared_ptr<Warp>& warp : warps_)
-	{
-		//warp->DebugDrawLine();
-	}
-}
+

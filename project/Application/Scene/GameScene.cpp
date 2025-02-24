@@ -10,7 +10,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    // paramfilePath変更
    globalVariables_->SetDirectoryFilePath("Resources/LevelData/ParamData/GameScene/");
    globalVariables_->LoadFiles("Resources/LevelData/ParamData/GameScene/");
-   // selectからのデータ
+   // selectからのデータを移動
    selectSceneData_ = *state->GetMoveSceneContext()->GetData<SceneContextData>();
 
    // levelDataの読み込み
@@ -85,10 +85,7 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
 
    gameCollisionManager_ = make_unique<BoxCollisionManager>();
 
-   // その他
-   gameUi_ = make_unique<GameSceneUI>();
-   gameUi_->Initialize();
-
+  
    // ゲーム終了のつなぐ
    isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
 
@@ -107,7 +104,6 @@ void GameScene::Initialize([[maybe_unused]] GameManager *state)
    PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 900.0f;
 
    this->ChangeGameSceneState(make_unique<GameSceneStartState>());
-
 }
 
 void GameScene::Update([[maybe_unused]] GameManager *Scene)
@@ -118,27 +114,22 @@ void GameScene::Update([[maybe_unused]] GameManager *Scene)
       state_->Update(this);
    }
 
-   gameUi_->Update();
-
    this->ListUpdate();
+
+   ParticlesUpdate();
 
    Gravitys();
    Collision();
-
-   ParticlesUpdate();
 
    /// シーン切り替え
    if (CheckChangeScene(Scene)) {
       return;
    }
-
-   gameCollisionManager_->End();
 }
 
 bool GameScene::CheckChangeScene(GameManager *Scene)
 {
-   if (!changeSceneAnmation_->GetIsChangeSceneFlag()) 
-   {
+   if (!changeSceneAnmation_->GetIsChangeSceneFlag()) {
       return false;
    }
 
@@ -146,7 +137,7 @@ bool GameScene::CheckChangeScene(GameManager *Scene)
       Scene->ChangeScene(make_unique<GameOverScene>());
       return true;
    }
-   else{
+   else {
       contextData_.stageConinsCount = stageCoinManager_->GetCoinsCount();
       context_->SetData(contextData_);
 
@@ -166,12 +157,6 @@ void GameScene::PostProcessDraw()
 
 void GameScene::Flont2dSpriteDraw()
 {
-   if (isGameStartFlag_) {
-      player_->Draw2d();
-      player_->Draw2dBullet();
-      player_->DrawHp();
-      gameUi_->Draw2d();
-   }
 
    if (state_) {
       state_->Draw2d();
@@ -202,15 +187,9 @@ void GameScene::ImGuiUpdate()
 
    changeSceneAnmation_->ImGuiUpdate();
 
-   ///*  ImGui::Begin("PostEffect");
-   //  ImGui::DragFloat("scale::%f", &postEffect_->GetAdjustedColorParam().fogScale_, 0.01f);
-   //  ImGui::DragFloat("att::%f", &postEffect_->GetAdjustedColorParam().fogAttenuationRate_,
-   //  0.01f); ImGui::DragFloat("start::%f", &postEffect_->GetAdjustedColorParam().fogStart, 1.0f);
-   //  ImGui::DragFloat("end::%f", &postEffect_->GetAdjustedColorParam().fogEnd, 1.0f);
-   //  ImGui::End();*/
-
-   //  ImGuiUpdate();
-   //  this->gameUi_->ImGuiUpdate();
+   if (state_) {
+      state_->ImGuiUpdate();
+   }
 }
 
 void GameScene::ChangeGameSceneState(unique_ptr<IGameSceneState> state)
@@ -294,41 +273,23 @@ void GameScene::Collision()
    }
 
    gameCollisionManager_->CheckAllCollisoin();
+
+   gameCollisionManager_->End();
 }
 
 void GameScene::Gravitys()
 {
    gravityManager_->ClearList();
 
-   if (!player_->GetPlayerCore()->IsInState<PlayerStateGoalAnimation>()) {
-      if (player_->GetPlayerCore()->GetIsUseGravityFlag()) {
-         gravityManager_->PushList(player_->GetPlayerCore());
+   // managerの中のオブジェクトをリストに追加
+   for (weak_ptr<ManagerComponent> m : managerList_) {
+      auto mObj = m.lock();
+      if (mObj) {
+
+         mObj->GravityManagerObjListPush(gravityManager_.get());
       }
    }
 
-   if (bulletEnemyManager_->GetIsStartFlag()) {
-      for (auto &e : bulletEnemyManager_->GetGunEnemys()) {
-         if (e.core) {
-            gravityManager_->PushList(e.core.get());
-         }
-         for (auto &parts : e.parts) {
-            if (!parts) {
-               continue;
-            }
-            if (parts->GetIsEnd()) {
-               gravityManager_->PushList(parts.get());
-            }
-         }
-      }
-   }
-
-   if (enemyWalkManager_->GetIsStartFlag()) {
-      for (shared_ptr<EnemyWalk> &e : enemyWalkManager_->GetData()) {
-         if (e) {
-            gravityManager_->PushList(e.get());
-         }
-      }
-   }
    gravityManager_->PushParticleList(CharacterDeadParticle::GetInstance()->GetParticle());
    gravityManager_->PushParticleList(
        lavaManager_->GetLava(0).lock()->GetLavaParticle().lock()->GetParticle());
@@ -360,8 +321,6 @@ void GameScene::ParticlesUpdate()
 
 void GameScene::ParticlesDraw()
 {
-   warpManager_->DebugDraw();
-
    GoalParticle::GetInstance()->Draw();
    characterDeadParticle_->Draw();
 

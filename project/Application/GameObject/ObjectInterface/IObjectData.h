@@ -1,12 +1,12 @@
 #pragma once
-#include"WorldTransform.h"
-#include"Utility/ObjectManager/GameObjectManager.h"
-#include"Utility/GlobalVariables/GlobalVariables.h"
+#include "Utility/GlobalVariables/GlobalVariables.h"
+#include "Utility/ObjectManager/GameObjectManager.h"
+#include "WorldTransform.h"
 
-#include"JsonComponent.h"
+#include "JsonComponent.h"
 
-#include"INameable.h"
-#include"../GameCollider/ICollider.h"
+#include "../GameCollider/ICollider.h"
+#include "INameable.h"
 
 class GameObjectManager;
 
@@ -16,46 +16,47 @@ class ICollider;
 /// </summary>
 class ObjectComponent : public INameable, public JsonComponent
 {
-public:
-	ObjectComponent();
-	virtual ~ObjectComponent() {};
+ public:
+   ObjectComponent();
+   virtual ~ObjectComponent() {};
 
-	void CalcGravity(float g);
+   void CalcGravity(float g);
 
-	/// <summary>
-	/// objectのデータをコライダーにセット
-	/// </summary>
-	void SetColliderParamData();
+   /// <summary>
+   /// objectのデータをコライダーにセット
+   /// </summary>
+   void SetColliderParamData();
 
-	virtual void OnCollision([[maybe_unused]]ObjectComponent* objectData) {};
+   virtual void OnCollision([[maybe_unused]] ObjectComponent *objectData) {};
 
-	void SetObjectParamData();
+   void SetObjectParamData();
 
-	virtual void Initialize() = 0;
+   virtual void Initialize() = 0;
 
-	virtual void Update() = 0;
-
+   virtual void Update() = 0;
 
 #pragma region Set
-	void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
+   void SetVelocity(Math::Vector::Vector3 v) { velocity_ = v; }
+   void SetIsUseGravityFlag(bool f) { isUseGravityFlag_ = f; }
 #pragma endregion
 
 #pragma region Get
-	Math::Vector::Vector3 GetVelocity() { return velocity_; }
-	ICollider* GetCollider() { return collider_.get(); }
-	weak_ptr<IGameObjectData> GetObjectData() { return objectData_; }
+   Math::Vector::Vector3 GetVelocity() { return velocity_; }
+   ICollider *GetCollider() { return collider_.get(); }
+   weak_ptr<IGameObjectData> GetObjectData() { return objectData_; }
+
+   bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
 #pragma endregion
 
-private:
+ private:
+ protected:
+   bool isUseGravityFlag_ = true;
 
-protected:
+   Math::Vector::Vector3 velocity_{};
 
-	Math::Vector::Vector3 velocity_{};
+   unique_ptr<ICollider> collider_ = nullptr;
 
-	unique_ptr<ICollider>collider_ = nullptr;
+   weak_ptr<IGameObjectData> objectData_;
 
-	weak_ptr<IGameObjectData>objectData_;
-
-	GameObjectManager* gameObjectManager_ = nullptr;
+   GameObjectManager *gameObjectManager_ = nullptr;
 };
-

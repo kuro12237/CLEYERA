@@ -4,6 +4,8 @@
 #include "Utility/ObjectManager/GameObjectManager.h"
 #include "Utility/convert/convert.h"
 
+class GravityManager;
+
 /// <summary>
 /// マネージャーリスト抽象クラス
 /// </summary>
@@ -37,6 +39,8 @@ class ManagerComponent : public JsonComponent
    /// </summary>
    void RemoveEmptyObjList();
 
+   void GravityManagerObjListPush(GravityManager *g);
+
 #pragma region Set
 
    void SetGameStartFlag(bool *f) { isGameStartFlag_ = f; }
@@ -44,7 +48,7 @@ class ManagerComponent : public JsonComponent
 #pragma endregion
 
 #pragma region Get
-   bool GetIsStartFlag() { return &isGameStartFlag_; }
+   bool *GetIsStartFlag() { return isGameStartFlag_; }
 #pragma endregion
 
  private:

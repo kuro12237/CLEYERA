@@ -15,7 +15,6 @@ public:
 
 	void Update()override;
 
-	void DebugDraw();
 
 #pragma region get
 	vector<shared_ptr<Warp>>GetWarps() { return warps_; }

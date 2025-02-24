@@ -115,6 +115,7 @@ class GameScene : public IScene, JsonComponent
    string inputLevelDataFileName_ = "";
    bool isGameStartFlag_ = false;
 
+
    unique_ptr<ISceneContext> context_ = nullptr;
    SceneContextData selectSceneData_ = {};
    SceneContextData contextData_ = {};
@@ -142,10 +143,6 @@ class GameScene : public IScene, JsonComponent
 
    shared_ptr<GravityManager> gravityManager_ = nullptr;
    shared_ptr<BoxCollisionManager> gameCollisionManager_ = nullptr;
-
-   // ui
-   unique_ptr<GameSceneUI> gameUi_ = nullptr;
-
 
    // particle
    shared_ptr<WallHitParticle> wallHitParticle_ = nullptr;

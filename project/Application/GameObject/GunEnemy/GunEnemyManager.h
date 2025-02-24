@@ -49,5 +49,7 @@ private:
 	uint32_t enemyCount_ = 0;
 
 	vector<GunEnemyData>enemys_{};
+
+	bool isSpeedSetFlag_ = false;
 };
 

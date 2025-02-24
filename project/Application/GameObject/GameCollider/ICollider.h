@@ -89,6 +89,7 @@ public:
 protected:
 
 	bool isExtrusion_ = false;
+
 	Math::Vector::Vector2 extrusion_ = {};
 	vector<HItDirection>hitDirection_;
 	AABB aabb_{ { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };

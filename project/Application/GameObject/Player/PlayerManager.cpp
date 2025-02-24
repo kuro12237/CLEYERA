@@ -101,12 +101,6 @@ void PlayerManager::Update()
 {
 	RemoveEmptyObjList();
 
-	//ゲームが終わる通知
-	if (playerCore_->GetIsGameEnd())
-	{
-	
-	}
-
 	//Commands
 	if (*this->isGameStartFlag_ && !playerCore_->IsInState<PlayerStateGoalAnimation>())
 	{

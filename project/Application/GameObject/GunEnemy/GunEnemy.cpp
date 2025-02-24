@@ -14,7 +14,6 @@ void GunEnemy::Initialize()
 	collider_->SetAttribute(CollisionMask::kEnemyWalkAttribute);
 
 	ChangeState(make_unique<GunEnemyStateMove>());
-	velocity_.x = 0.1f;
 
 	modelHandle_ = Engine::Manager::ModelManager::LoadObjectFile("PlayerNormalBullet");
 }

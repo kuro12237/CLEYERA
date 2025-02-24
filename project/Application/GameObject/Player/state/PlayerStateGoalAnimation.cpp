@@ -7,6 +7,7 @@ void PlayerStateGoalAnimation::Initialize(Player* p)
 
 	endPos_ = goalTransform.GetWorldPosition();
 	startPos_ = playerTransform.GetWorldPosition();
+        p->SetIsUseGravityFlag(false);
 }
 
 void PlayerStateGoalAnimation::Update(Player* p)
