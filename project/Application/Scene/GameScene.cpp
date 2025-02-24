@@ -157,7 +157,6 @@ bool GameScene::CheckChangeScene(GameManager *Scene)
       Scene->ChangeScene(make_unique<GameClearScene>());
       return true;
    }
-   return false;
 }
 
 void GameScene::PostProcessDraw()
