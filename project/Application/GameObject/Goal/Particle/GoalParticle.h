@@ -4,7 +4,7 @@
 #include"Particle/Field/ParticleField.h"
 #include"Graphics/TextureManager/TextureManager.h"
 #include"Utility/ColorConverter/ColorConverter.h"
-#include"GameObject/ObjectInterface/IParticleData.h"
+#include"GameObject/ObjectInterface/ParticleComponent.h"
 
 class GoalParticle
 {

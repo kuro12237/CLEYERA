@@ -1,11 +1,11 @@
 #pragma once
 
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/convert/convert.h"
 
 /// <summary>
-/// ƒ^ƒCƒgƒ‹‚ÌƒJƒƒ‰
+/// ã‚¿ã‚¤ãƒˆãƒ«ã®ã‚«ãƒ¡ãƒ©
 /// </summary>
 class TitleCamera :public ObjectComponent
 {
@@ -14,12 +14,12 @@ public:
 	~TitleCamera() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 

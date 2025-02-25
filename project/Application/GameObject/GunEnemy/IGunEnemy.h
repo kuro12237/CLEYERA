@@ -1,7 +1,7 @@
 #pragma once
 #include"Pch.h"
 #include"state/IGunEnemyState.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 
 /// <summary>
 /// 銃の敵の抽象クラス

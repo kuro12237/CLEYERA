@@ -3,7 +3,7 @@
 #include"Utility/SplineMotion/SplineMotion.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Utility/convert/convert.h"
 
 class ClearCamera :public ObjectComponent

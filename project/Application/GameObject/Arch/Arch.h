@@ -1,11 +1,11 @@
 #pragma once
 
 #include"Utility/ObjectManager/GameObjectManager.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"state/IArchState.h"
 
 /// <summary>
-/// ƒ^ƒCƒgƒ‹‚Ì”à
+/// ã‚¿ã‚¤ãƒˆãƒ«ã®æ‰‰
 /// </summary>
 class Arch :public ObjectComponent
 {
@@ -14,12 +14,12 @@ public:
 	~Arch() {};
 
 	/// <summary>
-	///  ‰Šú‰»
+	///  åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 

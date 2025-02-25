@@ -574,13 +574,13 @@
     <ClCompile Include="CLEYERA\Utility\ObjectManager\IGameObjectData.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\ObjectInterface\IObjectData.cpp">
+    <ClCompile Include="Application\GameObject\ObjectInterface\ObjectComponent.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\GravityManager\GravityManager.cpp">
       <Filter>Project\GameObject\Gravity</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\GameCollider\ICollider.cpp">
+    <ClCompile Include="Application\GameObject\GameCollider\Collider.cpp">
       <Filter>Project\GameObject\Collision</Filter>
     </ClCompile>
     <ClCompile Include="CLEYERA\Utility\Noise\NoiseTexture.cpp">
@@ -910,7 +910,7 @@
     <ClCompile Include="Application\GameObject\GunEnemy\IGunEnemy.cpp">
       <Filter>Project\GameObject\Character\GunEnemy</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp">
+    <ClCompile Include="Application\GameObject\ObjectInterface\ParticleComponent.cpp">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Player\Particle\PlayerMoveParticle.cpp">
@@ -1245,13 +1245,13 @@
     <ClInclude Include="CLEYERA\Utility\ObjectManager\IGameObjectData.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\ObjectInterface\IObjectData.h">
+    <ClInclude Include="Application\GameObject\ObjectInterface\ObjectComponent.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\GravityManager\GravityManager.h">
       <Filter>Project\GameObject\Gravity</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\GameCollider\ICollider.h">
+    <ClInclude Include="Application\GameObject\GameCollider\Collider.h">
       <Filter>Project\GameObject\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Application\Scene\IScene.h">
@@ -1638,7 +1638,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\ManagerComponent.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h">
+    <ClInclude Include="Application\GameObject\ObjectInterface\ParticleComponent.h">
       <Filter>Project\GameObject\ObjectData</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Player\Particle\PlayerMoveParticle.h">

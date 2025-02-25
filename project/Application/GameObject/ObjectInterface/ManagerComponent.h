@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IObjectData.h"
+#include "ObjectComponent.h"
 #include "Utility/ObjectManager/GameObjectManager.h"
 #include "Utility/convert/convert.h"
 

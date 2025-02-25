@@ -1,5 +1,5 @@
 #pragma 
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Cleyera.h"
 #include"../Player.h"
 

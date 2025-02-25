@@ -5,12 +5,12 @@
 
 #include "JsonComponent.h"
 
-#include "../GameCollider/ICollider.h"
+#include "../GameCollider/Collider.h"
 #include "INameable.h"
 
 class GameObjectManager;
 
-class ICollider;
+class Collider;
 /// <summary>
 /// オブジェクトの抽象クラス
 /// </summary>
@@ -42,7 +42,7 @@ class ObjectComponent : public INameable, public JsonComponent
 
 #pragma region Get
    Math::Vector::Vector3 GetVelocity() { return velocity_; }
-   ICollider *GetCollider() { return collider_.get(); }
+   Collider *GetCollider() { return collider_.get(); }
    weak_ptr<IGameObjectData> GetObjectData() { return objectData_; }
 
    bool GetIsUseGravityFlag() { return isUseGravityFlag_; }
@@ -54,7 +54,7 @@ class ObjectComponent : public INameable, public JsonComponent
 
    Math::Vector::Vector3 velocity_{};
 
-   unique_ptr<ICollider> collider_ = nullptr;
+   unique_ptr<Collider> collider_ = nullptr;
 
    weak_ptr<IGameObjectData> objectData_;
 

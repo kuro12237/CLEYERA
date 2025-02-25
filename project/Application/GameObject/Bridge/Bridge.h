@@ -1,9 +1,9 @@
 #pragma once
 #include"Utility/ObjectManager/GameObjectManager.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 
 /// <summary>
-/// ‹´
+/// æ©‹
 /// </summary>
 class Bridge :public ObjectComponent
 {
@@ -12,12 +12,12 @@ public:
 	~Bridge() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
@@ -33,11 +33,11 @@ public:
 private:
 
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ŠÖ”
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–¢æ•°
 	/// </summary>
 	float EaseOutBounce(float x);
 	/// <summary>
-	/// Vec3ƒAƒjƒ[ƒVƒ‡ƒ“ŠÖ”
+	/// Vec3ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–¢æ•°
 	/// </summary>
 	Math::Vector::Vector3  EaseOutBounceLerp(const Math::Vector::Vector3& startPos, const Math::Vector::Vector3& endPos, float t);
 

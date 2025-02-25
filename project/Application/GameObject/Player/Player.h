@@ -7,8 +7,7 @@
 #include"Utility/DeltaTimer/DeltaTimer.h"
 
 #include"Utility/ObjectId/GameObjectId.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
-#include"GameObject/GameCollider/ICollider.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 
 #include"command/PlayerCommandHandler.h"
 

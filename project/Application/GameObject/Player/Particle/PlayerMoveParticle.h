@@ -1,5 +1,5 @@
 #pragma once
-#include"GameObject/ObjectInterface/IParticleData.h"
+#include"GameObject/ObjectInterface/ParticleComponent.h"
 
 #include"GameObject/GameCollider/ColliderData.h"
 

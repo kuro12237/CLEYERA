@@ -30,7 +30,7 @@
 /// <summary>
 /// タイトル
 /// </summary>
-class TitleScene : public IScene, JsonComponent
+class TitleScene : public IScene, public JsonComponent
 {
 public:
   TitleScene() {};

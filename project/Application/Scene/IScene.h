@@ -3,8 +3,8 @@
 #include "Pch.h"
 #include "Utility/ObjectManager/GameObjectManager.h"
 
-#include "GameObject/ObjectInterface/IObjectData.h"
-#include "GameObject/ObjectInterface/IParticleData.h"
+#include "GameObject/ObjectInterface/ObjectComponent.h"
+#include "GameObject/ObjectInterface/ParticleComponent.h"
 #include "GameObject/ObjectInterface/LightComponent.h"
 #include "GameObject/ObjectInterface/ManagerComponent.h"
 

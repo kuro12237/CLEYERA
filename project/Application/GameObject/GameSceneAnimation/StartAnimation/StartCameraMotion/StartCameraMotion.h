@@ -1,12 +1,12 @@
 #pragma once
 #include"Utility/SplineMotion/SplineMotion.h"
 
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/convert/convert.h"
 
 /// <summary>
-/// ƒXƒ^[ƒg‚ÌƒJƒƒ‰‚Ì“®‚«
+/// ã‚¹ã‚¿ãƒ¼ãƒˆã®ã‚«ãƒ¡ãƒ©ã®å‹•ã
 /// </summary>
 class StartCameraMotion :public ObjectComponent
 {
@@ -15,18 +15,18 @@ public:
 	~StartCameraMotion() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
-	/// <param name="ƒJƒƒ‰”Ô†"></param>
+	/// <param name="ã‚«ãƒ¡ãƒ©ç•ªå·"></param>
 	void Initilaize(const uint32_t &index);
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// ƒfƒoƒbƒO—p
+	/// ãƒ‡ãƒãƒƒã‚°ç”¨
 	/// </summary>
 	void DrawLines();
 

@@ -78,7 +78,7 @@ float BoxCollisionManager::NomalizeDegree(float theta)
 	return theta;
 }
 
-AABB BoxCollisionManager::SettingAABBParam(ICollider* c)
+AABB BoxCollisionManager::SettingAABBParam(Collider* c)
 {
 	AABB result{};
 	result.min = {
@@ -150,27 +150,27 @@ bool BoxCollisionManager::CheckRightCollision(float t, Math::Vector::Vector4 bDe
 	return false;
 }
 
-float BoxCollisionManager::BottomExtrusion(ICollider* a, ICollider* b)
+float BoxCollisionManager::BottomExtrusion(Collider* a, Collider* b)
 {
 	return (-a->GetAABB().min.y + b->GetAABB().max.y) - (a->GetpTransform().translate.y - b->GetpTransform().translate.y);
 }
 
-float BoxCollisionManager::TopExtrusion(ICollider* a, ICollider* b)
+float BoxCollisionManager::TopExtrusion(Collider* a, Collider* b)
 {
 	return (-a->GetAABB().max.y + b->GetAABB().min.y) - (a->GetpTransform().translate.y - b->GetpTransform().translate.y);
 }
 
-float BoxCollisionManager::RightExtrusion(ICollider* a, ICollider* b)
+float BoxCollisionManager::RightExtrusion(Collider* a, Collider* b)
 {
 	return (-a->GetAABB().min.x + b->GetAABB().max.x) - (a->GetpTransform().translate.x - b->GetpTransform().translate.x);
 }
 
-float BoxCollisionManager::LeftExtrusion(ICollider* a, ICollider* b)
+float BoxCollisionManager::LeftExtrusion(Collider* a, Collider* b)
 {
 	return (-a->GetAABB().max.x + b->GetAABB().min.x) - (a->GetpTransform().translate.x - b->GetpTransform().translate.x);
 }
 
-void BoxCollisionManager::CheckExtrusion(ICollider* a, ICollider* b)
+void BoxCollisionManager::CheckExtrusion(Collider* a, Collider* b)
 {
 	//Aをもとにめり込み度を算出
 	Math::Vector::Vector2 extrusionA = {};

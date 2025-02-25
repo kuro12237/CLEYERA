@@ -1,6 +1,6 @@
-#include "ICollider.h"
+#include "Collider.h"
 
-void ICollider::ClearAllHitsIds()
+void Collider::ClearAllHitsIds()
 {
     while (!allHitIds.empty()) {
         allHitIds.pop();

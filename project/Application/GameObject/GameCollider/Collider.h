@@ -1,7 +1,7 @@
 #pragma once
 
 #include"Utility/CollisionMask/CollisionMask.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"ColliderData.h"
 #include"GameObject/ObjectInterface/INameable.h"
 
@@ -24,11 +24,11 @@ class ObjectComponent;
 /// <summary>
 /// コライダーインターフェース
 /// </summary>
-class ICollider
+class Collider
 {
 public:
-	ICollider() {};
-	~ICollider() {};
+	Collider() {};
+	~Collider() {};
 
 	/// <summary>
 	/// 当たった時

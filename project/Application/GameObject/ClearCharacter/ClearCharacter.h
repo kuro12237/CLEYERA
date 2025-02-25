@@ -1,14 +1,13 @@
 #pragma once
 #include"STransformEular.h"
 #include"Pch.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 
-#include"GameObject/GameCollider/ICollider.h"
 #include"Input.h"
 #include"Utility/ObjectId/GameObjectId.h"
 
 /// <summary>
-/// ƒNƒŠƒAƒV[ƒ“‚Å‚ÌƒLƒƒƒ‰ƒNƒ^[‚ÌXV
+/// ã‚¯ãƒªã‚¢ã‚·ãƒ¼ãƒ³ã§ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®æ›´æ–°
 /// </summary>
 class ClearCharacter :public ObjectComponent
 {
@@ -17,12 +16,12 @@ public:
 	~ClearCharacter() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 

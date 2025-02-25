@@ -1,9 +1,8 @@
 #pragma once
 
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Utility/convert/convert.h"
-#include"GameObject/GameCollider/ICollider.h"
 #include"Utility/ObjectId/GameObjectId.h"
 
 

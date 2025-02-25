@@ -3,7 +3,7 @@
 #include "Particle/Emitter/ParticleEmitter.h"
 #include "Particle/GpuParticle.h"
 
-#include "GameObject/ObjectInterface/IParticleData.h"
+#include "GameObject/ObjectInterface/ParticleComponent.h"
 
 /// <summary>
 /// プレイヤーが死んだときのパーティクル

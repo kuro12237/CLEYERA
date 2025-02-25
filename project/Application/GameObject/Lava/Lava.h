@@ -1,6 +1,6 @@
 #pragma once
 #include"Lava.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"LavaParticle.h"
 

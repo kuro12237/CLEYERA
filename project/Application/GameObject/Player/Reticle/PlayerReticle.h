@@ -3,7 +3,7 @@
 #include"Utility/ObjectManager/GameObjectManager.h"
 #include"Input.h"
 #include"Sprite/Sprite.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"../Player.h"
 
 class Player;

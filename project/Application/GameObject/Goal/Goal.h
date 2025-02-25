@@ -1,6 +1,5 @@
 #pragma once
-#include "GameObject/GameCollider/ICollider.h"
-#include "GameObject/ObjectInterface/IObjectData.h"
+#include "GameObject/ObjectInterface/ObjectComponent.h"
 #include "Graphics/CallPipline/PipelineHandler.h"
 #include "Input.h"
 #include "Particle/GoalParticle.h"

@@ -1,9 +1,9 @@
-#include "IObjectData.h"
+#include "ObjectComponent.h"
 
 ObjectComponent::ObjectComponent()
 {
 	gameObjectManager_ = GameObjectManager::GetInstance();
-	collider_ = make_unique<ICollider>();
+	collider_ = make_unique<Collider>();
 }
 
 void ObjectComponent::CalcGravity(float g)

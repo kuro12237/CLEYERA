@@ -1,7 +1,6 @@
 #pragma once
-#include"GameObject/GameCollider/ICollider.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Utility/ObjectId/GameObjectId.h"
 
 #include"BreakBlockHp.h"
@@ -9,7 +8,7 @@
 /// <summary>
 /// 壊れるマップのブロッククラス
 /// </summary>
-class BreakBlock :public ObjectComponent, public ICollider
+class BreakBlock :public ObjectComponent, public Collider
 {
 public:
 	BreakBlock() {};

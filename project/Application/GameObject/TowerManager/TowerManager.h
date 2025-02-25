@@ -1,10 +1,10 @@
 #pragma once
 #include"Tower.h"
 #include"Utility/ObjectManager/GameObjectManager.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 
 /// <summary>
-/// “ƒ‚ÌŠÇ—ƒNƒ‰ƒX
+/// å¡”ã®ç®¡ç†ã‚¯ãƒ©ã‚¹
 /// </summary>
 class TowerManager
 {
@@ -13,12 +13,12 @@ public:
 	~TowerManager() {};
 
 	/// <summary>
-	/// ‰Šú‰»
+	/// åˆæœŸåŒ–
 	/// </summary>
 	void Initialize();
 
 	/// <summary>
-	/// XV
+	/// æ›´æ–°
 	/// </summary>
 	void Update();
 

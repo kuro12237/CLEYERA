@@ -68,7 +68,7 @@
     <ClCompile Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateDead.cpp" />
     <ClCompile Include="Application\GameObject\EnemyWalk\state\EnemyWalkStateMove.cpp" />
     <ClCompile Include="Application\GameObject\GameCollider\BoxCollisionManager.cpp" />
-    <ClCompile Include="Application\GameObject\GameCollider\ICollider.cpp" />
+    <ClCompile Include="Application\GameObject\GameCollider\Collider.cpp" />
     <ClCompile Include="Application\GameObject\GameOverText\GameOverText.cpp" />
     <ClCompile Include="Application\GameObject\GameOverUI\GameOverUIManager.cpp" />
     <ClCompile Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.cpp" />
@@ -81,7 +81,7 @@
     <ClCompile Include="Application\GameObject\Lava\LavaManager.cpp" />
     <ClCompile Include="Application\GameObject\Lava\LavaParticle.cpp" />
     <ClCompile Include="Application\GameObject\Light\GameLight.cpp" />
-    <ClCompile Include="Application\GameObject\ObjectInterface\IParticleData.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\ParticleComponent.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\ISpriteData.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\LightComponent.cpp" />
     <ClCompile Include="Application\GameObject\ObjectInterface\ManagerComponent.cpp" />
@@ -139,7 +139,7 @@
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.cpp" />
     <ClCompile Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.cpp" />
     <ClCompile Include="CLEYERA\Utility\ObjectManager\GameObjectManager.cpp" />
-    <ClCompile Include="Application\GameObject\ObjectInterface\IObjectData.cpp" />
+    <ClCompile Include="Application\GameObject\ObjectInterface\ObjectComponent.cpp" />
     <ClCompile Include="Application\GameObject\Particles\CharacterDeadParticle.cpp" />
     <ClCompile Include="Application\GameObject\Particles\CharacterMoveParticle.cpp" />
     <ClCompile Include="Application\GameObject\Player\Bullet\PlayerBullet.cpp" />
@@ -277,7 +277,7 @@
     <ClInclude Include="Application\GameObject\EnemyWalk\state\IEnemyWalkState.h" />
     <ClInclude Include="Application\GameObject\GameCollider\BoxCollisionManager.h" />
     <ClInclude Include="Application\GameObject\GameCollider\ColliderData.h" />
-    <ClInclude Include="Application\GameObject\GameCollider\ICollider.h" />
+    <ClInclude Include="Application\GameObject\GameCollider\Collider.h" />
     <ClInclude Include="Application\GameObject\GameOverText\GameOverText.h" />
     <ClInclude Include="Application\GameObject\GameOverUI\GameOverUIManager.h" />
     <ClInclude Include="Application\GameObject\GameOverUI\UIActiveParticle\GameOverActiveUIParticle.h" />
@@ -293,7 +293,7 @@
     <ClInclude Include="Application\GameObject\ObjectInterface\LightComponent.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ManagerComponent.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\INameable.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\IParticleData.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\ParticleComponent.h" />
     <ClInclude Include="Application\GameObject\ObjectInterface\ITransform.h" />
     <ClInclude Include="Application\GameObject\Particles\Explosion\ExplosionParticle.h" />
     <ClInclude Include="Application\GameObject\Particles\TitleNameParticle\TitleNameParticle.h" />
@@ -354,7 +354,7 @@
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\PBRPiplineCommand.h" />
     <ClInclude Include="CLEYERA\Graphics\CallPipline\commands\Phong3dPiplineDepthNoneWriteCommand.h" />
     <ClInclude Include="CLEYERA\Utility\ObjectManager\GameObjectManager.h" />
-    <ClInclude Include="Application\GameObject\ObjectInterface\IObjectData.h" />
+    <ClInclude Include="Application\GameObject\ObjectInterface\ObjectComponent.h" />
     <ClInclude Include="Application\GameObject\Particles\CharacterDeadParticle.h" />
     <ClInclude Include="Application\GameObject\Particles\CharacterMoveParticle.h" />
     <ClInclude Include="Application\GameObject\Player\Bullet\PlayerBullet.h" />

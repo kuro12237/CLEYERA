@@ -3,7 +3,7 @@
 #include"Particle/GpuParticle.h"
 #include"Particle/Emitter/ParticleEmitter.h"
 #include"Graphics/TextureManager/TextureManager.h"
-#include"GameObject/ObjectInterface/IParticleData.h"
+#include"GameObject/ObjectInterface/ParticleComponent.h"
 
 /// <summary>
 /// 壁に当たった時のパーティクル

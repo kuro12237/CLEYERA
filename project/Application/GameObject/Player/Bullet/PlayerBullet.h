@@ -1,7 +1,6 @@
 #pragma once
 
-#include"GameObject/ObjectInterface/IObjectData.h"
-#include"GameObject/GameCollider/ICollider.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 
 #include"state/IPlayerBulletState.h"
 #include"state/PlayerBulletStateNone.h"

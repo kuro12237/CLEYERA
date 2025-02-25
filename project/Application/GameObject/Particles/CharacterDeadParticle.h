@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject/ObjectInterface/IParticleData.h"
+#include "GameObject/ObjectInterface/ParticleComponent.h"
 #include "Graphics/TextureManager/TextureManager.h"
 #include "Particle/Emitter/ParticleEmitter.h"
 #include "Particle/Field/ParticleField.h"

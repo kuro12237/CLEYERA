@@ -1,5 +1,4 @@
 #pragma once
-#include"GameObject/ObjectInterface/IObjectData.h"
 #include"GameObject/ObjectInterface/ISpriteData.h"
 
 

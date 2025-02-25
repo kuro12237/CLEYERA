@@ -2,11 +2,11 @@
 #include"Pch.h"
 #include"FileLoader.h"
 #include"Utility/LevelData/LevelData.h"
-#include"GameObject/GameCollider/ICollider.h"
+#include"GameObject/GameCollider/Collider.h"
 #include"GameObject/GameCollider/ColliderData.h"
 
 /// <summary>
-///  LevelData‚ğ“Ç‚ŞƒNƒ‰ƒX
+///  LevelDataã‚’èª­ã‚€ã‚¯ãƒ©ã‚¹
 /// </summary>
 class SceneFileLoader
 {
@@ -15,24 +15,24 @@ public:
 	static SceneFileLoader* GetInstance();
 
 	/// <summary>
-	/// ƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İ’¼‚·
+	/// ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿ç›´ã™
 	/// </summary>
 	shared_ptr<LevelData> ReLoad(const string& filePath);
 
 private:
 
 	/// <summary>
-	/// type‚ğ¯•Ê‚·‚éŠÖ”
+	/// typeã‚’è­˜åˆ¥ã™ã‚‹é–¢æ•°
 	/// </summary>
 	bool isTypeCompare(const string& type, const string& name);
 
 	/// <summary>
-	/// json‚Ì’†‚Éw’è‚µ‚½–¼‘O‚Ì•¨‚ª“ü‚Á‚Ä‚¢‚é‚©‚ğ”»’f‚·‚éŠÖ”
+	/// jsonã®ä¸­ã«æŒ‡å®šã—ãŸåå‰ã®ç‰©ãŒå…¥ã£ã¦ã„ã‚‹ã‹ã‚’åˆ¤æ–­ã™ã‚‹é–¢æ•°
 	/// </summary>
 	bool CheckJsonObjectContains(nlohmann::json& object, string name);
 
 	/// <summary>
-	/// ƒ‚ƒfƒ‹“Ç‚İ‚İŠÖ”
+	/// ãƒ¢ãƒ‡ãƒ«èª­ã¿è¾¼ã¿é–¢æ•°
 	/// </summary>
 	/// <param name="json"></param>
 	/// <param name="ObjectData"></param>
@@ -40,39 +40,39 @@ private:
 	uint32_t  LoadModelData(nlohmann::json& object, shared_ptr<Game3dObjectData> data);
 
 	/// <summary>
-	/// ƒIƒuƒWƒFƒNƒg‚Ìƒpƒ‰ƒ[ƒ^[“Ç‚İ‚İŠÖ”
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼èª­ã¿è¾¼ã¿é–¢æ•°
 	/// </summary>
 	/// <param name="object"></param>
 	/// <returns></returns>
 	vector<string>GetParamFileNames(nlohmann::json& object);
 
 	/// <summary>
-	/// “x”‚©‚çƒ‰ƒWƒAƒ“‚É•ÏŠ·
+	/// åº¦æ•°ã‹ã‚‰ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›
 	/// </summary>
 	Math::Vector::Vector3 degreesToRadians(Math::Vector::Vector3 degrees);
 
 	/// <summary>
-	/// box‚Ì“–‚½‚è”»’è‚Ì“Ç‚İ‚İ
+	/// boxã®å½“ãŸã‚Šåˆ¤å®šã®èª­ã¿è¾¼ã¿
 	/// </summary>
 	AABB LoadCollider(nlohmann::json& object);
 
 	/// <summary>
-	/// Object‚Ì“Ç‚İ‚İ
+	/// Objectã®èª­ã¿è¾¼ã¿
 	/// </summary>
 	void LoadObj3dData(shared_ptr<LevelData>& levelData, nlohmann::json object, shared_ptr<Game3dObjectData> data = nullptr);
 
 	/// <summary>
-	/// ƒJƒƒ‰“Ç‚İ‚İ
+	/// ã‚«ãƒ¡ãƒ©èª­ã¿è¾¼ã¿
 	/// </summary>
 	void LoadCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object);
 
 	/// <summary>
-	/// q‚ÌƒJƒƒ‰“Ç‚İ‚İ
+	/// å­ã®ã‚«ãƒ¡ãƒ©èª­ã¿è¾¼ã¿
 	/// </summary>
 	void LoadChildCameraData(shared_ptr<LevelData>& levelData, nlohmann::json& object, IGameObjectData* data = nullptr);
 
 	/// <summary>
-	/// json‚©‚çtransform‚ğ‚Æ‚é
+	/// jsonã‹ã‚‰transformã‚’ã¨ã‚‹
 	/// </summary>
 	Engine::Transform::TransformEular GetTransform(nlohmann::json transform);
 
@@ -80,7 +80,7 @@ private:
 	shared_ptr<LevelData> levelData_ = nullptr;
 
 	/// <summary>
-	/// ƒuƒŒƒ“ƒ_[‚©‚ç“Ç‚İ‚ñ‚¾ƒJƒƒ‰‚Ì•â³
+	/// ãƒ–ãƒ¬ãƒ³ãƒ€ãƒ¼ã‹ã‚‰èª­ã¿è¾¼ã‚“ã ã‚«ãƒ¡ãƒ©ã®è£œæ­£
 	/// </summary>
 	const float CameraRotationOffsetX = 90.0f;
 

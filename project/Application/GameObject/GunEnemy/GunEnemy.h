@@ -1,10 +1,9 @@
 #pragma once
 #include"STransformEular.h"
 #include"Pch.h"
-#include"GameObject/ObjectInterface/IObjectData.h"
+#include"GameObject/ObjectInterface/ObjectComponent.h"
 #include"Utility/convert/convert.h"
 
-#include"GameObject/GameCollider/ICollider.h"
 #include"Input.h"
 #include"Utility/ObjectId/GameObjectId.h"
 

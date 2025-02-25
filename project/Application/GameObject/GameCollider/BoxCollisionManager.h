@@ -1,5 +1,5 @@
 #pragma once
-#include"ICollider.h"
+#include"Collider.h"
 
 /// <summary>
 /// 箱の当たり判定
@@ -57,7 +57,7 @@ private:
 	/// </summary>
 	/// <param name="c"></param>
 	/// <returns></returns>
-	AABB SettingAABBParam(ICollider* c);
+	AABB SettingAABBParam(Collider* c);
 
 	/// <summary>
 	/// 当たっているかの判定
@@ -85,27 +85,27 @@ private:
 	/// <summary>
 	/// 押し出しを算出
 	/// </summary>
-	float BottomExtrusion(ICollider* a, ICollider* b);
+	float BottomExtrusion(Collider* a, Collider* b);
 
 	/// <summary>
 	/// 押し出しを算出
 	/// </summary>
-	float TopExtrusion(ICollider* a, ICollider* b);
+	float TopExtrusion(Collider* a, Collider* b);
 
 	/// <summary>
 	/// 押し出しを算出
 	/// </summary>
-	float RightExtrusion(ICollider* a, ICollider* b);
+	float RightExtrusion(Collider* a, Collider* b);
 
 	/// <summary>
 	/// 押し出しを算出
 	/// </summary>
-	float LeftExtrusion(ICollider* a, ICollider* b);
+	float LeftExtrusion(Collider* a, Collider* b);
 
 	/// <summary>
 	/// 押し出しの値の確認
 	/// </summary>
-	void CheckExtrusion(ICollider* a, ICollider* b);
+	void CheckExtrusion(Collider* a, Collider* b);
 
 	vector<ObjectComponent*>datas_;
 
