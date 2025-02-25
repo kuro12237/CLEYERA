@@ -84,34 +84,6 @@ void GameClearScene::Initialize([[maybe_unused]] GameManager *state)
 
 void GameClearScene::Update([[maybe_unused]] GameManager *Scene)
 {
-#ifdef _USE_IMGUI
-
-   gameObjectManager_->ImGuiUpdate();
-   ui_->ImGuiUpdate();
-
-   lava_->Update();
-   coinManager_->ImGuiUpdate();
-
-   if (ImGui::Button("ResetScene")) {
-
-      Scene->ChangeScene(make_unique<GameClearScene>());
-      return;
-   }
-   ImGui::Begin("PostEffect");
-   ImGui::DragFloat("scale::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
-   ImGui::DragFloat("att::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_,
-                    0.01f);
-   ImGui::DragFloat("start::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
-   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd,
-                    1.0f);
-   ImGui::End();
-
-   explosionParticle_->ImGuiUpdate();
-
-#endif // _USE_IMGUI
 
    changeSceneAnimation_->Update();
 
@@ -157,6 +129,28 @@ void GameClearScene::Update([[maybe_unused]] GameManager *Scene)
       Scene->ChangeScene(make_unique<SelectScene>());
       return;
    }
+}
+
+void GameClearScene::ImGuiUpdate() {
+
+   gameObjectManager_->ImGuiUpdate();
+   ui_->ImGuiUpdate();
+
+   lava_->Update();
+   coinManager_->ImGuiUpdate();
+   ImGui::Begin("PostEffect");
+   ImGui::DragFloat("scale::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
+   ImGui::DragFloat("att::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_,
+                    0.01f);
+   ImGui::DragFloat("start::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd,
+                    1.0f);
+   ImGui::End();
+
+   explosionParticle_->ImGuiUpdate();
 }
 
 void GameClearScene::PostProcessDraw()

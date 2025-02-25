@@ -45,13 +45,11 @@ void SelectScene::Initialize([[maybe_unused]] GameManager *state)
    lava_ = make_unique<Lava>();
    lava_->Initialize();
 
-
    this->jsonGropName_ = VAR_NAME(SelectScene);
    this->CreateJsonData();
 
-
    float lightRadious = 512.0f;
-   Math::Vector::Vector3 lightPos = {0.0f,64.0f,-16.0f};
+   Math::Vector::Vector3 lightPos = {0.0f, 64.0f, -16.0f};
    float lightDecay = 0.1f;
 
    string key = VAR_NAME(lightRadious);
@@ -69,7 +67,6 @@ void SelectScene::Initialize([[maybe_unused]] GameManager *state)
    light_.radious = lightRadious;
    light_.position = lightPos;
    light_.decay = lightDecay;
-
 
    isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
    player_->SetGameStartFlag(&isGameStart_);
@@ -92,7 +89,6 @@ void SelectScene::Initialize([[maybe_unused]] GameManager *state)
    postEffect_->GetAdjustedColorParam().fogStart = fogParam.z;
    postEffect_->GetAdjustedColorParam().fogEnd = fogParam.w;
 
-
    ui_ = make_unique<SelectSceneUI>();
    ui_->Initialize();
 
@@ -107,33 +103,6 @@ void SelectScene::Initialize([[maybe_unused]] GameManager *state)
 
 void SelectScene::Update(GameManager *Scene)
 {
-
-#ifdef _USE_IMGUI
-
-   ImGui::Begin("PostEffect");
-   ImGui::DragFloat("scale::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
-   ImGui::DragFloat("att::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_,
-                    0.01f);
-   ImGui::DragFloat("start::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
-   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd,
-                    1.0f);
-   ImGui::End();
-   gameObjectManager_->ImGuiUpdate();
-   if (ImGui::TreeNode("light")) {
-      ImGui::DragFloat3("t", &light_.position.x);
-      ImGui::DragFloat("radious", &light_.radious);
-      ImGui::DragFloat("decay", &light_.decay);
-      ImGui::DragFloat("intencity", &light_.intencity);
-
-      ImGui::TreePop();
-   }
-
-   ui_->ImGuiUpdate();
-   ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
-#endif // _USE_IMGUI
 
    ChangeSceneAnimation::GetInstance()->Update();
 
@@ -191,6 +160,34 @@ void SelectScene::Update(GameManager *Scene)
    }
 
    gameCollisionManager_->End();
+}
+
+void SelectScene::ImGuiUpdate()
+{
+
+   ImGui::Begin("PostEffect");
+   ImGui::DragFloat("scale::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
+   ImGui::DragFloat("att::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_,
+                    0.01f);
+   ImGui::DragFloat("start::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd,
+                    1.0f);
+   ImGui::End();
+   gameObjectManager_->ImGuiUpdate();
+   if (ImGui::TreeNode("light")) {
+      ImGui::DragFloat3("t", &light_.position.x);
+      ImGui::DragFloat("radious", &light_.radious);
+      ImGui::DragFloat("decay", &light_.decay);
+      ImGui::DragFloat("intencity", &light_.intencity);
+
+      ImGui::TreePop();
+   }
+
+   ui_->ImGuiUpdate();
+   ChangeSceneAnimation::GetInstance()->ImGuiUpdate();
 }
 
 void SelectScene::PostProcessDraw()

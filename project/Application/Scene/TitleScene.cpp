@@ -110,35 +110,6 @@ void TitleScene::Initialize([[maybe_unused]] GameManager *state)
 
 void TitleScene::Update([[maybe_unused]] GameManager *Scene)
 {
-#ifdef _USE_IMGUI
-
-   ImGui::Begin("Scene");
-   if (ImGui::Button("SkipScene")) {
-      Scene->ChangeScene(make_unique<GameScene>());
-      return;
-   }
-   ImGui::End();
-
-   gameObjectManager_->ImGuiUpdate();
-   // fireEmberParticle_->ImGuiUpdate();
-
-   changeSceneAnimation_->ImGuiUpdate();
-   ui_->ImGuiUpdate();
-   ImGui::Begin("PostEffect");
-   ImGui::DragFloat("scale::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
-   ImGui::DragFloat("att::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_,
-                    0.01f);
-   ImGui::DragFloat("start::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
-   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd,
-                    1.0f);
-
-   ImGui::End();
-   titleNameParticle_->ImGuiUpdate();
-#endif // _USE_IMGUI
-
    changeSceneAnimation_->Update();
 
    if (Engine::Input::PushBottonPressed(XINPUT_GAMEPAD_A)) {
@@ -185,6 +156,29 @@ void TitleScene::Update([[maybe_unused]] GameManager *Scene)
       Scene->ChangeScene(make_unique<SelectScene>());
       return;
    }
+}
+
+void TitleScene::ImGuiUpdate() {
+ 
+
+   gameObjectManager_->ImGuiUpdate();
+   // fireEmberParticle_->ImGuiUpdate();
+
+   changeSceneAnimation_->ImGuiUpdate();
+   ui_->ImGuiUpdate();
+   ImGui::Begin("PostEffect");
+   ImGui::DragFloat("scale::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
+   ImGui::DragFloat("att::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_,
+                    0.01f);
+   ImGui::DragFloat("start::%f",
+                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd,
+                    1.0f);
+
+   ImGui::End();
+   titleNameParticle_->ImGuiUpdate();
 }
 
 void TitleScene::PostProcessDraw()

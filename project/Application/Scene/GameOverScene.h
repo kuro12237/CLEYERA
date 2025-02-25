@@ -45,6 +45,9 @@ class GameOverScene : public IScene, JsonComponent
    /// </summary>
    /// <param name="Scene"></param>
    void Update([[maybe_unused]] GameManager *Scene) override;
+
+   void ImGuiUpdate() override;
+
    /// <summary>
    /// ポストエフェクトをかける
    /// </summary>

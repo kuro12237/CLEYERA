@@ -60,7 +60,6 @@ void GameOverScene::Initialize([[maybe_unused]] GameManager *state)
    AddJsonItem<decltype(fogParam)>(key, fogParam);
    fogParam = GetJsonItem<decltype(fogParam)>(key);
 
-  
    postEffect_->GetAdjustedColorParam().fogScale_ = fogParam.x;
    postEffect_->GetAdjustedColorParam().fogAttenuationRate_ = fogParam.y;
    postEffect_->GetAdjustedColorParam().fogStart = fogParam.z;
@@ -69,12 +68,6 @@ void GameOverScene::Initialize([[maybe_unused]] GameManager *state)
 
 void GameOverScene::Update([[maybe_unused]] GameManager *Scene)
 {
-#ifdef _USE_IMGUI
-
-   gameObjectManager_->ImGuiUpdate();
-   gameOverText_->ImGuiUpdate();
-   ui_->ImGuiUpdate();
-#endif // _USE_IMGUI
 
    changeSceneAnimation_->Update();
 
@@ -112,6 +105,14 @@ void GameOverScene::Update([[maybe_unused]] GameManager *Scene)
       Scene->ChangeScene(make_unique<SelectScene>());
       return;
    }
+}
+
+void GameOverScene::ImGuiUpdate()
+{
+
+   gameObjectManager_->ImGuiUpdate();
+   gameOverText_->ImGuiUpdate();
+   ui_->ImGuiUpdate();
 }
 
 void GameOverScene::PostProcessDraw()

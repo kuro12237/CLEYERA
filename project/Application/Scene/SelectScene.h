@@ -37,6 +37,8 @@ class SelectScene : public IScene, JsonComponent
 
    void Update([[maybe_unused]] GameManager *Scene) override;
 
+   void ImGuiUpdate() override;
+
    /// <summary>
    /// ポストエフェクトをかける
    /// </summary>

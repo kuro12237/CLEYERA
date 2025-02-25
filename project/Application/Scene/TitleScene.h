@@ -46,6 +46,8 @@ public:
   /// </summary>
   void Update([[maybe_unused]] GameManager *Scene) override;
 
+  void ImGuiUpdate() override;
+
   /// <summary>
   /// ポストエフェクト描画
   /// </summary>
