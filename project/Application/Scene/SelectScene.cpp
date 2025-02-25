@@ -45,10 +45,32 @@ void SelectScene::Initialize([[maybe_unused]] GameManager *state)
    lava_ = make_unique<Lava>();
    lava_->Initialize();
 
-   light_.radious = 512.0f;
-   light_.position.y = 64.0f;
-   light_.position.z = -16.0f;
-   light_.decay = 0.1f;
+
+   this->jsonGropName_ = VAR_NAME(SelectScene);
+   this->CreateJsonData();
+
+
+   float lightRadious = 512.0f;
+   Math::Vector::Vector3 lightPos = {0.0f,64.0f,-16.0f};
+   float lightDecay = 0.1f;
+
+   string key = VAR_NAME(lightRadious);
+   AddJsonItem<decltype(lightRadious)>(key, lightRadious);
+   lightRadious = GetJsonItem<decltype(lightRadious)>(key);
+
+   key = VAR_NAME(lightPos);
+   AddJsonItem<decltype(lightPos)>(key, lightPos);
+   lightPos = GetJsonItem<decltype(lightPos)>(key);
+
+   key = VAR_NAME(lightDecay);
+   AddJsonItem<decltype(lightDecay)>(key, lightDecay);
+   lightDecay = GetJsonItem<decltype(lightDecay)>(key);
+
+   light_.radious = lightRadious;
+   light_.position = lightPos;
+   light_.decay = lightDecay;
+
+
    isGameEnd_ = &player_->GetPlayerCore()->GetIsGameEnd();
    player_->SetGameStartFlag(&isGameStart_);
 
@@ -60,10 +82,16 @@ void SelectScene::Initialize([[maybe_unused]] GameManager *state)
    uint32_t skyBoxTexHandle = TextureManager::LoadDDSTexture("SkyBox/CubeMap.dds");
    SkyBox::GetInstance()->SetTexHandle(skyBoxTexHandle);
 
-   Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.2f;
-   Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.6f;
-   Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 50.0f;
-   Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 215.0f;
+   Math::Vector::Vector4 fogParam = {};
+   key = VAR_NAME(fogParam);
+   AddJsonItem<decltype(fogParam)>(key, fogParam);
+   fogParam = GetJsonItem<decltype(fogParam)>(key);
+
+   postEffect_->GetAdjustedColorParam().fogScale_ = fogParam.x;
+   postEffect_->GetAdjustedColorParam().fogAttenuationRate_ = fogParam.y;
+   postEffect_->GetAdjustedColorParam().fogStart = fogParam.z;
+   postEffect_->GetAdjustedColorParam().fogEnd = fogParam.w;
+
 
    ui_ = make_unique<SelectSceneUI>();
    ui_->Initialize();

@@ -54,8 +54,6 @@ class SelectScene : public IScene, JsonComponent
 
    bool CheckLoadScene();
 
-   list<ObjectComponent *> objectDataList_;
-
    SceneContextData contextData_;
    unique_ptr<ISceneContext> context_ = nullptr;
    GameObjectManager *gameObjectManager_;

@@ -63,7 +63,6 @@ private:
   std::string FormatNumberWithDots(int num);
 
   shared_ptr<LevelData> levelData_ = nullptr;
-  GameObjectManager *gameObjectManager_ = nullptr;
   ChangeSceneAnimation *changeSceneAnimation_ = nullptr;
   StageManager *stageManager_ = nullptr;
 

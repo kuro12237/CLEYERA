@@ -63,7 +63,6 @@ class GameClearScene : public IScene, JsonComponent
    void Flont2dSpriteDraw() override;
 
  private:
-   GameObjectManager *gameObjectManager_;
    ChangeSceneAnimation *changeSceneAnimation_ = nullptr;
 
    string inputLevelDataFileName_ = "GameClear.json";

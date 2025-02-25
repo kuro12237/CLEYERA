@@ -92,11 +92,20 @@ void TitleScene::Initialize([[maybe_unused]] GameManager *state)
    titleNameParticle_ = make_unique<TitleNameParticle>();
    titleNameParticle_->Initialize();
 
+
+   this->jsonGropName_ = VAR_NAME(TitleScene);
+   this->CreateJsonData();
+
    // fog設定
-   postEffect_->GetAdjustedColorParam().fogScale_ = 0.5f;
-   postEffect_->GetAdjustedColorParam().fogAttenuationRate_ = 0.1f;
-   postEffect_->GetAdjustedColorParam().fogStart = 10.0f;
-   postEffect_->GetAdjustedColorParam().fogEnd = 125.0f;
+   Math::Vector::Vector4 fogParam = {};
+   string key = VAR_NAME(fogParam);
+   AddJsonItem<decltype(fogParam)>(key, fogParam);
+   fogParam = GetJsonItem<decltype(fogParam)>(key);
+
+   postEffect_->GetAdjustedColorParam().fogScale_ = fogParam.x;
+   postEffect_->GetAdjustedColorParam().fogAttenuationRate_ = fogParam.y;
+   postEffect_->GetAdjustedColorParam().fogStart = fogParam.z;
+   postEffect_->GetAdjustedColorParam().fogEnd = fogParam.w;
 }
 
 void TitleScene::Update([[maybe_unused]] GameManager *Scene)

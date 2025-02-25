@@ -2,114 +2,130 @@
 
 using namespace Engine::Manager;
 
-void GameOverScene::Initialize([[maybe_unused]] GameManager* state)
+void GameOverScene::Initialize([[maybe_unused]] GameManager *state)
 {
-	GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/GameOverScene/");
-	GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameOverScene/");
-	//levelDataの読み込み
-	shared_ptr<LevelData> levelData = move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
+   GlobalVariables::GetInstance()->SetDirectoryFilePath(
+       "Resources/LevelData/ParamData/GameOverScene/");
+   GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/GameOverScene/");
+   // levelDataの読み込み
+   shared_ptr<LevelData> levelData =
+       move(SceneFileLoader::GetInstance()->ReLoad(inputLevelDataFileName_));
 
-	//objectManagerセット
-	gameObjectManager_ = GameObjectManager::GetInstance();
-	gameObjectManager_->ClearAllData();
-	gameObjectManager_->MoveData(levelData.get());
-	gameObjectManager_->SetAllParents();
+   // objectManagerセット
+   gameObjectManager_ = GameObjectManager::GetInstance();
+   gameObjectManager_->ClearAllData();
+   gameObjectManager_->MoveData(levelData.get());
+   gameObjectManager_->SetAllParents();
 
-	gameObjectManager_->CameraReset("Camera");
-	gameObjectManager_->Update();
+   gameObjectManager_->CameraReset("Camera");
+   gameObjectManager_->Update();
 
-	light_.radious = 512.0f;
-	light_.position.y = 64.0f;
-	light_.position.z = -16.0f;
-	light_.decay = 0.1f;
+   gameOverText_ = make_unique<GameOverText>();
+   gameOverText_->Initialize();
 
-	gameOverText_ = make_unique<GameOverText>();
-	gameOverText_->Initialize();
+   gameOverUiManager_ = make_unique<GameOverUIManager>();
+   gameOverUiManager_->Initialize();
+   gameOverUiManager_->Update();
 
-	gameOverUiManager_ = make_unique<GameOverUIManager>();
-	gameOverUiManager_->Initialize();
-	gameOverUiManager_->Update();
+   changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
 
-	changeSceneAnimation_ = ChangeSceneAnimation::GetInstance();
+   ui_ = make_unique<GameOverSceneUI>();
+   ui_->Initialize();
 
-	ui_ = make_unique<GameOverSceneUI>();
-	ui_->Initialize();
+   this->jsonGropName_ = VAR_NAME(GameOverScene);
+   this->CreateJsonData();
 
-	//fog設定
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_ = 0.5f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_ = 0.5f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart = 70.0f;
-	Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd = 280.0f;
+   float lightRadious = 0.0f;
+   Math::Vector::Vector3 lightPos = {};
+   float lightDecay = 0.0f;
+
+   string key = VAR_NAME(lightRadious);
+   AddJsonItem<decltype(lightRadious)>(key, lightRadious);
+   lightRadious = GetJsonItem<decltype(lightRadious)>(key);
+
+   key = VAR_NAME(lightPos);
+   AddJsonItem<decltype(lightPos)>(key, lightPos);
+   lightPos = GetJsonItem<decltype(lightPos)>(key);
+
+   key = VAR_NAME(lightDecay);
+   AddJsonItem<decltype(lightDecay)>(key, lightDecay);
+   lightDecay = GetJsonItem<decltype(lightDecay)>(key);
+
+   light_.radious = lightRadious;
+   light_.position = lightPos;
+   light_.decay = lightDecay;
+
+   Math::Vector::Vector4 fogParam = {};
+   key = VAR_NAME(fogParam);
+   AddJsonItem<decltype(fogParam)>(key, fogParam);
+   fogParam = GetJsonItem<decltype(fogParam)>(key);
+
+  
+   postEffect_->GetAdjustedColorParam().fogScale_ = fogParam.x;
+   postEffect_->GetAdjustedColorParam().fogAttenuationRate_ = fogParam.y;
+   postEffect_->GetAdjustedColorParam().fogStart = fogParam.z;
+   postEffect_->GetAdjustedColorParam().fogEnd = fogParam.w;
 }
 
-void GameOverScene::Update([[maybe_unused]] GameManager* Scene)
+void GameOverScene::Update([[maybe_unused]] GameManager *Scene)
 {
 #ifdef _USE_IMGUI
 
-	gameObjectManager_->ImGuiUpdate();
-	gameOverText_->ImGuiUpdate();
-	ui_->ImGuiUpdate();
+   gameObjectManager_->ImGuiUpdate();
+   gameOverText_->ImGuiUpdate();
+   ui_->ImGuiUpdate();
 #endif // _USE_IMGUI
 
-	changeSceneAnimation_->Update();
+   changeSceneAnimation_->Update();
 
-	ui_->Update();
-	gameOverText_->Update();
+   ui_->Update();
+   gameOverText_->Update();
 
-	if (ChangeSceneAnimation::GetInstance()->GetIsComplite())
-	{
-		gameOverUiManager_->Update();
-	}
+   if (ChangeSceneAnimation::GetInstance()->GetIsComplite()) {
+      gameOverUiManager_->Update();
+   }
 
-	if (gameOverUiManager_->GetIsSelect())
-	{
-		changeSceneAnimation_->ChangeStart();
-	}
+   if (gameOverUiManager_->GetIsSelect()) {
+      changeSceneAnimation_->ChangeStart();
+   }
 
-	gameObjectManager_->Update();
+   gameObjectManager_->Update();
 
-	LightingManager::AddList(light_);
-	
-	if (!gameOverUiManager_->GetIsSelect())
-	{
-		return;
-	}
+   LightingManager::AddList(light_);
 
-	if (!ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag())
-	{
-		return;
-	}
-	if (gameOverUiManager_->GetSelectIndex() == TITLE)
-	{
-		Scene->ChangeScene(make_unique<TitleScene>());
-		return;
-	}
-	if (gameOverUiManager_->GetSelectIndex() == GAME)
-	{
-		Scene->ChangeScene(make_unique<GameScene>());
-		return;
+   if (!gameOverUiManager_->GetIsSelect()) {
+      return;
+   }
 
-	}	if (gameOverUiManager_->GetSelectIndex() == SELECT)
-	{
-		Scene->ChangeScene(make_unique<SelectScene>());
-		return;
-	}
-
+   if (!ChangeSceneAnimation::GetInstance()->GetIsChangeSceneFlag()) {
+      return;
+   }
+   if (gameOverUiManager_->GetSelectIndex() == TITLE) {
+      Scene->ChangeScene(make_unique<TitleScene>());
+      return;
+   }
+   if (gameOverUiManager_->GetSelectIndex() == GAME) {
+      Scene->ChangeScene(make_unique<GameScene>());
+      return;
+   }
+   if (gameOverUiManager_->GetSelectIndex() == SELECT) {
+      Scene->ChangeScene(make_unique<SelectScene>());
+      return;
+   }
 }
 
 void GameOverScene::PostProcessDraw()
 {
 
-	gameObjectManager_->InstancingDraw();
-	gameObjectManager_->NormalDraw();
+   gameObjectManager_->InstancingDraw();
+   gameObjectManager_->NormalDraw();
 }
-
 
 void GameOverScene::Flont2dSpriteDraw()
 {
-	gameOverUiManager_->Draw2d();
-	gameOverText_->Draw2d();
-	ui_->Draw2d();
+   gameOverUiManager_->Draw2d();
+   gameOverText_->Draw2d();
+   ui_->Draw2d();
 
-	changeSceneAnimation_->Draw();
+   changeSceneAnimation_->Draw();
 }

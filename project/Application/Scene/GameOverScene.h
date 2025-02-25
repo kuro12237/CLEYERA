@@ -29,7 +29,7 @@
 /// <summary>
 /// ゲームオーバー
 /// </summary>
-class GameOverScene : public IScene
+class GameOverScene : public IScene, JsonComponent
 {
  public:
    GameOverScene() {};

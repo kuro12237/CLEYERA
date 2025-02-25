@@ -1,0 +1,17 @@
+{
+    "GameOverScene": {
+        "fogParam": [
+            0.5,
+            0.5,
+            70.0,
+            280.0
+        ],
+        "lightDecay": 0.10000000149011612,
+        "lightPos": [
+            0.0,
+            64.0,
+            -16.0
+        ],
+        "lightRadious": 512.0
+    }
+}
