@@ -27,8 +27,8 @@ void PlayerManager::Initialize()
       auto obj = it.lock();
       obj->Initialize();
    }
-   camera_->SetTarget(playerCore_->INameable::GetName());
-
+   camera_->SetTarget(playerCore_->GetObjectData().lock()->GetWorldTransform(),
+                      playerCore_->INameable::GetName());
    // Hp
    hp_ = make_shared<PlayerHp>();
    hp_->Initialize(kPlayerHp_);

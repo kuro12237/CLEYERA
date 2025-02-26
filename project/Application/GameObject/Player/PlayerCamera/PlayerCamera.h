@@ -24,10 +24,12 @@ public:
 
 #pragma region Set
 
-	void SetTarget(string target) {
-		targetName_ = target;
-		target_ = &gameObjectManager_->GetObj3dData_ptr(targetName_)->GetWorldTransform();
-	}
+void SetTarget(const Engine::Transform::WorldTransform &t, string name)
+        {
+           targetName_ = name;
+           target_ = &t;
+        }
+
 
 #pragma endregion
 
