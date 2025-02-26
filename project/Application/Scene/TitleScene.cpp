@@ -10,12 +10,10 @@ void TitleScene::Initialize([[maybe_unused]] GameManager *state)
    WinApp::GetInstance()->SetTiTleName(L"GunHead");
 
    // グローバル変数のパラメーターファイルの保存先変更
-   GlobalVariables::GetInstance()->SetDirectoryFilePath(
-       "Resources/LevelData/ParamData/TitleScene/");
+   GlobalVariables::GetInstance()->SetDirectoryFilePath("Resources/LevelData/ParamData/TitleScene/");
    GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/TitleScene/");
    GlobalVariables::GetInstance()->LoadFiles("Resources/LevelData/ParamData/Utility/");
-   GlobalVariables::GetInstance()->SetChangeSceneLoadFilesName(
-       "Resources/LevelData/ParamData/Utility/");
+   GlobalVariables::GetInstance()->SetChangeSceneLoadFilesName("Resources/LevelData/ParamData/Utility/");
 
    Engine::Input::SetDeadZone(0.2f);
 
@@ -92,7 +90,6 @@ void TitleScene::Initialize([[maybe_unused]] GameManager *state)
    titleNameParticle_ = make_unique<TitleNameParticle>();
    titleNameParticle_->Initialize();
 
-
    this->jsonGropName_ = VAR_NAME(TitleScene);
    this->CreateJsonData();
 
@@ -158,8 +155,8 @@ void TitleScene::Update([[maybe_unused]] GameManager *Scene)
    }
 }
 
-void TitleScene::ImGuiUpdate() {
- 
+void TitleScene::ImGuiUpdate()
+{
 
    gameObjectManager_->ImGuiUpdate();
    // fireEmberParticle_->ImGuiUpdate();
@@ -167,15 +164,10 @@ void TitleScene::ImGuiUpdate() {
    changeSceneAnimation_->ImGuiUpdate();
    ui_->ImGuiUpdate();
    ImGui::Begin("PostEffect");
-   ImGui::DragFloat("scale::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
-   ImGui::DragFloat("att::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_,
-                    0.01f);
-   ImGui::DragFloat("start::%f",
-                    &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
-   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd,
-                    1.0f);
+   ImGui::DragFloat("scale::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogScale_, 0.01f);
+   ImGui::DragFloat("att::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogAttenuationRate_, 0.01f);
+   ImGui::DragFloat("start::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogStart, 1.0f);
+   ImGui::DragFloat("end::%f", &Engine::PostEffect::GetInstance()->GetAdjustedColorParam().fogEnd, 1.0f);
 
    ImGui::End();
    titleNameParticle_->ImGuiUpdate();

@@ -2,7 +2,7 @@ BasedOnStyle: LLVM
 IndentWidth: 3
 UseTab: Never
 
-ColumnLimit: 100
+ColumnLimit: 200
 BreakBeforeBraces: Custom
 AlignTrailingComments: true
 AllowShortFunctionsOnASingleLine: Inline
