@@ -32,5 +32,8 @@
       インスタンシング描画の切り替え
       当たり判定設定など
 
+# 新しいエンジンを開発中
+  https://github.com/kuro12237/CLEYERA_GameEngine
+
 
 
